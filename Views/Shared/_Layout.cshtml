@@ -84,8 +84,6 @@
                                 de Centro</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoDireccions" asp-action="Index">Tipos
                                 de Direcciones</a>
-                            <a class="collapse-item" asp-area="" asp-controller="CatTipoClientes" asp-action="Index">Tipos
-                                de Cliente</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoLicencias"
                             asp-action="Index">Licencias</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Áreas</a>
@@ -158,9 +156,7 @@
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Escolares:</h6>
-                            <a class="collapse-item" asp-area="" asp-controller="TblClientes"
-                            asp-action="Index">Prospectos</a>
-                            <a class="collapse-item" asp-area="" asp-controller="TblClientes" asp-action="Index">Alumnos</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblAlumnos" asp-action="Index">Alumnos</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">transacción:</h6>
                             <a class="collapse-item" asp-area="" asp-controller="TblVentas" asp-action="Index">Ventas</a>
@@ -382,6 +378,8 @@
         
         <link href="@Url.Content("https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js")"
         rel="stylesheet" type="text/css" />
+
+        
         
     @await Component.InvokeAsync("Notyf");
     @await RenderSectionAsync("Scripts", required: false)
