@@ -128,7 +128,6 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                     FechaRegistro = DateTime.Now,
                     IdEstatusRegistro = 1
                 };
-                _context.SaveChanges();
                 _context.Add(addUsuarios);
                 await _context.SaveChangesAsync();
 

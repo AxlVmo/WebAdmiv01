@@ -21,7 +21,7 @@ namespace WebAdmin.Models
 
         [Display(Name = "ApellidoMaterno")]
         public string ApellidoMaterno { get; set; }
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         [Display(Name = "Nombre Usuario")]
         public string NombreUsuario { get; set; }
 
