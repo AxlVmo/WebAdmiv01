@@ -1,13 +1,15 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public class RelVentasPagos
+    public class RelVentaPagos
     {
         [Display(Name = "ID Ventas Pagos")]
         [Key]
-        public Guid IdRelVentasPago { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdRelVentasPago { get; set; }
 
         [Display(Name = "Codigo Referencia")]
         public string CodigoReferencia { get; set; }

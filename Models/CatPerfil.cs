@@ -9,7 +9,7 @@ namespace WebAdmin.Models
     public partial class CatPerfil
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int IdPerfil { get; set; }
 
         [Display(Name = "Descripción")]

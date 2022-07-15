@@ -42,6 +42,9 @@ namespace WebAdmin.Models
         [Display(Name = "Clave Acceso")]
         public string ClaveAcceso { get; set; }
 
+        [Display(Name = "Corporativo / Centro")]
+        public int IdCorpCent { get; set; }
+
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 

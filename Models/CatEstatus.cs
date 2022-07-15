@@ -9,7 +9,7 @@ namespace WebAdmin.Models
     public partial class CatEstatus
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         [Display(Name = "Estatus")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdEstatusRegistro { get; set; }

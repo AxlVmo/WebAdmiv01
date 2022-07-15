@@ -38,7 +38,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.CatTipoAlumno.ToListAsync());
+            return View(await _context.CatTipoAlumnos.ToListAsync());
         }
 
         // GET: CatTipoAlumnoes/Details/5
@@ -49,7 +49,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoAlumno = await _context.CatTipoAlumno
+            var catTipoAlumno = await _context.CatTipoAlumnos
                 .FirstOrDefaultAsync(m => m.IdTipoAlumno == id);
             if (catTipoAlumno == null)
             {
@@ -74,7 +74,7 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatTipoAlumno
+                var DuplicadosEstatus = _context.CatTipoAlumnos
                        .Where(s => s.TipoAlumnoDesc == catTipoAlumno.TipoAlumnoDesc)
                        .ToList();
 
@@ -110,7 +110,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoAlumno = await _context.CatTipoAlumno.FindAsync(id);
+            var catTipoAlumno = await _context.CatTipoAlumnos.FindAsync(id);
             if (catTipoAlumno == null)
             {
                 return NotFound();
@@ -167,7 +167,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoAlumno = await _context.CatTipoAlumno
+            var catTipoAlumno = await _context.CatTipoAlumnos
                 .FirstOrDefaultAsync(m => m.IdTipoAlumno == id);
             if (catTipoAlumno == null)
             {
@@ -182,7 +182,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catTipoAlumno = await _context.CatTipoAlumno.FindAsync(id);
+            var catTipoAlumno = await _context.CatTipoAlumnos.FindAsync(id);
             catTipoAlumno.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
@@ -191,7 +191,7 @@ namespace WebAdmin.Controllers
 
         private bool CatTipoAlumnoExists(int id)
         {
-            return _context.CatTipoAlumno.Any(e => e.IdTipoAlumno == id);
+            return _context.CatTipoAlumnos.Any(e => e.IdTipoAlumno == id);
         }
     }
 }

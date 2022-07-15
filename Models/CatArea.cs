@@ -9,7 +9,7 @@ namespace WebAdmin.Models
     public partial class CatArea
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        
         public int IdArea { get; set; }
 
         [Display(Name = "Descripción")]

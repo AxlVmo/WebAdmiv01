@@ -9,7 +9,7 @@ namespace WebAdmin.Models
     public partial class CatProducto
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int IdProducto { get; set; }
 
         [Display(Name = "Codigo Interno")]

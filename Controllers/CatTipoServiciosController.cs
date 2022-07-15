@@ -60,7 +60,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.CatTipoServicio.ToListAsync());
+            return View(await _context.CatTipoServicios.ToListAsync());
         }
 
         // GET: CatTipoServicios/Details/5
@@ -71,7 +71,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoServicio = await _context.CatTipoServicio
+            var catTipoServicio = await _context.CatTipoServicios
                 .FirstOrDefaultAsync(m => m.IdTipoServicio == id);
             if (catTipoServicio == null)
             {
@@ -96,7 +96,7 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatTipoServicio
+                var DuplicadosEstatus = _context.CatTipoServicios
                        .Where(s => s.TipoServicioDesc == catTipoServicio.TipoServicioDesc)
                        .ToList();
 
@@ -133,7 +133,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoServicio = await _context.CatTipoServicio.FindAsync(id);
+            var catTipoServicio = await _context.CatTipoServicios.FindAsync(id);
             if (catTipoServicio == null)
             {
                 return NotFound();
@@ -190,7 +190,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoServicio = await _context.CatTipoServicio
+            var catTipoServicio = await _context.CatTipoServicios
                 .FirstOrDefaultAsync(m => m.IdTipoServicio == id);
             if (catTipoServicio == null)
             {
@@ -205,7 +205,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catTipoServicio = await _context.CatTipoServicio.FindAsync(id);
+            var catTipoServicio = await _context.CatTipoServicios.FindAsync(id);
             catTipoServicio.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
@@ -214,7 +214,7 @@ namespace WebAdmin.Controllers
 
         private bool CatTipoServicioExists(int id)
         {
-            return _context.CatTipoServicio.Any(e => e.IdTipoServicio == id);
+            return _context.CatTipoServicios.Any(e => e.IdTipoServicio == id);
         }
     }
 }

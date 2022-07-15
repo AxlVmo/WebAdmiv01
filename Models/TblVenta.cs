@@ -34,6 +34,9 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         public DateTime FechaAlterna { get; set; }
 
+        [Display(Name = "Corporativo / Centro")]
+        public int IdCorpCent { get; set; }
+
         [Display(Name = "Usuario")]
         public Guid IdUsuarioModifico { get; set; }
 

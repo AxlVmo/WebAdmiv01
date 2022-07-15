@@ -38,7 +38,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.CatTipoPago.ToListAsync());
+            return View(await _context.CatTipoPagos.ToListAsync());
         }
 
         // GET: CatTipoPagoes/Details/5
@@ -49,7 +49,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoPago = await _context.CatTipoPago
+            var catTipoPago = await _context.CatTipoPagos
                 .FirstOrDefaultAsync(m => m.IdTipoPago == id);
             if (catTipoPago == null)
             {
@@ -74,7 +74,7 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatTipoPago
+                var DuplicadosEstatus = _context.CatTipoPagos
                        .Where(s => s.TipoPagoDesc == catTipoPago.TipoPagoDesc)
                        .ToList();
 
@@ -110,7 +110,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoPago = await _context.CatTipoPago.FindAsync(id);
+            var catTipoPago = await _context.CatTipoPagos.FindAsync(id);
             if (catTipoPago == null)
             {
                 return NotFound();
@@ -167,7 +167,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoPago = await _context.CatTipoPago
+            var catTipoPago = await _context.CatTipoPagos
                 .FirstOrDefaultAsync(m => m.IdTipoPago == id);
             if (catTipoPago == null)
             {
@@ -182,7 +182,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catTipoPago = await _context.CatTipoPago.FindAsync(id);
+            var catTipoPago = await _context.CatTipoPagos.FindAsync(id);
             catTipoPago.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
@@ -191,7 +191,7 @@ namespace WebAdmin.Controllers
 
         private bool CatTipoPagoExists(int id)
         {
-            return _context.CatTipoPago.Any(e => e.IdTipoPago == id);
+            return _context.CatTipoPagos.Any(e => e.IdTipoPago == id);
         }
     }
 }

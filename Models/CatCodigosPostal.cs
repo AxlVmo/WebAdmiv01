@@ -9,7 +9,7 @@ namespace WebAdmin.Models
 
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         [Column("IdCodigosPostales")]
         [Display(Name = "ID IdCodigosPostales")]
         public int IdCodigosPostales { get; set; }

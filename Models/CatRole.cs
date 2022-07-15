@@ -9,7 +9,7 @@ namespace WebAdmin.Models
     public partial class CatRole
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int IdRol { get; set; }
 
         [Display(Name = "Descripción")]

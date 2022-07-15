@@ -36,9 +36,11 @@ namespace WebAdmin
             //        Configuration.GetConnectionString("msql_connection")));
             // services.AddDbContext<nDbContext>(options =>
             //      options.UseMySQL(Configuration.GetConnectionString("MySQLDataSource")));
+            
             services.AddDbContext<nDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("pgSQLDataSource")));
+                  
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)

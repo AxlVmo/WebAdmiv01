@@ -38,7 +38,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.CatTipoContratacion.ToListAsync());
+            return View(await _context.CatTipoContrataciones.ToListAsync());
         }
 
         // GET: CatTipoContratacions/Details/5
@@ -49,7 +49,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoContratacion = await _context.CatTipoContratacion
+            var catTipoContratacion = await _context.CatTipoContrataciones
                 .FirstOrDefaultAsync(m => m.IdTipoContratacion == id);
             if (catTipoContratacion == null)
             {
@@ -74,7 +74,7 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatTipoContratacion
+                var DuplicadosEstatus = _context.CatTipoContrataciones
                        .Where(s => s.TipoContratacionDesc == catTipoContratacion.TipoContratacionDesc)
                        .ToList();
 
@@ -111,7 +111,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoContratacion = await _context.CatTipoContratacion.FindAsync(id);
+            var catTipoContratacion = await _context.CatTipoContrataciones.FindAsync(id);
             if (catTipoContratacion == null)
             {
                 return NotFound();
@@ -168,7 +168,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoContratacion = await _context.CatTipoContratacion
+            var catTipoContratacion = await _context.CatTipoContrataciones
                 .FirstOrDefaultAsync(m => m.IdTipoContratacion == id);
             if (catTipoContratacion == null)
             {
@@ -183,7 +183,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catTipoContratacion = await _context.CatTipoContratacion.FindAsync(id);
+            var catTipoContratacion = await _context.CatTipoContrataciones.FindAsync(id);
             catTipoContratacion.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
@@ -192,7 +192,7 @@ namespace WebAdmin.Controllers
 
         private bool CatTipoContratacionExists(int id)
         {
-            return _context.CatTipoContratacion.Any(e => e.IdTipoContratacion == id);
+            return _context.CatTipoContrataciones.Any(e => e.IdTipoContratacion == id);
         }
     }
 }

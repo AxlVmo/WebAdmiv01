@@ -7,19 +7,22 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebAdmin.Data;
 
+#nullable disable
+
 namespace WebAdmin.Migrations
 {
     [DbContext(typeof(nDbContext))]
-    [Migration("20220712050759_001m")]
-    partial class _001m
+    [Migration("20220715055725_0001m")]
+    partial class _0001m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -44,15 +47,16 @@ namespace WebAdmin.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -68,7 +72,7 @@ namespace WebAdmin.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -136,7 +140,7 @@ namespace WebAdmin.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
@@ -145,8 +149,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -162,7 +167,7 @@ namespace WebAdmin.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -186,7 +191,7 @@ namespace WebAdmin.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -201,7 +206,7 @@ namespace WebAdmin.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -222,39 +227,16 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CaTipotLicencia", b =>
-                {
-                    b.Property<int>("IdTipoLicencia")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("FechaRegistro");
-
-                    b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("LicenciaDesc")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("IdTipoLicencia");
-
-                    b.ToTable("CaTipotLicencias");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatArea", b =>
                 {
                     b.Property<int>("IdArea")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdArea"));
 
                     b.Property<string>("AreaDesc")
                         .IsRequired()
@@ -279,63 +261,55 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 1,
                             AreaDesc = "DIRECCION",
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdArea = 2,
-                            AreaDesc = "RECURSOS HUMANOS",
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            AreaDesc = "ADMINISTRATIVA",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdArea = 3,
-                            AreaDesc = "PRODUCCION DIGITAL",
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            AreaDesc = "RECURSOS HUMANOS",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdArea = 4,
-                            AreaDesc = "FINANZAS/CONTABILIDAD",
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            AreaDesc = "PRODUCCION DIGITAL",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdArea = 5,
-                            AreaDesc = "MARKETING/VENTAS",
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            AreaDesc = "FINANZAS/CONTABILIDAD",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdArea = 6,
-                            AreaDesc = "TIC",
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            AreaDesc = "MARKETING/VENTAS",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdArea = 7,
-                            AreaDesc = "SERVICIO AL Alumno",
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
-                            IdEstatusRegistro = 1,
-                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            IdArea = 8,
-                            AreaDesc = "OTRA",
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            AreaDesc = "TIC",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
@@ -345,8 +319,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdCategoria")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCategoria"));
 
                     b.Property<string>("CategoriaDesc")
                         .IsRequired()
@@ -372,8 +347,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdCodigosPostales")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("IdCodigosPostales")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnName("IdCodigosPostales");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCodigosPostales"));
 
                     b.Property<string>("Ccp")
                         .HasColumnType("text");
@@ -29231,12 +29207,58 @@ namespace WebAdmin.Migrations
                         });
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.CatCorpCent", b =>
+                {
+                    b.Property<int>("IdCorpCent")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCorpCent"));
+
+                    b.Property<string>("CorpCentDesc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("IdCorpCent");
+
+                    b.ToTable("CatCorpCents");
+
+                    b.HasData(
+                        new
+                        {
+                            IdCorpCent = 1,
+                            CorpCentDesc = "CORPORATIVO",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 0,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdCorpCent = 2,
+                            CorpCentDesc = "CENTRO",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 0,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
+                });
+
             modelBuilder.Entity("WebAdmin.Models.CatEscolaridad", b =>
                 {
                     b.Property<int>("IdEscolaridad")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdEscolaridad"));
 
                     b.Property<string>("EscolaridadDesc")
                         .IsRequired()
@@ -29254,15 +29276,66 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdEscolaridad");
 
-                    b.ToTable("CatEscolaridad");
+                    b.ToTable("CatEscolaridades");
+
+                    b.HasData(
+                        new
+                        {
+                            IdEscolaridad = 1,
+                            EscolaridadDesc = "PRIMERO",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdEscolaridad = 2,
+                            EscolaridadDesc = "SEGUNDO",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdEscolaridad = 3,
+                            EscolaridadDesc = "TERCERO",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdEscolaridad = 4,
+                            EscolaridadDesc = "CUARTO",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdEscolaridad = 5,
+                            EscolaridadDesc = "QUINTO",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdEscolaridad = 6,
+                            EscolaridadDesc = "SEXTO",
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatEstatus", b =>
                 {
                     b.Property<int>("IdEstatusRegistro")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdEstatusRegistro"));
 
                     b.Property<string>("EstatusDesc")
                         .IsRequired()
@@ -29284,14 +29357,14 @@ namespace WebAdmin.Migrations
                         {
                             IdEstatusRegistro = 1,
                             EstatusDesc = "ACTIVO",
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdEstatusRegistro = 2,
                             EstatusDesc = "DESACTIVO",
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
@@ -29300,8 +29373,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdGenero")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdGenero"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29325,7 +29399,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdGenero = 1,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             GeneroDesc = "HOMBRE",
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
@@ -29333,19 +29407,47 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdGenero = 2,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             GeneroDesc = "MUJER",
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.CaTipotLicencia", b =>
+                {
+                    b.Property<int>("IdTipoLicencia")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTipoLicencia"));
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("LicenciaDesc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("IdTipoLicencia");
+
+                    b.ToTable("CaTipotLicencias");
+                });
+
             modelBuilder.Entity("WebAdmin.Models.CatNivelEscolar", b =>
                 {
                     b.Property<int>("IdNivelEscolar")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdNivelEscolar"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29363,15 +29465,58 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdNivelEscolar");
 
-                    b.ToTable("CatNivelEscolar");
+                    b.ToTable("CatNivelEscolares");
+
+                    b.HasData(
+                        new
+                        {
+                            IdNivelEscolar = 1,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            NivelEscolarDesc = "PREESCOLAR"
+                        },
+                        new
+                        {
+                            IdNivelEscolar = 2,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            NivelEscolarDesc = "PRIMARIA"
+                        },
+                        new
+                        {
+                            IdNivelEscolar = 3,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            NivelEscolarDesc = "SECUNDARIA"
+                        },
+                        new
+                        {
+                            IdNivelEscolar = 4,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            NivelEscolarDesc = "BACHILLERATO"
+                        },
+                        new
+                        {
+                            IdNivelEscolar = 5,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            NivelEscolarDesc = "UNIVERSIDAD"
+                        });
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatPerfil", b =>
                 {
                     b.Property<int>("IdPerfil")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdPerfil"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29395,7 +29540,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 1,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "DIRECTOR"
@@ -29403,7 +29548,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 2,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "ADMINISTRADOR"
@@ -29411,7 +29556,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 3,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "GERENTE"
@@ -29419,7 +29564,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 4,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "EJECUTIVO"
@@ -29427,10 +29572,148 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 5,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "DOCENTE"
+                        });
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.CatPeriodoAmortiza", b =>
+                {
+                    b.Property<int>("IdPeriodoAmortiza")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdPeriodoAmortiza"));
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("PeriodoAmortizaDesc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("IdPeriodoAmortiza");
+
+                    b.ToTable("CatPeriodosAmortizaciones");
+
+                    b.HasData(
+                        new
+                        {
+                            IdPeriodoAmortiza = 1,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PeriodoAmortizaDesc = "1 MES"
+                        },
+                        new
+                        {
+                            IdPeriodoAmortiza = 2,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PeriodoAmortizaDesc = "3 MES"
+                        },
+                        new
+                        {
+                            IdPeriodoAmortiza = 3,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PeriodoAmortizaDesc = "6 MES"
+                        },
+                        new
+                        {
+                            IdPeriodoAmortiza = 4,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PeriodoAmortizaDesc = "9 MES"
+                        },
+                        new
+                        {
+                            IdPeriodoAmortiza = 5,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PeriodoAmortizaDesc = "12 MES"
+                        },
+                        new
+                        {
+                            IdPeriodoAmortiza = 6,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PeriodoAmortizaDesc = "18 MES"
+                        },
+                        new
+                        {
+                            IdPeriodoAmortiza = 7,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PeriodoAmortizaDesc = "24 MES"
+                        },
+                        new
+                        {
+                            IdPeriodoAmortiza = 8,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PeriodoAmortizaDesc = "36 MES"
+                        });
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.CatProdServ", b =>
+                {
+                    b.Property<int>("IdProdServ")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdProdServ"));
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ProdServDesc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("IdProdServ");
+
+                    b.ToTable("CatProdServs");
+
+                    b.HasData(
+                        new
+                        {
+                            IdProdServ = 1,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 0,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            ProdServDesc = "PRODUCTO"
+                        },
+                        new
+                        {
+                            IdProdServ = 2,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 0,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            ProdServDesc = "SERVICIO"
                         });
                 });
 
@@ -29438,8 +29721,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdProducto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdProducto"));
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("integer");
@@ -29491,8 +29775,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdRol")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdRol"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29516,7 +29801,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 1,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "DESARROLLADOR"
@@ -29524,7 +29809,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 2,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "ADMINISTRADOR"
@@ -29532,7 +29817,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 3,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "SUPERVISOR"
@@ -29540,7 +29825,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 4,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "OPERADOR"
@@ -29551,8 +29836,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoAlumno")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTipoAlumno"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29570,15 +29856,16 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdTipoAlumno");
 
-                    b.ToTable("CatTipoAlumno");
+                    b.ToTable("CatTipoAlumnos");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatTipoCentro", b =>
                 {
                     b.Property<int>("IdTipoCentro")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTipoCentro"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29602,7 +29889,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoCentro = 1,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoCentroDesc = "INTERNO"
@@ -29610,7 +29897,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoCentro = 2,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoCentroDesc = "LICENCIA"
@@ -29621,8 +29908,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoContratacion")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTipoContratacion"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29640,15 +29928,16 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdTipoContratacion");
 
-                    b.ToTable("CatTipoContratacion");
+                    b.ToTable("CatTipoContrataciones");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatTipoDireccion", b =>
                 {
                     b.Property<int>("IdTipoDireccion")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTipoDireccion"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29669,12 +29958,66 @@ namespace WebAdmin.Migrations
                     b.ToTable("CatTipoDirecciones");
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.CatTipoFormaPago", b =>
+                {
+                    b.Property<int>("IdTipoFormaPago")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTipoFormaPago"));
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TipoFormaPagoDesc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("IdTipoFormaPago");
+
+                    b.ToTable("CatTipoFormaPagos");
+
+                    b.HasData(
+                        new
+                        {
+                            IdTipoFormaPago = 1,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            TipoFormaPagoDesc = "SEMANAL"
+                        },
+                        new
+                        {
+                            IdTipoFormaPago = 2,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            TipoFormaPagoDesc = "QUINCENAL"
+                        },
+                        new
+                        {
+                            IdTipoFormaPago = 3,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            TipoFormaPagoDesc = "MENSUAL"
+                        });
+                });
+
             modelBuilder.Entity("WebAdmin.Models.CatTipoPago", b =>
                 {
                     b.Property<int>("IdTipoPago")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTipoPago"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29692,13 +30035,13 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdTipoPago");
 
-                    b.ToTable("CatTipoPago");
+                    b.ToTable("CatTipoPagos");
 
                     b.HasData(
                         new
                         {
                             IdTipoPago = 1,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "EFECTIVO"
@@ -29706,7 +30049,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 2,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TRANSFERENCIA"
@@ -29714,7 +30057,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 3,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "CREDITO"
@@ -29722,7 +30065,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 4,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TDC"
@@ -29730,7 +30073,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 5,
-                            FechaRegistro = new DateTime(2022, 7, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TDD"
@@ -29741,8 +30084,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoPrestamo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTipoPrestamo"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29760,15 +30104,34 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdTipoPrestamo");
 
-                    b.ToTable("CatTipoPrestamo");
+                    b.ToTable("CatTipoPrestamos");
+
+                    b.HasData(
+                        new
+                        {
+                            IdTipoPrestamo = 1,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 0,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            TipoPrestamoDesc = "INTERNO"
+                        },
+                        new
+                        {
+                            IdTipoPrestamo = 2,
+                            FechaRegistro = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 0,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            TipoPrestamoDesc = "EXTERNO"
+                        });
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatTipoServicio", b =>
                 {
                     b.Property<int>("IdTipoServicio")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTipoServicio"));
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
@@ -29786,15 +30149,43 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdTipoServicio");
 
-                    b.ToTable("CatTipoServicio");
+                    b.ToTable("CatTipoServicios");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.CatTipoSuministro", b =>
+                {
+                    b.Property<int>("IdTipoSuministro")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdTipoSuministro"));
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TipoSuministroDesc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("IdTipoSuministro");
+
+                    b.ToTable("CatTipoSuministros");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.FileOnDatabaseModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
@@ -29826,8 +30217,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
@@ -29855,10 +30247,128 @@ namespace WebAdmin.Migrations
                     b.ToTable("FilesOnFileSystem");
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.RelCompraPago", b =>
+                {
+                    b.Property<int>("IdRelComprasPago")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdRelComprasPago"));
+
+                    b.Property<int>("CantidadPago")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CodigoReferencia")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("IdCompra")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("IdRelComprasPago");
+
+                    b.ToTable("RelCompraPagos");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.RelCompraProducto", b =>
+                {
+                    b.Property<int>("IdRelCompraProducto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdRelCompraProducto"));
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Descuento")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("IdCompra")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<double>("Precio")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Producto")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("TblCompraIdCompra")
+                        .HasColumnType("uuid");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("TotalPrecio")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("IdRelCompraProducto");
+
+                    b.HasIndex("TblCompraIdCompra");
+
+                    b.ToTable("RelCompraProductos");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.RelVentaPagos", b =>
+                {
+                    b.Property<int>("IdRelVentasPago")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdRelVentasPago"));
+
+                    b.Property<int>("CantidadPago")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CodigoReferencia")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("IdVenta")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("IdRelVentasPago");
+
+                    b.ToTable("RelVentasPagos");
+                });
+
             modelBuilder.Entity("WebAdmin.Models.RelVentaProducto", b =>
                 {
-                    b.Property<Guid>("IdRelVentaProducto")
-                        .HasColumnType("uuid");
+                    b.Property<int>("IdRelVentaProducto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdRelVentaProducto"));
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("integer");
@@ -29905,35 +30415,6 @@ namespace WebAdmin.Migrations
                     b.ToTable("RelVentaProducto");
                 });
 
-            modelBuilder.Entity("WebAdmin.Models.RelVentasPagos", b =>
-                {
-                    b.Property<Guid>("IdRelVentasPago")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("CantidadPago")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("CodigoReferencia")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("IdVenta")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("IdRelVentasPago");
-
-                    b.ToTable("RelVentasPagos");
-                });
-
             modelBuilder.Entity("WebAdmin.Models.TblAlumno", b =>
                 {
                     b.Property<Guid>("IdAlumno")
@@ -29947,11 +30428,9 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ClaveAcceso")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("CorreoAcceso")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("FechaAcceso")
@@ -29961,6 +30440,9 @@ namespace WebAdmin.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdCorpCent")
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("integer");
@@ -29996,8 +30478,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdAlumnoContacto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdAlumnoContacto"));
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
@@ -30038,8 +30521,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdAlumnoDirecciones")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdAlumnoDirecciones"));
 
                     b.Property<string>("Calle")
                         .IsRequired()
@@ -30089,6 +30573,32 @@ namespace WebAdmin.Migrations
                     b.HasKey("IdAlumnoDirecciones");
 
                     b.ToTable("TblAlumnoDirecciones");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblBanco", b =>
+                {
+                    b.Property<Guid>("IdBanco")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<double>("CantidadDeposito")
+                        .HasColumnType("double precision");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("IdCorpCent")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("IdBanco");
+
+                    b.ToTable("TblBancos");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblCentro", b =>
@@ -30154,6 +30664,53 @@ namespace WebAdmin.Migrations
                     b.HasKey("IdCentro");
 
                     b.ToTable("TblCentros");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblCompra", b =>
+                {
+                    b.Property<Guid>("IdCompra")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CodigoPago")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("FechaAlterna")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("IdCentro")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("IdCliente")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("IdCorpCent")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdTipoPago")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioCompra")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("NumeroCompra")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("IdCompra");
+
+                    b.ToTable("TblCompras");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblCorporativo", b =>
@@ -30268,7 +30825,62 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdEmpresa");
 
-                    b.ToTable("TblEmpresa");
+                    b.ToTable("TblEmpresas");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblPrestamo", b =>
+                {
+                    b.Property<Guid>("IdPrestamo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ApellidoMaterno")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ApellidoPaterno")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<double>("CantidadPrestamo")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("CorreoAcceso")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("IdCorpCent")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdTipoPrestamo")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("IdUsuarioPrestamo")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Nombres")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PrestamoDesc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("text");
+
+                    b.HasKey("IdPrestamo");
+
+                    b.ToTable("TblPrestamos");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblProveedor", b =>
@@ -30309,8 +30921,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdProveedorContacto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdProveedorContacto"));
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
@@ -30351,8 +30964,9 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdProveedorDirecciones")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdProveedorDirecciones"));
 
                     b.Property<string>("Calle")
                         .HasColumnType("text");
@@ -30403,6 +31017,100 @@ namespace WebAdmin.Migrations
                     b.ToTable("TblProveedorDirecciones");
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.TblServicio", b =>
+                {
+                    b.Property<int>("IdServicio")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdServicio"));
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CodigoExterno")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CodigoInterno")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Costo")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("DescServicio")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdTipoServicio")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("PorcentajePrecioUno")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("ServicioPrecioUno")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("SubCosto")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("IdServicio");
+
+                    b.ToTable("TblServicio");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblSuministro", b =>
+                {
+                    b.Property<int>("IdSuministro")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdSuministro"));
+
+                    b.Property<DateTime>("FechaFacturacion")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdCorpCent")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdTipoSuministro")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uuid");
+
+                    b.Property<double>("MontoSuministro")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("NumeroReferencia")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SuministroDesc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("IdSuministro");
+
+                    b.ToTable("TblSuministros");
+                });
+
             modelBuilder.Entity("WebAdmin.Models.TblUsuario", b =>
                 {
                     b.Property<Guid>("IdUsuario")
@@ -30434,6 +31142,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdArea")
                         .HasColumnType("integer");
 
+                    b.Property<int>("IdCorpCent")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("IdCorporativo")
                         .HasColumnType("uuid");
 
@@ -30454,10 +31165,6 @@ namespace WebAdmin.Migrations
 
                     b.Property<byte[]>("ImagenPErfil")
                         .HasColumnType("bytea");
-
-                    b.Property<string>("NombreUsuario")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("Nombres")
                         .IsRequired()
@@ -30493,6 +31200,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<Guid>("IdCliente")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("IdCorpCent")
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("integer");
@@ -30620,6 +31330,13 @@ namespace WebAdmin.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.RelCompraProducto", b =>
+                {
+                    b.HasOne("WebAdmin.Models.TblCompra", null)
+                        .WithMany("RelCompraProductos")
+                        .HasForeignKey("TblCompraIdCompra");
+                });
+
             modelBuilder.Entity("WebAdmin.Models.RelVentaProducto", b =>
                 {
                     b.HasOne("WebAdmin.Models.TblVenta", null)
@@ -30637,6 +31354,11 @@ namespace WebAdmin.Migrations
             modelBuilder.Entity("WebAdmin.Models.CatNivelEscolar", b =>
                 {
                     b.Navigation("TblUsuarios");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblCompra", b =>
+                {
+                    b.Navigation("RelCompraProductos");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblVenta", b =>

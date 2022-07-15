@@ -38,7 +38,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.TblEmpresa.ToListAsync());
+            return View(await _context.TblEmpresas.ToListAsync());
         }
 
         // GET: TblEmpresas/Details/5
@@ -49,7 +49,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var tblEmpresa = await _context.TblEmpresa
+            var tblEmpresa = await _context.TblEmpresas
                 .FirstOrDefaultAsync(m => m.IdEmpresa == id);
             if (tblEmpresa == null)
             {
@@ -74,10 +74,10 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var vEmpresa = _context.TblEmpresa.ToList();
+                var vEmpresa = _context.TblEmpresas.ToList();
                 if (vEmpresa.Count == 0)
                 {
-                    var DuplicadosEstatus = _context.TblEmpresa
+                    var DuplicadosEstatus = _context.TblEmpresas
                                          .Where(s => s.NombreEmpresa == tblEmpresa.NombreEmpresa)
                                          .ToList();
 
@@ -129,7 +129,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var tblEmpresa = await _context.TblEmpresa.FindAsync(id);
+            var tblEmpresa = await _context.TblEmpresas.FindAsync(id);
             if (tblEmpresa == null)
             {
                 return NotFound();
@@ -196,7 +196,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var tblEmpresa = await _context.TblEmpresa
+            var tblEmpresa = await _context.TblEmpresas
                 .FirstOrDefaultAsync(m => m.IdEmpresa == id);
             if (tblEmpresa == null)
             {
@@ -211,7 +211,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var tblEmpresa = await _context.TblEmpresa.FindAsync(id);
+            var tblEmpresa = await _context.TblEmpresas.FindAsync(id);
             tblEmpresa.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
@@ -220,7 +220,7 @@ namespace WebAdmin.Controllers
 
         private bool TblEmpresaExists(Guid id)
         {
-            return _context.TblEmpresa.Any(e => e.IdEmpresa == id);
+            return _context.TblEmpresas.Any(e => e.IdEmpresa == id);
         }
     }
 }

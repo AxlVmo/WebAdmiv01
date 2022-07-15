@@ -13,7 +13,7 @@ namespace WebAdmin.Models
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int IdNivelEscolar { get; set; }
 
         [Display(Name = "Descripción")]

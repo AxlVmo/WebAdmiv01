@@ -38,7 +38,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.CatNivelEscolar.ToListAsync());
+            return View(await _context.CatNivelEscolares.ToListAsync());
         }
 
         // GET: CatNivelEscolars/Details/5
@@ -49,7 +49,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catNivelEscolar = await _context.CatNivelEscolar
+            var catNivelEscolar = await _context.CatNivelEscolares
                 .FirstOrDefaultAsync(m => m.IdNivelEscolar == id);
             if (catNivelEscolar == null)
             {
@@ -74,7 +74,7 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatNivelEscolar
+                var DuplicadosEstatus = _context.CatNivelEscolares
                        .Where(s => s.NivelEscolarDesc == catNivelEscolar.NivelEscolarDesc)
                        .ToList();
 
@@ -111,7 +111,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catNivelEscolar = await _context.CatNivelEscolar.FindAsync(id);
+            var catNivelEscolar = await _context.CatNivelEscolares.FindAsync(id);
             if (catNivelEscolar == null)
             {
                 return NotFound();
@@ -168,7 +168,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catNivelEscolar = await _context.CatNivelEscolar
+            var catNivelEscolar = await _context.CatNivelEscolares
                 .FirstOrDefaultAsync(m => m.IdNivelEscolar == id);
             if (catNivelEscolar == null)
             {
@@ -183,7 +183,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catNivelEscolar = await _context.CatNivelEscolar.FindAsync(id);
+            var catNivelEscolar = await _context.CatNivelEscolares.FindAsync(id);
             catNivelEscolar.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
@@ -192,7 +192,7 @@ namespace WebAdmin.Controllers
 
         private bool CatNivelEscolarExists(int id)
         {
-            return _context.CatNivelEscolar.Any(e => e.IdNivelEscolar == id);
+            return _context.CatNivelEscolares.Any(e => e.IdNivelEscolar == id);
         }
     }
 }

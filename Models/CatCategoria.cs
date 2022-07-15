@@ -9,7 +9,7 @@ namespace WebAdmin.Models
     public partial class CatCategoria
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int IdCategoria { get; set; }
 
         [Display(Name = "Categoria")]

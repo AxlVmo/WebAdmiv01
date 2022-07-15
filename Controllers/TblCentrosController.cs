@@ -104,7 +104,7 @@ namespace WebAdmin.Controllers
 
             var fUsuariosCentros = from a in _context.TblUsuarios
                                    where a.IdPerfil == 3 && a.IdRol == 2
-                                   select new TblUsuario
+                                   select new 
                                    {
                                        IdUsuario = a.IdUsuario,
                                        NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,

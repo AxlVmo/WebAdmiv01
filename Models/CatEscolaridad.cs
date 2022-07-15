@@ -7,7 +7,7 @@ namespace WebAdmin.Models
     public class CatEscolaridad
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int IdEscolaridad { get; set; }
 
         [Display(Name = "Descripción")]

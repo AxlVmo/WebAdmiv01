@@ -32,7 +32,7 @@ namespace WebAdmin.Controllers
             if (ValidaEstatus.Count == 2)
             {
                 ViewBag.EstatusFlag = 1;
-                var ValidaEmpresa = _context.TblEmpresa.ToList();
+                var ValidaEmpresa = _context.TblEmpresas.ToList();
 
                 if (ValidaEmpresa.Count == 1)
                 {

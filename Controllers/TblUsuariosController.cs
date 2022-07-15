@@ -32,7 +32,7 @@ namespace WebAdmin.Controllers
             if (ValidaEstatus.Count == 2)
             {
                 ViewBag.EstatusFlag = 1;
-                var ValidaEmpresa = _context.TblEmpresa.ToList();
+                var ValidaEmpresa = _context.TblEmpresas.ToList();
 
                 if (ValidaEmpresa.Count == 1)
                 {
@@ -174,7 +174,7 @@ namespace WebAdmin.Controllers
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;
                     tblUsuario.IdCorporativo = idCorporativos.IdCorporativo;
-                    tblUsuario.NombreUsuario = idCorporativos.NombreCorporativo;
+                    
                     tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
                     tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
                     tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();
@@ -252,7 +252,6 @@ namespace WebAdmin.Controllers
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;
                     tblUsuario.IdCorporativo = idCorporativos.IdCorporativo;
-                    tblUsuario.NombreUsuario = idCorporativos.NombreCorporativo;
                     tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
                     tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
                     tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();

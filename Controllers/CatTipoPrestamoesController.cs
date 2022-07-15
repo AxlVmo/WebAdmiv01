@@ -38,7 +38,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.CatTipoPrestamo.ToListAsync());
+            return View(await _context.CatTipoPrestamos.ToListAsync());
         }
 
         // GET: CatTipoPrestamoes/Details/5
@@ -49,7 +49,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoPrestamo = await _context.CatTipoPrestamo
+            var catTipoPrestamo = await _context.CatTipoPrestamos
                 .FirstOrDefaultAsync(m => m.IdTipoPrestamo == id);
             if (catTipoPrestamo == null)
             {
@@ -74,7 +74,7 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatTipoPrestamo
+                var DuplicadosEstatus = _context.CatTipoPrestamos
                        .Where(s => s.TipoPrestamoDesc == catTipoPrestamo.TipoPrestamoDesc)
                        .ToList();
 
@@ -111,7 +111,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoPrestamo = await _context.CatTipoPrestamo.FindAsync(id);
+            var catTipoPrestamo = await _context.CatTipoPrestamos.FindAsync(id);
             if (catTipoPrestamo == null)
             {
                 return NotFound();
@@ -168,7 +168,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoPrestamo = await _context.CatTipoPrestamo
+            var catTipoPrestamo = await _context.CatTipoPrestamos
                 .FirstOrDefaultAsync(m => m.IdTipoPrestamo == id);
             if (catTipoPrestamo == null)
             {
@@ -183,7 +183,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catTipoPrestamo = await _context.CatTipoPrestamo.FindAsync(id);
+            var catTipoPrestamo = await _context.CatTipoPrestamos.FindAsync(id);
             catTipoPrestamo.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
@@ -192,7 +192,7 @@ namespace WebAdmin.Controllers
 
         private bool CatTipoPrestamoExists(int id)
         {
-            return _context.CatTipoPrestamo.Any(e => e.IdTipoPrestamo == id);
+            return _context.CatTipoPrestamos.Any(e => e.IdTipoPrestamo == id);
         }
     }
 }

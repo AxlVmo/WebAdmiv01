@@ -9,7 +9,7 @@ namespace WebAdmin.Models
     public partial class CatTipoDireccion
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int IdTipoDireccion { get; set; }
 
         [Display(Name = "Descripción")]

@@ -14,6 +14,7 @@ namespace WebAdmin
     {
         public static void Main(string[] args)
         {
+             
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -21,6 +22,8 @@ namespace WebAdmin
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+                    AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
                     webBuilder.UseStartup<Startup>();
                 });
     }

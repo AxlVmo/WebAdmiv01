@@ -38,7 +38,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.CatEscolaridad.ToListAsync());
+            return View(await _context.CatEscolaridades.ToListAsync());
         }
 
         // GET: CatEscolaridads/Details/5
@@ -49,7 +49,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catEscolaridad = await _context.CatEscolaridad
+            var catEscolaridad = await _context.CatEscolaridades
                 .FirstOrDefaultAsync(m => m.IdEscolaridad == id);
             if (catEscolaridad == null)
             {
@@ -111,7 +111,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catEscolaridad = await _context.CatEscolaridad.FindAsync(id);
+            var catEscolaridad = await _context.CatEscolaridades.FindAsync(id);
             if (catEscolaridad == null)
             {
                 return NotFound();
@@ -168,7 +168,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catEscolaridad = await _context.CatEscolaridad
+            var catEscolaridad = await _context.CatEscolaridades
                 .FirstOrDefaultAsync(m => m.IdEscolaridad == id);
             if (catEscolaridad == null)
             {
@@ -183,7 +183,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catEscolaridad = await _context.CatEscolaridad.FindAsync(id);
+            var catEscolaridad = await _context.CatEscolaridades.FindAsync(id);
             catEscolaridad.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
@@ -192,7 +192,7 @@ namespace WebAdmin.Controllers
 
         private bool CatEscolaridadExists(int id)
         {
-            return _context.CatEscolaridad.Any(e => e.IdEscolaridad == id);
+            return _context.CatEscolaridades.Any(e => e.IdEscolaridad == id);
         }
     }
 }

@@ -121,7 +121,6 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                     Nombres = Input.Nombres.ToUpper(),
                     ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
                     ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
-                    NombreUsuario = "Null",
                     FechaNacimiento = DateTime.Now,
                     IdUsuarioModifico = Guid.Empty,
                     CorreoAcceso = user.Email,

@@ -13,51 +13,55 @@ namespace WebAdmin.Data
             : base(options)
         {
         }
-
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<CatCodigosPostal> CatCodigosPostales { get; set; }
         public DbSet<FileOnDatabaseModel> FilesOnDatabase { get; set; }
         public DbSet<FileOnFileSystemModel> FilesOnFileSystem { get; set; }
-
         public DbSet<CatEstatus> CatEstatus { get; set; }
         public DbSet<CatPerfil> CatPerfiles { get; set; }
         public DbSet<CatRole> CatRoles { get; set; }
-
         public DbSet<CatArea> CatAreas { get; set; }
-
         public DbSet<CatGenero> CatGeneros { get; set; }
-        public DbSet<TblEmpresa> TblEmpresa { get; set; }
+        public DbSet<TblEmpresa> TblEmpresas { get; set; }
         public DbSet<TblCentro> TblCentros { get; set; }
-
         public DbSet<TblCorporativo> TblCorporativos { get; set; }
         public DbSet<TblUsuario> TblUsuarios { get; set; }
-
         public DbSet<CatTipoDireccion> CatTipoDirecciones { get; set; }
-
         public DbSet<TblAlumno> TblAlumnos { get; set; }
         public DbSet<TblAlumnoContacto> TblAlumnoContactos { get; set; }
         public DbSet<TblAlumnoDireccion> TblAlumnoDirecciones { get; set; }
-
-        public DbSet<TblEmpresa> TblEmpresas { get; set; }
         public DbSet<TblProveedor> TblProveedores { get; set; }
         public DbSet<TblProveedorContacto> TblProveedorContactos { get; set; }
         public DbSet<TblProveedorDireccion> TblProveedorDirecciones { get; set; }
-
         public DbSet<CatCategoria> CatCategorias { get; set; }
         public DbSet<CatProducto> CatProductos { get; set; }
         public DbSet<CatTipoCentro> CatTipoCentros { get; set; }
         public DbSet<CaTipotLicencia> CaTipotLicencias { get; set; }
-        public DbSet<CatEscolaridad> CatEscolaridad { get; set; }
-        public DbSet<CatNivelEscolar> CatNivelEscolar { get; set; }
-        public DbSet<CatTipoAlumno> CatTipoAlumno { get; set; }
-        public DbSet<CatTipoContratacion> CatTipoContratacion { get; set; }
-        public DbSet<CatTipoPago> CatTipoPago { get; set; }
-        public DbSet<CatTipoPrestamo> CatTipoPrestamo { get; set; }
-        public DbSet<CatTipoServicio> CatTipoServicio { get; set; }
+        public DbSet<CatEscolaridad> CatEscolaridades { get; set; }
+        public DbSet<CatNivelEscolar> CatNivelEscolares { get; set; }
         public DbSet<CatTipoAlumno> CatTipoAlumnos { get; set; }
-        public DbSet<ApplicationUser> ApplicationUser { get; set; }
-
+        public DbSet<CatTipoContratacion> CatTipoContrataciones { get; set; }
+        public DbSet<CatTipoPago> CatTipoPagos { get; set; }
+        public DbSet<CatTipoPrestamo> CatTipoPrestamos { get; set; }
+        public DbSet<CatTipoServicio> CatTipoServicios { get; set; }
+        public DbSet<CatTipoFormaPago> CatTipoFormaPagos { get; set; }
+        public DbSet<CatCorpCent> CatCorpCents { get; set; }
+        public DbSet<CatPeriodoAmortiza> CatPeriodosAmortizaciones { get; set; }
+        public DbSet<CatProdServ> CatProdServs { get; set; }
+        public DbSet<CatTipoSuministro> CatTipoSuministros { get; set; }
+        public DbSet<RelCompraPago> RelCompraPagos { get; set; }
+        public DbSet<RelCompraProducto> RelCompraProductos { get; set; }
+        public DbSet<TblBanco> TblBancos { get; set; }
+        public DbSet<TblCompra> TblCompras { get; set; }
+        public DbSet<TblSuministro> TblSuministros { get; set; }
+        public DbSet<TblPrestamo> TblPrestamos { get; set; }
+        public DbSet<TblVenta> TblVenta { get; set; }
+        public DbSet<RelVentaPagos> RelVentasPagos { get; set; }
+        public DbSet<RelVentaProducto> RelVentaProducto { get; set; }
+        public DbSet<TblServicio> TblServicio { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
             // builder.HasDefaultSchema("Identity");
             modelBuilder.Entity<IdentityUser>(entity =>
@@ -89,12 +93,24 @@ namespace WebAdmin.Data
                 entity.ToTable("UserTokens");
             });
             //modelBuilder.Entity<IdentityRole>().Ignore("IdentityRole");
-    
+
 
             modelBuilder.Entity<CatEstatus>().HasData(
                 new CatEstatus { IdEstatusRegistro = 1, EstatusDesc = "ACTIVO", FechaRegistro = DateTime.Today },
                 new CatEstatus { IdEstatusRegistro = 2, EstatusDesc = "DESACTIVO", FechaRegistro = DateTime.Today }
             );
+            modelBuilder.Entity<CatCorpCent>().HasData(
+                new CatCorpCent { IdCorpCent = 1, CorpCentDesc = "CORPORATIVO", FechaRegistro = DateTime.Today },
+                new CatCorpCent { IdCorpCent = 2, CorpCentDesc = "CENTRO", FechaRegistro = DateTime.Today }
+            );
+            modelBuilder.Entity<CatProdServ>().HasData(
+                new CatProdServ { IdProdServ = 1, ProdServDesc = "PRODUCTO", FechaRegistro = DateTime.Today },
+                new CatProdServ { IdProdServ = 2, ProdServDesc = "SERVICIO", FechaRegistro = DateTime.Today }
+            );
+            modelBuilder.Entity<CatTipoPrestamo>().HasData(
+               new CatTipoPrestamo { IdTipoPrestamo = 1, TipoPrestamoDesc = "INTERNO", FechaRegistro = DateTime.Today },
+               new CatTipoPrestamo { IdTipoPrestamo = 2, TipoPrestamoDesc = "EXTERNO", FechaRegistro = DateTime.Today }
+           );
             modelBuilder.Entity<CatRole>().HasData(
                 new CatRole { IdRol = 1, RolDesc = "DESARROLLADOR", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                 new CatRole { IdRol = 2, RolDesc = "ADMINISTRADOR", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
@@ -111,13 +127,13 @@ namespace WebAdmin.Data
             );
             modelBuilder.Entity<CatArea>().HasData(
              new CatArea { IdArea = 1, AreaDesc = "DIRECCION", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-             new CatArea { IdArea = 2, AreaDesc = "RECURSOS HUMANOS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-             new CatArea { IdArea = 3, AreaDesc = "PRODUCCION DIGITAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-             new CatArea { IdArea = 4, AreaDesc = "FINANZAS/CONTABILIDAD", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-             new CatArea { IdArea = 5, AreaDesc = "MARKETING/VENTAS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-             new CatArea { IdArea = 6, AreaDesc = "TIC", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-             new CatArea { IdArea = 7, AreaDesc = "SERVICIO AL Alumno", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-             new CatArea { IdArea = 8, AreaDesc = "OTRA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+             new CatArea { IdArea = 2, AreaDesc = "ADMINISTRATIVA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+             new CatArea { IdArea = 3, AreaDesc = "RECURSOS HUMANOS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+             new CatArea { IdArea = 4, AreaDesc = "PRODUCCION DIGITAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+             new CatArea { IdArea = 5, AreaDesc = "FINANZAS/CONTABILIDAD", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+             new CatArea { IdArea = 6, AreaDesc = "MARKETING/VENTAS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+             new CatArea { IdArea = 7, AreaDesc = "TIC", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+
          );
             modelBuilder.Entity<CatTipoPago>().HasData(
             new CatTipoPago { IdTipoPago = 1, TipoPagoDesc = "EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
@@ -127,14 +143,46 @@ namespace WebAdmin.Data
             new CatTipoPago { IdTipoPago = 5, TipoPagoDesc = "TDD", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
 
         );
-         modelBuilder.Entity<CatGenero>().HasData(
-                new CatGenero { IdGenero = 1, GeneroDesc = "HOMBRE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatGenero { IdGenero = 2, GeneroDesc = "MUJER", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
-            );
-             modelBuilder.Entity<CatTipoCentro>().HasData(
-                new CatTipoCentro { IdTipoCentro = 1, TipoCentroDesc = "INTERNO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatTipoCentro { IdTipoCentro = 2, TipoCentroDesc = "LICENCIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
-            );
+            modelBuilder.Entity<CatGenero>().HasData(
+                   new CatGenero { IdGenero = 1, GeneroDesc = "HOMBRE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                   new CatGenero { IdGenero = 2, GeneroDesc = "MUJER", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+               );
+            modelBuilder.Entity<CatTipoCentro>().HasData(
+               new CatTipoCentro { IdTipoCentro = 1, TipoCentroDesc = "INTERNO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatTipoCentro { IdTipoCentro = 2, TipoCentroDesc = "LICENCIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+           );
+ 
+            modelBuilder.Entity<CatNivelEscolar>().HasData(
+                  new CatNivelEscolar { IdNivelEscolar = 1, NivelEscolarDesc = "PREESCOLAR", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                  new CatNivelEscolar { IdNivelEscolar = 2, NivelEscolarDesc = "PRIMARIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                  new CatNivelEscolar { IdNivelEscolar = 3, NivelEscolarDesc = "SECUNDARIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                  new CatNivelEscolar { IdNivelEscolar = 4, NivelEscolarDesc = "BACHILLERATO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                  new CatNivelEscolar { IdNivelEscolar = 5, NivelEscolarDesc = "UNIVERSIDAD", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+              );
+            modelBuilder.Entity<CatEscolaridad>().HasData(
+                  new CatEscolaridad { IdEscolaridad = 1, EscolaridadDesc = "PRIMERO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                  new CatEscolaridad { IdEscolaridad = 2, EscolaridadDesc = "SEGUNDO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                  new CatEscolaridad { IdEscolaridad = 3, EscolaridadDesc = "TERCERO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                  new CatEscolaridad { IdEscolaridad = 4, EscolaridadDesc = "CUARTO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                  new CatEscolaridad { IdEscolaridad = 5, EscolaridadDesc = "QUINTO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                  new CatEscolaridad { IdEscolaridad = 6, EscolaridadDesc = "SEXTO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+              );
+            modelBuilder.Entity<CatTipoFormaPago>().HasData(
+           new CatTipoFormaPago { IdTipoFormaPago = 1, TipoFormaPagoDesc = "SEMANAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+           new CatTipoFormaPago { IdTipoFormaPago = 2, TipoFormaPagoDesc = "QUINCENAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+           new CatTipoFormaPago { IdTipoFormaPago = 3, TipoFormaPagoDesc = "MENSUAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+       );
+            modelBuilder.Entity<CatPeriodoAmortiza>().HasData(
+              new CatPeriodoAmortiza { IdPeriodoAmortiza = 1, PeriodoAmortizaDesc = "1 MES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatPeriodoAmortiza { IdPeriodoAmortiza = 2, PeriodoAmortizaDesc = "3 MES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatPeriodoAmortiza { IdPeriodoAmortiza = 3, PeriodoAmortizaDesc = "6 MES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatPeriodoAmortiza { IdPeriodoAmortiza = 4, PeriodoAmortizaDesc = "9 MES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatPeriodoAmortiza { IdPeriodoAmortiza = 5, PeriodoAmortizaDesc = "12 MES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatPeriodoAmortiza { IdPeriodoAmortiza = 6, PeriodoAmortizaDesc = "18 MES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatPeriodoAmortiza { IdPeriodoAmortiza = 7, PeriodoAmortizaDesc = "24 MES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatPeriodoAmortiza { IdPeriodoAmortiza = 8, PeriodoAmortizaDesc = "36 MES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+          );
+
             modelBuilder.Entity<CatCodigosPostal>().HasData(
 
                 new CatCodigosPostal { IdCodigosPostales = 1, Dcodigo = "01000", Dasenta = "San Ángel", DtipoAsenta = "Colonia", Dmnpio = "Álvaro Obregón", Destado = "Ciudad de México", Dciudad = "Ciudad de México", Dcp = "01001", Cestado = "09", Coficina = "01001", Ccp = "0", CtipoAsenta = "09", Cmnpio = "010", IdAsentaCpcons = "0001", Dzona = "Urbano", CcveCiudad = "01" },
@@ -1659,10 +1707,9 @@ new CatCodigosPostal { IdCodigosPostales = 1516, Dcodigo = "16900", Dasenta = "S
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<WebAdmin.Models.TblVenta> TblVenta { get; set; }
+       
+       
 
-        public DbSet<WebAdmin.Models.RelVentasPagos> RelVentasPagos { get; set; }
-
-        public DbSet<WebAdmin.Models.RelVentaProducto> RelVentaProducto { get; set; }
+       
     }
 }

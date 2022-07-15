@@ -80,7 +80,7 @@ namespace WebAdmin.Controllers
                 {
                     foreach (var item in oVentaVM.RelVentaProductos)
                     {
-                        item.IdRelVentaProducto = Guid.NewGuid();
+                        //item.IdRelVentaProducto = Guid.NewGuid();
                         item.Cantidad = 1;
                         item.Precio = 0;
                         item.Total = 0;
@@ -148,11 +148,11 @@ namespace WebAdmin.Controllers
             ViewBag.ListaCategoria = ListaCategoria;
             // ViewData["IdProfile"] = new SelectList(_context.Profiles, "IdProfile", "IdProfile", userEntityTwo.IdProfile);
             List<CatTipoPago> ListaTipoPago = new List<CatTipoPago>();
-            ListaTipoPago = (from c in _context.CatTipoPago select c).Distinct().ToList();
+            ListaTipoPago = (from c in _context.CatTipoPagos select c).Distinct().ToList();
             ViewBag.ListaTipoPago = ListaTipoPago;
             var fUsuariosCentros = from a in _context.TblAlumnos
                                        //    where a.IdPerfil == 3 && a.IdRol == 2
-                                   select new TblUsuario
+                                   select new 
                                    {
                                        IdUsuario = a.IdAlumno,
                                        NombreUsuario = a.NombreAlumno + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,

@@ -6,10 +6,10 @@ namespace WebAdmin.Models
 {
     public class RelVentaProducto
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "ID Ventas Productos")]
         [Key]
-        public Guid IdRelVentaProducto { get; set; }
+        public int IdRelVentaProducto { get; set; }
 
         [Display(Name = "Cantidad")]
         public int Cantidad { get; set; }

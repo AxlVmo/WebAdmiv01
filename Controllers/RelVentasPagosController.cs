@@ -26,7 +26,7 @@ namespace WebAdmin.Controllers
         }
 
         // GET: RelVentasPagos/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -54,11 +54,10 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdRelVentasPago,CodigoReferencia,CantidadPago,IdCotizacionGeneral,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro")] RelVentasPagos relVentasPagos)
+        public async Task<IActionResult> Create([Bind("IdRelVentasPago,CodigoReferencia,CantidadPago,IdCotizacionGeneral,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro")] RelVentaPagos relVentasPagos)
         {
             if (ModelState.IsValid)
             {
-                relVentasPagos.IdRelVentasPago = Guid.NewGuid();
                 _context.Add(relVentasPagos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -87,7 +86,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdRelVentasPago,CodigoReferencia,CantidadPago,IdCotizacionGeneral,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro")] RelVentasPagos relVentasPagos)
+        public async Task<IActionResult> Edit(int id, [Bind("IdRelVentasPago,CodigoReferencia,CantidadPago,IdCotizacionGeneral,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro")] RelVentaPagos relVentasPagos)
         {
             if (id != relVentasPagos.IdRelVentasPago)
             {
@@ -118,7 +117,7 @@ namespace WebAdmin.Controllers
         }
 
         // GET: RelVentasPagos/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -138,7 +137,7 @@ namespace WebAdmin.Controllers
         // POST: RelVentasPagos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var relVentasPagos = await _context.RelVentasPagos.FindAsync(id);
             _context.RelVentasPagos.Remove(relVentasPagos);
@@ -146,7 +145,7 @@ namespace WebAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RelVentasPagosExists(Guid id)
+        private bool RelVentasPagosExists(int id)
         {
             return _context.RelVentasPagos.Any(e => e.IdRelVentasPago == id);
         }

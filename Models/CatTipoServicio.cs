@@ -7,7 +7,7 @@ namespace WebAdmin.Models
     public class CatTipoServicio
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int IdTipoServicio { get; set; }
 
         [Display(Name = "Descripción")]

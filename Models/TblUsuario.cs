@@ -22,12 +22,12 @@ namespace WebAdmin.Models
         [Display(Name = "ApellidoMaterno")]
         public string ApellidoMaterno { get; set; }
         
-        [Display(Name = "Nombre Usuario")]
-        public string NombreUsuario { get; set; }
-
         [Display(Name = "Corporativo")]
         [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdCorporativo { get; set; }
+
+        [Display(Name = "Corporativo / Centro")]
+        public int IdCorpCent { get; set; }
 
         [Display(Name = "Area")]
         [Required(ErrorMessage = "Campo Requerido")]

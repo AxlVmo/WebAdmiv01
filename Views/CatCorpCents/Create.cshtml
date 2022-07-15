@@ -1,4 +1,4 @@
-﻿@model WebAdmin.Models.RelVentasPagos
+﻿@model WebAdmin.Models.CatCorpCent
 
 @{
     ViewData["Title"] = "Create";
@@ -7,26 +7,16 @@
 
 <h1>Create</h1>
 
-<h4>RelVentasPagos</h4>
+<h4>CatCorpCent</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CodigoReferencia" class="control-label"></label>
-                <input asp-for="CodigoReferencia" class="form-control" />
-                <span asp-validation-for="CodigoReferencia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CantidadPago" class="control-label"></label>
-                <input asp-for="CantidadPago" class="form-control" />
-                <span asp-validation-for="CantidadPago" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdVenta" class="control-label"></label>
-                <input asp-for="IdVenta" class="form-control" />
-                <span asp-validation-for="IdVenta" class="text-danger"></span>
+                <label asp-for="CorpCentDesc" class="control-label"></label>
+                <input asp-for="CorpCentDesc" class="form-control" />
+                <span asp-validation-for="CorpCentDesc" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdUsuarioModifico" class="control-label"></label>

@@ -9,7 +9,7 @@ namespace WebAdmin.Models
     public partial class CaTipotLicencia
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int IdTipoLicencia { get; set; }
 
         [Display(Name = "Descripción")]
