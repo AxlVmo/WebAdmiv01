@@ -43,7 +43,7 @@
         <label asp-for="@Model.RelVentaProductos[0].Categoria" class="control-label"></label>
         <div class="input-group mb-3">
             <select id="drpCategoria" class="form-select" asp-for="@Model.RelVentaProductos[0].Categoria" asp-items="@(new
-            SelectList(ViewBag.ListaCategoria,"IdCategoria","CategoriaDesc"))">
+            SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
                 <option value="">SELECCIONAR</option>
             </select>
             <button class="btn btn-primary" type="button" onclick="DatosProductos()">Ver</button>
@@ -65,13 +65,13 @@
 <div class="row no-print">
     <div class="col-md-3">
         <div class="form-group">
-            <label class="control-label">Categoria</label>
+            <label class="control-label">Tipo Servicio</label>
             <input id="iCategoria" class="form-control" type="text" readonly />
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label class="control-label">Producto</label>
+            <label class="control-label">Servicio</label>
             <input id="iProducto" class="form-control" type="text" readonly />
         </div>
     </div>
@@ -89,31 +89,11 @@
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Invoice</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#"></a></li>
-                        <li class="breadcrumb-item active"></li>
-                    </ol>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
-
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="callout callout-info">
-                        <h5><i class="fas fa-info"></i> Note:</h5>
-                        This page has been enhanced for printing. Click the print button at the bottom of the
-                        invoice to test.
-                    </div>
+                 
 
 
                     <!-- Main content -->
@@ -122,7 +102,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <h4>
-                                    <i class="fas fa-globe"></i> Intelimundo, Inc.
+                                    <i class="fas fa-globe"></i> Intelimundo.
                                     <small class="float-right">Date: 2/10/2014</small>
                                 </h4>
                             </div>
@@ -131,7 +111,7 @@
                         <!-- info row -->
                         <div class="row invoice-info">
                             <div class="col-sm-4 invoice-col">
-                                From
+                                Direccion
                                 <address>
                                     <strong>Admin, Inc.</strong><br>
                                     795 Folsom Ave, Suite 600<br>
@@ -198,18 +178,32 @@
                         <div class="row">
                             <!-- accepted payments column -->
                             <div class="col-6">
-                                <p class="lead">Payment Methods:</p>
-                                <img src="../../dist/img/credit/visa.png" alt="Visa">
-                                <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                                <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                                <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
-                                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning
-                                    heekya handango imeem
-                                    plugg
-                                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                                </p>
+                                  <div class="row no-print">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
+                                    <select id="IdTipoPago" class="form-select" asp-for="TblVentas.IdTipoPago"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                    <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" hidden>
+                                    <label asp-for="TblVentas.CodigoPago" class="control-label"></label>
+                                    <input asp-for="TblVentas.CodigoPago" class="form-control" />
+                                    <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group" hidden>
+                                    <label asp-for="TblVentas.FechaAlterna" class="control-label"></label>
+                                    <input asp-for="TblVentas.FechaAlterna" class="form-control" />
+                                </div>
+                            </div>
+                           
+                        </div>
                             </div>
                             <!-- /.col -->
                             <div class="col-6">
@@ -240,38 +234,12 @@
                         </div>
                         <!-- /.row -->
                         <!-- this row will not appear when printing -->
-                        <div class="row no-print">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
-                                    <select id="IdTipoPago" class="form-select" asp-for="TblVentas.IdTipoPago"
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
-                                    <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group" hidden>
-                                    <label asp-for="TblVentas.CodigoPago" class="control-label"></label>
-                                    <input asp-for="TblVentas.CodigoPago" class="form-control" />
-                                    <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group" hidden>
-                                    <label asp-for="TblVentas.FechaAlterna" class="control-label"></label>
-                                    <input asp-for="TblVentas.FechaAlterna" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <button class="btn btn-primary" id="btnTerminar" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">Guardar</button>
+                      <div class="col-6">
+                                <button class="btn btn-primary" id="btnTerminar">Guardar</button>
                                 <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                                 <button class="btn btn-primary" id="btnTerminar2"
                                     onclick="GetClientReport()">Imprimir</button>
                             </div>
-                        </div>
                     </div>
                     <!-- /.invoice -->
                 </div><!-- /.col -->
@@ -280,29 +248,7 @@
     </section>
     <!-- /.content -->
 </div>
-<div class="modal fade-modal-xl" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog-modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">¿Listo/a para salir?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
 
-
-            </div>
-            <div class="modal-footer">
-                <form class="form-inline">
-                    <button type="submit" class="btn btn-primary">Imprimir</button>
-                </form>
-
-            </div>
-        </div>
-    </div>
-</div>
 @section Scripts {
 @{
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
@@ -462,7 +408,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
         $.ajax({
             type: "GET",
-            url: "/CatProductos/FiltroProductos/",
+            url: "/TblServicios/FiltroServicios/",
             data: { id: vProducto },
             contentType: "application/json;charset=utf-8",
             dataType: "json",
@@ -478,7 +424,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 else {
                     $select_colonias.append('<option value="">SELECCIONAR</option>');
                     for (var i = 0, len = list.length; i < len; i++) {
-                        $select_colonias.append('<option value=' + list[i].idProducto + '>' + list[i].descProducto + '</option>');
+                        $select_colonias.append('<option value=' + list[i].idServicio + '>' + list[i].descServicio + '</option>');
                         $select_colonias.attr('required', true);
                     }
                     $("#btnMostrar").removeAttr("disabled");
@@ -494,7 +440,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var vProducto = document.getElementById("drpProducto").value;
         $.ajax({
             type: "GET",
-            url: "/CatProductos/fFiltroProducto/",
+            url: "/TblServicios/fFiltroServicio/",
             data: { idA: vProducto },
             contentType: "application/json;charset=utf-8",
             dataType: "json",
@@ -507,9 +453,9 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 else {
 
                     for (var i = 0, len = list.length; i < len; i++) {
-                        document.getElementById("iCategoria").value = list[i].descCategoria;
-                        document.getElementById("iProducto").value = list[i].descProducto;
-                        document.getElementById("iPrecio").value = list[i].totalPrecioProducto;
+                        document.getElementById("iCategoria").value = list[i].tipoServicioDesc;
+                        document.getElementById("iProducto").value = list[i].descServicio;
+                        document.getElementById("iPrecio").value = list[i].totalPrecioServicio;
                     }
                     $("#btnAddProducto").removeAttr("disabled");
                 }

@@ -309,7 +309,7 @@ namespace WebAdminHecsa.Controllers
 
         private string GeneraCodigoInterno()
         {
-            string fmt = "00000000.##";
+            string fmt = "0000.##";
             int Cuenta = 0;
             string strCodigoInterno = string.Empty;
             int lProductos = _context.CatProductos.Count();
@@ -317,12 +317,12 @@ namespace WebAdminHecsa.Controllers
             if (lProductos == 0)
             {
                 Cuenta = 1;
-                strCodigoInterno = "im-p" + Cuenta.ToString(fmt);
+                strCodigoInterno = "IM-P" + Cuenta.ToString(fmt);
             }
             else
             {
                 Cuenta = lProductos + 1;
-                strCodigoInterno = "im-p" + Cuenta.ToString(fmt);
+                strCodigoInterno = "IM-P" + Cuenta.ToString(fmt);
             }
 
             return strCodigoInterno;

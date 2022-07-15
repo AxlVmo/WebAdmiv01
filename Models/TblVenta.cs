@@ -53,4 +53,5 @@ namespace WebAdmin.Models
 
         public virtual List<RelVentaProducto> RelVentaProductos { get; set; }
     }
+   
 }

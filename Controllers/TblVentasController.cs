@@ -96,7 +96,7 @@ namespace WebAdmin.Controllers
                     oVenta.FechaRegistro = DateTime.Now;
                     oVenta.IdEstatusRegistro = 1;
                     oVenta.IdVenta = nVenta;
-                    oVenta.NumeroVenta = _context.TblVenta.Count();
+                    oVenta.NumeroVenta = _context.TblVenta.Count() + 1;
                     oVenta.IdUsuarioVenta = Guid.Parse(fuser);
                     oVenta.IdCentro = idCorporativos.IdCorporativo;
                     oVenta.IdUsuarioModifico = Guid.Parse(fuser);
@@ -143,16 +143,16 @@ namespace WebAdmin.Controllers
         // GET: TblVentas/Create
         public IActionResult Create()
         {
-            List<CatCategoria> ListaCategoria = new List<CatCategoria>();
-            ListaCategoria = (from c in _context.CatCategorias select c).Distinct().ToList();
-            ViewBag.ListaCategoria = ListaCategoria;
+            List<CatTipoServicio> ListaTipoServicio = new List<CatTipoServicio>();
+            ListaTipoServicio = (from c in _context.CatTipoServicios select c).Distinct().ToList();
+            ViewBag.ListaTipoServicio = ListaTipoServicio;
             // ViewData["IdProfile"] = new SelectList(_context.Profiles, "IdProfile", "IdProfile", userEntityTwo.IdProfile);
             List<CatTipoPago> ListaTipoPago = new List<CatTipoPago>();
             ListaTipoPago = (from c in _context.CatTipoPagos select c).Distinct().ToList();
             ViewBag.ListaTipoPago = ListaTipoPago;
             var fUsuariosCentros = from a in _context.TblAlumnos
                                        //    where a.IdPerfil == 3 && a.IdRol == 2
-                                   select new 
+                                   select new
                                    {
                                        IdUsuario = a.IdAlumno,
                                        NombreUsuario = a.NombreAlumno + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,

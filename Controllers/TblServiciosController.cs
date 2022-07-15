@@ -1,94 +1,237 @@
-﻿using System;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
-namespace WebAdmin.Controllers
+namespace WebAdminHecsa.Controllers
 {
     public class TblServiciosController : Controller
     {
         private readonly nDbContext _context;
+        private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public TblServiciosController(nDbContext context)
+        public TblServiciosController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
+            _notyf = notyf;
+            _userService = userService;
         }
 
-        // GET: TblServicios
+        // GET: CatServicios
         public async Task<IActionResult> Index()
         {
-              return View(await _context.TblServicio.ToListAsync());
+            var ValidaEstatus = _context.CatEstatus.ToList();
+
+            if (ValidaEstatus.Count == 2)
+            {
+                ViewBag.EstatusFlag = 1;
+                var ValidaEmpresa = _context.TblEmpresas.ToList();
+
+                if (ValidaEmpresa.Count == 1)
+                {
+                    ViewBag.EmpresaFlag = 1;
+                    var ValidaCorporativo = _context.TblCorporativos.ToList();
+
+                    if (ValidaCorporativo.Count >= 1)
+                    {
+                        ViewBag.CorporativoFlag = 1;
+                        var ValidaTipoServicio = _context.CatTipoServicios.ToList();
+
+                        if (ValidaTipoServicio.Count >= 1)
+                        {
+                            ViewBag.TipoServicioFlag = 1;
+                        }
+                        else
+                        {
+                            ViewBag.TipoServicioFlag = 0;
+                            _notyf.Information("Favor de registrar los datos de Tipo Servicio para la Aplicación", 5);
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.CorporativoFlag = 0;
+                        _notyf.Information("Favor de registrar los datos de Corporativo para la Aplicación", 5);
+                    }
+                }
+                else
+                {
+                    ViewBag.EmpresaFlag = 0;
+                    _notyf.Information("Favor de registrar los datos de la Empresa para la Aplicación", 5);
+                }
+            }
+            else
+            {
+                ViewBag.EstatusFlag = 0;
+                _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
+            }
+            var fServicios = from a in _context.TblServicio
+                             join b in _context.CatTipoServicios on a.IdTipoServicio equals b.IdTipoServicio
+
+                             select new TblServicio
+                             {
+                                 IdServicio = a.IdServicio,
+                                 CodigoInterno = a.CodigoInterno,
+                                 CodigoExterno = a.CodigoExterno,
+                                 DescServicio = a.DescServicio,
+                                 TipoServicioDesc = b.TipoServicioDesc,
+                                 FechaRegistro = a.FechaRegistro,
+                                 IdEstatusRegistro = a.IdEstatusRegistro
+                             };
+
+            return View(await fServicios.ToListAsync());
         }
 
-        // GET: TblServicios/Details/5
+        // GET: CatServicios/Details/5
+
+        [HttpGet]
+        public ActionResult FiltroServicios(int id)
+        {
+            var fServicios = from a in _context.TblServicio
+                             join b in _context.CatTipoServicios on a.IdTipoServicio equals b.IdTipoServicio
+                             where b.IdTipoServicio == id
+                             select new TblServicio
+                             {
+                                 IdServicio = a.IdServicio,
+                                 DescServicio = a.DescServicio + " - $ " + a.ServicioPrecioUno
+                             };
+                             _notyf.Success("Carga de servicios correcta", 5);
+            return Json(fServicios);
+        }
+
+        [HttpGet]
+        public ActionResult fFiltroServicio(int idA)
+        {
+            var fServicios = from a in _context.TblServicio
+                              join b in _context.CatTipoServicios on a.IdTipoServicio equals b.IdTipoServicio
+                             where a.IdServicio == idA
+                             select new
+                             {
+                                 TipoServicioDesc = b.TipoServicioDesc,
+                                 DescServicio = a.DescServicio,
+                                 TotalPrecioServicio = a.ServicioPrecioUno,
+                                 IdServicio = a.IdServicio,
+                             };
+                             _notyf.Success("Seleccion de servicios correcta", 5);
+            return Json(fServicios);
+        }
+
+        [HttpPost]
+        public ActionResult FiltroServicio(int idA)
+        {
+            var fServicios = from a in _context.TblServicio
+                             join b in _context.CatTipoServicios on a.IdTipoServicio equals b.IdTipoServicio
+                             where b.IdTipoServicio == idA
+                             select new
+                             {
+                                 IdServicio = a.IdServicio,
+                                 DescServicio = a.DescServicio,
+                                 TipoServicioDesc = b.TipoServicioDesc,
+                                 Costo = a.ServicioPrecioUno,
+                             };
+            return Json(fServicios);
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.TblServicio == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var tblServicio = await _context.TblServicio
+            var catServicios = await _context.TblServicio
                 .FirstOrDefaultAsync(m => m.IdServicio == id);
-            if (tblServicio == null)
+            if (catServicios == null)
             {
                 return NotFound();
             }
 
-            return View(tblServicio);
+            return View(catServicios);
         }
 
-        // GET: TblServicios/Create
+        // GET: CatServicios/Create
         public IActionResult Create()
         {
+            List<CatTipoServicio> ListaTipoServicio = new List<CatTipoServicio>();
+            ListaTipoServicio = (from c in _context.CatTipoServicios select c).Distinct().ToList();
+            ViewBag.ListaTipoServicio = ListaTipoServicio;
+
             return View();
         }
 
-        // POST: TblServicios/Create
+        // POST: CatServicios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdServicio,CodigoInterno,CodigoExterno,IdTipoServicio,DescServicio,Cantidad,ServicioPrecioUno,PorcentajePrecioUno,SubCosto,Costo,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro")] TblServicio tblServicio)
+        public async Task<IActionResult> Create([Bind("IdServicio,CodigoExterno,IdTipoServicio,DescServicio,ServicioPrecioUno")] TblServicio catServicios)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tblServicio);
-                await _context.SaveChangesAsync();
+                var DuplicadosEstatus = _context.TblServicio
+               .Where(s => s.IdTipoServicio == catServicios.IdTipoServicio && s.DescServicio == catServicios.DescServicio)
+               .ToList();
+
+                if (DuplicadosEstatus.Count == 0)
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catServicios.IdUsuarioModifico = Guid.Parse(fuser);
+                    catServicios.FechaRegistro = DateTime.Now;
+                    catServicios.IdEstatusRegistro = 1;
+                    catServicios.DescServicio = !string.IsNullOrEmpty(catServicios.DescServicio) ? catServicios.DescServicio.ToUpper() : catServicios.DescServicio;
+                    catServicios.CodigoInterno = GeneraCodigoInterno();
+                    _context.Add(catServicios);
+                    await _context.SaveChangesAsync();
+                    _notyf.Success("Registro creado con éxito", 5);
+                }
+                else
+                {
+                    _notyf.Warning("Favor de validar, existe una Servicio con la misma marca y misma categoria", 5);
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblServicio);
+            return View(catServicios);
         }
 
-        // GET: TblServicios/Edit/5
+        // GET: CatServicios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.TblServicio == null)
+             List<CatTipoServicio> ListaTipoServicio = new List<CatTipoServicio>();
+            ListaTipoServicio = (from c in _context.CatTipoServicios select c).Distinct().ToList();
+            ViewBag.ListaTipoServicio = ListaTipoServicio;
+
+            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
+            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
+            ViewBag.ListaEstatus = ListaCatEstatus;
+
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var tblServicio = await _context.TblServicio.FindAsync(id);
-            if (tblServicio == null)
+            var catServicios = await _context.TblServicio.FindAsync(id);
+            if (catServicios == null)
             {
                 return NotFound();
             }
-            return View(tblServicio);
+            return View(catServicios);
         }
 
-        // POST: TblServicios/Edit/5
+        // POST: CatServicios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdServicio,CodigoInterno,CodigoExterno,IdTipoServicio,DescServicio,Cantidad,ServicioPrecioUno,PorcentajePrecioUno,SubCosto,Costo,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro")] TblServicio tblServicio)
+        public async Task<IActionResult> Edit(int id, [Bind("IdServicio,CodigoInterno,CodigoExterno,IdTipoServicio,Cantidad,ServicioPrecioUno,PorcentajePrecioUno,IdEstatusRegistro")] TblServicio catServicios)
         {
-            if (id != tblServicio.IdServicio)
+            if (id != catServicios.IdServicio)
             {
                 return NotFound();
             }
@@ -97,12 +240,21 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    _context.Update(tblServicio);
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catServicios.IdUsuarioModifico = Guid.Parse(fuser);
+                    var fCategoria = (from c in _context.CatTipoServicios where c.IdTipoServicio == catServicios.IdTipoServicio select c).Distinct().ToList();
+                    catServicios.FechaRegistro = DateTime.Now;
+                    catServicios.IdEstatusRegistro = catServicios.IdEstatusRegistro;
+                    catServicios.DescServicio = !string.IsNullOrEmpty(catServicios.DescServicio) ? catServicios.DescServicio.ToUpper() : catServicios.DescServicio;
+                    catServicios.SubCosto = catServicios.ServicioPrecioUno;
+                    _context.Update(catServicios);
                     await _context.SaveChangesAsync();
+                    _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TblServicioExists(tblServicio.IdServicio))
+                    if (!CatServiciosExists(catServicios.IdServicio))
                     {
                         return NotFound();
                     }
@@ -113,49 +265,63 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblServicio);
+            return View(catServicios);
         }
 
-        // GET: TblServicios/Delete/5
+        // GET: CatServicios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.TblServicio == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var tblServicio = await _context.TblServicio
+            var catServicios = await _context.TblServicio
                 .FirstOrDefaultAsync(m => m.IdServicio == id);
-            if (tblServicio == null)
+            if (catServicios == null)
             {
                 return NotFound();
             }
 
-            return View(tblServicio);
+            return View(catServicios);
         }
 
-        // POST: TblServicios/Delete/5
+        // POST: CatServicios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.TblServicio == null)
-            {
-                return Problem("Entity set 'nDbContext.TblServicio'  is null.");
-            }
-            var tblServicio = await _context.TblServicio.FindAsync(id);
-            if (tblServicio != null)
-            {
-                _context.TblServicio.Remove(tblServicio);
-            }
-            
+            var catServicios = await _context.TblServicio.FindAsync(id);
+            catServicios.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TblServicioExists(int id)
+        private bool CatServiciosExists(int id)
         {
-          return _context.TblServicio.Any(e => e.IdServicio == id);
+            return _context.TblServicio.Any(e => e.IdServicio == id);
+        }
+
+        private string GeneraCodigoInterno()
+        {
+            string fmt = "0000.##";
+            int Cuenta = 0;
+            string strCodigoInterno = string.Empty;
+            int lServicios = _context.TblServicio.Count();
+
+            if (lServicios == 0)
+            {
+                Cuenta = 1;
+                strCodigoInterno = "IM-S" + Cuenta.ToString(fmt);
+            }
+            else
+            {
+                Cuenta = lServicios + 1;
+                strCodigoInterno = "IM-S" + Cuenta.ToString(fmt);
+            }
+
+            return strCodigoInterno;
         }
     }
 }
