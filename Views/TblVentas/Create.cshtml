@@ -93,7 +93,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                 
+
 
 
                     <!-- Main content -->
@@ -178,32 +178,37 @@
                         <div class="row">
                             <!-- accepted payments column -->
                             <div class="col-6">
-                                  <div class="row no-print">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
-                                    <select id="IdTipoPago" class="form-select" asp-for="TblVentas.IdTipoPago"
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
-                                    <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
+                                <div class="row no-print">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
+                                            <select class="form-select" asp-for="TblVentas.IdTipoPago"
+                                                asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
+                                                <option value="">SELECCIONAR</option>
+                                            </select>
+                                            <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label id="lCodigoPago" asp-for="TblVentas.CodigoPago"
+                                                class="control-label"></label>
+                                            <input id="iCodigoPago" asp-for="TblVentas.CodigoPago"
+                                                class="form-control" />
+                                            <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label id="lFechaAlterna" asp-for="TblVentas.FechaAlterna"
+                                                class="control-label"></label>
+                                            <input type="date" id="iFechaAlterna" asp-for="TblVentas.FechaAlterna"
+                                                class="form-control" />
+                                        </div>
+
+                                    </div>
+
+
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group" hidden>
-                                    <label asp-for="TblVentas.CodigoPago" class="control-label"></label>
-                                    <input asp-for="TblVentas.CodigoPago" class="form-control" />
-                                    <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group" hidden>
-                                    <label asp-for="TblVentas.FechaAlterna" class="control-label"></label>
-                                    <input asp-for="TblVentas.FechaAlterna" class="form-control" />
-                                </div>
-                            </div>
-                           
-                        </div>
                             </div>
                             <!-- /.col -->
                             <div class="col-6">
@@ -234,12 +239,12 @@
                         </div>
                         <!-- /.row -->
                         <!-- this row will not appear when printing -->
-                      <div class="col-6">
-                                <button class="btn btn-primary" id="btnTerminar">Guardar</button>
-                                <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                                <button class="btn btn-primary" id="btnTerminar2"
-                                    onclick="GetClientReport()">Imprimir</button>
-                            </div>
+                        <div class="col-6">
+                            <button class="btn btn-primary" id="btnTerminar">Guardar</button>
+                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                            <button class="btn btn-primary" id="btnTerminar2"
+                                onclick="GetClientReport()">Imprimir</button>
+                        </div>
                     </div>
                     <!-- /.invoice -->
                 </div><!-- /.col -->
@@ -263,6 +268,26 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             var p = o.parentNode.parentNode;
             p.parentNode.removeChild(p);
         }
+
+    $('#iIdTipoPago').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        if (SelectedValue != 1) {
+            document.getElementById("iCodigoPago").style.visibility = "visible";
+            document.getElementById("iFechaAlterna").style.visibility = "visible";
+            document.getElementById("lCodigoPago").style.visibility = "visible";
+            document.getElementById("lFechaAlterna").style.visibility = "visible";
+        }
+        else {
+            document.getElementById("iCodigoPago").style.visibility = "hidden";
+            document.getElementById("iFechaAlterna").style.visibility = "hidden";
+            document.getElementById("lCodigoPago").style.visibility = "hidden";
+            document.getElementById("lFechaAlterna").style.visibility = "hidden";
+        }
+
+
+    });
     $('#btnTerminar2').click(function () {
         window.print();
     });
