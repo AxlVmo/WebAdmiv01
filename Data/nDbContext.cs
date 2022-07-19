@@ -59,6 +59,7 @@ namespace WebAdmin.Data
         public DbSet<RelVentaPagos> RelVentasPagos { get; set; }
         public DbSet<RelVentaProducto> RelVentaProducto { get; set; }
         public DbSet<TblServicio> TblServicio { get; set; }
+        public DbSet<CatTipoDevolucion> CatTipoDevoluciones { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
