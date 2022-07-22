@@ -2,15 +2,17 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+#nullable disable
+
 namespace WebAdmin.Models
 {
-    public class CatCorpCent
+    public partial class CatCorpCent
     {
         [Key]
         
-        public int IdCorpCent { get; set; }
+        public int IdCorpCent{ get; set; }
 
-        [Display(Name = "Descripción")]
+        [Display(Name = "Corporativo/Centro")]
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Campo Requerido")]
         public string CorpCentDesc { get; set; }

@@ -1,15 +1,21 @@
 ﻿@model WebAdmin.Models.CatProdServ
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Desactivar Categoria";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Details</h1>
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Catálogos</li>
+        <li class="breadcrumb-item">Marca</li>
+        <li class="breadcrumb-item">Control de Categoria</li>
+        <li class="breadcrumb-item active" aria-current="page">Desactivar Categoria</li>
+    </ol>
+</nav>
+<hr />
 <div>
-    <h4>CatProdServ</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ProdServDesc)
@@ -17,12 +23,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ProdServDesc)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdUsuarioModifico)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdUsuarioModifico)
-        </dd>
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)
         </dt>
@@ -36,8 +37,11 @@
             @Html.DisplayFor(model => model.IdEstatusRegistro)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdProdServ">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    
+    <form asp-action="Delete">
+        <input style="text-transform:uppercase" type="hidden" asp-for="IdProdServ" />
+        <input style="text-transform:uppercase" type="submit" value="Desactivar" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+    </form>
+</di>
+   
