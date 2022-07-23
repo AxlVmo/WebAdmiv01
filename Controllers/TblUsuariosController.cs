@@ -125,7 +125,20 @@ namespace WebAdmin.Controllers
 
             return View(tblUsuario);
         }
-
+        [HttpGet]
+        public ActionResult FiltroUsuario()
+        {
+            var fuser = _userService.GetUserId();
+            var fUsuario = from a in _context.TblUsuarios
+                           where a.IdUsuario == Guid.Parse(fuser) && a.IdPerfil == 3 && a.IdRol == 2
+                           select new TblUsuario
+                           {
+                               IdUsuario = a.IdUsuario,
+                               IdPerfil = a.IdPerfil,
+                               IdRol = a.IdRol,
+                           };
+            return Json(fUsuario);
+        }
         // GET: TblUsuarios/Create
         public IActionResult Create()
         {
@@ -174,7 +187,7 @@ namespace WebAdmin.Controllers
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;
                     tblUsuario.IdCorporativo = idCorporativos.IdCorporativo;
-                    
+
                     tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
                     tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
                     tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();

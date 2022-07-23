@@ -34,6 +34,7 @@
     <div id="wrapper">
         @if (SignInManager.IsSignedIn(User))
         {
+            <input type="hidden" id="v_perfil" />
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion no-print" id="accordionSidebar">
 
@@ -71,7 +72,7 @@
                     </a>
                 </li>
                 <!-- Nav Item - Catálogos Collapse Menu -->
-            <li class="nav-item" id="i_catalogos_n">
+            <li class="nav-item" id="i_catalogos_n" hidden>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCatálogos"
                     aria-expanded="true" aria-controls="collapseCatálogos">
                         <i class="fa-solid fa-gears"></i>
@@ -124,7 +125,7 @@
                     </div>
                 </li>
                 <!-- Nav Item - Centros Collapse Menu -->
-            <li class="nav-item" id="i_empresa_n">
+            <li class="nav-item" id="i_empresa_n" hidden>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCentros"
                     aria-expanded="true" aria-controls="collapseCentros">
                         <i class="fa-solid fa-building"></i>
@@ -292,7 +293,7 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                     <a class="dropdown-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index"
-                                    id="i_empresa_p">
+                                    id="i_empresa_p" hidden>
                                         <i class="fa-solid fa-building fa-fw mr-2 text-gray-400"></i>
                                         Empresa
                                     </a>
@@ -382,9 +383,10 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="@Url.Content("~/js/site.js")"></script>
+    
     <!-- Bootstrap core JavaScript-->
-    <script type="text/javascript" src="@Url.Content("~/plantilla/vendor/jquery/jquery.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/lib/jquery/dist/jquery.js")"></script>
     <script type="text/javascript"
         src="@Url.Content("~/plantilla/vendor/bootstrap/js/bootstrap.bundle.min.js")"></script>
     <!-- Custom scripts for all pages-->
@@ -396,40 +398,24 @@
     <script type="text/javascript"
         src="@Url.Content("~/plantilla/vendor/datatables/dataTables.bootstrap4.min.js")"></script>
     <script type="text/javascript"
-        src="@Url.Content("https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js")"
+        src="@Url.Content("//cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js")"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>
     <script type="text/javascript"
-        src="@Url.Content("https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js")"
+        src="@Url.Content("//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js")"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
     <script type="text/javascript"
-        src="@Url.Content("https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js")"></script>
+        src="@Url.Content("//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js")"></script>
     <!-- #region datatables files -->
-    <link href="@Url.Content("https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css")" rel="stylesheet"
+    <link href="@Url.Content("//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css")" rel="stylesheet"
         type="text/css" />
 
-    <link href="@Url.Content("https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js")" rel="stylesheet"
+    <link href="@Url.Content("//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js")" rel="stylesheet"
         type="text/css" />
-
-
-
+<script type="text/javascript" src="@Url.Content("~/js/site.js")"></script>
     @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>
-
-<script>
-    $(document).ready(function () {
-        var v = '@ViewBag.ActivaRol'
-        if (v == 1) {
-            var remove_i_empresa_p = document.getElementById("i_empresa_p");
-                remove_i_empresa_p.parentNode.removeChild(remove_i_empresa_p);
-                var remove_i_empresa_n = document.getElementById("i_empresa_n");
-                remove_i_empresa_n.parentNode.removeChild(remove_i_empresa_n);
-                var remove_i_catalogos_n = document.getElementById("i_catalogos_n");
-                remove_i_catalogos_n.parentNode.removeChild(remove_i_catalogos_n);
-        } 
-    });
-</script>
