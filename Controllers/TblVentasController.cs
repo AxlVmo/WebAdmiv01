@@ -143,24 +143,37 @@ namespace WebAdmin.Controllers
         // GET: TblVentas/Create
         public IActionResult Create()
         {
-            List<CatTipoServicio> ListaTipoServicio = new List<CatTipoServicio>();
-            ListaTipoServicio = (from c in _context.CatTipoServicios select c).Distinct().ToList();
-            ViewBag.ListaTipoServicio = ListaTipoServicio;
-            // ViewData["IdProfile"] = new SelectList(_context.Profiles, "IdProfile", "IdProfile", userEntityTwo.IdProfile);
-            List<CatTipoPago> ListaTipoPago = new List<CatTipoPago>();
-            ListaTipoPago = (from c in _context.CatTipoPagos select c).Distinct().ToList();
-            ViewBag.ListaTipoPago = ListaTipoPago;
+
+            var fTipoServicio = from a in _context.CatTipoServicios
+                                where a.IdEstatusRegistro == 1
+                                select new CatTipoServicio
+                                {
+                                    IdTipoServicio = a.IdTipoServicio,
+                                    TipoServicioDesc = a.TipoServicioDesc
+                                };
+            TempData["fTS"] = fTipoServicio.ToList();
+            ViewBag.ListaTipoServicio = TempData["fTS"];
+
+            var fTipoPago = from a in _context.CatTipoPagos
+                            where a.IdEstatusRegistro == 1
+                            select new CatTipoPago
+                                   {
+                                       IdTipoPago = a.IdTipoPago,
+                                       TipoPagoDesc = a.TipoPagoDesc
+                                   };
+            TempData["fTP"] = fTipoPago.ToList();
+            ViewBag.ListaTipoPago = TempData["fTP"];
+
             var fUsuariosCentros = from a in _context.TblAlumnos
-                                       //    where a.IdPerfil == 3 && a.IdRol == 2
+                                   where a.IdEstatusRegistro == 1
                                    select new
                                    {
                                        IdUsuario = a.IdAlumno,
-                                       NombreUsuario = a.NombreAlumno + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
-
+                                       NombreUsuario = a.NombreAlumno + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno
                                    };
-            TempData["Mpps"] = fUsuariosCentros.ToList();
-            ViewBag.ListaUsuariosCentros = TempData["Mpps"];
-            // ViewData["CatProductos"] = _context.CatProductos;
+            TempData["fUC"] = fUsuariosCentros.ToList();
+            ViewBag.ListaUsuariosCentros = TempData["fUC"];
+
             return View();
         }
 

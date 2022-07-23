@@ -66,7 +66,6 @@ namespace WebAdminHecsa.Controllers
                                 {
                                     IdCategoria = a.IdCategoria,
                                     CategoriaDesc = a.CategoriaDesc,
-
                                     FechaRegistro = a.FechaRegistro,
                                     IdEstatusRegistro = a.IdEstatusRegistro
                                 };

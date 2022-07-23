@@ -1,59 +1,68 @@
 ﻿@model WebAdmin.Models.TblSuministro
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Tipo de Suministro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
 
-<h1>Create</h1>
-
-<h4>TblSuministro</h4>
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Control de Suministro</li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Suministro</li>
+    </ol>
+</nav>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoSuministro" class="control-label"></label>
-                <input asp-for="IdTipoSuministro" class="form-control" />
+                <select id="drpTipoServicio" class="form-select" asp-for="IdTipoSuministro"
+                    asp-items="@(new SelectList(ViewBag.ListaTipoSuministro,"IdTipoSuministro","TipoSuministroDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
                 <span asp-validation-for="IdTipoSuministro" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="SuministroDesc" class="control-label"></label>
-                <input asp-for="SuministroDesc" class="form-control" />
+                <input style="text-transform:uppercase" asp-for="SuministroDesc" class="form-control" />
                 <span asp-validation-for="SuministroDesc" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-2">
             <div class="form-group">
-                <label asp-for="IdCorpCent" class="control-label"></label>
-                <input asp-for="IdCorpCent" class="form-control" />
-                <span asp-validation-for="IdCorpCent" class="text-danger"></span>
+                <label asp-for="NumeroReferencia" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="NumeroReferencia" class="form-control" />
+                <span asp-validation-for="NumeroReferencia" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-2">
             <div class="form-group">
-                <label asp-for="IdUsuarioModifico" class="control-label"></label>
-                <input asp-for="IdUsuarioModifico" class="form-control" />
-                <span asp-validation-for="IdUsuarioModifico" class="text-danger"></span>
+                <label asp-for="FechaFacturacion" class="control-label"></label>
+                <input asp-for="FechaFacturacion" class="form-control" type="date" />
+                <span asp-validation-for="FechaFacturacion" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-2">
             <div class="form-group">
-                <label asp-for="FechaRegistro" class="control-label"></label>
-                <input asp-for="FechaRegistro" class="form-control" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                <label asp-for="MontoSuministro" class="control-label"></label>
+                <input asp-for="MontoSuministro" class="form-control" type="number" />
+                <span asp-validation-for="MontoSuministro" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <input asp-for="IdEstatusRegistro" class="form-control" />
-                <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Crear" class="btn btn-success" />
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+    </div>
+</form>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

@@ -24,16 +24,6 @@ namespace WebAdmin.Controllers
             _notyf = notyf;
             _userService = userService;
         }
-
-        [HttpPost]
-        public IActionResult Export(string GridHtml)
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
-            }
-        }
-
         // GET: CatEstatus
         public async Task<IActionResult> Index()
         {

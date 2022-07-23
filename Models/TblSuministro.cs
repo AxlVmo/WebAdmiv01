@@ -14,7 +14,8 @@ namespace WebAdmin.Models
         [Display(Name = "Tipo Suministro")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdTipoSuministro { get; set; }
-
+        [NotMapped]
+        public string TipoSuministroDesc { get; set; }
         [Display(Name = "Suministro")]
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Campo Requerido")]
@@ -23,6 +24,7 @@ namespace WebAdmin.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public string NumeroReferencia { get; set; }
         [Display(Name = "Fecha de Facturacion")]
+        [DataType(DataType.Date)]
         [Required(ErrorMessage = "Campo Requerido")]
         public DateTime FechaFacturacion { get; set; }
         [Display(Name = "Monto Suministro")]

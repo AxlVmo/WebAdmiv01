@@ -66,7 +66,6 @@ namespace WebAdmin.Controllers
                                 {
                                     IdTipoSuministro = a.IdTipoSuministro,
                                     TipoSuministroDesc = a.TipoSuministroDesc,
-
                                     FechaRegistro = a.FechaRegistro,
                                     IdEstatusRegistro = a.IdEstatusRegistro
                                 };

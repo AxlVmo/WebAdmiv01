@@ -46,11 +46,11 @@ namespace WebAdminHecsa.Controllers
 
                         if (ValidaTipoServicio.Count >= 1)
                         {
-                            ViewBag.TipoServicioFlag = 1;
+                            ViewBag.TipoSuministroFlag = 1;
                         }
                         else
                         {
-                            ViewBag.TipoServicioFlag = 0;
+                            ViewBag.TipoSuministroFlag = 0;
                             _notyf.Information("Favor de registrar los datos de Tipo Servicio para la Aplicación", 5);
                         }
                     }
