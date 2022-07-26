@@ -101,16 +101,23 @@ namespace WebAdmin.Data
                 new CatEstatus { IdEstatusRegistro = 2, EstatusDesc = "DESACTIVO", FechaRegistro = DateTime.Today }
             );
             modelBuilder.Entity<CatCorpCent>().HasData(
-                new CatCorpCent { IdCorpCent = 1, CorpCentDesc = "CORPORATIVO", FechaRegistro = DateTime.Today },
-                new CatCorpCent { IdCorpCent = 2, CorpCentDesc = "CENTRO", FechaRegistro = DateTime.Today }
+                new CatCorpCent { IdCorpCent = 1, CorpCentDesc = "CORPORATIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatCorpCent { IdCorpCent = 2, CorpCentDesc = "CENTRO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+            );
+             modelBuilder.Entity<CaTipotLicencia>().HasData(
+                new CaTipotLicencia { IdTipoLicencia = 1, LicenciaDesc ="LICENCIA C", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
             );
             modelBuilder.Entity<CatProdServ>().HasData(
-                new CatProdServ { IdProdServ = 1, ProdServDesc = "PRODUCTO", FechaRegistro = DateTime.Today },
-                new CatProdServ { IdProdServ = 2, ProdServDesc = "SERVICIO", FechaRegistro = DateTime.Today }
+                new CatProdServ { IdProdServ = 1, ProdServDesc = "PRODUCTO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatProdServ { IdProdServ = 2, ProdServDesc = "SERVICIO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+            );
+            modelBuilder.Entity<CatTipoAlumno>().HasData(
+                new CatTipoAlumno { IdTipoAlumno = 1, TipoAlumnoDesc = "PROSPECTO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatTipoAlumno { IdTipoAlumno = 2, TipoAlumnoDesc = "ALUMNO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
             );
             modelBuilder.Entity<CatTipoPrestamo>().HasData(
-               new CatTipoPrestamo { IdTipoPrestamo = 1, TipoPrestamoDesc = "INTERNO", FechaRegistro = DateTime.Today },
-               new CatTipoPrestamo { IdTipoPrestamo = 2, TipoPrestamoDesc = "EXTERNO", FechaRegistro = DateTime.Today }
+               new CatTipoPrestamo { IdTipoPrestamo = 1, TipoPrestamoDesc = "INTERNO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatTipoPrestamo { IdTipoPrestamo = 2, TipoPrestamoDesc = "EXTERNO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
            );
             modelBuilder.Entity<CatRole>().HasData(
                 new CatRole { IdRol = 1, RolDesc = "DESARROLLADOR", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
@@ -152,7 +159,7 @@ namespace WebAdmin.Data
                new CatTipoCentro { IdTipoCentro = 1, TipoCentroDesc = "INTERNO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                new CatTipoCentro { IdTipoCentro = 2, TipoCentroDesc = "LICENCIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
            );
- 
+
             modelBuilder.Entity<CatNivelEscolar>().HasData(
                   new CatNivelEscolar { IdNivelEscolar = 1, NivelEscolarDesc = "PREESCOLAR", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                   new CatNivelEscolar { IdNivelEscolar = 2, NivelEscolarDesc = "PRIMARIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
@@ -1708,9 +1715,9 @@ new CatCodigosPostal { IdCodigosPostales = 1516, Dcodigo = "16900", Dasenta = "S
             base.OnModelCreating(modelBuilder);
         }
 
-       
-       
 
-       
+
+
+
     }
 }

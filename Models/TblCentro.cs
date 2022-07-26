@@ -50,12 +50,15 @@ namespace WebAdmin.Models
 
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
-        [Display(Name = "Corporativo")]
-        [Required(ErrorMessage = "Campo Requerido")]
-        public Guid IdCorporativo { get; set; }
+        [Display(Name = "Corporativo / Centro")]
+        public int IdCorpCent { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
+
+        [Display(Name = "Corporativo / Centro")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public Guid IdUCorporativoCentro { get; set; }
 
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Usuario Control")]

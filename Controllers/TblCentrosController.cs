@@ -104,7 +104,7 @@ namespace WebAdmin.Controllers
 
             var fUsuariosCentros = from a in _context.TblUsuarios
                                    where a.IdPerfil == 3 && a.IdRol == 2
-                                   select new 
+                                   select new
                                    {
                                        IdUsuario = a.IdUsuario,
                                        NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
@@ -153,9 +153,16 @@ namespace WebAdmin.Controllers
                         tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
                         tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
                         tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
-                        tblCentros.IdCorporativo = idCorporativos.IdCorporativo;
-                        _context.SaveChanges();
+                        tblCentros.IdUCorporativoCentro = idCorporativos.IdCorporativo;
                         _context.Add(tblCentros);
+
+                        var tbluser = _context.TblUsuarios
+                                                        .Where(s => s.IdUsuario == tblCentros.IdUsuarioControl)
+                                                        .FirstOrDefault();
+                        tbluser.IdCorpCent = 2;
+                        tbluser.IdCorporativo = tblCentros.IdCentro;
+
+                         _context.Update(tbluser);
                         await _context.SaveChangesAsync();
                         _notyf.Success("Registro creado con éxito", 5);
                     }

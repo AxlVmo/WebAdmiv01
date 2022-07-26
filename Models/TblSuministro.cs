@@ -30,11 +30,15 @@ namespace WebAdmin.Models
         [Display(Name = "Monto Suministro")]
         [Required(ErrorMessage = "Campo Requerido")]
         public double MontoSuministro { get; set; }
-        [Display(Name = "Corporativo / Centro")]
+       [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
+
+        [Display(Name = "Corporativo / Centro")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public Guid IdUCorporativoCentro { get; set; }
 
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]

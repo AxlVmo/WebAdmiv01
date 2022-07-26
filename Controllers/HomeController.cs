@@ -30,19 +30,7 @@ namespace WebAdmin.Controllers
 
         public IActionResult Index()
         {
-            var isLoggedIn = _userService.IsAuthenticated();
-            if (isLoggedIn)
-            {
-                var fuser = _userService.GetUserId();
-
-                var vUsuarios = _context.TblUsuarios
-                        .Where(s => s.IdUsuario == Guid.Parse(fuser) && s.IdPerfil == 3 && s.IdRol == 2)
-                        .ToList();
-                if (vUsuarios.Count == 1)
-                {
-                    ViewBag.ActivaRol = 1;
-                }
-            }
+            
             return View();
         }
 

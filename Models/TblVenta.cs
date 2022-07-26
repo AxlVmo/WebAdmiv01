@@ -34,11 +34,15 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         public DateTime FechaAlterna { get; set; }
 
-        [Display(Name = "Corporativo / Centro")]
+       [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
 
-        [Display(Name = "Usuario")]
+        [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
+
+        [Display(Name = "Corporativo / Centro")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public Guid IdUCorporativoCentro { get; set; }
 
         [Display(Name = "Fecha Registro")]
         [DataType(DataType.Date)]

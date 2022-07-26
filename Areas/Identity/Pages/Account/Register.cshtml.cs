@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebAdmin.Data;
 using WebAdmin.Models;
@@ -30,14 +31,14 @@ namespace WebAdmin.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly INotyfService _notyf;
         private readonly nDbContext _context;
-
+        private readonly IUserService _userService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             nDbContext context,
-            IEmailSender emailSender, INotyfService notyf)
+            IEmailSender emailSender, INotyfService notyf, IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,6 +46,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
 
         [BindProperty]
@@ -113,23 +115,38 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                     IdEstatusRegistro = 1
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
-
+                var nIdUsuario = Guid.Parse(user.Id);
                 var addUsuarios = new TblUsuario
                 {
-                    IdUsuario = Guid.Parse(user.Id),
+                    IdUsuario = nIdUsuario,
                     Nombres = Input.Nombres.ToUpper(),
                     ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
                     ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
                     FechaNacimiento = DateTime.Now,
                     IdUsuarioModifico = Guid.Empty,
+
                     CorreoAcceso = user.Email,
                     FechaRegistro = DateTime.Now,
                     IdEstatusRegistro = 1
                 };
                 _context.Add(addUsuarios);
                 await _context.SaveChangesAsync();
-
+                var isLoggedIn = _userService.IsAuthenticated();
+                if (isLoggedIn)
+                {
+                    var fuser = _userService.GetUserId();
+                    var vUsuarios = _context.TblUsuarios
+                            .Where(s => s.IdUsuario == Guid.Parse(fuser) && s.IdPerfil == 3 && s.IdRol == 2 && s.IdCorpCent == 2)
+                            .ToList();
+                    if (vUsuarios.Count == 1)
+                    {
+                        var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == nIdUsuario);
+                        fIdUsuario.IdCorpCent = 2;
+                        fIdUsuario.IdCorporativo = vUsuarios[0].IdCorporativo;
+                        _context.Update(fIdUsuario);
+                        await _context.SaveChangesAsync();
+                    }
+                }
                 if (result.Succeeded)
                 {
                     _notyf.Success("Registro creado con éxito", 5);

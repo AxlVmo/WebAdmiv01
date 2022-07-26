@@ -15,9 +15,6 @@ namespace WebAdmin.Models
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Campo Requerido")]
         public string PrestamoDesc { get; set; }
-        [Display(Name = "Corporativo / Centro")]
-        public int IdCorpCent { get; set; }
-
         [Display(Name = "Cantidad de Deposito")]
         public double CantidadPrestamo { get; set; }
 
@@ -40,8 +37,15 @@ namespace WebAdmin.Models
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
-        [Display(Name = "Usuario Modifica")]
+        [Display(Name = "Corporativo / Centro")]
+        public int IdCorpCent { get; set; }
+
+        [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
+
+        [Display(Name = "Corporativo / Centro")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public Guid IdUCorporativoCentro { get; set; }
 
         [Display(Name = "Fecha Registro")]
         [DataType(DataType.Date)]
