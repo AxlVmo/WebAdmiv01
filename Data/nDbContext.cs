@@ -60,6 +60,10 @@ namespace WebAdmin.Data
         public DbSet<RelVentaProducto> RelVentaProducto { get; set; }
         public DbSet<TblServicio> TblServicio { get; set; }
         public DbSet<CatTipoDevolucion> CatTipoDevoluciones { get; set; }
+        public DbSet<TblNomina> TblNominas { get; set; }
+        public DbSet<CatPersonalEstudio> CatPersonalEstudios { get; set; }
+
+        public DbSet<CatTipoCompra> CatTipoCompras { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -104,9 +108,9 @@ namespace WebAdmin.Data
                 new CatCorpCent { IdCorpCent = 1, CorpCentDesc = "CORPORATIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                 new CatCorpCent { IdCorpCent = 2, CorpCentDesc = "CENTRO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
             );
-             modelBuilder.Entity<CaTipotLicencia>().HasData(
-                new CaTipotLicencia { IdTipoLicencia = 1, LicenciaDesc ="LICENCIA C", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
-            );
+            modelBuilder.Entity<CaTipotLicencia>().HasData(
+               new CaTipotLicencia { IdTipoLicencia = 1, LicenciaDesc = "LICENCIA C", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+           );
             modelBuilder.Entity<CatProdServ>().HasData(
                 new CatProdServ { IdProdServ = 1, ProdServDesc = "PRODUCTO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                 new CatProdServ { IdProdServ = 2, ProdServDesc = "SERVICIO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
@@ -118,6 +122,21 @@ namespace WebAdmin.Data
             modelBuilder.Entity<CatTipoPrestamo>().HasData(
                new CatTipoPrestamo { IdTipoPrestamo = 1, TipoPrestamoDesc = "INTERNO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                new CatTipoPrestamo { IdTipoPrestamo = 2, TipoPrestamoDesc = "EXTERNO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+           );
+            modelBuilder.Entity<CatPersonalEstudio>().HasData(
+               new CatPersonalEstudio { IdPersonalEstudio = 1, PersonalEstudioDesc = "BACHILLERATO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatPersonalEstudio { IdPersonalEstudio = 2, PersonalEstudioDesc = "BACHILLERATO TECNICO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatPersonalEstudio { IdPersonalEstudio = 3, PersonalEstudioDesc = "LICNECIATURA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatPersonalEstudio { IdPersonalEstudio = 4, PersonalEstudioDesc = "INGENIERIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatPersonalEstudio { IdPersonalEstudio = 5, PersonalEstudioDesc = "MAESTRIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatPersonalEstudio { IdPersonalEstudio = 6, PersonalEstudioDesc = "DOCTORADO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+           );
+           modelBuilder.Entity<CatTipoContratacion>().HasData(
+               new CatTipoContratacion { IdTipoContratacion = 1, TipoContratacionDesc = "FIJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatTipoContratacion { IdTipoContratacion = 2, TipoContratacionDesc = "TEMPORAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatTipoContratacion { IdTipoContratacion = 3, TipoContratacionDesc = "FORMACION/APRENDIZAJE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatTipoContratacion { IdTipoContratacion = 4, TipoContratacionDesc = "SERVICIO SOCIAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatTipoContratacion { IdTipoContratacion = 5, TipoContratacionDesc = "RESIENCIAS PROFESIONALES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
            );
             modelBuilder.Entity<CatRole>().HasData(
                 new CatRole { IdRol = 1, RolDesc = "DESARROLLADOR", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },

@@ -28,6 +28,10 @@ namespace WebAdmin.Models
         [Display(Name = "Descripcion Servicio")]
         public string DescServicio { get; set; }
 
+        [Display(Name = "Periodo / Meses")]
+        public int Periodo { get; set; }
+
+
         [Display(Name = "Cantidad")]
         public int Cantidad { get; set; }
 

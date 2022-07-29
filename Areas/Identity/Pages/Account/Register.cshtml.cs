@@ -59,7 +59,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required(ErrorMessage = "Campo Requerido")]
-            [Display(Name = "Nombres")]
+            [Display(Name = "Nombre (s)")]
             public string Nombres { get; set; }
             [Required(ErrorMessage = "Campo Requerido")]
             [Display(Name = "Apellido Paterno")]
@@ -75,7 +75,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Campo Requerido")]
             [StringLength(100, ErrorMessage = "El {0} debe tener al menos {2} y un máximo de {1} caracteres de longitud.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Clave")]
+            [Display(Name = "Contraseña")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]

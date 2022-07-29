@@ -121,7 +121,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCentro,IdTipoLicencia,IdTipoCentro,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,IdUsuarioControl")] TblCentro tblCentros)
+        public async Task<IActionResult> Create([Bind("IdCentro,IdTipoLicencia,IdTipoCentro,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,CentroPresupuesto,IdUsuarioControl")] TblCentro tblCentros)
         {
             if (ModelState.IsValid)
             {
@@ -162,7 +162,7 @@ namespace WebAdmin.Controllers
                         tbluser.IdCorpCent = 2;
                         tbluser.IdCorporativo = tblCentros.IdCentro;
 
-                         _context.Update(tbluser);
+                        _context.Update(tbluser);
                         await _context.SaveChangesAsync();
                         _notyf.Success("Registro creado con éxito", 5);
                     }
@@ -177,9 +177,10 @@ namespace WebAdmin.Controllers
                     //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
                     _notyf.Warning("Favor de validar, existe una Estatus con el mismo nombre", 5);
                 }
-                return RedirectToAction(nameof(Index));
+                return View(tblCentros);
             }
-            return View(tblCentros);
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: tblCentros/Edit/5
@@ -189,7 +190,24 @@ namespace WebAdmin.Controllers
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaEstatus = ListaCatEstatus;
 
+            List<CatTipoCentro> ListaTipoCentro = new List<CatTipoCentro>();
+            ListaTipoCentro = (from c in _context.CatTipoCentros select c).Distinct().ToList();
+            ViewBag.ListaTipoCentro = ListaTipoCentro;
 
+            List<CaTipotLicencia> ListaLicencia = new List<CaTipotLicencia>();
+            ListaLicencia = (from c in _context.CaTipotLicencias select c).Distinct().ToList();
+            ViewBag.ListaLicencia = ListaLicencia;
+
+            var fUsuariosCentros = from a in _context.TblUsuarios
+                                   where a.IdPerfil == 3 && a.IdRol == 2
+                                   select new
+                                   {
+                                       IdUsuario = a.IdUsuario,
+                                       NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+
+                                   };
+            TempData["Mpps"] = fUsuariosCentros.ToList();
+            ViewBag.ListaUsuariosCentros = TempData["Mpps"];
 
             if (id == null)
             {
@@ -209,7 +227,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdEmpresaFiscales,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,IdEstatusRegistro,IdEmpresa,IdUsuarioControl")] TblCentro tblCentros)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdCentro,IdTipoLicencia,IdTipoCentro,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,CentroPresupuesto,IdEstatusRegistro,IdEmpresa,IdUsuarioControl")] TblCentro tblCentros)
         {
             if (id != tblCentros.IdCentro)
             {
@@ -220,37 +238,24 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var DuplicadoUsuarioAsignado = _context.TblCentros
-                .Where(s => s.IdUsuarioControl == tblCentros.IdUsuarioControl)
-                .ToList();
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblCentros.FechaRegistro = DateTime.Now;
+                    tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
+                    tblCentros.IdEstatusRegistro = tblCentros.IdEstatusRegistro;
+                    var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCentros.Colonia).FirstOrDefault();
+                    tblCentros.IdColonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? tblCentros.Colonia : tblCentros.Colonia;
+                    tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper() : tblCentros.Colonia;
+                    tblCentros.Calle = !string.IsNullOrEmpty(tblCentros.Calle) ? tblCentros.Calle.ToUpper() : tblCentros.Calle;
+                    tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
+                    tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
+                    tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
+                    tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
+                    _context.Update(tblCentros);
+                    await _context.SaveChangesAsync();
+                    _notyf.Warning("Registro actualizado con éxito", 5);
 
-                    if (DuplicadoUsuarioAsignado.Count == 0)
-                    {
-
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
-                        tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
-                        tblCentros.FechaRegistro = DateTime.Now;
-                        tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
-
-                        tblCentros.IdEstatusRegistro = tblCentros.IdEstatusRegistro;
-                        var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCentros.Colonia).FirstOrDefault();
-                        tblCentros.IdColonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? tblCentros.Colonia : tblCentros.Colonia;
-                        tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper() : tblCentros.Colonia;
-                        tblCentros.Calle = !string.IsNullOrEmpty(tblCentros.Calle) ? tblCentros.Calle.ToUpper() : tblCentros.Calle;
-                        tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
-                        tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
-                        tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
-                        tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
-                        _context.Update(tblCentros);
-                        await _context.SaveChangesAsync();
-                        _notyf.Warning("Registro actualizado con éxito", 5);
-                    }
-                    else
-                    {
-
-                        _notyf.Warning("Favor de validar, este Usurio ya esta asignado a otro centro", 5);
-                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -264,6 +269,7 @@ namespace WebAdmin.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+
             }
             return View(tblCentros);
         }

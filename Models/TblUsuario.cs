@@ -11,7 +11,7 @@ namespace WebAdmin.Models
         [Key]
         public Guid IdUsuario { get; set; }
 
-        [Display(Name = "Nombres")]
+        [Display(Name = "Nombre (s)")]
         [Required(ErrorMessage = "Campo Requerido")]
         public string Nombres { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
@@ -19,7 +19,7 @@ namespace WebAdmin.Models
         public string ApellidoPaterno { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
 
-        [Display(Name = "ApellidoMaterno")]
+        [Display(Name = "Apellido Materno")]
         public string ApellidoMaterno { get; set; }
         
         [Display(Name = "Corporativo")]
@@ -56,13 +56,65 @@ namespace WebAdmin.Models
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
-        [Display(Name = "Profile Picture")]
+        [Display(Name = "CURP")]
+        public string UsuarioCurp { get; set; }
+        [Display(Name = "RFC")]
+        public string UsuarioRfc { get; set; }
+        [Display(Name = "NSS")]
+        public string UsuarioNss { get; set; }
+
+        [Display(Name = "Tipo Contratacion")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public int IdTipoContratacion { get; set; }
+        [Display(Name = "Remuneracion")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public double UsuarioRemuneracion { get; set; }
+
+        [Display(Name = "Tipo Forma Pago")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public int IdTipoFormaPago { get; set; }
+
+        [Display(Name = "Estudios")]
+        [Required(ErrorMessage = "Campo Requerido")]
+         public int IdPersonalEstudio { get; set; }
+
+        [Display(Name = "Fecha Contratacion")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        [DataType(DataType.Date)]
+        public DateTime FechaContratacion { get; set; }
+    
+        [Display(Name = "Tipo Direccion")]
+        
+        public int IdTipoDireccion { get; set; }
+
+        [Display(Name = "Calle")]
+        
+        public string Calle { get; set; }
+
+        [Display(Name = "Codigo Postal")]
+        public string CodigoPostal { get; set; }
+
+        public string IdColonia { get; set; }
+
+        [Display(Name = "Colonia")]
+        public string Colonia { get; set; }
+
+        [Display(Name = "Localidad / Municipio")]
+        public string LocalidadMunicipio { get; set; }
+
+        [Display(Name = "Ciudad")]
+        public string Ciudad { get; set; }
+
+        [Display(Name = "Estado")]
+        public string Estado { get; set; }
+
+        [Display(Name = "Imagen de Perfil")]
         public byte[] ImagenPErfil { get; set; }
 
         [Display(Name = "Usuario")]
         public Guid IdUsuarioModifico { get; set; }
 
-        [Column("FechaRegistro")]
+        [Display(Name = "Fecha Registro")]
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }
 

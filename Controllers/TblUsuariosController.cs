@@ -260,6 +260,18 @@ namespace WebAdmin.Controllers
             ListaRol = (from c in _context.CatRoles select c).Distinct().ToList();
             ViewBag.ListaRol = ListaRol;
 
+            List<CatTipoContratacion> ListaContratacion = new List<CatTipoContratacion>();
+            ListaContratacion = (from c in _context.CatTipoContrataciones select c).Distinct().ToList();
+            ViewBag.ListaContratacion = ListaContratacion;
+
+            List<CatTipoFormaPago> ListaFormaPago = new List<CatTipoFormaPago>();
+            ListaFormaPago = (from c in _context.CatTipoFormaPagos select c).Distinct().ToList();
+            ViewBag.ListaFormaPago = ListaFormaPago;
+
+            List<CatPersonalEstudio> ListaPersonalEstudio = new List<CatPersonalEstudio>();
+            ListaPersonalEstudio = (from c in _context.CatPersonalEstudios select c).Distinct().ToList();
+            ViewBag.ListaPersonalEstudio = ListaPersonalEstudio;
+
             if (id == null)
             {
                 return NotFound();
@@ -278,46 +290,41 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdUsuario,IdGenero,IdArea,IdCorpCent,IdPerfil,IdRol,FechaNacimiento,Nombres,ApellidoPaterno,ApellidoMaterno,CorreoAcceso,IdEstatusRegistro")] TblUsuario tblUsuario)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdUsuario,IdGenero,IdArea,IdCorpCent,IdPerfil,IdRol,FechaNacimiento,Nombres,ApellidoPaterno,ApellidoMaterno,CorreoAcceso,Telefono,UsuarioCurp,UsuarioRfc,UsuarioNss,IdTipoContratacion,FechaContratacion,IdTipoFormaPago,IdPersonalEstudio,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,UsuarioRemuneracion,IdEstatusRegistro")] TblUsuario tblUsuario)
         {
             if (id != tblUsuario.IdUsuario)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    var fuser = _userService.GetUserId();
-                    var isLoggedIn = _userService.IsAuthenticated();
-                    tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
-                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
-                    tblUsuario.FechaRegistro = DateTime.Now;
-                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-                        tblUsuario.IdCorpCent = fIdUsuario.IdCorpCent;
-                        tblUsuario.IdCorporativo = fIdUsuario.IdCorporativo;
-                    tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
-                    tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
-                    tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();
-                    _context.Update(tblUsuario);
-                    await _context.SaveChangesAsync();
-                    _notyf.Warning("Registro actualizado con éxito", 5);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TblUsuarioExists(tblUsuario.IdUsuario))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                var fuser = _userService.GetUserId();
+                var isLoggedIn = _userService.IsAuthenticated();
+                tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
+                var idCorporativos = _context.TblCorporativos.FirstOrDefault();
+                tblUsuario.FechaRegistro = DateTime.Now;
+                var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                tblUsuario.IdCorpCent = fIdUsuario.IdCorpCent;
+                tblUsuario.IdCorporativo = fIdUsuario.IdCorporativo;
+                tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
+                tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
+                tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();
+                _context.Update(tblUsuario);
+                await _context.SaveChangesAsync();
+                _notyf.Warning("Registro actualizado con éxito", 5);
             }
-            return View(tblUsuario);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TblUsuarioExists(tblUsuario.IdUsuario))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: TblUsuarios/Delete/5
