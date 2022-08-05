@@ -8,7 +8,7 @@ namespace WebAdmin.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdTipoDevolucion{ get; set; }
+        public int IdTipoDevolucion { get; set; }
 
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]

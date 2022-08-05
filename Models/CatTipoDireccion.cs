@@ -9,7 +9,6 @@ namespace WebAdmin.Models
     public partial class CatTipoDireccion
     {
         [Key]
-        
         public int IdTipoDireccion { get; set; }
 
         [Display(Name = "Descripción")]

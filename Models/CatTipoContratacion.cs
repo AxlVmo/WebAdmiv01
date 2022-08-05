@@ -7,7 +7,6 @@ namespace WebAdmin.Models
     public class CatTipoContratacion
     {
         [Key]
-        
         public int IdTipoContratacion { get; set; }
 
         [Display(Name = "Descripción")]

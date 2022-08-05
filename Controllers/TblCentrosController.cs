@@ -170,14 +170,17 @@ namespace WebAdmin.Controllers
                     {
 
                         _notyf.Warning("Favor de validar, este Usurio ya esta asignado a otro centro", 5);
+                        return View(tblCentros);
                     }
                 }
                 else
                 {
-                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
+                    
                     _notyf.Warning("Favor de validar, existe una Estatus con el mismo nombre", 5);
+                    return View(tblCentros);
                 }
-                return View(tblCentros);
+                
+                
             }
             return RedirectToAction(nameof(Index));
 

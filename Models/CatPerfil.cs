@@ -9,7 +9,6 @@ namespace WebAdmin.Models
     public partial class CatPerfil
     {
         [Key]
-        
         public int IdPerfil { get; set; }
 
         [Display(Name = "Descripción")]

@@ -28,6 +28,7 @@
                     $('#i_consulta_n').removeAttr('hidden');
                     $('#i_resumen_n').removeAttr('hidden');
                     
+                    
                 }
                 if (list[0].idPerfil == 1 && list[0].idRol == 2 && list[0].idCorpCent == 1 && list[0].idArea == 1) {
                     $('#i_empresa_p').removeAttr('hidden');
@@ -36,6 +37,8 @@
                     $('#i_centro_n').removeAttr('hidden');
                     $('#i_consulta_n').removeAttr('hidden');
                     $('#i_resumen_n').removeAttr('hidden');
+                    $('#iCorpCent').removeAttr('hidden');
+                    
                 }
             }
         },

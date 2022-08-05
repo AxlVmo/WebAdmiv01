@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
@@ -30,6 +29,5 @@ namespace WebAdmin.Models
         [Display(Name = "Estatus")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdEstatusRegistro { get; set; }
-
     }
 }

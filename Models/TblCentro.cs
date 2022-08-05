@@ -50,8 +50,10 @@ namespace WebAdmin.Models
 
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
+
         [Display(Name = "Presupuesto")]
         public double CentroPresupuesto { get; set; }
+
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
 

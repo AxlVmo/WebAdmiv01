@@ -9,8 +9,7 @@ namespace WebAdmin.Models
     public partial class CatCorpCent
     {
         [Key]
-        
-        public int IdCorpCent{ get; set; }
+        public int IdCorpCent { get; set; }
 
         [Display(Name = "Corporativo/Centro")]
         [DataType(DataType.Text)]

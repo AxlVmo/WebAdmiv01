@@ -70,20 +70,67 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
+
+            var fCent = from a in _context.TblCentros
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCentro,
+                            CentroDesc = a.NombreCentro
+                        };
+            var fCorp = from a in _context.TblCorporativos
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCorporativo,
+                            CentroDesc = a.NombreCorporativo
+                        };
+            var sCorpCent = fCorp.Union(fCent);
+            TempData["fTS"] = sCorpCent.ToList();
+            ViewBag.ListaCorpCent = TempData["fTS"];
+
+            var fuser = _userService.GetUserId();
+            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+
+            if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+            {
+                var fSuministroCntro = from a in _context.TblSuministros
+                                       join b in _context.CatTipoSuministros on a.IdTipoSuministro equals b.IdTipoSuministro
+                                       where a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdCorpCent == 2
+                                       select new TblSuministro
+                                       {
+                                           TipoSuministroDesc = b.TipoSuministroDesc,
+                                           IdSuministro = a.IdSuministro,
+                                           SuministroDesc = a.SuministroDesc,
+                                           NumeroReferencia = a.NumeroReferencia,
+                                           FechaFacturacion = a.FechaFacturacion,
+                                           MontoSuministro = a.MontoSuministro,
+                                           IdUCorporativoCentro = a.IdUCorporativoCentro,
+                                           FechaRegistro = a.FechaRegistro,
+                                           IdEstatusRegistro = a.IdEstatusRegistro
+                                       };
+                return View(await fSuministroCntro.ToListAsync());
+            }
+
+
             var fSuministro = from a in _context.TblSuministros
                               join b in _context.CatTipoSuministros on a.IdTipoSuministro equals b.IdTipoSuministro
 
                               select new TblSuministro
                               {
+
                                   TipoSuministroDesc = b.TipoSuministroDesc,
                                   IdSuministro = a.IdSuministro,
                                   SuministroDesc = a.SuministroDesc,
                                   NumeroReferencia = a.NumeroReferencia,
                                   FechaFacturacion = a.FechaFacturacion,
                                   MontoSuministro = a.MontoSuministro,
+                                  IdUCorporativoCentro = a.IdUCorporativoCentro,
                                   FechaRegistro = a.FechaRegistro,
                                   IdEstatusRegistro = a.IdEstatusRegistro
                               };
+
 
             return View(await fSuministro.ToListAsync());
         }
@@ -136,8 +183,21 @@ namespace WebAdmin.Controllers
 
                 if (DuplicadosEstatus.Count == 0)
                 {
+                    Guid fCentroCorporativo = Guid.Empty;
+                    int fCorpCent = 0;
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
+                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                    fCentroCorporativo = fIdUsuario.IdCorporativo;
+                    fCorpCent = 1;
+                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                    {
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                        fCentroCorporativo = fIdCentro.IdCentro;
+                        fCorpCent = 2;
+                    }
+                    TblSuministro.IdCorpCent = fCorpCent;
+                    TblSuministro.IdUCorporativoCentro = fCentroCorporativo;
                     TblSuministro.IdUsuarioModifico = Guid.Parse(fuser);
                     TblSuministro.SuministroDesc = TblSuministro.SuministroDesc.ToString().ToUpper();
                     TblSuministro.FechaRegistro = DateTime.Now;
@@ -162,6 +222,16 @@ namespace WebAdmin.Controllers
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaEstatus = ListaCatEstatus;
+
+             var fTipoSuministro = from a in _context.CatTipoSuministros
+                                  where a.IdEstatusRegistro == 1
+                                  select new CatTipoSuministro
+                                  {
+                                      IdTipoSuministro = a.IdTipoSuministro,
+                                      TipoSuministroDesc = a.TipoSuministroDesc
+                                  };
+            TempData["fTS"] = fTipoSuministro.ToList();
+            ViewBag.ListaTipoSuministro = TempData["fTS"];
 
             if (id == null)
             {
@@ -192,9 +262,23 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    Guid fCentroCorporativo = Guid.Empty;
+                    int fCorpCent = 0;
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    TblSuministro.IdUsuarioModifico = Guid.Parse(fuser);
+                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+
+                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                    {
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                        fCentroCorporativo = fIdCentro.IdCentro;
+                        fCorpCent = 2;
+                    }
+                    fCentroCorporativo = fIdUsuario.IdCorporativo;
+                    fCorpCent = 1;
+
+                    TblSuministro.IdCorpCent = fCorpCent;
+                    TblSuministro.IdUCorporativoCentro = fCentroCorporativo;
                     TblSuministro.SuministroDesc = TblSuministro.SuministroDesc.ToString().ToUpper();
                     TblSuministro.FechaRegistro = DateTime.Now;
                     TblSuministro.IdEstatusRegistro = TblSuministro.IdEstatusRegistro;

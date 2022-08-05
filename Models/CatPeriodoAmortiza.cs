@@ -7,7 +7,6 @@ namespace WebAdmin.Models
     public class CatPeriodoAmortiza
     {
         [Key]
-        
         public int IdPeriodoAmortiza { get; set; }
 
         [Display(Name = "Descripción")]

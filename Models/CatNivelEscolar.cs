@@ -13,7 +13,6 @@ namespace WebAdmin.Models
         }
 
         [Key]
-        
         public int IdNivelEscolar { get; set; }
 
         [Display(Name = "Descripción")]

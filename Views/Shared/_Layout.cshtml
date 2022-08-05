@@ -179,7 +179,7 @@
                             <h6 class="collapse-header">Administracion:</h6>
                             <a class="collapse-item" asp-area="" asp-controller="TblUsuarios"
                             asp-action="Index">Usuarios</a>
-                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Nómina</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblNominas" asp-action="Index">Nómina</a>
                             <a class="collapse-item" asp-area="" asp-controller="TblPrestamoes"
                             asp-action="Index">Préstamos</a>
                             <h6 class="collapse-header">Escolares:</h6>
@@ -390,10 +390,11 @@
     <script type="text/javascript" src="@Url.Content("~/plantilla/js/sb-admin-2.min.js")"></script>
 
     <!-- Page level plugins -->
+    <link href="@Url.Content("~/plantilla/vendor/datatables/dataTables.css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript"
-        src="@Url.Content("~/plantilla/vendor/datatables/jquery.dataTables.min.js")"></script>
+        src="@Url.Content("~/plantilla/vendor/datatables/dataTables.min.js")"></script>
     <script type="text/javascript"
-        src="@Url.Content("~/plantilla/vendor/datatables/dataTables.bootstrap4.min.js")"></script>
+        src="@Url.Content("~/plantilla/vendor/datatables/dataTables.js")"></script>
     <script type="text/javascript"
         src="@Url.Content("//cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js")"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -404,11 +405,6 @@
     <script type="text/javascript"
         src="@Url.Content("//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js")"></script>
     <!-- #region datatables files -->
-    <link href="@Url.Content("//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css")" rel="stylesheet"
-        type="text/css" />
-
-    <link href="@Url.Content("//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js")" rel="stylesheet"
-        type="text/css" />
     <script type="text/javascript" src="@Url.Content("~/js/site.js")"></script>
     @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)

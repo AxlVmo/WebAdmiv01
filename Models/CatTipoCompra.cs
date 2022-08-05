@@ -1,16 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAdmin.Models
 {
     public class CatTipoCompra
     {
         [Key]
-        
         public int IdTipoCompra { get; set; }
 
         [Display(Name = "Descripción")]
@@ -28,6 +24,6 @@ namespace WebAdmin.Models
 
         [Display(Name = "Estatus")]
         [Required(ErrorMessage = "Campo Requerido")]
-        public int IdEstatusRegistro { get; set; } 
+        public int IdEstatusRegistro { get; set; }
     }
 }

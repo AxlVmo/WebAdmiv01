@@ -105,34 +105,25 @@ namespace WebAdmin.Controllers
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
 
-
             var fuser = _userService.GetUserId();
-            var tblUsuario = await _context.TblUsuarios
-                .FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser) && m.IdPerfil == 3 && m.IdRol == 2);
-            try
-            {
-                if (tblUsuario.IdUsuario != null)
-                {
-                    var fUsuario = from a in _context.TblUsuarios
-                                   where a.IdPerfil != 1 && a.IdRol != 2 && a.IdArea != 1 && a.IdCorporativo == tblUsuario.IdCorporativo
-                                   select new TblUsuario
-                                   {
-                                       IdUsuario = a.IdUsuario,
-                                       Nombres = a.Nombres,
-                                       ApellidoPaterno = a.ApellidoPaterno,
-                                       ApellidoMaterno = a.ApellidoMaterno,
-                                       IdCorpCent = a.IdCorpCent,
-                                       FechaRegistro = a.FechaRegistro,
-                                       IdEstatusRegistro = a.IdEstatusRegistro,
-                                   };
-                    return View(await fUsuario.ToListAsync());
-                }
-            }
-            catch (NullReferenceException ex)
-            {
+            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
+            if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+            {
+                var fUsuario = from a in _context.TblUsuarios
+                               where a.IdCorporativo == fIdCentro.IdCentro && a.IdCorpCent == 2
+                               select new TblUsuario
+                               {
+                                   IdUsuario = a.IdUsuario,
+                                   Nombres = a.Nombres,
+                                   ApellidoPaterno = a.ApellidoPaterno,
+                                   ApellidoMaterno = a.ApellidoMaterno,
+                                   IdCorpCent = a.IdCorpCent,
+                                   FechaRegistro = a.FechaRegistro,
+                                   IdEstatusRegistro = a.IdEstatusRegistro,
+                               };
             }
-
             return View(await _context.TblUsuarios.ToListAsync());
         }
 
@@ -321,7 +312,7 @@ namespace WebAdmin.Controllers
                 }
                 else
                 {
-                    
+
                 }
             }
             return RedirectToAction(nameof(Index));

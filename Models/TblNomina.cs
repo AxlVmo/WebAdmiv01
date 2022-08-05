@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,10 +7,13 @@ namespace WebAdmin.Models
     public class TblNomina
     {
         [Key]
-
         public int IdNomina { get; set; }
+
+        [NotMapped]
+        public string CentroDesc { get; set; }
+
         [Display(Name = "Usuario")]
-        public Guid IdUsuario { get; set; }
+        public Guid IdUsuarioRemuneracion { get; set; }
 
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
@@ -24,15 +24,23 @@ namespace WebAdmin.Models
         public double UsuarioRemuneracion { get; set; }
 
         [Display(Name = "Tipo Contratacion")]
-        [NotMapped]
         public int IdTipoContratacion { get; set; }
-
-        [Display(Name = "Tipo Pago")]
         [NotMapped]
+        public string TipoContratacionDesc { get; set; }
+        [Display(Name = "Tipo Pago")]
         public int IdTipoPago { get; set; }
+        [NotMapped]
+        public string TipoPagoDesc { get; set; }
+
+        [Display(Name = "Corporativo / Centro")]
+        public int IdCorpCent { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
+
+        [Display(Name = "Corporativo / Centro")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public Guid IdUCorporativoCentro { get; set; }
 
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]

@@ -9,7 +9,6 @@ namespace WebAdmin.Models
     public partial class TblServicio
     {
         [Key]
-
         public int IdServicio { get; set; }
 
         [Display(Name = "Codigo Interno")]
@@ -22,15 +21,16 @@ namespace WebAdmin.Models
         [Display(Name = "Tipo Servicio")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdTipoServicio { get; set; }
+
         [Display(Name = "Descripcion Tipo Servicio")]
         [NotMapped]
         public string TipoServicioDesc { get; set; }
+
         [Display(Name = "Descripcion Servicio")]
         public string DescServicio { get; set; }
 
         [Display(Name = "Periodo / Meses")]
         public int Periodo { get; set; }
-
 
         [Display(Name = "Cantidad")]
         public int Cantidad { get; set; }

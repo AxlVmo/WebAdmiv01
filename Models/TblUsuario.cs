@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -14,14 +13,15 @@ namespace WebAdmin.Models
         [Display(Name = "Nombre (s)")]
         [Required(ErrorMessage = "Campo Requerido")]
         public string Nombres { get; set; }
+
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Apellido Paterno")]
         public string ApellidoPaterno { get; set; }
-        [Required(ErrorMessage = "Campo Requerido")]
 
+        [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Apellido Materno")]
         public string ApellidoMaterno { get; set; }
-        
+
         [Display(Name = "Corporativo")]
         [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdCorporativo { get; set; }
@@ -58,14 +58,17 @@ namespace WebAdmin.Models
 
         [Display(Name = "CURP")]
         public string UsuarioCurp { get; set; }
+
         [Display(Name = "RFC")]
         public string UsuarioRfc { get; set; }
+
         [Display(Name = "NSS")]
         public string UsuarioNss { get; set; }
 
         [Display(Name = "Tipo Contratacion")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdTipoContratacion { get; set; }
+
         [Display(Name = "Remuneracion")]
         [Required(ErrorMessage = "Campo Requerido")]
         public double UsuarioRemuneracion { get; set; }
@@ -76,19 +79,17 @@ namespace WebAdmin.Models
 
         [Display(Name = "Estudios")]
         [Required(ErrorMessage = "Campo Requerido")]
-         public int IdPersonalEstudio { get; set; }
+        public int IdPersonalEstudio { get; set; }
 
         [Display(Name = "Fecha Contratacion")]
         [Required(ErrorMessage = "Campo Requerido")]
         [DataType(DataType.Date)]
         public DateTime FechaContratacion { get; set; }
-    
+
         [Display(Name = "Tipo Direccion")]
-        
         public int IdTipoDireccion { get; set; }
 
         [Display(Name = "Calle")]
-        
         public string Calle { get; set; }
 
         [Display(Name = "Codigo Postal")]

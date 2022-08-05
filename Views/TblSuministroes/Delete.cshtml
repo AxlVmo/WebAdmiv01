@@ -4,13 +4,16 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Control de Suministro</li>
+        <li class="breadcrumb-item active" aria-current="page">Desactivar Suministro</li>
+    </ol>
+</nav>
+<hr />
 <div>
-    <h4>TblSuministro</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdTipoSuministro)
@@ -49,10 +52,9 @@
             @Html.DisplayFor(model => model.IdEstatusRegistro)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdSuministro" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+   <form asp-action="Delete">
+        <input type="hidden" asp-for="IdEstatusRegistro" />
+        <input type="submit" value="Desactivar" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
     </form>
 </div>

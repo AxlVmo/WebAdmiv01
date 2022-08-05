@@ -16,7 +16,6 @@ namespace WebAdmin.Models
         [Display(Name = "Usuario")]
         public Guid IdUsuarioCompra { get; set; }
 
-       
         [Display(Name = "Alumno")]
         [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdCliente { get; set; }
@@ -31,7 +30,8 @@ namespace WebAdmin.Models
         [Display(Name = "Fecha Altera")]
         [DataType(DataType.Date)]
         public DateTime FechaAlterna { get; set; }
-       [Display(Name = "Corporativo / Centro")]
+
+        [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
 
         [Display(Name = "Usuario Modifico")]

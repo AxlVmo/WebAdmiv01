@@ -7,7 +7,6 @@ namespace WebAdmin.Models
     public class CatEscolaridad
     {
         [Key]
-        
         public int IdEscolaridad { get; set; }
 
         [Display(Name = "Descripción")]

@@ -9,7 +9,6 @@ namespace WebAdmin.Models
     public partial class CatRole
     {
         [Key]
-        
         public int IdRol { get; set; }
 
         [Display(Name = "Descripción")]

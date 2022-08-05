@@ -9,7 +9,6 @@ namespace WebAdmin.Models
     public partial class CatArea
     {
         [Key]
-        
         public int IdArea { get; set; }
 
         [Display(Name = "Descripción")]

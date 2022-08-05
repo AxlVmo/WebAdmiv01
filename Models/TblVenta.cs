@@ -34,7 +34,7 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         public DateTime FechaAlterna { get; set; }
 
-       [Display(Name = "Corporativo / Centro")]
+        [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
 
         [Display(Name = "Usuario Modifico")]
@@ -57,5 +57,4 @@ namespace WebAdmin.Models
 
         public virtual List<RelVentaProducto> RelVentaProductos { get; set; }
     }
-   
 }

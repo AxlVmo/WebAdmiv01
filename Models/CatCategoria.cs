@@ -9,7 +9,6 @@ namespace WebAdmin.Models
     public partial class CatCategoria
     {
         [Key]
-        
         public int IdCategoria { get; set; }
 
         [Display(Name = "Categoria")]

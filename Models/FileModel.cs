@@ -9,17 +9,22 @@ namespace WebAdmin.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         [Display(Name = "Nombre")]
         public string Name { get; set; }
+
         [Display(Name = "Tipo de Archivo")]
         public string FileType { get; set; }
+
         [Display(Name = "Extension")]
         public string Extension { get; set; }
 
         [Display(Name = "Descripcion")]
         public string Description { get; set; }
+
         [Display(Name = "Usuario")]
         public string UploadedBy { get; set; }
+
         [Display(Name = "Fecha")]
         public DateTime? CreatedOn { get; set; }
     }

@@ -9,7 +9,6 @@ namespace WebAdmin.Models
     public partial class CatPersonalEstudio
     {
         [Key]
-        
         public int IdPersonalEstudio { get; set; }
 
         [Display(Name = "Descripción")]

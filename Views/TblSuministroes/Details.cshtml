@@ -4,12 +4,16 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
 
-<h1>Details</h1>
-
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Control de Suministro</li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles Suministro</li>
+    </ol>
+</nav>
+<hr />
 <div>
-    <h4>TblSuministro</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdTipoSuministro)
@@ -49,7 +53,6 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdSuministro">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+  <div class="form-group">
+        <a asp-action="Index" class="btn btn-info">Regresar</a>
+    </div>

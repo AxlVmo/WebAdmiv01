@@ -9,7 +9,6 @@ namespace WebAdmin.Models
     public partial class CatProducto
     {
         [Key]
-        
         public int IdProducto { get; set; }
 
         [Display(Name = "Codigo Interno")]

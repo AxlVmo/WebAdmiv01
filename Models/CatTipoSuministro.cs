@@ -7,7 +7,6 @@ namespace WebAdmin.Models
     public class CatTipoSuministro
     {
         [Key]
-        
         public int IdTipoSuministro { get; set; }
 
         [Display(Name = "Descripción")]

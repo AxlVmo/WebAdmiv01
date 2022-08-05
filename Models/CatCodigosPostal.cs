@@ -9,7 +9,6 @@ namespace WebAdmin.Models
 
     {
         [Key]
-        
         [Column("IdCodigosPostales")]
         [Display(Name = "ID IdCodigosPostales")]
         public int IdCodigosPostales { get; set; }

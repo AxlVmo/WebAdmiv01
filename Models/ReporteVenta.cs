@@ -20,11 +20,9 @@ namespace WebAdmin.Models
         public Guid IdCentro { get; set; }
 
         [Display(Name = "Alumno")]
-        
         public Guid IdCliente { get; set; }
 
         [Display(Name = "Tipo de Pago")]
-        
         public int IdTipoPago { get; set; }
 
         [Display(Name = "Codigo / Referencia")]
@@ -42,7 +40,6 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        
         public int IdEstatusRegistro { get; set; }
 
         [Display(Name = "Total")]
@@ -50,9 +47,9 @@ namespace WebAdmin.Models
 
         public virtual List<RelVentaProducto> RelVentaProductos { get; set; }
     }
+
     public class ReporteVentaProducto
     {
-
         [Display(Name = "ID Ventas Productos")]
         [Key]
         public Guid IdRelVentaProducto { get; set; }
@@ -61,11 +58,9 @@ namespace WebAdmin.Models
         public int Cantidad { get; set; }
 
         [Display(Name = "Categoria")]
-        
         public string Categoria { get; set; }
 
         [Display(Name = "Producto")]
-        
         public string Producto { get; set; }
 
         [Display(Name = "Precio")]
@@ -88,7 +83,6 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        
         public int IdEstatusRegistro { get; set; }
 
         public Guid IdVenta { get; set; }

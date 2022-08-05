@@ -9,7 +9,6 @@ namespace WebAdmin.Models
     public partial class CaTipotLicencia
     {
         [Key]
-        
         public int IdTipoLicencia { get; set; }
 
         [Display(Name = "Descripción")]

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using WebAdmin.Data;
 using WebAdmin.Services;
@@ -10,7 +6,7 @@ namespace WebAdmin.Models
 {
     public class SerieVentas
     {
-       private readonly nDbContext _context;
+        private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
@@ -27,8 +23,8 @@ namespace WebAdmin.Models
             this.sliced = sliced;
             this.sliced = sliced;
             this.selected = selected;
-
         }
+
         public string name { get; set; }
         public double y { get; set; }
         public bool sliced { get; set; }
@@ -36,11 +32,6 @@ namespace WebAdmin.Models
 
         public SerieVentas()
         {
-
         }
-
-
- 
     }
-
 }

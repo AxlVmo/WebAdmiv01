@@ -9,7 +9,6 @@ namespace WebAdmin.Models
     public partial class CatEstatus
     {
         [Key]
-        
         [Display(Name = "Estatus")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdEstatusRegistro { get; set; }
