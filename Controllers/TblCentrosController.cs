@@ -42,6 +42,18 @@ namespace WebAdmin.Controllers
                     if (ValidaCorporativo.Count >= 1)
                     {
                         ViewBag.CorporativoFlag = 1;
+                        // var ValidaUsuarios = _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdArea == 2 && m.IdPerfil == 3 && m.IdRol == 2);
+                        var ValidaUsuarios = _context.TblUsuarios.ToList();
+
+                        if (ValidaUsuarios.Count >= 1)
+                        {
+                            ViewBag.UsuariosFlag = 1;
+                        }
+                        else
+                        {
+                            ViewBag.UsuariosFlag = 0;
+                            _notyf.Information("Favor de registrar los datos de Usuarios para la Aplicación con perfil para los Centros", 5);
+                        }
                     }
                     else
                     {
@@ -175,12 +187,12 @@ namespace WebAdmin.Controllers
                 }
                 else
                 {
-                    
+
                     _notyf.Warning("Favor de validar, existe una Estatus con el mismo nombre", 5);
                     return View(tblCentros);
                 }
-                
-                
+
+
             }
             return RedirectToAction(nameof(Index));
 

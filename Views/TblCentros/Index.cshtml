@@ -14,7 +14,8 @@
     </ol>
 </nav>
 <p>
-    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i class="fas fa-plus"></i> Nuevo</a>
+    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i
+            class="fas fa-plus"></i> Nuevo</a>
 </p>
 <table class="table">
     <thead>
@@ -42,11 +43,11 @@
                     @Html.DisplayFor(modelItem => item.NombreCentro)
                 </td>
 
-              
+
                 <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.Telefono)
                 </td>
-              
+
                 <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.FechaRegistro)
                 </td>
@@ -61,50 +62,52 @@
                     }
                 </td>
                 <td style="text-align:center">
-                    <a asp-action="Edit" asp-route-id="@item.IdCentro" class="btn btn-outline-secondary" title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
-                    <a asp-action="Details" asp-route-id="@item.IdCentro" class="btn btn-outline-secondary" title="Detalles"><i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.IdCentro" class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle" style="font-size: 1em; color: #FF9333;"></i></a>
+                    <a asp-action="Edit" asp-route-id="@item.IdCentro" class="btn btn-outline-secondary" title="Editar"><i
+                        class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.IdCentro" class="btn btn-outline-secondary"
+                    title="Detalles"><i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.IdCentro" class="btn btn-outline-secondary"
+                    title="Desactivar"><i class="far fa-stop-circle" style="font-size: 1em; color: #FF9333;"></i></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 @section Scripts {
-    @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
     <script type="text/javascript">
-    $(document).ready(function() {
+        $(document).ready(function () {
 
-        $('#tblProductos').DataTable();
+            $('#tblProductos').DataTable();
 
-           var vEstatusFlag = '@ViewBag.EstatusFlag'
-           var vEmpresaFlag = '@ViewBag.EmpresaFlag'
-           var vCorporativo = '@ViewBag.CorporativoFlag'
-
-
-         if (vEstatusFlag == 0)
-         {
-         document.getElementById("iNuevo").style.visibility="hidden";
-         }
-         else
-         {
-             if (vEmpresaFlag == 0)
-             {
-             document.getElementById("iNuevo").style.visibility="hidden";
-             }
-             else
-             {
-                 if (vCorporativo == 0)
-                 {
-                 document.getElementById("iNuevo").style.visibility="hidden";
-                 }
-                 else
-                 {
-                 document.getElementById("iNuevo").style.visibility="visible";
-                 }
-             }
-         }
-       });
-</script>
+            var vEstatusFlag = '@ViewBag.EstatusFlag'
+            var vEmpresaFlag = '@ViewBag.EmpresaFlag'
+            var vCorporativo = '@ViewBag.CorporativoFlag'
+            var vUsuariosFlag = '@ViewBag.UsuariosFlag'
+            
+            if (vEstatusFlag == 0) {
+                document.getElementById("iNuevo").style.visibility = "hidden";
+            }
+            else {
+                if (vEmpresaFlag == 0) {
+                    document.getElementById("iNuevo").style.visibility = "hidden";
+                }
+                else {
+                    if (vCorporativo == 0) {
+                        document.getElementById("iNuevo").style.visibility = "hidden";
+                    }
+                    else {
+                        if (vUsuariosFlag == 0) {
+                            document.getElementById("iNuevo").style.visibility = "hidden";
+                        }
+                        else {
+                            document.getElementById("iNuevo").style.visibility = "visible";
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 }
 }

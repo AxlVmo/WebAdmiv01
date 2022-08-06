@@ -123,8 +123,21 @@ namespace WebAdmin.Controllers
                                    FechaRegistro = a.FechaRegistro,
                                    IdEstatusRegistro = a.IdEstatusRegistro,
                                };
+                               return View(await fUsuario.ToListAsync());
             }
-            return View(await _context.TblUsuarios.ToListAsync());
+            var UsuarioF = from a in _context.TblUsuarios
+                               where a.IdUsuario != Guid.Parse(fuser)
+                               select new TblUsuario
+                               {
+                                   IdUsuario = a.IdUsuario,
+                                   Nombres = a.Nombres,
+                                   ApellidoPaterno = a.ApellidoPaterno,
+                                   ApellidoMaterno = a.ApellidoMaterno,
+                                   IdCorpCent = a.IdCorpCent,
+                                   FechaRegistro = a.FechaRegistro,
+                                   IdEstatusRegistro = a.IdEstatusRegistro,
+                               };
+            return View(await UsuarioF.ToListAsync());
         }
 
         // GET: TblUsuarios/Details/5
@@ -202,14 +215,25 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicados.Count == 0)
                 {
+                    Guid fCentroCorporativo = Guid.Empty;
+                    int fCorpCent = 0;
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
+                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                    var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
+                    fCentroCorporativo = fCorp.IdCorporativo;
+                    fCorpCent = 1;
+                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                    {
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                        fCentroCorporativo = fIdCentro.IdCentro;
+                        fCorpCent = 2;
+                    }
+                    tblUsuario.IdCorpCent = fCorpCent;
+                    tblUsuario.IdCorporativo = fCentroCorporativo;
                     tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
-                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;
-                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-                    tblUsuario.IdCorporativo = fIdUsuario.IdCorporativo;
                     tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
                     tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
                     tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();
@@ -289,14 +313,24 @@ namespace WebAdmin.Controllers
             }
             try
             {
+                Guid fCentroCorporativo = Guid.Empty;
+                int fCorpCent = 0;
                 var fuser = _userService.GetUserId();
                 var isLoggedIn = _userService.IsAuthenticated();
-                tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
-                var idCorporativos = _context.TblCorporativos.FirstOrDefault();
-                tblUsuario.FechaRegistro = DateTime.Now;
                 var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-                tblUsuario.IdCorpCent = fIdUsuario.IdCorpCent;
-                tblUsuario.IdCorporativo = fIdUsuario.IdCorporativo;
+                var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
+                fCentroCorporativo = fCorp.IdCorporativo;
+                fCorpCent = 1;
+                if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                {
+                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                    fCentroCorporativo = fIdCentro.IdCentro;
+                    fCorpCent = 2;
+                }
+                tblUsuario.IdCorpCent = fCorpCent;
+                tblUsuario.IdCorporativo = fCentroCorporativo;
+                tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
+                tblUsuario.FechaRegistro = DateTime.Now;
                 tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
                 tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
                 tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();

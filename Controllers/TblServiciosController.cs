@@ -170,12 +170,12 @@ namespace WebAdminHecsa.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdServicio,CodigoExterno,IdTipoServicio,DescServicio,ServicioPrecioUno")] TblServicio catServicios)
+        public async Task<IActionResult> Create([Bind("IdServicio,CodigoExterno,IdTipoServicio,DescServicio,ServicioPrecioUno,Periodo")] TblServicio catServicios)
         {
             if (ModelState.IsValid)
             {
                 var DuplicadosEstatus = _context.TblServicio
-               .Where(s => s.IdTipoServicio == catServicios.IdTipoServicio && s.DescServicio == catServicios.DescServicio)
+               .Where(s => s.IdServicio == catServicios.IdServicio && s.DescServicio == catServicios.DescServicio)
                .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
@@ -209,7 +209,7 @@ namespace WebAdminHecsa.Controllers
 
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             if (id == null)
             {
@@ -229,7 +229,7 @@ namespace WebAdminHecsa.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdServicio,CodigoInterno,CodigoExterno,IdTipoServicio,Cantidad,ServicioPrecioUno,PorcentajePrecioUno,IdEstatusRegistro")] TblServicio catServicios)
+        public async Task<IActionResult> Edit(int id, [Bind("IdServicio,CodigoExterno,IdTipoServicio,DescServicio,ServicioPrecioUno,Periodo,IdEstatusRegistro")] TblServicio catServicios)
         {
             if (id != catServicios.IdServicio)
             {

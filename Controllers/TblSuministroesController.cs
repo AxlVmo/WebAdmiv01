@@ -144,7 +144,7 @@ namespace WebAdmin.Controllers
             }
 
             var TblSuministro = await _context.TblSuministros
-                .FirstOrDefaultAsync(m => m.IdTipoSuministro == id);
+                .FirstOrDefaultAsync(m => m.IdSuministro == id);
             if (TblSuministro == null)
             {
                 return NotFound();
@@ -173,12 +173,12 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoSuministro,SuministroDesc,NumeroReferencia,FechaFacturacion,MontoSuministro")] TblSuministro TblSuministro)
+        public async Task<IActionResult> Create([Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,FechaFacturacion,MontoSuministro")] TblSuministro tblSuministro)
         {
             if (ModelState.IsValid)
             {
                 var DuplicadosEstatus = _context.TblSuministros
-               .Where(s => s.SuministroDesc == TblSuministro.SuministroDesc)
+               .Where(s => s.SuministroDesc == tblSuministro.SuministroDesc)
                .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
@@ -196,13 +196,13 @@ namespace WebAdmin.Controllers
                         fCentroCorporativo = fIdCentro.IdCentro;
                         fCorpCent = 2;
                     }
-                    TblSuministro.IdCorpCent = fCorpCent;
-                    TblSuministro.IdUCorporativoCentro = fCentroCorporativo;
-                    TblSuministro.IdUsuarioModifico = Guid.Parse(fuser);
-                    TblSuministro.SuministroDesc = TblSuministro.SuministroDesc.ToString().ToUpper();
-                    TblSuministro.FechaRegistro = DateTime.Now;
-                    TblSuministro.IdEstatusRegistro = 1;
-                    _context.Add(TblSuministro);
+                    tblSuministro.IdCorpCent = fCorpCent;
+                    tblSuministro.IdUCorporativoCentro = fCentroCorporativo;
+                    tblSuministro.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblSuministro.SuministroDesc = tblSuministro.SuministroDesc.ToString().ToUpper();
+                    tblSuministro.FechaRegistro = DateTime.Now;
+                    tblSuministro.IdEstatusRegistro = 1;
+                    _context.Add(tblSuministro);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -213,7 +213,7 @@ namespace WebAdmin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             //ViewData["IdTipoSuministro"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", TblSuministro.IdTipoSuministro);
-            return View(TblSuministro);
+            return View(tblSuministro);
         }
 
         // GET: TblSuministros/Edit/5
@@ -251,9 +251,9 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoSuministro,SuministroDesc,NumeroReferencia,FechaFacturacion,MontoSuministro,IdEstatusRegistro")] TblSuministro TblSuministro)
+        public async Task<IActionResult> Edit(int id, [Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,FechaFacturacion,MontoSuministro,IdEstatusRegistro")] TblSuministro tblSuministro)
         {
-            if (id != TblSuministro.IdTipoSuministro)
+            if (id != tblSuministro.IdSuministro)
             {
                 return NotFound();
             }
@@ -277,19 +277,19 @@ namespace WebAdmin.Controllers
                     fCentroCorporativo = fIdUsuario.IdCorporativo;
                     fCorpCent = 1;
 
-                    TblSuministro.IdCorpCent = fCorpCent;
-                    TblSuministro.IdUCorporativoCentro = fCentroCorporativo;
-                    TblSuministro.SuministroDesc = TblSuministro.SuministroDesc.ToString().ToUpper();
-                    TblSuministro.FechaRegistro = DateTime.Now;
-                    TblSuministro.IdEstatusRegistro = TblSuministro.IdEstatusRegistro;
-                    _context.Add(TblSuministro);
-                    _context.Update(TblSuministro);
+                    tblSuministro.IdCorpCent = fCorpCent;
+                    tblSuministro.IdUCorporativoCentro = fCentroCorporativo;
+                    tblSuministro.SuministroDesc = tblSuministro.SuministroDesc.ToString().ToUpper();
+                    tblSuministro.FechaRegistro = DateTime.Now;
+                    tblSuministro.IdEstatusRegistro = tblSuministro.IdEstatusRegistro;
+                    _context.Add(tblSuministro);
+                    _context.Update(tblSuministro);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TblSuministroExists(TblSuministro.IdTipoSuministro))
+                    if (!TblSuministroExists(tblSuministro.IdSuministro))
                     {
                         return NotFound();
                     }
@@ -300,7 +300,7 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(TblSuministro);
+            return View(tblSuministro);
         }
 
         // GET: TblSuministros/Delete/5
@@ -312,7 +312,7 @@ namespace WebAdmin.Controllers
             }
 
             var TblSuministro = await _context.TblSuministros
-                .FirstOrDefaultAsync(m => m.IdTipoSuministro == id);
+                .FirstOrDefaultAsync(m => m.IdSuministro == id);
             if (TblSuministro == null)
             {
                 return NotFound();
@@ -335,7 +335,7 @@ namespace WebAdmin.Controllers
 
         private bool TblSuministroExists(int id)
         {
-            return _context.TblSuministros.Any(e => e.IdTipoSuministro == id);
+            return _context.TblSuministros.Any(e => e.IdSuministro == id);
         }
     }
 }

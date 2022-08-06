@@ -46,6 +46,7 @@ namespace WebAdmin.Controllers
 
                         if (ValidaCentro.Count >= 1)
                         {
+                            ViewBag.CentrosFlag = 1;
                             var ValidaUsuarios = _context.TblUsuarios.ToList();
 
                             if (ValidaUsuarios.Count >= 1)
@@ -166,12 +167,34 @@ namespace WebAdmin.Controllers
         public IActionResult Create()
         {
             var fuser = _userService.GetUserId();
-            var fIdCentro = _context.TblCentros
-                                       .Where(s => s.IdUsuarioControl == Guid.Parse(fuser))
-                                       .FirstOrDefault();
+            var fIdUsuario = (from a in _context.TblUsuarios
+                              where a.IdPerfil == 3 && a.IdRol == 2 && a.IdArea == 2 && a.IdUsuario == Guid.Parse(fuser)
+                              select new TblUsuario
+                              {
+                                  IdUsuario = a.IdUsuario,
+                                  IdArea = a.IdArea,
+                                  IdPerfil = a.IdPerfil,
+                                  IdRol = a.IdRol
+                              }).ToList();
+
+            if (fIdUsuario.Count == 1)
+            {
+                var fIdCentroCorp = _context.TblCentros
+                                      .Where(s => s.IdUsuarioControl == Guid.Parse(fuser))
+                                      .FirstOrDefault();
+
+                var fUsuariosCentrosCorp = from a in _context.TblUsuarios
+                                       where a.IdCorporativo == fIdCentroCorp.IdCentro
+                                       select new
+                                       {
+                                           IdUsuario = a.IdUsuario,
+                                           NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+                                       };
+                TempData["Mpps"] = fUsuariosCentrosCorp.ToList();
+                ViewBag.ListaUsuariosCentros = TempData["Mpps"];
+            }
 
             var fUsuariosCentros = from a in _context.TblUsuarios
-                                   where a.IdCorporativo == fIdCentro.IdCentro
                                    select new
                                    {
                                        IdUsuario = a.IdUsuario,

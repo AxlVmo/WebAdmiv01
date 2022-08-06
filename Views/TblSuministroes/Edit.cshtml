@@ -14,7 +14,8 @@
 </nav>
 <hr />
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="IdSuministro" />
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">

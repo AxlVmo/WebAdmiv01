@@ -4,93 +4,78 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
 
-<h1>Edit</h1>
-
-<h4>TblServicio</h4>
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Catálogos</li>
+        <li class="breadcrumb-item">Servicio</li>
+        <li class="breadcrumb-item">Control de Servicio</li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Servicio</li>
+    </ol>
+</nav>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdServicio" />
-            <div class="form-group">
-                <label asp-for="CodigoInterno" class="control-label"></label>
-                <input asp-for="CodigoInterno" class="form-control" />
-                <span asp-validation-for="CodigoInterno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CodigoExterno" class="control-label"></label>
-                <input asp-for="CodigoExterno" class="form-control" />
-                <span asp-validation-for="CodigoExterno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdTipoServicio" class="control-label"></label>
-                <input asp-for="IdTipoServicio" class="form-control" />
-                <span asp-validation-for="IdTipoServicio" class="text-danger"></span>
-            </div>
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="IdServicio" />
+    <div class="row">
+        <div class="col-md-5">
             <div class="form-group">
                 <label asp-for="DescServicio" class="control-label"></label>
-                <input asp-for="DescServicio" class="form-control" />
+                <input style="text-transform:uppercase" asp-for="DescServicio" class="form-control" type="text" />
                 <span asp-validation-for="DescServicio" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
+                <label asp-for="IdTipoServicio" class="control-label"></label>
+                <select id="drpTipoServicio" class="form-select" asp-for="IdTipoServicio"
+                    asp-items="@(new SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+                <span asp-validation-for="IdTipoServicio" class="text-danger"></span>
             </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="CodigoExterno" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="CodigoExterno" class="form-control" type="text" />
+                <span asp-validation-for="CodigoExterno" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ServicioPrecioUno" class="control-label"></label>
-                <input asp-for="ServicioPrecioUno" class="form-control" />
+                <input asp-for="ServicioPrecioUno" class="form-control" type="number" />
                 <span asp-validation-for="ServicioPrecioUno" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-2">
             <div class="form-group">
-                <label asp-for="PorcentajePrecioUno" class="control-label"></label>
-                <input asp-for="PorcentajePrecioUno" class="form-control" />
-                <span asp-validation-for="PorcentajePrecioUno" class="text-danger"></span>
+                <label asp-for="Periodo" class="control-label"></label>
+                <input asp-for="Periodo" class="form-control" type="number" />
+                <span asp-validation-for="Periodo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="SubCosto" class="control-label"></label>
-                <input asp-for="SubCosto" class="form-control" />
-                <span asp-validation-for="SubCosto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Costo" class="control-label"></label>
-                <input asp-for="Costo" class="form-control" />
-                <span asp-validation-for="Costo" class="text-danger"></span>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label asp-for="Periodo" class="control-label"></label>
-                    <input asp-for="Periodo" class="form-control" type="number" />
-                    <span asp-validation-for="Periodo" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdUsuarioModifico" class="control-label"></label>
-                <input asp-for="IdUsuarioModifico" class="form-control" />
-                <span asp-validation-for="IdUsuarioModifico" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaRegistro" class="control-label"></label>
-                <input asp-for="FechaRegistro" class="form-control" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-            </div>
+        </div>
+        <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <input asp-for="IdEstatusRegistro" class="form-control" />
+                <select id="idEstatusLista" class="form-select" asp-for="IdEstatusRegistro"
+                    asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
                 <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Actualizar" class="btn btn-warning" />
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+    </div>
+</form>
 
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
