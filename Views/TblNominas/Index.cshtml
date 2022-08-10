@@ -41,13 +41,10 @@
                 @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
             </th>
             <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.NominaDesc)
+                @Html.DisplayNameFor(model => model.UsuarioAsignado)
             </th>
             <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.UsuarioRemuneracion)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.TipoContratacionDesc)
             </th>
             <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.TipoPagoDesc)
@@ -68,15 +65,11 @@
                 <td style="text-align:center" hidden>
                     @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
                 </td>
-
                 <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.NominaDesc)
+                    @Html.DisplayFor(modelItem => item.UsuarioAsignado)
                 </td>
                 <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.UsuarioRemuneracion)
-                </td>
-                <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.TipoContratacionDesc)
                 </td>
                 <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.TipoPagoDesc)
@@ -110,7 +103,9 @@
             <th style="text-align:center" hidden>
                 @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
             </th>
-
+           <th style="text-align:center" hidden>
+                @Html.DisplayNameFor(model => model.UsuarioAsignado)
+            </th>
             <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.NominaDesc)
             </th>
@@ -136,11 +131,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#drpTipoServicio').change(function () {
+        $('#drpCorpCent').change(function () {
             var SelectedText = $('option:selected', this).text();
             var SelectedValue = $('option:selected', this).val();
             var input, filter, table, tr, td, i;
-            input = document.getElementById("drpTipoServicio");
+            input = document.getElementById("drpCorpCent");
             filter = input.value.toUpperCase();
             table = document.getElementById("tblNominas");
             tr = table.getElementsByTagName("tr");

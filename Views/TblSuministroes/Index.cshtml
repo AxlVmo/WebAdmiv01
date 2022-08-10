@@ -30,10 +30,7 @@
         </div>
     </div>
 </div>
-
-
 <table class="table" id="tblSuministros">
-
     <thead>
         <tr>
 
@@ -143,11 +140,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#drpTipoServicio').change(function () {
+        $('#drpCorpCent').change(function () {
             var SelectedText = $('option:selected', this).text();
             var SelectedValue = $('option:selected', this).val();
             var input, filter, table, tr, td, i;
-            input = document.getElementById("drpTipoServicio");
+            input = document.getElementById("drpCorpCent");
             filter = input.value.toUpperCase();
             table = document.getElementById("tblSuministros");
             tr = table.getElementsByTagName("tr");

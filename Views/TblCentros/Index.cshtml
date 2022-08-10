@@ -13,18 +13,23 @@
         <li class="breadcrumb-item active" aria-current="page">Crear Centro</li>
     </ol>
 </nav>
-<p>
-    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i
-            class="fas fa-plus"></i> Nuevo</a>
-</p>
-<table class="table">
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group"></div>
+        <p>
+            <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo"
+                title="Nuevo"><i class="fas fa-plus"></i> Nuevo</a>
+        </p>
+    </div>
+</div>
+<table class="table" id="tblCentros">
     <thead>
         <tr>
             <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.NombreCentro)
+                @Html.DisplayNameFor(model => model.UsuarioAsignado)
             </th>
             <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.Telefono)
+                @Html.DisplayNameFor(model => model.NombreCentro)
             </th>
             <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.FechaRegistro)
@@ -40,14 +45,11 @@
         {
             <tr>
                 <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.UsuarioAsignado)
+                </td>
+                <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.NombreCentro)
                 </td>
-
-
-                <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.Telefono)
-                </td>
-
                 <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.FechaRegistro)
                 </td>
@@ -72,16 +74,95 @@
             </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.UsuarioAsignado)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.NombreCentro)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+           </tr>
+    </tfoot>
 </table>
 @section Scripts {
 @{
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    <script type="text/javascript">
-        $(document).ready(function () {
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#drpCorpCent').change(function () {
+            var SelectedText = $('option:selected', this).text();
+            var SelectedValue = $('option:selected', this).val();
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("drpCorpCent");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("tblSuministros");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
 
-            $('#tblProductos').DataTable();
+        });
 
-            var vEstatusFlag = '@ViewBag.EstatusFlag'
+        $('#tblCentros').DataTable(
+            {
+                initComplete: function () {
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            var column = this;
+                            var select = $('<select class="form-select">SELECCIONAR<option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+
+                            column
+                                .data()
+                                .unique()
+                                .sort()
+                                .each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>');
+                                });
+                        });
+                },
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            }
+        );
+
+        var vEstatusFlag = '@ViewBag.EstatusFlag'
             var vEmpresaFlag = '@ViewBag.EmpresaFlag'
             var vCorporativo = '@ViewBag.CorporativoFlag'
             var vUsuariosFlag = '@ViewBag.UsuariosFlag'
@@ -107,7 +188,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     }
                 }
             }
-        });
-    </script>
-}
+    });
+</script>
 }

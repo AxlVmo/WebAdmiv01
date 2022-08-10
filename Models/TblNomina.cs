@@ -11,6 +11,9 @@ namespace WebAdmin.Models
 
         [NotMapped]
         public string CentroDesc { get; set; }
+         [Display(Name = "Usuario Asignado")]
+        [NotMapped]
+        public string UsuarioAsignado { get; set; }
 
         [Display(Name = "Usuario")]
         public Guid IdUsuarioRemuneracion { get; set; }

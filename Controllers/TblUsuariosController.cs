@@ -112,7 +112,7 @@ namespace WebAdmin.Controllers
             if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
             {
                 var fUsuario = from a in _context.TblUsuarios
-                               where a.IdCorporativo == fIdCentro.IdCentro && a.IdCorpCent == 2
+                               where a.IdCorporativo == fIdCentro.IdCentro && a.IdCorpCent == 2 && a.IdUsuario != Guid.Parse(fuser)
                                select new TblUsuario
                                {
                                    IdUsuario = a.IdUsuario,

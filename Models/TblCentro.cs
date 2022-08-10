@@ -19,6 +19,9 @@ namespace WebAdmin.Models
         [Display(Name = "Tipo de Centro")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdTipoCentro { get; set; }
+        [Display(Name = "Usuario Asignado")]
+        [NotMapped]
+        public string UsuarioAsignado { get; set; }
 
         [Display(Name = "Nombre de Centro")]
         [Required(ErrorMessage = "Campo Requerido")]

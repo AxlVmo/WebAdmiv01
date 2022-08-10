@@ -72,17 +72,28 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.TblCentros.ToListAsync());
+
+            var CentroF = from a in _context.TblCentros
+                          join b in _context.TblUsuarios on a.IdUsuarioControl equals b.IdUsuario
+                          select new TblCentro
+                          {
+                              IdCentro = a.IdCentro,
+                              UsuarioAsignado = b.Nombres + ' ' + b.ApellidoPaterno + ' ' + b.ApellidoMaterno,
+                              NombreCentro = a.NombreCentro,
+                              FechaRegistro = a.FechaRegistro,
+                              IdEstatusRegistro = a.IdEstatusRegistro,
+                          };
+            return View(await CentroF.ToListAsync());
         }
 
         [HttpGet]
-        public ActionResult FiltroEmpresaFiscales(Guid id)
+        public ActionResult FiltroCentro(Guid id)
         {
-            var fEmpresaFiscales = (from ta in _context.TblCentros
+            var fCentro = (from ta in _context.TblCentros
                                     where ta.IdCentro == id
                                     select ta).Distinct().ToList();
 
-            return Json(fEmpresaFiscales);
+            return Json(fCentro);
         }
 
         // GET: tblCentros/Details/5
@@ -137,19 +148,17 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.TblCentros
-                       .Where(s => s.NombreCentro == tblCentros.NombreCentro)
-                       .ToList();
+                var vNombreCentro = _context.TblCentros
+                .Where(a => a.NombreCentro == tblCentros.NombreCentro).FirstOrDefaultAsync();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vNombreCentro is null)
                 {
-                    var DuplicadoUsuarioAsignado = _context.TblCentros
+                    var vUsuarioAsignado = _context.TblCentros
                       .Where(s => s.IdUsuarioControl == tblCentros.IdUsuarioControl)
-                      .ToList();
+                      .FirstOrDefaultAsync();
 
-                    if (DuplicadoUsuarioAsignado.Count == 0)
+                    if (vUsuarioAsignado is null)
                     {
-
                         var fuser = _userService.GetUserId();
                         var isLoggedIn = _userService.IsAuthenticated();
                         tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
@@ -182,17 +191,13 @@ namespace WebAdmin.Controllers
                     {
 
                         _notyf.Warning("Favor de validar, este Usurio ya esta asignado a otro centro", 5);
-                        return View(tblCentros);
+
                     }
                 }
                 else
                 {
-
-                    _notyf.Warning("Favor de validar, existe una Estatus con el mismo nombre", 5);
-                    return View(tblCentros);
+                    _notyf.Warning("Favor de validar, existe una Centro con el mismo nombre", 5);
                 }
-
-
             }
             return RedirectToAction(nameof(Index));
 

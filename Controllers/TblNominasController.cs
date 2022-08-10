@@ -110,14 +110,13 @@ namespace WebAdmin.Controllers
                 var fNominaCntro = from a in _context.TblNominas
                                    join b in _context.TblUsuarios on a.IdUsuarioRemuneracion equals b.IdUsuario
                                    join c in _context.CatTipoPagos on a.IdTipoPago equals c.IdTipoPago
-                                   join d in _context.CatTipoContrataciones on a.IdTipoContratacion equals d.IdTipoContratacion
                                    where a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdCorpCent == 2
                                    select new TblNomina
                                    {
                                        IdNomina = a.IdNomina,
+                                       UsuarioAsignado = b.Nombres + " " + b.ApellidoPaterno + " " + b.ApellidoMaterno,
                                        NominaDesc = a.NominaDesc,
                                        UsuarioRemuneracion = a.UsuarioRemuneracion,
-                                       TipoContratacionDesc = d.TipoContratacionDesc,
                                        TipoPagoDesc = c.TipoPagoDesc,
                                        IdUCorporativoCentro = a.IdUCorporativoCentro,
                                        FechaRegistro = a.FechaRegistro,
@@ -129,13 +128,12 @@ namespace WebAdmin.Controllers
             var fNomina = from a in _context.TblNominas
                           join b in _context.TblUsuarios on a.IdUsuarioRemuneracion equals b.IdUsuario
                           join c in _context.CatTipoPagos on a.IdTipoPago equals c.IdTipoPago
-                          join d in _context.CatTipoContrataciones on a.IdTipoContratacion equals d.IdTipoContratacion
                           select new TblNomina
                           {
                               IdNomina = a.IdNomina,
+                              UsuarioAsignado = b.Nombres + " " + b.ApellidoPaterno + " " + b.ApellidoMaterno,
                               NominaDesc = a.NominaDesc,
                               UsuarioRemuneracion = a.UsuarioRemuneracion,
-                              TipoContratacionDesc = d.TipoContratacionDesc,
                               TipoPagoDesc = c.TipoPagoDesc,
                               IdUCorporativoCentro = a.IdUCorporativoCentro,
                               FechaRegistro = a.FechaRegistro,
@@ -167,41 +165,44 @@ namespace WebAdmin.Controllers
         public IActionResult Create()
         {
             var fuser = _userService.GetUserId();
-            var fIdUsuario = (from a in _context.TblUsuarios
-                              where a.IdPerfil == 3 && a.IdRol == 2 && a.IdArea == 2 && a.IdUsuario == Guid.Parse(fuser)
-                              select new TblUsuario
-                              {
-                                  IdUsuario = a.IdUsuario,
-                                  IdArea = a.IdArea,
-                                  IdPerfil = a.IdPerfil,
-                                  IdRol = a.IdRol
-                              }).ToList();
+            var fIdUsuario = _context.TblUsuarios
+                .Where(a => a.IdPerfil == 3 && a.IdRol == 2 && a.IdArea == 2 && a.IdUsuario == Guid.Parse(fuser)).ToList();
 
-            if (fIdUsuario.Count == 1)
+            if (fIdUsuario.Count != 0)
             {
                 var fIdCentroCorp = _context.TblCentros
                                       .Where(s => s.IdUsuarioControl == Guid.Parse(fuser))
                                       .FirstOrDefault();
 
                 var fUsuariosCentrosCorp = from a in _context.TblUsuarios
-                                       where a.IdCorporativo == fIdCentroCorp.IdCentro
+                                           where a.IdCorporativo == fIdCentroCorp.IdCentro
+                                           where a.IdUsuario != Guid.Parse(fuser)
+                                           select new
+                                           {
+                                               IdUsuario = a.IdUsuario,
+                                               NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+                                           };
+
+                ViewBag.ListaUsuariosCentros = fUsuariosCentrosCorp;
+            }
+            else
+            {
+                var fUsuariosCentros = from a in _context.TblUsuarios
                                        select new
                                        {
                                            IdUsuario = a.IdUsuario,
                                            NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
                                        };
-                TempData["Mpps"] = fUsuariosCentrosCorp.ToList();
-                ViewBag.ListaUsuariosCentros = TempData["Mpps"];
+                ViewBag.ListaUsuariosCentros = fUsuariosCentros;
             }
+            List<CatTipoContratacion> ListaContratacion = new List<CatTipoContratacion>();
+            ListaContratacion = (from c in _context.CatTipoContrataciones select c).Distinct().ToList();
+            ViewBag.ListaContratacion = ListaContratacion;
 
-            var fUsuariosCentros = from a in _context.TblUsuarios
-                                   select new
-                                   {
-                                       IdUsuario = a.IdUsuario,
-                                       NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
-                                   };
-            TempData["Mpps"] = fUsuariosCentros.ToList();
-            ViewBag.ListaUsuariosCentros = TempData["Mpps"];
+            List<CatTipoPago> ListaTipopago = new List<CatTipoPago>();
+            ListaTipopago = (from c in _context.CatTipoPagos select c).Distinct().ToList();
+            ViewBag.ListaTipopago = ListaTipopago;
+
             return View();
         }
 
@@ -210,7 +211,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoNomina,NominaDesc,NumeroReferencia,FechaFacturacion,MontoNomina")] TblNomina TblNomina)
+        public async Task<IActionResult> Create([Bind("IdTipoNomina,IdUsuarioRemuneracion,NominaDesc,IdTipoPago,UsuarioRemuneracion")] TblNomina TblNomina)
         {
             if (ModelState.IsValid)
             {
@@ -256,14 +257,25 @@ namespace WebAdmin.Controllers
         // GET: TblNominas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
-            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
-
+            Guid fCentroCorporativo = Guid.Empty;
             var fuser = _userService.GetUserId();
-            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+            var isLoggedIn = _userService.IsAuthenticated();
+            var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+            fCentroCorporativo = fIdUsuario.IdCorporativo;
+            if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+            {
+                var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                var fUsuariosCentrosCorp = from a in _context.TblUsuarios
+                                           where a.IdCorporativo == fIdCentro.IdCentro
+                                           select new
+                                           {
+                                               IdUsuario = a.IdUsuario,
+                                               NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+                                           };
+                TempData["Mpps"] = fUsuariosCentrosCorp.ToList();
+
+            }
             var fUsuariosCentros = from a in _context.TblUsuarios
-                                   where a.IdCorporativo == fIdCentro.IdCentro
                                    select new
                                    {
                                        IdUsuario = a.IdUsuario,
@@ -272,6 +284,17 @@ namespace WebAdmin.Controllers
             TempData["Mpps"] = fUsuariosCentros.ToList();
             ViewBag.ListaUsuariosCentros = TempData["Mpps"];
 
+            List<CatTipoContratacion> ListaContratacion = new List<CatTipoContratacion>();
+            ListaContratacion = (from c in _context.CatTipoContrataciones select c).Distinct().ToList();
+            ViewBag.ListaContratacion = ListaContratacion;
+
+            List<CatTipoPago> ListaTipopago = new List<CatTipoPago>();
+            ListaTipopago = (from c in _context.CatTipoPagos select c).Distinct().ToList();
+            ViewBag.ListaTipopago = ListaTipopago;
+
+            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
+            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
+            ViewBag.ListaEstatus = ListaCatEstatus;
             if (id == null)
             {
                 return NotFound();
