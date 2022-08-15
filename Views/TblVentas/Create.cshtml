@@ -267,18 +267,14 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var SelectedValue = $('option:selected', this).val();
 
         if (SelectedValue != 1) {
-            alert(SelectedValue);
              $('#lCodigoPago').removeAttr('hidden');
               $('#lFechaAlterna').removeAttr('hidden');
         }
         else {
-            document.getElementById("iCodigoPago").style.visibility = "hidden";
-            document.getElementById("iFechaAlterna").style.visibility = "hidden";
-            document.getElementById("lCodigoPago").style.visibility = "hidden";
-            document.getElementById("lFechaAlterna").style.visibility = "hidden";
+            
+            document.getElementById("lCodigoPago").setAttribute("hidden", true);
+            document.getElementById("lFechaAlterna").setAttribute("hidden", true);
         }
-
-
     });
     $('#btnTerminar2').click(function () {
         window.print();
