@@ -56,21 +56,20 @@ namespace WebAdmin.Controllers
         public ActionResult FiltroAlumno(Guid id)
         {
             var fAlumno = (from a in _context.TblAlumnos
-                            join b in _context.TblAlumnoDirecciones on a.IdAlumno equals b.IdAlumno
-                            where a.IdAlumno == id && b.IdTipoDireccion == 1
-                            select new
-                            {
-                                IdAlumno = a.IdAlumno,
-                                NombreAlumno = a.NombreAlumno,
-
-                                CalleAlumno = b.Calle,
-                                CodigoPostalAlumno = b.CodigoPostal,
-                                ColoniaAlumno = b.Colonia,
-                                CiudadAlumno = b.Ciudad,
-                                EstadoAlumno = b.Estado,
-                                CorreoElectronicoAlumno = b.CorreoElectronico,
-                                TelefonoAlumno = b.Telefono
-                            }).Distinct().ToList();
+                           join b in _context.TblAlumnoDirecciones on a.IdAlumno equals b.IdAlumno
+                           where a.IdAlumno == id && b.IdTipoDireccion == 1
+                           select new
+                           {
+                               IdAlumno = a.IdAlumno,
+                               NombreAlumno = a.NombreAlumno,
+                               CalleAlumno = b.Calle,
+                               CodigoPostalAlumno = b.CodigoPostal,
+                               ColoniaAlumno = b.Colonia,
+                               CiudadAlumno = b.Ciudad,
+                               EstadoAlumno = b.Estado,
+                               CorreoElectronicoAlumno = b.CorreoElectronico,
+                               TelefonoAlumno = b.Telefono
+                           }).Distinct().ToList();
 
             return Json(fAlumno);
         }
@@ -108,56 +107,47 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdAlumno,NombreAlumno,ApellidoPaterno,ApellidoMaterno,IdTipoAlumno")] TblAlumno tblAlumno)
+        public async Task<IActionResult> Create([Bind("IdAlumno,IdTipoAlumno,NombreAlumno,ApellidoPaterno,ApellidoMaterno")] TblAlumno tblAlumno)
         {
-            if (ModelState.IsValid)
+            var vDuplicado = _context.TblAlumnos
+                                      .Where(s => s.NombreAlumno == tblAlumno.NombreAlumno && s.ApellidoPaterno == tblAlumno.ApellidoPaterno && s.ApellidoMaterno == tblAlumno.ApellidoMaterno)
+                                      .ToList();
+
+            if (vDuplicado.Count == 0)
             {
-                var DuplicadosEstatus = _context.TblAlumnos
-                                          .Where(s => s.NombreAlumno == tblAlumno.NombreAlumno)
-                                          .ToList();
-
-                if (DuplicadosEstatus.Count == 0)
+                Guid fCentroCorporativo = Guid.Empty;
+                int fCorpCent = 0;
+                var fuser = _userService.GetUserId();
+                var isLoggedIn = _userService.IsAuthenticated();
+                var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                fCentroCorporativo = fIdUsuario.IdCorporativo;
+                fCorpCent = 1;
+                if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                 {
-                    var fuser = _userService.GetUserId();
-                    var isLoggedIn = _userService.IsAuthenticated();
-                    tblAlumno.IdUsuarioModifico = Guid.Parse(fuser);
-                    var fCentro = Guid.Empty;
-
-                    var vCentro = _context.TblCentros
-                                              .Where(s => s.IdUsuarioControl == Guid.Parse(fuser))
-                                              .ToList();
-
-                    if (vCentro.Count == 0)
-                    {
-                        var fcorporativo = _context.TblCorporativos.FirstOrDefault();
-                        tblAlumno.IdUCorporativoCentro = fcorporativo.IdCorporativo;
-
-                    }
-                    else
-                    {
-                        fCentro = vCentro[0].IdCentro;
-                        tblAlumno.IdUCorporativoCentro = fCentro;
-                    }
-
-
-                    tblAlumno.FechaRegistro = DateTime.Now;
-                    tblAlumno.ApellidoPaterno = !string.IsNullOrEmpty(tblAlumno.ApellidoPaterno) ? tblAlumno.ApellidoPaterno.ToUpper() : tblAlumno.ApellidoPaterno;
-                    tblAlumno.ApellidoPaterno = !string.IsNullOrEmpty(tblAlumno.ApellidoMaterno) ? tblAlumno.ApellidoMaterno.ToUpper() : tblAlumno.ApellidoMaterno;
-                    tblAlumno.IdEstatusRegistro = 1;
-
-                    _context.Add(tblAlumno);
-                    await _context.SaveChangesAsync();
-                    _notyf.Success("Registro creado con éxito", 5);
-                    return RedirectToAction(nameof(Index));
+                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                    fCentroCorporativo = fIdCentro.IdCentro;
+                    fCorpCent = 2;
                 }
-                else
-                {
-                    _notyf.Warning("Favor de validar, existe una Estatus con el mismo nombre", 5);
+                tblAlumno.IdCorpCent = fCorpCent;
+                tblAlumno.IdUCorporativoCentro = fCentroCorporativo;
+                tblAlumno.IdUsuarioModifico = Guid.Parse(fuser);
+                tblAlumno.FechaRegistro = DateTime.Now;
+                tblAlumno.ApellidoPaterno = tblAlumno.ApellidoPaterno.ToUpper();
+                tblAlumno.ApellidoPaterno = tblAlumno.ApellidoMaterno.ToUpper();
+                tblAlumno.IdEstatusRegistro = 1;
 
-                }
+                _context.Add(tblAlumno);
+                await _context.SaveChangesAsync();
+                _notyf.Success("Registro creado con éxito", 5);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                _notyf.Warning("Favor de validar, existe una Alumno con el mismo nombre", 5);
 
             }
-            return View(tblAlumno);
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: TblAlumnos/Edit/5
@@ -193,7 +183,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdAlumno,NombreAlumno,IdTipoAlumno, IdPerfil, IdRol,IdEstatusRegistro")] TblAlumno tblAlumno)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdAlumno,IdTipoAlumno,NombreAlumno,ApellidoPaterno,ApellidoMaterno,IdEstatusRegistro")] TblAlumno tblAlumno)
         {
             if (id != tblAlumno.IdAlumno)
             {
@@ -204,10 +194,22 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    Guid fCentroCorporativo = Guid.Empty;
+                    int fCorpCent = 0;
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
+                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                    fCentroCorporativo = fIdUsuario.IdCorporativo;
+                    fCorpCent = 1;
+                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                    {
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                        fCentroCorporativo = fIdCentro.IdCentro;
+                        fCorpCent = 2;
+                    }
+                    tblAlumno.IdCorpCent = fCorpCent;
+                    tblAlumno.IdUCorporativoCentro = fCentroCorporativo;
                     tblAlumno.IdUsuarioModifico = Guid.Parse(fuser);
-                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblAlumno.FechaRegistro = DateTime.Now;
                     tblAlumno.NombreAlumno = tblAlumno.NombreAlumno.ToString().ToUpper();
 
@@ -226,9 +228,9 @@ namespace WebAdmin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(tblAlumno);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: TblAlumnos/Delete/5

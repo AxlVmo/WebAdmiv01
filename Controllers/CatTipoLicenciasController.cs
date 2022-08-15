@@ -111,11 +111,11 @@ namespace WebAdminHecsa.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CaTipotLicencias
+                var vDuplicado = _context.CaTipotLicencias
                .Where(s => s.LicenciaDesc == CaTipotLicencia.LicenciaDesc)
                .ToList();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();

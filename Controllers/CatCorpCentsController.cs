@@ -107,11 +107,11 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatCorpCents
+                var vDuplicado = _context.CatCorpCents
                .Where(s => s.CorpCentDesc == catCorpCents.CorpCentDesc)
                .ToList();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();

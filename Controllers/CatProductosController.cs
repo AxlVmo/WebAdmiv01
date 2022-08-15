@@ -173,11 +173,11 @@ namespace WebAdminHecsa.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatProductos
+                var vDuplicado = _context.CatProductos
                .Where(s => s.IdCategoria == catProductos.IdCategoria && s.DescProducto == catProductos.DescProducto)
                .ToList();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();

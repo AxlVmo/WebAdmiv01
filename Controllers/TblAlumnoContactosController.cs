@@ -163,11 +163,11 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.TblAlumnoContactos
+                var vDuplicado = _context.TblAlumnoContactos
                        .Where(s => s.NombreAlumnoContacto == tblAlumnoContacto.NombreAlumnoContacto)
                        .ToList();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();

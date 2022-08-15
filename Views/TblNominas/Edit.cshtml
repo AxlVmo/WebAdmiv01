@@ -6,14 +6,14 @@
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Control de Nomina</li>
         <li class="breadcrumb-item active" aria-current="page">Crear Nomina</li>
     </ol>
 </nav>
 <form asp-action="Edit">
-
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="IdNomina" />
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">

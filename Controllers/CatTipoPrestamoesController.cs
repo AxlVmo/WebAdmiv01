@@ -74,11 +74,11 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatTipoPrestamos
+                var vDuplicado = _context.CatTipoPrestamos
                        .Where(s => s.TipoPrestamoDesc == catTipoPrestamo.TipoPrestamoDesc)
                        .ToList();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();

@@ -177,11 +177,11 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.TblSuministros
+                var vDuplicado = _context.TblSuministros
                .Where(s => s.SuministroDesc == tblSuministro.SuministroDesc)
                .ToList();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vDuplicado.Count == 0)
                 {
                     Guid fCentroCorporativo = Guid.Empty;
                     int fCorpCent = 0;
@@ -223,7 +223,7 @@ namespace WebAdmin.Controllers
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaEstatus = ListaCatEstatus;
 
-             var fTipoSuministro = from a in _context.CatTipoSuministros
+            var fTipoSuministro = from a in _context.CatTipoSuministros
                                   where a.IdEstatusRegistro == 1
                                   select new CatTipoSuministro
                                   {
@@ -267,22 +267,20 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-
+                    fCentroCorporativo = fIdUsuario.IdCorporativo;
+                    fCorpCent = 1;
                     if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                     {
                         var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
                         fCentroCorporativo = fIdCentro.IdCentro;
                         fCorpCent = 2;
                     }
-                    fCentroCorporativo = fIdUsuario.IdCorporativo;
-                    fCorpCent = 1;
-
                     tblSuministro.IdCorpCent = fCorpCent;
                     tblSuministro.IdUCorporativoCentro = fCentroCorporativo;
                     tblSuministro.SuministroDesc = tblSuministro.SuministroDesc.ToString().ToUpper();
+                    tblSuministro.IdUsuarioModifico = Guid.Parse(fuser);
                     tblSuministro.FechaRegistro = DateTime.Now;
                     tblSuministro.IdEstatusRegistro = tblSuministro.IdEstatusRegistro;
-                    _context.Add(tblSuministro);
                     _context.Update(tblSuministro);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
@@ -298,9 +296,8 @@ namespace WebAdmin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(tblSuministro);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: TblSuministros/Delete/5

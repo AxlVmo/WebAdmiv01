@@ -218,11 +218,11 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.TblPrestamos
+                var vDuplicado = _context.TblPrestamos
                .Where(s => s.PrestamoDesc == TblPrestamo.PrestamoDesc)
                .ToList();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vDuplicado.Count == 0)
                 {
                     Guid fCentroCorporativo = Guid.Empty;
                     int fCorpCent = 0;

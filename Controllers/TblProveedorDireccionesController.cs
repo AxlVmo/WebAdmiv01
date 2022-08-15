@@ -129,11 +129,11 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.TblProveedorDirecciones
+                var vDuplicado = _context.TblProveedorDirecciones
                        .Where(s => s.Calle == tblProveedorDirecciones.Calle && s.CodigoPostal == tblProveedorDirecciones.CodigoPostal)
                        .ToList();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();

@@ -11,11 +11,12 @@ namespace WebAdmin.Models
 
         [NotMapped]
         public string CentroDesc { get; set; }
-         [Display(Name = "Usuario Asignado")]
+        [Display(Name = "Usuario")]
         [NotMapped]
         public string UsuarioAsignado { get; set; }
 
         [Display(Name = "Usuario")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdUsuarioRemuneracion { get; set; }
 
         [Display(Name = "Descripción")]
@@ -23,7 +24,8 @@ namespace WebAdmin.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public string NominaDesc { get; set; }
 
-        [Display(Name = "Remuneracion")]
+        [Display(Name = "Monto")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public double UsuarioRemuneracion { get; set; }
 
         [Display(Name = "Tipo Contratacion")]
@@ -31,7 +33,9 @@ namespace WebAdmin.Models
         [NotMapped]
         public string TipoContratacionDesc { get; set; }
         [Display(Name = "Tipo Pago")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int IdTipoPago { get; set; }
+        [Display(Name = "Tipo Pago")]
         [NotMapped]
         public string TipoPagoDesc { get; set; }
 

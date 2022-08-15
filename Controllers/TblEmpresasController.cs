@@ -77,11 +77,11 @@ namespace WebAdmin.Controllers
                 var vEmpresa = _context.TblEmpresas.ToList();
                 if (vEmpresa.Count == 0)
                 {
-                    var DuplicadosEstatus = _context.TblEmpresas
+                    var vDuplicado = _context.TblEmpresas
                                          .Where(s => s.NombreEmpresa == tblEmpresa.NombreEmpresa)
                                          .ToList();
 
-                    if (DuplicadosEstatus.Count == 0)
+                    if (vDuplicado.Count == 0)
                     {
                         var fuser = _userService.GetUserId();
                         var isLoggedIn = _userService.IsAuthenticated();

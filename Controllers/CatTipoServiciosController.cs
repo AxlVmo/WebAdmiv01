@@ -96,11 +96,11 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatTipoServicios
+                var vDuplicado = _context.CatTipoServicios
                        .Where(s => s.TipoServicioDesc == catTipoServicio.TipoServicioDesc)
                        .ToList();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();

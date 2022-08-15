@@ -215,11 +215,11 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.TblNominas
+                var vDuplicado = _context.TblNominas
                .Where(s => s.NominaDesc == TblNomina.NominaDesc)
                .ToList();
 
-                if (DuplicadosEstatus.Count == 0)
+                if (vDuplicado.Count == 0)
                 {
                     Guid fCentroCorporativo = Guid.Empty;
                     int fCorpCent = 0;
@@ -257,36 +257,19 @@ namespace WebAdmin.Controllers
         // GET: TblNominas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            Guid fCentroCorporativo = Guid.Empty;
-            var fuser = _userService.GetUserId();
-            var isLoggedIn = _userService.IsAuthenticated();
-            var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-            fCentroCorporativo = fIdUsuario.IdCorporativo;
-            if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
-            {
-                var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
-                var fUsuariosCentrosCorp = from a in _context.TblUsuarios
-                                           where a.IdCorporativo == fIdCentro.IdCentro
-                                           select new
-                                           {
-                                               IdUsuario = a.IdUsuario,
-                                               NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
-                                           };
-                TempData["Mpps"] = fUsuariosCentrosCorp.ToList();
 
-            }
-            var fUsuariosCentros = from a in _context.TblUsuarios
-                                   select new
-                                   {
-                                       IdUsuario = a.IdUsuario,
-                                       NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
-                                   };
-            TempData["Mpps"] = fUsuariosCentros.ToList();
-            ViewBag.ListaUsuariosCentros = TempData["Mpps"];
+            var fIdUsuario = _context.TblNominas
+                .Where(a => a.IdNomina == id).FirstOrDefault();
 
-            List<CatTipoContratacion> ListaContratacion = new List<CatTipoContratacion>();
-            ListaContratacion = (from c in _context.CatTipoContrataciones select c).Distinct().ToList();
-            ViewBag.ListaContratacion = ListaContratacion;
+            var fUsuariosCentrosCorp = from a in _context.TblUsuarios
+                                       where a.IdUsuario == fIdUsuario.IdUsuarioRemuneracion
+                                       select new
+                                       {
+                                           IdUsuario = a.IdUsuario,
+                                           NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+                                       };
+
+            ViewBag.ListaUsuariosCentros = fUsuariosCentrosCorp;
 
             List<CatTipoPago> ListaTipopago = new List<CatTipoPago>();
             ListaTipopago = (from c in _context.CatTipoPagos select c).Distinct().ToList();
@@ -313,7 +296,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoNomina,NominaDesc,NumeroReferencia,FechaFacturacion,MontoNomina,IdEstatusRegistro")] TblNomina TblNomina)
+        public async Task<IActionResult> Edit(int id, [Bind("IdNomina,IdTipoNomina,NominaDesc,IdUsuarioRemuneracion,IdTipoPago,UsuarioRemuneracion,IdEstatusRegistro")] TblNomina TblNomina)
         {
             if (id != TblNomina.IdNomina)
             {
@@ -329,22 +312,20 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-
+                    fCentroCorporativo = fIdUsuario.IdCorporativo;
+                    fCorpCent = 1;
                     if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                     {
                         var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
                         fCentroCorporativo = fIdCentro.IdCentro;
                         fCorpCent = 2;
                     }
-                    fCentroCorporativo = fIdUsuario.IdCorporativo;
-                    fCorpCent = 1;
-
                     TblNomina.IdCorpCent = fCorpCent;
                     TblNomina.IdUCorporativoCentro = fCentroCorporativo;
                     TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper();
+                    TblNomina.IdUsuarioModifico = Guid.Parse(fuser);
                     TblNomina.FechaRegistro = DateTime.Now;
                     TblNomina.IdEstatusRegistro = TblNomina.IdEstatusRegistro;
-                    _context.Add(TblNomina);
                     _context.Update(TblNomina);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
@@ -360,9 +341,9 @@ namespace WebAdmin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                
             }
-            return View(TblNomina);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: TblNominas/Delete/5
