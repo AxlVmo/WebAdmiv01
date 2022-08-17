@@ -11,8 +11,7 @@ using AspNetCoreHero.ToastNotification.Abstractions;
 using WebAdmin.ViewModels;
 using System.IO;
 using System.Text;
-using DinkToPdf;
-using DinkToPdf.Contracts;
+
 
 namespace WebAdmin.Controllers
 {
@@ -21,14 +20,14 @@ namespace WebAdmin.Controllers
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
-        private IConverter _converter;
 
-        public TblVentasController(nDbContext context, INotyfService notyf, IUserService userService, IConverter iconverte)
+
+        public TblVentasController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
-            _converter = iconverte;
+   
         }
 
         // GET: TblVentas
@@ -37,34 +36,7 @@ namespace WebAdmin.Controllers
             var fVentas = _context.TblVenta.Include(u => u.RelVentaProductos);
             return View(await fVentas.ToListAsync());
         }
-        public FileResult CreatePdf()
-        {
-            var globalSettings = new GlobalSettings
-            {
-                ColorMode = ColorMode.Color,
-                Orientation = Orientation.Portrait,
-                PaperSize = PaperKind.A4,
-                Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = "PDF Report"
-            };
-            var objectSettings = new ObjectSettings
-            {
-                PagesCount = true,
-                //Page = "https://iides.tech"
-                HtmlContent = TemplateGenerator.GetHTMLString(),
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
-                HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
-                FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
 
-            };
-            var pdf = new HtmlToPdfDocument()
-            {
-                GlobalSettings = globalSettings,
-                Objects = { objectSettings }
-            };
-            var file = _converter.Convert(pdf);
-            return File(file, contentType: "application/pdf");
-        }
         [HttpPost]
         public IActionResult Index([FromBody] VentasViewModel oVentaVM)
         {

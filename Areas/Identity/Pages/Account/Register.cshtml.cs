@@ -117,20 +117,45 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var nIdUsuario = Guid.Parse(user.Id);
 
-                var addUsuarios = new TblUsuario
+                var tblUsuario = _context.TblUsuarios.ToList();
+                if (tblUsuario.Count == 0)
                 {
-                    IdUsuario = nIdUsuario,
-                    Nombres = Input.Nombres.ToUpper(),
-                    ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
-                    ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
-                    FechaNacimiento = DateTime.Now,
-                    IdUsuarioModifico = Guid.Empty,
-                    IdCorpCent = 1,
-                    CorreoAcceso = user.Email,
-                    FechaRegistro = DateTime.Now,
-                    IdEstatusRegistro = 1
-                };
-                _context.Add(addUsuarios);
+                    var addUsuariosU = new TblUsuario
+                    {
+                        IdUsuario = nIdUsuario,
+                        Nombres = Input.Nombres.ToUpper(),
+                        ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
+                        ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
+                        FechaNacimiento = DateTime.Now,
+                        IdUsuarioModifico = Guid.Empty,
+                        IdCorpCent = 1,
+                        IdArea = 1,
+                        IdPerfil = 1,
+                        IdRol = 2,
+                        CorreoAcceso = user.Email,
+                        FechaRegistro = DateTime.Now,
+                        IdEstatusRegistro = 1
+                    };
+                    _context.Add(addUsuariosU);
+                }
+                else
+                {
+                    var addUsuarios = new TblUsuario
+                    {
+                        IdUsuario = nIdUsuario,
+                        Nombres = Input.Nombres.ToUpper(),
+                        ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
+                        ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
+                        FechaNacimiento = DateTime.Now,
+                        IdUsuarioModifico = Guid.Empty,
+                        IdCorpCent = 1,
+                        CorreoAcceso = user.Email,
+                        FechaRegistro = DateTime.Now,
+                        IdEstatusRegistro = 1
+                    };
+                    _context.Add(addUsuarios);
+                }
+
                 await _context.SaveChangesAsync();
                 var isLoggedIn = _userService.IsAuthenticated();
                 if (isLoggedIn)

@@ -11,11 +11,9 @@ using Microsoft.Extensions.Hosting;
 using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
-
 using System;
 using Microsoft.AspNetCore.HttpOverrides;
-using DinkToPdf;
-using DinkToPdf.Contracts;
+
 
 namespace WebAdmin
 {
@@ -58,7 +56,7 @@ namespace WebAdmin
                 options.ForwardedHeaders =
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
-            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+            
         }
     
 
