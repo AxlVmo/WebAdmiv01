@@ -69,8 +69,18 @@ namespace WebAdmin.Controllers
         public IActionResult Index([FromBody] VentasViewModel oVentaVM)
         {
             var fuser = _userService.GetUserId();
+            Guid fCentroCorporativo = Guid.Empty;
+            int fCorpCent = 0;
             var isLoggedIn = _userService.IsAuthenticated();
-            var idCorporativos = _context.TblCorporativos.FirstOrDefault();
+            var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+            fCentroCorporativo = fIdUsuario.IdCorporativo;
+            fCorpCent = 1;
+            if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+            {
+                var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                fCentroCorporativo = fIdCentro.IdCentro;
+                fCorpCent = 2;
+            }
             var nVenta = Guid.NewGuid();
             bool respuesta = false;
 
@@ -93,13 +103,14 @@ namespace WebAdmin.Controllers
 
                     TblVenta oVenta = oVentaVM.TblVentas;
 
-                    oVenta.FechaRegistro = DateTime.Now;
-                    oVenta.IdEstatusRegistro = 1;
+
+                    oVenta.IdCorpCent = fCorpCent;
+                    oVenta.IdUCorporativoCentro = fCentroCorporativo;
+                    oVenta.IdUsuarioModifico = Guid.Parse(fuser);
                     oVenta.IdVenta = nVenta;
                     oVenta.NumeroVenta = _context.TblVenta.Count() + 1;
                     oVenta.IdUsuarioVenta = Guid.Parse(fuser);
-                    oVenta.IdCentro = idCorporativos.IdCorporativo;
-                    oVenta.IdUsuarioModifico = Guid.Parse(fuser);
+                    oVenta.IdCentro = fCentroCorporativo;
                     oVenta.FechaRegistro = DateTime.Now;
                     oVenta.IdEstatusRegistro = 1;
                     oVenta.CodigoPago = "Generar";
@@ -157,13 +168,30 @@ namespace WebAdmin.Controllers
             var fTipoPago = from a in _context.CatTipoPagos
                             where a.IdEstatusRegistro == 1
                             select new CatTipoPago
-                                   {
-                                       IdTipoPago = a.IdTipoPago,
-                                       TipoPagoDesc = a.TipoPagoDesc
-                                   };
+                            {
+                                IdTipoPago = a.IdTipoPago,
+                                TipoPagoDesc = a.TipoPagoDesc
+                            };
             TempData["fTP"] = fTipoPago.ToList();
             ViewBag.ListaTipoPago = TempData["fTP"];
 
+            var fuser = _userService.GetUserId();
+            var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+
+            if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+            {
+                var fIdCentroCent = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                var fUsuariosCent = from a in _context.TblAlumnos
+                                    where a.IdUCorporativoCentro == fIdCentroCent.IdCentro && a.IdCorpCent == 2
+                                    where a.IdEstatusRegistro == 1
+                                    select new
+                                    {
+                                        IdUsuario = a.IdAlumno,
+                                        NombreUsuario = a.NombreAlumno + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno
+                                    };
+                TempData["fUC"] = fUsuariosCent.ToList();
+                ViewBag.ListaUsuariosCentros = TempData["fUC"];
+            }
             var fUsuariosCentros = from a in _context.TblAlumnos
                                    where a.IdEstatusRegistro == 1
                                    select new

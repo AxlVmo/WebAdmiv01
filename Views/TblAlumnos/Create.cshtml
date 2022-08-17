@@ -1,0 +1,63 @@
+﻿@model WebAdmin.Models.TblAlumno
+
+@{
+    ViewData["Title"] = "Crear Proveedor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Empresa</li>
+        <li class="breadcrumb-item">Control de Alumno</li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Alumno</li>
+    </ol>
+</nav>
+<hr />
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="IdTipoAlumno" class="control-label"></label>
+                <select id="drpTipoAlumno" class="form-select" asp-for="IdTipoAlumno"
+                    asp-items="@(new SelectList(ViewBag.ListaTipoAlumnos,"IdTipoAlumno","TipoAlumnoDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+                <span asp-validation-for="IdTipoAlumno" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="NombreAlumno" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="NombreAlumno" class="form-control" />
+                <span asp-validation-for="NombreAlumno" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="ApellidoPaterno" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="ApellidoPaterno" class="form-control" />
+                <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="ApellidoMaterno" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="ApellidoMaterno" class="form-control" />
+                <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Crear" class="btn btn-success" />
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+    </div>
+</form>
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

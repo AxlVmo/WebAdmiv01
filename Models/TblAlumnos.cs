@@ -14,6 +14,9 @@ namespace WebAdmin.Models
         [Display(Name = "Tipo Alumno")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdTipoAlumno { get; set; }
+        [Display(Name = "Tipo Alumno")]
+        [NotMapped]
+        public string TipoAlumnoDesc { get; set; }
         [Display(Name = "Genero")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdGenero { get; set; }
@@ -27,15 +30,15 @@ namespace WebAdmin.Models
         public string NivelEscolarDesc { get; set; }
 
          [Display(Name = "Nombre Tutor")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string NombreTutor { get; set; }
 
         [Display(Name = "Apellido Paterno Tutor")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string ApellidoPaternoTutor { get; set; }
 
         [Display(Name = "Apellido Materno Tutor")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string ApellidoMaternoTutor { get; set; }
 
         [Display(Name = "Nombre Alumno")]

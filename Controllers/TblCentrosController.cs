@@ -149,15 +149,15 @@ namespace WebAdmin.Controllers
             if (ModelState.IsValid)
             {
                 var vNombreCentro = _context.TblCentros
-                .Where(a => a.NombreCentro == tblCentros.NombreCentro).FirstOrDefaultAsync();
+                .Where(a => a.NombreCentro == tblCentros.NombreCentro).ToList();
 
-                if (vNombreCentro is null)
+                if (vNombreCentro.Count == 0)
                 {
                     var vUsuarioAsignado = _context.TblCentros
                       .Where(s => s.IdUsuarioControl == tblCentros.IdUsuarioControl)
-                      .FirstOrDefaultAsync();
+                      .ToList();
 
-                    if (vUsuarioAsignado is null)
+                    if (vUsuarioAsignado.Count == 0)
                     {
                         var fuser = _userService.GetUserId();
                         var isLoggedIn = _userService.IsAuthenticated();

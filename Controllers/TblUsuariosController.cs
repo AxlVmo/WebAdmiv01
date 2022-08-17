@@ -104,6 +104,23 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
+              var fCent = from a in _context.TblCentros
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCentro,
+                            CentroDesc = a.NombreCentro
+                        };
+            var fCorp = from a in _context.TblCorporativos
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCorporativo,
+                            CentroDesc = a.NombreCorporativo
+                        };
+            var sCorpCent = fCorp.Union(fCent);
+            TempData["fTS"] = sCorpCent.ToList();
+            ViewBag.ListaCorpCent = TempData["fTS"];
 
             var fuser = _userService.GetUserId();
             var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
@@ -120,6 +137,7 @@ namespace WebAdmin.Controllers
                                    ApellidoPaterno = a.ApellidoPaterno,
                                    ApellidoMaterno = a.ApellidoMaterno,
                                    IdCorpCent = a.IdCorpCent,
+                                   IdCorporativo = a.IdCorporativo,
                                    FechaRegistro = a.FechaRegistro,
                                    IdEstatusRegistro = a.IdEstatusRegistro,
                                };
@@ -134,6 +152,7 @@ namespace WebAdmin.Controllers
                                    ApellidoPaterno = a.ApellidoPaterno,
                                    ApellidoMaterno = a.ApellidoMaterno,
                                    IdCorpCent = a.IdCorpCent,
+                                   IdCorporativo = a.IdCorporativo,
                                    FechaRegistro = a.FechaRegistro,
                                    IdEstatusRegistro = a.IdEstatusRegistro,
                                };
@@ -327,8 +346,7 @@ namespace WebAdmin.Controllers
                     fCentroCorporativo = fIdCentro.IdCentro;
                     fCorpCent = 2;
                 }
-                tblUsuario.IdCorpCent = fCorpCent;
-                tblUsuario.IdCorporativo = fCentroCorporativo;
+   
                 tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
                 tblUsuario.FechaRegistro = DateTime.Now;
                 tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
