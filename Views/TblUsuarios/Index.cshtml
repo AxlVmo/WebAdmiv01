@@ -114,9 +114,7 @@
             <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.FechaRegistro)
             </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
-            </th>
+    
         </tr>
     </tfoot>
 </table>
@@ -132,7 +130,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             var input, filter, table, tr, td, i;
             input = document.getElementById("drpCorpCent");
             filter = input.value.toUpperCase();
-            table = document.getElementById("tblSuministros");
+            table = document.getElementById("tblUsuarios");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[0];

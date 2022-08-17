@@ -149,7 +149,7 @@ namespace WebAdmin.Controllers
             if (ModelState.IsValid)
             {
                 var vNombreCentro = _context.TblCentros
-                .Where(a => a.NombreCentro == tblCentros.NombreCentro).ToList();
+                .Where(a => a.NombreCentro == tblCentros.NombreCentro.ToUpper()).ToList();
 
                 if (vNombreCentro.Count == 0)
                 {
@@ -190,7 +190,7 @@ namespace WebAdmin.Controllers
                     else
                     {
 
-                        _notyf.Warning("Favor de validar, este Usurio ya esta asignado a otro centro", 5);
+                        _notyf.Warning("Favor de validar, este Usuario ya esta asignado a otro centro", 5);
 
                     }
                 }

@@ -116,6 +116,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var nIdUsuario = Guid.Parse(user.Id);
+
                 var addUsuarios = new TblUsuario
                 {
                     IdUsuario = nIdUsuario,
@@ -124,7 +125,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                     ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
                     FechaNacimiento = DateTime.Now,
                     IdUsuarioModifico = Guid.Empty,
-
+                    IdCorpCent = 1,
                     CorreoAcceso = user.Email,
                     FechaRegistro = DateTime.Now,
                     IdEstatusRegistro = 1

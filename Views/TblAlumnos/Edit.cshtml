@@ -219,5 +219,81 @@
     </div>
 </form>
 @section Scripts {
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{
+
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            filtro_colonias();
+        });
+
+        function filtro_cp() {
+
+            var valor_cp = document.getElementById("iCodigoPostal").value;
+
+            $.ajax({
+                type: "GET",
+                url: "/CatCodigosPostales/FiltroCodigosPostales/",
+                data: { id: valor_cp },
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (list) {
+                    var $select_colonias = $('#drpColonias');
+                    $("#drpColonias").empty();
+
+                    if (list.length == 0) {
+                        $select_colonias.append('<option value="">SELECCIONAR</option>');
+                        document.getElementById("idLocalidadMunicipio").value = null;
+                        document.getElementById("idCiudad").value = null;
+                        document.getElementById("idEstados").value = null;
+                    }
+                    else {
+                        $select_colonias.append('<option value="">SELECCIONAR</option>');
+                        for (var i = 0, len = list.length; i < len; i++) {
+                            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                            document.getElementById("idLocalidadMunicipio").value = list[i].dmnpio;
+                            document.getElementById("idCiudad").value = list[i].dciudad;
+                            document.getElementById("idEstados").value = list[i].destado;
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Error!!")
+                }
+            });
+        }
+        function filtro_colonias() {
+
+            var valor_col = document.getElementById("IdColonia").value;
+            var valor_cp = document.getElementById("iCodigoPostal").value;
+            $.ajax({
+                type: "GET",
+                url: "/CatCodigosPostales/FiltroColonia/",
+                data: { id: valor_cp, idC: valor_col },
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (list) {
+                    var $select_colonias = $('#drpColonias');
+                    $("#drpColonias").empty();
+                    if (list.length == 0) {
+                        $select_colonias.append('<option value="">SELECCIONAR</option>');
+                    }
+                    else {
+
+                        for (var i = 0, len = list.length; i < len; i++) {
+                            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Error!!")
+                }
+            });
+        }
+
+    </script>
+
+}
 }

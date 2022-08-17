@@ -104,7 +104,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-              var fCent = from a in _context.TblCentros
+            var fCent = from a in _context.TblCentros
                         where a.IdEstatusRegistro == 1
                         select new
                         {
@@ -141,21 +141,21 @@ namespace WebAdmin.Controllers
                                    FechaRegistro = a.FechaRegistro,
                                    IdEstatusRegistro = a.IdEstatusRegistro,
                                };
-                               return View(await fUsuario.ToListAsync());
+                return View(await fUsuario.ToListAsync());
             }
             var UsuarioF = from a in _context.TblUsuarios
-                               where a.IdUsuario != Guid.Parse(fuser)
-                               select new TblUsuario
-                               {
-                                   IdUsuario = a.IdUsuario,
-                                   Nombres = a.Nombres,
-                                   ApellidoPaterno = a.ApellidoPaterno,
-                                   ApellidoMaterno = a.ApellidoMaterno,
-                                   IdCorpCent = a.IdCorpCent,
-                                   IdCorporativo = a.IdCorporativo,
-                                   FechaRegistro = a.FechaRegistro,
-                                   IdEstatusRegistro = a.IdEstatusRegistro,
-                               };
+                           where a.IdUsuario != Guid.Parse(fuser)
+                           select new TblUsuario
+                           {
+                               IdUsuario = a.IdUsuario,
+                               Nombres = a.Nombres,
+                               ApellidoPaterno = a.ApellidoPaterno,
+                               ApellidoMaterno = a.ApellidoMaterno,
+                               IdCorpCent = a.IdCorpCent,
+                               IdCorporativo = a.IdCorporativo,
+                               FechaRegistro = a.FechaRegistro,
+                               IdEstatusRegistro = a.IdEstatusRegistro,
+                           };
             return View(await UsuarioF.ToListAsync());
         }
 
@@ -324,7 +324,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdUsuario,IdGenero,IdArea,IdCorpCent,IdPerfil,IdRol,FechaNacimiento,Nombres,ApellidoPaterno,ApellidoMaterno,CorreoAcceso,Telefono,UsuarioCurp,UsuarioRfc,UsuarioNss,IdTipoContratacion,FechaContratacion,IdTipoFormaPago,IdPersonalEstudio,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,UsuarioRemuneracion,IdEstatusRegistro")] TblUsuario tblUsuario)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdUsuario,IdGenero,IdArea,IdCorpCent,IdCorporativo,IdPerfil,IdRol,FechaNacimiento,Nombres,ApellidoPaterno,ApellidoMaterno,CorreoAcceso,Telefono,UsuarioCurp,UsuarioRfc,UsuarioNss,IdTipoContratacion,FechaContratacion,IdTipoFormaPago,IdPersonalEstudio,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,UsuarioRemuneracion,IdEstatusRegistro")] TblUsuario tblUsuario)
         {
             if (id != tblUsuario.IdUsuario)
             {
@@ -337,21 +337,35 @@ namespace WebAdmin.Controllers
                 var fuser = _userService.GetUserId();
                 var isLoggedIn = _userService.IsAuthenticated();
                 var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-                var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
-                fCentroCorporativo = fCorp.IdCorporativo;
-                fCorpCent = 1;
+
                 if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                 {
                     var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
                     fCentroCorporativo = fIdCentro.IdCentro;
                     fCorpCent = 2;
+                    tblUsuario.IdCorpCent = fCorpCent;
+                    tblUsuario.IdCorporativo = fCentroCorporativo;
                 }
-   
+                if (fIdUsuario.IdArea == 1 && fIdUsuario.IdPerfil == 1 && fIdUsuario.IdRol == 2 && tblUsuario.IdCorpCent == 1)
+                {
+                    var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
+                    fCentroCorporativo = fCorp.IdCorporativo;
+                    fCorpCent = 1;
+                    tblUsuario.IdCorpCent = fCorpCent;
+                    tblUsuario.IdCorporativo = fCentroCorporativo;
+                }
                 tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
                 tblUsuario.FechaRegistro = DateTime.Now;
                 tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
                 tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
                 tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();
+                var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblUsuario.Colonia).FirstOrDefault();
+                tblUsuario.IdColonia = !string.IsNullOrEmpty(tblUsuario.Colonia) ? tblUsuario.Colonia : tblUsuario.Colonia;
+                tblUsuario.Colonia = !string.IsNullOrEmpty(tblUsuario.Colonia) ? strColonia.Dasenta.ToUpper() : tblUsuario.Colonia;
+                tblUsuario.Calle = !string.IsNullOrEmpty(tblUsuario.Calle) ? tblUsuario.Calle.ToUpper() : tblUsuario.Calle;
+                tblUsuario.LocalidadMunicipio = !string.IsNullOrEmpty(tblUsuario.LocalidadMunicipio) ? tblUsuario.LocalidadMunicipio.ToUpper() : tblUsuario.LocalidadMunicipio;
+                tblUsuario.Ciudad = !string.IsNullOrEmpty(tblUsuario.Ciudad) ? tblUsuario.Ciudad.ToUpper() : tblUsuario.Ciudad;
+                tblUsuario.Estado = !string.IsNullOrEmpty(tblUsuario.Estado) ? tblUsuario.Estado.ToUpper() : tblUsuario.Estado;
                 _context.Update(tblUsuario);
                 await _context.SaveChangesAsync();
                 _notyf.Warning("Registro actualizado con éxito", 5);

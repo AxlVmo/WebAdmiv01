@@ -69,10 +69,10 @@ namespace WebAdmin.Controllers
             ViewBag.ListaCorpCent = TempData["fTS"];
 
             var fuser = _userService.GetUserId();
-            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+            var tblAlumno = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
             var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
-            if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+            if (tblAlumno.IdArea == 2 && tblAlumno.IdPerfil == 3 && tblAlumno.IdRol == 2)
             {
                 var fAlumnoCntro = from a in _context.TblAlumnos
                                    join b in _context.CatTipoAlumnos on a.IdTipoAlumno equals b.IdTipoAlumno
@@ -271,6 +271,13 @@ namespace WebAdmin.Controllers
                     tblAlumno.NombreAlumno = tblAlumno.NombreAlumno.ToString().ToUpper();
                     tblAlumno.ApellidoPaterno = tblAlumno.ApellidoPaterno.ToUpper();
                     tblAlumno.ApellidoMaterno = tblAlumno.ApellidoMaterno.ToUpper();
+                    var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblAlumno.Colonia).FirstOrDefault();
+                    tblAlumno.IdColonia = !string.IsNullOrEmpty(tblAlumno.Colonia) ? tblAlumno.Colonia : tblAlumno.Colonia;
+                    tblAlumno.Colonia = !string.IsNullOrEmpty(tblAlumno.Colonia) ? strColonia.Dasenta.ToUpper() : tblAlumno.Colonia;
+                    tblAlumno.Calle = !string.IsNullOrEmpty(tblAlumno.Calle) ? tblAlumno.Calle.ToUpper() : tblAlumno.Calle;
+                    tblAlumno.LocalidadMunicipio = !string.IsNullOrEmpty(tblAlumno.LocalidadMunicipio) ? tblAlumno.LocalidadMunicipio.ToUpper() : tblAlumno.LocalidadMunicipio;
+                    tblAlumno.Ciudad = !string.IsNullOrEmpty(tblAlumno.Ciudad) ? tblAlumno.Ciudad.ToUpper() : tblAlumno.Ciudad;
+                    tblAlumno.Estado = !string.IsNullOrEmpty(tblAlumno.Estado) ? tblAlumno.Estado.ToUpper() : tblAlumno.Estado;
 
                     _context.Update(tblAlumno);
                     await _context.SaveChangesAsync();
