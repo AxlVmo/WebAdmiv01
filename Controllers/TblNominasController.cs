@@ -1,8 +1,13 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using FastReport;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Data;
@@ -16,12 +21,15 @@ namespace WebAdmin.Controllers
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public TblNominasController(nDbContext context, INotyfService notyf, IUserService userService)
+        public TblNominasController(nDbContext context, INotyfService notyf, IUserService userService, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
+            _webHostEnvironment = webHostEnvironment;
+
         }
 
         // GET: TblNominas
@@ -142,7 +150,33 @@ namespace WebAdmin.Controllers
 
             return View(await fNomina.ToListAsync());
         }
+        public IActionResult ImprimirNomina(int IdNomina)
+        {
+            // FastReport.Utils.Config.WebMode = true;
+            // Report rep = new Report();
+            // string webRootPath = _webHostEnvironment.WebRootPath;
+            // string contentRootPath = _webHostEnvironment.ContentRootPath;
+            // string path = Path.GetFullPath("Reports/im_nomina.frx");
 
+            // var fNomina = _context.TblNominas.ToList();
+            // var dt = new DataTable();
+            // dt.Load((IDataReader)fNomina);
+            // DataSet n = new DataSet();
+            // n.Tables.Add(dt);
+            // rep.Load(path);
+            // rep.SetParameterValue("p1", "1");
+            // rep.SetParameterValue("p2", "2");
+            // rep.RegisterData(n);
+            // 
+            var fNomina = _context.TblNominas.First();
+            return new ViewAsPdf("ImprimirNomina", fNomina)
+            {
+                FileName = $" nomina_{fNomina.IdNomina.ToString()}.pdf",
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                PageSize = Rotativa.AspNetCore.Options.Size.Legal
+            };
+            // return null;
+        }
         // GET: TblNominas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -181,6 +215,8 @@ namespace WebAdmin.Controllers
                                            {
                                                IdUsuario = a.IdUsuario,
                                                NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+                                               NominaDesc = "NOMINA",
+                                               UsuarioRemuneracion = a.UsuarioRemuneracion
                                            };
 
                 ViewBag.ListaUsuariosCentros = fUsuariosCentrosCorp;
@@ -192,6 +228,8 @@ namespace WebAdmin.Controllers
                                        {
                                            IdUsuario = a.IdUsuario,
                                            NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+                                           NominaDesc = "NOMINA",
+                                           UsuarioRemuneracion = a.UsuarioRemuneracion
                                        };
                 ViewBag.ListaUsuariosCentros = fUsuariosCentros;
             }
@@ -341,7 +379,7 @@ namespace WebAdmin.Controllers
                         throw;
                     }
                 }
-                
+
             }
             return RedirectToAction(nameof(Index));
         }

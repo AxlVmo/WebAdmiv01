@@ -104,7 +104,7 @@ namespace WebAdmin.Controllers
                                            IdSuministro = a.IdSuministro,
                                            SuministroDesc = a.SuministroDesc,
                                            NumeroReferencia = a.NumeroReferencia,
-                                           FechaFacturacion = a.FechaFacturacion,
+                                           DiaFacturacion = a.DiaFacturacion,
                                            MontoSuministro = a.MontoSuministro,
                                            IdUCorporativoCentro = a.IdUCorporativoCentro,
                                            FechaRegistro = a.FechaRegistro,
@@ -124,7 +124,7 @@ namespace WebAdmin.Controllers
                                   IdSuministro = a.IdSuministro,
                                   SuministroDesc = a.SuministroDesc,
                                   NumeroReferencia = a.NumeroReferencia,
-                                  FechaFacturacion = a.FechaFacturacion,
+                                  DiaFacturacion = a.DiaFacturacion,
                                   MontoSuministro = a.MontoSuministro,
                                   IdUCorporativoCentro = a.IdUCorporativoCentro,
                                   FechaRegistro = a.FechaRegistro,
@@ -173,7 +173,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,FechaFacturacion,MontoSuministro")] TblSuministro tblSuministro)
+        public async Task<IActionResult> Create([Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,DiaFacturacion,IdPeriodo,MontoSuministro")] TblSuministro tblSuministro)
         {
             if (ModelState.IsValid)
             {
@@ -251,7 +251,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,FechaFacturacion,MontoSuministro,IdEstatusRegistro")] TblSuministro tblSuministro)
+        public async Task<IActionResult> Edit(int id, [Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,DiaFacturacion,IdPeriodo,MontoSuministro,IdEstatusRegistro")] TblSuministro tblSuministro)
         {
             if (id != tblSuministro.IdSuministro)
             {

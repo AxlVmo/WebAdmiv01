@@ -31,10 +31,11 @@
                     
                 }
                 if (list[0].idPerfil == 1 && list[0].idRol == 2 && list[0].idCorpCent == 1 && list[0].idArea == 1) {
+                    var remove_i_catalogos_n = document.getElementById("i_centro_n");
+                    remove_i_catalogos_n.parentNode.removeChild(remove_i_catalogos_n);
                     $('#i_empresa_p').removeAttr('hidden');
                     $('#i_empresa_n').removeAttr('hidden');
                     $('#i_catalogos_n').removeAttr('hidden');
-                    $('#i_centro_n').removeAttr('hidden');
                     $('#i_consulta_n').removeAttr('hidden');
                     $('#i_resumen_n').removeAttr('hidden');
                     $('#iCorpCent').removeAttr('hidden');

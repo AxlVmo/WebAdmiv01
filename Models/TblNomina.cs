@@ -38,6 +38,8 @@ namespace WebAdmin.Models
         [Display(Name = "Tipo Pago")]
         [NotMapped]
         public string TipoPagoDesc { get; set; }
+         [Display(Name = "Codigo / Referencia")]
+        public string CodigoPago { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }

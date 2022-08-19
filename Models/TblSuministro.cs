@@ -32,10 +32,15 @@ namespace WebAdmin.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public string NumeroReferencia { get; set; }
 
-        [Display(Name = "Fecha de Facturacion")]
-        [DataType(DataType.Date)]
+        [Display(Name = "Dia de Facturacion")]
         [Required(ErrorMessage = "Campo Requerido")]
-        public DateTime FechaFacturacion { get; set; }
+        public int DiaFacturacion { get; set; }
+        [Display(Name = "Periodo de Facturacion")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public int IdPeriodo { get; set; }
+        [Display(Name = "Periodo de Facturacion")]
+        [NotMapped]
+        public string PeriodoDesc { get; set; }
 
         [Display(Name = "Monto Suministro")]
         [Required(ErrorMessage = "Campo Requerido")]

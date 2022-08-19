@@ -94,6 +94,8 @@
                             asp-action="Index">Licencias</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoDevoluciones"
                             asp-action="Index">Tipos Devoluciones</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatPeriodos"
+                            asp-action="Index">Periodos</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatProdServs" asp-action="Index">Producto /
                                 Servicio</a>
 
@@ -153,13 +155,23 @@
                                 de Servicios</a>
                             <a class="collapse-item" asp-area="" asp-controller="TblServicios"
                             asp-action="Index">Servicios</a>
-                            <h6 class="collapse-header">Productos:</h6>
+                             <h6 class="collapse-header">Escolares:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="TblAlumnos" asp-action="Index">Alumnos</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Entradas:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="TblVentas" asp-action="Index">Ventas</a>
+                            <h6 class="collapse-header">Salidas:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="TblCompras" asp-action="Index">Compras</a>
+                            <h6 class="collapse-header">Finanzas:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="TblBancoes" asp-action="Index">Bancos</a>
+                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Inversiones</a>
+                            @* <h6 class="collapse-header">Productos:</h6>
                             <a class="collapse-item" asp-area="" asp-controller="TblProveedores" asp-action="Index"
                             disable>Proveedores</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatCategorias" asp-action="Index">Tipos
                                 Categorias</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatProductos"
-                            asp-action="Index">Productos</a>
+                            asp-action="Index">Productos</a> *@
                         </div>
                     </div>
                 </li>
@@ -167,9 +179,9 @@
                 <!-- Divider -->
             <hr class="sidebar-divider">
                 <!-- Heading -->
-            <div class="sidebar-heading">
+            @* <div class="sidebar-heading">
                     Administracion de Centro
-                </div>
+                </div> *@
                 <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item" id="i_centro_n" hidden>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"

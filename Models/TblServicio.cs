@@ -30,6 +30,7 @@ namespace WebAdmin.Models
         public string DescServicio { get; set; }
 
         [Display(Name = "Periodo / Meses")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int Periodo { get; set; }
 
         [Display(Name = "Cantidad")]

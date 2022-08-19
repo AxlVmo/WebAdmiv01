@@ -210,7 +210,18 @@ namespace WebAdmin.Controllers
 
             return View();
         }
-
+        [HttpGet]
+        public ActionResult fUsuarioNomina(Guid id)
+        {
+            var fUsuarioNominaR = from a in _context.TblUsuarios
+                             where a.IdUsuario == id
+                             select new TblUsuario
+                             {
+                                 IdUsuario = a.IdUsuario,
+                                 UsuarioRemuneracion = a.UsuarioRemuneracion
+                             };
+            return Json(fUsuarioNominaR);
+        }
         // POST: TblUsuarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

@@ -14,11 +14,11 @@ namespace WebAdmin.Models
         [Display(Name = "Cantidad")]
         public int Cantidad { get; set; }
 
-        [Display(Name = "Categoria")]
+        [Display(Name = "Tipo Servicio")]
         [Required(ErrorMessage = "Campo Requerido")]
         public string Categoria { get; set; }
 
-        [Display(Name = "Producto")]
+        [Display(Name = "Servicio")]
         [Required(ErrorMessage = "Campo Requerido")]
         public string Producto { get; set; }
 

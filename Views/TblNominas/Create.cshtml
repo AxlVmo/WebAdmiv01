@@ -25,35 +25,88 @@
                 <span asp-validation-for="IdUsuarioRemuneracion" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-md-3"><div class="form-group">
-            <label asp-for="NominaDesc" class="control-label"></label>
-            <input asp-for="NominaDesc" class="form-control" />
-            <span asp-validation-for="NominaDesc" class="text-danger"></span>
-        </div></div>
-        <div class="col-md-2"> <div class="form-group">
-            <label asp-for="UsuarioRemuneracion" class="control-label"></label>
-            <input asp-for="UsuarioRemuneracion" class="form-control" type="number"/>
-            <span asp-validation-for="UsuarioRemuneracion" class="text-danger"></span>
-        </div></div>
-        
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="NominaDesc" class="control-label"></label>
+                <input asp-for="NominaDesc" class="form-control" />
+                <span asp-validation-for="NominaDesc" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="UsuarioRemuneracion" class="control-label"></label>
+                <input asp-for="UsuarioRemuneracion" class="form-control" type="number" />
+                <span asp-validation-for="UsuarioRemuneracion" class="text-danger"></span>
+            </div>
+        </div>
+
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoPago" class="control-label"></label>
-                <select id="drpLicencias" class="form-select" asp-for="IdTipoPago"
+                <select id="lTipoPago" class="form-select" asp-for="IdTipoPago"
                     asp-items="@(new SelectList(ViewBag.ListaTipopago,"IdTipoPago","TipoPagoDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
                 <span asp-validation-for="IdTipoPago" class="text-danger"></span>
             </div>
         </div>
+        <div class="col-md-2">
+            <div class="form-group" id="lCodigoPago" hidden>
+                <label asp-for="CodigoPago" class="control-label"></label>
+                <input id="iCodigoPago" asp-for="CodigoPago" class="form-control" />
+                <span asp-validation-for="CodigoPago" class="text-danger"></span>
+            </div>
+        </div>
     </div>
-      <br />
+    <br />
     <div class="form-group">
         <input type="submit" value="Crear" class="btn btn-success" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+        <a asp-action="ImprimirNomina" asp-route-IdNomina="1" class="btn btn-info text-white">Imprimir</a>
     </div>
 </form>
 
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $('#IdUsuarioRemuneracion').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        $.ajax({
+            type: "GET",
+            url: "/TblUsuarios/fUsuarioNomina/",
+            data: { id: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+
+                if (list.length == 0) {
+                    document.getElementById("NominaDesc").value = null;
+                    document.getElementById("UsuarioRemuneracion").value = null;
+                }
+                else {
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        document.getElementById("NominaDesc").value = "NOMINA";
+                        document.getElementById("UsuarioRemuneracion").value = list[i].usuarioRemuneracion;
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    });
+    $('#lTipoPago').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        if (SelectedValue != 1) {
+            $('#lCodigoPago').removeAttr('hidden');
+        }
+        else {
+            document.getElementById("lCodigoPago").setAttribute("hidden", true);
+        }
+    });
+</script>
 }

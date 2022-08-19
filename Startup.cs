@@ -13,7 +13,7 @@ using WebAdmin.Models;
 using WebAdmin.Services;
 using System;
 using Microsoft.AspNetCore.HttpOverrides;
-
+using Rotativa.AspNetCore;
 
 namespace WebAdmin
 {
@@ -34,11 +34,11 @@ namespace WebAdmin
             //        Configuration.GetConnectionString("msql_connection")));
             // services.AddDbContext<nDbContext>(options =>
             //      options.UseMySQL(Configuration.GetConnectionString("MySQLDataSource")));
-            
+
             services.AddDbContext<nDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("pgSQLDataSource")));
-                  
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -56,9 +56,9 @@ namespace WebAdmin
                 options.ForwardedHeaders =
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
-            
+
         }
-    
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -74,10 +74,14 @@ namespace WebAdmin
                 app.UseForwardedHeaders();
                 app.UseHsts();
             }
+             
+            RotativaConfiguration.Setup(env.WebRootPath, "..\\Rotativa\\Windows\\");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseFastReport();
 
             app.UseAuthentication();
             app.UseAuthorization();
