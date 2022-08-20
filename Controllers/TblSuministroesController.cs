@@ -134,7 +134,22 @@ namespace WebAdmin.Controllers
 
             return View(await fSuministro.ToListAsync());
         }
+        [HttpGet]
+        public ActionResult DatosResumen()
+        {
+            var fuser = _userService.GetUserId();
+            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro =  _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
+            var fSuministrosTotales = from a in _context.TblSuministros
+                                      where a.IdEstatusRegistro == 1
+                                      select new
+                                      {
+                                          fRegistros = _context.TblSuministros.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
+                                          fMontos = _context.TblSuministros.Where(a => a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoSuministro)).Sum()
+                                      };
+            return Json(fSuministrosTotales);
+        }
         // GET: TblSuministros/Details/5
         public async Task<IActionResult> Details(int? id)
         {

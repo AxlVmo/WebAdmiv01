@@ -150,6 +150,22 @@ namespace WebAdmin.Controllers
 
             return View(await fNomina.ToListAsync());
         }
+        [HttpGet]
+        public ActionResult DatosResumen()
+        {
+            var fuser = _userService.GetUserId();
+            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro =  _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+
+            var fNominasTotales = from a in _context.TblNominas
+                                      where a.IdEstatusRegistro == 1
+                                      select new
+                                      {
+                                          fRegistros = _context.TblNominas.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
+                                          fMontos = _context.TblNominas.Where(a => a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.UsuarioRemuneracion)).Sum()
+                                      };
+            return Json(fNominasTotales);
+        }
         public IActionResult ImprimirNomina(int IdNomina)
         {
             // FastReport.Utils.Config.WebMode = true;
@@ -224,6 +240,7 @@ namespace WebAdmin.Controllers
             else
             {
                 var fUsuariosCentros = from a in _context.TblUsuarios
+                                       where a.IdUsuario != Guid.Parse(fuser)
                                        select new
                                        {
                                            IdUsuario = a.IdUsuario,
@@ -253,39 +270,30 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var vDuplicado = _context.TblNominas
-               .Where(s => s.NominaDesc == TblNomina.NominaDesc)
-               .ToList();
 
-                if (vDuplicado.Count == 0)
+                Guid fCentroCorporativo = Guid.Empty;
+                int fCorpCent = 0;
+                var fuser = _userService.GetUserId();
+                var isLoggedIn = _userService.IsAuthenticated();
+                var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                fCentroCorporativo = fIdUsuario.IdCorporativo;
+                fCorpCent = 1;
+                if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                 {
-                    Guid fCentroCorporativo = Guid.Empty;
-                    int fCorpCent = 0;
-                    var fuser = _userService.GetUserId();
-                    var isLoggedIn = _userService.IsAuthenticated();
-                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-                    fCentroCorporativo = fIdUsuario.IdCorporativo;
-                    fCorpCent = 1;
-                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
-                    {
-                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
-                        fCentroCorporativo = fIdCentro.IdCentro;
-                        fCorpCent = 2;
-                    }
-                    TblNomina.IdCorpCent = fCorpCent;
-                    TblNomina.IdUCorporativoCentro = fCentroCorporativo;
-                    TblNomina.IdUsuarioModifico = Guid.Parse(fuser);
-                    TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper();
-                    TblNomina.FechaRegistro = DateTime.Now;
-                    TblNomina.IdEstatusRegistro = 1;
-                    _context.Add(TblNomina);
-                    await _context.SaveChangesAsync();
-                    _notyf.Success("Registro creado con éxito", 5);
+                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                    fCentroCorporativo = fIdCentro.IdCentro;
+                    fCorpCent = 2;
                 }
-                else
-                {
-                    _notyf.Warning("Favor de validar, existe una TipoNomina con el mismo nombre", 5);
-                }
+                TblNomina.IdCorpCent = fCorpCent;
+                TblNomina.IdUCorporativoCentro = fCentroCorporativo;
+                TblNomina.IdUsuarioModifico = Guid.Parse(fuser);
+                TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper();
+                TblNomina.FechaRegistro = DateTime.Now;
+                TblNomina.IdEstatusRegistro = 1;
+                _context.Add(TblNomina);
+                await _context.SaveChangesAsync();
+                _notyf.Success("Registro creado con éxito", 5);
+
                 return RedirectToAction(nameof(Index));
             }
             //ViewData["IdTipoNomina"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", TblNomina.IdTipoNomina);

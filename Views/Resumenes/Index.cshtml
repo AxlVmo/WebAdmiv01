@@ -2,16 +2,16 @@
   <div class="col-sm-2">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">1</h5>
-        <p class="card-text">Suministros.</p>
+        <h5 class="card-title" id="i_fMontosSuministros"></h5>
+        <p class="card-text" id="i_fRegistrosSuministros"></p>
       </div>
     </div>
   </div>
   <div class="col-sm-2">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">2</h5>
-        <p class="card-text">Nomina.</p>
+        <h5 class="card-title" id="i_fMontosNominas"></h5>
+        <p class="card-text" id="i_fRegistrosNominas"></p>
       </div>
     </div>
   </div>
@@ -62,76 +62,145 @@
 @{
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
+<script>
+  $(document).ready(function () {
+    DatosSuministros();
+    DatosNominas();
+  });
+
+  function DatosSuministros() {
+    $.ajax({
+      type: "GET",
+      url: "/TblSuministroes/DatosResumen/",
+      data: {},
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
+      success: function (list) {
+
+        if (list.length == 0) {
+          document.getElementById("i_fRegistrosSuministros").value = null;
+          document.getElementById("i_fMontosSuministros").value = null;
+        }
+        else {
+
+          for (var i = 0, len = list.length; i < len; i++) {
+            document.getElementById('i_fRegistrosSuministros').innerText = 'Total Suministros: ' + list[i].fRegistros;
+            document.getElementById("i_fMontosSuministros").innerText = 'Monto Suministros: ' + list[i].fMontos.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+          }
+
+        }
+      },
+      error: function () {
+        alert("Error!!")
+      }
+    });
+
+    return false;
+  }
+  function DatosNominas() {
+    $.ajax({
+      type: "GET",
+      url: "/TblNominas/DatosResumen/",
+      data: {},
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
+      success: function (list) {
+
+        if (list.length == 0) {
+          document.getElementById("i_fRegistrosNominas").value = null;
+          document.getElementById("i_fMontosNominas").value = null;
+        }
+        else {
+
+          for (var i = 0, len = list.length; i < len; i++) {
+            document.getElementById('i_fRegistrosNominas').innerText = 'Total Nominas: ' + list[i].fRegistros;
+            document.getElementById("i_fMontosNominas").innerText = 'Monto Nominas: ' + list[i].fMontos.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+          }
+
+        }
+      },
+      error: function () {
+        alert("Error!!")
+      }
+    });
+  }
+</script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
-  Highcharts.chart('container', {
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'Ventas Mensuales'
-    },
-    subtitle: {
-      text: 'Intelimundo'
-    },
-    xAxis: {
-      categories: [
-        'Ene',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Ago',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dic'
-      ],
-      crosshair: true
-    },
-    yAxis: {
-      min: 0,
+    Highcharts.chart('container', {
+      chart: {
+        type: 'column'
+      },
       title: {
-        text: 'Rainfall (mm)'
-      }
-    },
-    tooltip: {
-      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-      footerFormat: '</table>',
-      shared: true,
-      useHTML: true
-    },
-    plotOptions: {
-      column: {
-        pointPadding: 0.2,
-        borderWidth: 0
-      }
-    },
-    series: [{
-      name: 'Tokyo',
-      data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+        text: 'Ventas Mensuales'
+      },
+      subtitle: {
+        text: 'Intelimundo'
+      },
+      xAxis: {
+        categories: [
+          'Ene',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Ago',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dic'
+        ],
+        crosshair: true
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Rainfall (mm)'
+        }
+      },
+      tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+          '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+      },
+      plotOptions: {
+        column: {
+          pointPadding: 0.2,
+          borderWidth: 0
+        }
+      },
+      series: [{
+        name: 'Tokyo',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 
-    }, {
-      name: 'New York',
-      data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+      }, {
+        name: 'New York',
+        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
 
-    }, {
-      name: 'London',
-      data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+      }, {
+        name: 'London',
+        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
 
-    }, {
-      name: 'Berlin',
-      data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+      }, {
+        name: 'Berlin',
+        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
 
-    }]
-  });
+      }]
+    });
 </script>
 
 }

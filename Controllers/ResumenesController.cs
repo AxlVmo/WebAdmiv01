@@ -1,14 +1,18 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
+using FastReport;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using AspNetCoreHero.ToastNotification.Abstractions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using WebAdmin.Data;
+using WebAdmin.Models;
 using WebAdmin.Services;
-using WebAdmin.ViewModels;
 
 namespace WebAdmin.Controllers
 {
@@ -27,8 +31,18 @@ namespace WebAdmin.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            
+            // var fNominaTotales = from a in _context.TblSuministros
+            //                      where a.IdEstatusRegistro == 1
+            //                      select new
+            //                      {
+            //                          fRegistros = _context.TblNominas.Where(a => a.IdEstatusRegistro == 1).Count(),
+            //                          fMontos = _context.TblNominas.Where(p => p.IdUCorporativoCentro == fIdCentro.IdCentro).Select(i => Convert.ToDouble(i.UsuarioRemuneracion)).Sum()
+            //                      };
+            // var sResumen = fSuministrosTotales.Union(fNominaTotales);
+
             return View();
         }
 
@@ -38,6 +52,6 @@ namespace WebAdmin.Controllers
             return View("Error!");
         }
 
-     
+
     }
 }
