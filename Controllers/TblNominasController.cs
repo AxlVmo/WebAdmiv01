@@ -1,9 +1,9 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using FastReport;
+// using FastReport;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Rotativa.AspNetCore;
+// using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -166,33 +166,33 @@ namespace WebAdmin.Controllers
                                       };
             return Json(fNominasTotales);
         }
-        public IActionResult ImprimirNomina(int IdNomina)
-        {
-            // FastReport.Utils.Config.WebMode = true;
-            // Report rep = new Report();
-            // string webRootPath = _webHostEnvironment.WebRootPath;
-            // string contentRootPath = _webHostEnvironment.ContentRootPath;
-            // string path = Path.GetFullPath("Reports/im_nomina.frx");
+        // public IActionResult ImprimirNomina(int IdNomina)
+        // {
+        //     // FastReport.Utils.Config.WebMode = true;
+        //     // Report rep = new Report();
+        //     // string webRootPath = _webHostEnvironment.WebRootPath;
+        //     // string contentRootPath = _webHostEnvironment.ContentRootPath;
+        //     // string path = Path.GetFullPath("Reports/im_nomina.frx");
 
-            // var fNomina = _context.TblNominas.ToList();
-            // var dt = new DataTable();
-            // dt.Load((IDataReader)fNomina);
-            // DataSet n = new DataSet();
-            // n.Tables.Add(dt);
-            // rep.Load(path);
-            // rep.SetParameterValue("p1", "1");
-            // rep.SetParameterValue("p2", "2");
-            // rep.RegisterData(n);
-            // 
-            var fNomina = _context.TblNominas.First();
-            return new ViewAsPdf("ImprimirNomina", fNomina)
-            {
-                FileName = $" nomina_{fNomina.IdNomina.ToString()}.pdf",
-                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
-                PageSize = Rotativa.AspNetCore.Options.Size.Legal
-            };
-            // return null;
-        }
+        //     // var fNomina = _context.TblNominas.ToList();
+        //     // var dt = new DataTable();
+        //     // dt.Load((IDataReader)fNomina);
+        //     // DataSet n = new DataSet();
+        //     // n.Tables.Add(dt);
+        //     // rep.Load(path);
+        //     // rep.SetParameterValue("p1", "1");
+        //     // rep.SetParameterValue("p2", "2");
+        //     // rep.RegisterData(n);
+        //     // 
+        //     var fNomina = _context.TblNominas.First();
+        //     // return new ViewAsPdf("ImprimirNomina", fNomina)
+        //     // {
+        //     //     FileName = $" nomina_{fNomina.IdNomina.ToString()}.pdf",
+        //     //     PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+        //     //     PageSize = Rotativa.AspNetCore.Options.Size.Legal
+        //     // };
+        //     // return null;
+        // }
         // GET: TblNominas/Details/5
         public async Task<IActionResult> Details(int? id)
         {

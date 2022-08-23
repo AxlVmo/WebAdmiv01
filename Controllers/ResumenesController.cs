@@ -1,9 +1,9 @@
 using AspNetCoreHero.ToastNotification.Abstractions;
-using FastReport;
+// using FastReport;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Rotativa.AspNetCore;
+// using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.Data;

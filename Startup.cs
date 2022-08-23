@@ -13,7 +13,7 @@ using WebAdmin.Models;
 using WebAdmin.Services;
 using System;
 using Microsoft.AspNetCore.HttpOverrides;
-using Rotativa.AspNetCore;
+// using Rotativa.AspNetCore;
 
 namespace WebAdmin
 {
@@ -75,13 +75,13 @@ namespace WebAdmin
                 app.UseHsts();
             }
              
-            RotativaConfiguration.Setup(env.WebRootPath, "..\\Rotativa\\Windows\\");
+            // RotativaConfiguration.Setup(env.WebRootPath, "..\\Rotativa\\Windows\\");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseFastReport();
+            // app.UseFastReport();
 
             app.UseAuthentication();
             app.UseAuthorization();
