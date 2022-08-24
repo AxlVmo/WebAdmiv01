@@ -11,20 +11,20 @@ using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
-    public class CatCategoriasController : Controller
+    public class CatPeriodosController : Controller
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatCategoriasController(nDbContext context, INotyfService notyf, IUserService userService)
+        public CatPeriodosController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
         }
 
-        // GET: CatCategorias
+        // GET: CatPeriodo
         public async Task<IActionResult> Index()
         {
             var ValidaEstatus = _context.CatEstatus.ToList();
@@ -60,20 +60,19 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            var fCatCategoria = from a in _context.CatCategorias
+            var fCatPeriodo = from a in _context.CatPeriodos
 
-                                select new CatCategoria
-                                {
-                                    IdCategoria = a.IdCategoria,
-                                    CategoriaDesc = a.CategoriaDesc,
-                                    FechaRegistro = a.FechaRegistro,
-                                    IdEstatusRegistro = a.IdEstatusRegistro
+                                select new CatPeriodo
+                              {  IdPeriodo = a.IdPeriodo,
+                                 PeriodoDesc = a.PeriodoDesc,
+                                 FechaRegistro = a.FechaRegistro,
+                             IdEstatusRegistro = a.IdEstatusRegistro
                                 };
 
-            return View(await fCatCategoria.ToListAsync());
+            return View(await fCatPeriodo.ToListAsync());
         }
 
-        // GET: CatCategorias/Details/5
+        // GET: CatPeriodo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -81,58 +80,58 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catCategoria = await _context.CatCategorias
-                .FirstOrDefaultAsync(m => m.IdCategoria == id);
-            if (catCategoria == null)
+            var catPeriodo = await _context.CatPeriodos
+                .FirstOrDefaultAsync(m => m.IdPeriodo == id);
+            if (catPeriodo == null)
             {
                 return NotFound();
             }
 
-            return View(catCategoria);
+            return View(catPeriodo);
         }
 
-        // GET: CatCategorias/Create
+        // GET: CatPeriodo/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CatCategorias/Create
+        // POST: CatPeriodo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCategoria,CategoriaDesc")] CatCategoria catCategoria)
+        public async Task<IActionResult> Create([Bind("IdPeriodo,PeriodoDesc")] CatPeriodo catPeriodo)
         {
             if (ModelState.IsValid)
             {
-                var vDuplicado = _context.CatCategorias
-               .Where(s => s.CategoriaDesc == catCategoria.CategoriaDesc)
+                var vDuplicado = _context.CatPeriodos
+               .Where(s => s.PeriodoDesc == catPeriodo.PeriodoDesc)
                .ToList();
 
                 if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catCategoria.IdUsuarioModifico = Guid.Parse(fuser);
-                    catCategoria.CategoriaDesc = catCategoria.CategoriaDesc.ToString().ToUpper();
-                    catCategoria.FechaRegistro = DateTime.Now;
-                    catCategoria.IdEstatusRegistro = 1;
-                    _context.Add(catCategoria);
+                    catPeriodo.IdUsuarioModifico = Guid.Parse(fuser);
+                    catPeriodo.PeriodoDesc = catPeriodo.PeriodoDesc.ToString().ToUpper();
+                    catPeriodo.FechaRegistro = DateTime.Now;
+                    catPeriodo.IdEstatusRegistro = 1;
+                    _context.Add(catPeriodo);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
                 else
                 {
-                    _notyf.Warning("Favor de validar, existe una Categoria con el mismo nombre", 5);
+                    _notyf.Warning("Favor de validar, existe una Periodo con el mismo nombre", 5);
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["IdCategoria"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", catCategoria.IdCategoria);
-            return View(catCategoria);
+            //ViewData["IdPeriodo"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", catPeriodo.IdPeriodo);
+            return View(catPeriodo);
         }
 
-        // GET: CatCategorias/Edit/5
+        // GET: CatPeriodo/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
@@ -144,22 +143,22 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catCategoria = await _context.CatCategorias.FindAsync(id);
-            if (catCategoria == null)
+            var catPeriodo = await _context.CatPeriodos.FindAsync(id);
+            if (catPeriodo == null)
             {
                 return NotFound();
             }
-            return View(catCategoria);
+            return View(catPeriodo);
         }
 
-        // POST: CatCategorias/Edit/5
+        // POST: CatPeriodo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,CategoriaDesc,IdEstatusRegistro")] CatCategoria catCategoria)
+        public async Task<IActionResult> Edit(int id, [Bind("IdPeriodo,PeriodoDesc,IdEstatusRegistro")] CatPeriodo catPeriodo)
         {
-            if (id != catCategoria.IdCategoria)
+            if (id != catPeriodo.IdPeriodo)
             {
                 return NotFound();
             }
@@ -170,18 +169,18 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catCategoria.IdUsuarioModifico = Guid.Parse(fuser);
-                    catCategoria.CategoriaDesc = catCategoria.CategoriaDesc.ToString().ToUpper();
-                    catCategoria.FechaRegistro = DateTime.Now;
-                    catCategoria.IdEstatusRegistro = catCategoria.IdEstatusRegistro;
-                    _context.Add(catCategoria);
-                    _context.Update(catCategoria);
+                    catPeriodo.IdUsuarioModifico = Guid.Parse(fuser);
+                    catPeriodo.PeriodoDesc = catPeriodo.PeriodoDesc.ToString().ToUpper();
+                    catPeriodo.FechaRegistro = DateTime.Now;
+                    catPeriodo.IdEstatusRegistro = catPeriodo.IdEstatusRegistro;
+                    _context.Add(catPeriodo);
+                    _context.Update(catPeriodo);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatCategoriaExists(catCategoria.IdCategoria))
+                    if (!CatPeriodoExists(catPeriodo.IdPeriodo))
                     {
                         return NotFound();
                     }
@@ -192,10 +191,10 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catCategoria);
+            return View(catPeriodo);
         }
 
-        // GET: CatCategorias/Delete/5
+        // GET: CatPeriodo/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -203,31 +202,31 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catCategoria = await _context.CatCategorias
-                .FirstOrDefaultAsync(m => m.IdCategoria == id);
-            if (catCategoria == null)
+            var catPeriodo = await _context.CatPeriodos
+                .FirstOrDefaultAsync(m => m.IdPeriodo == id);
+            if (catPeriodo == null)
             {
                 return NotFound();
             }
 
-            return View(catCategoria);
+            return View(catPeriodo);
         }
 
-        // POST: CatCategorias/Delete/5
+        // POST: CatPeriodo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catCategoria = await _context.CatCategorias.FindAsync(id);
-            catCategoria.IdEstatusRegistro = 2;
+            var catPeriodo = await _context.CatPeriodos.FindAsync(id);
+            catPeriodo.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CatCategoriaExists(int id)
+        private bool CatPeriodoExists(int id)
         {
-            return _context.CatCategorias.Any(e => e.IdCategoria == id);
+            return _context.CatPeriodos.Any(e => e.IdPeriodo== id);
         }
     }
 }

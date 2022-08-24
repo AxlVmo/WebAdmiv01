@@ -11,20 +11,20 @@ using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
-    public class CatCategoriasController : Controller
+    public class CatTipoCancelacionesController : Controller
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatCategoriasController(nDbContext context, INotyfService notyf, IUserService userService)
+        public CatTipoCancelacionesController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
         }
 
-        // GET: CatCategorias
+        // GET: CatTipoCancelaciones
         public async Task<IActionResult> Index()
         {
             var ValidaEstatus = _context.CatEstatus.ToList();
@@ -60,20 +60,20 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            var fCatCategoria = from a in _context.CatCategorias
+            var fCatTipoCancelaciones = from a in _context.CatTipoCancelaciones
 
-                                select new CatCategoria
-                                {
-                                    IdCategoria = a.IdCategoria,
-                                    CategoriaDesc = a.CategoriaDesc,
-                                    FechaRegistro = a.FechaRegistro,
-                                    IdEstatusRegistro = a.IdEstatusRegistro
-                                };
+                                        select new CatTipoCancelacion
+                                        {
+                                            IdTipoCancelacion = a.IdTipoCancelacion,
+                                            TipoCancelacionDesc = a.TipoCancelacionDesc,
+                                            FechaRegistro = a.FechaRegistro,
+                                            IdEstatusRegistro = a.IdEstatusRegistro
+                                        };
 
-            return View(await fCatCategoria.ToListAsync());
+            return View(await fCatTipoCancelaciones.ToListAsync());
         }
 
-        // GET: CatCategorias/Details/5
+        // GET: CatTipoCancelaciones/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -81,58 +81,58 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catCategoria = await _context.CatCategorias
-                .FirstOrDefaultAsync(m => m.IdCategoria == id);
-            if (catCategoria == null)
+            var catTipoCancelaciones = await _context.CatTipoCancelaciones
+                .FirstOrDefaultAsync(m => m.IdTipoCancelacion == id);
+            if (catTipoCancelaciones == null)
             {
                 return NotFound();
             }
 
-            return View(catCategoria);
+            return View(catTipoCancelaciones);
         }
 
-        // GET: CatCategorias/Create
+        // GET: CatTipoCancelaciones/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CatCategorias/Create
+        // POST: CatTipoCancelaciones/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCategoria,CategoriaDesc")] CatCategoria catCategoria)
+        public async Task<IActionResult> Create([Bind("IdTipoCancelacion,TipoCancelacionDesc")] CatTipoCancelacion catTipoCancelaciones)
         {
             if (ModelState.IsValid)
             {
-                var vDuplicado = _context.CatCategorias
-               .Where(s => s.CategoriaDesc == catCategoria.CategoriaDesc)
+                var vDuplicado = _context.CatTipoCancelaciones
+               .Where(s => s.TipoCancelacionDesc == catTipoCancelaciones.TipoCancelacionDesc)
                .ToList();
 
                 if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catCategoria.IdUsuarioModifico = Guid.Parse(fuser);
-                    catCategoria.CategoriaDesc = catCategoria.CategoriaDesc.ToString().ToUpper();
-                    catCategoria.FechaRegistro = DateTime.Now;
-                    catCategoria.IdEstatusRegistro = 1;
-                    _context.Add(catCategoria);
+                    catTipoCancelaciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoCancelaciones.TipoCancelacionDesc= catTipoCancelaciones.TipoCancelacionDesc.ToString().ToUpper();
+                    catTipoCancelaciones.FechaRegistro = DateTime.Now;
+                    catTipoCancelaciones.IdEstatusRegistro = 1;
+                    _context.Add(catTipoCancelaciones);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
                 else
                 {
-                    _notyf.Warning("Favor de validar, existe una Categoria con el mismo nombre", 5);
+                    _notyf.Warning("Favor de validar, existe una TipoCancelaciones con el mismo nombre", 5);
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["IdCategoria"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", catCategoria.IdCategoria);
-            return View(catCategoria);
+            //ViewData["IdTipoCancelaciones"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", catTipoCancelaciones.IdTipoCancelaciones);
+            return View(catTipoCancelaciones);
         }
 
-        // GET: CatCategorias/Edit/5
+        // GET: CatTipoCancelaciones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
@@ -144,22 +144,22 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catCategoria = await _context.CatCategorias.FindAsync(id);
-            if (catCategoria == null)
+            var catTipoCancelaciones = await _context.CatTipoCancelaciones.FindAsync(id);
+            if (catTipoCancelaciones == null)
             {
                 return NotFound();
             }
-            return View(catCategoria);
+            return View(catTipoCancelaciones);
         }
 
-        // POST: CatCategorias/Edit/5
+        // POST: CatTipoCancelaciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,CategoriaDesc,IdEstatusRegistro")] CatCategoria catCategoria)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTipoCancelacion,TipoCancelacionDesc,IdEstatusRegistro")] CatTipoCancelacion catTipoCancelaciones)
         {
-            if (id != catCategoria.IdCategoria)
+            if (id != catTipoCancelaciones.IdTipoCancelacion)
             {
                 return NotFound();
             }
@@ -170,18 +170,18 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catCategoria.IdUsuarioModifico = Guid.Parse(fuser);
-                    catCategoria.CategoriaDesc = catCategoria.CategoriaDesc.ToString().ToUpper();
-                    catCategoria.FechaRegistro = DateTime.Now;
-                    catCategoria.IdEstatusRegistro = catCategoria.IdEstatusRegistro;
-                    _context.Add(catCategoria);
-                    _context.Update(catCategoria);
+                    catTipoCancelaciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoCancelaciones.TipoCancelacionDesc = catTipoCancelaciones.TipoCancelacionDesc.ToString().ToUpper();
+                    catTipoCancelaciones.FechaRegistro = DateTime.Now;
+                    catTipoCancelaciones.IdEstatusRegistro = catTipoCancelaciones.IdEstatusRegistro;
+                    _context.Add(catTipoCancelaciones);
+                    _context.Update(catTipoCancelaciones);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatCategoriaExists(catCategoria.IdCategoria))
+                    if (!CatTipoCancelacionesExists(catTipoCancelaciones.IdTipoCancelacion))
                     {
                         return NotFound();
                     }
@@ -192,10 +192,10 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catCategoria);
+            return View(catTipoCancelaciones);
         }
 
-        // GET: CatCategorias/Delete/5
+        // GET: CatTipoCancelaciones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -203,31 +203,31 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catCategoria = await _context.CatCategorias
-                .FirstOrDefaultAsync(m => m.IdCategoria == id);
-            if (catCategoria == null)
+            var catTipoCancelaciones = await _context.CatTipoCancelaciones
+                .FirstOrDefaultAsync(m => m.IdTipoCancelacion == id);
+            if (catTipoCancelaciones == null)
             {
                 return NotFound();
             }
 
-            return View(catCategoria);
+            return View(catTipoCancelaciones);
         }
 
-        // POST: CatCategorias/Delete/5
+        // POST: CatTipoCancelaciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catCategoria = await _context.CatCategorias.FindAsync(id);
-            catCategoria.IdEstatusRegistro = 2;
+            var catTipoCancelaciones = await _context.CatTipoCancelaciones.FindAsync(id);
+            catTipoCancelaciones.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CatCategoriaExists(int id)
+        private bool CatTipoCancelacionesExists(int id)
         {
-            return _context.CatCategorias.Any(e => e.IdCategoria == id);
+            return _context.CatTipoCancelaciones.Any(e => e.IdTipoCancelacion == id);
         }
     }
 }

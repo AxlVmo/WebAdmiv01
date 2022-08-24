@@ -62,6 +62,8 @@ namespace WebAdmin.Data
         public DbSet<CatTipoDevolucion> CatTipoDevoluciones { get; set; }
         public DbSet<TblNomina> TblNominas { get; set; }
         public DbSet<CatPersonalEstudio> CatPersonalEstudios { get; set; }
+        public DbSet<CatPeriodo> CatPeriodos { get; set; }
+        public DbSet<CatTipoCancelacion> CatTipoCancelaciones { get; set; }
 
         public DbSet<CatTipoCompra> CatTipoCompras { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1733,8 +1735,7 @@ new CatCodigosPostal { IdCodigosPostales = 1516, Dcodigo = "16900", Dasenta = "S
 
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<WebAdmin.Models.CatPeriodo> CatPeriodo { get; set; }
-        public DbSet<WebAdmin.Models.CatTipoCancelacion> CatTipoCancelacion { get; set; }
+       
 
 
 

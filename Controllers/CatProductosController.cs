@@ -9,7 +9,7 @@ using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
 
-namespace WebAdminHecsa.Controllers
+namespace WebAdmin.Controllers
 {
     public class CatProductosController : Controller
     {
