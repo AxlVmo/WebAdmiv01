@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WebAdmin.Models.CatPeriodo>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodoDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioModifico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodoDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUsuarioModifico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEstatusRegistro)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdPeriodo">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdPeriodo">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdPeriodo">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

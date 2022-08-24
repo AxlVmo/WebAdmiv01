@@ -137,6 +137,7 @@ namespace WebAdmin.Controllers
         [HttpGet]
         public ActionResult DatosResumen()
         {
+            
             var fuser = _userService.GetUserId();
             var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
             var fIdCentro =  _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));

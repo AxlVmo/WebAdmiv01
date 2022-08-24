@@ -31,9 +31,9 @@ namespace WebAdmin.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            
+
             // var fNominaTotales = from a in _context.TblSuministros
             //                      where a.IdEstatusRegistro == 1
             //                      select new
