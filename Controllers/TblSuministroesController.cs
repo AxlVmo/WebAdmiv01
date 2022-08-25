@@ -204,7 +204,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-                    fCentroCorporativo = fIdUsuario.IdCorporativo;
+                    var fCorporativo = _context.TblCorporativos.First();
                     fCorpCent = 1;
                     if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                     {
@@ -213,7 +213,7 @@ namespace WebAdmin.Controllers
                         fCorpCent = 2;
                     }
                     tblSuministro.IdCorpCent = fCorpCent;
-                    tblSuministro.IdUCorporativoCentro = fCentroCorporativo;
+                    tblSuministro.IdUCorporativoCentro = fCorporativo.IdCorporativo;
                     tblSuministro.IdUsuarioModifico = Guid.Parse(fuser);
                     tblSuministro.SuministroDesc = tblSuministro.SuministroDesc.ToString().ToUpper();
                     tblSuministro.FechaRegistro = DateTime.Now;
