@@ -1,49 +1,45 @@
 ﻿@model WebAdmin.Models.CatTipoCancelacion
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Tipo Cancelacion";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Create</h1>
-
-<h4>CatTipoCancelacion</h4>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Catálogos</li>
+        <li class="breadcrumb-item">Control de Tipo Cancelacion</li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Tipo Cancelacion</li>
+    </ol>
+</nav>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+
+ 
+
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="TipoCancelacionDesc" class="control-label"></label>
-                <input asp-for="TipoCancelacionDesc" class="form-control" />
+                <input style="text-transform:uppercase" asp-for="TipoCancelacionDesc" class="form-control" />
                 <span asp-validation-for="TipoCancelacionDesc" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdUsuarioModifico" class="control-label"></label>
-                <input asp-for="IdUsuarioModifico" class="form-control" />
-                <span asp-validation-for="IdUsuarioModifico" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaRegistro" class="control-label"></label>
-                <input asp-for="FechaRegistro" class="form-control" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <input asp-for="IdEstatusRegistro" class="form-control" />
-                <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Crear" class="btn btn-success" />
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+    </div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

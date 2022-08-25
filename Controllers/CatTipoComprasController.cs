@@ -1,46 +1,94 @@
-﻿using System;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
     public class CatTipoComprasController : Controller
     {
         private readonly nDbContext _context;
+        private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public CatTipoComprasController(nDbContext context)
+        public CatTipoComprasController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
+            _notyf = notyf;
+            _userService = userService;
         }
 
         // GET: CatTipoCompras
         public async Task<IActionResult> Index()
         {
-              return View(await _context.CatTipoCompras.ToListAsync());
+            var ValidaEstatus = _context.CatEstatus.ToList();
+
+            if (ValidaEstatus.Count == 2)
+            {
+                ViewBag.EstatusFlag = 1;
+                var ValidaEmpresa = _context.TblEmpresas.ToList();
+
+                if (ValidaEmpresa.Count == 1)
+                {
+                    ViewBag.EmpresaFlag = 1;
+                    var ValidaCorporativo = _context.TblCorporativos.ToList();
+
+                    if (ValidaCorporativo.Count >= 1)
+                    {
+                        ViewBag.CorporativoFlag = 1;
+                    }
+                    else
+                    {
+                        ViewBag.CorporativoFlag = 0;
+                        _notyf.Information("Favor de registrar los datos de Corporativo para la Aplicación", 5);
+                    }
+                }
+                else
+                {
+                    ViewBag.EmpresaFlag = 0;
+                    _notyf.Information("Favor de registrar los datos de la Empresa para la Aplicación", 5);
+                }
+            }
+            else
+            {
+                ViewBag.EstatusFlag = 0;
+                _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
+            }
+            var fCatTipoCompras = from a in _context.CatTipoCompras
+
+                                        select new CatTipoCompra
+                                        {
+                                            IdTipoCompra = a.IdTipoCompra,
+                                            TipoCompraDesc = a.TipoCompraDesc,
+                                            FechaRegistro = a.FechaRegistro,
+                                            IdEstatusRegistro = a.IdEstatusRegistro
+                                        };
+
+            return View(await fCatTipoCompras.ToListAsync());
         }
 
         // GET: CatTipoCompras/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.CatTipoCompras == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var catTipoCompra = await _context.CatTipoCompras
+            var catTipoCompras = await _context.CatTipoCompras
                 .FirstOrDefaultAsync(m => m.IdTipoCompra == id);
-            if (catTipoCompra == null)
+            if (catTipoCompras == null)
             {
                 return NotFound();
             }
 
-            return View(catTipoCompra);
+            return View(catTipoCompras);
         }
 
         // GET: CatTipoCompras/Create
@@ -54,31 +102,54 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoCompra,TipoCompraDesc,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro")] CatTipoCompra catTipoCompra)
+        public async Task<IActionResult> Create([Bind("IdTipoCompra,TipoCompraDesc")] CatTipoCompra catTipoCompras)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(catTipoCompra);
-                await _context.SaveChangesAsync();
+                var vDuplicado = _context.CatTipoCompras
+               .Where(s => s.TipoCompraDesc == catTipoCompras.TipoCompraDesc)
+               .ToList();
+
+                if (vDuplicado.Count == 0)
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catTipoCompras.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoCompras.TipoCompraDesc= catTipoCompras.TipoCompraDesc.ToString().ToUpper();
+                    catTipoCompras.FechaRegistro = DateTime.Now;
+                    catTipoCompras.IdEstatusRegistro = 1;
+                    _context.Add(catTipoCompras);
+                    await _context.SaveChangesAsync();
+                    _notyf.Success("Registro creado con éxito", 5);
+                }
+                else
+                {
+                    _notyf.Warning("Favor de validar, existe una TipoCompras con el mismo nombre", 5);
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catTipoCompra);
+            //ViewData["IdTipoCompras"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", catTipoCompras.IdTipoCompras);
+            return View(catTipoCompras);
         }
 
         // GET: CatTipoCompras/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.CatTipoCompras == null)
+            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
+            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
+            ViewBag.ListaEstatus = ListaCatEstatus;
+
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var catTipoCompra = await _context.CatTipoCompras.FindAsync(id);
-            if (catTipoCompra == null)
+            var catTipoCompras = await _context.CatTipoCompras.FindAsync(id);
+            if (catTipoCompras == null)
             {
                 return NotFound();
             }
-            return View(catTipoCompra);
+            return View(catTipoCompras);
         }
 
         // POST: CatTipoCompras/Edit/5
@@ -86,9 +157,9 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoCompra,TipoCompraDesc,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro")] CatTipoCompra catTipoCompra)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTipoCompra,TipoCompraDesc,IdEstatusRegistro")] CatTipoCompra catTipoCompras)
         {
-            if (id != catTipoCompra.IdTipoCompra)
+            if (id != catTipoCompras.IdTipoCompra)
             {
                 return NotFound();
             }
@@ -97,12 +168,20 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    _context.Update(catTipoCompra);
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catTipoCompras.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoCompras.TipoCompraDesc = catTipoCompras.TipoCompraDesc.ToString().ToUpper();
+                    catTipoCompras.FechaRegistro = DateTime.Now;
+                    catTipoCompras.IdEstatusRegistro = catTipoCompras.IdEstatusRegistro;
+                    _context.Add(catTipoCompras);
+                    _context.Update(catTipoCompras);
                     await _context.SaveChangesAsync();
+                    _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatTipoCompraExists(catTipoCompra.IdTipoCompra))
+                    if (!CatTipoComprasExists(catTipoCompras.IdTipoCompra))
                     {
                         return NotFound();
                     }
@@ -113,25 +192,25 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catTipoCompra);
+            return View(catTipoCompras);
         }
 
         // GET: CatTipoCompras/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.CatTipoCompras == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var catTipoCompra = await _context.CatTipoCompras
+            var catTipoCompras = await _context.CatTipoCompras
                 .FirstOrDefaultAsync(m => m.IdTipoCompra == id);
-            if (catTipoCompra == null)
+            if (catTipoCompras == null)
             {
                 return NotFound();
             }
 
-            return View(catTipoCompra);
+            return View(catTipoCompras);
         }
 
         // POST: CatTipoCompras/Delete/5
@@ -139,23 +218,16 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.CatTipoCompras == null)
-            {
-                return Problem("Entity set 'nDbContext.CatTipoCompras'  is null.");
-            }
-            var catTipoCompra = await _context.CatTipoCompras.FindAsync(id);
-            if (catTipoCompra != null)
-            {
-                _context.CatTipoCompras.Remove(catTipoCompra);
-            }
-            
+            var catTipoCompras = await _context.CatTipoCompras.FindAsync(id);
+            catTipoCompras.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CatTipoCompraExists(int id)
+        private bool CatTipoComprasExists(int id)
         {
-          return _context.CatTipoCompras.Any(e => e.IdTipoCompra == id);
+            return _context.CatTipoCompras.Any(e => e.IdTipoCompra == id);
         }
     }
 }
