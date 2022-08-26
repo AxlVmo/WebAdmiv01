@@ -84,7 +84,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoPago.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoPago.FechaRegistro = DateTime.Now;
-                    catTipoPago.TipoPagoDesc = catTipoPago.TipoPagoDesc.ToString().ToUpper();
+                    catTipoPago.TipoPagoDesc = catTipoPago.TipoPagoDesc.ToString().ToUpper().Trim();
                     catTipoPago.IdEstatusRegistro = 1;
                     _context.Add(catTipoPago);
                     await _context.SaveChangesAsync();
@@ -138,7 +138,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoPago.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoPago.FechaRegistro = DateTime.Now;
-                    catTipoPago.TipoPagoDesc = catTipoPago.TipoPagoDesc.ToString().ToUpper();
+                    catTipoPago.TipoPagoDesc = catTipoPago.TipoPagoDesc.ToString().ToUpper().Trim();
                     catTipoPago.IdEstatusRegistro = catTipoPago.IdEstatusRegistro;
                     _context.Update(catTipoPago);
                     await _context.SaveChangesAsync();

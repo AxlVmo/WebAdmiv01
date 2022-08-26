@@ -84,7 +84,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoPrestamo.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoPrestamo.FechaRegistro = DateTime.Now;
-                    catTipoPrestamo.TipoPrestamoDesc = catTipoPrestamo.TipoPrestamoDesc.ToString().ToUpper();
+                    catTipoPrestamo.TipoPrestamoDesc = catTipoPrestamo.TipoPrestamoDesc.ToString().ToUpper().Trim();
                     catTipoPrestamo.IdEstatusRegistro = 1;
                     _context.Add(catTipoPrestamo);
                     await _context.SaveChangesAsync();
@@ -139,7 +139,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoPrestamo.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoPrestamo.FechaRegistro = DateTime.Now;
-                    catTipoPrestamo.TipoPrestamoDesc = catTipoPrestamo.TipoPrestamoDesc.ToString().ToUpper();
+                    catTipoPrestamo.TipoPrestamoDesc = catTipoPrestamo.TipoPrestamoDesc.ToString().ToUpper().Trim();
                     catTipoPrestamo.IdEstatusRegistro = catTipoPrestamo.IdEstatusRegistro;
                     _context.Update(catTipoPrestamo);
                     await _context.SaveChangesAsync();

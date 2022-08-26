@@ -146,11 +146,11 @@ namespace WebAdmin.Controllers
 
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblProveedorDirecciones.Colonia).FirstOrDefault();
                     tblProveedorDirecciones.IdColonia = !string.IsNullOrEmpty(tblProveedorDirecciones.Colonia) ? tblProveedorDirecciones.Colonia : tblProveedorDirecciones.Colonia;
-                    tblProveedorDirecciones.Colonia = !string.IsNullOrEmpty(tblProveedorDirecciones.Colonia) ? strColonia.Dasenta.ToUpper() : tblProveedorDirecciones.Colonia;
-                    tblProveedorDirecciones.Calle = !string.IsNullOrEmpty(tblProveedorDirecciones.Calle) ? tblProveedorDirecciones.Calle.ToUpper() : tblProveedorDirecciones.Calle;
-                    tblProveedorDirecciones.LocalidadMunicipio = !string.IsNullOrEmpty(tblProveedorDirecciones.LocalidadMunicipio) ? tblProveedorDirecciones.LocalidadMunicipio.ToUpper() : tblProveedorDirecciones.LocalidadMunicipio;
-                    tblProveedorDirecciones.Ciudad = !string.IsNullOrEmpty(tblProveedorDirecciones.Ciudad) ? tblProveedorDirecciones.Ciudad.ToUpper() : tblProveedorDirecciones.Ciudad;
-                    tblProveedorDirecciones.Estado = !string.IsNullOrEmpty(tblProveedorDirecciones.Estado) ? tblProveedorDirecciones.Estado.ToUpper() : tblProveedorDirecciones.Estado;
+                    tblProveedorDirecciones.Colonia = !string.IsNullOrEmpty(tblProveedorDirecciones.Colonia) ? strColonia.Dasenta.ToUpper().Trim() : tblProveedorDirecciones.Colonia;
+                    tblProveedorDirecciones.Calle = !string.IsNullOrEmpty(tblProveedorDirecciones.Calle) ? tblProveedorDirecciones.Calle.ToUpper().Trim() : tblProveedorDirecciones.Calle;
+                    tblProveedorDirecciones.LocalidadMunicipio = !string.IsNullOrEmpty(tblProveedorDirecciones.LocalidadMunicipio) ? tblProveedorDirecciones.LocalidadMunicipio.ToUpper().Trim() : tblProveedorDirecciones.LocalidadMunicipio;
+                    tblProveedorDirecciones.Ciudad = !string.IsNullOrEmpty(tblProveedorDirecciones.Ciudad) ? tblProveedorDirecciones.Ciudad.ToUpper().Trim() : tblProveedorDirecciones.Ciudad;
+                    tblProveedorDirecciones.Estado = !string.IsNullOrEmpty(tblProveedorDirecciones.Estado) ? tblProveedorDirecciones.Estado.ToUpper().Trim() : tblProveedorDirecciones.Estado;
 
                     _context.SaveChanges();
                     _context.Add(tblProveedorDirecciones);
@@ -223,11 +223,11 @@ namespace WebAdmin.Controllers
 
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblProveedorDirecciones.Colonia).FirstOrDefault();
                     tblProveedorDirecciones.IdColonia = !string.IsNullOrEmpty(tblProveedorDirecciones.Colonia) ? tblProveedorDirecciones.Colonia : tblProveedorDirecciones.Colonia;
-                    tblProveedorDirecciones.Colonia = !string.IsNullOrEmpty(tblProveedorDirecciones.Colonia) ? strColonia.Dasenta.ToUpper() : tblProveedorDirecciones.Colonia;
-                    tblProveedorDirecciones.Calle = !string.IsNullOrEmpty(tblProveedorDirecciones.Calle) ? tblProveedorDirecciones.Calle.ToUpper() : tblProveedorDirecciones.Calle;
-                    tblProveedorDirecciones.LocalidadMunicipio = !string.IsNullOrEmpty(tblProveedorDirecciones.LocalidadMunicipio) ? tblProveedorDirecciones.LocalidadMunicipio.ToUpper() : tblProveedorDirecciones.LocalidadMunicipio;
-                    tblProveedorDirecciones.Ciudad = !string.IsNullOrEmpty(tblProveedorDirecciones.Ciudad) ? tblProveedorDirecciones.Ciudad.ToUpper() : tblProveedorDirecciones.Ciudad;
-                    tblProveedorDirecciones.Estado = !string.IsNullOrEmpty(tblProveedorDirecciones.Estado) ? tblProveedorDirecciones.Estado.ToUpper() : tblProveedorDirecciones.Estado;
+                    tblProveedorDirecciones.Colonia = !string.IsNullOrEmpty(tblProveedorDirecciones.Colonia) ? strColonia.Dasenta.ToUpper().Trim() : tblProveedorDirecciones.Colonia;
+                    tblProveedorDirecciones.Calle = !string.IsNullOrEmpty(tblProveedorDirecciones.Calle) ? tblProveedorDirecciones.Calle.ToUpper().Trim() : tblProveedorDirecciones.Calle;
+                    tblProveedorDirecciones.LocalidadMunicipio = !string.IsNullOrEmpty(tblProveedorDirecciones.LocalidadMunicipio) ? tblProveedorDirecciones.LocalidadMunicipio.ToUpper().Trim() : tblProveedorDirecciones.LocalidadMunicipio;
+                    tblProveedorDirecciones.Ciudad = !string.IsNullOrEmpty(tblProveedorDirecciones.Ciudad) ? tblProveedorDirecciones.Ciudad.ToUpper().Trim() : tblProveedorDirecciones.Ciudad;
+                    tblProveedorDirecciones.Estado = !string.IsNullOrEmpty(tblProveedorDirecciones.Estado) ? tblProveedorDirecciones.Estado.ToUpper().Trim() : tblProveedorDirecciones.Estado;
 
                     _context.SaveChanges();
                     _context.Update(tblProveedorDirecciones);

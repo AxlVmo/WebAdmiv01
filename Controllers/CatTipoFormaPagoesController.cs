@@ -116,7 +116,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoFormaPago.IdUsuarioModifico = Guid.Parse(fuser);
-                    catTipoFormaPago.TipoFormaPagoDesc = catTipoFormaPago.TipoFormaPagoDesc.ToString().ToUpper();
+                    catTipoFormaPago.TipoFormaPagoDesc = catTipoFormaPago.TipoFormaPagoDesc.ToString().ToUpper().Trim();
                     catTipoFormaPago.FechaRegistro = DateTime.Now;
                     catTipoFormaPago.IdEstatusRegistro = 1;
                     _context.Add(catTipoFormaPago);
@@ -172,7 +172,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoFormaPago.IdUsuarioModifico = Guid.Parse(fuser);
-                    catTipoFormaPago.TipoFormaPagoDesc = catTipoFormaPago.TipoFormaPagoDesc.ToString().ToUpper();
+                    catTipoFormaPago.TipoFormaPagoDesc = catTipoFormaPago.TipoFormaPagoDesc.ToString().ToUpper().Trim();
                     catTipoFormaPago.FechaRegistro = DateTime.Now;
                     catTipoFormaPago.IdEstatusRegistro = catTipoFormaPago.IdEstatusRegistro;
                     _context.Add(catTipoFormaPago);

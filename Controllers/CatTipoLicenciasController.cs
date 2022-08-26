@@ -121,7 +121,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     CaTipotLicencia.IdUsuarioModifico = Guid.Parse(fuser);
                     CaTipotLicencia.FechaRegistro = DateTime.Now;
-                    CaTipotLicencia.LicenciaDesc = CaTipotLicencia.LicenciaDesc.ToUpper();
+                    CaTipotLicencia.LicenciaDesc = CaTipotLicencia.LicenciaDesc.ToUpper().Trim();
                     CaTipotLicencia.IdEstatusRegistro = 1;
                     _context.Add(CaTipotLicencia);
                     await _context.SaveChangesAsync();
@@ -177,7 +177,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     CaTipotLicencia.IdUsuarioModifico = Guid.Parse(fuser);
                     CaTipotLicencia.FechaRegistro = DateTime.Now;
-                    CaTipotLicencia.LicenciaDesc = CaTipotLicencia.LicenciaDesc.ToUpper();
+                    CaTipotLicencia.LicenciaDesc = CaTipotLicencia.LicenciaDesc.ToUpper().Trim();
                     CaTipotLicencia.IdEstatusRegistro = CaTipotLicencia.IdEstatusRegistro;
                     _context.Update(CaTipotLicencia);
                     await _context.SaveChangesAsync();

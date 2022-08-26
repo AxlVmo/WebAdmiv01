@@ -4,12 +4,14 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
 
-<h1>Details</h1>
-
-<div>
-    <h4>TblPrestamo</h4>
-    <hr />
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Control de Prestamos</li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles Prestamo</li>
+    </ol>
+</nav>
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdTipoPrestamo)

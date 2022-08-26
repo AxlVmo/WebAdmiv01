@@ -84,7 +84,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     CatTipoAlumnos.IdUsuarioModifico = Guid.Parse(fuser);
                     CatTipoAlumnos.FechaRegistro = DateTime.Now;
-                    CatTipoAlumnos.TipoAlumnoDesc = CatTipoAlumnos.TipoAlumnoDesc.ToString().ToUpper();
+                    CatTipoAlumnos.TipoAlumnoDesc = CatTipoAlumnos.TipoAlumnoDesc.ToString().ToUpper().Trim();
                     CatTipoAlumnos.IdEstatusRegistro = 1;
                     _context.Add(CatTipoAlumnos);
                     await _context.SaveChangesAsync();
@@ -139,7 +139,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     CatTipoAlumnos.IdUsuarioModifico = Guid.Parse(fuser);
                     CatTipoAlumnos.FechaRegistro = DateTime.Now;
-                    CatTipoAlumnos.TipoAlumnoDesc = CatTipoAlumnos.TipoAlumnoDesc.ToString().ToUpper();
+                    CatTipoAlumnos.TipoAlumnoDesc = CatTipoAlumnos.TipoAlumnoDesc.ToString().ToUpper().Trim();
                     CatTipoAlumnos.IdEstatusRegistro = CatTipoAlumnos.IdEstatusRegistro;
                     _context.Update(CatTipoAlumnos);
                     await _context.SaveChangesAsync();

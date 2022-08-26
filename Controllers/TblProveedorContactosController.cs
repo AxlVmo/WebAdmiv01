@@ -140,7 +140,7 @@ namespace WebAdmin.Controllers
                     tblProveedorContacto.IdUsuarioModifico = Guid.Parse(fuser);
                     var fProveedor = (from c in _context.TblProveedores where c.IdProveedor == tblProveedorContacto.IdProveedor select c).Distinct().ToList();
                     var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblProveedorContacto.IdPerfil select c).Distinct().ToList();
-                    tblProveedorContacto.NombreProveedorContacto = tblProveedorContacto.NombreProveedorContacto.ToString().ToUpper();
+                    tblProveedorContacto.NombreProveedorContacto = tblProveedorContacto.NombreProveedorContacto.ToString().ToUpper().Trim();
                     tblProveedorContacto.FechaRegistro = DateTime.Now;
                     tblProveedorContacto.IdEstatusRegistro = 1;
 
@@ -208,7 +208,7 @@ namespace WebAdmin.Controllers
                     tblProveedorContacto.IdUsuarioModifico = Guid.Parse(fuser);
                     var fProveedor = (from c in _context.TblProveedores where c.IdProveedor == tblProveedorContacto.IdProveedor select c).Distinct().ToList();
                     var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblProveedorContacto.IdPerfil select c).Distinct().ToList();
-                    tblProveedorContacto.NombreProveedorContacto = tblProveedorContacto.NombreProveedorContacto.ToString().ToUpper();
+                    tblProveedorContacto.NombreProveedorContacto = tblProveedorContacto.NombreProveedorContacto.ToString().ToUpper().Trim();
                     tblProveedorContacto.FechaRegistro = DateTime.Now;
                     tblProveedorContacto.IdEstatusRegistro = 1;
 

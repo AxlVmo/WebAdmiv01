@@ -70,23 +70,23 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdGenero,GeneroDesc")] CatGenero catGenero)
+        public async Task<IActionResult> Create([Bind("IdGenero,GeneroDesc")] CatGenero nCatGenero)
         {
             if (ModelState.IsValid)
             {
                 var vDuplicados = _context.CatGeneros
-                       .Where(s => s.GeneroDesc == catGenero.GeneroDesc)
+                       .Where(s => s.GeneroDesc == nCatGenero.GeneroDesc)
                        .ToList();
 
                 if (vDuplicados.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catGenero.IdUsuarioModifico = Guid.Parse(fuser);
-                    catGenero.FechaRegistro = DateTime.Now;
-                    catGenero.GeneroDesc = catGenero.GeneroDesc.ToString().ToUpper();
-                    catGenero.IdEstatusRegistro = 1;
-                    _context.Add(catGenero);
+                    nCatGenero.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatGenero.FechaRegistro = DateTime.Now;
+                    nCatGenero.GeneroDesc = nCatGenero.GeneroDesc.ToString().ToUpper().Trim();
+                    nCatGenero.IdEstatusRegistro = 1;
+                    _context.Add(nCatGenero);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -98,7 +98,7 @@ namespace WebAdmin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(catGenero);
+            return View(nCatGenero);
         }
 
         // GET: CatGeneroes/Edit/5
@@ -126,9 +126,9 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdGenero,GeneroDesc,IdEstatusRegistro")] CatGenero catGenero)
+        public async Task<IActionResult> Edit(int id, [Bind("IdGenero,GeneroDesc,IdEstatusRegistro")] CatGenero nCatGenero)
         {
-            if (id != catGenero.IdGenero)
+            if (id != nCatGenero.IdGenero)
             {
                 return NotFound();
             }
@@ -139,18 +139,18 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catGenero.IdUsuarioModifico = Guid.Parse(fuser);
-                    catGenero.FechaRegistro = DateTime.Now;
-                    catGenero.GeneroDesc = catGenero.GeneroDesc.ToString().ToUpper();
-                    catGenero.IdEstatusRegistro = catGenero.IdEstatusRegistro;
+                    nCatGenero.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatGenero.FechaRegistro = DateTime.Now;
+                    nCatGenero.GeneroDesc = nCatGenero.GeneroDesc.ToString().ToUpper().Trim();
+                    nCatGenero.IdEstatusRegistro = nCatGenero.IdEstatusRegistro;
                     _context.SaveChanges();
-                    _context.Update(catGenero);
+                    _context.Update(nCatGenero);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatGeneroExists(catGenero.IdGenero))
+                    if (!CatGeneroExists(nCatGenero.IdGenero))
                     {
                         return NotFound();
                     }
@@ -161,7 +161,7 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catGenero);
+            return View(nCatGenero);
         }
 
         // GET: CatGeneroes/Delete/5
@@ -187,8 +187,8 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catGenero = await _context.CatGeneros.FindAsync(id);
-            catGenero.IdEstatusRegistro = 2;
+            var nCatGenero = await _context.CatGeneros.FindAsync(id);
+            nCatGenero.IdEstatusRegistro = 2;
             _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);

@@ -186,7 +186,7 @@ namespace WebAdmin.Controllers
                     catProductos.FechaRegistro = DateTime.Now;
                     catProductos.IdEstatusRegistro = 1;
                     catProductos.CategoriaDesc = fCategoria[0].CategoriaDesc;
-                    catProductos.DescProducto = !string.IsNullOrEmpty(catProductos.DescProducto) ? catProductos.DescProducto.ToUpper() : catProductos.DescProducto;
+                    catProductos.DescProducto = !string.IsNullOrEmpty(catProductos.DescProducto) ? catProductos.DescProducto.ToUpper().Trim() : catProductos.DescProducto;
                     catProductos.CodigoInterno = GeneraCodigoInterno();
                     catProductos.SubCosto = catProductos.ProductoPrecioUno * (catProductos.PorcentajePrecioUno / 100);
                     _context.Add(catProductos);
@@ -249,7 +249,7 @@ namespace WebAdmin.Controllers
                     catProductos.FechaRegistro = DateTime.Now;
                     catProductos.IdEstatusRegistro = catProductos.IdEstatusRegistro;
                     catProductos.CategoriaDesc = fCategoria[0].CategoriaDesc;
-                    catProductos.DescProducto = !string.IsNullOrEmpty(catProductos.DescProducto) ? catProductos.DescProducto.ToUpper() : catProductos.DescProducto;
+                    catProductos.DescProducto = !string.IsNullOrEmpty(catProductos.DescProducto) ? catProductos.DescProducto.ToUpper().Trim() : catProductos.DescProducto;
                     //catProductos.SubCosto = catProductos.ProductoPrecioUno * (1 + (catProductos.PorcentajePrecioUno / 100));
                     catProductos.SubCosto = catProductos.ProductoPrecioUno;
                     _context.Update(catProductos);

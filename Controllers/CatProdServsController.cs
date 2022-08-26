@@ -116,7 +116,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catProdServ.IdUsuarioModifico = Guid.Parse(fuser);
-                    catProdServ.ProdServDesc = catProdServ.ProdServDesc.ToString().ToUpper();
+                    catProdServ.ProdServDesc = catProdServ.ProdServDesc.ToString().ToUpper().Trim();
                     catProdServ.FechaRegistro = DateTime.Now;
                     catProdServ.IdEstatusRegistro = 1;
                     _context.Add(catProdServ);
@@ -172,7 +172,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catProdServ.IdUsuarioModifico = Guid.Parse(fuser);
-                    catProdServ.ProdServDesc = catProdServ.ProdServDesc.ToString().ToUpper();
+                    catProdServ.ProdServDesc = catProdServ.ProdServDesc.ToString().ToUpper().Trim();
                     catProdServ.FechaRegistro = DateTime.Now;
                     catProdServ.IdEstatusRegistro = catProdServ.IdEstatusRegistro;
                     _context.Add(catProdServ);

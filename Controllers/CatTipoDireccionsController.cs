@@ -84,7 +84,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoDireccion.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoDireccion.FechaRegistro = DateTime.Now;
-                    catTipoDireccion.TipoDireccionDesc = catTipoDireccion.TipoDireccionDesc.ToString().ToUpper();
+                    catTipoDireccion.TipoDireccionDesc = catTipoDireccion.TipoDireccionDesc.ToString().ToUpper().Trim();
                     catTipoDireccion.IdEstatusRegistro = 1;
                     _context.Add(catTipoDireccion);
                     await _context.SaveChangesAsync();
@@ -139,7 +139,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoDireccion.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoDireccion.FechaRegistro = DateTime.Now;
-                    catTipoDireccion.TipoDireccionDesc = catTipoDireccion.TipoDireccionDesc.ToString().ToUpper();
+                    catTipoDireccion.TipoDireccionDesc = catTipoDireccion.TipoDireccionDesc.ToString().ToUpper().Trim();
                     catTipoDireccion.IdEstatusRegistro = catTipoDireccion.IdEstatusRegistro;
                     _context.Update(catTipoDireccion);
                     await _context.SaveChangesAsync();

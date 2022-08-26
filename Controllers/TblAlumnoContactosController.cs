@@ -174,7 +174,7 @@ namespace WebAdmin.Controllers
                     tblAlumnoContacto.IdUsuarioModifico = Guid.Parse(fuser);
                     var fAlumno = (from c in _context.TblAlumnos where c.IdAlumno == tblAlumnoContacto.IdAlumno select c).Distinct().ToList();
                     var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblAlumnoContacto.IdPerfil select c).Distinct().ToList();
-                    tblAlumnoContacto.NombreAlumnoContacto = tblAlumnoContacto.NombreAlumnoContacto.ToString().ToUpper();
+                    tblAlumnoContacto.NombreAlumnoContacto = tblAlumnoContacto.NombreAlumnoContacto.ToString().ToUpper().Trim();
                     tblAlumnoContacto.FechaRegistro = DateTime.Now;
                     tblAlumnoContacto.IdEstatusRegistro = 1;
 
@@ -242,7 +242,7 @@ namespace WebAdmin.Controllers
                     tblAlumnoContacto.IdUsuarioModifico = Guid.Parse(fuser);
                     var fAlumno = (from c in _context.TblAlumnos where c.IdAlumno == tblAlumnoContacto.IdAlumno select c).Distinct().ToList();
                     var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblAlumnoContacto.IdPerfil select c).Distinct().ToList();
-                    tblAlumnoContacto.NombreAlumnoContacto = tblAlumnoContacto.NombreAlumnoContacto.ToString().ToUpper();
+                    tblAlumnoContacto.NombreAlumnoContacto = tblAlumnoContacto.NombreAlumnoContacto.ToString().ToUpper().Trim();
                     tblAlumnoContacto.FechaRegistro = DateTime.Now;
                     tblAlumnoContacto.IdEstatusRegistro = 1;
 

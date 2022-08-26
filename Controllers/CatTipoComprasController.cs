@@ -115,7 +115,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoCompras.IdUsuarioModifico = Guid.Parse(fuser);
-                    catTipoCompras.TipoCompraDesc= catTipoCompras.TipoCompraDesc.ToString().ToUpper();
+                    catTipoCompras.TipoCompraDesc= catTipoCompras.TipoCompraDesc.ToString().ToUpper().Trim();
                     catTipoCompras.FechaRegistro = DateTime.Now;
                     catTipoCompras.IdEstatusRegistro = 1;
                     _context.Add(catTipoCompras);
@@ -171,7 +171,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoCompras.IdUsuarioModifico = Guid.Parse(fuser);
-                    catTipoCompras.TipoCompraDesc = catTipoCompras.TipoCompraDesc.ToString().ToUpper();
+                    catTipoCompras.TipoCompraDesc = catTipoCompras.TipoCompraDesc.ToString().ToUpper().Trim();
                     catTipoCompras.FechaRegistro = DateTime.Now;
                     catTipoCompras.IdEstatusRegistro = catTipoCompras.IdEstatusRegistro;
                     _context.Add(catTipoCompras);

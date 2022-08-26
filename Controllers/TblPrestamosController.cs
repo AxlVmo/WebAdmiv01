@@ -231,47 +231,45 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoPrestamo,PrestamoDesc,NumeroReferencia,FechaFacturacion,MontoPrestamo")] TblPrestamo TblPrestamo)
+        public async Task<IActionResult> Create([Bind("IdTipoPrestamo,PrestamoDesc,CantidadPrestamo,IdCentroPrestamo,IdPeriodoAmortiza,IdTipoFormaPago,Nombres,ApellidoPaterno,ApellidoMaterno,curp,ine")] TblPrestamo TblPrestamo)
         {
-            if (ModelState.IsValid)
+            var vDuplicado = _context.TblPrestamos.Where(s => s.PrestamoDesc == TblPrestamo.PrestamoDesc).ToList();
+            if (vDuplicado.Count == 0)
             {
-                var vDuplicado = _context.TblPrestamos
-               .Where(s => s.PrestamoDesc == TblPrestamo.PrestamoDesc)
-               .ToList();
-
-                if (vDuplicado.Count == 0)
+                Guid fCentroCorporativo = Guid.Empty;
+                int fCorpCent = 0;
+                var fuser = _userService.GetUserId();
+                var isLoggedIn = _userService.IsAuthenticated();
+                var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                fCentroCorporativo = fIdUsuario.IdCorporativo;
+                fCorpCent = 1;
+                if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                 {
-                    Guid fCentroCorporativo = Guid.Empty;
-                    int fCorpCent = 0;
-                    var fuser = _userService.GetUserId();
-                    var isLoggedIn = _userService.IsAuthenticated();
-                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-                    fCentroCorporativo = fIdUsuario.IdCorporativo;
-                    fCorpCent = 1;
-                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
-                    {
-                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
-                        fCentroCorporativo = fIdCentro.IdCentro;
-                        fCorpCent = 2;
-                    }
-                    TblPrestamo.IdCorpCent = fCorpCent;
-                    TblPrestamo.IdUCorporativoCentro = fCentroCorporativo;
-                    TblPrestamo.IdUsuarioModifico = Guid.Parse(fuser);
-                    TblPrestamo.PrestamoDesc = TblPrestamo.PrestamoDesc.ToString().ToUpper();
-                    TblPrestamo.FechaRegistro = DateTime.Now;
-                    TblPrestamo.IdEstatusRegistro = 1;
-                    _context.Add(TblPrestamo);
-                    await _context.SaveChangesAsync();
-                    _notyf.Success("Registro creado con éxito", 5);
+                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                    fCentroCorporativo = fIdCentro.IdCentro;
+                    fCorpCent = 2;
                 }
-                else
-                {
-                    _notyf.Warning("Favor de validar, existe una TipoPrestamo con el mismo nombre", 5);
-                }
-                return RedirectToAction(nameof(Index));
+                TblPrestamo.IdCentroPrestamo = !string.IsNullOrEmpty(TblPrestamo.IdCentroPrestamo.ToString()) ? Guid.Empty : TblPrestamo.IdCentroPrestamo;
+                TblPrestamo.Nombres = !string.IsNullOrEmpty(TblPrestamo.Nombres) ? TblPrestamo.Nombres.ToUpper().Trim() : TblPrestamo.Nombres;
+                TblPrestamo.ApellidoPaterno = !string.IsNullOrEmpty(TblPrestamo.ApellidoPaterno) ? TblPrestamo.ApellidoPaterno.ToUpper().Trim() : TblPrestamo.ApellidoPaterno;
+                TblPrestamo.ApellidoMaterno = !string.IsNullOrEmpty(TblPrestamo.ApellidoMaterno) ? TblPrestamo.ApellidoMaterno.ToUpper().Trim() : TblPrestamo.ApellidoMaterno;
+                TblPrestamo.curp = !string.IsNullOrEmpty(TblPrestamo.curp) ? TblPrestamo.curp.ToUpper().Trim() : TblPrestamo.curp;
+                TblPrestamo.ine = !string.IsNullOrEmpty(TblPrestamo.ine) ? TblPrestamo.ine.ToUpper().Trim() : TblPrestamo.ine;
+                TblPrestamo.IdCorpCent = fCorpCent;
+                TblPrestamo.IdUCorporativoCentro = fCentroCorporativo;
+                TblPrestamo.IdUsuarioModifico = Guid.Parse(fuser);
+                TblPrestamo.PrestamoDesc = !string.IsNullOrEmpty(TblPrestamo.PrestamoDesc) ? TblPrestamo.PrestamoDesc.ToUpper().Trim() : TblPrestamo.PrestamoDesc;
+                TblPrestamo.FechaRegistro = DateTime.Now;
+                TblPrestamo.IdEstatusRegistro = 1;
+                _context.Add(TblPrestamo);
+                await _context.SaveChangesAsync();
+                _notyf.Success("Registro creado con éxito", 5);
             }
-            //ViewData["IdTipoPrestamo"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", TblPrestamo.IdTipoPrestamo);
-            return View(TblPrestamo);
+            else
+            {
+                _notyf.Warning("Favor de validar, existe una TipoPrestamo con el mismo nombre", 5);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: TblPrestamos/Edit/5
@@ -339,7 +337,7 @@ namespace WebAdmin.Controllers
 
                     TblPrestamo.IdCorpCent = fCorpCent;
                     TblPrestamo.IdUCorporativoCentro = fCentroCorporativo;
-                    TblPrestamo.PrestamoDesc = TblPrestamo.PrestamoDesc.ToString().ToUpper();
+                    TblPrestamo.PrestamoDesc = TblPrestamo.PrestamoDesc.ToString().ToUpper().Trim();
                     TblPrestamo.FechaRegistro = DateTime.Now;
                     TblPrestamo.IdEstatusRegistro = TblPrestamo.IdEstatusRegistro;
                     _context.Add(TblPrestamo);

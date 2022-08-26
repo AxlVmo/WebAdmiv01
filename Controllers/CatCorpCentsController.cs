@@ -60,7 +60,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            var fCatCorpCents= from a in _context.CatCorpCents
+            var fnCatCorpCents= from a in _context.CatCorpCents
 
                                 select new CatCorpCent
                                 {
@@ -71,7 +71,7 @@ namespace WebAdmin.Controllers
                                     IdEstatusRegistro = a.IdEstatusRegistro
                                 };
 
-            return View(await fCatCorpCents.ToListAsync());
+            return View(await fnCatCorpCents.ToListAsync());
         }
 
         // GET: CatCorpCents/Details/5
@@ -103,23 +103,23 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCorpCent,CorpCentDesc")] CatCorpCent catCorpCents)
+        public async Task<IActionResult> Create([Bind("IdCorpCent,CorpCentDesc")] CatCorpCent nCatCorpCents)
         {
             if (ModelState.IsValid)
             {
                 var vDuplicado = _context.CatCorpCents
-               .Where(s => s.CorpCentDesc == catCorpCents.CorpCentDesc)
+               .Where(s => s.CorpCentDesc == nCatCorpCents.CorpCentDesc)
                .ToList();
 
                 if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catCorpCents.IdUsuarioModifico = Guid.Parse(fuser);
-                    catCorpCents.CorpCentDesc = catCorpCents.CorpCentDesc.ToString().ToUpper();
-                    catCorpCents.FechaRegistro = DateTime.Now;
-                    catCorpCents.IdEstatusRegistro = 1;
-                    _context.Add(catCorpCents);
+                    nCatCorpCents.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatCorpCents.CorpCentDesc = nCatCorpCents.CorpCentDesc.ToString().ToUpper().Trim();
+                    nCatCorpCents.FechaRegistro = DateTime.Now;
+                    nCatCorpCents.IdEstatusRegistro = 1;
+                    _context.Add(nCatCorpCents);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -129,8 +129,8 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["IdCategoria"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", catCorpCents.IdCategoria);
-            return View(catCorpCents);
+            //ViewData["IdCategoria"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", nCatCorpCents.IdCategoria);
+            return View(nCatCorpCents);
         }
 
         // GET: CatCorpCents/Edit/5
@@ -158,9 +158,9 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCorpCent,CorpCentDesc,IdEstatusRegistro")] CatCorpCent catCorpCents)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCorpCent,CorpCentDesc,IdEstatusRegistro")] CatCorpCent nCatCorpCents)
         {
-            if (id != catCorpCents.IdCorpCent)
+            if (id != nCatCorpCents.IdCorpCent)
             {
                 return NotFound();
             }
@@ -171,18 +171,17 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catCorpCents.IdUsuarioModifico = Guid.Parse(fuser);
-                    catCorpCents.CorpCentDesc = catCorpCents.CorpCentDesc.ToString().ToUpper();
-                    catCorpCents.FechaRegistro = DateTime.Now;
-                    catCorpCents.IdEstatusRegistro = catCorpCents.IdEstatusRegistro;
-                    _context.Add(catCorpCents);
-                    _context.Update(catCorpCents);
+                    nCatCorpCents.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatCorpCents.CorpCentDesc = nCatCorpCents.CorpCentDesc.ToString().ToUpper().Trim();
+                    nCatCorpCents.FechaRegistro = DateTime.Now;
+                    nCatCorpCents.IdEstatusRegistro = nCatCorpCents.IdEstatusRegistro;
+                    _context.Update(nCatCorpCents);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!catCorpCentsExists(catCorpCents.IdCorpCent))
+                    if (!catCorpCentsExists(nCatCorpCents.IdCorpCent))
                     {
                         return NotFound();
                     }
@@ -193,7 +192,7 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catCorpCents);
+            return View(nCatCorpCents);
         }
 
         // GET: CatCorpCents/Delete/5
@@ -219,8 +218,8 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catCorpCents = await _context.CatCorpCents.FindAsync(id);
-            catCorpCents.IdEstatusRegistro = 2;
+            var nCatCorpCents = await _context.CatCorpCents.FindAsync(id);
+            nCatCorpCents.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

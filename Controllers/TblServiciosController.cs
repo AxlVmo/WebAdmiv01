@@ -185,7 +185,7 @@ namespace WebAdmin.Controllers
                     catServicios.IdUsuarioModifico = Guid.Parse(fuser);
                     catServicios.FechaRegistro = DateTime.Now;
                     catServicios.IdEstatusRegistro = 1;
-                    catServicios.DescServicio = !string.IsNullOrEmpty(catServicios.DescServicio) ? catServicios.DescServicio.ToUpper() : catServicios.DescServicio;
+                    catServicios.DescServicio = !string.IsNullOrEmpty(catServicios.DescServicio) ? catServicios.DescServicio.ToUpper().Trim() : catServicios.DescServicio;
                     catServicios.CodigoInterno = GeneraCodigoInterno();
                     _context.Add(catServicios);
                     await _context.SaveChangesAsync();
@@ -246,7 +246,7 @@ namespace WebAdmin.Controllers
                     var fCategoria = (from c in _context.CatTipoServicios where c.IdTipoServicio == catServicios.IdTipoServicio select c).Distinct().ToList();
                     catServicios.FechaRegistro = DateTime.Now;
                     catServicios.IdEstatusRegistro = catServicios.IdEstatusRegistro;
-                    catServicios.DescServicio = !string.IsNullOrEmpty(catServicios.DescServicio) ? catServicios.DescServicio.ToUpper() : catServicios.DescServicio;
+                    catServicios.DescServicio = !string.IsNullOrEmpty(catServicios.DescServicio) ? catServicios.DescServicio.ToUpper().Trim() : catServicios.DescServicio;
                     catServicios.SubCosto = catServicios.ServicioPrecioUno;
                     _context.Update(catServicios);
                     await _context.SaveChangesAsync();

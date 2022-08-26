@@ -84,7 +84,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoContratacion.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoContratacion.FechaRegistro = DateTime.Now;
-                    catTipoContratacion.TipoContratacionDesc = catTipoContratacion.TipoContratacionDesc.ToString().ToUpper();
+                    catTipoContratacion.TipoContratacionDesc = catTipoContratacion.TipoContratacionDesc.ToString().ToUpper().Trim();
                     catTipoContratacion.IdEstatusRegistro = 1;
                     _context.Add(catTipoContratacion);
                     await _context.SaveChangesAsync();
@@ -139,7 +139,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoContratacion.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoContratacion.FechaRegistro = DateTime.Now;
-                    catTipoContratacion.TipoContratacionDesc = catTipoContratacion.TipoContratacionDesc.ToString().ToUpper();
+                    catTipoContratacion.TipoContratacionDesc = catTipoContratacion.TipoContratacionDesc.ToString().ToUpper().Trim();
                     catTipoContratacion.IdEstatusRegistro = catTipoContratacion.IdEstatusRegistro;
                     _context.Update(catTipoContratacion);
                     await _context.SaveChangesAsync();

@@ -108,9 +108,9 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                 {
                     UserName = userName,
                     Email = Input.Email,
-                    Nombres = Input.Nombres.ToUpper(),
-                    ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
-                    ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
+                    Nombres = Input.Nombres.ToUpper().Trim(),
+                    ApellidoPaterno = Input.ApellidoPaterno.ToUpper().Trim(),
+                    ApellidoMaterno = Input.ApellidoMaterno.ToUpper().Trim(),
                     FechaRegistro = DateTime.Now,
                     IdEstatusRegistro = 1
                 };
@@ -123,9 +123,9 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                     var addUsuariosU = new TblUsuario
                     {
                         IdUsuario = nIdUsuario,
-                        Nombres = Input.Nombres.ToUpper(),
-                        ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
-                        ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
+                        Nombres = Input.Nombres.ToUpper().Trim(),
+                        ApellidoPaterno = Input.ApellidoPaterno.ToUpper().Trim(),
+                        ApellidoMaterno = Input.ApellidoMaterno.ToUpper().Trim(),
                         FechaNacimiento = DateTime.Now,
                         IdUsuarioModifico = Guid.Empty,
                         IdCorpCent = 1,
@@ -143,9 +143,9 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                     var addUsuarios = new TblUsuario
                     {
                         IdUsuario = nIdUsuario,
-                        Nombres = Input.Nombres.ToUpper(),
-                        ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
-                        ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
+                        Nombres = Input.Nombres.ToUpper().Trim(),
+                        ApellidoPaterno = Input.ApellidoPaterno.ToUpper().Trim(),
+                        ApellidoMaterno = Input.ApellidoMaterno.ToUpper().Trim(),
                         FechaNacimiento = DateTime.Now,
                         IdUsuarioModifico = Guid.Empty,
                         IdCorpCent = 1,

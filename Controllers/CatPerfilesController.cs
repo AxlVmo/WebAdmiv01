@@ -84,7 +84,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catPerfil.IdUsuarioModifico = Guid.Parse(fuser);
                     catPerfil.FechaRegistro = DateTime.Now;
-                    catPerfil.PerfilDesc = catPerfil.PerfilDesc.ToString().ToUpper();
+                    catPerfil.PerfilDesc = catPerfil.PerfilDesc.ToString().ToUpper().Trim();
                     catPerfil.IdEstatusRegistro = 1;
                     _context.Add(catPerfil);
                     await _context.SaveChangesAsync();
@@ -139,7 +139,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catPerfil.IdUsuarioModifico = Guid.Parse(fuser);
                     catPerfil.FechaRegistro = DateTime.Now;
-                    catPerfil.PerfilDesc = catPerfil.PerfilDesc.ToString().ToUpper();
+                    catPerfil.PerfilDesc = catPerfil.PerfilDesc.ToString().ToUpper().Trim();
                     catPerfil.IdEstatusRegistro = catPerfil.IdEstatusRegistro;
                     _context.Update(catPerfil);
                     await _context.SaveChangesAsync();

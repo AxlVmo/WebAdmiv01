@@ -84,7 +84,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catNivelEscolar.IdUsuarioModifico = Guid.Parse(fuser);
                     catNivelEscolar.FechaRegistro = DateTime.Now;
-                    catNivelEscolar.NivelEscolarDesc = catNivelEscolar.NivelEscolarDesc.ToString().ToUpper();
+                    catNivelEscolar.NivelEscolarDesc = catNivelEscolar.NivelEscolarDesc.ToString().ToUpper().Trim();
                     catNivelEscolar.IdEstatusRegistro = 1;
                     _context.Add(catNivelEscolar);
                     await _context.SaveChangesAsync();
@@ -139,7 +139,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catNivelEscolar.IdUsuarioModifico = Guid.Parse(fuser);
                     catNivelEscolar.FechaRegistro = DateTime.Now;
-                    catNivelEscolar.NivelEscolarDesc = catNivelEscolar.NivelEscolarDesc.ToString().ToUpper();
+                    catNivelEscolar.NivelEscolarDesc = catNivelEscolar.NivelEscolarDesc.ToString().ToUpper().Trim();
                     catNivelEscolar.IdEstatusRegistro = catNivelEscolar.IdEstatusRegistro;
                     _context.Update(catNivelEscolar);
                     await _context.SaveChangesAsync();

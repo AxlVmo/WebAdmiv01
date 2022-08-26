@@ -70,7 +70,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEstatus,EstatusDesc")] CatEstatus CatEstatus)
+        public async Task<IActionResult> Create([Bind("IdEstatus,EstatusDesc")] CatEstatus nCatEstatus)
         {
             if (ModelState.IsValid)
             {
@@ -82,17 +82,17 @@ namespace WebAdmin.Controllers
                 else
                 {
                     var vDuplicados = _context.CatEstatus
-                        .Where(s => s.EstatusDesc == CatEstatus.EstatusDesc)
+                        .Where(s => s.EstatusDesc == nCatEstatus.EstatusDesc)
                         .ToList();
 
                     if (vDuplicados.Count == 0)
                     {
                         var fuser = _userService.GetUserId();
                         var isLoggedIn = _userService.IsAuthenticated();
-                        CatEstatus.IdUsuarioModifico = Guid.Parse(fuser);
-                        CatEstatus.FechaRegistro = DateTime.Now;
-                        CatEstatus.EstatusDesc = CatEstatus.EstatusDesc.ToString().ToUpper();
-                        _context.Add(CatEstatus);
+                        nCatEstatus.IdUsuarioModifico = Guid.Parse(fuser);
+                        nCatEstatus.FechaRegistro = DateTime.Now;
+                        nCatEstatus.EstatusDesc = nCatEstatus.EstatusDesc.ToString().ToUpper().Trim();
+                        _context.Add(nCatEstatus);
                         await _context.SaveChangesAsync();
                         _notyf.Success("Registro creado con éxito", 5);
                     }
@@ -105,7 +105,7 @@ namespace WebAdmin.Controllers
                 }
             }
 
-            return View(CatEstatus);
+            return View(nCatEstatus);
         }
 
         // GET: CatEstatus/Edit/5
@@ -133,9 +133,9 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdEstatus,EstatusDesc,FechaRegistro,IdEstatusRegistro")] CatEstatus CatEstatus)
+        public async Task<IActionResult> Edit(int id, [Bind("IdEstatus,EstatusDesc,FechaRegistro,IdEstatusRegistro")] CatEstatus nCatEstatus)
         {
-            if (id != CatEstatus.IdEstatusRegistro)
+            if (id != nCatEstatus.IdEstatusRegistro)
             {
                 return NotFound();
             }
@@ -146,18 +146,18 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    CatEstatus.IdUsuarioModifico = Guid.Parse(fuser);
-                    CatEstatus.FechaRegistro = DateTime.Now;
-                    CatEstatus.EstatusDesc = CatEstatus.EstatusDesc.ToString().ToUpper();
-                    CatEstatus.IdEstatusRegistro = CatEstatus.IdEstatusRegistro;
+                    nCatEstatus.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatEstatus.FechaRegistro = DateTime.Now;
+                    nCatEstatus.EstatusDesc = nCatEstatus.EstatusDesc.ToString().ToUpper().Trim();
+                    nCatEstatus.IdEstatusRegistro = nCatEstatus.IdEstatusRegistro;
                     _context.SaveChanges();
-                    _context.Update(CatEstatus);
+                    _context.Update(nCatEstatus);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatEstatusExists(CatEstatus.IdEstatusRegistro))
+                    if (!CatEstatusExists(nCatEstatus.IdEstatusRegistro))
                     {
                         return NotFound();
                     }
@@ -168,7 +168,7 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(CatEstatus);
+            return View(nCatEstatus);
         }
 
         // GET: CatEstatus/Delete/5
@@ -194,8 +194,8 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var CatEstatus = await _context.CatEstatus.FindAsync(id);
-            CatEstatus.IdEstatusRegistro = 2;
+            var nCatEstatus = await _context.CatEstatus.FindAsync(id);
+            nCatEstatus.IdEstatusRegistro = 2;
             _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);

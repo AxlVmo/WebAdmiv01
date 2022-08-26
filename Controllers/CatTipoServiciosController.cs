@@ -106,7 +106,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoServicio.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoServicio.FechaRegistro = DateTime.Now;
-                    catTipoServicio.TipoServicioDesc = catTipoServicio.TipoServicioDesc.ToString().ToUpper();
+                    catTipoServicio.TipoServicioDesc = catTipoServicio.TipoServicioDesc.ToString().ToUpper().Trim();
                     catTipoServicio.IdEstatusRegistro = 1;
                     _context.Add(catTipoServicio);
                     await _context.SaveChangesAsync();
@@ -161,7 +161,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoServicio.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoServicio.FechaRegistro = DateTime.Now;
-                    catTipoServicio.TipoServicioDesc = catTipoServicio.TipoServicioDesc.ToString().ToUpper();
+                    catTipoServicio.TipoServicioDesc = catTipoServicio.TipoServicioDesc.ToString().ToUpper().Trim();
                     catTipoServicio.IdEstatusRegistro = catTipoServicio.IdEstatusRegistro;
                     _context.Update(catTipoServicio);
                     await _context.SaveChangesAsync();

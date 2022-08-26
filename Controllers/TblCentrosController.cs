@@ -42,8 +42,8 @@ namespace WebAdmin.Controllers
                     if (ValidaCorporativo.Count >= 1)
                     {
                         ViewBag.CorporativoFlag = 1;
-                        // var ValidaUsuarios = _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdArea == 2 && m.IdPerfil == 3 && m.IdRol == 2);
-                        var ValidaUsuarios = _context.TblUsuarios.ToList();
+                        
+                        var ValidaUsuarios = _context.TblUsuarios.Where(m => m.IdArea == 2 && m.IdPerfil == 3 && m.IdRol == 2).ToList();
 
                         if (ValidaUsuarios.Count >= 1)
                         {
@@ -149,7 +149,7 @@ namespace WebAdmin.Controllers
             if (ModelState.IsValid)
             {
                 var vNombreCentro = _context.TblCentros
-                .Where(a => a.NombreCentro == tblCentros.NombreCentro.ToUpper()).ToList();
+                .Where(a => a.NombreCentro == tblCentros.NombreCentro.ToUpper().Trim()).ToList();
 
                 if (vNombreCentro.Count == 0)
                 {
@@ -164,15 +164,15 @@ namespace WebAdmin.Controllers
                         tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
                         var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                         tblCentros.FechaRegistro = DateTime.Now;
-                        tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
+                        tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper().Trim();
                         tblCentros.IdEstatusRegistro = 1;
                         var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCentros.Colonia).FirstOrDefault();
                         tblCentros.IdColonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? tblCentros.Colonia : tblCentros.Colonia;
-                        tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper() : tblCentros.Colonia;
-                        tblCentros.Calle = !string.IsNullOrEmpty(tblCentros.Calle) ? tblCentros.Calle.ToUpper() : tblCentros.Calle;
-                        tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
-                        tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
-                        tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
+                        tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper().Trim() : tblCentros.Colonia;
+                        tblCentros.Calle = !string.IsNullOrEmpty(tblCentros.Calle) ? tblCentros.Calle.ToUpper().Trim() : tblCentros.Calle;
+                        tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper().Trim() : tblCentros.LocalidadMunicipio;
+                        tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper().Trim() : tblCentros.Ciudad;
+                        tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper().Trim() : tblCentros.Estado;
                         tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
                         tblCentros.IdUCorporativoCentro = idCorporativos.IdCorporativo;
                         _context.Add(tblCentros);
@@ -262,15 +262,15 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
                     tblCentros.FechaRegistro = DateTime.Now;
-                    tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
+                    tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper().Trim();
                     tblCentros.IdEstatusRegistro = tblCentros.IdEstatusRegistro;
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCentros.Colonia).FirstOrDefault();
                     tblCentros.IdColonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? tblCentros.Colonia : tblCentros.Colonia;
-                    tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper() : tblCentros.Colonia;
-                    tblCentros.Calle = !string.IsNullOrEmpty(tblCentros.Calle) ? tblCentros.Calle.ToUpper() : tblCentros.Calle;
-                    tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
-                    tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
-                    tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
+                    tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper().Trim() : tblCentros.Colonia;
+                    tblCentros.Calle = !string.IsNullOrEmpty(tblCentros.Calle) ? tblCentros.Calle.ToUpper().Trim() : tblCentros.Calle;
+                    tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper().Trim() : tblCentros.LocalidadMunicipio;
+                    tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper().Trim() : tblCentros.Ciudad;
+                    tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper().Trim() : tblCentros.Estado;
                     tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
                     _context.Update(tblCentros);
                     await _context.SaveChangesAsync();

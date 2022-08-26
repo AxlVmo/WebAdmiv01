@@ -107,9 +107,9 @@ namespace WebAdmin.Controllers
                     tblProveedor.IdUsuarioModifico = Guid.Parse(fuser);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblProveedor.FechaRegistro = DateTime.Now;
-                    tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper();
-                    tblProveedor.GiroComercial = !string.IsNullOrEmpty(tblProveedor.GiroComercial) ? tblProveedor.GiroComercial.ToUpper() : tblProveedor.GiroComercial;
-                    tblProveedor.Rfc = !string.IsNullOrEmpty(tblProveedor.Rfc) ? tblProveedor.Rfc.ToUpper() : tblProveedor.Rfc;
+                    tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper().Trim();
+                    tblProveedor.GiroComercial = !string.IsNullOrEmpty(tblProveedor.GiroComercial) ? tblProveedor.GiroComercial.ToUpper().Trim() : tblProveedor.GiroComercial;
+                    tblProveedor.Rfc = !string.IsNullOrEmpty(tblProveedor.Rfc) ? tblProveedor.Rfc.ToUpper().Trim() : tblProveedor.Rfc;
                     tblProveedor.IdEstatusRegistro = 1;
                     tblProveedor.IdCorporativo = idCorporativos.IdCorporativo;
 
@@ -167,9 +167,9 @@ namespace WebAdmin.Controllers
                     tblProveedor.IdUsuarioModifico = Guid.Parse(fuser);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblProveedor.FechaRegistro = DateTime.Now;
-                    tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper();
-                    tblProveedor.GiroComercial = !string.IsNullOrEmpty(tblProveedor.GiroComercial) ? tblProveedor.GiroComercial.ToUpper() : tblProveedor.GiroComercial;
-                    tblProveedor.Rfc = !string.IsNullOrEmpty(tblProveedor.Rfc) ? tblProveedor.Rfc.ToUpper() : tblProveedor.Rfc;
+                    tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper().Trim();
+                    tblProveedor.GiroComercial = !string.IsNullOrEmpty(tblProveedor.GiroComercial) ? tblProveedor.GiroComercial.ToUpper().Trim() : tblProveedor.GiroComercial;
+                    tblProveedor.Rfc = !string.IsNullOrEmpty(tblProveedor.Rfc) ? tblProveedor.Rfc.ToUpper().Trim() : tblProveedor.Rfc;
                     tblProveedor.IdEstatusRegistro = 1;
                     tblProveedor.IdCorporativo = idCorporativos.IdCorporativo;
 

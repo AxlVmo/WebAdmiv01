@@ -60,7 +60,7 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            var fCatCategoria = from a in _context.CatCategorias
+            var fnCatCategoria = from a in _context.CatCategorias
 
                                 select new CatCategoria
                                 {
@@ -70,7 +70,7 @@ namespace WebAdmin.Controllers
                                     IdEstatusRegistro = a.IdEstatusRegistro
                                 };
 
-            return View(await fCatCategoria.ToListAsync());
+            return View(await fnCatCategoria.ToListAsync());
         }
 
         // GET: CatCategorias/Details/5
@@ -102,23 +102,23 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCategoria,CategoriaDesc")] CatCategoria catCategoria)
+        public async Task<IActionResult> Create([Bind("IdCategoria,CategoriaDesc")] CatCategoria nCatCategoria)
         {
             if (ModelState.IsValid)
             {
                 var vDuplicado = _context.CatCategorias
-               .Where(s => s.CategoriaDesc == catCategoria.CategoriaDesc)
+               .Where(s => s.CategoriaDesc == nCatCategoria.CategoriaDesc)
                .ToList();
 
                 if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catCategoria.IdUsuarioModifico = Guid.Parse(fuser);
-                    catCategoria.CategoriaDesc = catCategoria.CategoriaDesc.ToString().ToUpper();
-                    catCategoria.FechaRegistro = DateTime.Now;
-                    catCategoria.IdEstatusRegistro = 1;
-                    _context.Add(catCategoria);
+                    nCatCategoria.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatCategoria.CategoriaDesc = nCatCategoria.CategoriaDesc.ToString().ToUpper().Trim();
+                    nCatCategoria.FechaRegistro = DateTime.Now;
+                    nCatCategoria.IdEstatusRegistro = 1;
+                    _context.Add(nCatCategoria);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -128,8 +128,8 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["IdCategoria"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", catCategoria.IdCategoria);
-            return View(catCategoria);
+            //ViewData["IdCategoria"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", nCatCategoria.IdCategoria);
+            return View(nCatCategoria);
         }
 
         // GET: CatCategorias/Edit/5
@@ -157,9 +157,9 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,CategoriaDesc,IdEstatusRegistro")] CatCategoria catCategoria)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,CategoriaDesc,IdEstatusRegistro")] CatCategoria nCatCategoria)
         {
-            if (id != catCategoria.IdCategoria)
+            if (id != nCatCategoria.IdCategoria)
             {
                 return NotFound();
             }
@@ -170,18 +170,17 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catCategoria.IdUsuarioModifico = Guid.Parse(fuser);
-                    catCategoria.CategoriaDesc = catCategoria.CategoriaDesc.ToString().ToUpper();
-                    catCategoria.FechaRegistro = DateTime.Now;
-                    catCategoria.IdEstatusRegistro = catCategoria.IdEstatusRegistro;
-                    _context.Add(catCategoria);
-                    _context.Update(catCategoria);
+                    nCatCategoria.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatCategoria.CategoriaDesc = nCatCategoria.CategoriaDesc.ToString().ToUpper().Trim();
+                    nCatCategoria.FechaRegistro = DateTime.Now;
+                    nCatCategoria.IdEstatusRegistro = nCatCategoria.IdEstatusRegistro;
+                    _context.Update(nCatCategoria);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatCategoriaExists(catCategoria.IdCategoria))
+                    if (!CatCategoriaExists(nCatCategoria.IdCategoria))
                     {
                         return NotFound();
                     }
@@ -192,7 +191,7 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catCategoria);
+            return View(nCatCategoria);
         }
 
         // GET: CatCategorias/Delete/5
@@ -218,8 +217,8 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catCategoria = await _context.CatCategorias.FindAsync(id);
-            catCategoria.IdEstatusRegistro = 2;
+            var nCatCategoria = await _context.CatCategorias.FindAsync(id);
+            nCatCategoria.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

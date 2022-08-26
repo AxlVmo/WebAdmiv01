@@ -70,23 +70,23 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEscolaridad,EscolaridadDesc")] CatEscolaridad catEscolaridad)
+        public async Task<IActionResult> Create([Bind("IdEscolaridad,EscolaridadDesc")] CatEscolaridad nCatEscolaridad)
         {
             if (ModelState.IsValid)
             {
                 var vDuplicado = _context.CatAreas
-                       .Where(s => s.AreaDesc == catEscolaridad.EscolaridadDesc)
+                       .Where(s => s.AreaDesc == nCatEscolaridad.EscolaridadDesc)
                        .ToList();
 
                 if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catEscolaridad.IdUsuarioModifico = Guid.Parse(fuser);
-                    catEscolaridad.FechaRegistro = DateTime.Now;
-                    catEscolaridad.EscolaridadDesc = catEscolaridad.EscolaridadDesc.ToString().ToUpper();
-                    catEscolaridad.IdEstatusRegistro = 1;
-                    _context.Add(catEscolaridad);
+                    nCatEscolaridad.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatEscolaridad.FechaRegistro = DateTime.Now;
+                    nCatEscolaridad.EscolaridadDesc = nCatEscolaridad.EscolaridadDesc.ToString().ToUpper().Trim();
+                    nCatEscolaridad.IdEstatusRegistro = 1;
+                    _context.Add(nCatEscolaridad);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -97,7 +97,7 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catEscolaridad);
+            return View(nCatEscolaridad);
         }
 
         // GET: CatEscolaridads/Edit/5
@@ -124,9 +124,9 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdEscolaridad,EscolaridadDesc,IdEstatusRegistro")] CatEscolaridad catEscolaridad)
+        public async Task<IActionResult> Edit(int id, [Bind("IdEscolaridad,EscolaridadDesc,IdEstatusRegistro")] CatEscolaridad nCatEscolaridad)
         {
-            if (id != catEscolaridad.IdEscolaridad)
+            if (id != nCatEscolaridad.IdEscolaridad)
             {
                 return NotFound();
             }
@@ -137,16 +137,16 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catEscolaridad.IdUsuarioModifico = Guid.Parse(fuser);
-                    catEscolaridad.FechaRegistro = DateTime.Now;
-                    catEscolaridad.EscolaridadDesc = catEscolaridad.EscolaridadDesc.ToString().ToUpper();
-                    catEscolaridad.IdEstatusRegistro = catEscolaridad.IdEstatusRegistro;
-                    _context.Update(catEscolaridad);
+                    nCatEscolaridad.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatEscolaridad.FechaRegistro = DateTime.Now;
+                    nCatEscolaridad.EscolaridadDesc = nCatEscolaridad.EscolaridadDesc.ToString().ToUpper().Trim();
+                    nCatEscolaridad.IdEstatusRegistro = nCatEscolaridad.IdEstatusRegistro;
+                    _context.Update(nCatEscolaridad);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatEscolaridadExists(catEscolaridad.IdEscolaridad))
+                    if (!CatEscolaridadExists(nCatEscolaridad.IdEscolaridad))
                     {
                         return NotFound();
                     }
@@ -157,7 +157,7 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catEscolaridad);
+            return View(nCatEscolaridad);
         }
 
         // GET: CatEscolaridads/Delete/5
@@ -183,8 +183,8 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catEscolaridad = await _context.CatEscolaridades.FindAsync(id);
-            catEscolaridad.IdEstatusRegistro = 2;
+            var nCatEscolaridad = await _context.CatEscolaridades.FindAsync(id);
+            nCatEscolaridad.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

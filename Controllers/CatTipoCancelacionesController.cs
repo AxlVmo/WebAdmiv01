@@ -115,7 +115,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoCancelaciones.IdUsuarioModifico = Guid.Parse(fuser);
-                    catTipoCancelaciones.TipoCancelacionDesc= catTipoCancelaciones.TipoCancelacionDesc.ToString().ToUpper();
+                    catTipoCancelaciones.TipoCancelacionDesc= catTipoCancelaciones.TipoCancelacionDesc.ToString().ToUpper().Trim();
                     catTipoCancelaciones.FechaRegistro = DateTime.Now;
                     catTipoCancelaciones.IdEstatusRegistro = 1;
                     _context.Add(catTipoCancelaciones);
@@ -171,7 +171,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoCancelaciones.IdUsuarioModifico = Guid.Parse(fuser);
-                    catTipoCancelaciones.TipoCancelacionDesc = catTipoCancelaciones.TipoCancelacionDesc.ToString().ToUpper();
+                    catTipoCancelaciones.TipoCancelacionDesc = catTipoCancelaciones.TipoCancelacionDesc.ToString().ToUpper().Trim();
                     catTipoCancelaciones.FechaRegistro = DateTime.Now;
                     catTipoCancelaciones.IdEstatusRegistro = catTipoCancelaciones.IdEstatusRegistro;
                     _context.Add(catTipoCancelaciones);

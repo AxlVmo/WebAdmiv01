@@ -146,11 +146,11 @@ namespace WebAdmin.Controllers
 
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblAlumnoDirecciones.Colonia).FirstOrDefault();
                     tblAlumnoDirecciones.IdColonia = !string.IsNullOrEmpty(tblAlumnoDirecciones.Colonia) ? tblAlumnoDirecciones.Colonia : tblAlumnoDirecciones.Colonia;
-                    tblAlumnoDirecciones.Colonia = !string.IsNullOrEmpty(tblAlumnoDirecciones.Colonia) ? strColonia.Dasenta.ToUpper() : tblAlumnoDirecciones.Colonia;
-                    tblAlumnoDirecciones.Calle = !string.IsNullOrEmpty(tblAlumnoDirecciones.Calle) ? tblAlumnoDirecciones.Calle.ToUpper() : tblAlumnoDirecciones.Calle;
-                    tblAlumnoDirecciones.LocalidadMunicipio = !string.IsNullOrEmpty(tblAlumnoDirecciones.LocalidadMunicipio) ? tblAlumnoDirecciones.LocalidadMunicipio.ToUpper() : tblAlumnoDirecciones.LocalidadMunicipio;
-                    tblAlumnoDirecciones.Ciudad = !string.IsNullOrEmpty(tblAlumnoDirecciones.Ciudad) ? tblAlumnoDirecciones.Ciudad.ToUpper() : tblAlumnoDirecciones.Ciudad;
-                    tblAlumnoDirecciones.Estado = !string.IsNullOrEmpty(tblAlumnoDirecciones.Estado) ? tblAlumnoDirecciones.Estado.ToUpper() : tblAlumnoDirecciones.Estado;
+                    tblAlumnoDirecciones.Colonia = !string.IsNullOrEmpty(tblAlumnoDirecciones.Colonia) ? strColonia.Dasenta.ToUpper().Trim() : tblAlumnoDirecciones.Colonia;
+                    tblAlumnoDirecciones.Calle = !string.IsNullOrEmpty(tblAlumnoDirecciones.Calle) ? tblAlumnoDirecciones.Calle.ToUpper().Trim() : tblAlumnoDirecciones.Calle;
+                    tblAlumnoDirecciones.LocalidadMunicipio = !string.IsNullOrEmpty(tblAlumnoDirecciones.LocalidadMunicipio) ? tblAlumnoDirecciones.LocalidadMunicipio.ToUpper().Trim() : tblAlumnoDirecciones.LocalidadMunicipio;
+                    tblAlumnoDirecciones.Ciudad = !string.IsNullOrEmpty(tblAlumnoDirecciones.Ciudad) ? tblAlumnoDirecciones.Ciudad.ToUpper().Trim() : tblAlumnoDirecciones.Ciudad;
+                    tblAlumnoDirecciones.Estado = !string.IsNullOrEmpty(tblAlumnoDirecciones.Estado) ? tblAlumnoDirecciones.Estado.ToUpper().Trim() : tblAlumnoDirecciones.Estado;
 
                     _context.SaveChanges();
                     _context.Add(tblAlumnoDirecciones);
@@ -220,11 +220,11 @@ namespace WebAdmin.Controllers
 
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblAlumnoDirecciones.Colonia).FirstOrDefault();
                     tblAlumnoDirecciones.IdColonia = !string.IsNullOrEmpty(tblAlumnoDirecciones.Colonia) ? tblAlumnoDirecciones.Colonia : tblAlumnoDirecciones.Colonia;
-                    tblAlumnoDirecciones.Colonia = !string.IsNullOrEmpty(tblAlumnoDirecciones.Colonia) ? strColonia.Dasenta.ToUpper() : tblAlumnoDirecciones.Colonia;
-                    tblAlumnoDirecciones.Calle = !string.IsNullOrEmpty(tblAlumnoDirecciones.Calle) ? tblAlumnoDirecciones.Calle.ToUpper() : tblAlumnoDirecciones.Calle;
-                    tblAlumnoDirecciones.LocalidadMunicipio = !string.IsNullOrEmpty(tblAlumnoDirecciones.LocalidadMunicipio) ? tblAlumnoDirecciones.LocalidadMunicipio.ToUpper() : tblAlumnoDirecciones.LocalidadMunicipio;
-                    tblAlumnoDirecciones.Ciudad = !string.IsNullOrEmpty(tblAlumnoDirecciones.Ciudad) ? tblAlumnoDirecciones.Ciudad.ToUpper() : tblAlumnoDirecciones.Ciudad;
-                    tblAlumnoDirecciones.Estado = !string.IsNullOrEmpty(tblAlumnoDirecciones.Estado) ? tblAlumnoDirecciones.Estado.ToUpper() : tblAlumnoDirecciones.Estado;
+                    tblAlumnoDirecciones.Colonia = !string.IsNullOrEmpty(tblAlumnoDirecciones.Colonia) ? strColonia.Dasenta.ToUpper().Trim() : tblAlumnoDirecciones.Colonia;
+                    tblAlumnoDirecciones.Calle = !string.IsNullOrEmpty(tblAlumnoDirecciones.Calle) ? tblAlumnoDirecciones.Calle.ToUpper().Trim() : tblAlumnoDirecciones.Calle;
+                    tblAlumnoDirecciones.LocalidadMunicipio = !string.IsNullOrEmpty(tblAlumnoDirecciones.LocalidadMunicipio) ? tblAlumnoDirecciones.LocalidadMunicipio.ToUpper().Trim() : tblAlumnoDirecciones.LocalidadMunicipio;
+                    tblAlumnoDirecciones.Ciudad = !string.IsNullOrEmpty(tblAlumnoDirecciones.Ciudad) ? tblAlumnoDirecciones.Ciudad.ToUpper().Trim() : tblAlumnoDirecciones.Ciudad;
+                    tblAlumnoDirecciones.Estado = !string.IsNullOrEmpty(tblAlumnoDirecciones.Estado) ? tblAlumnoDirecciones.Estado.ToUpper().Trim() : tblAlumnoDirecciones.Estado;
 
                     _context.Update(tblAlumnoDirecciones);
                     await _context.SaveChangesAsync();

@@ -84,7 +84,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catRole.IdUsuarioModifico = Guid.Parse(fuser);
                     catRole.FechaRegistro = DateTime.Now;
-                    catRole.RolDesc = catRole.RolDesc.ToString().ToUpper();
+                    catRole.RolDesc = catRole.RolDesc.ToString().ToUpper().Trim();
                     catRole.IdEstatusRegistro = 1;
                     _context.Add(catRole);
                     await _context.SaveChangesAsync();
@@ -138,7 +138,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     catRole.IdUsuarioModifico = Guid.Parse(fuser);
                     catRole.FechaRegistro = DateTime.Now;
-                    catRole.RolDesc = catRole.RolDesc.ToString().ToUpper();
+                    catRole.RolDesc = catRole.RolDesc.ToString().ToUpper().Trim();
                     catRole.IdEstatusRegistro = catRole.IdEstatusRegistro;
                     _context.SaveChanges();
                     _context.Update(catRole);

@@ -267,9 +267,9 @@ namespace WebAdmin.Controllers
                     tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;
-                    tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
-                    tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
-                    tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();
+                    tblUsuario.Nombres = tblUsuario.Nombres.ToUpper().Trim();
+                    tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper().Trim();
+                    tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper().Trim();
                     tblUsuario.IdUsuario = Guid.NewGuid();
                     _context.Add(tblUsuario);
                     await _context.SaveChangesAsync();
@@ -370,16 +370,16 @@ namespace WebAdmin.Controllers
                 }
                 tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
                 tblUsuario.FechaRegistro = DateTime.Now;
-                tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
-                tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
-                tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();
+                tblUsuario.Nombres = tblUsuario.Nombres.ToUpper().Trim();
+                tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper().Trim();
+                tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper().Trim();
                 var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblUsuario.Colonia).FirstOrDefault();
                 tblUsuario.IdColonia = !string.IsNullOrEmpty(tblUsuario.Colonia) ? tblUsuario.Colonia : tblUsuario.Colonia;
-                tblUsuario.Colonia = !string.IsNullOrEmpty(tblUsuario.Colonia) ? strColonia.Dasenta.ToUpper() : tblUsuario.Colonia;
-                tblUsuario.Calle = !string.IsNullOrEmpty(tblUsuario.Calle) ? tblUsuario.Calle.ToUpper() : tblUsuario.Calle;
-                tblUsuario.LocalidadMunicipio = !string.IsNullOrEmpty(tblUsuario.LocalidadMunicipio) ? tblUsuario.LocalidadMunicipio.ToUpper() : tblUsuario.LocalidadMunicipio;
-                tblUsuario.Ciudad = !string.IsNullOrEmpty(tblUsuario.Ciudad) ? tblUsuario.Ciudad.ToUpper() : tblUsuario.Ciudad;
-                tblUsuario.Estado = !string.IsNullOrEmpty(tblUsuario.Estado) ? tblUsuario.Estado.ToUpper() : tblUsuario.Estado;
+                tblUsuario.Colonia = !string.IsNullOrEmpty(tblUsuario.Colonia) ? strColonia.Dasenta.ToUpper().Trim() : tblUsuario.Colonia;
+                tblUsuario.Calle = !string.IsNullOrEmpty(tblUsuario.Calle) ? tblUsuario.Calle.ToUpper().Trim() : tblUsuario.Calle;
+                tblUsuario.LocalidadMunicipio = !string.IsNullOrEmpty(tblUsuario.LocalidadMunicipio) ? tblUsuario.LocalidadMunicipio.ToUpper().Trim() : tblUsuario.LocalidadMunicipio;
+                tblUsuario.Ciudad = !string.IsNullOrEmpty(tblUsuario.Ciudad) ? tblUsuario.Ciudad.ToUpper().Trim() : tblUsuario.Ciudad;
+                tblUsuario.Estado = !string.IsNullOrEmpty(tblUsuario.Estado) ? tblUsuario.Estado.ToUpper().Trim() : tblUsuario.Estado;
                 _context.Update(tblUsuario);
                 await _context.SaveChangesAsync();
                 _notyf.Warning("Registro actualizado con éxito", 5);

@@ -215,7 +215,7 @@ namespace WebAdmin.Controllers
                     tblSuministro.IdCorpCent = fCorpCent;
                     tblSuministro.IdUCorporativoCentro = fCorporativo.IdCorporativo;
                     tblSuministro.IdUsuarioModifico = Guid.Parse(fuser);
-                    tblSuministro.SuministroDesc = tblSuministro.SuministroDesc.ToString().ToUpper();
+                    tblSuministro.SuministroDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim();
                     tblSuministro.FechaRegistro = DateTime.Now;
                     tblSuministro.IdEstatusRegistro = 1;
                     _context.Add(tblSuministro);
@@ -293,7 +293,7 @@ namespace WebAdmin.Controllers
                     }
                     tblSuministro.IdCorpCent = fCorpCent;
                     tblSuministro.IdUCorporativoCentro = fCentroCorporativo;
-                    tblSuministro.SuministroDesc = tblSuministro.SuministroDesc.ToString().ToUpper();
+                    tblSuministro.SuministroDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim();
                     tblSuministro.IdUsuarioModifico = Guid.Parse(fuser);
                     tblSuministro.FechaRegistro = DateTime.Now;
                     tblSuministro.IdEstatusRegistro = tblSuministro.IdEstatusRegistro;

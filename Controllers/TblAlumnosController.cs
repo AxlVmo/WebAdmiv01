@@ -185,9 +185,9 @@ namespace WebAdmin.Controllers
                     tblAlumno.IdUCorporativoCentro = fCentroCorporativo;
                     tblAlumno.IdUsuarioModifico = Guid.Parse(fuser);
                     tblAlumno.FechaRegistro = DateTime.Now;
-                    tblAlumno.NombreAlumno = tblAlumno.NombreAlumno.ToString().ToUpper();
-                    tblAlumno.ApellidoPaterno = tblAlumno.ApellidoPaterno.ToUpper();
-                    tblAlumno.ApellidoMaterno = tblAlumno.ApellidoMaterno.ToUpper();
+                    tblAlumno.NombreAlumno = tblAlumno.NombreAlumno.ToString().ToUpper().Trim();
+                    tblAlumno.ApellidoPaterno = tblAlumno.ApellidoPaterno.ToUpper().Trim();
+                    tblAlumno.ApellidoMaterno = tblAlumno.ApellidoMaterno.ToUpper().Trim();
                     tblAlumno.IdEstatusRegistro = 1;
 
                     _context.Add(tblAlumno);
@@ -268,16 +268,16 @@ namespace WebAdmin.Controllers
                     tblAlumno.IdUCorporativoCentro = fCentroCorporativo;
                     tblAlumno.IdUsuarioModifico = Guid.Parse(fuser);
                     tblAlumno.FechaRegistro = DateTime.Now;
-                    tblAlumno.NombreAlumno = tblAlumno.NombreAlumno.ToString().ToUpper();
-                    tblAlumno.ApellidoPaterno = tblAlumno.ApellidoPaterno.ToUpper();
-                    tblAlumno.ApellidoMaterno = tblAlumno.ApellidoMaterno.ToUpper();
+                    tblAlumno.NombreAlumno = tblAlumno.NombreAlumno.ToString().ToUpper().Trim();
+                    tblAlumno.ApellidoPaterno = tblAlumno.ApellidoPaterno.ToUpper().Trim();
+                    tblAlumno.ApellidoMaterno = tblAlumno.ApellidoMaterno.ToUpper().Trim();
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblAlumno.Colonia).FirstOrDefault();
                     tblAlumno.IdColonia = !string.IsNullOrEmpty(tblAlumno.Colonia) ? tblAlumno.Colonia : tblAlumno.Colonia;
-                    tblAlumno.Colonia = !string.IsNullOrEmpty(tblAlumno.Colonia) ? strColonia.Dasenta.ToUpper() : tblAlumno.Colonia;
-                    tblAlumno.Calle = !string.IsNullOrEmpty(tblAlumno.Calle) ? tblAlumno.Calle.ToUpper() : tblAlumno.Calle;
-                    tblAlumno.LocalidadMunicipio = !string.IsNullOrEmpty(tblAlumno.LocalidadMunicipio) ? tblAlumno.LocalidadMunicipio.ToUpper() : tblAlumno.LocalidadMunicipio;
-                    tblAlumno.Ciudad = !string.IsNullOrEmpty(tblAlumno.Ciudad) ? tblAlumno.Ciudad.ToUpper() : tblAlumno.Ciudad;
-                    tblAlumno.Estado = !string.IsNullOrEmpty(tblAlumno.Estado) ? tblAlumno.Estado.ToUpper() : tblAlumno.Estado;
+                    tblAlumno.Colonia = !string.IsNullOrEmpty(tblAlumno.Colonia) ? strColonia.Dasenta.ToUpper().Trim() : tblAlumno.Colonia;
+                    tblAlumno.Calle = !string.IsNullOrEmpty(tblAlumno.Calle) ? tblAlumno.Calle.ToUpper().Trim() : tblAlumno.Calle;
+                    tblAlumno.LocalidadMunicipio = !string.IsNullOrEmpty(tblAlumno.LocalidadMunicipio) ? tblAlumno.LocalidadMunicipio.ToUpper().Trim() : tblAlumno.LocalidadMunicipio;
+                    tblAlumno.Ciudad = !string.IsNullOrEmpty(tblAlumno.Ciudad) ? tblAlumno.Ciudad.ToUpper().Trim() : tblAlumno.Ciudad;
+                    tblAlumno.Estado = !string.IsNullOrEmpty(tblAlumno.Estado) ? tblAlumno.Estado.ToUpper().Trim() : tblAlumno.Estado;
 
                     _context.Update(tblAlumno);
                     await _context.SaveChangesAsync();

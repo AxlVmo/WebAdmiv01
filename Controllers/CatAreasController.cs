@@ -70,25 +70,25 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdArea,AreaDesc")] CatArea catArea)
+        public async Task<IActionResult> Create([Bind("IdArea,AreaDesc")] CatArea nCatArea)
         {
             if (ModelState.IsValid)
             {
                 var vDuplicado = _context.CatAreas
-                       .Where(s => s.AreaDesc == catArea.AreaDesc)
+                       .Where(s => s.AreaDesc == nCatArea.AreaDesc)
                        .ToList();
 
                 if (vDuplicado.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catArea.FechaRegistro = DateTime.Now;
-                    catArea.AreaDesc = catArea.AreaDesc.ToString().ToUpper();
-                    catArea.IdEstatusRegistro = 1;
-                    catArea.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatArea.FechaRegistro = DateTime.Now;
+                    nCatArea.AreaDesc = nCatArea.AreaDesc.ToString().ToUpper().Trim();
+                    nCatArea.IdEstatusRegistro = 1;
+                    nCatArea.IdUsuarioModifico = Guid.Parse(fuser);
                     _context.SaveChanges();
 
-                    _context.Add(catArea);
+                    _context.Add(nCatArea);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -99,7 +99,7 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catArea);
+            return View(nCatArea);
         }
 
         // GET: CatAreas/Edit/5
@@ -126,9 +126,9 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdArea,AreaDesc,IdEstatusRegistro")] CatArea catArea)
+        public async Task<IActionResult> Edit(int id, [Bind("IdArea,AreaDesc,IdEstatusRegistro")] CatArea nCatArea)
         {
-            if (id != catArea.IdArea)
+            if (id != nCatArea.IdArea)
             {
                 return NotFound();
             }
@@ -139,17 +139,17 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catArea.IdUsuarioModifico = Guid.Parse(fuser);
-                    catArea.FechaRegistro = DateTime.Now;
-                    catArea.AreaDesc = catArea.AreaDesc.ToString().ToUpper();
-                    catArea.IdEstatusRegistro = catArea.IdEstatusRegistro;
-                    _context.Update(catArea);
+                    nCatArea.IdUsuarioModifico = Guid.Parse(fuser);
+                    nCatArea.FechaRegistro = DateTime.Now;
+                    nCatArea.AreaDesc = nCatArea.AreaDesc.ToString().ToUpper().Trim();
+                    nCatArea.IdEstatusRegistro = nCatArea.IdEstatusRegistro;
+                    _context.Update(nCatArea);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatAreaExists(catArea.IdArea))
+                    if (!CatAreaExists(nCatArea.IdArea))
                     {
                         return NotFound();
                     }
@@ -160,7 +160,7 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catArea);
+            return View(nCatArea);
         }
 
         // GET: CatAreas/Delete/5
@@ -186,8 +186,8 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catArea = await _context.CatAreas.FindAsync(id);
-            catArea.IdEstatusRegistro = 2;
+            var nCatArea = await _context.CatAreas.FindAsync(id);
+            nCatArea.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

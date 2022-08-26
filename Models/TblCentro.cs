@@ -55,6 +55,7 @@ namespace WebAdmin.Models
         public string Telefono { get; set; }
 
         [Display(Name = "Presupuesto")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public double CentroPresupuesto { get; set; }
 
         [Display(Name = "Corporativo / Centro")]

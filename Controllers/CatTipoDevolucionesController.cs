@@ -84,7 +84,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     CatTipoDevoluciones.IdUsuarioModifico = Guid.Parse(fuser);
                     CatTipoDevoluciones.FechaRegistro = DateTime.Now;
-                    CatTipoDevoluciones.TipoDevolucionDesc = CatTipoDevoluciones.TipoDevolucionDesc.ToString().ToUpper();
+                    CatTipoDevoluciones.TipoDevolucionDesc = CatTipoDevoluciones.TipoDevolucionDesc.ToString().ToUpper().Trim();
                     CatTipoDevoluciones.IdEstatusRegistro = 1;
                     _context.Add(CatTipoDevoluciones);
                     await _context.SaveChangesAsync();
@@ -139,7 +139,7 @@ namespace WebAdmin.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     CatTipoDevoluciones.IdUsuarioModifico = Guid.Parse(fuser);
                     CatTipoDevoluciones.FechaRegistro = DateTime.Now;
-                    CatTipoDevoluciones.TipoDevolucionDesc = CatTipoDevoluciones.TipoDevolucionDesc.ToString().ToUpper();
+                    CatTipoDevoluciones.TipoDevolucionDesc = CatTipoDevoluciones.TipoDevolucionDesc.ToString().ToUpper().Trim();
                     CatTipoDevoluciones.IdEstatusRegistro = CatTipoDevoluciones.IdEstatusRegistro;
                     _context.Update(CatTipoDevoluciones);
                     await _context.SaveChangesAsync();

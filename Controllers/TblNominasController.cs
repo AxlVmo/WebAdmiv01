@@ -287,7 +287,7 @@ namespace WebAdmin.Controllers
                 TblNomina.IdCorpCent = fCorpCent;
                 TblNomina.IdUCorporativoCentro = fCorporativo.IdCorporativo;
                 TblNomina.IdUsuarioModifico = Guid.Parse(fuser);
-                TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper();
+                TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper().Trim();
                 TblNomina.FechaRegistro = DateTime.Now;
                 TblNomina.IdEstatusRegistro = 1;
                 _context.Add(TblNomina);
@@ -369,7 +369,7 @@ namespace WebAdmin.Controllers
                     }
                     TblNomina.IdCorpCent = fCorpCent;
                     TblNomina.IdUCorporativoCentro = fCentroCorporativo;
-                    TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper();
+                    TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper().Trim();
                     TblNomina.IdUsuarioModifico = Guid.Parse(fuser);
                     TblNomina.FechaRegistro = DateTime.Now;
                     TblNomina.IdEstatusRegistro = TblNomina.IdEstatusRegistro;

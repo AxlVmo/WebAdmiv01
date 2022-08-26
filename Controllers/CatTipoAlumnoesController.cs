@@ -83,7 +83,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoAlumno.IdUsuarioModifico = Guid.Parse(fuser);
-                    catTipoAlumno.TipoAlumnoDesc = catTipoAlumno.TipoAlumnoDesc.ToString().ToUpper();
+                    catTipoAlumno.TipoAlumnoDesc = catTipoAlumno.TipoAlumnoDesc.ToString().ToUpper().Trim();
                     catTipoAlumno.FechaRegistro = DateTime.Now;
                     catTipoAlumno.IdEstatusRegistro = 1;
                     _context.Add(catTipoAlumno);
@@ -137,7 +137,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoAlumno.IdUsuarioModifico = Guid.Parse(fuser);
-                    catTipoAlumno.TipoAlumnoDesc = catTipoAlumno.TipoAlumnoDesc.ToString().ToUpper();
+                    catTipoAlumno.TipoAlumnoDesc = catTipoAlumno.TipoAlumnoDesc.ToString().ToUpper().Trim();
                     catTipoAlumno.FechaRegistro = DateTime.Now;
                     catTipoAlumno.IdEstatusRegistro = catTipoAlumno.IdEstatusRegistro;
                     _context.Update(catTipoAlumno);

@@ -23,6 +23,7 @@ namespace WebAdmin.Models
         public string PrestamoDesc { get; set; }
 
         [Display(Name = "Cantidad de Deposito")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public double CantidadPrestamo { get; set; }
 
         [Display(Name = "Periodo Amortizacion")]
@@ -40,6 +41,10 @@ namespace WebAdmin.Models
         public string TipoFormaPagoDesc { get; set; }
 
         [Display(Name = "Centro")]
+        
+        [Required(AllowEmptyStrings = true)]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+
         public Guid IdCentroPrestamo { get; set; }
 
         [Display(Name = "Nombres")]
@@ -53,7 +58,7 @@ namespace WebAdmin.Models
         public string ApellidoPaterno { get; set; }
 
         [Required(ErrorMessage = "Campo Requerido")]
-        [Display(Name = "ApellidoMaterno")]
+        [Display(Name = "Apellido Materno")]
         
         public string ApellidoMaterno { get; set; }
 

@@ -16,7 +16,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoPrestamo" class="control-label"></label>
                 <select id="lTipoPrestamo" class="form-select" asp-for="IdTipoPrestamo"
@@ -26,8 +26,23 @@
                 <span asp-validation-for="IdTipoPrestamo" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
+        <div class="col-md-4">
+              <div class="form-group">
+                <label asp-for="PrestamoDesc" class="control-label"></label>
+                <input asp-for="PrestamoDesc" style="text-transform:uppercase" class="form-control" />
+                <span asp-validation-for="PrestamoDesc" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="col-md-2">
+                 <div class="form-group">
+                <label asp-for="CantidadPrestamo" class="control-label"></label>
+                <input asp-for="CantidadPrestamo"  class="form-control" type="number"/>
+                <span asp-validation-for="CantidadPrestamo" class="text-danger"></span>
+            </div>
+            </div>
+            
+        <div class="col-md-4">
+            <div class="form-group" hidden id="hIdCentroPrestamo">
                 <label asp-for="IdCentroPrestamo" class="control-label"></label>
                 <select id="lIdCentroPrestamo" class="form-select" asp-for="IdCentroPrestamo"
                     asp-items="@(new SelectList(ViewBag.ListaCorpCent,"IdCentro","CentroDesc"))">
@@ -57,26 +72,65 @@
             </div>
         </div>
         </div>
+        <div class="row" hidden id="rPersona">
+        <div class="col-md-2">
             <div class="form-group">
-                <label asp-for="PrestamoDesc" class="control-label"></label>
-                <input asp-for="PrestamoDesc" class="form-control" />
-                <span asp-validation-for="PrestamoDesc" class="text-danger"></span>
+                <label asp-for="Nombres" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="Nombres" class="form-control" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
             </div>
-           
+        </div>
+        <div class="col-md-2">
             <div class="form-group">
-                <label asp-for="CantidadPrestamo" class="control-label"></label>
-                <input asp-for="CantidadPrestamo" class="form-control" />
-                <span asp-validation-for="CantidadPrestamo" class="text-danger"></span>
+                <label asp-for="ApellidoPaterno" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="ApellidoPaterno" class="form-control" />
+                <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
             </div>
-            
-           
-       
-            
+        </div>
+        <div class="col-md-2">
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="ApellidoMaterno" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="ApellidoMaterno" class="form-control" />
+                <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="curp" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="curp" class="form-control" />
+                <span asp-validation-for="curp" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="ine" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="ine" class="form-control" />
+                <span asp-validation-for="ine" class="text-danger"></span>
+            </div>
+        </div>
+   
+    </div>
+ <div class="form-group">
+        <input type="submit" value="Crear" class="btn btn-success" />
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+        <a asp-action="" asp-route-IdNomina="1" class="btn btn-info text-white">Imprimir</a>
+    </div>
         </form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+    $('#lTipoPrestamo').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+        if (SelectedText == "INTERNO") {
+            document.getElementById("rPersona").setAttribute("hidden", true);
+            $('#hIdCentroPrestamo').removeAttr('hidden');
+        }
+        else {
+            document.getElementById("hIdCentroPrestamo").setAttribute("hidden", true);
+            $('#rPersona').removeAttr('hidden');
+        }
+    });
+</script>
 }
