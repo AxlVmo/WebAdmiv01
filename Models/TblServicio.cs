@@ -15,11 +15,11 @@ namespace WebAdmin.Models
         public string CodigoInterno { get; set; }
 
         [Display(Name = "Codigo Externo")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string CodigoExterno { get; set; }
 
         [Display(Name = "Tipo Servicio")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdTipoServicio { get; set; }
 
         [Display(Name = "Descripcion Tipo Servicio")]
@@ -30,14 +30,14 @@ namespace WebAdmin.Models
         public string DescServicio { get; set; }
 
         [Display(Name = "Periodo / Meses")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int Periodo { get; set; }
 
         [Display(Name = "Cantidad")]
         public int Cantidad { get; set; }
 
         [Display(Name = "Precio")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public decimal ServicioPrecioUno { get; set; }
 
         [Display(Name = "Porcentaje")]
@@ -55,7 +55,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
     }
 }

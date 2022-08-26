@@ -10,12 +10,12 @@ namespace WebAdmin.Models
     {
         [Key]
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
 
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string EstatusDesc { get; set; }
 
         [Display(Name = "Usuario Modifico")]

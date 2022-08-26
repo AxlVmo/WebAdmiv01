@@ -58,21 +58,21 @@ namespace WebAdmin.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "Campo Requerido")]
+            
             [Display(Name = "Nombre (s)")]
             public string Nombres { get; set; }
-            [Required(ErrorMessage = "Campo Requerido")]
+            
             [Display(Name = "Apellido Paterno")]
             public string ApellidoPaterno { get; set; }
-            [Required(ErrorMessage = "Campo Requerido")]
+            
             [Display(Name = "Apellido Materno")]
             public string ApellidoMaterno { get; set; }
-            [Required(ErrorMessage = "Campo Requerido")]
+            
             [EmailAddress]
             [Display(Name = "Correo electrónico")]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "Campo Requerido")]
+            
             [StringLength(100, ErrorMessage = "El {0} debe tener al menos {2} y un máximo de {1} caracteres de longitud.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Contraseña")]

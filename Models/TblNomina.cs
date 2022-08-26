@@ -16,16 +16,16 @@ namespace WebAdmin.Models
         public string UsuarioAsignado { get; set; }
 
         [Display(Name = "Usuario")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public Guid IdUsuarioRemuneracion { get; set; }
 
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string NominaDesc { get; set; }
 
         [Display(Name = "Monto")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public double UsuarioRemuneracion { get; set; }
 
         [Display(Name = "Tipo Contratacion")]
@@ -33,7 +33,7 @@ namespace WebAdmin.Models
         [NotMapped]
         public string TipoContratacionDesc { get; set; }
         [Display(Name = "Tipo Pago")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdTipoPago { get; set; }
         [Display(Name = "Tipo Pago")]
         [NotMapped]
@@ -48,7 +48,7 @@ namespace WebAdmin.Models
         public Guid IdUsuarioModifico { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public Guid IdUCorporativoCentro { get; set; }
 
         [Column("FechaRegistro")]
@@ -57,7 +57,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace WebAdmin.Models
         public Guid IdEmpresa { get; set; }
 
         [Display(Name = "Nombre Empresa")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string NombreEmpresa { get; set; }
 
         [Display(Name = "RFC")]
@@ -43,7 +43,7 @@ namespace WebAdmin.Models
         public string Estado { get; set; }
 
         [Display(Name = "Correo Electronico")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string CorreoElectronico { get; set; }
 
         [Display(Name = "Telefono")]
@@ -57,7 +57,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
     }
 }

@@ -51,10 +51,10 @@ namespace WebAdmin.Areas.Identity.Pages.Account
             
             [EmailAddress]
             [Display(Name = "Correo electrónico")]
-            [Required(ErrorMessage = "Campo Requerido")]
+            
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "Campo Requerido")]
+            
             [DataType(DataType.Password)]
             [Display(Name = "Contraseña")]
             public string Password { get; set; }

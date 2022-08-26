@@ -12,19 +12,19 @@ namespace WebAdmin.Models
         public Guid IdAlumno { get; set; }
 
         [Display(Name = "Tipo Alumno")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdTipoAlumno { get; set; }
         [Display(Name = "Tipo Alumno")]
         [NotMapped]
         public string TipoAlumnoDesc { get; set; }
         [Display(Name = "Genero")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdGenero { get; set; }
         [Display(Name = "Fecha de Nacimiento")]
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
         [Display(Name = "Nivel Escolar")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdNivelEscolar { get; set; }
         [NotMapped]
         public string NivelEscolarDesc { get; set; }
@@ -42,18 +42,18 @@ namespace WebAdmin.Models
         public string ApellidoMaternoTutor { get; set; }
 
         [Display(Name = "Nombre Alumno")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string NombreAlumno { get; set; }
 
         [Display(Name = "Apellido Paterno")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string ApellidoPaterno { get; set; }
 
         [Display(Name = "ApellidoMaterno")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string ApellidoMaterno { get; set; }
         [Display(Name = "Corporativo / Centro")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public Guid IdUCorporativoCentro { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
@@ -109,7 +109,7 @@ namespace WebAdmin.Models
         public DateTime FechaAcceso { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
 
         [Display(Name = "Nombre Completo")]

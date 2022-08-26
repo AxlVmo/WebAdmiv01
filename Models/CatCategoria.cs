@@ -13,7 +13,7 @@ namespace WebAdmin.Models
 
         [Display(Name = "Categoria")]
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string CategoriaDesc { get; set; }
 
         [Display(Name = "Usuario Modifico")]
@@ -25,7 +25,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
     }
 }

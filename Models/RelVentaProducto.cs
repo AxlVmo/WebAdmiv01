@@ -15,11 +15,11 @@ namespace WebAdmin.Models
         public int Cantidad { get; set; }
 
         [Display(Name = "Tipo Servicio")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string Categoria { get; set; }
 
         [Display(Name = "Servicio")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string Producto { get; set; }
 
         [Display(Name = "Precio")]
@@ -42,7 +42,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
 
         public Guid IdVenta { get; set; }

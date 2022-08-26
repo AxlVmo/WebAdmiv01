@@ -20,11 +20,11 @@ namespace WebAdmin.Models
         public Guid IdCentro { get; set; }
 
         [Display(Name = "Alumno")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public Guid IdCliente { get; set; }
 
         [Display(Name = "Tipo de Pago")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdTipoPago { get; set; }
 
         [Display(Name = "Codigo / Referencia")]
@@ -41,7 +41,7 @@ namespace WebAdmin.Models
         public Guid IdUsuarioModifico { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public Guid IdUCorporativoCentro { get; set; }
 
         [Display(Name = "Fecha Registro")]
@@ -49,7 +49,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
 
         [Display(Name = "Total")]

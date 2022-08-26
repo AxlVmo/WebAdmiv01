@@ -14,7 +14,7 @@ namespace WebAdmin.Models
 
         [ForeignKey("CatTipoDireccion")]
         [Display(Name = "Tipo Direccion")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdTipoDireccion { get; set; }
 
         [Display(Name = "Tipo Direccion")]
@@ -22,7 +22,7 @@ namespace WebAdmin.Models
         public string TipoDireccionDesc { get; set; }
 
         [Display(Name = "Calle")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string Calle { get; set; }
 
         [Display(Name = "Codigo Postal")]
@@ -43,7 +43,7 @@ namespace WebAdmin.Models
         public string Estado { get; set; }
 
         [Display(Name = "Correo Electronico")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string CorreoElectronico { get; set; }
 
         [Display(Name = "Telefono")]
@@ -66,7 +66,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
     }
 }

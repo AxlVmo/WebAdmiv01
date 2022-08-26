@@ -13,7 +13,7 @@ namespace WebAdmin.Models
         public Guid IdProveedor { get; set; }
 
         [Display(Name = "Nombre Proveedor")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string NombreProveedor { get; set; }
 
         [Display(Name = "RFC")]
@@ -23,7 +23,7 @@ namespace WebAdmin.Models
         public string GiroComercial { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public Guid IdCorporativo { get; set; }
 
         [Display(Name = "Usuario Modifico")]
@@ -34,7 +34,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
     }
 }

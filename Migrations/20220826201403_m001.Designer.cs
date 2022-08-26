@@ -12,7 +12,7 @@ using WebAdmin.Data;
 namespace WebAdmin.Migrations
 {
     [DbContext(typeof(nDbContext))]
-    [Migration("20220826030247_m001")]
+    [Migration("20220826201403_m001")]
     partial class m001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -239,7 +239,6 @@ namespace WebAdmin.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdArea"));
 
                     b.Property<string>("AreaDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -261,7 +260,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 1,
                             AreaDesc = "DIRECCION",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -269,7 +268,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 2,
                             AreaDesc = "ADMINISTRATIVA",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -277,7 +276,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 3,
                             AreaDesc = "RECURSOS HUMANOS",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -285,7 +284,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 4,
                             AreaDesc = "PRODUCCION DIGITAL",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -293,7 +292,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 5,
                             AreaDesc = "FINANZAS/CONTABILIDAD",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -301,7 +300,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 6,
                             AreaDesc = "MARKETING/VENTAS",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -309,7 +308,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 7,
                             AreaDesc = "TIC",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
@@ -324,7 +323,6 @@ namespace WebAdmin.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCategoria"));
 
                     b.Property<string>("CategoriaDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -29216,7 +29214,6 @@ namespace WebAdmin.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCorpCent"));
 
                     b.Property<string>("CorpCentDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -29238,7 +29235,7 @@ namespace WebAdmin.Migrations
                         {
                             IdCorpCent = 1,
                             CorpCentDesc = "CORPORATIVO",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -29246,7 +29243,7 @@ namespace WebAdmin.Migrations
                         {
                             IdCorpCent = 2,
                             CorpCentDesc = "CENTRO",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
@@ -29261,7 +29258,6 @@ namespace WebAdmin.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdEscolaridad"));
 
                     b.Property<string>("EscolaridadDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -29283,7 +29279,7 @@ namespace WebAdmin.Migrations
                         {
                             IdEscolaridad = 1,
                             EscolaridadDesc = "PRIMERO",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -29291,7 +29287,7 @@ namespace WebAdmin.Migrations
                         {
                             IdEscolaridad = 2,
                             EscolaridadDesc = "SEGUNDO",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -29299,7 +29295,7 @@ namespace WebAdmin.Migrations
                         {
                             IdEscolaridad = 3,
                             EscolaridadDesc = "TERCERO",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -29307,7 +29303,7 @@ namespace WebAdmin.Migrations
                         {
                             IdEscolaridad = 4,
                             EscolaridadDesc = "CUARTO",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -29315,7 +29311,7 @@ namespace WebAdmin.Migrations
                         {
                             IdEscolaridad = 5,
                             EscolaridadDesc = "QUINTO",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -29323,7 +29319,7 @@ namespace WebAdmin.Migrations
                         {
                             IdEscolaridad = 6,
                             EscolaridadDesc = "SEXTO",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
@@ -29338,7 +29334,6 @@ namespace WebAdmin.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdEstatusRegistro"));
 
                     b.Property<string>("EstatusDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -29357,14 +29352,14 @@ namespace WebAdmin.Migrations
                         {
                             IdEstatusRegistro = 1,
                             EstatusDesc = "ACTIVO",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdEstatusRegistro = 2,
                             EstatusDesc = "DESACTIVO",
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
@@ -29382,7 +29377,6 @@ namespace WebAdmin.Migrations
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("GeneroDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("IdEstatusRegistro")
@@ -29399,7 +29393,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdGenero = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             GeneroDesc = "HOMBRE",
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
@@ -29407,7 +29401,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdGenero = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             GeneroDesc = "MUJER",
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
@@ -29433,7 +29427,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("LicenciaDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoLicencia");
@@ -29444,7 +29437,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoLicencia = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             LicenciaDesc = "LICENCIA C"
@@ -29470,7 +29463,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("NivelEscolarDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdNivelEscolar");
@@ -29481,7 +29473,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdNivelEscolar = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             NivelEscolarDesc = "PREESCOLAR"
@@ -29489,7 +29481,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdNivelEscolar = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             NivelEscolarDesc = "PRIMARIA"
@@ -29497,7 +29489,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdNivelEscolar = 3,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             NivelEscolarDesc = "SECUNDARIA"
@@ -29505,7 +29497,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdNivelEscolar = 4,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             NivelEscolarDesc = "BACHILLERATO"
@@ -29513,7 +29505,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdNivelEscolar = 5,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             NivelEscolarDesc = "UNIVERSIDAD"
@@ -29539,7 +29531,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("PerfilDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdPerfil");
@@ -29550,7 +29541,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "DIRECTOR"
@@ -29558,7 +29549,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "ADMINISTRADOR"
@@ -29566,7 +29557,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 3,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "GERENTE"
@@ -29574,7 +29565,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 4,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "EJECUTIVO"
@@ -29582,7 +29573,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 5,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "DOCENTE"
@@ -29608,7 +29599,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("PeriodoDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdPeriodo");
@@ -29635,7 +29625,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("PeriodoAmortizaDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdPeriodoAmortiza");
@@ -29646,7 +29635,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPeriodoAmortiza = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PeriodoAmortizaDesc = "1 MES"
@@ -29654,7 +29643,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPeriodoAmortiza = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PeriodoAmortizaDesc = "3 MES"
@@ -29662,7 +29651,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPeriodoAmortiza = 3,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PeriodoAmortizaDesc = "6 MES"
@@ -29670,7 +29659,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPeriodoAmortiza = 4,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PeriodoAmortizaDesc = "9 MES"
@@ -29678,7 +29667,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPeriodoAmortiza = 5,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PeriodoAmortizaDesc = "12 MES"
@@ -29686,7 +29675,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPeriodoAmortiza = 6,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PeriodoAmortizaDesc = "18 MES"
@@ -29694,7 +29683,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPeriodoAmortiza = 7,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PeriodoAmortizaDesc = "24 MES"
@@ -29702,7 +29691,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPeriodoAmortiza = 8,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PeriodoAmortizaDesc = "36 MES"
@@ -29728,7 +29717,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("PersonalEstudioDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdPersonalEstudio");
@@ -29739,7 +29727,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPersonalEstudio = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PersonalEstudioDesc = "BACHILLERATO"
@@ -29747,7 +29735,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPersonalEstudio = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PersonalEstudioDesc = "BACHILLERATO TECNICO"
@@ -29755,7 +29743,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPersonalEstudio = 3,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PersonalEstudioDesc = "LICNECIATURA"
@@ -29763,7 +29751,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPersonalEstudio = 4,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PersonalEstudioDesc = "INGENIERIA"
@@ -29771,7 +29759,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPersonalEstudio = 5,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PersonalEstudioDesc = "MAESTRIA"
@@ -29779,7 +29767,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPersonalEstudio = 6,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PersonalEstudioDesc = "DOCTORADO"
@@ -29805,7 +29793,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("ProdServDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdProdServ");
@@ -29816,7 +29803,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdProdServ = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             ProdServDesc = "PRODUCTO"
@@ -29824,7 +29811,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdProdServ = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             ProdServDesc = "SERVICIO"
@@ -29846,7 +29833,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("CodigoExterno")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("CodigoInterno")
@@ -29904,7 +29890,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("RolDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdRol");
@@ -29915,7 +29900,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "DESARROLLADOR"
@@ -29923,7 +29908,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "ADMINISTRADOR"
@@ -29931,7 +29916,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 3,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "SUPERVISOR"
@@ -29939,7 +29924,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 4,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "OPERADOR"
@@ -29965,7 +29950,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoAlumnoDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoAlumno");
@@ -29976,7 +29960,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoAlumno = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoAlumnoDesc = "PROSPECTO"
@@ -29984,7 +29968,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoAlumno = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoAlumnoDesc = "ALUMNO"
@@ -30010,7 +29994,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoCancelacionDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoCancelacion");
@@ -30037,7 +30020,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoCentroDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoCentro");
@@ -30048,7 +30030,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoCentro = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoCentroDesc = "INTERNO"
@@ -30056,7 +30038,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoCentro = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoCentroDesc = "LICENCIA"
@@ -30082,7 +30064,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoCompraDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoCompra");
@@ -30109,7 +30090,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoContratacionDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoContratacion");
@@ -30120,7 +30100,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoContratacion = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoContratacionDesc = "FIJA"
@@ -30128,7 +30108,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoContratacion = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoContratacionDesc = "TEMPORAL"
@@ -30136,7 +30116,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoContratacion = 3,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoContratacionDesc = "FORMACION/APRENDIZAJE"
@@ -30144,7 +30124,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoContratacion = 4,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoContratacionDesc = "SERVICIO SOCIAL"
@@ -30152,7 +30132,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoContratacion = 5,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoContratacionDesc = "RESIENCIAS PROFESIONALES"
@@ -30178,7 +30158,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoDevolucionDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoDevolucion");
@@ -30205,7 +30184,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoDireccionDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoDireccion");
@@ -30232,7 +30210,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoFormaPagoDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoFormaPago");
@@ -30243,7 +30220,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoFormaPago = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoFormaPagoDesc = "SEMANAL"
@@ -30251,7 +30228,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoFormaPago = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoFormaPagoDesc = "QUINCENAL"
@@ -30259,7 +30236,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoFormaPago = 3,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoFormaPagoDesc = "MENSUAL"
@@ -30285,7 +30262,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoPagoDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoPago");
@@ -30296,7 +30272,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "EFECTIVO"
@@ -30304,7 +30280,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TRANSFERENCIA"
@@ -30312,7 +30288,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 3,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "CREDITO"
@@ -30320,7 +30296,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 4,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TDC"
@@ -30328,7 +30304,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 5,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TDD"
@@ -30354,7 +30330,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoPrestamoDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoPrestamo");
@@ -30365,7 +30340,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPrestamo = 1,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPrestamoDesc = "INTERNO"
@@ -30373,7 +30348,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPrestamo = 2,
-                            FechaRegistro = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPrestamoDesc = "EXTERNO"
@@ -30399,7 +30374,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoServicioDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoServicio");
@@ -30426,7 +30400,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("TipoSuministroDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdTipoSuministro");
@@ -30545,7 +30518,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Categoria")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Descuento")
@@ -30567,7 +30539,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("Producto")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid?>("TblCompraIdCompra")
@@ -30629,7 +30600,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Categoria")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Descuento")
@@ -30651,7 +30621,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("Producto")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid?>("TblVentaIdVenta")
@@ -30683,14 +30652,12 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ApellidoMaterno")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ApellidoMaternoTutor")
                         .HasColumnType("text");
 
                     b.Property<string>("ApellidoPaterno")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ApellidoPaternoTutor")
@@ -30756,7 +30723,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("NombreAlumno")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("NombreTutor")
@@ -30782,7 +30748,6 @@ namespace WebAdmin.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdAlumnoContacto"));
 
                     b.Property<string>("CorreoElectronico")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -30802,7 +30767,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("NombreAlumnoContacto")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Telefono")
@@ -30825,7 +30789,6 @@ namespace WebAdmin.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdAlumnoDirecciones"));
 
                     b.Property<string>("Calle")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Ciudad")
@@ -30838,7 +30801,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CorreoElectronico")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Estado")
@@ -30925,7 +30887,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CorreoElectronico")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Estado")
@@ -30963,7 +30924,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("NombreCentro")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Telefono")
@@ -31040,7 +31000,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CorreoElectronico")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Estado")
@@ -31066,7 +31025,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("NombreCorporativo")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Telefono")
@@ -31096,7 +31054,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CorreoElectronico")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Estado")
@@ -31122,7 +31079,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("NombreEmpresa")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Rfc")
@@ -31173,7 +31129,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("NominaDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<double>("UsuarioRemuneracion")
@@ -31193,11 +31148,9 @@ namespace WebAdmin.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdPrestamo"));
 
                     b.Property<string>("ApellidoMaterno")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ApellidoPaterno")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<double>("CantidadPrestamo")
@@ -31231,19 +31184,15 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Nombres")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PrestamoDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("curp")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ine")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdPrestamo");
@@ -31274,7 +31223,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("NombreProveedor")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Rfc")
@@ -31294,7 +31242,6 @@ namespace WebAdmin.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdProveedorContacto"));
 
                     b.Property<string>("CorreoElectronico")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -31314,7 +31261,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("NombreProveedorContacto")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Telefono")
@@ -31349,7 +31295,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CorreoElectronico")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Estado")
@@ -31397,7 +31342,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("CodigoExterno")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("CodigoInterno")
@@ -31476,11 +31420,9 @@ namespace WebAdmin.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("NumeroReferencia")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("SuministroDesc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("IdSuministro");
@@ -31495,11 +31437,9 @@ namespace WebAdmin.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("ApellidoMaterno")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ApellidoPaterno")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Calle")
@@ -31518,7 +31458,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CorreoAcceso")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Estado")
@@ -31579,7 +31518,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Nombres")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Telefono")

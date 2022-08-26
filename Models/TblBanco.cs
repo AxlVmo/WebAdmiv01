@@ -19,7 +19,7 @@ namespace WebAdmin.Models
         public Guid IdUsuarioModifico { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public Guid IdUCorporativoCentro { get; set; }
 
         [Display(Name = "Fecha Registro")]
@@ -27,7 +27,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
     }
 }

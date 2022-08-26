@@ -71,7 +71,7 @@ namespace WebAdmin.Migrations
                 {
                     IdArea = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AreaDesc = table.Column<string>(type: "text", nullable: false),
+                    AreaDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -87,7 +87,7 @@ namespace WebAdmin.Migrations
                 {
                     IdCategoria = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CategoriaDesc = table.Column<string>(type: "text", nullable: false),
+                    CategoriaDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -130,7 +130,7 @@ namespace WebAdmin.Migrations
                 {
                     IdCorpCent = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CorpCentDesc = table.Column<string>(type: "text", nullable: false),
+                    CorpCentDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -146,7 +146,7 @@ namespace WebAdmin.Migrations
                 {
                     IdEscolaridad = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EscolaridadDesc = table.Column<string>(type: "text", nullable: false),
+                    EscolaridadDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -162,7 +162,7 @@ namespace WebAdmin.Migrations
                 {
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EstatusDesc = table.Column<string>(type: "text", nullable: false),
+                    EstatusDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
@@ -177,7 +177,7 @@ namespace WebAdmin.Migrations
                 {
                     IdGenero = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    GeneroDesc = table.Column<string>(type: "text", nullable: false),
+                    GeneroDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -193,7 +193,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoLicencia = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    LicenciaDesc = table.Column<string>(type: "text", nullable: false),
+                    LicenciaDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -209,7 +209,7 @@ namespace WebAdmin.Migrations
                 {
                     IdNivelEscolar = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    NivelEscolarDesc = table.Column<string>(type: "text", nullable: false),
+                    NivelEscolarDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -225,7 +225,7 @@ namespace WebAdmin.Migrations
                 {
                     IdPerfil = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PerfilDesc = table.Column<string>(type: "text", nullable: false),
+                    PerfilDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -241,7 +241,7 @@ namespace WebAdmin.Migrations
                 {
                     IdPeriodo = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PeriodoDesc = table.Column<string>(type: "text", nullable: false),
+                    PeriodoDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -257,7 +257,7 @@ namespace WebAdmin.Migrations
                 {
                     IdPeriodoAmortiza = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PeriodoAmortizaDesc = table.Column<string>(type: "text", nullable: false),
+                    PeriodoAmortizaDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -273,7 +273,7 @@ namespace WebAdmin.Migrations
                 {
                     IdPersonalEstudio = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PersonalEstudioDesc = table.Column<string>(type: "text", nullable: false),
+                    PersonalEstudioDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -289,7 +289,7 @@ namespace WebAdmin.Migrations
                 {
                     IdProdServ = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ProdServDesc = table.Column<string>(type: "text", nullable: false),
+                    ProdServDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -306,7 +306,7 @@ namespace WebAdmin.Migrations
                     IdProducto = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CodigoInterno = table.Column<string>(type: "text", nullable: true),
-                    CodigoExterno = table.Column<string>(type: "text", nullable: false),
+                    CodigoExterno = table.Column<string>(type: "text", nullable: true),
                     IdCategoria = table.Column<int>(type: "integer", nullable: false),
                     DescProducto = table.Column<string>(type: "text", nullable: true),
                     CantidadMinima = table.Column<int>(type: "integer", nullable: false),
@@ -330,7 +330,7 @@ namespace WebAdmin.Migrations
                 {
                     IdRol = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RolDesc = table.Column<string>(type: "text", nullable: false),
+                    RolDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -346,7 +346,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoAlumno = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoAlumnoDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoAlumnoDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -362,7 +362,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoCancelacion = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoCancelacionDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoCancelacionDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -378,7 +378,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoCentro = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoCentroDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoCentroDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -394,7 +394,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoCompra = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoCompraDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoCompraDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -410,7 +410,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoContratacion = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoContratacionDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoContratacionDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -426,7 +426,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoDevolucion = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoDevolucionDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoDevolucionDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -442,7 +442,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoDireccion = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoDireccionDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoDireccionDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -458,7 +458,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoFormaPago = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoFormaPagoDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoFormaPagoDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -474,7 +474,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoPago = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoPagoDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoPagoDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -490,7 +490,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoPrestamo = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoPrestamoDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoPrestamoDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -506,7 +506,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoServicio = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoServicioDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoServicioDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -522,7 +522,7 @@ namespace WebAdmin.Migrations
                 {
                     IdTipoSuministro = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoSuministroDesc = table.Column<string>(type: "text", nullable: false),
+                    TipoSuministroDesc = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
@@ -613,8 +613,8 @@ namespace WebAdmin.Migrations
                     IdAlumnoContacto = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IdPerfil = table.Column<int>(type: "integer", nullable: false),
-                    NombreAlumnoContacto = table.Column<string>(type: "text", nullable: false),
-                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    NombreAlumnoContacto = table.Column<string>(type: "text", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: true),
                     Telefono = table.Column<string>(type: "text", nullable: true),
                     TelefonoMovil = table.Column<string>(type: "text", nullable: true),
                     IdAlumno = table.Column<Guid>(type: "uuid", nullable: false),
@@ -634,14 +634,14 @@ namespace WebAdmin.Migrations
                     IdAlumnoDirecciones = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IdTipoDireccion = table.Column<int>(type: "integer", nullable: false),
-                    Calle = table.Column<string>(type: "text", nullable: false),
+                    Calle = table.Column<string>(type: "text", nullable: true),
                     CodigoPostal = table.Column<string>(type: "text", nullable: true),
                     IdColonia = table.Column<string>(type: "text", nullable: true),
                     Colonia = table.Column<string>(type: "text", nullable: true),
                     LocalidadMunicipio = table.Column<string>(type: "text", nullable: true),
                     Ciudad = table.Column<string>(type: "text", nullable: true),
                     Estado = table.Column<string>(type: "text", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: true),
                     Telefono = table.Column<string>(type: "text", nullable: true),
                     IdAlumno = table.Column<Guid>(type: "uuid", nullable: false),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
@@ -665,9 +665,9 @@ namespace WebAdmin.Migrations
                     NombreTutor = table.Column<string>(type: "text", nullable: true),
                     ApellidoPaternoTutor = table.Column<string>(type: "text", nullable: true),
                     ApellidoMaternoTutor = table.Column<string>(type: "text", nullable: true),
-                    NombreAlumno = table.Column<string>(type: "text", nullable: false),
-                    ApellidoPaterno = table.Column<string>(type: "text", nullable: false),
-                    ApellidoMaterno = table.Column<string>(type: "text", nullable: false),
+                    NombreAlumno = table.Column<string>(type: "text", nullable: true),
+                    ApellidoPaterno = table.Column<string>(type: "text", nullable: true),
+                    ApellidoMaterno = table.Column<string>(type: "text", nullable: true),
                     IdUCorporativoCentro = table.Column<Guid>(type: "uuid", nullable: false),
                     IdCorpCent = table.Column<int>(type: "integer", nullable: false),
                     CorreoAcceso = table.Column<string>(type: "text", nullable: true),
@@ -717,7 +717,7 @@ namespace WebAdmin.Migrations
                     IdCentro = table.Column<Guid>(type: "uuid", nullable: false),
                     IdTipoLicencia = table.Column<int>(type: "integer", nullable: false),
                     IdTipoCentro = table.Column<int>(type: "integer", nullable: false),
-                    NombreCentro = table.Column<string>(type: "text", nullable: false),
+                    NombreCentro = table.Column<string>(type: "text", nullable: true),
                     Calle = table.Column<string>(type: "text", nullable: true),
                     CodigoPostal = table.Column<string>(type: "text", nullable: true),
                     IdColonia = table.Column<string>(type: "text", nullable: true),
@@ -725,7 +725,7 @@ namespace WebAdmin.Migrations
                     LocalidadMunicipio = table.Column<string>(type: "text", nullable: true),
                     Ciudad = table.Column<string>(type: "text", nullable: true),
                     Estado = table.Column<string>(type: "text", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: true),
                     Telefono = table.Column<string>(type: "text", nullable: true),
                     CentroPresupuesto = table.Column<double>(type: "double precision", nullable: false),
                     IdCorpCent = table.Column<int>(type: "integer", nullable: false),
@@ -768,7 +768,7 @@ namespace WebAdmin.Migrations
                 columns: table => new
                 {
                     IdCorporativo = table.Column<Guid>(type: "uuid", nullable: false),
-                    NombreCorporativo = table.Column<string>(type: "text", nullable: false),
+                    NombreCorporativo = table.Column<string>(type: "text", nullable: true),
                     Calle = table.Column<string>(type: "text", nullable: true),
                     CodigoPostal = table.Column<string>(type: "text", nullable: true),
                     IdColonia = table.Column<string>(type: "text", nullable: true),
@@ -776,7 +776,7 @@ namespace WebAdmin.Migrations
                     LocalidadMunicipio = table.Column<string>(type: "text", nullable: true),
                     Ciudad = table.Column<string>(type: "text", nullable: true),
                     Estado = table.Column<string>(type: "text", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: true),
                     Telefono = table.Column<string>(type: "text", nullable: true),
                     IdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
@@ -793,7 +793,7 @@ namespace WebAdmin.Migrations
                 columns: table => new
                 {
                     IdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
-                    NombreEmpresa = table.Column<string>(type: "text", nullable: false),
+                    NombreEmpresa = table.Column<string>(type: "text", nullable: true),
                     Rfc = table.Column<string>(type: "text", nullable: true),
                     GiroComercial = table.Column<string>(type: "text", nullable: true),
                     Calle = table.Column<string>(type: "text", nullable: true),
@@ -803,7 +803,7 @@ namespace WebAdmin.Migrations
                     LocalidadMunicipio = table.Column<string>(type: "text", nullable: true),
                     Ciudad = table.Column<string>(type: "text", nullable: true),
                     Estado = table.Column<string>(type: "text", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: true),
                     Telefono = table.Column<string>(type: "text", nullable: true),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -821,7 +821,7 @@ namespace WebAdmin.Migrations
                     IdNomina = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IdUsuarioRemuneracion = table.Column<Guid>(type: "uuid", nullable: false),
-                    NominaDesc = table.Column<string>(type: "text", nullable: false),
+                    NominaDesc = table.Column<string>(type: "text", nullable: true),
                     UsuarioRemuneracion = table.Column<double>(type: "double precision", nullable: false),
                     IdTipoContratacion = table.Column<int>(type: "integer", nullable: false),
                     IdTipoPago = table.Column<int>(type: "integer", nullable: false),
@@ -844,16 +844,16 @@ namespace WebAdmin.Migrations
                     IdPrestamo = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IdTipoPrestamo = table.Column<int>(type: "integer", nullable: false),
-                    PrestamoDesc = table.Column<string>(type: "text", nullable: false),
+                    PrestamoDesc = table.Column<string>(type: "text", nullable: true),
                     CantidadPrestamo = table.Column<double>(type: "double precision", nullable: false),
                     IdPeriodoAmortiza = table.Column<int>(type: "integer", nullable: false),
                     IdTipoFormaPago = table.Column<int>(type: "integer", nullable: false),
                     IdCentroPrestamo = table.Column<Guid>(type: "uuid", nullable: false),
-                    Nombres = table.Column<string>(type: "text", nullable: false),
-                    ApellidoPaterno = table.Column<string>(type: "text", nullable: false),
-                    ApellidoMaterno = table.Column<string>(type: "text", nullable: false),
-                    curp = table.Column<string>(type: "text", nullable: false),
-                    ine = table.Column<string>(type: "text", nullable: false),
+                    Nombres = table.Column<string>(type: "text", nullable: true),
+                    ApellidoPaterno = table.Column<string>(type: "text", nullable: true),
+                    ApellidoMaterno = table.Column<string>(type: "text", nullable: true),
+                    curp = table.Column<string>(type: "text", nullable: true),
+                    ine = table.Column<string>(type: "text", nullable: true),
                     IdCorpCent = table.Column<int>(type: "integer", nullable: false),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     IdUCorporativoCentro = table.Column<Guid>(type: "uuid", nullable: false),
@@ -872,8 +872,8 @@ namespace WebAdmin.Migrations
                     IdProveedorContacto = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IdPerfil = table.Column<int>(type: "integer", nullable: false),
-                    NombreProveedorContacto = table.Column<string>(type: "text", nullable: false),
-                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    NombreProveedorContacto = table.Column<string>(type: "text", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: true),
                     Telefono = table.Column<string>(type: "text", nullable: true),
                     TelefonoMovil = table.Column<string>(type: "text", nullable: true),
                     IdProveedor = table.Column<Guid>(type: "uuid", nullable: false),
@@ -900,7 +900,7 @@ namespace WebAdmin.Migrations
                     LocalidadMunicipio = table.Column<string>(type: "text", nullable: true),
                     Ciudad = table.Column<string>(type: "text", nullable: true),
                     Estado = table.Column<string>(type: "text", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: true),
                     Telefono = table.Column<string>(type: "text", nullable: true),
                     IdProveedor = table.Column<Guid>(type: "uuid", nullable: false),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
@@ -917,7 +917,7 @@ namespace WebAdmin.Migrations
                 columns: table => new
                 {
                     IdProveedor = table.Column<Guid>(type: "uuid", nullable: false),
-                    NombreProveedor = table.Column<string>(type: "text", nullable: false),
+                    NombreProveedor = table.Column<string>(type: "text", nullable: true),
                     Rfc = table.Column<string>(type: "text", nullable: true),
                     GiroComercial = table.Column<string>(type: "text", nullable: true),
                     IdCorporativo = table.Column<Guid>(type: "uuid", nullable: false),
@@ -937,7 +937,7 @@ namespace WebAdmin.Migrations
                     IdServicio = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CodigoInterno = table.Column<string>(type: "text", nullable: true),
-                    CodigoExterno = table.Column<string>(type: "text", nullable: false),
+                    CodigoExterno = table.Column<string>(type: "text", nullable: true),
                     IdTipoServicio = table.Column<int>(type: "integer", nullable: false),
                     DescServicio = table.Column<string>(type: "text", nullable: true),
                     Periodo = table.Column<int>(type: "integer", nullable: false),
@@ -962,8 +962,8 @@ namespace WebAdmin.Migrations
                     IdSuministro = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IdTipoSuministro = table.Column<int>(type: "integer", nullable: false),
-                    SuministroDesc = table.Column<string>(type: "text", nullable: false),
-                    NumeroReferencia = table.Column<string>(type: "text", nullable: false),
+                    SuministroDesc = table.Column<string>(type: "text", nullable: true),
+                    NumeroReferencia = table.Column<string>(type: "text", nullable: true),
                     DiaFacturacion = table.Column<int>(type: "integer", nullable: false),
                     IdPeriodo = table.Column<int>(type: "integer", nullable: false),
                     MontoSuministro = table.Column<double>(type: "double precision", nullable: false),
@@ -1113,9 +1113,9 @@ namespace WebAdmin.Migrations
                 columns: table => new
                 {
                     IdUsuario = table.Column<Guid>(type: "uuid", nullable: false),
-                    Nombres = table.Column<string>(type: "text", nullable: false),
-                    ApellidoPaterno = table.Column<string>(type: "text", nullable: false),
-                    ApellidoMaterno = table.Column<string>(type: "text", nullable: false),
+                    Nombres = table.Column<string>(type: "text", nullable: true),
+                    ApellidoPaterno = table.Column<string>(type: "text", nullable: true),
+                    ApellidoMaterno = table.Column<string>(type: "text", nullable: true),
                     IdCorporativo = table.Column<Guid>(type: "uuid", nullable: false),
                     IdCorpCent = table.Column<int>(type: "integer", nullable: false),
                     IdArea = table.Column<int>(type: "integer", nullable: false),
@@ -1123,7 +1123,7 @@ namespace WebAdmin.Migrations
                     IdPerfil = table.Column<int>(type: "integer", nullable: false),
                     IdRol = table.Column<int>(type: "integer", nullable: false),
                     FechaNacimiento = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    CorreoAcceso = table.Column<string>(type: "text", nullable: false),
+                    CorreoAcceso = table.Column<string>(type: "text", nullable: true),
                     Telefono = table.Column<string>(type: "text", nullable: true),
                     UsuarioCurp = table.Column<string>(type: "text", nullable: true),
                     UsuarioRfc = table.Column<string>(type: "text", nullable: true),
@@ -1164,8 +1164,8 @@ namespace WebAdmin.Migrations
                     IdRelCompraProducto = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Cantidad = table.Column<int>(type: "integer", nullable: false),
-                    Categoria = table.Column<string>(type: "text", nullable: false),
-                    Producto = table.Column<string>(type: "text", nullable: false),
+                    Categoria = table.Column<string>(type: "text", nullable: true),
+                    Producto = table.Column<string>(type: "text", nullable: true),
                     Precio = table.Column<double>(type: "double precision", nullable: false),
                     TotalPrecio = table.Column<double>(type: "double precision", nullable: false),
                     Descuento = table.Column<int>(type: "integer", nullable: false),
@@ -1193,8 +1193,8 @@ namespace WebAdmin.Migrations
                     IdRelVentaProducto = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Cantidad = table.Column<int>(type: "integer", nullable: false),
-                    Categoria = table.Column<string>(type: "text", nullable: false),
-                    Producto = table.Column<string>(type: "text", nullable: false),
+                    Categoria = table.Column<string>(type: "text", nullable: true),
+                    Producto = table.Column<string>(type: "text", nullable: true),
                     Precio = table.Column<double>(type: "double precision", nullable: false),
                     TotalPrecio = table.Column<double>(type: "double precision", nullable: false),
                     Descuento = table.Column<int>(type: "integer", nullable: false),
@@ -1218,20 +1218,20 @@ namespace WebAdmin.Migrations
             migrationBuilder.InsertData(
                 table: "CaTipotLicencias",
                 columns: new[] { "IdTipoLicencia", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "LicenciaDesc" },
-                values: new object[] { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "LICENCIA C" });
+                values: new object[] { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "LICENCIA C" });
 
             migrationBuilder.InsertData(
                 table: "CatAreas",
                 columns: new[] { "IdArea", "AreaDesc", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, "DIRECCION", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, "ADMINISTRATIVA", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 3, "RECURSOS HUMANOS", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 4, "PRODUCCION DIGITAL", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 5, "FINANZAS/CONTABILIDAD", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 6, "MARKETING/VENTAS", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 7, "TIC", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, "DIRECCION", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, "ADMINISTRATIVA", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 3, "RECURSOS HUMANOS", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 4, "PRODUCCION DIGITAL", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 5, "FINANZAS/CONTABILIDAD", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 6, "MARKETING/VENTAS", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 7, "TIC", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -2769,8 +2769,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCorpCent", "CorpCentDesc", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, "CORPORATIVO", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, "CENTRO", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, "CORPORATIVO", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, "CENTRO", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -2778,12 +2778,12 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdEscolaridad", "EscolaridadDesc", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, "PRIMERO", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, "SEGUNDO", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 3, "TERCERO", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 4, "CUARTO", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 5, "QUINTO", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 6, "SEXTO", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, "PRIMERO", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, "SEGUNDO", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 3, "TERCERO", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 4, "CUARTO", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 5, "QUINTO", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 6, "SEXTO", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -2791,8 +2791,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdEstatusRegistro", "EstatusDesc", "FechaRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, "ACTIVO", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, "DESACTIVO", new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, "ACTIVO", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, "DESACTIVO", new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -2800,8 +2800,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdGenero", "FechaRegistro", "GeneroDesc", "IdEstatusRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), "HOMBRE", 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), "MUJER", 1, new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), "HOMBRE", 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), "MUJER", 1, new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -2809,11 +2809,11 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdNivelEscolar", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "NivelEscolarDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "PREESCOLAR" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "PRIMARIA" },
-                    { 3, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SECUNDARIA" },
-                    { 4, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "BACHILLERATO" },
-                    { 5, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "UNIVERSIDAD" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "PREESCOLAR" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "PRIMARIA" },
+                    { 3, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SECUNDARIA" },
+                    { 4, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "BACHILLERATO" },
+                    { 5, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "UNIVERSIDAD" }
                 });
 
             migrationBuilder.InsertData(
@@ -2821,11 +2821,11 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdPerfil", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "PerfilDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DIRECTOR" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
-                    { 3, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "GERENTE" },
-                    { 4, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EJECUTIVO" },
-                    { 5, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DOCENTE" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DIRECTOR" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
+                    { 3, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "GERENTE" },
+                    { 4, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EJECUTIVO" },
+                    { 5, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DOCENTE" }
                 });
 
             migrationBuilder.InsertData(
@@ -2833,14 +2833,14 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdPeriodoAmortiza", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "PeriodoAmortizaDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "1 MES" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "3 MES" },
-                    { 3, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "6 MES" },
-                    { 4, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "9 MES" },
-                    { 5, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "12 MES" },
-                    { 6, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "18 MES" },
-                    { 7, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "24 MES" },
-                    { 8, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "36 MES" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "1 MES" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "3 MES" },
+                    { 3, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "6 MES" },
+                    { 4, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "9 MES" },
+                    { 5, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "12 MES" },
+                    { 6, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "18 MES" },
+                    { 7, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "24 MES" },
+                    { 8, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "36 MES" }
                 });
 
             migrationBuilder.InsertData(
@@ -2848,12 +2848,12 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdPersonalEstudio", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "PersonalEstudioDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "BACHILLERATO" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "BACHILLERATO TECNICO" },
-                    { 3, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "LICNECIATURA" },
-                    { 4, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "INGENIERIA" },
-                    { 5, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "MAESTRIA" },
-                    { 6, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DOCTORADO" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "BACHILLERATO" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "BACHILLERATO TECNICO" },
+                    { 3, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "LICNECIATURA" },
+                    { 4, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "INGENIERIA" },
+                    { 5, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "MAESTRIA" },
+                    { 6, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DOCTORADO" }
                 });
 
             migrationBuilder.InsertData(
@@ -2861,8 +2861,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdProdServ", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "ProdServDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "PRODUCTO" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SERVICIO" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "PRODUCTO" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SERVICIO" }
                 });
 
             migrationBuilder.InsertData(
@@ -2870,10 +2870,10 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdRol", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "RolDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DESARROLLADOR" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
-                    { 3, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SUPERVISOR" },
-                    { 4, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "OPERADOR" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DESARROLLADOR" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
+                    { 3, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SUPERVISOR" },
+                    { 4, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "OPERADOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -2881,8 +2881,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdTipoAlumno", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoAlumnoDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "PROSPECTO" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ALUMNO" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "PROSPECTO" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ALUMNO" }
                 });
 
             migrationBuilder.InsertData(
@@ -2890,8 +2890,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdTipoCentro", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoCentroDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "INTERNO" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "LICENCIA" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "INTERNO" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "LICENCIA" }
                 });
 
             migrationBuilder.InsertData(
@@ -2899,11 +2899,11 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdTipoContratacion", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoContratacionDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "FIJA" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TEMPORAL" },
-                    { 3, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "FORMACION/APRENDIZAJE" },
-                    { 4, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SERVICIO SOCIAL" },
-                    { 5, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "RESIENCIAS PROFESIONALES" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "FIJA" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TEMPORAL" },
+                    { 3, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "FORMACION/APRENDIZAJE" },
+                    { 4, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SERVICIO SOCIAL" },
+                    { 5, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "RESIENCIAS PROFESIONALES" }
                 });
 
             migrationBuilder.InsertData(
@@ -2911,9 +2911,9 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdTipoFormaPago", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoFormaPagoDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SEMANAL" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "QUINCENAL" },
-                    { 3, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "MENSUAL" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SEMANAL" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "QUINCENAL" },
+                    { 3, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "MENSUAL" }
                 });
 
             migrationBuilder.InsertData(
@@ -2921,11 +2921,11 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdTipoPago", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoPagoDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EFECTIVO" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TRANSFERENCIA" },
-                    { 3, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "CREDITO" },
-                    { 4, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDC" },
-                    { 5, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDD" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EFECTIVO" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TRANSFERENCIA" },
+                    { 3, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "CREDITO" },
+                    { 4, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDC" },
+                    { 5, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDD" }
                 });
 
             migrationBuilder.InsertData(
@@ -2933,8 +2933,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdTipoPrestamo", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoPrestamoDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "INTERNO" },
-                    { 2, new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EXTERNO" }
+                    { 1, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "INTERNO" },
+                    { 2, new DateTime(2022, 8, 26, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EXTERNO" }
                 });
 
             migrationBuilder.CreateIndex(

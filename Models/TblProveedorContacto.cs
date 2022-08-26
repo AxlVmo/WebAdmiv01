@@ -13,7 +13,7 @@ namespace WebAdmin.Models
         public int IdProveedorContacto { get; set; }
 
         [Display(Name = "Perfil")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdPerfil { get; set; }
 
         [NotMapped]
@@ -21,11 +21,11 @@ namespace WebAdmin.Models
         public string PerfilDesc { get; set; }
 
         [Display(Name = "Nombre Contacto")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string NombreProveedorContacto { get; set; }
 
         [Display(Name = "Correo Electronico")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string CorreoElectronico { get; set; }
 
         [Display(Name = "Telefono")]
@@ -50,7 +50,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
     }
 }

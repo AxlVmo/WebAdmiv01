@@ -13,18 +13,18 @@ namespace WebAdmin.Models
         public Guid IdCentro { get; set; }
 
         [Display(Name = "Tipo de Licencia")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdTipoLicencia { get; set; }
 
         [Display(Name = "Tipo de Centro")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdTipoCentro { get; set; }
         [Display(Name = "Usuario Asignado")]
         [NotMapped]
         public string UsuarioAsignado { get; set; }
 
         [Display(Name = "Nombre de Centro")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string NombreCentro { get; set; }
 
         [Display(Name = "Calle")]
@@ -48,14 +48,14 @@ namespace WebAdmin.Models
         public string Estado { get; set; }
 
         [Display(Name = "Correo Electronico")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string CorreoElectronico { get; set; }
 
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
         [Display(Name = "Presupuesto")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public double CentroPresupuesto { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
@@ -65,10 +65,10 @@ namespace WebAdmin.Models
         public Guid IdUsuarioModifico { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public Guid IdUCorporativoCentro { get; set; }
 
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         [Display(Name = "Usuario Control")]
         public Guid IdUsuarioControl { get; set; }
 
@@ -78,7 +78,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
     }
 }

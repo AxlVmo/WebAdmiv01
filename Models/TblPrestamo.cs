@@ -13,28 +13,28 @@ namespace WebAdmin.Models
         public string CentroDesc { get; set; }
 
         [Display(Name = "Tipo Prestamo")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdTipoPrestamo { get; set; }
         [NotMapped]
         public string TipoPrestamoDesc { get; set; }
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string PrestamoDesc { get; set; }
 
         [Display(Name = "Cantidad de Deposito")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public double CantidadPrestamo { get; set; }
 
         [Display(Name = "Periodo Amortizacion")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdPeriodoAmortiza { get; set; }
 
         [NotMapped]
         public string PeriodoAmortizaDesc { get; set; }
 
         [Display(Name = "Forma Pago")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdTipoFormaPago { get; set; }
 
         [NotMapped]
@@ -48,26 +48,26 @@ namespace WebAdmin.Models
         public Guid IdCentroPrestamo { get; set; }
 
         [Display(Name = "Nombres")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         
         public string Nombres { get; set; }
 
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         [Display(Name = "Apellido Paterno")]
         
         public string ApellidoPaterno { get; set; }
 
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         [Display(Name = "Apellido Materno")]
         
         public string ApellidoMaterno { get; set; }
 
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         [Display(Name = "CURP")]
         
         public string curp { get; set; }
 
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         [Display(Name = "INE")]
         
         public string ine { get; set; }
@@ -79,7 +79,7 @@ namespace WebAdmin.Models
         public Guid IdUsuarioModifico { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public Guid IdUCorporativoCentro { get; set; }
 
         [Display(Name = "Fecha Registro")]
@@ -87,7 +87,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public int IdEstatusRegistro { get; set; }
     }
 }
