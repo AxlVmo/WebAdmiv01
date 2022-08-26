@@ -25,7 +25,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="CategoriaDesc" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="CategoriaDesc" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="CategoriaDesc" class="form-control" />
                 <span asp-validation-for="CategoriaDesc" class="text-danger"></span>
             </div>
         </div>

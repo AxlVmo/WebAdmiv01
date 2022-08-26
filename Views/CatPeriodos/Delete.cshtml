@@ -38,8 +38,8 @@
     </dl>
     
     <form asp-action="Delete">
-        <input style="text-transform:uppercase" type="hidden" asp-for="IdPeriodo" />
-        <input style="text-transform:uppercase" type="submit" value="Desactivar" class="btn btn-danger" />
+        <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required type="hidden" asp-for="IdPeriodo" />
+        <input type="submit" value="Desactivar" class="btn btn-danger" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
     </form>
 </div>

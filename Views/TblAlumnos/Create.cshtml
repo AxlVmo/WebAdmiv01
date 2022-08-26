@@ -22,7 +22,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoAlumno" class="control-label"></label>
-                <select id="drpTipoAlumno" class="form-select" asp-for="IdTipoAlumno"
+                <select id="drpTipoAlumno" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoAlumno"
                     asp-items="@(new SelectList(ViewBag.ListaTipoAlumnos,"IdTipoAlumno","TipoAlumnoDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
@@ -33,21 +33,21 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="NombreAlumno" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="NombreAlumno" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="NombreAlumno" class="form-control" />
                 <span asp-validation-for="NombreAlumno" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoPaterno" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="ApellidoPaterno" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ApellidoPaterno" class="form-control" />
                 <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoMaterno" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="ApellidoMaterno" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ApellidoMaterno" class="form-control" />
                 <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
             </div>
         </div>

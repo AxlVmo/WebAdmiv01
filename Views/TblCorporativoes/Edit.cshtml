@@ -55,7 +55,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="Colonia" class="control-label"></label>
-                <select id="drpColonias" class="form-select" asp-for="Colonia">
+                <select id="drpColonias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Colonia">
                     @*<option value="">Seleccionar Estatus</option>*@
                 </select>
                 <span asp-validation-for="Colonia" class="text-danger"></span>
@@ -101,7 +101,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <select id="idEstatusLista" class="form-select" asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
                 <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>

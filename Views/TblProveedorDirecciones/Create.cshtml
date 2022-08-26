@@ -33,7 +33,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="IdTipoDireccion" class="control-label"></label>
-                    <select id="idListaTipoDireccion" class="form-select" asp-for="IdTipoDireccion" asp-items="@(new SelectList(ViewBag.ListaTipoDireccion,"IdTipoDireccion","TipoDireccionDesc"))">
+                    <select id="idListaTipoDireccion" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoDireccion" asp-items="@(new SelectList(ViewBag.ListaTipoDireccion,"IdTipoDireccion","TipoDireccionDesc"))">
                         <option value="">SELECCIONAR</option>
                     </select>
                     <span asp-validation-for="IdTipoDireccion" class="text-danger"></span>
@@ -43,7 +43,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Calle" class="control-label"></label>
-                    <input style="text-transform:uppercase" asp-for="Calle" class="form-control" />
+                    <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Calle" class="form-control" />
                     <span asp-validation-for="Calle" class="text-danger"></span>
                 </div>
             </div>
@@ -65,7 +65,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="Colonia" class="control-label"></label>
-                    <select id="drpColonias" class="form-select" asp-for="Colonia">
+                    <select id="drpColonias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Colonia">
                         <option value="">SELECCIONAR</option>
                     </select>
                     <span asp-validation-for="Colonia" class="text-danger"></span>

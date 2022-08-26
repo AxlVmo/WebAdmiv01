@@ -23,7 +23,7 @@
     <div class="col-md-6 col-xl-3 col-sm-12" id="iCorpCent" hidden>
         <div class="form-group">
             <label class="control-label">Corporativo / Centro</label>
-            <select id="drpCorpCent" class="form-select" onchange="myFunction()"
+            <select id="drpCorpCent" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required onchange="myFunction()"
                 asp-items="@(new SelectList(ViewBag.ListaCorpCent,"IdCentro","CentroDesc"))">
                 <option value="">SELECCIONAR / LIMPIAR</option>
             </select>
@@ -159,7 +159,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         .columns()
                         .every(function () {
                             var column = this;
-                            var select = $('<select class="form-select">SELECCIONAR<option value=""></option></select>')
+                            var select = $('<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required>SELECCIONAR<option value=""></option></select>')
                                 .appendTo($(column.footer()).empty())
                                 .on('change', function () {
                                     var val = $.fn.dataTable.util.escapeRegex($(this).val());

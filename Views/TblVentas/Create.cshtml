@@ -25,7 +25,7 @@
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="TblVentas.IdCliente" class="control-label"></label>
-            <select id="IdCliente" class="form-select" asp-for="TblVentas.IdCliente"
+            <select id="IdCliente" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TblVentas.IdCliente"
                 asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
                 <option value="">SELECCIONAR</option>
             </select>
@@ -42,7 +42,7 @@
     <div class="col-md-3">
         <label asp-for="@Model.RelVentaProductos[0].Categoria" class="control-label"></label>
         <div class="input-group mb-3">
-            <select id="drpCategoria" class="form-select" asp-for="@Model.RelVentaProductos[0].Categoria" asp-items="@(new
+            <select id="drpCategoria" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="@Model.RelVentaProductos[0].Categoria" asp-items="@(new
             SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
                 <option value="">SELECCIONAR</option>
             </select>
@@ -54,7 +54,7 @@
 
         <label asp-for="@Model.RelVentaProductos[0].Producto" class="control-label"></label>
         <div class="input-group mb-3">
-            <select id="drpProducto" class="form-select" asp-for="@Model.RelVentaProductos[0].Producto">
+            <select id="drpProducto" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="@Model.RelVentaProductos[0].Producto">
                 <option value="">SELECCIONAR</option>
             </select>
         </div>
@@ -182,7 +182,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
-                                            <select id="lTipoPago" class="form-select" asp-for="TblVentas.IdTipoPago"
+                                            <select id="lTipoPago" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TblVentas.IdTipoPago"
                                                 asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
                                                 <option value="">SELECCIONAR</option>
                                             </select>

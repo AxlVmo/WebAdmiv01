@@ -7,7 +7,7 @@ permalink: /getting-started/basic-usage/
 
 {% assign field_name = "basic-usage" %}
 {% capture example_html %}
-<select class="form-select" id="{{ field_name }}" data-placeholder="Choose one thing">
+<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="{{ field_name }}" data-placeholder="Choose one thing">
     <option></option>
     <option>Reactive</option>
     <option>Solution</option>

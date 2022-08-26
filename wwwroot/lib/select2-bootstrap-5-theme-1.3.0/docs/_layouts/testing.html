@@ -112,7 +112,7 @@
 {%- capture content -%}
 <h2 id="single-select">Single select</h2>
 <h3 id="single-basic">Basic single select</h3>
-<select class="form-select" id="single-select-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="single-select-field" data-placeholder="Choose one thing">{{ single_options }}</select>
 
 <script>
 $( '#single-select-field' ).select2( {
@@ -123,7 +123,7 @@ $( '#single-select-field' ).select2( {
 </script>
 
 <h3 id="single-optgroup">Single select w/ optgroup</h3>
-<select class="form-select" id="single-select-optgroup-field" data-placeholder="Choose one thing">{{ single_optgroup }}</select>
+<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="single-select-optgroup-field" data-placeholder="Choose one thing">{{ single_optgroup }}</select>
 
 <script>
 $( '#single-select-optgroup-field' ).select2( {
@@ -134,7 +134,7 @@ $( '#single-select-optgroup-field' ).select2( {
 </script>
 
 <h3 id="single-clear">Single select w/ allow clear</h3>
-<select class="form-select" id="single-select-clear-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="single-select-clear-field" data-placeholder="Choose one thing">{{ single_options }}</select>
 
 <script>
 $( '#single-select-clear-field' ).select2( {
@@ -146,7 +146,7 @@ $( '#single-select-clear-field' ).select2( {
 </script>
 
 <h3 id="single-disabled">Disabled single select</h3>
-<select class="form-select" id="single-select-disabled-field" data-placeholder="Choose one thing" disabled>{{ single_options }}</select>
+<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="single-select-disabled-field" data-placeholder="Choose one thing" disabled>{{ single_options }}</select>
 
 <script>
 $( '#single-select-disabled-field' ).select2( {
@@ -158,7 +158,7 @@ $( '#single-select-disabled-field' ).select2( {
 
 <h2 id="multiple">Multiple select</h2>
 <h3 id="multiple-basic">Basic multiple select</h3>
-<select class="form-select" id="multiple-select-field" data-placeholder="Choose anything" multiple>{{ multiple_options }}</select>
+<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="multiple-select-field" data-placeholder="Choose anything" multiple>{{ multiple_options }}</select>
 
 <script>
 $( '#multiple-select-field' ).select2( {
@@ -170,7 +170,7 @@ $( '#multiple-select-field' ).select2( {
 </script>
 
 <h3 id="multiple-optgroup">Multiple select w/ optgroup</h3>
-<select class="form-select" id="multiple-select-optgroup-field" data-placeholder="Choose anything" multiple>{{ multiple_optgroup }}</select>
+<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="multiple-select-optgroup-field" data-placeholder="Choose anything" multiple>{{ multiple_optgroup }}</select>
 
 <script>
 $( '#multiple-select-optgroup-field' ).select2( {
@@ -182,7 +182,7 @@ $( '#multiple-select-optgroup-field' ).select2( {
 </script>
 
 <h3 id="multiple-clear">Multiple select w/ allow clear</h3>
-<select class="form-select" id="multiple-select-clear-field" data-placeholder="Choose anything" multiple>{{ multiple_options }}</select>
+<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="multiple-select-clear-field" data-placeholder="Choose anything" multiple>{{ multiple_options }}</select>
 
 <script>
 $( '#multiple-select-clear-field' ).select2( {
@@ -195,7 +195,7 @@ $( '#multiple-select-clear-field' ).select2( {
 </script>
 
 <h3 id="multiple-custom">Multiple select w/ custom entries</h3>
-<select class="form-select" id="multiple-select-custom-field" data-placeholder="Choose anything" multiple>{{ multiple_options }}</select>
+<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="multiple-select-custom-field" data-placeholder="Choose anything" multiple>{{ multiple_options }}</select>
 
 <script>
 $( '#multiple-select-custom-field' ).select2( {
@@ -208,7 +208,7 @@ $( '#multiple-select-custom-field' ).select2( {
 </script>
 
 <h3 id="multiple-disabled">Disabled multiple select</h3>
-<select class="form-select" id="multiple-select-disabled-field" data-placeholder="Choose anything" multiple disabled>{{ multiple_options }}</select>
+<select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="multiple-select-disabled-field" data-placeholder="Choose anything" multiple disabled>{{ multiple_options }}</select>
 
 <script>
 $( '#multiple-select-disabled-field' ).select2( {
@@ -224,7 +224,7 @@ $( '#multiple-select-disabled-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_text }}
-    <select class="form-select" id="prepend-text-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="prepend-text-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
 </div>
 
 <script>
@@ -237,7 +237,7 @@ $( '#prepend-text-single-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_text }}
-    <select class="form-select" data-placeholder="Choose anything" id="prepend-text-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="prepend-text-multiple-field" multiple>{{ multiple_options }}</select>
 </div>
 
 <script>
@@ -251,7 +251,7 @@ $( '#prepend-text-multiple-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_button }}
-    <select class="form-select" id="prepend-button-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="prepend-button-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
 </div>
 
 <script>
@@ -264,7 +264,7 @@ $( '#prepend-button-single-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_button }}
-    <select class="form-select" data-placeholder="Choose anything" id="prepend-button-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="prepend-button-multiple-field" multiple>{{ multiple_options }}</select>
 </div>
 
 <script>
@@ -278,7 +278,7 @@ $( '#prepend-button-multiple-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_dropdown }}
-    <select class="form-select" id="prepend-dropdown-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="prepend-dropdown-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
 </div>
 
 <script>
@@ -291,7 +291,7 @@ $( '#prepend-dropdown-single-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_dropdown }}
-    <select class="form-select" data-placeholder="Choose anything" id="prepend-dropdown-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="prepend-dropdown-multiple-field" multiple>{{ multiple_options }}</select>
 </div>
 
 <script>
@@ -305,7 +305,7 @@ $( '#prepend-dropdown-multiple-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_toggle }}
-    <select class="form-select" id="prepend-toggle-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="prepend-toggle-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
 </div>
 
 <script>
@@ -318,7 +318,7 @@ $( '#prepend-toggle-single-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_toggle }}
-    <select class="form-select" data-placeholder="Choose anything" id="prepend-toggle-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="prepend-toggle-multiple-field" multiple>{{ multiple_options }}</select>
 </div>
 
 <script>
@@ -333,7 +333,7 @@ $( '#prepend-toggle-multiple-field' ).select2( {
 <h3 id="append">Append</h3>
 
 <div class="input-group mb-3">
-    <select class="form-select" id="append-text-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="append-text-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
     {{ append_text }}
 </div>
 
@@ -346,7 +346,7 @@ $( '#append-text-single-field' ).select2( {
 </script>
 
 <div class="input-group mb-3">
-    <select class="form-select" data-placeholder="Choose anything" id="append-text-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="append-text-multiple-field" multiple>{{ multiple_options }}</select>
     {{ append_text }}
 </div>
 
@@ -360,7 +360,7 @@ $( '#append-text-multiple-field' ).select2( {
 </script>
 
 <div class="input-group mb-3">
-    <select class="form-select" id="append-button-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="append-button-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
     {{ append_button }}
 </div>
 
@@ -373,7 +373,7 @@ $( '#append-button-single-field' ).select2( {
 </script>
 
 <div class="input-group mb-3">
-    <select class="form-select" data-placeholder="Choose anything" id="append-button-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="append-button-multiple-field" multiple>{{ multiple_options }}</select>
     {{ append_button }}
 </div>
 
@@ -387,7 +387,7 @@ $( '#append-button-multiple-field' ).select2( {
 </script>
 
 <div class="input-group mb-3">
-    <select class="form-select" id="append-dropdown-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="append-dropdown-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
     {{ append_dropdown }}
 </div>
 
@@ -400,7 +400,7 @@ $( '#append-dropdown-single-field' ).select2( {
 </script>
 
 <div class="input-group mb-3">
-    <select class="form-select" data-placeholder="Choose anything" id="append-dropdown-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="append-dropdown-multiple-field" multiple>{{ multiple_options }}</select>
     {{ append_dropdown }}
 </div>
 
@@ -414,7 +414,7 @@ $( '#append-dropdown-multiple-field' ).select2( {
 </script>
 
 <div class="input-group mb-3">
-    <select class="form-select" id="append-toggle-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="append-toggle-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
     {{ append_toggle }}
 </div>
 
@@ -427,7 +427,7 @@ $( '#append-toggle-single-field' ).select2( {
 </script>
 
 <div class="input-group mb-3">
-    <select class="form-select" data-placeholder="Choose anything" id="append-toggle-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="append-toggle-multiple-field" multiple>{{ multiple_options }}</select>
     {{ append_toggle }}
 </div>
 
@@ -444,7 +444,7 @@ $( '#append-toggle-multiple-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_text }}
-    <select class="form-select" id="prepend-append-text-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="prepend-append-text-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
     {{ append_text }}
 </div>
 
@@ -458,7 +458,7 @@ $( '#prepend-append-text-single-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_text }}
-    <select class="form-select" data-placeholder="Choose anything" id="prepend-append-text-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="prepend-append-text-multiple-field" multiple>{{ multiple_options }}</select>
     {{ append_text }}
 </div>
 
@@ -473,7 +473,7 @@ $( '#prepend-append-text-multiple-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_button }}
-    <select class="form-select" id="prepend-append-button-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="prepend-append-button-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
     {{ append_button }}
 </div>
 
@@ -487,7 +487,7 @@ $( '#prepend-append-button-single-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_button }}
-    <select class="form-select" data-placeholder="Choose anything" id="prepend-append-button-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="prepend-append-button-multiple-field" multiple>{{ multiple_options }}</select>
     {{ append_button }}
 </div>
 
@@ -502,7 +502,7 @@ $( '#prepend-append-button-multiple-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_dropdown }}
-    <select class="form-select" id="prepend-append-dropdown-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="prepend-append-dropdown-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
     {{ append_dropdown }}
 </div>
 
@@ -516,7 +516,7 @@ $( '#prepend-append-dropdown-single-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_dropdown }}
-    <select class="form-select" data-placeholder="Choose anything" id="prepend-append-dropdown-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="prepend-append-dropdown-multiple-field" multiple>{{ multiple_options }}</select>
     {{ append_dropdown }}
 </div>
 
@@ -531,7 +531,7 @@ $( '#prepend-append-dropdown-multiple-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_toggle }}
-    <select class="form-select" id="prepend-append-toggle-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="prepend-append-toggle-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
     {{ append_toggle }}
 </div>
 
@@ -545,7 +545,7 @@ $( '#prepend-append-toggle-single-field' ).select2( {
 
 <div class="input-group mb-3">
     {{ prepend_toggle }}
-    <select class="form-select" data-placeholder="Choose anything" id="prepend-append-toggle-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="prepend-append-toggle-multiple-field" multiple>{{ multiple_options }}</select>
     {{ append_toggle }}
 </div>
 
@@ -563,7 +563,7 @@ $( '#prepend-append-toggle-multiple-field' ).select2( {
 <h4 id="small-select2">Select2 options</h4>
 
 <div class="mb-3">
-    <select class="form-select" id="small-select2-options-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="small-select2-options-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
 </div>
 
 <script>
@@ -578,7 +578,7 @@ $( '#small-select2-options-single-field' ).select2( {
 </script>
 
 <div class="mb-3">
-    <select class="form-select" data-placeholder="Choose anything" id="small-select2-options-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="small-select2-options-multiple-field" multiple>{{ multiple_options }}</select>
 </div>
 
 <script>
@@ -625,7 +625,7 @@ $( '#small-bootstrap-class-multiple-field' ).select2( {
 <h4 id="large-select2">Select2 options</h4>
 
 <div class="mb-3">
-    <select class="form-select" id="large-select2-options-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="large-select2-options-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
 </div>
 
 <script>
@@ -640,7 +640,7 @@ $( '#large-select2-options-single-field' ).select2( {
 </script>
 
 <div class="mb-3">
-    <select class="form-select" data-placeholder="Choose anything" id="large-select2-options-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="large-select2-options-multiple-field" multiple>{{ multiple_options }}</select>
 </div>
 
 <script>
@@ -688,7 +688,7 @@ $( '#large-bootstrap-class-multiple-field' ).select2( {
 <h4 id="valid-was-validated"><code>.was-validated</code></h4>
 
 <form class="was-validated mb-3">
-    <select class="form-select" id="valid-was-validated-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="valid-was-validated-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
 </form>
 
 <script>
@@ -700,7 +700,7 @@ $( '#valid-was-validated-single-field' ).select2( {
 </script>
 
 <form class="was-validated mb-3">
-    <select class="form-select" data-placeholder="Choose anything" id="valid-was-validated-multiple-field" multiple>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="valid-was-validated-multiple-field" multiple>{{ multiple_options }}</select>
 </form>
 
 <script>
@@ -741,7 +741,7 @@ $( '#valid-is-valid-multiple-field' ).select2( {
 <h3 id="invalid">Invalid fields</h3>
 <h4 id="invalid-was-validated"><code>.was-validated</code></h4>
 <form class="was-validated mb-3">
-    <select class="form-select" id="invalid-was-validated-single-field" data-placeholder="Choose one thing" required>{{ single_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="invalid-was-validated-single-field" data-placeholder="Choose one thing" required>{{ single_options }}</select>
 </form>
 
 <script>
@@ -753,7 +753,7 @@ $( '#invalid-was-validated-single-field' ).select2( {
 </script>
 
 <form class="was-validated mb-3">
-    <select class="form-select" data-placeholder="Choose anything" id="invalid-was-validated-multiple-field" multiple required>{{ multiple_options }}</select>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="invalid-was-validated-multiple-field" multiple required>{{ multiple_options }}</select>
 </form>
 
 <script>
@@ -802,11 +802,11 @@ $( '#invalid-is-invalid-multiple-field' ).select2( {
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <select class="form-select" id="modal-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
+                    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="modal-single-field" data-placeholder="Choose one thing">{{ single_options }}</select>
                 </div>
 
                 <div class="mb-3">
-                    <select class="form-select" data-placeholder="Choose anything" id="modal-multiple-field" multiple>{{ multiple_options }}</select>
+                    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="modal-multiple-field" multiple>{{ multiple_options }}</select>
                 </div>
             </div>
         </div>

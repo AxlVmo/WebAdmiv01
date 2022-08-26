@@ -20,12 +20,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TipoContratacionDesc" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="TipoContratacionDesc" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TipoContratacionDesc" class="form-control" />
                 <span asp-validation-for="TipoContratacionDesc" class="text-danger"></span>
             </div>
             <br>
             <div class="form-group">
-                <input style="text-transform:uppercase" type="submit" value="Crear" class="btn btn-success" />
+                <input type="submit" value="Crear" class="btn btn-success" />
                 <a asp-action="Index" class="btn btn-secondary">Regresar</a>
             </div>
         </form>

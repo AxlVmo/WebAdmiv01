@@ -18,7 +18,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="IdUsuarioRemuneracion" class="control-label"></label>
-                <select id="IdUsuarioRemuneracion" class="form-select" asp-for="IdUsuarioRemuneracion"
+                <select id="IdUsuarioRemuneracion" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdUsuarioRemuneracion"
                     asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
                     <option value="">SELECCIONAR</option>
                 </select>
@@ -43,7 +43,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoPago" class="control-label"></label>
-                <select id="lTipoPago" class="form-select" asp-for="IdTipoPago"
+                <select id="lTipoPago" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoPago"
                     asp-items="@(new SelectList(ViewBag.ListaTipopago,"IdTipoPago","TipoPagoDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>

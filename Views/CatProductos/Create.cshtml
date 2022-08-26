@@ -23,14 +23,14 @@
         <div class="col-md-5">
             <div class="form-group">
                 <label asp-for="DescProducto" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="DescProducto" class="form-control" type="text" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="DescProducto" class="form-control" type="text" />
                 <span asp-validation-for="DescProducto" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="IdCategoria" class="control-label"></label>
-                <select id="drpCategorias" class="form-select" asp-for="IdCategoria"
+                <select id="drpCategorias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdCategoria"
                     asp-items="@(new SelectList(ViewBag.ListaCategoria,"IdCategoria","CategoriaDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
@@ -41,7 +41,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="CodigoExterno" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="CodigoExterno" class="form-control" type="text" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="CodigoExterno" class="form-control" type="text" />
                 <span asp-validation-for="CodigoExterno" class="text-danger"></span>
             </div>
         </div>

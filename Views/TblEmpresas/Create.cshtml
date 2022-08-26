@@ -26,21 +26,21 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="NombreEmpresa" class="control-label"></label>
-                    <input style="text-transform:uppercase" asp-for="NombreEmpresa" class="form-control" />
+                    <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="NombreEmpresa" class="form-control" />
                     <span asp-validation-for="NombreEmpresa" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="GiroComercial" class="control-label"></label>
-                    <input style="text-transform:uppercase" asp-for="GiroComercial" class="form-control" />
+                    <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="GiroComercial" class="form-control" />
                     <span asp-validation-for="GiroComercial" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Calle" class="control-label"></label>
-                    <input style="text-transform:uppercase" asp-for="Calle" class="form-control" />
+                    <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Calle" class="form-control" />
                     <span asp-validation-for="Calle" class="text-danger"></span>
                 </div>
             </div>
@@ -62,7 +62,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="Colonia" class="control-label"></label>
-                     <select id="drpColonias" class="form-select" asp-for="Colonia" >
+                     <select id="drpColonias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Colonia" >
                         <option value="">SELECCIONAR</option>
                     </select>
                     <span asp-validation-for="Colonia" class="text-danger"></span>

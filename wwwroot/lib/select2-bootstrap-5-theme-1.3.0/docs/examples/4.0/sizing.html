@@ -7,7 +7,7 @@ permalink: /examples/sizing/4.0/
 
 {%- capture single_select -%}
 <div class="mb-3">
-    <select class="form-select" id="single-select-single-field" data-placeholder="Choose one thing">
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required id="single-select-single-field" data-placeholder="Choose one thing">
         <option></option>
         <option>Reactive</option>
         <option>Solution</option>
@@ -20,7 +20,7 @@ permalink: /examples/sizing/4.0/
 
 {%- capture multiple_select -%}
 <div class="mb-3">
-    <select class="form-select" data-placeholder="Choose anything" id="multiple-select-multiple-field" multiple>
+    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required data-placeholder="Choose anything" id="multiple-select-multiple-field" multiple>
         <option>Christmas Island</option>
         <option>South Sudan</option>
         <option>Jamaica</option>

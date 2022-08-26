@@ -19,7 +19,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoPrestamo" class="control-label"></label>
-                <select id="lTipoPrestamo" class="form-select" asp-for="IdTipoPrestamo"
+                <select id="lTipoPrestamo" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoPrestamo"
                     asp-items="@(new SelectList(ViewBag.ListaCatTipoPrestamo,"IdTipoPrestamo","TipoPrestamoDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
@@ -44,7 +44,7 @@
         <div class="col-md-4">
             <div class="form-group" hidden id="hIdCentroPrestamo">
                 <label asp-for="IdCentroPrestamo" class="control-label"></label>
-                <select id="lIdCentroPrestamo" class="form-select" asp-for="IdCentroPrestamo"
+                <select id="lIdCentroPrestamo" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdCentroPrestamo"
                     asp-items="@(new SelectList(ViewBag.ListaCorpCent,"IdCentro","CentroDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
@@ -54,7 +54,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="IdPeriodoAmortiza" class="control-label"></label>
-                <select id="lIdPeriodoAmortiza" class="form-select" asp-for="IdPeriodoAmortiza"
+                <select id="lIdPeriodoAmortiza" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdPeriodoAmortiza"
                     asp-items="@(new SelectList(ViewBag.ListaCatPeriodoAmortiza,"IdPeriodoAmortiza","PeriodoAmortizaDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
@@ -64,7 +64,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="IdTipoFormaPago" class="control-label"></label>
-                <select id="lIdTipoFormaPago" class="form-select" asp-for="IdTipoFormaPago"
+                <select id="lIdTipoFormaPago" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoFormaPago"
                     asp-items="@(new SelectList(ViewBag.ListaCatTipoFormaPago,"IdTipoFormaPago","TipoFormaPagoDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
@@ -76,35 +76,35 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="Nombres" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="Nombres" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Nombres" class="form-control" />
                 <span asp-validation-for="Nombres" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoPaterno" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="ApellidoPaterno" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ApellidoPaterno" class="form-control" />
                 <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoMaterno" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="ApellidoMaterno" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ApellidoMaterno" class="form-control" />
                 <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="curp" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="curp" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="curp" class="form-control" />
                 <span asp-validation-for="curp" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ine" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="ine" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ine" class="form-control" />
                 <span asp-validation-for="ine" class="text-danger"></span>
             </div>
         </div>

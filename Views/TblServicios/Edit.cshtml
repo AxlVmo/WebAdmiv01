@@ -22,14 +22,14 @@
         <div class="col-md-5">
             <div class="form-group">
                 <label asp-for="DescServicio" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="DescServicio" class="form-control" type="text" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="DescServicio" class="form-control" type="text" />
                 <span asp-validation-for="DescServicio" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="IdTipoServicio" class="control-label"></label>
-                <select id="drpTipoServicio" class="form-select" asp-for="IdTipoServicio"
+                <select id="drpTipoServicio" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoServicio"
                     asp-items="@(new SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
@@ -40,7 +40,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="CodigoExterno" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="CodigoExterno" class="form-control" type="text" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="CodigoExterno" class="form-control" type="text" />
                 <span asp-validation-for="CodigoExterno" class="text-danger"></span>
             </div>
         </div>
@@ -61,7 +61,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <select id="idEstatusLista" class="form-select" asp-for="IdEstatusRegistro"
+                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
                     asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>

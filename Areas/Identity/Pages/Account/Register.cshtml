@@ -15,21 +15,21 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="Input.Nombres"></label>
-                <input style="text-transform:uppercase" asp-for="Input.Nombres" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Input.Nombres" class="form-control" />
                 <span asp-validation-for="Input.Nombres" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="Input.ApellidoPaterno"></label>
-                <input style="text-transform:uppercase" asp-for="Input.ApellidoPaterno" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Input.ApellidoPaterno" class="form-control" />
                 <span asp-validation-for="Input.ApellidoPaterno" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="Input.ApellidoMaterno"></label>
-                <input style="text-transform:uppercase" asp-for="Input.ApellidoMaterno" class="form-control" />
+                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Input.ApellidoMaterno" class="form-control" />
                 <span asp-validation-for="Input.ApellidoMaterno" class="text-danger"></span>
             </div>
         </div>
