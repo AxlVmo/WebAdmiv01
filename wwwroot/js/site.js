@@ -18,7 +18,7 @@
                 
             }
             else {
-                // document.getElementById("btn_Registro").setAttribute("hidden", true);
+                
                 if (list[0].idPerfil == 3 && list[0].idRol == 2 && list[0].idCorpCent == 2) {
                     var remove_i_empresa_p = document.getElementById("i_empresa_p");
                     remove_i_empresa_p.parentNode.removeChild(remove_i_empresa_p);
@@ -46,7 +46,7 @@
             }
         },
         error: function () {
-            $('#btn_Registro').removeAttr('hidden');
+            
         }
     });
 

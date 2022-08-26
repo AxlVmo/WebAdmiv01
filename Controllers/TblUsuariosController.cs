@@ -169,6 +169,17 @@ namespace WebAdmin.Controllers
             return View(tblUsuario);
         }
         [HttpGet]
+        public ActionResult RegistroUsuario()
+        {
+            bool vUsuario = false;
+            var fUsuario = _context.TblUsuarios.ToList();
+            if (fUsuario.Count != 0)
+            {
+                vUsuario = true;
+            }
+            return Json(vUsuario);
+        }
+        [HttpGet]
         public ActionResult FiltroUsuario()
         {
             var fuser = _userService.GetUserId();
@@ -214,12 +225,12 @@ namespace WebAdmin.Controllers
         public ActionResult fUsuarioNomina(Guid id)
         {
             var fUsuarioNominaR = from a in _context.TblUsuarios
-                             where a.IdUsuario == id
-                             select new TblUsuario
-                             {
-                                 IdUsuario = a.IdUsuario,
-                                 UsuarioRemuneracion = a.UsuarioRemuneracion
-                             };
+                                  where a.IdUsuario == id
+                                  select new TblUsuario
+                                  {
+                                      IdUsuario = a.IdUsuario,
+                                      UsuarioRemuneracion = a.UsuarioRemuneracion
+                                  };
             return Json(fUsuarioNominaR);
         }
         // POST: TblUsuarios/Create

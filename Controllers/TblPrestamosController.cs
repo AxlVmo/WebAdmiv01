@@ -108,7 +108,7 @@ namespace WebAdmin.Controllers
             if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
             {
                 var fPrestamoCntro = from a in _context.TblPrestamos
-                                     join b in _context.TblUsuarios on a.IdUsuarioPrestamo equals b.IdUsuario
+                                     join b in _context.TblUsuarios on a.IdCentroPrestamo equals b.IdUsuario
                                      join c in _context.CatTipoPrestamos on a.IdTipoPrestamo equals c.IdTipoPrestamo
                                      join d in _context.CatPeriodosAmortizaciones on a.IdPeriodoAmortiza equals d.IdPeriodoAmortiza
                                      join e in _context.CatTipoFormaPagos on a.IdTipoFormaPago equals e.IdTipoFormaPago
@@ -129,7 +129,7 @@ namespace WebAdmin.Controllers
             }
 
             var fPrestamo = from a in _context.TblPrestamos
-                            join b in _context.TblUsuarios on a.IdUsuarioPrestamo equals b.IdUsuario
+                            join b in _context.TblUsuarios on a.IdCentroPrestamo equals b.IdUsuario
                             join c in _context.CatTipoPrestamos on a.IdTipoPrestamo equals c.IdTipoPrestamo
                             join d in _context.CatPeriodosAmortizaciones on a.IdPeriodoAmortiza equals d.IdPeriodoAmortiza
                             join e in _context.CatTipoFormaPagos on a.IdTipoFormaPago equals e.IdTipoFormaPago
@@ -183,29 +183,46 @@ namespace WebAdmin.Controllers
 
             if (fIdUsuario.Count == 1)
             {
-                var fIdCentroCorp = _context.TblCentros
-                                      .Where(s => s.IdUsuarioControl == Guid.Parse(fuser))
-                                      .FirstOrDefault();
-
-                var fUsuariosCentrosCorp = from a in _context.TblUsuarios
-                                       where a.IdCorporativo == fIdCentroCorp.IdCentro
-                                       select new
-                                       {
-                                           IdUsuario = a.IdUsuario,
-                                           NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
-                                       };
-                TempData["Mpps"] = fUsuariosCentrosCorp.ToList();
-                ViewBag.ListaUsuariosCentros = TempData["Mpps"];
+                var fCent2 = from a in _context.TblCentros
+                             where a.IdEstatusRegistro == 1
+                             select new
+                             {
+                                 IdCentro = a.IdCentro,
+                                 CentroDesc = a.NombreCentro
+                             };
+                TempData["fTS"] = fCent2.ToList();
+                ViewBag.ListaCorpCent = TempData["fTS"];
             }
+            var fCent = from a in _context.TblCentros
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCentro,
+                            CentroDesc = a.NombreCentro
+                        };
+            var fCorp = from a in _context.TblCorporativos
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCorporativo,
+                            CentroDesc = a.NombreCorporativo
+                        };
+            var sCorpCent = fCorp.Union(fCent);
+            TempData["fTS"] = sCorpCent.ToList();
+            ViewBag.ListaCorpCent = TempData["fTS"];
 
-            var fUsuariosCentros = from a in _context.TblUsuarios
-                                   select new
-                                   {
-                                       IdUsuario = a.IdUsuario,
-                                       NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
-                                   };
-            TempData["Mpps"] = fUsuariosCentros.ToList();
-            ViewBag.ListaUsuariosCentros = TempData["Mpps"];
+            List<CatTipoPrestamo> ListaCatTipoPrestamo = new List<CatTipoPrestamo>();
+            ListaCatTipoPrestamo = (from c in _context.CatTipoPrestamos select c).Distinct().ToList();
+            ViewBag.ListaCatTipoPrestamo = ListaCatTipoPrestamo;
+
+            List<CatPeriodoAmortiza> ListaCatPeriodoAmortiza = new List<CatPeriodoAmortiza>();
+            ListaCatPeriodoAmortiza = (from c in _context.CatPeriodosAmortizaciones select c).Distinct().ToList();
+            ViewBag.ListaCatPeriodoAmortiza = ListaCatPeriodoAmortiza;
+
+            List<CatTipoFormaPago> ListaCatTipoFormaPago = new List<CatTipoFormaPago>();
+            ListaCatTipoFormaPago = (from c in _context.CatTipoFormaPagos select c).Distinct().ToList();
+            ViewBag.ListaCatTipoFormaPago = ListaCatTipoFormaPago;
+
             return View();
         }
 

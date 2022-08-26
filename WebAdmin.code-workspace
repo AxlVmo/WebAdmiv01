@@ -4,5 +4,18 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"sqltools.connections": [
+			{
+				"previewLimit": 50,
+				"server": "38.242.137.90",
+				"port": 5432,
+				"driver": "PostgreSQL",
+				"name": "vps_iides",
+				"database": "dbAdminDev1",
+				"username": "dev",
+				"password": "D3s4rr01l0_1"
+			}
+		]
+	}
 }

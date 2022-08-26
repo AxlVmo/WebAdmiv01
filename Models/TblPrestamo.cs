@@ -39,23 +39,33 @@ namespace WebAdmin.Models
         [NotMapped]
         public string TipoFormaPagoDesc { get; set; }
 
-        [Display(Name = "Usuario")]
-        public Guid IdUsuarioPrestamo { get; set; }
+        [Display(Name = "Centro")]
+        public Guid IdCentroPrestamo { get; set; }
 
         [Display(Name = "Nombres")]
         [Required(ErrorMessage = "Campo Requerido")]
-        [NotMapped]
+        
         public string Nombres { get; set; }
 
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Apellido Paterno")]
-        [NotMapped]
+        
         public string ApellidoPaterno { get; set; }
 
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "ApellidoMaterno")]
-        [NotMapped]
+        
         public string ApellidoMaterno { get; set; }
+
+        [Required(ErrorMessage = "Campo Requerido")]
+        [Display(Name = "CURP")]
+        
+        public string curp { get; set; }
+
+        [Required(ErrorMessage = "Campo Requerido")]
+        [Display(Name = "INE")]
+        
+        public string ine { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }

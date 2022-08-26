@@ -4,81 +4,78 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
 
-<h1>Create</h1>
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Control de Prestamos</li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Prestamo</li>
+    </ol>
+</nav>
 
-<h4>TblPrestamo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="IdTipoPrestamo" class="control-label"></label>
-                <input asp-for="IdTipoPrestamo" class="form-control" />
+                <select id="lTipoPrestamo" class="form-select" asp-for="IdTipoPrestamo"
+                    asp-items="@(new SelectList(ViewBag.ListaCatTipoPrestamo,"IdTipoPrestamo","TipoPrestamoDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
                 <span asp-validation-for="IdTipoPrestamo" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="IdCentroPrestamo" class="control-label"></label>
+                <select id="lIdCentroPrestamo" class="form-select" asp-for="IdCentroPrestamo"
+                    asp-items="@(new SelectList(ViewBag.ListaCorpCent,"IdCentro","CentroDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+                <span asp-validation-for="IdCentroPrestamo" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="IdPeriodoAmortiza" class="control-label"></label>
+                <select id="lIdPeriodoAmortiza" class="form-select" asp-for="IdPeriodoAmortiza"
+                    asp-items="@(new SelectList(ViewBag.ListaCatPeriodoAmortiza,"IdPeriodoAmortiza","PeriodoAmortizaDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+                <span asp-validation-for="IdPeriodoAmortiza" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="IdTipoFormaPago" class="control-label"></label>
+                <select id="lIdTipoFormaPago" class="form-select" asp-for="IdTipoFormaPago"
+                    asp-items="@(new SelectList(ViewBag.ListaCatTipoFormaPago,"IdTipoFormaPago","TipoFormaPagoDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+                <span asp-validation-for="IdTipoFormaPago" class="text-danger"></span>
+            </div>
+        </div>
+        </div>
             <div class="form-group">
                 <label asp-for="PrestamoDesc" class="control-label"></label>
                 <input asp-for="PrestamoDesc" class="form-control" />
                 <span asp-validation-for="PrestamoDesc" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdCorpCent" class="control-label"></label>
-                <input asp-for="IdCorpCent" class="form-control" />
-                <span asp-validation-for="IdCorpCent" class="text-danger"></span>
-            </div>
+           
             <div class="form-group">
                 <label asp-for="CantidadPrestamo" class="control-label"></label>
                 <input asp-for="CantidadPrestamo" class="form-control" />
                 <span asp-validation-for="CantidadPrestamo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdUsuarioPrestamo" class="control-label"></label>
-                <input asp-for="IdUsuarioPrestamo" class="form-control" />
-                <span asp-validation-for="IdUsuarioPrestamo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombres" class="control-label"></label>
-                <input asp-for="Nombres" class="form-control" />
-                <span asp-validation-for="Nombres" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ApellidoPaterno" class="control-label"></label>
-                <input asp-for="ApellidoPaterno" class="form-control" />
-                <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ApellidoMaterno" class="control-label"></label>
-                <input asp-for="ApellidoMaterno" class="form-control" />
-                <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
-            </div>
+            
+           
        
-            <div class="form-group">
-                <label asp-for="IdUsuarioModifico" class="control-label"></label>
-                <input asp-for="IdUsuarioModifico" class="form-control" />
-                <span asp-validation-for="IdUsuarioModifico" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaRegistro" class="control-label"></label>
-                <input asp-for="FechaRegistro" class="form-control" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <input asp-for="IdEstatusRegistro" class="form-control" />
-                <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

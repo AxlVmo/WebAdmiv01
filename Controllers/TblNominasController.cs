@@ -155,15 +155,15 @@ namespace WebAdmin.Controllers
         {
             var fuser = _userService.GetUserId();
             var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro =  _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
             var fNominasTotales = from a in _context.TblNominas
-                                      where a.IdEstatusRegistro == 1
-                                      select new
-                                      {
-                                          fRegistros = _context.TblNominas.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
-                                          fMontos = _context.TblNominas.Where(a => a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.UsuarioRemuneracion)).Sum()
-                                      };
+                                  where a.IdEstatusRegistro == 1
+                                  select new
+                                  {
+                                      fRegistros = _context.TblNominas.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
+                                      fMontos = _context.TblNominas.Where(a => a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.UsuarioRemuneracion)).Sum()
+                                  };
             return Json(fNominasTotales);
         }
         // public IActionResult ImprimirNomina(int IdNomina)
@@ -266,7 +266,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoNomina,IdUsuarioRemuneracion,NominaDesc,IdTipoPago,UsuarioRemuneracion")] TblNomina TblNomina)
+        public async Task<IActionResult> Create([Bind("IdTipoNomina,IdUsuarioRemuneracion,NominaDesc,IdTipoPago,UsuarioRemuneracion,CodigoPago")] TblNomina TblNomina)
         {
             if (ModelState.IsValid)
             {
@@ -324,6 +324,7 @@ namespace WebAdmin.Controllers
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaEstatus = ListaCatEstatus;
+
             if (id == null)
             {
                 return NotFound();
@@ -342,7 +343,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdNomina,IdTipoNomina,NominaDesc,IdUsuarioRemuneracion,IdTipoPago,UsuarioRemuneracion,IdEstatusRegistro")] TblNomina TblNomina)
+        public async Task<IActionResult> Edit(int id, [Bind("IdNomina,IdTipoNomina,NominaDesc,IdUsuarioRemuneracion,IdTipoPago,UsuarioRemuneracion,CodigoPago,IdEstatusRegistro")] TblNomina TblNomina)
         {
             if (id != TblNomina.IdNomina)
             {
