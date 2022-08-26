@@ -22,14 +22,14 @@
             <div class="form-group">
                 <label asp-for="TipoPagoDesc" class="control-label"></label>
                 <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TipoPagoDesc" class="form-control" />
-                <span asp-validation-for="TipoPagoDesc" class="text-danger"></span>
+               
             </div>
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>
                 <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
+               
             </div>
             <br />
             <div class="form-group">

@@ -24,7 +24,7 @@
                             asp-items="@(new SelectList(ViewBag.ListaTipoSuministro,"IdTipoSuministro","TipoSuministroDesc"))">
                             <option value="">SELECCIONAR</option>
                         </select>
-                        <span asp-validation-for="IdTipoSuministro" class="text-danger"></span>
+                        
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -62,7 +62,7 @@
                             asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
                             <option value="">SELECCIONAR</option>
                         </select>
-                        <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
+                       
                     </div>
                 </div>
             </div>

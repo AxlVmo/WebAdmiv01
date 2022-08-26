@@ -29,7 +29,7 @@
                     asp-items="@(new SelectList(ViewBag.ListaTipoCentro,"IdTipoCentro","TipoCentroDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdTipoCentro" class="text-danger"></span>
+                
             </div>
         </div>
         <div class="col-md-2">
@@ -39,14 +39,14 @@
                     asp-items="@(new SelectList(ViewBag.ListaLicencia,"IdTipoLicencia","LicenciaDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdTipoLicencia" class="text-danger"></span>
+               
             </div>
         </div>
          <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="NombreCentro" class="control-label"></label>
                 <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="NombreCentro" class="form-control" />
-                <span asp-validation-for="NombreCentro" class="text-danger"></span>
+               
             </div>
 
         </div>
@@ -54,7 +54,7 @@
             <div class="form-group">
                 <label asp-for="Calle" class="control-label"></label>
                 <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Calle" class="form-control" />
-                <span asp-validation-for="Calle" class="text-danger"></span>
+               
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@
                 <select id="drpColonias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Colonia">
                     @*<option value="">Seleccionar Estatus</option>*@
                 </select>
-                <span asp-validation-for="Colonia" class="text-danger"></span>
+               
             </div>
         </div>
         <div class="col-md-3">
@@ -132,7 +132,7 @@
                     asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdUsuarioControl" class="text-danger"></span>
+               
             </div>
         </div>
         <div class="col-md-2">
@@ -141,7 +141,7 @@
                 <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
+               
             </div>
         </div>
     </div>

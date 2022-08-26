@@ -25,21 +25,21 @@
                 <div class="form-group">
                     <label asp-for="NombreProveedor" class="control-label"></label>
                     <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="NombreProveedor" class="form-control" />
-                    <span asp-validation-for="NombreProveedor" class="text-danger"></span>
+                    
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="GiroComercial" class="control-label"></label>
                     <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="GiroComercial" class="form-control" />
-                    <span asp-validation-for="GiroComercial" class="text-danger"></span>
+                    
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="Rfc" class="control-label"></label>
                     <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Rfc" class="form-control" />
-                    <span asp-validation-for="Rfc" class="text-danger"></span>
+                  
                 </div>
             </div>
             <div class="col-md-2">
@@ -48,7 +48,7 @@
                     <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
                         <option value="">SELECCIONAR</option>
                     </select>
-                    <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
+                    
                 </div>
             </div>
         </div>

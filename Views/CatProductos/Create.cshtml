@@ -34,7 +34,7 @@
                     asp-items="@(new SelectList(ViewBag.ListaCategoria,"IdCategoria","CategoriaDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdCategoria" class="text-danger"></span>
+                
             </div>
         </div>
 
@@ -42,7 +42,7 @@
             <div class="form-group">
                 <label asp-for="CodigoExterno" class="control-label"></label>
                 <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="CodigoExterno" class="form-control" type="text" />
-                <span asp-validation-for="CodigoExterno" class="text-danger"></span>
+                
             </div>
         </div>
       <div class="col-md-2">

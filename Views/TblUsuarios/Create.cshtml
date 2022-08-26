@@ -25,7 +25,7 @@
                 <select id="drpGenero" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdGenero" asp-items="@(new SelectList(ViewBag.ListaGenero,"IdGenero","GeneroDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdGenero" class="text-danger"></span>
+                
             </div>
         </div>
         <div class="col-md-2">
@@ -42,7 +42,7 @@
                 <select id="drpArea" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdArea" asp-items="@(new SelectList(ViewBag.ListaArea,"IdArea","AreaDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdArea" class="text-danger"></span>
+                
             </div>
         </div>
         <div class="col-md-2">
@@ -51,7 +51,7 @@
                 <select id="drpPerfil" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdPerfil" asp-items="@(new SelectList(ViewBag.ListaPerfil,"IdPerfil","PerfilDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdPerfil" class="text-danger"></span>
+                
             </div>
         </div>
         <div class="col-md-2">
@@ -60,7 +60,7 @@
                 <select id="drpRol" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdRol" asp-items="@(new SelectList(ViewBag.ListaRol,"IdRol","RolDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdRol" class="text-danger"></span>
+               
             </div>
         </div>
     </div>
@@ -69,21 +69,21 @@
             <div class="form-group">
                 <label asp-for="Nombres" class="control-label"></label>
                 <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Nombres" class="form-control" />
-                <span asp-validation-for="Nombres" class="text-danger"></span>
+                
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoPaterno" class="control-label"></label>
                 <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ApellidoPaterno" class="form-control" />
-                <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
+                
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoMaterno" class="control-label"></label>
                 <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ApellidoMaterno" class="form-control" />
-                <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
+                
             </div>
         </div>
         <div class="col-md-4">
