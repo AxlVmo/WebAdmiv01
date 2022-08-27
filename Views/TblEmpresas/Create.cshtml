@@ -26,22 +26,19 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="NombreEmpresa" class="control-label"></label>
-                    <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="NombreEmpresa" class="form-control" />
-                    <span asp-validation-for="NombreEmpresa" class="text-danger"></span>
+                    <input  style="text-transform:uppercase" type="text" placeholder="Campo Requerido" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="NombreEmpresa" class="form-control" />
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="GiroComercial" class="control-label"></label>
-                    <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="GiroComercial" class="form-control" />
-                    <span asp-validation-for="GiroComercial" class="text-danger"></span>
+                    <input  style="text-transform:uppercase" type="text"  asp-for="GiroComercial" class="form-control" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Calle" class="control-label"></label>
-                    <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Calle" class="form-control" />
-                    <span asp-validation-for="Calle" class="text-danger"></span>
+                    <input  style="text-transform:uppercase" type="text" asp-for="Calle" class="form-control" />
                 </div>
             </div>
         </div>
@@ -55,14 +52,12 @@
                             <button class="btn btn-outline-secondary" type="button" onclick="filtro_cp()">Buscar</button>
                         </div>
                     </div>
-                    <span asp-validation-for="CodigoPostal" class="text-danger"></span>
                 </div>
             </div>
-
             <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="Colonia" class="control-label"></label>
-                     <select id="drpColonias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Colonia" >
+                     <select id="drpColonias" class="form-select" asp-for="Colonia" >
                         <option value="">SELECCIONAR</option>
                     </select>
                     <span asp-validation-for="Colonia" class="text-danger"></span>
@@ -94,7 +89,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="CorreoElectronico" class="control-label"></label>
-                    <input id="iCorreoElectronico" asp-for="CorreoElectronico" class="form-control" type="email"   />
+                    <input id="iCorreoElectronico" asp-for="CorreoElectronico" class="form-control" type="email" placeholder="Campo Requerido (usuario@dominio.com)" required/>
                     <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
                 </div>
             </div>
@@ -106,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <br />
+    
         <div class="form-group">
             <input type="submit" value="Crear" class="btn btn-success" />
             <a asp-action="Index" class="btn btn-secondary">Regresar</a>
@@ -119,7 +114,13 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
     <script type="text/javascript">
-
+$('input[type="email"]')
+	.on('invalid', function(){
+		return this.setCustomValidity('Ingresa una dirección de correo válida.');
+	})
+	.on('input', function(){
+		return this.setCustomValidity('');
+	});
                 $(document).ready(function () {
                   
                 });

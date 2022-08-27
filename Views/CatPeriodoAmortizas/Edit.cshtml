@@ -20,13 +20,10 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input  type="hidden" asp-for="IdPeriodoAmortiza" id="IdMarca" />
     <div class="row">
-
-
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="PeriodoAmortizaDesc" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="PeriodoAmortizaDesc" class="form-control" />
-              
+                <input  style="text-transform:uppercase" placeholder="Campo Requerido" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="PeriodoAmortizaDesc" class="form-control" />
             </div>
         </div>
         <div class="col-md-3">
@@ -35,11 +32,10 @@
                 <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-              
             </div>
         </div>
     </div>
-    <br />
+
     <div class="form-group">
         <input type="submit" value="Actializar" class="btn btn-warning" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>

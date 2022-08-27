@@ -19,10 +19,10 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required type="hidden" asp-for="IdTipoDireccion" id="IdEstatus" />
+            <input type="hidden" asp-for="IdTipoDireccion" id="IdEstatus" />
             <div class="form-group">
                 <label asp-for="TipoDireccionDesc" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TipoDireccionDesc" class="form-control" />
+                <input  style="text-transform:uppercase" placeholder="Campo Requerido" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TipoDireccionDesc" class="form-control" />
                
             </div>
             <div class="form-group">
@@ -32,7 +32,7 @@
                 </select>
                 
             </div>
-            <br />
+
             <div class="form-group">
                 <input  type="submit" value="Actualizar" class="btn btn-warning" />
                 <a asp-action="Index" class="btn btn-secondary">Regresar</a>

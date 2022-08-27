@@ -25,12 +25,12 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="TipoCancelacionDesc" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TipoCancelacionDesc" class="form-control" />
+                <input  style="text-transform:uppercase" placeholder="Campo Requerido" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TipoCancelacionDesc" class="form-control" />
                
             </div>
         </div>
     </div>
-    <br />
+
     <div class="form-group">
         <input type="submit" value="Crear" class="btn btn-success" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>

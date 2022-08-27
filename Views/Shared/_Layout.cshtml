@@ -25,7 +25,7 @@
     <link
         href="@Url.Content("https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css")"
         rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/plantilla/vendor/datatables/datatables.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("//cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/af-2.4.0/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/date-1.1.2/fc-4.1.0/fh-3.2.4/kt-2.7.0/r-2.3.0/rg-1.2.0/rr-1.2.8/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/sr-1.1.1/datatables.min.css")" rel="stylesheet" type="text/css" />
 </head>
 
 <body id="page-top">
@@ -36,7 +36,7 @@
         {
             <input type="hidden" id="v_perfil" />
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion no-print" id="accordionSidebar">
+            <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion no-print" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
@@ -296,13 +296,12 @@
                                         <img id="profilePicture" class="img-profile rounded-circle"
                                     style="width:32px;height:32px; object-fit:cover"
                                     src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))">
-                                        <br>
+                            
                                     }
                                     else
                                     {
-                                        <img id="profilePicture" class="img-profile rounded-circle"
-                                    style="width:32px;height:32px; object-fit:cover" src="">
-                                        <br>
+                                        <img id="profilePicture" class="img-profile rounded-circle" style="width:32px;height:32px; object-fit:cover" src="~/img/blank-profile.jpg">
+                            
                                     }
                                 </a>
                                 <!-- Dropdown - User Information -->
@@ -391,27 +390,30 @@
                 <div class="modal-footer">
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
                         asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button type="submit" class="nav-link btn btn-link text-dark">Cerrar sesión</button>
+                        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    
      <environment include="Development">
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="~/plantilla/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script type="text/javascript" src="~/plantilla/js/sb-admin-2.min.js"></script>
-        
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script type="text/javascript" src="~/plantilla/vendor/datatables/datatables.min.js"></script>
-        <script type="text/javascript" src="~/plantilla/vendor/datatables/datatables.js"></script>
+    
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="~/plantilla/js/sb-admin-2.js"></script>
+        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+        <script type="text/javascript" src="//cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/af-2.4.0/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/date-1.1.2/fc-4.1.0/fh-3.2.4/kt-2.7.0/r-2.3.0/rg-1.2.0/rr-1.2.8/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/sr-1.1.1/datatables.min.js"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)
     <script type="text/javascript">
+
+    if($('#btn_Registro').length){
 $.ajax({
             type: "GET",
             url: "/TblUsuarios/RegistroUsuario/",
@@ -430,9 +432,9 @@ $.ajax({
                 }
             },
             error: function () {
-                alert("Error!!")
             }
         });
+}
 </script>
 </body>
 

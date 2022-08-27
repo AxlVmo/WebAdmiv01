@@ -14,12 +14,6 @@
         <li class="breadcrumb-item active" aria-current="page">Crear Venta</li>
     </ol>
 </nav>
-<p>
-    <a id="iNuevo" type="submit" class="btn btn-outline-primary no-print" asp-area="Identity"
-        asp-page="/Account/Register">
-        <i class="fas fa-plus"></i> Nuevo
-    </a>
-</p>
 <div class="row">
 
     <div class="col-md-3">
@@ -93,59 +87,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
-
-
                     <!-- Main content -->
                     <div class="invoice p-3 mb-3">
-                        <!-- title row -->
-                        <div class="row">
-                            <div class="col-12">
-                                <h4>
-                                    <i class="fas fa-globe"></i> Intelimundo.
-                                    <small class="float-right">Date: 2/10/2014</small>
-                                </h4>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- info row -->
-                        <div class="row invoice-info">
-                            <div class="col-sm-4 invoice-col">
-                                Direccion
-                                <address>
-                                    <strong>Admin, Inc.</strong><br>
-                                    795 Folsom Ave, Suite 600<br>
-                                    San Francisco, CA 94107<br>
-                                    Phone: (804) 123-5432<br>
-                                    Email: info@almasaeedstudio.com
-                                </address>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-4 invoice-col">
-                                To
-                                <address>
-                                    <strong>John Doe</strong><br>
-                                    795 Folsom Ave, Suite 600<br>
-                                    San Francisco, CA 94107<br>
-                                    Phone: (555) 539-1037<br>
-                                    Email: john.doe@example.com
-                                </address>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-4 invoice-col">
-                                <b>Invoice #007612</b><br>
-                                <br>
-                                <b>Order ID:</b> 4F3S8J<br>
-                                <b>Payment Due:</b> 2/22/2014<br>
-                                <b>Account:</b> 968-34567
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
                         <!-- Table row -->
                         <div class="row">
                             <div class="col-12 table-responsive">
-
                                 <table class="table" id="tbProducto">
                                     <tbody>
                                         <thead>
@@ -169,7 +115,6 @@
                                         </thead>
                                     </tbody>
                                 </table>
-
                             </div>
                             <!-- /.col -->
                         </div>
@@ -188,20 +133,25 @@
                                             </select>
                                             <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
                                         </div>
-
                                         <div class="form-group" id="lCodigoPago" hidden>
                                             <label asp-for="TblVentas.CodigoPago" class="control-label"></label>
                                             <input id="iCodigoPago" asp-for="TblVentas.CodigoPago"
                                                 class="form-control" />
                                             <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
                                         </div>
-                                        <div class="form-group" id="lFechaAlterna" hidden>
+                                    </div>
+                                     <div class="col-md-6">
+                                        <div class="form-group" id="lFechaAlterna">
                                             <label asp-for="TblVentas.FechaAlterna" class="control-label"></label>
                                             <input type="date" id="iFechaAlterna" asp-for="TblVentas.FechaAlterna"
                                                 class="form-control" />
                                         </div>
-                                    </div>
+                                        </div>
                                 </div>
+                            <button class="btn btn-primary" id="btnTerminar">Guardar</button>
+                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                            <button class="btn btn-primary" id="btnTerminar2"
+                                onclick="GetClientReport()">Imprimir</button>
                             </div>
                             <!-- /.col -->
                             <div class="col-6">
@@ -232,12 +182,7 @@
                         </div>
                         <!-- /.row -->
                         <!-- this row will not appear when printing -->
-                        <div class="col-6 no-print">
-                            <button class="btn btn-primary" id="btnTerminar">Guardar</button>
-                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                            <button class="btn btn-primary" id="btnTerminar2"
-                                onclick="GetClientReport()">Imprimir</button>
-                        </div>
+                    
                     </div>
                     <!-- /.invoice -->
                 </div><!-- /.col -->
@@ -268,12 +213,9 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
         if (SelectedValue != 1) {
              $('#lCodigoPago').removeAttr('hidden');
-              $('#lFechaAlterna').removeAttr('hidden');
         }
         else {
-            
             document.getElementById("lCodigoPago").setAttribute("hidden", true);
-            document.getElementById("lFechaAlterna").setAttribute("hidden", true);
         }
     });
     $('#btnTerminar2').click(function () {

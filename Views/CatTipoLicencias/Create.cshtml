@@ -19,10 +19,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="LicenciaDesc" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="LicenciaDesc" class="form-control" />
-               
+                <input  style="text-transform:uppercase" placeholder="Campo Requerido" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="LicenciaDesc" class="form-control" />
             </div>
-            <br>
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-success" />
                 <a asp-action="Index" class="btn btn-secondary">Regresar</a>
