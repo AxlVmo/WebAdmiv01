@@ -277,7 +277,7 @@ namespace WebAdmin.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             var fuser = _userService.GetUserId();
             var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));

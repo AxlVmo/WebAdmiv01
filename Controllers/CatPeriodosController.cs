@@ -62,12 +62,13 @@ namespace WebAdmin.Controllers
             }
             var fCatPeriodo = from a in _context.CatPeriodos
 
-                                select new CatPeriodo
-                              {  IdPeriodo = a.IdPeriodo,
-                                 PeriodoDesc = a.PeriodoDesc,
-                                 FechaRegistro = a.FechaRegistro,
-                             IdEstatusRegistro = a.IdEstatusRegistro
-                                };
+                              select new CatPeriodo
+                              {
+                                  IdPeriodo = a.IdPeriodo,
+                                  PeriodoDesc = a.PeriodoDesc,
+                                  FechaRegistro = a.FechaRegistro,
+                                  IdEstatusRegistro = a.IdEstatusRegistro
+                              };
 
             return View(await fCatPeriodo.ToListAsync());
         }
@@ -136,7 +137,7 @@ namespace WebAdmin.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             if (id == null)
             {
@@ -226,7 +227,7 @@ namespace WebAdmin.Controllers
 
         private bool CatPeriodoExists(int id)
         {
-            return _context.CatPeriodos.Any(e => e.IdPeriodo== id);
+            return _context.CatPeriodos.Any(e => e.IdPeriodo == id);
         }
     }
 }

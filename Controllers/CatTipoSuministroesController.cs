@@ -62,13 +62,13 @@ namespace WebAdmin.Controllers
             }
             var fCatTipoSuministro = from a in _context.CatTipoSuministros
 
-                                select new CatTipoSuministro
-                                {
-                                    IdTipoSuministro = a.IdTipoSuministro,
-                                    TipoSuministroDesc = a.TipoSuministroDesc,
-                                    FechaRegistro = a.FechaRegistro,
-                                    IdEstatusRegistro = a.IdEstatusRegistro
-                                };
+                                     select new CatTipoSuministro
+                                     {
+                                         IdTipoSuministro = a.IdTipoSuministro,
+                                         TipoSuministroDesc = a.TipoSuministroDesc,
+                                         FechaRegistro = a.FechaRegistro,
+                                         IdEstatusRegistro = a.IdEstatusRegistro
+                                     };
 
             return View(await fCatTipoSuministro.ToListAsync());
         }
@@ -137,7 +137,7 @@ namespace WebAdmin.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             if (id == null)
             {

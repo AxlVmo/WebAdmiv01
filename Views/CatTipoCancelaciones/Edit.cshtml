@@ -1,12 +1,12 @@
 ﻿@model WebAdmin.Models.CatTipoCancelacion
 
 @{
-    ViewData["Title"] = "Editar TipoCancelacion";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewData["Title"] = "Editar TipoCancelacion";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        
+
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Catálogos</li>
         <li class="breadcrumb-item">Control de TipoCancelacion</li>
@@ -18,24 +18,28 @@
 
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input  type="hidden" asp-for="IdTipoCancelacion" id="IdMarca" />
+    <input type="hidden" asp-for="IdTipoCancelacion" id="IdMarca" />
     <div class="row">
 
 
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="TipoCancelacionDesc" class="control-label"></label>
-                <input  style="text-transform:uppercase" placeholder="Campo Requerido" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TipoCancelacionDesc" class="form-control" />
-                
+                <input style="text-transform:uppercase" placeholder="Campo Requerido" type="text"
+                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                    asp-for="TipoCancelacionDesc" class="form-control" />
+
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
+                    asp-items="@(new SelectList(ViewBag.ListaCatEstatus," IdEstatusRegistro","EstatusDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                
+
             </div>
         </div>
     </div>
@@ -48,8 +52,8 @@
 
 
 @section Scripts {
-    @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script>
     $(document).ready(function () {

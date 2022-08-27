@@ -1,8 +1,8 @@
 ﻿@model WebAdmin.Models.TblUsuario
 
 @{
-    ViewData["Title"] = "Editar Usuaio";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewData["Title"] = "Editar Usuaio";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -24,11 +24,12 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdGenero" class="control-label"></label>
-                <select id="drpGenero" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdGenero"
-                    asp-items="@(new SelectList(ViewBag.ListaGenero,"IdGenero","GeneroDesc"))">
+                <select id="drpGenero" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdGenero"
+                    asp-items="@(new SelectList(ViewBag.ListaGenero," IdGenero","GeneroDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                
+
             </div>
         </div>
         <div class="col-md-2">
@@ -41,31 +42,34 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdArea" class="control-label"></label>
-                <select id="drpArea" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdArea"
-                    asp-items="@(new SelectList(ViewBag.ListaArea,"IdArea","AreaDesc"))">
+                <select id="drpArea" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdArea"
+                    asp-items="@(new SelectList(ViewBag.ListaArea," IdArea","AreaDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-              
+
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdPerfil" class="control-label"></label>
-                <select id="drpPerfil" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdPerfil"
-                    asp-items="@(new SelectList(ViewBag.ListaPerfil,"IdPerfil","PerfilDesc"))">
+                <select id="drpPerfil" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdPerfil"
+                    asp-items="@(new SelectList(ViewBag.ListaPerfil," IdPerfil","PerfilDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-               
+
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdRol" class="control-label"></label>
-                <select id="drpRol" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdRol"
-                    asp-items="@(new SelectList(ViewBag.ListaRol,"IdRol","RolDesc"))">
+                <select id="drpRol" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdRol"
+                    asp-items="@(new SelectList(ViewBag.ListaRol," IdRol","RolDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                
+
             </div>
         </div>
         <div class="col-md-2">
@@ -80,22 +84,28 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="Nombres" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Nombres" class="form-control" />
-                
+                <input style="text-transform:uppercase" type="text"
+                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                    asp-for="Nombres" class="form-control" />
+
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoPaterno" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ApellidoPaterno" class="form-control" />
-                
+                <input style="text-transform:uppercase" type="text"
+                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                    asp-for="ApellidoPaterno" class="form-control" />
+
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoMaterno" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ApellidoMaterno" class="form-control" />
-                
+                <input style="text-transform:uppercase" type="text"
+                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                    asp-for="ApellidoMaterno" class="form-control" />
+
             </div>
         </div>
         <div class="col-md-4">
@@ -132,11 +142,9 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoContratacion" class="control-label"></label>
-                <select id="idContratacionLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoContratacion"
-                    asp-items="@(new SelectList(ViewBag.ListaContratacion,"IdTipoContratacion","TipoContratacionDesc"))">
+                <select id="idContratacionLista" class="form-select" asp-for="IdTipoContratacion" asp-items="@(new SelectList(ViewBag.ListaContratacion,"IdTipoContratacion","TipoContratacionDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-               
             </div>
         </div>
         <div class="col-md-2">
@@ -149,31 +157,33 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoFormaPago" class="control-label"></label>
-                <select id="idPagoLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoFormaPago"
-                    asp-items="@(new SelectList(ViewBag.ListaFormaPago,"IdTipoFormaPago","TipoFormaPagoDesc"))">
+                <select id="idPagoLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdTipoFormaPago"
+                    asp-items="@(new SelectList(ViewBag.ListaFormaPago," IdTipoFormaPago","TipoFormaPagoDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                
+
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdPersonalEstudio" class="control-label"></label>
-                <select id="idEstudiosLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdPersonalEstudio"
-                    asp-items="@(new SelectList(ViewBag.ListaPersonalEstudio,"IdPersonalEstudio","PersonalEstudioDesc"))">
+                <select id="idEstudiosLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdPersonalEstudio"
+                    asp-items="@(new SelectList(ViewBag.ListaPersonalEstudio,"
+                    IdPersonalEstudio","PersonalEstudioDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-               
+
             </div>
         </div>
 
     </div>
     <div class="row">
-          <div class="col-md-5">
+        <div class="col-md-5">
             <div class="form-group">
                 <label asp-for="Calle" class="control-label"></label>
-                <input id="idCalle" style="text-transform:uppercase" asp-for="Calle"
-                    class="form-control" />
+                <input id="idCalle" style="text-transform:uppercase" asp-for="Calle" class="form-control" />
                 <span asp-validation-for="Calle" class="text-danger"></span>
             </div>
         </div>
@@ -195,10 +205,11 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="Colonia" class="control-label"></label>
-                <select id="drpColonias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Colonia">
+                <select id="drpColonias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="Colonia">
                     @*<option value="">Seleccionar Estatus</option>*@
                 </select>
-                
+
             </div>
         </div>
         <div class="col-md-3">
@@ -209,7 +220,7 @@
                 <span asp-validation-for="LocalidadMunicipio" class="text-danger"></span>
             </div>
         </div>
-        
+
     </div>
     <div class="row">
         <div class="col-md-2">
@@ -219,7 +230,7 @@
                     readonly="readonly" />
                 <span asp-validation-for="Ciudad" class="text-danger"></span>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <input type="submit" value="Actualizar" class="btn btn-warning" />
                 <a asp-action="Index" class="btn btn-secondary">Regresar</a>
             </div>
@@ -242,21 +253,22 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
-                    asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
+                    asp-items="@(new SelectList(ViewBag.ListaCatEstatus," IdEstatusRegistro","EstatusDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-               
+
             </div>
         </div>
     </div>
-    
+
     <div class="row">
 
-       
+
         <div class="col-md-10">
 
-           
+
         </div>
     </div>
 </form>
@@ -266,77 +278,77 @@
 
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $(document).ready(function () {
-            filtro_colonias();
+    $(document).ready(function () {
+        filtro_colonias();
+    });
+
+    function filtro_cp() {
+
+        var valor_cp = document.getElementById("iCodigoPostal").value;
+
+        $.ajax({
+            type: "GET",
+            url: "/CatCodigosPostales/FiltroCodigosPostales/",
+            data: { id: valor_cp },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $select_colonias = $('#drpColonias');
+                $("#drpColonias").empty();
+
+                if (list.length == 0) {
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
+                    document.getElementById("idLocalidadMunicipio").value = null;
+                    document.getElementById("idCiudad").value = null;
+                    document.getElementById("idEstados").value = null;
+                }
+                else {
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                        document.getElementById("idLocalidadMunicipio").value = list[i].dmnpio;
+                        document.getElementById("idCiudad").value = list[i].dciudad;
+                        document.getElementById("idEstados").value = list[i].destado;
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
         });
+    }
+    function filtro_colonias() {
 
-        function filtro_cp() {
-
-            var valor_cp = document.getElementById("iCodigoPostal").value;
-
-            $.ajax({
-                type: "GET",
-                url: "/CatCodigosPostales/FiltroCodigosPostales/",
-                data: { id: valor_cp },
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (list) {
-                    var $select_colonias = $('#drpColonias');
-                    $("#drpColonias").empty();
-
-                    if (list.length == 0) {
-                        $select_colonias.append('<option value="">SELECCIONAR</option>');
-                        document.getElementById("idLocalidadMunicipio").value = null;
-                        document.getElementById("idCiudad").value = null;
-                        document.getElementById("idEstados").value = null;
-                    }
-                    else {
-                        $select_colonias.append('<option value="">SELECCIONAR</option>');
-                        for (var i = 0, len = list.length; i < len; i++) {
-                            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
-                            document.getElementById("idLocalidadMunicipio").value = list[i].dmnpio;
-                            document.getElementById("idCiudad").value = list[i].dciudad;
-                            document.getElementById("idEstados").value = list[i].destado;
-                        }
-                    }
-                },
-                error: function () {
-                    alert("Error!!")
+        var valor_col = document.getElementById("IdColonia").value;
+        var valor_cp = document.getElementById("iCodigoPostal").value;
+        $.ajax({
+            type: "GET",
+            url: "/CatCodigosPostales/FiltroColonia/",
+            data: { id: valor_cp, idC: valor_col },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $select_colonias = $('#drpColonias');
+                $("#drpColonias").empty();
+                if (list.length == 0) {
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
                 }
-            });
-        }
-        function filtro_colonias() {
+                else {
 
-            var valor_col = document.getElementById("IdColonia").value;
-            var valor_cp = document.getElementById("iCodigoPostal").value;
-            $.ajax({
-                type: "GET",
-                url: "/CatCodigosPostales/FiltroColonia/",
-                data: { id: valor_cp, idC: valor_col },
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (list) {
-                    var $select_colonias = $('#drpColonias');
-                    $("#drpColonias").empty();
-                    if (list.length == 0) {
-                        $select_colonias.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
                     }
-                    else {
-
-                        for (var i = 0, len = list.length; i < len; i++) {
-                            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
-                        }
-                    }
-                },
-                error: function () {
-                    alert("Error!!")
                 }
-            });
-        }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    }
 
-    </script>
+</script>
 
 }
 }

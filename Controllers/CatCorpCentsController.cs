@@ -60,16 +60,16 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            var fnCatCorpCents= from a in _context.CatCorpCents
+            var fnCatCorpCents = from a in _context.CatCorpCents
 
-                                select new CatCorpCent
-                                {
-                                    IdCorpCent = a.IdCorpCent,
-                                    CorpCentDesc = a.CorpCentDesc,
+                                 select new CatCorpCent
+                                 {
+                                     IdCorpCent = a.IdCorpCent,
+                                     CorpCentDesc = a.CorpCentDesc,
 
-                                    FechaRegistro = a.FechaRegistro,
-                                    IdEstatusRegistro = a.IdEstatusRegistro
-                                };
+                                     FechaRegistro = a.FechaRegistro,
+                                     IdEstatusRegistro = a.IdEstatusRegistro
+                                 };
 
             return View(await fnCatCorpCents.ToListAsync());
         }
@@ -138,7 +138,7 @@ namespace WebAdmin.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             if (id == null)
             {

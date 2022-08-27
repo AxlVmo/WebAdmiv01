@@ -42,7 +42,7 @@ namespace WebAdmin.Controllers
                     if (ValidaCorporativo.Count >= 1)
                     {
                         ViewBag.CorporativoFlag = 1;
-                        
+
                         var ValidaUsuarios = _context.TblUsuarios.Where(m => m.IdArea == 2 && m.IdPerfil == 3 && m.IdRol == 2).ToList();
 
                         if (ValidaUsuarios.Count >= 1)
@@ -90,8 +90,8 @@ namespace WebAdmin.Controllers
         public ActionResult FiltroCentro(Guid id)
         {
             var fCentro = (from ta in _context.TblCentros
-                                    where ta.IdCentro == id
-                                    select ta).Distinct().ToList();
+                           where ta.IdCentro == id
+                           select ta).Distinct().ToList();
 
             return Json(fCentro);
         }
@@ -208,7 +208,7 @@ namespace WebAdmin.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             List<CatTipoCentro> ListaTipoCentro = new List<CatTipoCentro>();
             ListaTipoCentro = (from c in _context.CatTipoCentros select c).Distinct().ToList();

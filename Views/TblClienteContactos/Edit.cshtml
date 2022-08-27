@@ -1,8 +1,8 @@
 ﻿@model WebAdmin.Models.TblAlumnoContacto
 
 @{
-    ViewData["Title"] = "Editar Alumno Contacto";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewData["Title"] = "Editar Alumno Contacto";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -25,7 +25,8 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="IdAlumno" class="control-label"></label>
-                    <select id="idListaAlumno" class="form-select statesSelect" asp-for="IdAlumno" asp-items="@(new SelectList(ViewBag.ListaAlumno,"IdAlumno","NombreAlumno"))">
+                    <select id="idListaAlumno" class="form-select statesSelect" asp-for="IdAlumno"
+                        asp-items="@(new SelectList(ViewBag.ListaAlumno," IdAlumno","NombreAlumno"))">
                         <option value="">SELECCIONAR</option>
                     </select>
                     <span asp-validation-for="IdAlumno" class="text-danger"></span>
@@ -34,7 +35,8 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="IdPerfil" class="control-label"></label>
-                    <select id="idListaPerfil" class="form-select statesSelect" asp-for="IdPerfil" asp-items="@(new SelectList(ViewBag.ListaPerfil,"IdPerfil","PerfilDesc"))">
+                    <select id="idListaPerfil" class="form-select statesSelect" asp-for="IdPerfil"
+                        asp-items="@(new SelectList(ViewBag.ListaPerfil," IdPerfil","PerfilDesc"))">
                         <option value="">SELECCIONAR</option>
                     </select>
                     <span asp-validation-for="IdAlumno" class="text-danger"></span>
@@ -43,14 +45,16 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="NombreAlumnoContacto" class="control-label"></label>
-                    <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="NombreAlumnoContacto" class="form-control" />
-                    
+                    <input style="text-transform:uppercase" type="text"
+                        oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                        required asp-for="NombreAlumnoContacto" class="form-control" />
+
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="CorreoElectronico" class="control-label"></label>
-                    <input  asp-for="CorreoElectronico" class="form-control" type="email" />
+                    <input asp-for="CorreoElectronico" class="form-control" type="email" />
                     <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
                 </div>
 
@@ -60,30 +64,36 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="Telefono" class="control-label"></label>
-                    <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Telefono" class="form-control" type="number" />
-                    
+                    <input style="text-transform:uppercase" type="text"
+                        oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                        required asp-for="Telefono" class="form-control" type="number" />
+
                 </div>
             </div>
             <div class="col-md-2">
 
                 <div class="form-group">
                     <label asp-for="TelefonoMovil" class="control-label"></label>
-                    <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TelefonoMovil" class="form-control" type="number" />
-                   
+                    <input style="text-transform:uppercase" type="text"
+                        oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                        required asp-for="TelefonoMovil" class="form-control" type="number" />
+
                 </div>
 
             </div>
-             <div class="col-md-2">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                    <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                    <select class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                        onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
+                        asp-items="@(new SelectList(ViewBag.ListaCatEstatus," IdEstatusRegistro","EstatusDesc"))">
                         <option value="">Seleccionar Estatus</option>
                     </select>
-                    
+
                 </div>
             </div>
         </div>
-    
+
         <div class="form-group">
             <input type="submit" value="Actualizar" class="btn btn-warning" />
             <a asp-action="Index" class="btn btn-secondary">Regresar</a>
@@ -92,5 +102,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

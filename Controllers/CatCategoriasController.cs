@@ -62,13 +62,13 @@ namespace WebAdmin.Controllers
             }
             var fnCatCategoria = from a in _context.CatCategorias
 
-                                select new CatCategoria
-                                {
-                                    IdCategoria = a.IdCategoria,
-                                    CategoriaDesc = a.CategoriaDesc,
-                                    FechaRegistro = a.FechaRegistro,
-                                    IdEstatusRegistro = a.IdEstatusRegistro
-                                };
+                                 select new CatCategoria
+                                 {
+                                     IdCategoria = a.IdCategoria,
+                                     CategoriaDesc = a.CategoriaDesc,
+                                     FechaRegistro = a.FechaRegistro,
+                                     IdEstatusRegistro = a.IdEstatusRegistro
+                                 };
 
             return View(await fnCatCategoria.ToListAsync());
         }
@@ -137,7 +137,7 @@ namespace WebAdmin.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             if (id == null)
             {

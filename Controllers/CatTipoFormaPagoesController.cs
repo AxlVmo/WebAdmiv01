@@ -60,16 +60,16 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            var fCatTipoFormaPago= from a in _context.CatTipoFormaPagos
+            var fCatTipoFormaPago = from a in _context.CatTipoFormaPagos
 
-                                select new CatTipoFormaPago
-                                {
-                                    IdTipoFormaPago= a.IdTipoFormaPago,
-                                    TipoFormaPagoDesc = a.TipoFormaPagoDesc,
+                                    select new CatTipoFormaPago
+                                    {
+                                        IdTipoFormaPago = a.IdTipoFormaPago,
+                                        TipoFormaPagoDesc = a.TipoFormaPagoDesc,
 
-                                    FechaRegistro = a.FechaRegistro,
-                                    IdEstatusRegistro = a.IdEstatusRegistro
-                                };
+                                        FechaRegistro = a.FechaRegistro,
+                                        IdEstatusRegistro = a.IdEstatusRegistro
+                                    };
 
             return View(await fCatTipoFormaPago.ToListAsync());
         }
@@ -82,9 +82,9 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoFormaPago= await _context.CatTipoFormaPagos
-                .FirstOrDefaultAsync(m => m.IdTipoFormaPago== id);
-            if (catTipoFormaPago== null)
+            var catTipoFormaPago = await _context.CatTipoFormaPagos
+                .FirstOrDefaultAsync(m => m.IdTipoFormaPago == id);
+            if (catTipoFormaPago == null)
             {
                 return NotFound();
             }
@@ -138,15 +138,15 @@ namespace WebAdmin.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             if (id == null)
             {
                 return NotFound();
             }
 
-            var catTipoFormaPago= await _context.CatTipoFormaPagos.FindAsync(id);
-            if (catTipoFormaPago== null)
+            var catTipoFormaPago = await _context.CatTipoFormaPagos.FindAsync(id);
+            if (catTipoFormaPago == null)
             {
                 return NotFound();
             }
@@ -204,9 +204,9 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoFormaPago= await _context.CatTipoFormaPagos
-                .FirstOrDefaultAsync(m => m.IdTipoFormaPago== id);
-            if (catTipoFormaPago== null)
+            var catTipoFormaPago = await _context.CatTipoFormaPagos
+                .FirstOrDefaultAsync(m => m.IdTipoFormaPago == id);
+            if (catTipoFormaPago == null)
             {
                 return NotFound();
             }
@@ -219,7 +219,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catTipoFormaPago= await _context.CatTipoFormaPagos.FindAsync(id);
+            var catTipoFormaPago = await _context.CatTipoFormaPagos.FindAsync(id);
             catTipoFormaPago.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
@@ -228,7 +228,7 @@ namespace WebAdmin.Controllers
 
         private bool CatTipoFormaPagoExists(int id)
         {
-            return _context.CatTipoFormaPagos.Any(e => e.IdTipoFormaPago== id);
+            return _context.CatTipoFormaPagos.Any(e => e.IdTipoFormaPago == id);
         }
     }
 }

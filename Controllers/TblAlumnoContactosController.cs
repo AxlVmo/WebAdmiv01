@@ -72,17 +72,17 @@ namespace WebAdmin.Controllers
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
             var fTblAlumnoContacto = from a in _context.TblAlumnoContactos
-                                      join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
-                                      join c in _context.TblAlumnos on a.IdAlumno equals c.IdAlumno
-                                      select new TblAlumnoContacto
-                                      {
-                                          IdAlumnoContacto = a.IdAlumnoContacto,
-                                          NombreAlumno = c.NombreAlumno,
-                                          NombreAlumnoContacto = a.NombreAlumnoContacto,
-                                          PerfilDesc = b.PerfilDesc,
-                                          FechaRegistro = a.FechaRegistro,
-                                          IdEstatusRegistro = a.IdEstatusRegistro
-                                      };
+                                     join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
+                                     join c in _context.TblAlumnos on a.IdAlumno equals c.IdAlumno
+                                     select new TblAlumnoContacto
+                                     {
+                                         IdAlumnoContacto = a.IdAlumnoContacto,
+                                         NombreAlumno = c.NombreAlumno,
+                                         NombreAlumnoContacto = a.NombreAlumnoContacto,
+                                         PerfilDesc = b.PerfilDesc,
+                                         FechaRegistro = a.FechaRegistro,
+                                         IdEstatusRegistro = a.IdEstatusRegistro
+                                     };
 
             return View(await fTblAlumnoContacto.ToListAsync());
             //return View(await _context.TblAlumnoDirecciones.ToListAsync());
@@ -92,13 +92,13 @@ namespace WebAdmin.Controllers
         public ActionResult FiltroContactos(Guid id)
         {
             var fAlumnoContacto = (from a in _context.TblAlumnoContactos
-                                    join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
-                                    where a.IdAlumno == id
-                                    select new
-                                    {
-                                        IdAlumnoContacto = a.IdAlumnoContacto,
-                                        NombreAlumnoContacto = a.NombreAlumnoContacto,
-                                    }).Distinct().ToList();
+                                   join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
+                                   where a.IdAlumno == id
+                                   select new
+                                   {
+                                       IdAlumnoContacto = a.IdAlumnoContacto,
+                                       NombreAlumnoContacto = a.NombreAlumnoContacto,
+                                   }).Distinct().ToList();
 
             return Json(fAlumnoContacto);
         }
@@ -107,17 +107,17 @@ namespace WebAdmin.Controllers
         public ActionResult FiltroDatosContactos(int id)
         {
             var fAlumnoContacto = (from a in _context.TblAlumnoContactos
-                                    join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
-                                    where a.IdAlumnoContacto == id
-                                    select new
-                                    {
-                                        IdAlumnoContacto = a.IdAlumnoContacto,
-                                        PerfilDesc = b.PerfilDesc,
-                                        NombreAlumnoContacto = a.NombreAlumnoContacto,
-                                        CorreoElectronicoAlumnoContacto = a.CorreoElectronico,
-                                        TelefonoAlumnoContacto = a.Telefono,
-                                        TelefonoMovilAlumnoContacto = a.TelefonoMovil
-                                    }).Distinct().ToList();
+                                   join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
+                                   where a.IdAlumnoContacto == id
+                                   select new
+                                   {
+                                       IdAlumnoContacto = a.IdAlumnoContacto,
+                                       PerfilDesc = b.PerfilDesc,
+                                       NombreAlumnoContacto = a.NombreAlumnoContacto,
+                                       CorreoElectronicoAlumnoContacto = a.CorreoElectronico,
+                                       TelefonoAlumnoContacto = a.Telefono,
+                                       TelefonoMovilAlumnoContacto = a.TelefonoMovil
+                                   }).Distinct().ToList();
 
             return Json(fAlumnoContacto);
         }
@@ -206,7 +206,7 @@ namespace WebAdmin.Controllers
 
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             if (id == null)
             {

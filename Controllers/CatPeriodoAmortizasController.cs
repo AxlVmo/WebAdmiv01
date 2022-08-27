@@ -62,14 +62,14 @@ namespace WebAdmin.Controllers
             }
             var fCatPeriodoAmortizas = from a in _context.CatPeriodosAmortizaciones
 
-                                select new CatPeriodoAmortiza
-                                {
-                                    IdPeriodoAmortiza = a.IdPeriodoAmortiza,
-                                    PeriodoAmortizaDesc = a.PeriodoAmortizaDesc,
+                                       select new CatPeriodoAmortiza
+                                       {
+                                           IdPeriodoAmortiza = a.IdPeriodoAmortiza,
+                                           PeriodoAmortizaDesc = a.PeriodoAmortizaDesc,
 
-                                    FechaRegistro = a.FechaRegistro,
-                                    IdEstatusRegistro = a.IdEstatusRegistro
-                                };
+                                           FechaRegistro = a.FechaRegistro,
+                                           IdEstatusRegistro = a.IdEstatusRegistro
+                                       };
 
             return View(await fCatPeriodoAmortizas.ToListAsync());
         }
@@ -84,7 +84,7 @@ namespace WebAdmin.Controllers
 
             var catPeriodoAmortizas = await _context.CatPeriodosAmortizaciones
                 .FirstOrDefaultAsync(m => m.IdPeriodoAmortiza == id);
-            if (catPeriodoAmortizas== null)
+            if (catPeriodoAmortizas == null)
             {
                 return NotFound();
             }
@@ -138,14 +138,14 @@ namespace WebAdmin.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             if (id == null)
             {
                 return NotFound();
             }
 
-            var catPeriodoAmortiza= await _context.CatPeriodosAmortizaciones.FindAsync(id);
+            var catPeriodoAmortiza = await _context.CatPeriodosAmortizaciones.FindAsync(id);
             if (catPeriodoAmortiza == null)
             {
                 return NotFound();

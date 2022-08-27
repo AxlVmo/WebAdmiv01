@@ -1,8 +1,8 @@
 ﻿@model WebAdmin.Models.TblNomina
 
 @{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewData["Title"] = "Edit";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -18,24 +18,26 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="IdUsuarioRemuneracion" class="control-label"></label>
-                <select id="IdUsuarioRemuneracion" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdUsuarioRemuneracion"
-                    asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                <select id="IdUsuarioRemuneracion" class="form-select"
+                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                    asp-for="IdUsuarioRemuneracion" asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"
+                    IdUsuario","NombreUsuario"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                
+
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="NominaDesc" class="control-label"></label>
-                <input asp-for="NominaDesc" class="form-control"  />
+                <input asp-for="NominaDesc" class="form-control" />
                 <span asp-validation-for="NominaDesc" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="UsuarioRemuneracion" class="control-label"></label>
-                <input asp-for="UsuarioRemuneracion" class="form-control" type="number"  />
+                <input asp-for="UsuarioRemuneracion" class="form-control" type="number" />
                 <span asp-validation-for="UsuarioRemuneracion" class="text-danger"></span>
             </div>
         </div>
@@ -43,28 +45,30 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoPago" class="control-label"></label>
-                <select id="lTipoPago" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoPago" readonly
-                    asp-items="@(new SelectList(ViewBag.ListaTipopago,"IdTipoPago","TipoPagoDesc"))">
+                <select id="lTipoPago" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdTipoPago" readonly
+                    asp-items="@(new SelectList(ViewBag.ListaTipopago," IdTipoPago","TipoPagoDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-               
+
             </div>
         </div>
-         <div class="col-md-2">
+        <div class="col-md-2">
             <div class="form-group" id="lCodigoPago">
                 <label asp-for="CodigoPago" class="control-label"></label>
-                <input id="iCodigoPago" asp-for="CodigoPago" class="form-control"  />
+                <input id="iCodigoPago" asp-for="CodigoPago" class="form-control" />
                 <span asp-validation-for="CodigoPago" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
-                    asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
+                    asp-items="@(new SelectList(ViewBag.ListaCatEstatus," IdEstatusRegistro","EstatusDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                
+
             </div>
         </div>
     </div>

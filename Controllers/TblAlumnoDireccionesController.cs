@@ -72,18 +72,18 @@ namespace WebAdmin.Controllers
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
             var fTblAlumnoDirecciones = from a in _context.TblAlumnoDirecciones
-                                         join b in _context.CatTipoDirecciones on a.IdTipoDireccion equals b.IdTipoDireccion
-                                         join c in _context.TblAlumnos on a.IdAlumno equals c.IdAlumno
-                                         select new TblAlumnoDireccion
-                                         {
-                                             IdAlumnoDirecciones = a.IdAlumnoDirecciones,
-                                             NombreAlumno = c.NombreAlumno,
-                                             TipoDireccionDesc = b.TipoDireccionDesc,
-                                             CorreoElectronico = a.CorreoElectronico,
-                                             Telefono = a.Telefono,
-                                             FechaRegistro = a.FechaRegistro,
-                                             IdEstatusRegistro = a.IdEstatusRegistro
-                                         };
+                                        join b in _context.CatTipoDirecciones on a.IdTipoDireccion equals b.IdTipoDireccion
+                                        join c in _context.TblAlumnos on a.IdAlumno equals c.IdAlumno
+                                        select new TblAlumnoDireccion
+                                        {
+                                            IdAlumnoDirecciones = a.IdAlumnoDirecciones,
+                                            NombreAlumno = c.NombreAlumno,
+                                            TipoDireccionDesc = b.TipoDireccionDesc,
+                                            CorreoElectronico = a.CorreoElectronico,
+                                            Telefono = a.Telefono,
+                                            FechaRegistro = a.FechaRegistro,
+                                            IdEstatusRegistro = a.IdEstatusRegistro
+                                        };
 
             return View(await fTblAlumnoDirecciones.ToListAsync());
             //return View(await _context.TblAlumnoDirecciones.ToListAsync());
@@ -180,7 +180,7 @@ namespace WebAdmin.Controllers
 
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
             if (id == null)
             {
                 return NotFound();

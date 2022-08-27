@@ -137,10 +137,10 @@ namespace WebAdmin.Controllers
         [HttpGet]
         public ActionResult DatosResumen()
         {
-            
+
             var fuser = _userService.GetUserId();
             var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro =  _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
             var fSuministrosTotales = from a in _context.TblSuministros
                                       where a.IdEstatusRegistro == 1
@@ -237,7 +237,7 @@ namespace WebAdmin.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             var fTipoSuministro = from a in _context.CatTipoSuministros
                                   where a.IdEstatusRegistro == 1

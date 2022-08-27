@@ -62,13 +62,13 @@ namespace WebAdmin.Controllers
             }
             var fCatTipoCompras = from a in _context.CatTipoCompras
 
-                                        select new CatTipoCompra
-                                        {
-                                            IdTipoCompra = a.IdTipoCompra,
-                                            TipoCompraDesc = a.TipoCompraDesc,
-                                            FechaRegistro = a.FechaRegistro,
-                                            IdEstatusRegistro = a.IdEstatusRegistro
-                                        };
+                                  select new CatTipoCompra
+                                  {
+                                      IdTipoCompra = a.IdTipoCompra,
+                                      TipoCompraDesc = a.TipoCompraDesc,
+                                      FechaRegistro = a.FechaRegistro,
+                                      IdEstatusRegistro = a.IdEstatusRegistro
+                                  };
 
             return View(await fCatTipoCompras.ToListAsync());
         }
@@ -115,7 +115,7 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoCompras.IdUsuarioModifico = Guid.Parse(fuser);
-                    catTipoCompras.TipoCompraDesc= catTipoCompras.TipoCompraDesc.ToString().ToUpper().Trim();
+                    catTipoCompras.TipoCompraDesc = catTipoCompras.TipoCompraDesc.ToString().ToUpper().Trim();
                     catTipoCompras.FechaRegistro = DateTime.Now;
                     catTipoCompras.IdEstatusRegistro = 1;
                     _context.Add(catTipoCompras);
@@ -137,7 +137,7 @@ namespace WebAdmin.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
             if (id == null)
             {

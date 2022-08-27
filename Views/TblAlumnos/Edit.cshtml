@@ -1,8 +1,8 @@
 ﻿@model WebAdmin.Models.TblAlumno
 
 @{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewData["Title"] = "Edit";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -25,8 +25,9 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoAlumno" class="control-label"></label>
-                <select id="drpTipoAlumno" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoAlumno"
-                    asp-items="@(new SelectList(ViewBag.ListaTipoAlumnos,"IdTipoAlumno","TipoAlumnoDesc"))">
+                <select id="drpTipoAlumno" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdTipoAlumno"
+                    asp-items="@(new SelectList(ViewBag.ListaTipoAlumnos," IdTipoAlumno","TipoAlumnoDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
                 <span asp-validation-for="IdTipoAlumno" class="text-danger"></span>
@@ -35,8 +36,9 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdGenero" class="control-label"></label>
-                <select id="drpGenero" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdGenero"
-                    asp-items="@(new SelectList(ViewBag.ListaGenero,"IdGenero","GeneroDesc"))">
+                <select id="drpGenero" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdGenero"
+                    asp-items="@(new SelectList(ViewBag.ListaGenero," IdGenero","GeneroDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
                 <span asp-validation-for="IdGenero" class="text-danger"></span>
@@ -52,8 +54,9 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdNivelEscolar" class="control-label"></label>
-                <select id="drpGenero" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdNivelEscolar"
-                    asp-items="@(new SelectList(ViewBag.ListaNivelEscolar,"IdNivelEscolar","NivelEscolarDesc"))">
+                <select id="drpGenero" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdNivelEscolar"
+                    asp-items="@(new SelectList(ViewBag.ListaNivelEscolar," IdNivelEscolar","NivelEscolarDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
                 <span asp-validation-for="IdNivelEscolar" class="text-danger"></span>
@@ -69,22 +72,28 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="NombreAlumno" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="NombreAlumno" class="form-control" />
-               
+                <input style="text-transform:uppercase" type="text"
+                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                    asp-for="NombreAlumno" class="form-control" />
+
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoPaterno" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ApellidoPaterno" class="form-control" />
-               
+                <input style="text-transform:uppercase" type="text"
+                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                    asp-for="ApellidoPaterno" class="form-control" />
+
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoMaterno" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="ApellidoMaterno" class="form-control" />
-               
+                <input style="text-transform:uppercase" type="text"
+                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                    asp-for="ApellidoMaterno" class="form-control" />
+
             </div>
         </div>
         <div class="col-md-2">
@@ -94,7 +103,7 @@
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
         </div>
-        
+
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="AlumnoCurp" class="control-label"></label>
@@ -136,7 +145,8 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="Colonia" class="control-label"></label>
-                <select id="drpColonias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Colonia">
+                <select id="drpColonias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="Colonia">
                     @*<option value="">Seleccionar Estatus</option>*@
                 </select>
                 <span asp-validation-for="Colonia" class="text-danger"></span>
@@ -169,7 +179,7 @@
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
         </div>
-        
+
     </div>
     <div class="row">
         <div class="col-md-2">
@@ -203,8 +213,9 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
-                    asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
+                    asp-items="@(new SelectList(ViewBag.ListaCatEstatus," IdEstatusRegistro","EstatusDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
                 <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
@@ -212,7 +223,7 @@
         </div>
     </div>
     <div class="row"></div>
-   <br />
+    <br />
     <div class="form-group">
         <input type="submit" value="Actualizar" class="btn btn-warning" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
@@ -223,77 +234,77 @@
 
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $(document).ready(function () {
-            filtro_colonias();
+    $(document).ready(function () {
+        filtro_colonias();
+    });
+
+    function filtro_cp() {
+
+        var valor_cp = document.getElementById("iCodigoPostal").value;
+
+        $.ajax({
+            type: "GET",
+            url: "/CatCodigosPostales/FiltroCodigosPostales/",
+            data: { id: valor_cp },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $select_colonias = $('#drpColonias');
+                $("#drpColonias").empty();
+
+                if (list.length == 0) {
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
+                    document.getElementById("idLocalidadMunicipio").value = null;
+                    document.getElementById("idCiudad").value = null;
+                    document.getElementById("idEstados").value = null;
+                }
+                else {
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                        document.getElementById("idLocalidadMunicipio").value = list[i].dmnpio;
+                        document.getElementById("idCiudad").value = list[i].dciudad;
+                        document.getElementById("idEstados").value = list[i].destado;
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
         });
+    }
+    function filtro_colonias() {
 
-        function filtro_cp() {
-
-            var valor_cp = document.getElementById("iCodigoPostal").value;
-
-            $.ajax({
-                type: "GET",
-                url: "/CatCodigosPostales/FiltroCodigosPostales/",
-                data: { id: valor_cp },
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (list) {
-                    var $select_colonias = $('#drpColonias');
-                    $("#drpColonias").empty();
-
-                    if (list.length == 0) {
-                        $select_colonias.append('<option value="">SELECCIONAR</option>');
-                        document.getElementById("idLocalidadMunicipio").value = null;
-                        document.getElementById("idCiudad").value = null;
-                        document.getElementById("idEstados").value = null;
-                    }
-                    else {
-                        $select_colonias.append('<option value="">SELECCIONAR</option>');
-                        for (var i = 0, len = list.length; i < len; i++) {
-                            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
-                            document.getElementById("idLocalidadMunicipio").value = list[i].dmnpio;
-                            document.getElementById("idCiudad").value = list[i].dciudad;
-                            document.getElementById("idEstados").value = list[i].destado;
-                        }
-                    }
-                },
-                error: function () {
-                    alert("Error!!")
+        var valor_col = document.getElementById("IdColonia").value;
+        var valor_cp = document.getElementById("iCodigoPostal").value;
+        $.ajax({
+            type: "GET",
+            url: "/CatCodigosPostales/FiltroColonia/",
+            data: { id: valor_cp, idC: valor_col },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $select_colonias = $('#drpColonias');
+                $("#drpColonias").empty();
+                if (list.length == 0) {
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
                 }
-            });
-        }
-        function filtro_colonias() {
+                else {
 
-            var valor_col = document.getElementById("IdColonia").value;
-            var valor_cp = document.getElementById("iCodigoPostal").value;
-            $.ajax({
-                type: "GET",
-                url: "/CatCodigosPostales/FiltroColonia/",
-                data: { id: valor_cp, idC: valor_col },
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (list) {
-                    var $select_colonias = $('#drpColonias');
-                    $("#drpColonias").empty();
-                    if (list.length == 0) {
-                        $select_colonias.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
                     }
-                    else {
-
-                        for (var i = 0, len = list.length; i < len; i++) {
-                            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
-                        }
-                    }
-                },
-                error: function () {
-                    alert("Error!!")
                 }
-            });
-        }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    }
 
-    </script>
+</script>
 
 }
 }
