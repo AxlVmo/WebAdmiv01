@@ -1,88 +1,116 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Registro";
+ViewData["Title"] = "Registro";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Usuarios</li>
-        <li class="breadcrumb-item active" aria-current="page">Crear Usuarios</li>
-    </ol>
-</nav>
-<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="form-group">
-                <label asp-for="Input.Nombres"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Input.Nombres" class="form-control" />
-                <span asp-validation-for="Input.Nombres" class="text-danger"></span>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Usuario /</span> Registro</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+            <div class="card-header d-flex align-items-center justify-content-between">
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label asp-for="Input.ApellidoPaterno"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Input.ApellidoPaterno" class="form-control" />
-                <span asp-validation-for="Input.ApellidoPaterno" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label asp-for="Input.ApellidoMaterno"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="Input.ApellidoMaterno" class="form-control" />
-                <span asp-validation-for="Input.ApellidoMaterno" class="text-danger"></span>
-            </div>
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="Input.Nombres" class="form-label" asp-for="Input.Nombres"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    placeholder="Campo Requerido" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="Input.Nombres" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" tabindex="1" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="Input.ApellidoPaterno" class="form-label"
+                                asp-for="Input.ApellidoPaterno"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    placeholder="Campo Requerido" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="Input.ApellidoPaterno" required tabindex="2" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="Input.ApellidoMaterno" class="form-label" asp-for="Input.ApellidoMaterno"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    placeholder="Campo Requerido" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="Input.ApellidoMaterno" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" tabindex="3" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="Input.Email" class="form-label"
+                                asp-for="Input.Email"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input type="email" class="form-control" id=""
+                                    placeholder="Campo Requerido" required aria-label="John Doe" aria-describedby="2"
+                                    asp-for="Input.Email" tabindex="4" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="Input.Password" class="form-label" asp-for="Input.Password"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input type="password" class="form-control" id=""
+                                    placeholder="Campo Requerido" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="Input.Password" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" tabindex="5" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="Input.ConfirmPassword" class="form-label"
+                                asp-for="Input.ConfirmPassword"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input  type="password" class="form-control" id=""
+                                    placeholder="Campo Requerido" required aria-label="John Doe" aria-describedby="2"
+                                    asp-for="Input.ConfirmPassword" tabindex="6" />
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <input type="submit" value="Crear" class="btn btn-primary" tabindex="7"/>
+                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                          </div>
+                    </div>
+            </form>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Registrar</button>
-        <a class="btn btn-secondary" asp-area="" asp-controller="TblUsuarios" asp-action="Index" id="regresar_registro" hidden>Regresar</a>
-    </div>
-</form>
+</div>
+</div>
 
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
- <script type="text/javascript">
-$.ajax({
-            type: "GET",
-            url: "/TblUsuarios/RegistroUsuario/",
-            
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (list) {
-                if (list == true) {
-                   $('#regresar_registro').removeAttr('hidden');  
-                }
-                else {
-                    document.getElementById("btn_Registro").setAttribute("hidden", true);
-                }
-            },
-            error: function () {
-                alert("Error!!")
+<script type="text/javascript">
+    $.ajax({
+        type: "GET",
+        url: "/TblUsuarios/RegistroUsuario/",
+
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (list) {
+            if (list == true) {
+                $('#regresar_registro').removeAttr('hidden');
             }
-        });
+            else {
+                document.getElementById("btn_Registro").setAttribute("hidden", true);
+            }
+        },
+        error: function () {
+            alert("Error!!")
+        }
+    });
 </script>
 }

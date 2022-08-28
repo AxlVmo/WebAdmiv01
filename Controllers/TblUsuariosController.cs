@@ -288,37 +288,29 @@ namespace WebAdmin.Controllers
         // GET: TblUsuarios/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
-            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaCatEstatus = ListaCatEstatus;
+            TempData["l_estatus"] = _context.CatEstatus.ToList();
+            ViewBag.ListaCatEstatus = TempData["l_estatus"];
 
-            List<CatArea> ListaArea = new List<CatArea>();
-            ListaArea = (from c in _context.CatAreas select c).Distinct().ToList();
-            ViewBag.ListaArea = ListaArea;
+            TempData["l_area"] = _context.CatAreas.Where(f => f.IdEstatusRegistro == 1).ToList();
+            ViewBag.ListaArea = TempData["l_area"];
 
-            List<CatGenero> ListaGenero = new List<CatGenero>();
-            ListaGenero = (from c in _context.CatGeneros select c).Distinct().ToList();
-            ViewBag.ListaGenero = ListaGenero;
+            TempData["l_genero"] = _context.CatGeneros.Where(f => f.IdEstatusRegistro == 1).ToList();
+            ViewBag.ListaGenero = TempData["l_genero"];
 
-            List<CatPerfil> ListaPerfil = new List<CatPerfil>();
-            ListaPerfil = (from c in _context.CatPerfiles select c).Distinct().ToList();
-            ViewBag.ListaPerfil = ListaPerfil;
+            TempData["l_perfil"] = _context.CatPerfiles.Where(f => f.IdEstatusRegistro == 1).ToList();
+            ViewBag.ListaPerfil = TempData["l_perfil"];
 
-            List<CatRole> ListaRol = new List<CatRole>();
-            ListaRol = (from c in _context.CatRoles select c).Distinct().ToList();
-            ViewBag.ListaRol = ListaRol;
+            TempData["l_rol"] = _context.CatRoles.Where(f => f.IdEstatusRegistro == 1).ToList();
+            ViewBag.ListaRol = TempData["l_rol"];
 
-            List<CatTipoContratacion> ListaContratacion = new List<CatTipoContratacion>();
-            ListaContratacion = (from c in _context.CatTipoContrataciones select c).Distinct().ToList();
-            ViewBag.ListaContratacion = ListaContratacion;
+            TempData["l_tipos_contrataciones"] = _context.CatTipoContrataciones.Where(f => f.IdEstatusRegistro == 1).ToList();
+            ViewBag.ListaContratacion = TempData["l_tipos_contrataciones"];
 
-            List<CatTipoFormaPago> ListaFormaPago = new List<CatTipoFormaPago>();
-            ListaFormaPago = (from c in _context.CatTipoFormaPagos select c).Distinct().ToList();
-            ViewBag.ListaFormaPago = ListaFormaPago;
+            TempData["l_formas_pagos"] = _context.CatTipoFormaPagos.Where(f => f.IdEstatusRegistro == 1).ToList();
+            ViewBag.ListaFormaPago = TempData["l_formas_pagos"];
 
-            List<CatPersonalEstudio> ListaPersonalEstudio = new List<CatPersonalEstudio>();
-            ListaPersonalEstudio = (from c in _context.CatPersonalEstudios select c).Distinct().ToList();
-            ViewBag.ListaPersonalEstudio = ListaPersonalEstudio;
+            TempData["l_personal_estudios"] = _context.CatPersonalEstudios.Where(f => f.IdEstatusRegistro == 1).ToList();
+            ViewBag.ListaPersonalEstudio = TempData["l_personal_estudios"];
 
             if (id == null)
             {

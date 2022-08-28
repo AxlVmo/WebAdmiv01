@@ -12,7 +12,6 @@
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/bin/Debug/net6.0/WebAdmin.dll",
             "args": [],
-            "webRoot": "${workspaceFolder}",
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser

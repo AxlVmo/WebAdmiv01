@@ -4,275 +4,39 @@
 ViewData["Title"] = "Editar Usuaio";
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Empresa</li>
-        <li class="breadcrumb-item">Usuaio</li>
-        <li class="breadcrumb-item active" aria-current="page">Editar Usuaio</li>
-    </ol>
-</nav>
-<hr />
-<form asp-action="Edit">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="IdUsuario" />
-    <input type="hidden" asp-for="IdCorpCent" />
-    <input type="hidden" asp-for="IdCorporativo" />
-    <input type="hidden" asp-for="IdColonia" />
-    <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdGenero" class="control-label"></label>
-                <select id="drpGenero" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')" required asp-for="IdGenero"
-                    asp-items="@(new SelectList(ViewBag.ListaGenero," IdGenero","GeneroDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Informacion /</span> Empresa</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+            <div class="card-header d-flex align-items-center justify-content-between">
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="FechaNacimiento" class="control-label"></label>
-                <input asp-for="FechaNacimiento" class="form-control" />
-                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdArea" class="control-label"></label>
-                <select id="drpArea" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')" required asp-for="IdArea"
-                    asp-items="@(new SelectList(ViewBag.ListaArea," IdArea","AreaDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdPerfil" class="control-label"></label>
-                <select id="drpPerfil" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')" required asp-for="IdPerfil"
-                    asp-items="@(new SelectList(ViewBag.ListaPerfil," IdPerfil","PerfilDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
-                <select id="drpRol" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')" required asp-for="IdRol"
-                    asp-items="@(new SelectList(ViewBag.ListaRol," IdRol","RolDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="UsuarioCurp" class="control-label"></label>
-                <input type="text" asp-for="UsuarioCurp" class="form-control" aria-describedby="basic-addon2">
-                <span asp-validation-for="UsuarioCurp" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="Nombres" class="control-label"></label>
-                <input style="text-transform:uppercase" type="text"
-                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                    asp-for="Nombres" class="form-control" />
-
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="ApellidoPaterno" class="control-label"></label>
-                <input style="text-transform:uppercase" type="text"
-                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                    asp-for="ApellidoPaterno" class="form-control" />
-
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="ApellidoMaterno" class="control-label"></label>
-                <input style="text-transform:uppercase" type="text"
-                    oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                    asp-for="ApellidoMaterno" class="form-control" />
-
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="CorreoAcceso" class="control-label"></label>
-                <input type="email" asp-for="CorreoAcceso" class="form-control" id="iCorreoAcceso"
-                    aria-describedby="basic-addon2">
-                <span asp-validation-for="CorreoAcceso" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input type="tel" asp-for="Telefono" class="form-control" aria-describedby="basic-addon2">
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="UsuarioRfc" class="control-label"></label>
-                <input type="text" asp-for="UsuarioRfc" class="form-control" aria-describedby="basic-addon2">
-                <span asp-validation-for="UsuarioRfc" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="UsuarioNss" class="control-label"></label>
-                <input type="text" asp-for="UsuarioNss" class="form-control" aria-describedby="basic-addon2">
-                <span asp-validation-for="UsuarioNss" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdTipoContratacion" class="control-label"></label>
-                <select id="idContratacionLista" class="form-select" asp-for="IdTipoContratacion" asp-items="@(new SelectList(ViewBag.ListaContratacion,"IdTipoContratacion","TipoContratacionDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="FechaContratacion" class="control-label"></label>
-                <input asp-for="FechaContratacion" class="form-control" />
-                <span asp-validation-for="FechaContratacion" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdTipoFormaPago" class="control-label"></label>
-                <select id="idPagoLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')" required asp-for="IdTipoFormaPago"
-                    asp-items="@(new SelectList(ViewBag.ListaFormaPago," IdTipoFormaPago","TipoFormaPagoDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdPersonalEstudio" class="control-label"></label>
-                <select id="idEstudiosLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')" required asp-for="IdPersonalEstudio"
-                    asp-items="@(new SelectList(ViewBag.ListaPersonalEstudio,"
-                    IdPersonalEstudio","PersonalEstudioDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                <label asp-for="Calle" class="control-label"></label>
-                <input id="idCalle" style="text-transform:uppercase" asp-for="Calle" class="form-control" />
-                <span asp-validation-for="Calle" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="CodigoPostal" class="control-label"></label>
-                <div class="input-group mb-3">
-                    <input type="number" asp-for="CodigoPostal" class="form-control" id="iCodigoPostal"
-                        aria-label="CodigoPostal" aria-describedby="basic-addon2" pattern="[0-9]"
-                        title="Solo números. Tamaño mínimo: 6">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" onclick="filtro_cp()">Buscar</button>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="IdUsuario" />
+                    <input type="hidden" asp-for="IdCorpCent" />
+                    <input type="hidden" asp-for="IdCorporativo" />
+                    <input type="hidden" asp-for="IdColonia" />
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            
+                        </div>
                     </div>
-                </div>
-                <span asp-validation-for="CodigoPostal" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="Colonia" class="control-label"></label>
-                <select id="drpColonias" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')" required asp-for="Colonia">
-                    @*<option value="">Seleccionar Estatus</option>*@
-                </select>
-
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label asp-for="LocalidadMunicipio" class="control-label"></label>
-                <input id="idLocalidadMunicipio" style="text-transform:uppercase" asp-for="LocalidadMunicipio"
-                    class="form-control" readonly="readonly" />
-                <span asp-validation-for="LocalidadMunicipio" class="text-danger"></span>
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="Ciudad" class="control-label"></label>
-                <input id="idCiudad" style="text-transform:uppercase" asp-for="Ciudad" class="form-control"
-                    readonly="readonly" />
-                <span asp-validation-for="Ciudad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Actualizar" class="btn btn-warning" />
-                <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input id="idEstados" style="text-transform:uppercase" asp-for="Estado" class="form-control"
-                    readonly="readonly" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="UsuarioRemuneracion" class="control-label"></label>
-                <input type="number" asp-for="UsuarioRemuneracion" class="form-control" aria-describedby="basic-addon2">
-                <span asp-validation-for="UsuarioRemuneracion" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
-                    asp-items="@(new SelectList(ViewBag.ListaCatEstatus," IdEstatusRegistro","EstatusDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-
+                    <div class="mb-3 col-md-6">
+                        <label for="FechaNacimiento" class="form-label" asp-for="FechaNacimiento"></label>
+                        <div class="input-group input-group-merge">
+                            <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                            <input style="text-transform:uppercase" type="date" class="form-control" id=""
+                                placeholder="Campo Requerido" aria-label="John Doe" aria-describedby="2"
+                                asp-for="FechaNacimiento" />
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
-    <div class="row">
-
-
-        <div class="col-md-10">
-
-
-        </div>
-    </div>
-</form>
-
+</div>
 @section Scripts {
 @{
 

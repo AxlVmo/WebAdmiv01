@@ -120,9 +120,8 @@ namespace WebAdmin.Controllers
         // GET: TblEmpresas/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
-            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaCatEstatus = ListaCatEstatus;
+            TempData["lCE"] = _context.CatEstatus.ToList();
+            ViewBag.ListaCatEstatus = TempData["lCE"];
 
             if (id == null)
             {
