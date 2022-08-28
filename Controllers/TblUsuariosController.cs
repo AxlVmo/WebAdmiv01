@@ -104,15 +104,9 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            var fCent = from a in _context.TblCentros
-                        where a.IdEstatusRegistro == 1
-                        select new
-                        {
-                            IdCentro = a.IdCentro,
-                            CentroDesc = a.NombreCentro
-                        };
-            TempData["fTS"] = fCent.ToList();
-            ViewBag.ListaCorpCent = TempData["fTS"];
+            
+            TempData["l_centros"] = _context.TblCentros.Where(f => f.IdEstatusRegistro == 1);
+            ViewBag.ListaCorpCent = TempData["l_centros"];
 
             var fuser = _userService.GetUserId();
             var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
@@ -199,26 +193,7 @@ namespace WebAdmin.Controllers
         // GET: TblUsuarios/Create
         public IActionResult Create()
         {
-            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
-            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaCatEstatus = ListaCatEstatus;
-
-            List<CatArea> ListaArea = new List<CatArea>();
-            ListaArea = (from c in _context.CatAreas select c).Distinct().ToList();
-            ViewBag.ListaArea = ListaArea;
-
-            List<CatGenero> ListaGenero = new List<CatGenero>();
-            ListaGenero = (from c in _context.CatGeneros select c).Distinct().ToList();
-            ViewBag.ListaGenero = ListaGenero;
-
-            List<CatPerfil> ListaPerfil = new List<CatPerfil>();
-            ListaPerfil = (from c in _context.CatPerfiles select c).Distinct().ToList();
-            ViewBag.ListaPerfil = ListaPerfil;
-
-            List<CatRole> ListaRol = new List<CatRole>();
-            ListaRol = (from c in _context.CatRoles select c).Distinct().ToList();
-            ViewBag.ListaRol = ListaRol;
-
+ 
             return View();
         }
         [HttpGet]

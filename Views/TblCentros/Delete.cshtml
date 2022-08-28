@@ -4,18 +4,11 @@
     ViewData["Title"] = "Desactivar Centro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    
-    <li class="breadcrumb-item">Información</li>
-    <li class="breadcrumb-item">Empresa</li>
-    <li class="breadcrumb-item">Control de Centro</li>
-    <li class="breadcrumb-item active" aria-current="page">Desactivar Centro</li>
-  </ol>
-</nav>
-<hr />
-<div>
-
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administracion /</span> Centro</h4>
+    <div class="col-xxl">
+        <div class="card mb-4">
+            <div class="card-body">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.NombreCentro)
@@ -80,4 +73,7 @@
         <input type="submit" value="Desactivar" class="btn btn-danger" /> 
           <a asp-action="Index" class="btn btn-secondary">Regresar</a> 
     </form>
+  </div>
+        </div>
+    </div>
 </div>

@@ -206,17 +206,14 @@ namespace WebAdmin.Controllers
         // GET: tblCentros/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
-            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaCatEstatus = ListaCatEstatus;
+            TempData["l_estatus"] = _context.CatEstatus.ToList();
+            ViewBag.ListaCatEstatus = TempData["l_estatus"];
 
-            List<CatTipoCentro> ListaTipoCentro = new List<CatTipoCentro>();
-            ListaTipoCentro = (from c in _context.CatTipoCentros select c).Distinct().ToList();
-            ViewBag.ListaTipoCentro = ListaTipoCentro;
+            TempData["l_tipo_centros"] = _context.CatTipoCentros.Where(f => f.IdEstatusRegistro == 1).ToList();
+            ViewBag.ListaTipoCentro = TempData["l_tipo_centros"];
 
-            List<CaTipotLicencia> ListaLicencia = new List<CaTipotLicencia>();
-            ListaLicencia = (from c in _context.CaTipotLicencias select c).Distinct().ToList();
-            ViewBag.ListaLicencia = ListaLicencia;
+            TempData["l_tipos_licencias"] = _context.CaTipotLicencias.Where(f => f.IdEstatusRegistro == 1).ToList();
+            ViewBag.ListaLicencia = TempData["l_tipos_licencias"];
 
             var fUsuariosCentros = from a in _context.TblUsuarios
                                    where a.IdPerfil == 3 && a.IdRol == 2
