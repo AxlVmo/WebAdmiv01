@@ -18,7 +18,7 @@ ViewData["Title"] = "Registro";
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                                 <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                                    placeholder="Campo Requerido" aria-label="John Doe" aria-describedby="2"
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                                     asp-for="Input.Nombres" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" tabindex="1" />
@@ -30,7 +30,7 @@ ViewData["Title"] = "Registro";
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                                 <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                                    placeholder="Campo Requerido" aria-label="John Doe" aria-describedby="2"
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                                     asp-for="Input.ApellidoPaterno" required tabindex="2" />
                             </div>
                         </div>
@@ -41,7 +41,7 @@ ViewData["Title"] = "Registro";
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                                 <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                                    placeholder="Campo Requerido" aria-label="John Doe" aria-describedby="2"
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                                     asp-for="Input.ApellidoMaterno" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" tabindex="3" />
@@ -53,7 +53,7 @@ ViewData["Title"] = "Registro";
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                                 <input type="email" class="form-control" id=""
-                                    placeholder="Campo Requerido" required aria-label="John Doe" aria-describedby="2"
+                                    placeholder="Requerido" required aria-label="John Doe" aria-describedby="2"
                                     asp-for="Input.Email" tabindex="4" />
                             </div>
                         </div>
@@ -64,7 +64,7 @@ ViewData["Title"] = "Registro";
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                                 <input type="password" class="form-control" id=""
-                                    placeholder="Campo Requerido" aria-label="John Doe" aria-describedby="2"
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                                     asp-for="Input.Password" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" tabindex="5" />
@@ -76,13 +76,13 @@ ViewData["Title"] = "Registro";
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                                 <input  type="password" class="form-control" id=""
-                                    placeholder="Campo Requerido" required aria-label="John Doe" aria-describedby="2"
+                                    placeholder="Requerido" required aria-label="John Doe" aria-describedby="2"
                                     asp-for="Input.ConfirmPassword" tabindex="6" />
                             </div>
                         </div>
                         <div class="mt-2">
                             <input type="submit" value="Crear" class="btn btn-primary" tabindex="7"/>
-                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                            <a class="btn btn-secondary" asp-area="" asp-controller="TblUsuarios" asp-action="Index">Regresar</a>
                           </div>
                     </div>
             </form>

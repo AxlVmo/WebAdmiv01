@@ -1,11 +1,11 @@
 ﻿@model WebAdmin.Models.TblUsuario
 
 @{
-ViewData["Title"] = "Editar Usuaio";
-Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Editar Usuaio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Informacion /</span> Empresa</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Informacion /</span> Usuario</h4>
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
@@ -19,19 +19,258 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                     <input type="hidden" asp-for="IdCorporativo" />
                     <input type="hidden" asp-for="IdColonia" />
                     <div class="row">
+                        <div class="mb-3 col-md-2">
+                            <label for="IdGenero" class="form-label" asp-for="IdGenero"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select class="form-select" required asp-for="IdGenero" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaGenero,"IdGenero","GeneroDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label for="FechaNacimiento" class="form-label" asp-for="FechaNacimiento"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="date" class="form-control" id=""
+                                     aria-label="John Doe" aria-describedby="2" 
+                                    asp-for="FechaNacimiento" />
+                            </div>
+                        </div>
+                         <div class="mb-3 col-md-3">
+                             <label for="Nombres" class="form-label" asp-for="Nombres"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                    asp-for="Nombres" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <label for="ApellidoPaterno" class="form-label" asp-for="ApellidoPaterno"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                    asp-for="ApellidoPaterno" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                              <label for="ApellidoMaterno" class="form-label" asp-for="ApellidoMaterno"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                    asp-for="ApellidoMaterno" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                          <div class="mb-3 col-md-3">
+                            <label for="UsuarioRfc" class="form-label" asp-for="UsuarioRfc"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                     aria-label="John Doe" aria-describedby="2"
+                                    asp-for="UsuarioRfc" />
+                            </div>
+                        </div>
+                         <div class="mb-3 col-md-3">
+                             <label for="UsuarioNss" class="form-label" asp-for="UsuarioNss"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    aria-label="John Doe" aria-describedby="2"
+                                    asp-for="UsuarioNss" />
+                            </div>
+                        </div>
+                         <div class="mb-3 col-md-3">
+                            <label for="UsuarioCurp" class="form-label" asp-for="UsuarioCurp"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    aria-label="John Doe" aria-describedby="2"
+                                    asp-for="UsuarioCurp" />
+                            </div>
+                        </div>
+                         <div class="mb-3 col-md-3">
+                            <label for="Telefono" class="form-label" asp-for="Telefono"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="Telefono" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                         <div class="mb-3 col-md-4">
+                            <label for="CorreoAcceso" class="form-label" asp-for="CorreoAcceso"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                    asp-for="CorreoAcceso" />
+                            </div>
+                        </div>
+                     <div class="mb-3 col-md-2">
+                            <label for="IdPersonalEstudioIdPersonalEstudio" class="form-label" asp-for="IdPersonalEstudio"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select class="form-select" required asp-for="IdPersonalEstudio" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaPersonalEstudio,"IdPersonalEstudio","PersonalEstudioDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="mb-3 col-md-2">
+                            <label for="IdArea" class="form-label" asp-for="IdArea"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select class="form-select" required asp-for="IdArea" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaArea,"IdArea","AreaDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                             <label for="IdPerfil" class="form-label" asp-for="IdPerfil"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select class="form-select" required asp-for="IdPerfil" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaPerfil,"IdPerfil","PerfilDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                           <label for="IdRol" class="form-label" asp-for="IdRol"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select class="form-select" required asp-for="IdRol" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaRol,"IdRol","RolDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="row">
+                       <div class="mb-3 col-md-2">
+                            <label for="IdTipoContratacion" class="form-label" asp-for="IdTipoContratacion"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select class="form-select" required asp-for="IdTipoContratacion" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaContratacion,"IdTipoContratacion","TipoContratacionDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="mb-3 col-md-2">
+                            <label for="FechaContratacion" class="form-label" asp-for="FechaContratacion"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="date" class="form-control" id=""
+                                     aria-label="John Doe" aria-describedby="2"
+                                    asp-for="FechaContratacion" />
+                            </div>
+                        </div>
+                         <div class="mb-3 col-md-2">
+                           <label for="IdTipoFormaPago" class="form-label" asp-for="IdTipoFormaPago"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select class="form-select" required asp-for="IdTipoFormaPago" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaFormaPago,"IdTipoFormaPago","TipoFormaPagoDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-3 col-md-6">
-                            
+                             <label for="Calle" class="form-label" asp-for="Calle"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                        placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
+                                        asp-for="Calle" />
+                                </div>
                         </div>
                     </div>
-                    <div class="mb-3 col-md-6">
-                        <label for="FechaNacimiento" class="form-label" asp-for="FechaNacimiento"></label>
-                        <div class="input-group input-group-merge">
-                            <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                            <input style="text-transform:uppercase" type="date" class="form-control" id=""
-                                placeholder="Campo Requerido" aria-label="John Doe" aria-describedby="2"
-                                asp-for="FechaNacimiento" />
+                    <div class="row">
+                            <div class="mb-3 col-md-3">
+                                <label for="CodigoPostal" class="form-label" asp-for="CodigoPostal"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                        id="iCodigoPostal"  aria-label="John Doe"
+                                        aria-describedby="2" asp-for="CodigoPostal" />
+                                    <button class="btn btn-outline-primary" type="button" id="button-addon2"
+                                        onclick="filtro_cp()">Button</button>
+                                </div>
+                            </div>
+                             <div class="mb-3 col-md-5">
+                                <label for="Colonia" class="form-label" asp-for="Colonia"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <select id="drpColonias" class="form-select" asp-for="Colonia">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="LocalidadMunicipio" class="form-label" asp-for="LocalidadMunicipio"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                        id="idLocalidadMunicipio"  aria-label="John Doe"
+                                        aria-describedby="2" asp-for="LocalidadMunicipio" readonly />
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label for="Ciudad" class="form-label" asp-for="Ciudad"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                        id="idCiudad"  aria-label="John Doe"
+                                        aria-describedby="2" asp-for="Ciudad" readonly />
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="Estado" class="form-label" asp-for="Estado"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                        id="idEstados"  aria-label="John Doe"
+                                        aria-describedby="2" asp-for="Estado" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    <div class="mt-2">
+                            <input type="submit" value="Actualizar" class="btn btn-warning" />
+                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                        </div>
                 </form>
             </div>
         </div>
@@ -42,77 +281,77 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $(document).ready(function () {
-        filtro_colonias();
-    });
-
-    function filtro_cp() {
-
-        var valor_cp = document.getElementById("iCodigoPostal").value;
-
-        $.ajax({
-            type: "GET",
-            url: "/CatCodigosPostales/FiltroCodigosPostales/",
-            data: { id: valor_cp },
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (list) {
-                var $select_colonias = $('#drpColonias');
-                $("#drpColonias").empty();
-
-                if (list.length == 0) {
-                    $select_colonias.append('<option value="">SELECCIONAR</option>');
-                    document.getElementById("idLocalidadMunicipio").value = null;
-                    document.getElementById("idCiudad").value = null;
-                    document.getElementById("idEstados").value = null;
-                }
-                else {
-                    $select_colonias.append('<option value="">SELECCIONAR</option>');
-                    for (var i = 0, len = list.length; i < len; i++) {
-                        $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
-                        document.getElementById("idLocalidadMunicipio").value = list[i].dmnpio;
-                        document.getElementById("idCiudad").value = list[i].dciudad;
-                        document.getElementById("idEstados").value = list[i].destado;
-                    }
-                }
-            },
-            error: function () {
-                alert("Error!!")
-            }
+        $(document).ready(function () {
+            filtro_colonias();
         });
-    }
-    function filtro_colonias() {
 
-        var valor_col = document.getElementById("IdColonia").value;
-        var valor_cp = document.getElementById("iCodigoPostal").value;
-        $.ajax({
-            type: "GET",
-            url: "/CatCodigosPostales/FiltroColonia/",
-            data: { id: valor_cp, idC: valor_col },
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (list) {
-                var $select_colonias = $('#drpColonias');
-                $("#drpColonias").empty();
-                if (list.length == 0) {
-                    $select_colonias.append('<option value="">SELECCIONAR</option>');
-                }
-                else {
+        function filtro_cp() {
 
-                    for (var i = 0, len = list.length; i < len; i++) {
-                        $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+            var valor_cp = document.getElementById("iCodigoPostal").value;
+
+            $.ajax({
+                type: "GET",
+                url: "/CatCodigosPostales/FiltroCodigosPostales/",
+                data: { id: valor_cp },
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (list) {
+                    var $select_colonias = $('#drpColonias');
+                    $("#drpColonias").empty();
+
+                    if (list.length == 0) {
+                        $select_colonias.append('<option value="">SELECCIONAR</option>');
+                        document.getElementById("idLocalidadMunicipio").value = null;
+                        document.getElementById("idCiudad").value = null;
+                        document.getElementById("idEstados").value = null;
                     }
+                    else {
+                        $select_colonias.append('<option value="">SELECCIONAR</option>');
+                        for (var i = 0, len = list.length; i < len; i++) {
+                            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                            document.getElementById("idLocalidadMunicipio").value = list[i].dmnpio;
+                            document.getElementById("idCiudad").value = list[i].dciudad;
+                            document.getElementById("idEstados").value = list[i].destado;
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Error!!")
                 }
-            },
-            error: function () {
-                alert("Error!!")
-            }
-        });
-    }
+            });
+        }
+        function filtro_colonias() {
 
-</script>
+            var valor_col = document.getElementById("IdColonia").value;
+            var valor_cp = document.getElementById("iCodigoPostal").value;
+            $.ajax({
+                type: "GET",
+                url: "/CatCodigosPostales/FiltroColonia/",
+                data: { id: valor_cp, idC: valor_col },
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (list) {
+                    var $select_colonias = $('#drpColonias');
+                    $("#drpColonias").empty();
+                    if (list.length == 0) {
+                        $select_colonias.append('<option value="">SELECCIONAR</option>');
+                    }
+                    else {
+
+                        for (var i = 0, len = list.length; i < len; i++) {
+                            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Error!!")
+                }
+            });
+        }
+
+    </script>
 
 }
 }
