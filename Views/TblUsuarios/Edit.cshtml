@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Informacion /</span> Usuario</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administracion /</span> Usuario</h4>
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
@@ -264,6 +264,27 @@
                                     <input style="text-transform:uppercase" type="text" class="form-control"
                                         id="idEstados"  aria-label="John Doe"
                                         aria-describedby="2" asp-for="Estado" readonly />
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row">
+                            <div class="mb-3 col-md-6">
+                               
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname"
+                                      asp-for="IdEstatusRegistro"></label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                        <select class="form-select" required asp-for="IdEstatusRegistro"
+                                          asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                                          <option value="">SELECCIONAR</option>
+                                        </select>
+                                      </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
