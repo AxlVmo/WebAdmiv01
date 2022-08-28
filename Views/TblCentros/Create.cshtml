@@ -1,8 +1,8 @@
 ﻿@model WebAdmin.Models.TblCentro
 
 @{
-ViewData["Title"] = "Crear Centro";
-Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Crear Centro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administracion /</span> Centro</h4>
@@ -19,7 +19,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                 <label for="IdTipoCentro" class="form-label" asp-for="IdTipoCentro"></label>
                                 <div class="input-group input-group-merge">
                                     <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                    <select id="drpTipoCentros" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoCentro"
+                                    <select id="drpTipoCentros" class="form-select"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required asp-for="IdTipoCentro"
                                         asp-items="@(new SelectList(ViewBag.ListaTipoCentro,"IdTipoCentro","TipoCentroDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
@@ -32,8 +34,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                     <select id="drpLicencias" class="form-select"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" required asp-for="IdTipoLicencia"
-                                        asp-items="@(new SelectList(ViewBag.ListaLicencia,"
-                                        IdTipoLicencia","LicenciaDesc"))">
+                                        asp-items="@(new SelectList(ViewBag.ListaLicencia,"IdTipoLicencia","LicenciaDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
@@ -49,10 +50,19 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                         asp-for="NombreCentro" />
                                 </div>
                             </div>
-                            
-                            <div class="row">
-
+                            <div class="mb-3 col-md-6">
+                                <label for="IdUsuarioControl" class="form-label" asp-for="IdUsuarioControl"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <select id="drpLicencias" class="form-select"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required asp-for="IdUsuarioControl"
+                                        asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
                             </div>
+                        </div>
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label for="Calle" class="form-label" asp-for="Calle"></label>
@@ -115,7 +125,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <input type="submit" value="Crear" class="btn btn-success" />
                                 <a asp-action="Index" class="btn btn-secondary">Regresar</a>
