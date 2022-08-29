@@ -1,46 +1,69 @@
 ﻿@model WebAdmin.Models.CatRole
 
 @{
-    ViewData["Title"] = "Editar Rol";
+    ViewData["Title"] = "Editar Estatus";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Catálogos</li>
-        <li class="breadcrumb-item">Rol</li>
-        <li class="breadcrumb-item">Control de Rol</li>
-        <li class="breadcrumb-item active" aria-current="page">Editar Rol</li>
-    </ol>
-</nav>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdRol" id="IdEstatus" />
-            <div class="form-group">
-                <label asp-for="RolDesc" class="control-label"></label>
-                <input  style="text-transform:uppercase" placeholder="Requerido" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="RolDesc" class="form-control" />
-              
-            </div>
-            <div class="form-group">
-                <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
+ <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Rol</h4>
+                <!-- Basic with Icons -->
+                <div class="col-xxl">
+                  <div class="card mb-4">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                      
+                    </div>
+                    <div class="card-body">
+                       <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdRol"/>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname" asp-for="RolDesc" ></label>
+                          <div class="col-sm-3">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-fullname2" class="input-group-text"
+                                ><i class="bx bx-check-shield"></i
+                              ></span>
+                              <input
+                              style="text-transform:uppercase"
+                                type="text"
+                                class="form-control"
+                                id="basic-icon-default-fullname"
+                                placeholder="Requerido"
+                                aria-label="John Doe"
+                                aria-describedby="basic-icon-default-fullname2"
+                                asp-for="RolDesc"
+                                required
+                                oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                         <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname" asp-for="IdEstatusRegistro"></label>
+                          <div class="col-sm-3">
+                            <div class="input-group input-group-merge">
+                              <span id="basic-icon-default-fullname2" class="input-group-text"
+                                ><i class="bx bx-check-shield"></i
+                              ></span>
+                             <select  class="form-select"  required asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                
-            </div>
-
-            <div class="form-group">
-                <input  type="submit" value="Actualizar" class="btn btn-warning" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row justify-content-end">
+                          <div class="col-sm-10">
+                             <input  type="submit" value="Actualizar" class="btn btn-warning" />
                 <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-            </div>
-        </form>
-    </div>
-</div>
 
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

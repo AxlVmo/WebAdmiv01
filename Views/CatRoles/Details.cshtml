@@ -4,40 +4,35 @@
     ViewData["Title"] = "Detalles Rol";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Catálogos</li>
-        <li class="breadcrumb-item">Rol</li>
-        <li class="breadcrumb-item">Control de Rol</li>
-        <li class="breadcrumb-item active" aria-current="page">Editar Rol</li>
-    </ol>
-</nav>
-<hr />
-<div>
-
+<div class="container-xxl flex-grow-1 container-p-Rol">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Rol</h4>
+    <div class="col-xxl">
+        <div class="card mb-4">
+            <div class="card-body">
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RolDesc)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.RolDesc)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FechaRegistro)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdEstatusRegistro)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdEstatusRegistro)
         </dd>
     </dl>
-</div>
-<div>
- <a asp-action="Index" class="btn btn-info">Regresar</a>
+    <div class="form-group">
+        <a asp-action="Index" class="btn btn-info">Regresar</a>
+    </div>
+            </div>
+        </div>
+    </div>
 </div>

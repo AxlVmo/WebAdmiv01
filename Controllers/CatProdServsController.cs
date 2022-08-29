@@ -66,7 +66,6 @@ namespace WebAdmin.Controllers
                                {
                                    IdProdServ = a.IdProdServ,
                                    ProdServDesc = a.ProdServDesc,
-
                                    FechaRegistro = a.FechaRegistro,
                                    IdEstatusRegistro = a.IdEstatusRegistro
                                };

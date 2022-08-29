@@ -4,18 +4,11 @@
     ViewData["Title"] = "Detalles Género";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Catálogos</li>
-        <li class="breadcrumb-item">Género</li>
-  <li class="breadcrumb-item">Tipo Devolucion</li>
-        <li class="breadcrumb-item active" aria-current="page">Control de Tipo Devolucion</li>
-    </ol>
-</nav>
-<hr />
-<div>
+<div class="container-xxl flex-grow-1 container-p-Rol">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Tipo de Devolucion</h4>
+    <div class="col-xxl">
+        <div class="card mb-4">
+            <div class="card-body">
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TipoDevolucionDesc)
@@ -38,5 +31,8 @@
     </dl>
     <div class="form-group">
         <a asp-action="Index" class="btn btn-info">Regresar</a>
+    </div>
+            </div>
+        </div>
     </div>
 </div>

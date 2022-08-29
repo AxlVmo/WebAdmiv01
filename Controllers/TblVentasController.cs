@@ -33,6 +33,24 @@ namespace WebAdmin.Controllers
         // GET: TblVentas
         public async Task<IActionResult> Index()
         {
+             var fCent = from a in _context.TblCentros
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCentro,
+                            CentroDesc = a.NombreCentro
+                        };
+            var fCorp = from a in _context.TblCorporativos
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCorporativo,
+                            CentroDesc = a.NombreCorporativo
+                        };
+            var sCorpCent = fCorp.Union(fCent);
+            TempData["fTS"] = sCorpCent.ToList();
+            ViewBag.ListaCorpCent = TempData["fTS"];
+
             var fVentas = _context.TblVenta.Include(u => u.RelVentaProductos);
             return View(await fVentas.ToListAsync());
         }

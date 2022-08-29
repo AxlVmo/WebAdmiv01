@@ -1,20 +1,36 @@
 ﻿@model IEnumerable<WebAdmin.Models.TblVenta>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Ventas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Ventas</li>
-        <li class="breadcrumb-item active" aria-current="page">Control Ventas</li>
-    </ol>
-</nav>
-<p>
-    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i class="fas fa-plus" hidden></i> Nuevo</a>
-</p>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administracion /</span> Ventas</h4>
+    <div class="card">
+        <h5 class="card-header">
+            <div class="row">
+                <div class="mb-3 col-md-6">
+<a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create"><i class="fas fa-plus"></i> Nuevo</a>
+                </div>
+                 <div class="mb-3 col-md-6">
+                     <div class="row mb-3" id="iCorpCent" hidden>
+                                    <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Corporativo / Centro</label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                        <select class="form-select" id="drpCorpCent"
+                                          asp-items="@(new SelectList(ViewBag.ListaCorpCent,"IdCentro","CentroDesc"))">
+                                          <option value="">SELECCIONAR</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                </div>
+                </div>
+            </div>
+        </h5>
+        <div class="table-responsive text-nowrap">
+            <div class="row">
 <table class="table">
     <thead>
         <tr>
@@ -66,3 +82,7 @@
 }
     </tbody>
 </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,42 +4,38 @@
     ViewData["Title"] = "Desactivar Periodo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Catálogos</li>
-        <li class="breadcrumb-item">Control Tipo de Periodo/li>
-        <li class="breadcrumb-item active" aria-current="page">Desactivar Periodo</li>
-    </ol>
-</nav>
-<hr />
-<div>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Tipo de Periodo</h4>
+    <div class="col-xxl">
+        <div class="card mb-4">
+            <div class="card-body">
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PeriodoDesc)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PeriodoDesc)
         </dd>
-
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FechaRegistro)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdEstatusRegistro)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdEstatusRegistro)
         </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required type="hidden" asp-for="IdPeriodo" />
+         <form asp-action="Delete">
+        <input type="hidden" asp-for="IdPeriodo" />
         <input type="submit" value="Desactivar" class="btn btn-danger" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
     </form>
+    </dl>
+ </div>
+        </div>
+    </div>
 </div>
+

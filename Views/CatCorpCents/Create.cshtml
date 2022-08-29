@@ -5,18 +5,16 @@ ViewData["Title"] = "Crear Estatus";
 Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Estatus de Registros</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Corporativo - Centro</h4>
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-4">
             <div class="card-header d-flex align-items-center justify-content-between">
-
             </div>
             <div class="card-body">
                 <form asp-action="Create">
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Estatus de
-                            Registro</label>
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname" asp-for="CorpCentDesc"></label>
                         <div class="col-sm-10">
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
@@ -40,7 +38,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         </div>
     </div>
 </div>
-</div>
+
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
