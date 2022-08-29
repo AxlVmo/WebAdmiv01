@@ -4,63 +4,77 @@
     ViewData["Title"] = "Crear Tipo de Suministro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Control de Suministro</li>
-        <li class="breadcrumb-item active" aria-current="page">Crear Suministro</li>
-    </ol>
-</nav>
-<hr />
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Servicio</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+            <div class="card-header d-flex align-items-center justify-content-between">
+            </div>
+            <div class="card-body">
 <form asp-action="Create">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdTipoSuministro" class="control-label"></label>
-                <select id="drpTipoServicio" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoSuministro"
-                    asp-items="@(new SelectList(ViewBag.ListaTipoSuministro,"IdTipoSuministro","TipoSuministroDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-                
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label asp-for="SuministroDesc" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="SuministroDesc" class="form-control" />
-               
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="NumeroReferencia" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="NumeroReferencia" class="form-control" />
-               
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="DiaFacturacion" class="control-label"></label>
-                <input asp-for="DiaFacturacion" class="form-control" type="number" />
-                <span asp-validation-for="DiaFacturacion" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="MontoSuministro" class="control-label"></label>
-                <input asp-for="MontoSuministro" class="form-control" type="number" />
-                <span asp-validation-for="MontoSuministro" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <input type="submit" value="Crear" class="btn btn-success" />
-        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-    </div>
+         <div class="mb-3 col-md-2">
+                            <label for="IdTipoSuministro" class="form-label" asp-for="IdTipoSuministro"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select id="lTipoSuministro" class="form-select" required asp-for="IdTipoSuministro" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoSuministro,"IdTipoSuministro","TipoSuministroDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                          <div class="mb-3 col-md-4">
+                            <label for="SuministroDesc" class="form-label" asp-for="SuministroDesc"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required  oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                                     aria-label="John Doe" aria-describedby="2"
+                                    asp-for="SuministroDesc" />
+                            </div>
+                        </div>
+                         
+                        
+                         <div class="mb-3 col-md-2">
+                            <label for="NumeroReferencia" class="form-label" asp-for="NumeroReferencia"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="NumeroReferencia" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label for="DiaFacturacion" class="form-label" asp-for="DiaFacturacion"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="number" class="form-control" id="" required  oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="DiaFacturacion" />
+                            </div>
+                        </div>
+                         <div class="mb-3 col-md-2">
+                            <label for="MontoSuministro" class="form-label" asp-for="MontoSuministro"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="number" class="form-control" id="" required  oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="MontoSuministro" />
+                            </div>
+                        </div>
+                    </div>
+   <div class="form-group">
+                                <input type="submit" value="Crear" class="btn btn-success" />
+                                <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                            </div>
 </form>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
 @{
 await Html.RenderPartialAsync("_ValidationScriptsPartial");

@@ -27,13 +27,13 @@ namespace WebAdmin.Controllers
             _context = context;
             _notyf = notyf;
             _userService = userService;
-   
+
         }
 
         // GET: TblVentas
         public async Task<IActionResult> Index()
         {
-             var fCent = from a in _context.TblCentros
+            var fCent = from a in _context.TblCentros
                         where a.IdEstatusRegistro == 1
                         select new
                         {
@@ -51,7 +51,42 @@ namespace WebAdmin.Controllers
             TempData["fTS"] = sCorpCent.ToList();
             ViewBag.ListaCorpCent = TempData["fTS"];
 
-            var fVentas = _context.TblVenta.Include(u => u.RelVentaProductos);
+
+            var fuser = _userService.GetUserId();
+            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+
+            if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+            {
+                var fVentasCnto = from a in _context.TblVenta
+                                  join b in _context.TblAlumnos on a.IdCliente equals b.IdAlumno
+                                  join c in _context.TblCentros on a.IdUCorporativoCentro equals c.IdCentro
+                                  select new TblVenta
+                                  {
+                                      IdVenta = a.IdVenta,
+                                      NumeroVenta = a.NumeroVenta,
+                                      NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,
+                                      CentroDesc = c.NombreCentro,
+                                      FechaRegistro = a.FechaRegistro,
+                                      IdEstatusRegistro = a.IdEstatusRegistro
+                                  };
+
+                return View(await fVentasCnto.ToListAsync());
+            }
+
+            var fVentas = from a in _context.TblVenta
+                          join b in _context.TblAlumnos on a.IdCliente equals b.IdAlumno
+                          join c in _context.TblCorporativos on a.IdUCorporativoCentro equals c.IdCorporativo
+                          select new TblVenta
+                          {
+                              IdVenta = a.IdVenta,
+                              NumeroVenta = a.NumeroVenta,
+                              NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,
+                              CentroDesc = c.NombreCorporativo,
+                              FechaRegistro = a.FechaRegistro,
+                              IdEstatusRegistro = a.IdEstatusRegistro
+                          };
+
             return View(await fVentas.ToListAsync());
         }
 

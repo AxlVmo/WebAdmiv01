@@ -1,273 +1,280 @@
 ﻿@model WebAdmin.ViewModels.VentasViewModel
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewData["Title"] = "Create";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-<nav aria-label="breadcrumb no-print">
-    <ol class="breadcrumb">
-
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Ventas</li>
-        <li class="breadcrumb-item active" aria-current="page">Crear Venta</li>
-    </ol>
-</nav>
-<div class="row">
-
-    <div class="col-md-3">
-        <div class="form-group">
-            <label asp-for="TblVentas.IdCliente" class="control-label"></label>
-            <select id="IdCliente" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TblVentas.IdCliente"
-                asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
-                <option value="">SELECCIONAR</option>
-            </select>
-        </div>
-       
-    </div>
-    <div class="col-md-1">
-        <div class="form-group">
-            <label asp-for="TblVentas.RelVentaProductos[0].Descuento" class="control-label"></label>
-            <input id="iDescuento" asp-for="TblVentas.RelVentaProductos[0].Descuento" class="form-control" type="number"
-                min="0" max="100" value="0" />
-        </div>
-    </div>
-    <div class="col-md-3">
-        <label asp-for="@Model.RelVentaProductos[0].Categoria" class="control-label"></label>
-        <div class="input-group mb-3">
-            <select id="drpCategoria" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="@Model.RelVentaProductos[0].Categoria" asp-items="@(new
-            SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
-                <option value="">SELECCIONAR</option>
-            </select>
-            <button class="btn btn-primary" type="button" onclick="DatosProductos()">Ver</button>
-        </div>
-        <span asp-validation-for="@Model.RelVentaProductos[0].Categoria" class="text-danger"></span>
-    </div>
-    <div class="col-md-5">
-
-        <label asp-for="@Model.RelVentaProductos[0].Producto" class="control-label"></label>
-        <div class="input-group mb-3">
-            <select id="drpProducto" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="@Model.RelVentaProductos[0].Producto">
-                <option value="">SELECCIONAR</option>
-            </select>
-        </div>
-        <span asp-validation-for="@Model.RelVentaProductos[0].Producto" class="text-danger"></span>
-    </div>
-
-</div>
-<div class="row no-print">
-    <div class="col-md-3">
-        <div class="form-group">
-            <label class="control-label">Tipo Servicio</label>
-            <input id="iCategoria" class="form-control" type="text" readonly />
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label class="control-label">Servicio</label>
-            <input id="iProducto" class="form-control" type="text" readonly />
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="form-group">
-            <label class="control-label">Precio $</label>
-            <input id="iPrecio" class="form-control" min="1" step="any" readonly />
-        </div>
-    </div>
-    <div class="form-group">
-        <button id="btnAddProducto" class="btn btn-primary" type="button" disabled>Agregar</button>
-    </div>
-
-</div>
-
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Main content -->
-                    <div class="invoice p-3 mb-3">
-                        <!-- Table row -->
-                        <div class="row">
-                            <div class="col-12 table-responsive">
-                                <table class="table" id="tbProducto">
-                                    <tbody>
-                                        <thead>
-                                            </th>
-                                            <th style="text-align:center">
-                                                CATEGORIA
-                                            </th>
-                                            <th style="text-align:center">
-                                                PRODUCTO
-                                            </th>
-                                            <th style="text-align:center">
-                                                TOTAL
-                                            </th>
-                                            <th style="text-align:center">
-                                                PRECIO
-                                            </th>
-                                            <th style="text-align:center">
-                                                DESCUENTO
-                                            </th>
-                                            <th style="text-align:center">ACCIONES</th>
-                                        </thead>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-
-                        <div class="row">
-                            <!-- accepted payments column -->
-                            <div class="col-6">
-                                <div class="row no-print">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
-                                            <select id="lTipoPago" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TblVentas.IdTipoPago"
-                                                asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
-                                                <option value="">SELECCIONAR</option>
-                                            </select>
-                                            <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-group" id="lCodigoPago" hidden>
-                                            <label asp-for="TblVentas.CodigoPago" class="control-label"></label>
-                                            <input id="iCodigoPago" asp-for="TblVentas.CodigoPago"
-                                                class="form-control" />
-                                            <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                     <div class="col-md-6">
-                                        <div class="form-group" id="lFechaAlterna">
-                                            <label asp-for="TblVentas.FechaAlterna" class="control-label"></label>
-                                            <input type="date" id="iFechaAlterna" asp-for="TblVentas.FechaAlterna"
-                                                class="form-control" />
-                                        </div>
-                                        </div>
-                                </div>
-                            <button class="btn btn-primary" id="btnTerminar">Guardar</button>
-                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                            <button class="btn btn-primary" id="btnTerminar2"
-                                onclick="GetClientReport()">Imprimir</button>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-6">
-                                <p class="lead">Amount Due 2/22/2014</p>
-
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tr>
-                                            <th style="width:50%">Subtotal:</th>
-                                            <td>$250.30</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tax (9.3%)</th>
-                                            <td>$10.34</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Shipping:</th>
-                                            <td>$5.80</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Total:</th>
-                                            <td>$265.24</td>
-                                        </tr>
-                                    </table>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Usuario</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+            <div class="card-header d-flex align-items-center justify-content-between">
+            </div>
+            <div class="card-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="mb-3 col-md-4">
+                            <label for="TblVentas.IdCliente" class="form-label" asp-for="TblVentas.IdCliente"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select id="IdCliente" class="form-select" required asp-for="TblVentas.IdCliente"
+                                        asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
                                 </div>
                             </div>
-                            <!-- /.col -->
                         </div>
-                        <!-- /.row -->
-                        <!-- this row will not appear when printing -->
-                    
+                        <div class="mb-3 col-md-4">
+                            <label  class="form-label" asp-for="@Model.RelVentaProductos[0].Categoria"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select id="l_tipo_servicios" class="form-select" 
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                     <div class="mb-3 col-md-4">
+                            <label  class="form-label" asp-for="@Model.RelVentaProductos[0].Producto"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select id="l_servicios" class="form-select" required asp-for="@Model.RelVentaProductos[0].Producto">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- /.invoice -->
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+                    <div class="row">
+                          <div class="mb-3 col-md-2">
+                            <label  class="form-label" asp-for="TblVentas.RelVentaProductos[0].Descuento"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input id="iDescuento" style="text-transform:uppercase" type="number" class="form-control" id="" min="0" max="100" value="0"
+                                     aria-label="John Doe" aria-describedby="2" 
+                                    asp-for="TblVentas.RelVentaProductos[0].Descuento" />
+                            </div>
+                        </div>
+                   
+                    </div>
+                    <div class="row">
+                            <div class="col-12">
+                                <!-- Main content -->
+                                <div class="invoice p-3 mb-3">
+                                    <!-- Table row -->
+                                    <div class="row">
+                                        <div class="col-12 table-responsive">
+                                            <table class="table" id="tbProducto">
+                                                <tbody>
+                                                    <thead>
+                                                        </th>
+                                                        <th style="text-align:center">
+                                                            CATEGORIA
+                                                        </th>
+                                                        <th style="text-align:center">
+                                                            PRODUCTO
+                                                        </th>
+                                                        <th style="text-align:center">
+                                                            TOTAL
+                                                        </th>
+                                                        <th style="text-align:center">
+                                                            PRECIO
+                                                        </th>
+                                                        <th style="text-align:center">
+                                                            DESCUENTO
+                                                        </th>
+                                                        <th style="text-align:center">ACCIONES</th>
+                                                    </thead>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+
+                                   
+                                    <!-- /.row -->
+                                    <!-- this row will not appear when printing -->
+                                
+                                </div>
+                                <!-- /.invoice -->
+                            </div><!-- /.col -->
+                        </div>
+                    <div class="row">
+                                        <!-- accepted payments column -->
+                                        <div class="col-6">
+                                            <div class="row no-print">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
+                                                        <select id="lTipoPago" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TblVentas.IdTipoPago"
+                                                            asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
+                                                            <option value="">SELECCIONAR</option>
+                                                        </select>
+                                                        <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="form-group" id="lCodigoPago" hidden>
+                                                        <label asp-for="TblVentas.CodigoPago" class="control-label"></label>
+                                                        <input id="iCodigoPago" asp-for="TblVentas.CodigoPago"
+                                                            class="form-control" />
+                                                        <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group" id="lFechaAlterna">
+                                                        <label asp-for="TblVentas.FechaAlterna" class="control-label"></label>
+                                                        <input type="date" id="iFechaAlterna" asp-for="TblVentas.FechaAlterna"
+                                                            class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-6">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tr>
+                                                        <th style="width:50%">Subtotal:</th>
+                                                        <td>$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>IVA (16 %)</th>
+                                                        <td>$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Shipping:</th>
+                                                        <td>$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Total:</th>
+                                                        <td>$0.00</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                    </div>
+                            <div class="form-group">
+                               <button class="btn btn-success" id="btnTerminar">Guardar</button>
+                                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                                        <button class="btn btn-success" id="btnTerminar2"
+                                            onclick="GetClientReport()">Imprimir</button>
+                            </div>             <!-- /.col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+    @section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+      $('#IdCliente').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_servicios').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_servicios').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_tipo_servicios').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+        $.ajax({
+            type: "GET",
+            url: "/TblServicios/FiltroServicios/",
+            data: { id: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $lista_servicios = $('#l_servicios');
+                $("#l_servicios").empty();
 
-@section Scripts {
-@{
-await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-<script>
-    @* function GetClientReport() {
-            window.open('/TblVentas/CreatePdf', '_blank');
-            }; *@
+                if (list.length == 0) {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    $lista_servicios.attr('required', false);
 
-        function RemoveRow(o) {
-            //no clue what to put here?
-            var p = o.parentNode.parentNode;
-            p.parentNode.removeChild(p);
-        }
-
+                }
+                else {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $lista_servicios.append('<option value=' + list[i].idServicio + '>' + list[i].descServicio + '</option>');
+                        $lista_servicios.attr('required', true);
+                    }
+                    alert("Servicios Cargados");
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    });
     $('#lTipoPago').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
 
         if (SelectedValue != 1) {
-             $('#lCodigoPago').removeAttr('hidden');
+            $('#lCodigoPago').removeAttr('hidden');
         }
         else {
             document.getElementById("lCodigoPago").setAttribute("hidden", true);
         }
     });
-    $('#btnTerminar2').click(function () {
-        window.print();
-    });
-    $('#drpProducto').change(function () {
+    $('#l_servicios').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
 
-        mProductos();
+        $.ajax({
+            type: "GET",
+            url: "/TblServicios/fFiltroServicio/",
+            data: { idA: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        var f_tipo_servicio = list[i].tipoServicioDesc;
+                        var f_servicio = list[i].descServicio;
+                        var f_precio = list[i].totalPrecioServicio;
+                        var _desc = parseFloat($("#iDescuento").val())
+                        var _prec = parseFloat(f_precio)
+                        var _tprecio = _prec - (100 * (_desc / 100))
 
-
+                        $("#tbProducto tbody").append(
+                            $("<tr>").append(
+                                $("<td style='text-align:center'>").text(f_tipo_servicio),
+                                $("<td style='text-align:center'>").text(f_servicio),
+                                $("<td style='text-align:center'>").text(_tprecio),
+                                $("<td style='text-align:center'>").text(_prec),
+                                $("<td style='text-align:center'>").text(_desc),
+                                $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
+                        )
+                    }
+                    var $lista_servicios = $('#l_servicios');
+                    $("#l_servicios").empty();
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                }
+            },
+        });
     });
-    $('#drpCategoria').change(function () {
-
-        @* var $select_colonias = $('#drpProducto');
-                $("#drpProducto").empty();
-
-
-                $select_colonias.append('<option value="">SELECCIONAR</option>');
-                $select_colonias.attr('required', true);
-                $("#btnMostrar").setAttribute("disabled"); *@
-
-            });
-    $("#btnAddProducto").on("click", function () {
-        var _desc = parseFloat($("#iDescuento").val())
-        var _prec = parseFloat($("#iPrecio").val())
-        var _tprecio = _prec - (100 * (_desc / 100))
-
-
-        $("#tbProducto tbody").append(
-            $("<tr>").append(
-                $("<td style='text-align:center'>").text($("#iCategoria").val()),
-                $("<td style='text-align:center'>").text($("#iProducto").val()),
-                $("<td style='text-align:center'>").text(_tprecio),
-                $("<td style='text-align:center'>").text($("#iPrecio").val()),
-                $("<td style='text-align:center'>").text($("#iDescuento").val()),
-                $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
-        )
-
-        var receivables = $("#tbProducto tbody tr>td:nth-child(2)").map(function () {
-            return parseFloat($(this).text().replace(/,/g, ""));
-        }).get().reduce(sum).toFixed(2);
-
-        $("#ivTotal").text(receivables);
-
-
-        function sum(a, b) {
-            return a + b
-        }
-    })
-
     $("#btnTerminar").on("click", function () {
 
         var RelVenta_Productos = []
@@ -315,166 +322,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         })
 
     })
-    $(function () {
-        $('#btnSave').on('click', function () {
-            var generation = {};
-            var membersDetails = new Array();
-            $("#tblProductos TBODY TR").each(function () {
-                var row = $(this);
-                var memberDetails = {};
-                memberDetails.MemberType = row.find("TD").eq(0).html();
-                memberDetails.MemberCategory = row.find("TD").eq(1).html();
-                memberDetails.TotalSum = row.find("TD").eq(2).html();
-                memberDetails.MemberCount = row.find("TD").eq(3).html();
-                membersDetails.push(memberDetails);
-            });
-
-            generation.Memberdetails = membersDetails;
-
-            //Send the JSON array to Controller using AJAX.
-            $.ajax({
-                type: "POST",
-                url: "/Home/Save",
-                data: JSON.stringify(generation),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                }
-            });
-        });
-    });
-    $('#IdCliente').select2({
-        theme: "bootstrap-5",
-        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-        placeholder: $(this).data('placeholder'),
-    });
-    $('#drpCategoria').select2({
-        theme: "bootstrap-5",
-        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-        placeholder: $(this).data('placeholder'),
-    });
-    $('#drpProducto').select2({
-        theme: "bootstrap-5",
-        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-        placeholder: $(this).data('placeholder'),
-    });
-    function DatosProductos() {
-        var vProducto = document.getElementById("drpCategoria").value;
-
-        $.ajax({
-            type: "GET",
-            url: "/TblServicios/FiltroServicios/",
-            data: { id: vProducto },
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (list) {
-                var $select_colonias = $('#drpProducto');
-                $("#drpProducto").empty();
-
-                if (list.length == 0) {
-                    $select_colonias.append('<option value="">SELECCIONAR</option>');
-                    $select_colonias.attr('required', false);
-                    $("#btnMostrar").setAttribute("disabled");
-                }
-                else {
-                    $select_colonias.append('<option value="">SELECCIONAR</option>');
-                    for (var i = 0, len = list.length; i < len; i++) {
-                        $select_colonias.append('<option value=' + list[i].idServicio + '>' + list[i].descServicio + '</option>');
-                        $select_colonias.attr('required', true);
-                    }
-                    $("#btnMostrar").removeAttr("disabled");
-                }
-            },
-            error: function () {
-                alert("Error!!")
-            }
-        });
-        return false;
+    function RemoveRow(o) {
+    //no clue what to put here?
+    var p = o.parentNode.parentNode;
+    p.parentNode.removeChild(p);
     }
-    function mProductos() {
-        var vProducto = document.getElementById("drpProducto").value;
-        $.ajax({
-            type: "GET",
-            url: "/TblServicios/fFiltroServicio/",
-            data: { idA: vProducto },
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (list) {
-                if (list.length == 0) {
-                    document.getElementById("iCategoria").value = null;
-                    document.getElementById("iProducto").value = null;
-                    document.getElementById("iPrecio").value = null;
-                }
-                else {
-
-                    for (var i = 0, len = list.length; i < len; i++) {
-                        document.getElementById("iCategoria").value = list[i].tipoServicioDesc;
-                        document.getElementById("iProducto").value = list[i].descServicio;
-                        document.getElementById("iPrecio").value = list[i].totalPrecioServicio;
-                    }
-                    $("#btnAddProducto").removeAttr("disabled");
-                }
-            },
-            error: function () {
-                alert("Error!!")
-            }
-        });
-        return false;
+    </script>
     }
-    function AgregaProducto() {
-        var vProducto = document.getElementById("drpProducto").value;
-        var vPorcentaje = document.getElementById("iDescuento").value;
-        var vCosto = 0;
-        var vtotal = 0;
-        $.ajax({
-            type: "GET",
-            url: "/CatProductos/FiltroProducto/",
-            data: { idA: vProducto },
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                var items = "";
-                $.each(data, function (i, item) {
-                    const options2 = { style: "currency", currency: "USD" };
-                    const numberFormat2 = new Intl.NumberFormat("en-US", options2);
-                    vCosto = item.costo - (item.costo * (vPorcentaje / 100));
-                    vCosto = vCosto;
-
-                    var rows =
-                        "<tr>" +
-                        "<td style='text-align:center'>" +
-                        item.DescCategoria +
-                        "</td>" +
-                        "<td style='text-align:center'>" +
-                        item.DescProducto +
-                        "</td>" +
-                        "<td style='text-align:center'>" +
-                        vCosto +
-                        "<td style='text-align:center'>" +
-                        numberFormat2.format(item.costo) +
-                        "</td>" +
-                        "<td style='text-align:center'>" +
-                        numberFormat2.format((item.costo * (vPorcentaje / 100))) +
-                        "</td>" +
-                        "<td style='text-align:center'>" +
-
-                        "<a asp-action='Edit' asp-route-id='" +
-                        item.idProducto +
-                        "'class='btn btn-outline-secondary' title='Editar'><i class='far fa-edit' style='font-size: 1em; color: #FFC300;' onclick='MProducto(this)'></i></a>" +
-                        "<a asp-action='Delete' asp-route-id='" +
-                        item.idProducto +
-                        "'class='btn btn-outline-secondary' title='Desactivar'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;' onclick='DProducto(this)'></i></a></td>" +
-                        "</tr>";
-                    $("#tblProductos tbody").append(rows);
-                });
-            },
-            error: function (ex) {
-            },
-        });
-    }
-    function subtotal() {
-        var table = document.getElementById("tblProductos");
-    }
-
-</script>
-}

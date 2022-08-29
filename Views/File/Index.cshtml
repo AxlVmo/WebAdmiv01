@@ -21,7 +21,7 @@
 <form method="post" enctype="multipart/form-data">
     <input type="file" name="files" multiple required />
     <input type="text" autocomplete="off" placeholder="Descripcion" name="description" required />
-    <button type="submit" class="btn btn-primary" asp-controller="File" asp-action="UploadToFileSystem">Subir al sistema de archivos</button>
+    <button type="submit" class="btn btn-success" asp-controller="File" asp-action="UploadToFileSystem">Subir al sistema de archivos</button>
     <button class="btn btn-success" type="submit" asp-controller="File" asp-action="UploadToDatabase">Subir a la base de datos</button>
 </form>
 <hr />
@@ -54,7 +54,7 @@ else
                     <td>@file.FileType</td>
                     <td>@file.CreatedOn</td>
                     <td>
-                        @*<a type="button" class="btn btn-primary" asp-controller="File" asp-action="UploadToCPs" asp-route-id="@file.Id" disabled>Subir</a>*@
+                        @*<a type="button" class="btn btn-success" asp-controller="File" asp-action="UploadToCPs" asp-route-id="@file.Id" disabled>Subir</a>*@
                         <a type="button" class="btn btn-danger" asp-controller="File" asp-action="DeleteFileFromFileSystem" asp-route-id="@file.Id">Eliminar</a>
                     </td>
                 </tr>
@@ -94,7 +94,7 @@ else
                     <td>@file.FileType</td>
                     <td>@file.CreatedOn</td>
                     <td>
-                        @*<a type="button" class="btn btn-primary" asp-controller="File" asp-action="DownloadFileFromDatabase" asp-route-id="@file.Id">Subir</a>*@
+                        @*<a type="button" class="btn btn-success" asp-controller="File" asp-action="DownloadFileFromDatabase" asp-route-id="@file.Id">Subir</a>*@
                         <a type="button" class="btn btn-danger" asp-controller="File" asp-action="DeleteFileFromDatabase" asp-route-id="@file.Id">Eliminar</a>
                     </td>
                 </tr>

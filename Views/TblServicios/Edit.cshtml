@@ -1,80 +1,98 @@
 ﻿@model WebAdmin.Models.TblServicio
 
 @{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewData["Title"] = "Edit";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Empresa</li>
-        <li class="breadcrumb-item">Servicio</li>
-        <li class="breadcrumb-item active" aria-current="page">Crear Servicio</li>
-    </ol>
-</nav>
-<hr />
-
-<form asp-action="Edit">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="IdServicio" />
-    <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                <label asp-for="DescServicio" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="DescServicio" class="form-control" type="text" />
-                <span asp-validation-for="DescServicio" class="text-danger"></span>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Servicio</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+             <form asp-action="Edit">
+            <div class="card-header d-flex align-items-center justify-content-between">
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="IdTipoServicio" class="control-label"></label>
-                <select id="drpTipoServicio" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdTipoServicio"
-                    asp-items="@(new SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-                
+            <div class="card-body">
+                    <input type="hidden" asp-for="IdServicio" />
+                    <div class="row">
+                        <div class="mb-3 col-md-4">
+                            <label for="DescServicio" class="form-label" asp-for="DescServicio"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="DescServicio" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="IdTipoServicio" class="form-label" asp-for="IdTipoServicio"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select id="IdTipoServicio" class="form-select" required asp-for="IdTipoServicio"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label for="ServicioPrecioUno" class="form-label" asp-for="ServicioPrecioUno"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="number" class="form-control" id=""
+                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="ServicioPrecioUno" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label for="Periodo" class="form-label" asp-for="Periodo"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input style="text-transform:uppercase" type="number" class="form-control" id=""
+                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="Periodo" />
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                               
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname"
+                                      asp-for="IdEstatusRegistro"></label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                        <select class="form-select" required asp-for="IdEstatusRegistro"
+                                          asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                                          <option value="">SELECCIONAR</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="mt-2">
+                <input type="submit" value="Actualizar" class="btn btn-warning" />
+                <a asp-action="Index" class="btn btn-secondary">Regresar</a>
             </div>
-        </div>
-
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="CodigoExterno" class="control-label"></label>
-                <input  style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="CodigoExterno" class="form-control" type="text" />
-               
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="ServicioPrecioUno" class="control-label"></label>
-                <input asp-for="ServicioPrecioUno" class="form-control" type="number" />
-                <span asp-validation-for="ServicioPrecioUno" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="Periodo" class="control-label"></label>
-                <input asp-for="Periodo" class="form-control" type="number" />
-                <span asp-validation-for="Periodo" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdEstatusRegistro" class="control-label"></label>
-                <select id="idEstatusLista" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="IdEstatusRegistro"
-                    asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-                
-            </div>
+            
+            </form>
         </div>
     </div>
-
-    <div class="form-group">
-        <input type="submit" value="Actualizar" class="btn btn-warning" />
-        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-    </div>
-</form>
+</div>
+</div>
 
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
