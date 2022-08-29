@@ -30,10 +30,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             </div>
             <div class="row">
               <div class="mb-3 col-md-6">
-                <label for="CorreoElectronico" class="form-label" asp-for="CorreoElectronico"></label>
+               <label for="CorreoElectronico" class="form-label" asp-for="CorreoElectronico"></label>
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                  <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                  <input  type="email" class="form-control" id=""
                     placeholder="Requerido" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico"
                     required oninvalid="this.setCustomValidity('Campo Requerido')"
                     onchange="this.setCustomValidity('')" />
@@ -44,7 +44,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" asp-for="Telefono" />
+                     aria-label="John Doe" aria-describedby="2" asp-for="Telefono" />
                 </div>
               </div>
             </div>
@@ -54,7 +54,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" asp-for="Calle" />
+                     aria-label="John Doe" aria-describedby="2" asp-for="Calle" />
                 </div>
               </div>
               <div class="mb-3 col-md-6">
@@ -62,7 +62,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPostal"
-                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" asp-for="CodigoPostal" />
+                     aria-label="John Doe" aria-describedby="2" asp-for="CodigoPostal" />
                   <button class="btn btn-outline-primary" type="button" id="button-addon2"
                     onclick="filtro_cp()">Button</button>
                 </div>
@@ -83,7 +83,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="idLocalidadMunicipio"
-                    placeholder=" Campo Requerido" aria-label="John Doe" aria-describedby="2"
+                     aria-label="John Doe" aria-describedby="2"
                     asp-for="LocalidadMunicipio" readonly />
                 </div>
               </div>
@@ -94,7 +94,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="idCiudad"
-                    placeholder=" Campo Requerido" aria-label="John Doe" aria-describedby="2" asp-for="Ciudad"
+                     aria-label="John Doe" aria-describedby="2" asp-for="Ciudad"
                     readonly />
                 </div>
               </div>
@@ -103,7 +103,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="idEstados"
-                    placeholder=" Campo Requerido" aria-label="John Doe" aria-describedby="2" asp-for="Estado"
+                    aria-label="John Doe" aria-describedby="2" asp-for="Estado"
                     readonly />
                 </div>
               </div>

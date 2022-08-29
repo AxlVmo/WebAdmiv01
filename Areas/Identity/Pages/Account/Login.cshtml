@@ -127,16 +127,11 @@ $.ajax({
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (list) {
-                if (list == true) {
-                   $('#regresar_registro').removeAttr('hidden');  
-                }
-                else {
-                    document.getElementById("btn_Registro").setAttribute("hidden", true);
+                if (list != true) {
+                   $('#btn_Registro').removeAttr('hidden');  
                 }
             },
-            error: function () {
-                alert("Error!!")
-            }
+            
         });
 </script>
 }

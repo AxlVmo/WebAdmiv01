@@ -82,7 +82,7 @@ ViewData["Title"] = "Registro";
                         </div>
                         <div class="mt-2">
                             <input type="submit" value="Crear" class="btn btn-success" tabindex="7"/>
-                            <a class="btn btn-secondary" asp-area="" asp-controller="TblUsuarios" asp-action="Index">Regresar</a>
+                            <a id="regresar_registro" hidden class="btn btn-secondary" asp-area="" asp-controller="TblUsuarios" asp-action="Index">Regresar</a>
                           </div>
                     </div>
             </form>
@@ -104,13 +104,9 @@ ViewData["Title"] = "Registro";
             if (list == true) {
                 $('#regresar_registro').removeAttr('hidden');
             }
-            else {
-                document.getElementById("btn_Registro").setAttribute("hidden", true);
-            }
+
         },
-        error: function () {
-            alert("Error!!")
-        }
+
     });
 </script>
 }

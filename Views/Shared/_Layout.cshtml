@@ -564,5 +564,21 @@
       </environment>
        @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)
+    <script type="text/javascript">
+$.ajax({
+            type: "GET",
+            url: "/TblUsuarios/RegistroUsuario/",
+            
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list == false) {
+
+                   $('#btn_Registro').removeAttr('hidden');  
+                }
+            },
+            
+        });
+</script>
   </body>
 </html>

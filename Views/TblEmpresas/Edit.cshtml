@@ -40,15 +40,14 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                         </div>
                         <div class="row">
                             <div class="mb-3 col-md-6">
-                                <label for="CorreoElectronico" class="form-label" asp-for="CorreoElectronico"></label>
-                                <div class="input-group input-group-merge">
-                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                                        placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                        asp-for="CorreoElectronico" required
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" />
-                                </div>
+                               <label for="CorreoElectronico" class="form-label" asp-for="CorreoElectronico"></label>
+                <div class="input-group input-group-merge">
+                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                  <input  type="email" class="form-control" id=""
+                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico"
+                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" />
+                </div>
 
                             </div>
                             <div class="mb-3 col-md-6">
