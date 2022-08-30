@@ -24,9 +24,10 @@
                     $('#i_empresa_d').removeAttr('hidden');
                     $('#i_empresa_p').removeAttr('hidden');
                     $('#i_empresa_n').removeAttr('hidden');
-
+                    
                     $('#i_catalogos_c').removeAttr('hidden');
                     $('#i_catalogos_u').removeAttr('hidden');
+                    $('#iCorpCent').removeAttr('hidden');
                 }
             }
         },

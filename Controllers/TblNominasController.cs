@@ -276,16 +276,17 @@ namespace WebAdmin.Controllers
                 var fuser = _userService.GetUserId();
                 var isLoggedIn = _userService.IsAuthenticated();
                 var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-                var fCorporativo = _context.TblCorporativos.First();
-                fCorpCent = 1;
-                if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
-                {
-                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
-                    fCentroCorporativo = fIdCentro.IdCentro;
-                    fCorpCent = 2;
-                }
-                TblNomina.IdCorpCent = fCorpCent;
-                TblNomina.IdUCorporativoCentro = fCorporativo.IdCorporativo;
+                var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
+                    fCentroCorporativo = fCorp.IdCorporativo;
+                    fCorpCent = 1;
+                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                    {
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                        fCentroCorporativo = fIdCentro.IdCentro;
+                        fCorpCent = 2;
+                    }
+                    TblNomina.IdCorpCent = fCorpCent;
+                    TblNomina.IdUCorporativoCentro = fCentroCorporativo;
                 TblNomina.IdUsuarioModifico = Guid.Parse(fuser);
                 TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper().Trim();
                 TblNomina.FechaRegistro = DateTime.Now;
