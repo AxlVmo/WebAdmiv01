@@ -2,136 +2,123 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Acceso";
-    
+  ViewData["Title"] = "Acceso";
+
 }
-   <div class="container-xxl">
-      <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-          <!-- Register -->
-          <div class="card">
-            <div class="card-body">
-              <!-- Logo -->
-              <div class="app-brand justify-content-center">
-                 <a href="index.html" class="app-brand-link">
+<div class="container-xxl">
+  <div class="authentication-wrapper authentication-basic container-p-y">
+    <div class="authentication-inner">
+      <!-- Register -->
+      <div class="card">
+        <div class="card-body">
+          <!-- Logo -->
+          <div class="app-brand justify-content-center">
+            <a href="index.html" class="app-brand-link">
               <span class="app-brand-logo demo">
-   <img id="profilePicture" class="img-profile" style="width:64px;height:64px" src="~/assets/img/logo1.png">
+                <img id="profilePicture" class="img-profile" style="width:64px;height:64px"
+                  src="~/assets/img/logo1.png">
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2"><img style="width:128px;height:64px" src="~/assets/img/logo2.png"></span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2"><img style="width:128px;height:64px"
+                  src="~/assets/img/logo2.png"></span>
             </a>
-              </div>
-              <!-- /Logo -->
-              <h4 class="mb-2">Bienvenido/a a Intelimundo! 👋</h4>
-              <p class="mb-4">Use una cuenta activa para iniciar sesión</p>
-
-              <form id="account" class="mb-3"  method="POST">
-                <div class="mb-3">
-                  <label for="email" class="form-label" asp-for="Input.Email"></label>
-                  <input
-                    type="email"
-                    class="form-control"
-
-                    placeholder="Requerido"
-                    autofocus
-                    asp-for="Input.Email"
-                    required
-                  />
-                  
-                </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-   
-                      class="form-control"
-  
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                      asp-for="Input.Password"
-                      required
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                     
-                  </div>
-                   <a href="#">
-                      <small>¿Has olvidado tu contraseña?</small>
-                    </a>
-                </div>
-                <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="remember-me" asp-for="Input.RememberMe" />
-                    <label class="form-check-label" for="remember-me"> @Html.DisplayNameFor(m => m.Input.RememberMe) </label>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Entrar</button>
-                </div>
-              </form>
-
-              <p class="text-center">
-                <span>¿Nueva/o en nuestra plataforma?</span>
-                <a href="#">
-                  <span>Crear Cuenta</span>
-                </a>
-              </p>
-            </div>
           </div>
-          <!-- /Register -->
+          <!-- /Logo -->
+          <h4 class="mb-2">Bienvenido/a a Intelimundo! 👋</h4>
+          <p class="mb-4">Use una cuenta activa para iniciar sesión</p>
+
+          <form id="account" class="mb-3" method="POST">
+            <div class="mb-3">
+              <label for="email" class="form-label" asp-for="Input.Email"></label>
+              <input type="email" class="form-control" placeholder="Requerido" autofocus asp-for="Input.Email"
+                required oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" />
+            </div>
+            <div class="mb-3 form-password-toggle">
+              <div class="d-flex justify-content-between">
+                <label class="form-label" for="password">Password</label>
+              </div>
+              <div class="input-group input-group-merge">
+                <input type="password" class="form-control"
+                  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                  aria-describedby="password" asp-for="Input.Password" required />
+                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+              </div>
+              <a href="#">
+                <small>¿Has olvidado tu contraseña?</small>
+              </a>
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="remember-me" asp-for="Input.RememberMe" />
+                <label class="form-check-label" for="remember-me"> @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <button class="btn btn-primary d-grid w-100" type="submit">Entrar</button>
+            </div>
+          </form>
+
+          <p class="text-center">
+            <span>¿Nueva/o en nuestra plataforma?</span>
+            <a href="#">
+              <span>Crear Cuenta</span>
+            </a>
+          </p>
         </div>
       </div>
+      <!-- /Register -->
     </div>
+  </div>
+</div>
 
 <div class="row">
-    <div class="col-md-4">
-        <section>
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section>
+  <div class="col-md-4">
+    <section>
+    </section>
+  </div>
+  <div class="col-md-4">
+    <section>
 
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
+      @{
+        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+        {
 
-                }
-                else
+        }
+        else
+        {
+          <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post"
+        class="form-horizontal">
+            <div>
+              <p>
+                @foreach (var provider in Model.ExternalLogins)
                 {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post"
-                class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-success" name="provider" value="@provider.Name"
-                                title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
+                  <button type="submit" class="btn btn-success" name="provider" value="@provider.Name"
+                title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                 }
-            }
-        </section>
-    </div>
+              </p>
+            </div>
+          </form>
+        }
+      }
+    </section>
+  </div>
 </div>
 
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
 <script type="text/javascript">
-$.ajax({
-            type: "GET",
-            url: "/TblUsuarios/RegistroUsuario/",
-            
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (list) {
-                if (list != true) {
-                   $('#btn_Registro').removeAttr('hidden');  
-                }
-            },
-            
-        });
+  $.ajax({
+    type: "GET",
+    url: "/TblUsuarios/RegistroUsuario/",
+
+    contentType: "application/json;charset=utf-8",
+    dataType: "json",
+    success: function (list) {
+      if (list != true) {
+        $('#btn_Registro').removeAttr('hidden');
+      }
+    },
+
+  });
 </script>
 }

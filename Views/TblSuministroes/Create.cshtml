@@ -19,12 +19,13 @@
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                        <i
-                                            class="bx bx-check-shield">
+                                        <i class="bx bx-check-shield">
                                         </i>
                                     </span>
-                                    <select id="lTipoSuministro" class="form-select" required asp-for="IdTipoSuministro" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
-                                            asp-items="@(new SelectList(ViewBag.ListaTipoSuministro, "IdTipoSuministro", "TipoSuministroDesc"))">
+                                    <select id="lTipoSuministro" class="form-select" required asp-for="IdTipoSuministro"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoSuministro, "IdTipoSuministro", "TipoSuministroDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
@@ -36,9 +37,10 @@
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
-                                       aria-label="John Doe" aria-describedby="2"
-                                       asp-for="SuministroDesc"/>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="SuministroDesc" />
                             </div>
                         </div>
 
@@ -49,9 +51,10 @@
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
-                                       placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                       asp-for="NumeroReferencia"/>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="NumeroReferencia" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
@@ -60,9 +63,10 @@
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input style="text-transform:uppercase" type="number" class="form-control" id="" required oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
-                                       placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                       asp-for="DiaFacturacion"/>
+                                <input style="text-transform:uppercase" type="number" class="form-control" id=""
+                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="DiaFacturacion" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
@@ -71,14 +75,15 @@
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input style="text-transform:uppercase" type="number" class="form-control" id="" required oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
-                                       placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                       asp-for="MontoSuministro"/>
+                                <input style="text-transform:uppercase" type="number" class="form-control" id=""
+                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="MontoSuministro" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Crear" class="btn btn-success"/>
+                        <input type="submit" value="Crear" class="btn btn-success" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>
@@ -88,7 +93,7 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }
