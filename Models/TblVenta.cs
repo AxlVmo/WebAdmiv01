@@ -10,6 +10,14 @@ namespace WebAdmin.Models
         [Display(Name = "ID Venta")]
         [Key]
         public Guid IdVenta { get; set; }
+        [Display(Name = "Tipo de Venta")]
+        public int IdTipoVenta { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Tipo de Venta")]
+
+        public string TipoVentaDesc { get; set; }
+
 
         [Display(Name = "Numero Venta")]
         public int NumeroVenta { get; set; }

@@ -1,11 +1,11 @@
-﻿@model WebAdmin.Models.CatArea
+﻿@model WebAdmin.Models.CatTipoVenta
 
 @{
-    ViewData["Title"] = "Crear Área";
+    ViewData["Title"] = "Crear Tipo Venta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Área</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Tipo de Venta</h4>
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-4">
@@ -14,14 +14,14 @@
             <div class="card-body">
                 <form asp-action="Create">
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname" asp-for="AreaDesc"></label>
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname" asp-for="TipoVentaDesc"></label>
                         <div class="col-sm-10">
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class="bx bx-check-shield"></i></span>
                                 <input style="text-transform:uppercase" type="text" class="form-control"
                                     id="basic-icon-default-fullname" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="basic-icon-default-fullname2" asp-for="AreaDesc" required
+                                    aria-describedby="basic-icon-default-fullname2" asp-for="TipoVentaDesc" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" />
                             </div>
@@ -39,5 +39,7 @@
     </div>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

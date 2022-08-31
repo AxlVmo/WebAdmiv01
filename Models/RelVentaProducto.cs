@@ -16,11 +16,11 @@ namespace WebAdmin.Models
 
         [Display(Name = "Tipo Servicio")]
         
-        public string Categoria { get; set; }
+        public string TipoServicio { get; set; }
 
         [Display(Name = "Servicio")]
         
-        public string Producto { get; set; }
+        public string Servicio { get; set; }
 
         [Display(Name = "Precio")]
         public double Precio { get; set; }

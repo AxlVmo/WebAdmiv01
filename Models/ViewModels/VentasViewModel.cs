@@ -7,5 +7,6 @@ namespace WebAdmin.ViewModels
     {
         public TblVenta TblVentas { get; set; }
         public List<RelVentaProducto> RelVentaProductos { get; set; }
+        public List<RelVentaPagos> RelVentaPagos { get; set; }
     }
 }

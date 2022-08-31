@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Prestamos</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Préstamos</h4>
     <div class="card">
         <h5 class="card-header">
             <div class="row">
@@ -46,7 +46,7 @@
                 @Html.DisplayNameFor(model => model.TipoFormaPagoDesc)
             </th>
             <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.PrestamoDesc)
+                @Html.DisplayNameFor(model => model.PeriodoAmortizaDesc)
             </th>
             <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.CantidadPrestamo)
@@ -75,7 +75,7 @@
                     @Html.DisplayFor(modelItem => item.TipoFormaPagoDesc)
                 </td>
                 <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.PrestamoDesc)
+                    @Html.DisplayFor(modelItem => item.PeriodoAmortizaDesc)
                 </td>
                 <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.CantidadPrestamo)
@@ -140,11 +140,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#drpTipoServicio').change(function () {
+        $('#drpCorpCent').change(function () {
             var SelectedText = $('option:selected', this).text();
             var SelectedValue = $('option:selected', this).val();
             var input, filter, table, tr, td, i;
-            input = document.getElementById("drpTipoServicio");
+            input = document.getElementById("drpCorpCent");
             filter = input.value.toUpperCase();
             table = document.getElementById("tblPrestamos");
             tr = table.getElementsByTagName("tr");

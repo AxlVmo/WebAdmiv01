@@ -22,7 +22,7 @@
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class="bx bx-check-shield"></i></span>
                                 <select class="form-select" id="drpCorpCent"
-                                    asp-items="@(new SelectList(ViewBag.ListaCorpCent,"IdCentro","NombreCentro"))">
+                                    asp-items="@(new SelectList(ViewBag.ListaCorpCent,"IdCentro","CentroDesc"))">
                                     <option value="">SELECCIONAR</option>
                                 </select>
                             </div>
@@ -33,7 +33,7 @@
         </h5>
         <div class="table-responsive text-nowrap">
             <div class="row">
-                <table class="table card-table" id="tblUsuarios">
+                <table class="table" id="tblUsuarios">
                     <thead>
                         <tr>
                             <th style="text-align:center" hidden>

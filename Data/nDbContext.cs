@@ -66,6 +66,7 @@ namespace WebAdmin.Data
         public DbSet<CatTipoCancelacion> CatTipoCancelaciones { get; set; }
 
         public DbSet<CatTipoCompra> CatTipoCompras { get; set; }
+        public DbSet<CatTipoVenta> CatTipoVentas { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

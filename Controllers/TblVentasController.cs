@@ -33,6 +33,62 @@ namespace WebAdmin.Controllers
         // GET: TblVentas
         public async Task<IActionResult> Index()
         {
+            var ValidaEstatus = _context.CatEstatus.ToList();
+
+            if (ValidaEstatus.Count == 2)
+            {
+                ViewBag.EstatusFlag = 1;
+                var ValidaEmpresa = _context.TblEmpresas.ToList();
+
+                if (ValidaEmpresa.Count == 1)
+                {
+                    ViewBag.EmpresaFlag = 1;
+                    var ValidaCorporativo = _context.TblCorporativos.ToList();
+
+                    if (ValidaCorporativo.Count >= 1)
+                    {
+                        ViewBag.CorporativoFlag = 1;
+                        var ValidaCentro = _context.TblCentros.ToList();
+
+                        if (ValidaCentro.Count >= 1)
+                        {
+                            ViewBag.CentrosFlag = 1;
+                            var ValidaUsuarios = _context.TblUsuarios.ToList();
+
+                            if (ValidaUsuarios.Count >= 1)
+                            {
+                                ViewBag.UsuariosFlag = 1;
+                            }
+                            else
+                            {
+                                ViewBag.UsuariosFlag = 0;
+                                _notyf.Information("Favor de registrar los datos de Usuarios para la Aplicación", 5);
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.CentrosFlag = 0;
+                            _notyf.Information("Favor de registrar los datos de Centros para la Aplicación", 5);
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.CorporativoFlag = 0;
+                        _notyf.Information("Favor de registrar los datos de Corporativo para la Aplicación", 5);
+                    }
+                }
+                else
+                {
+                    ViewBag.EmpresaFlag = 0;
+                    _notyf.Information("Favor de registrar los datos de la Empresa para la Aplicación", 5);
+                }
+            }
+            else
+            {
+                ViewBag.EstatusFlag = 0;
+                _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
+            }
+
             var fCent = from a in _context.TblCentros
                         where a.IdEstatusRegistro == 1
                         select new
@@ -61,12 +117,14 @@ namespace WebAdmin.Controllers
                 var fVentasCnto = from a in _context.TblVenta
                                   join b in _context.TblAlumnos on a.IdCliente equals b.IdAlumno
                                   join c in _context.TblCentros on a.IdUCorporativoCentro equals c.IdCentro
+                                  where a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdCorpCent == 2
                                   select new TblVenta
                                   {
                                       IdVenta = a.IdVenta,
                                       NumeroVenta = a.NumeroVenta,
                                       NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,
                                       CentroDesc = c.NombreCentro,
+                                      IdUCorporativoCentro = a.IdUCorporativoCentro,
                                       FechaRegistro = a.FechaRegistro,
                                       IdEstatusRegistro = a.IdEstatusRegistro
                                   };
@@ -76,13 +134,14 @@ namespace WebAdmin.Controllers
 
             var fVentas = from a in _context.TblVenta
                           join b in _context.TblAlumnos on a.IdCliente equals b.IdAlumno
-                          join c in _context.TblCorporativos on a.IdUCorporativoCentro equals c.IdCorporativo
+                          join c in _context.TblCentros on a.IdUCorporativoCentro equals c.IdCentro
                           select new TblVenta
                           {
                               IdVenta = a.IdVenta,
                               NumeroVenta = a.NumeroVenta,
                               NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,
-                              CentroDesc = c.NombreCorporativo,
+                              CentroDesc = c.NombreCentro,
+                              IdUCorporativoCentro = a.IdUCorporativoCentro,
                               FechaRegistro = a.FechaRegistro,
                               IdEstatusRegistro = a.IdEstatusRegistro
                           };
@@ -179,6 +238,15 @@ namespace WebAdmin.Controllers
         // GET: TblVentas/Create
         public IActionResult Create()
         {
+            var fTipoVenta = from a in _context.CatTipoVentas
+                                where a.IdEstatusRegistro == 1
+                                select new CatTipoVenta
+                                {
+                                    IdTipoVenta = a.IdTipoVenta,
+                                    TipoVentaDesc = a.TipoVentaDesc
+                                };
+            TempData["fTV"] = fTipoVenta.ToList();
+            ViewBag.ListaTipoVenta = TempData["fTV"];
 
             var fTipoServicio = from a in _context.CatTipoServicios
                                 where a.IdEstatusRegistro == 1
@@ -217,6 +285,8 @@ namespace WebAdmin.Controllers
                 TempData["fUC"] = fUsuariosCent.ToList();
                 ViewBag.ListaUsuariosCentros = TempData["fUC"];
             }
+            else
+            {
             var fUsuariosCentros = from a in _context.TblAlumnos
                                    where a.IdEstatusRegistro == 1
                                    select new
@@ -226,7 +296,7 @@ namespace WebAdmin.Controllers
                                    };
             TempData["fUC"] = fUsuariosCentros.ToList();
             ViewBag.ListaUsuariosCentros = TempData["fUC"];
-
+            }
             return View();
         }
 

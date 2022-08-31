@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-
     $.ajax({
         type: "GET",
         url: "/TblUsuarios/FiltroUsuario/",
@@ -15,8 +14,7 @@
                 $('#i_consulta_n').removeAttr('hidden');
                 $('#i_resumen_n').removeAttr('hidden');           
             }
-            else {
-                
+            else {              
                 if (list[0].idPerfil == 3 && list[0].idRol == 2 && list[0].idCorpCent == 2) {               
                     $('#i_centro_n').removeAttr('hidden');
                 }
@@ -31,8 +29,7 @@
                 }
             }
         },
-        error: function () {
-            
+        error: function () {      
         }
     });
 

@@ -108,7 +108,6 @@ namespace WebAdmin.Controllers
             if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
             {
                 var fPrestamoCntro = from a in _context.TblPrestamos
-                                     join b in _context.TblUsuarios on a.IdCentroPrestamo equals b.IdUsuario
                                      join c in _context.CatTipoPrestamos on a.IdTipoPrestamo equals c.IdTipoPrestamo
                                      join d in _context.CatPeriodosAmortizaciones on a.IdPeriodoAmortiza equals d.IdPeriodoAmortiza
                                      join e in _context.CatTipoFormaPagos on a.IdTipoFormaPago equals e.IdTipoFormaPago
@@ -116,9 +115,8 @@ namespace WebAdmin.Controllers
                                      select new TblPrestamo
                                      {
                                          IdPrestamo = a.IdPrestamo,
-                                         PrestamoDesc = a.PrestamoDesc,
-                                         CantidadPrestamo = a.CantidadPrestamo,
                                          TipoPrestamoDesc = c.TipoPrestamoDesc,
+                                         CantidadPrestamo = a.CantidadPrestamo,
                                          PeriodoAmortizaDesc = d.PeriodoAmortizaDesc,
                                          TipoFormaPagoDesc = e.TipoFormaPagoDesc,
                                          IdUCorporativoCentro = a.IdUCorporativoCentro,
@@ -129,18 +127,16 @@ namespace WebAdmin.Controllers
             }
 
             var fPrestamo = from a in _context.TblPrestamos
-                            join b in _context.TblUsuarios on a.IdCentroPrestamo equals b.IdUsuario
                             join c in _context.CatTipoPrestamos on a.IdTipoPrestamo equals c.IdTipoPrestamo
                             join d in _context.CatPeriodosAmortizaciones on a.IdPeriodoAmortiza equals d.IdPeriodoAmortiza
                             join e in _context.CatTipoFormaPagos on a.IdTipoFormaPago equals e.IdTipoFormaPago
                             select new TblPrestamo
                             {
                                 IdPrestamo = a.IdPrestamo,
-                                PrestamoDesc = a.PrestamoDesc,
+                                TipoFormaPagoDesc = e.TipoFormaPagoDesc,
                                 CantidadPrestamo = a.CantidadPrestamo,
                                 TipoPrestamoDesc = c.TipoPrestamoDesc,
                                 PeriodoAmortizaDesc = d.PeriodoAmortizaDesc,
-                                TipoFormaPagoDesc = e.TipoFormaPagoDesc,
                                 IdUCorporativoCentro = a.IdUCorporativoCentro,
                                 FechaRegistro = a.FechaRegistro,
                                 IdEstatusRegistro = a.IdEstatusRegistro
@@ -241,7 +237,8 @@ namespace WebAdmin.Controllers
                 var fuser = _userService.GetUserId();
                 var isLoggedIn = _userService.IsAuthenticated();
                 var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-                fCentroCorporativo = fIdUsuario.IdCorporativo;
+                var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
+                fCentroCorporativo = fCorp.IdCorporativo;
                 fCorpCent = 1;
                 if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                 {
@@ -249,14 +246,14 @@ namespace WebAdmin.Controllers
                     fCentroCorporativo = fIdCentro.IdCentro;
                     fCorpCent = 2;
                 }
-                TblPrestamo.IdCentroPrestamo = !string.IsNullOrEmpty(TblPrestamo.IdCentroPrestamo.ToString()) ? Guid.Empty : TblPrestamo.IdCentroPrestamo;
+                TblPrestamo.IdCorpCent = fCorpCent;
+                TblPrestamo.IdUCorporativoCentro = fCentroCorporativo;
+
                 TblPrestamo.Nombres = !string.IsNullOrEmpty(TblPrestamo.Nombres) ? TblPrestamo.Nombres.ToUpper().Trim() : TblPrestamo.Nombres;
                 TblPrestamo.ApellidoPaterno = !string.IsNullOrEmpty(TblPrestamo.ApellidoPaterno) ? TblPrestamo.ApellidoPaterno.ToUpper().Trim() : TblPrestamo.ApellidoPaterno;
                 TblPrestamo.ApellidoMaterno = !string.IsNullOrEmpty(TblPrestamo.ApellidoMaterno) ? TblPrestamo.ApellidoMaterno.ToUpper().Trim() : TblPrestamo.ApellidoMaterno;
                 TblPrestamo.curp = !string.IsNullOrEmpty(TblPrestamo.curp) ? TblPrestamo.curp.ToUpper().Trim() : TblPrestamo.curp;
                 TblPrestamo.ine = !string.IsNullOrEmpty(TblPrestamo.ine) ? TblPrestamo.ine.ToUpper().Trim() : TblPrestamo.ine;
-                TblPrestamo.IdCorpCent = fCorpCent;
-                TblPrestamo.IdUCorporativoCentro = fCentroCorporativo;
                 TblPrestamo.IdUsuarioModifico = Guid.Parse(fuser);
                 TblPrestamo.PrestamoDesc = !string.IsNullOrEmpty(TblPrestamo.PrestamoDesc) ? TblPrestamo.PrestamoDesc.ToUpper().Trim() : TblPrestamo.PrestamoDesc;
                 TblPrestamo.FechaRegistro = DateTime.Now;
@@ -275,21 +272,35 @@ namespace WebAdmin.Controllers
         // GET: TblPrestamos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
-            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaCatEstatus = ListaCatEstatus;
+           List<CatTipoPrestamo> ListaCatTipoPrestamo = new List<CatTipoPrestamo>();
+            ListaCatTipoPrestamo = (from c in _context.CatTipoPrestamos select c).Distinct().ToList();
+            ViewBag.ListaCatTipoPrestamo = ListaCatTipoPrestamo;
 
-            var fuser = _userService.GetUserId();
-            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
-            var fUsuariosCentros = from a in _context.TblUsuarios
-                                   where a.IdCorporativo == fIdCentro.IdCentro
-                                   select new
-                                   {
-                                       IdUsuario = a.IdUsuario,
-                                       NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
-                                   };
-            TempData["Mpps"] = fUsuariosCentros.ToList();
-            ViewBag.ListaUsuariosCentros = TempData["Mpps"];
+            List<CatPeriodoAmortiza> ListaCatPeriodoAmortiza = new List<CatPeriodoAmortiza>();
+            ListaCatPeriodoAmortiza = (from c in _context.CatPeriodosAmortizaciones select c).Distinct().ToList();
+            ViewBag.ListaCatPeriodoAmortiza = ListaCatPeriodoAmortiza;
+
+            List<CatTipoFormaPago> ListaCatTipoFormaPago = new List<CatTipoFormaPago>();
+            ListaCatTipoFormaPago = (from c in _context.CatTipoFormaPagos select c).Distinct().ToList();
+            ViewBag.ListaCatTipoFormaPago = ListaCatTipoFormaPago;
+
+            var fCent = from a in _context.TblCentros
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCentro,
+                            CentroDesc = a.NombreCentro
+                        };
+            var fCorp = from a in _context.TblCorporativos
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCorporativo,
+                            CentroDesc = a.NombreCorporativo
+                        };
+            var sCorpCent = fCorp.Union(fCent);
+            TempData["fTS"] = sCorpCent.ToList();
+            ViewBag.ListaCorpCent = TempData["fTS"];
 
             if (id == null)
             {

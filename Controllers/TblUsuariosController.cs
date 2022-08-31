@@ -104,8 +104,22 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            
-            TempData["l_centros"] = _context.TblCentros.Where(f => f.IdEstatusRegistro == 1);
+            var fCent = from a in _context.TblCentros
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCentro,
+                            CentroDesc = a.NombreCentro
+                        };
+            var fCorp = from a in _context.TblCorporativos
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCorporativo,
+                            CentroDesc = a.NombreCorporativo
+                        };
+            var sCorpCent = fCorp.Union(fCent);
+            TempData["l_centros"] = sCorpCent.ToList();
             ViewBag.ListaCorpCent = TempData["l_centros"];
 
             var fuser = _userService.GetUserId();
@@ -319,15 +333,12 @@ namespace WebAdmin.Controllers
                 var isLoggedIn = _userService.IsAuthenticated();
                 var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
 
-                if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
                 {
-                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
-                    fCentroCorporativo = fIdCentro.IdCentro;
                     fCorpCent = 2;
                     tblUsuario.IdCorpCent = fCorpCent;
-                    tblUsuario.IdCorporativo = fCentroCorporativo;
                 }
-                if (fIdUsuario.IdArea == 1 && fIdUsuario.IdPerfil == 1 && fIdUsuario.IdRol == 2 && tblUsuario.IdCorpCent == 1)
+                if (tblUsuario.IdArea == 1 && tblUsuario.IdPerfil == 1 && tblUsuario.IdRol == 2)
                 {
                     var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
                     fCentroCorporativo = fCorp.IdCorporativo;

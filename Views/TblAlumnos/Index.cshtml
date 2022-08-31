@@ -35,7 +35,9 @@
 <table class="table" id="tblAlumnos">
     <thead>
         <tr>
-
+<th style="text-align:center" hidden>
+                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+            </th>
             <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.TipoAlumnoDesc)
             </th>
@@ -61,6 +63,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                   <td style="text-align:center" hidden>
+                    @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
+                </td>
                 <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.TipoAlumnoDesc)
                 </td>
@@ -98,7 +103,9 @@
         }
     </tbody>
      <tfoot>
-        <tr>
+        <tr> <th style="text-align:center" hidden>
+                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+            </th>
              <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.TipoAlumnoDesc)
             </th>
@@ -136,7 +143,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             var input, filter, table, tr, td, i;
             input = document.getElementById("drpCorpCent");
             filter = input.value.toUpperCase();
-            table = document.getElementById("tblSuministros");
+            table = document.getElementById("tblAlumnos");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[0];

@@ -1,12 +1,11 @@
-﻿@model WebAdmin.Models.CatArea
-
+﻿@model WebAdmin.Models.CatTipoVenta
 
 @{
-    ViewData["Title"] = "Editar Área";
+    ViewData["Title"] = "Editar Estatus";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
  <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Área</h4>
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Tipo de Venta</h4>
                 <!-- Basic with Icons -->
                 <div class="col-xxl">
                   <div class="card mb-4">
@@ -14,11 +13,11 @@
                       
                     </div>
                     <div class="card-body">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdArea" id="IdEstatus" />
-<div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname" asp-for="AreaDesc" ></label>
+                       <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdTipoVenta"/>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname" asp-for="TipoVentaDesc" ></label>
                           <div class="col-sm-3">
                             <div class="input-group input-group-merge">
                               <span id="basic-icon-default-fullname2" class="input-group-text"
@@ -32,7 +31,7 @@
                                 placeholder="Requerido"
                                 aria-label="John Doe"
                                 aria-describedby="basic-icon-default-fullname2"
-                                asp-for="AreaDesc"
+                                asp-for="TipoVentaDesc"
                                 required
                                 oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
                               />
@@ -57,7 +56,7 @@
                              <input  type="submit" value="Actualizar" class="btn btn-warning" />
                 <a asp-action="Index" class="btn btn-secondary">Regresar</a>
 
-</div>
+                          </div>
                         </div>
                       </form>
                     </div>
@@ -68,4 +67,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-

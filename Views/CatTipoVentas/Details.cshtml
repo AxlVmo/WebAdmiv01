@@ -1,20 +1,20 @@
-﻿@model WebAdmin.Models.CatArea
+﻿@model WebAdmin.Models.CatTipoVenta
 
 @{
-    ViewData["Title"] = "Detalles Área";
+    ViewData["Title"] = "Detalles Tipo Venta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Área</h4>
+<div class="container-xxl flex-grow-1 container-p-Rol">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Tipo de Venta</h4>
     <div class="col-xxl">
         <div class="card mb-4">
             <div class="card-body">
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AreaDesc)
+            @Html.DisplayNameFor(model => model.TipoVentaDesc)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AreaDesc)
+            @Html.DisplayFor(model => model.TipoVentaDesc)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)

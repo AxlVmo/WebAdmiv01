@@ -17,10 +17,16 @@ namespace WebAdmin.Models
         [Display(Name = "Descuento")]
         public int CantidadPago { get; set; }
 
-        [Display(Name = "ID Cotización")]
-        public Guid IdVenta { get; set; }
+         [Display(Name = "Descuento")]
+        public int CantidadAbono { get; set; }
 
-        [Display(Name = "Usuario")]
+        [Display(Name = "Descuento %")]
+        public int Descuento { get; set; }
+
+        [Display(Name = "Total Precio Producto")]
+        public double Total { get; set; }
+
+        [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
         [Display(Name = "Fecha Registro")]
@@ -30,5 +36,7 @@ namespace WebAdmin.Models
         [Display(Name = "Estatus")]
         
         public int IdEstatusRegistro { get; set; }
+
+        public Guid IdVenta { get; set; }
     }
 }

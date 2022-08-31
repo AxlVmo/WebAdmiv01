@@ -14,57 +14,72 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="card-body">
                 <div class="card-body">
                     <div class="row">
-                        <div class="mb-3 col-md-4">
+                        <div class="mb-3 col-md-3">
+                            <label for="TblVentas.IdTipoVenta" class="form-label" asp-for="TblVentas.IdTipoVenta"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-check-shield"></i></span>
+                                    <select id="lIdTipoVenta" class="form-select" required asp-for="TblVentas.IdTipoVenta" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoVenta,"IdTipoVenta","TipoVentaDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
                             <label for="TblVentas.IdCliente" class="form-label" asp-for="TblVentas.IdCliente"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="bx bx-check-shield"></i></span>
-                                    <select id="IdCliente" class="form-select" required asp-for="TblVentas.IdCliente"
+                                    <select id="IdCliente" class="form-select" required asp-for="TblVentas.IdCliente" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                                         asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+                        <div class="mb-3 col-md-2">
+                            <label  class="form-label"> Descuento</label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input id="iDescuento" style="text-transform:uppercase" type="number" class="form-control" id="" min="0" max="100" value="0"
+                                     aria-label="John Doe" aria-describedby="2"  />
+                            </div>
+                   </div>    
+                     </div>
+                      <div class="row">
                         <div class="mb-3 col-md-4">
-                            <label  class="form-label" asp-for="@Model.RelVentaProductos[0].Categoria"></label>
+                            <label  class="form-label" asp-for="@Model.RelVentaProductos[0].TipoServicio"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="bx bx-check-shield"></i></span>
-                                    <select id="l_tipo_servicios" class="form-select" 
+                                    <select id="l_tipo_servicios" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                                         asp-items="@(new SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                     <div class="mb-3 col-md-4">
-                            <label  class="form-label" asp-for="@Model.RelVentaProductos[0].Producto"></label>
+                      <div class="mb-3 col-md-4">
+                            <label  class="form-label" asp-for="@Model.RelVentaProductos[0].Servicio"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="bx bx-check-shield"></i></span>
-                                    <select id="l_servicios" class="form-select" required asp-for="@Model.RelVentaProductos[0].Producto">
+                                    <select id="l_servicios" class="form-select" required asp-for="@Model.RelVentaProductos[0].Servicio" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required>
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
-                    <div class="row">
-                          <div class="mb-3 col-md-2">
-                            <label  class="form-label" asp-for="TblVentas.RelVentaProductos[0].Descuento"></label>
-                            <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input id="iDescuento" style="text-transform:uppercase" type="number" class="form-control" id="" min="0" max="100" value="0"
-                                     aria-label="John Doe" aria-describedby="2" 
-                                    asp-for="TblVentas.RelVentaProductos[0].Descuento" />
-                            </div>
-                        </div>
+                      
                    
-                    </div>
+                   
                     <div class="row">
                             <div class="col-12">
                                 <!-- Main content -->
@@ -77,10 +92,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                                     <thead>
                                                         </th>
                                                         <th style="text-align:center">
-                                                            CATEGORIA
+                                                            TIPO SERVICIO
                                                         </th>
                                                         <th style="text-align:center">
-                                                            PRODUCTO
+                                                            SERVICIO
                                                         </th>
                                                         <th style="text-align:center">
                                                             TOTAL
@@ -114,25 +129,25 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                             <div class="row no-print">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
-                                                        <select id="lTipoPago" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="TblVentas.IdTipoPago"
+                                                        <label  class="control-label">TIPO PAGO</label>
+                                                        <select id="lTipoPago" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                                                             asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
                                                             <option value="">SELECCIONAR</option>
                                                         </select>
-                                                        <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
                                                     </div>
                                                     <div class="form-group" id="lCodigoPago" hidden>
-                                                        <label asp-for="TblVentas.CodigoPago" class="control-label"></label>
-                                                        <input id="iCodigoPago" asp-for="TblVentas.CodigoPago"
-                                                            class="form-control" />
-                                                        <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
+                                                        <label  class="control-label">CODIGO PAGO</label>
+                                                        <input id="iCodigoPago"  class="form-control" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required/>
+                                                    </div>
+                                                     <div class="form-group" id="lCantidadAbono" hidden>
+                                                        <label  class="control-label">ABONO</label>
+                                                        <input id="iCantidadAbono"  class="form-control" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required/>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group" id="lFechaAlterna">
-                                                        <label asp-for="TblVentas.FechaAlterna" class="control-label"></label>
-                                                        <input type="date" id="iFechaAlterna" asp-for="TblVentas.FechaAlterna"
-                                                            class="form-control" />
+                                                        <label  class="control-label">FECHA ALTERNA</label>
+                                                        <input type="date" id="iFechaAlterna"  class="form-control" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,12 +176,20 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                                 </table>
                                             </div>
                     </div>
-                            <div class="form-group">
-                               <button class="btn btn-success" id="btnTerminar">Guardar</button>
+                            
+                              
+                                     
+                    </div>
+
+                      <div class="row">
+                       
+                        <div class="col-sm-10">
+                             <br>
+                             <button class="btn btn-success" id="btnTerminar">Guardar</button>
                                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                                         <button class="btn btn-success" id="btnTerminar2"
                                             onclick="GetClientReport()">Imprimir</button>
-                            </div>             <!-- /.col -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -225,6 +248,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             }
         });
     });
+    
     $('#lTipoPago').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
@@ -234,6 +258,17 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         }
         else {
             document.getElementById("lCodigoPago").setAttribute("hidden", true);
+        }
+    });
+    $('#lIdTipoVenta').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        if (SelectedText == 'DIFERIDA') {
+            $('#lCantidadAbono').removeAttr('hidden');
+        }
+        else {
+            document.getElementById("lCantidadAbono").setAttribute("hidden", true);
         }
     });
     $('#l_servicios').change(function () {
@@ -284,8 +319,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
             RelVenta_Productos.push(
                 {
-                    Categoria: $(tr).find('td:eq(0)').text(),
-                    Producto: $(tr).find('td:eq(1)').text(),
+                    TipoServicio: $(tr).find('td:eq(0)').text(),
+                    Servicio: $(tr).find('td:eq(1)').text(),
                     TotalPrecio: $(tr).find('td:eq(2)').text(),
                     Precio: $(tr).find('td:eq(3)').text(),
                     Descuento: $(tr).find('td:eq(4)').text()
@@ -298,7 +333,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         var oCompraVM = {
             TblVentas: {
                 IdCliente: $("#IdCliente").val(),
-                IdTipoPago: $("#IdTipoPago").val(),
+                IdTipoPago: $("#lTipoPago").val(),
             },
             RelVentaProductos: RelVenta_Productos
         }

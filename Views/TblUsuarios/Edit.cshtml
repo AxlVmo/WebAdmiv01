@@ -219,7 +219,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-6">
+                        <div class="mb-3 col-md-2">
+                            <label for="UsuarioRemuneracion" class="form-label" asp-for="UsuarioRemuneracion"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input type="numeric" class="form-control" id=""
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required
+                                    asp-for="UsuarioRemuneracion" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-4">
                             <label for="Calle" class="form-label" asp-for="Calle"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>

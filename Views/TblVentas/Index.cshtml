@@ -31,20 +31,21 @@
         </h5>
         <div class="table-responsive text-nowrap">
             <div class="row">
-<table class="table">
+<table class="table"  id="tblVentas">
     <thead>
         <tr>
+              <th style="text-align:center" hidden>
+                                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+                            </th>
+                           <th>
+                @Html.DisplayNameFor(model => model.CentroDesc)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.NumeroVenta)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NombreCompletoAlumno)
-            </th>
-
-
-            <th>
-                @Html.DisplayNameFor(model => model.CentroDesc)
-            </th>
+            </th>       
             <th>
                 @Html.DisplayNameFor(model => model.FechaRegistro)
             </th>
@@ -57,14 +58,17 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+             <td style="text-align:center" hidden>
+                                    @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
+                                </td>
+                         <td>
+                @Html.DisplayFor(modelItem => item.CentroDesc)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumeroVenta)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NombreCompletoAlumno)
-            </td>
-             <td>
-                @Html.DisplayFor(modelItem => item.CentroDesc)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaRegistro)
@@ -88,8 +92,137 @@
             </tr>
 }
     </tbody>
+     <tfoot>
+                        <tr>
+                            <th style="text-align:center" hidden>
+                                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.CentroDesc)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.NumeroVenta)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.NombreCompletoAlumno)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.FechaRegistro)
+                            </th>
+
+                        </tr>
+                    </tfoot>
 </table>
             </div>
         </div>
     </div>
 </div>
+@section Scripts {
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#drpCorpCent').change(function () {
+            var SelectedText = $('option:selected', this).text();
+            var SelectedValue = $('option:selected', this).val();
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("drpCorpCent");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("tblVentas");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+
+        });
+
+        $('#tblVentas').DataTable(
+            {
+                initComplete: function () {
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            var column = this;
+                            var select = $('<select class="form-select">SELECCIONAR<option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+
+                            column
+                                .data()
+                                .unique()
+                                .sort()
+                                .each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>');
+                                });
+                        });
+                },
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            }
+        );
+
+        var vEstatusFlag = '@ViewBag.EstatusFlag'
+        var vEmpresaFlag = '@ViewBag.EmpresaFlag'
+        var vCorporativoFlag = '@ViewBag.CorporativoFlag'
+        var vCentrosFlag = '@ViewBag.CentrosFlag'
+        var vUsuariosFlag = '@ViewBag.UsuariosFlag'
+
+        if (vEstatusFlag == 0) {
+            document.getElementById("iNuevo").style.visibility = "hidden";
+        }
+        else {
+            if (vEmpresaFlag == 0) {
+                document.getElementById("iNuevo").style.visibility = "hidden";
+            }
+            else {
+                if (vCorporativoFlag == 0) {
+                    document.getElementById("iNuevo").style.visibility = "hidden";
+                }
+                else {
+                    if (vCentrosFlag == 0) {
+                        document.getElementById("iNuevo").style.visibility = "hidden";
+                    }
+                    else {
+                        if (vUsuariosFlag == 0) {
+                            document.getElementById("iNuevo").style.visibility = "hidden";
+                        }
+                        else {
+                            document.getElementById("iNuevo").style.visibility = "visible";
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+}
