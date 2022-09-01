@@ -3,7 +3,77 @@
 @{
 ViewData["Title"] = "Create";
 Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/css/site.css" />
 }
+<style>
+.invoice-box {
+				max-width: 800px;
+				margin: auto;
+				padding: 5px;
+				border: 1px solid #eee;
+				
+				font-size: 14px;
+				line-height: 15px;
+				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+				color: #555;
+			}
+
+			.invoice-box table {
+				width: 100%;
+				line-height: inherit;
+				text-align: left;
+				border-collapse: collapse;
+			}
+
+			.invoice-box table td {
+				padding: 10px;
+				vertical-align: top;
+			}
+
+			.invoice-box table tr td:nth-child(2) {
+				text-align: right;
+			}
+
+			.invoice-box table tr.top table td {
+				padding-bottom: 10px;
+			}
+
+			.invoice-box table tr.top table td.title {
+				font-size: 45px;
+				line-height: 20px;
+				color: #333;
+			}
+
+			.invoice-box table tr.information table td {
+				padding-bottom: 10px;
+			}
+
+			.invoice-box table tr.heading td {
+				background: #eee;
+				border-bottom: 1px solid #ddd;
+				font-weight: bold;
+			}
+
+			.invoice-box table tr.details td {
+				padding-bottom: 10px;
+			}
+
+			.invoice-box table tr.item td {
+				border-bottom: 1px solid #eee;
+			}
+
+			.invoice-box table tr.item.last td {
+				border-bottom: none;
+			}
+
+			.invoice-box table tr.total td:nth-child(2) {
+				border-top: 2px solid #eee;
+				font-weight: bold;
+			}
+
+
+</style>
+
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Usuario</h4>
     <!-- Basic with Icons -->
@@ -12,201 +82,411 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="card-header d-flex align-items-center justify-content-between">
             </div>
             <div class="card-body">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="mb-3 col-md-3">
-                            <label for="TblVentas.IdTipoVenta" class="form-label" asp-for="TblVentas.IdTipoVenta"></label>
+                <div class="row">
+                    <div class="mb-3 col-md-3">
+                        <label for="TblVentas.IdTipoVenta" class="form-label" asp-for="TblVentas.IdTipoVenta"></label>
+                        <div class="input-group input-group-merge">
                             <div class="input-group input-group-merge">
-                                <div class="input-group input-group-merge">
-                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="bx bx-check-shield"></i></span>
-                                    <select id="lIdTipoVenta" class="form-select" required asp-for="TblVentas.IdTipoVenta" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoVenta,"IdTipoVenta","TipoVentaDesc"))">
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
-                                </div>
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                        class="bx bx-check-shield"></i></span>
+                                <select id="lIdTipoVenta" class="form-select" required asp-for="TblVentas.IdTipoVenta"
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" required
+                                    asp-items="@(new SelectList(ViewBag.ListaTipoVenta,"IdTipoVenta","TipoVentaDesc"))">
+                                    <option value="">SELECCIONAR</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-6">
-                            <label for="TblVentas.IdCliente" class="form-label" asp-for="TblVentas.IdCliente"></label>
-                            <div class="input-group input-group-merge">
-                                <div class="input-group input-group-merge">
-                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="bx bx-check-shield"></i></span>
-                                    <select id="IdCliente" class="form-select" required asp-for="TblVentas.IdCliente" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                                        asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3 col-md-2">
-                            <label  class="form-label"> Descuento</label>
-                            <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input id="iDescuento" style="text-transform:uppercase" type="number" class="form-control" id="" min="0" max="100" value="0"
-                                     aria-label="John Doe" aria-describedby="2"  />
-                            </div>
-                   </div>    
-                     </div>
-                      <div class="row">
-                        <div class="mb-3 col-md-4">
-                            <label  class="form-label" asp-for="@Model.RelVentaProductos[0].TipoServicio"></label>
-                            <div class="input-group input-group-merge">
-                                <div class="input-group input-group-merge">
-                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="bx bx-check-shield"></i></span>
-                                    <select id="l_tipo_servicios" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                      <div class="mb-3 col-md-4">
-                            <label  class="form-label" asp-for="@Model.RelVentaProductos[0].Servicio"></label>
-                            <div class="input-group input-group-merge">
-                                <div class="input-group input-group-merge">
-                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="bx bx-check-shield"></i></span>
-                                    <select id="l_servicios" class="form-select" required asp-for="@Model.RelVentaProductos[0].Servicio" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required>
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </div>
-                      
-                   
-                   
-                    <div class="row">
-                            <div class="col-12">
-                                <!-- Main content -->
-                                <div class="invoice p-3 mb-3">
-                                    <!-- Table row -->
-                                    <div class="row">
-                                        <div class="col-12 table-responsive">
-                                            <table class="table" id="tbProducto">
-                                                <tbody>
-                                                    <thead>
-                                                        </th>
-                                                        <th style="text-align:center">
-                                                            TIPO SERVICIO
-                                                        </th>
-                                                        <th style="text-align:center">
-                                                            SERVICIO
-                                                        </th>
-                                                        <th style="text-align:center">
-                                                            TOTAL
-                                                        </th>
-                                                        <th style="text-align:center">
-                                                            PRECIO
-                                                        </th>
-                                                        <th style="text-align:center">
-                                                            DESCUENTO
-                                                        </th>
-                                                        <th style="text-align:center">ACCIONES</th>
-                                                    </thead>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
+                    <div class="mb-3 col-md-6">
+                        <label for="TblVentas.IdCliente" class="form-label" asp-for="TblVentas.IdCliente"></label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                        class="bx bx-check-shield"></i></span>
+                                <select id="IdCliente" class="form-select" required asp-for="TblVentas.IdCliente"
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" required
+                                    asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                                    <option value="">SELECCIONAR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-2">
+                        <label class="form-label"> Descuento</label>
+                        <div class="input-group input-group-merge">
+                            <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                            <input id="iDescuento" style="text-transform:uppercase" type="number" class="form-control"
+                                id="" min="0" max="100" value="0" aria-label="John Doe" aria-describedby="2" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label class="form-label" asp-for="@Model.RelVentaProductos[0].TipoServicio"></label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                        class="bx bx-check-shield"></i></span>
+                                <select id="l_tipo_servicios" class="form-select"
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" required
+                                    asp-items="@(new SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
+                                    <option value="">SELECCIONAR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label class="form-label" asp-for="@Model.RelVentaProductos[0].Servicio"></label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                        class="bx bx-check-shield"></i></span>
+                                <select id="l_servicios" class="form-select" required
+                                    asp-for="@Model.RelVentaProductos[0].Servicio"
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" required>
+                                    <option value="">SELECCIONAR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Main content -->
+                        <div class="invoice p-3 mb-3">
+                            <!-- Table row -->
+                            <div class="row">
+                                <div class="col-12 table-responsive">
+                                    <table class="table" id="tbProducto">
+                                        <tbody>
+                                            <thead>
+                                                </th>
+                                                <th style="text-align:center">
+                                                    TIPO SERVICIO
+                                                </th>
+                                                <th style="text-align:center">
+                                                    SERVICIO
+                                                </th>
+                                                <th style="text-align:center">
+                                                    TOTAL
+                                                </th>
+                                                <th style="text-align:center">
+                                                    PRECIO
+                                                </th>
+                                                <th style="text-align:center">
+                                                    DESCUENTO
+                                                </th>
+                                                <th style="text-align:center">ACCIONES</th>
+                                            </thead>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                            <!-- /.row -->
+                            <!-- this row will not appear when printing -->
+                        </div>
+                        <!-- /.invoice -->
+                    </div><!-- /.col -->
+                </div>
+                <div class="row">
+                    <!-- accepted payments column -->
+                    <div class="col-6">
+                        <div class="row no-print">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">TIPO PAGO</label>
+                                    <select id="lTipoPago" class="form-select"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="lCodigoPago" hidden>
+                                    <label class="control-label">CODIGO PAGO</label>
+                                    <input id="iCodigoPago" class="form-control"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required />
+                                </div>
+                                <div class="form-group" id="lCantidadAbono" hidden>
+                                    <label class="control-label">ABONO</label>
+                                    <input id="iCantidadAbono" class="form-control"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" id="lFechaAlterna">
+                                    <label class="control-label">FECHA ALTERNA</label>
+                                    <input type="date" id="iFechaAlterna" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-6">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th style="width:50%">Subtotal:</th>
+                                    <td>$0.00</td>
+                                </tr>
+                                <tr>
+                                    <th>IVA (16 %)</th>
+                                    <td>$0.00</td>
+                                </tr>
+                                <tr>
+                                    <th>Shipping:</th>
+                                    <td>$0.00</td>
+                                </tr>
+                                <tr>
+                                    <th>Total:</th>
+                                    <td>$0.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10">
+                        <br>
+                        <button class="btn btn-success" id="btnTerminar">Guardar</button>
+                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                        <button class="btn btn-info" id="btnPrint">Imprimir</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
+                        <table>
+                            <tr class="top">
+                                <td colspan="2">
+                                    <table>
+                                        <tr>
+                                            <td class="title">
+                                                <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
+                                                    style="width: 128px; max-width: 128px" />
+                                            </td>
 
-                                   
-                                    <!-- /.row -->
-                                    <!-- this row will not appear when printing -->
-                                
-                                </div>
-                                <!-- /.invoice -->
-                            </div><!-- /.col -->
-                        </div>
-                    <div class="row">
-                                        <!-- accepted payments column -->
-                                        <div class="col-6">
-                                            <div class="row no-print">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label  class="control-label">TIPO PAGO</label>
-                                                        <select id="lTipoPago" class="form-select" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                                                            asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
-                                                            <option value="">SELECCIONAR</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group" id="lCodigoPago" hidden>
-                                                        <label  class="control-label">CODIGO PAGO</label>
-                                                        <input id="iCodigoPago"  class="form-control" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required/>
-                                                    </div>
-                                                     <div class="form-group" id="lCantidadAbono" hidden>
-                                                        <label  class="control-label">ABONO</label>
-                                                        <input id="iCantidadAbono"  class="form-control" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required/>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group" id="lFechaAlterna">
-                                                        <label  class="control-label">FECHA ALTERNA</label>
-                                                        <input type="date" id="iFechaAlterna"  class="form-control" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        
-                                        </div>
-                                        <!-- /.col -->
-                                        <div class="col-6">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <tr>
-                                                        <th style="width:50%">Subtotal:</th>
-                                                        <td>$0.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>IVA (16 %)</th>
-                                                        <td>$0.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Shipping:</th>
-                                                        <td>$0.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Total:</th>
-                                                        <td>$0.00</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                    </div>
-                            
-                              
-                                     
-                    </div>
+                                            <td>
+                                                <label id="l_NumVenta"></label><br />
+                                                <label id="l_FechaCreacionVenta"></label><br />
+                                                <label id="l_FechaAlternaVenta"></label><br />
+                                                <label id="l_UsuarioVenta"></label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
 
-                      <div class="row">
+                            <tr class="information">
+                                <td colspan="2">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <label id="l_CentroVenta"></label><br />
+                                                <label id="l_DatosCentroVenta"></label><br />
+                                                <label id="l_DatosCentroVentaAlt"></label><br />
+                                            </td>
+
+                                            <td>
+                                                <label id="l_ClienteVenta"></label><br />
+                                                <label id="l_DatosClienteVenta"></label><br />
+                                                <label id="l_DatosClienteVentaAlt"></label><br />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr class="heading">
+                                <td>Metodo de Pago</td>
+
+                                <td>Pago #</td>
+                            </tr>
+
+                            <tr class="details">
+                                <td>Efectivo</td>
+
+                                <td>1000</td>
+                            </tr>
+
+                            <tr class="heading">
+                                <td>Total</td>
+
+                                <td>Precio</td>
+                            </tr>
+
+                            <tr class="item">
+                                <td>Test</td>
+
+                                <td>$0.00</td>
+                            </tr>
+
+                            <tr class="item">
+                                <td>Test</td>
+
+                                <td>$0.00</td>
+                            </tr>
+
+                            <tr class="item last">
+                                <td>Test</td>
+
+                                <td>$0.00</td>
+                            </tr>
+
+                            <tr class="total">
+                                <td><p><span class="text-muted fw-light">Intelimundo /</span>
+                            Contabilidad</p></td>
+
+                                <td>Total: $0.00</td>
+                            </tr>
+                        </table>
                        
-                        <div class="col-sm-10">
-                             <br>
-                             <button class="btn btn-success" id="btnTerminar">Guardar</button>
-                                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                                        <button class="btn btn-success" id="btnTerminar2"
-                                            onclick="GetClientReport()">Imprimir</button>
-                        </div>
+                        <table>
+                            <tr class="top">
+                                <td colspan="2">
+                                    <table>
+                                        <tr>
+                                            <td class="title">
+                                                <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
+                                                    style="width: 128px; max-width: 128px" />
+                                            </td>
+                                            <td>
+                                                <label id="l_NumVenta"></label><br />
+                                                <label id="l_FechaCreacionVenta"></label><br />
+                                                <label id="l_FechaAlternaVenta"></label><br />
+                                                <label id="l_UsuarioVenta"></label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr class="information">
+                                <td colspan="2">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <label id="l_CentroVenta"></label><br />
+                                                <label id="l_DatosCentroVenta"></label><br />
+                                                <label id="l_DatosCentroVentaAlt"></label><br />
+                                            </td>
+
+                                            <td>
+                                                <label id="l_ClienteVenta"></label><br />
+                                                <label id="l_DatosClienteVenta"></label><br />
+                                                <label id="l_DatosClienteVentaAlt"></label><br />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr class="heading">
+                                <td>Metodo de Pago</td>
+
+                                <td>Pago #</td>
+                            </tr>
+
+                            <tr class="details">
+                                <td>Efectivo</td>
+
+                                <td>1000</td>
+                            </tr>
+
+                            <tr class="heading">
+                                <td>Total</td>
+
+                                <td>Precio</td>
+                            </tr>
+
+                            <tr class="item">
+                                <td>Test</td>
+
+                                <td>$0.00</td>
+                            </tr>
+
+                            <tr class="item">
+                                <td>Test</td>
+
+                                <td>$0.00</td>
+                            </tr>
+
+                            <tr class="item last">
+                                <td>Test</td>
+
+                                <td>$0.00</td>
+                            </tr>
+
+                            <tr class="total">
+                                <td><p><span class="text-muted fw-light">Intelimundo /</span>
+                            Cliente</p></td>
+
+                                <td>Total: $0.00</td>
+                            </tr>
+                        </table>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-    @section Scripts {
-    @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    <script>
-      $('#IdCliente').select2({
+@section Scripts {
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script>
+    $(document).ready(function () {
+
+         $.ajax({
+            type: "GET",
+            url: "/TblVentas/NuevaVenta/",
+            data: {  },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        document.getElementById('l_NumVenta').innerHTML = 'Venta: #' + list[i].idVenta;
+                        document.getElementById('l_FechaCreacionVenta').innerHTML = 'Fecha: ' + list[i].fechaRegistro;
+                        document.getElementById('l_FechaAlternaVenta').innerHTML = 'Fecha Alterna: ' ;
+                        document.getElementById('l_UsuarioVenta').innerHTML = 'Usuario: ' + list[i].nombreCompletoUsuario;
+
+                        document.getElementById('l_CentroVenta').innerHTML = 'Centro: ' + list[i].centroDesc;
+                        document.getElementById('l_DatosCentroVenta').innerHTML = 'Datos: ' + list[i].centroDireccion;
+                        document.getElementById('l_DatosCentroVentaAlt').innerHTML = 'Contacto: ' + list[i].centroContacto;
+                        
+                        document.getElementById('l_ClienteVenta').innerHTML = 'Alumno: ';
+                        document.getElementById('l_DatosClienteVenta').innerHTML = 'Datos: ';
+                        document.getElementById('l_DatosClienteVentaAlt').innerHTML = 'Contacto: ';
+                        
+                        
+                    }
+
+                }
+            },
+        });
+
+
+    
+
+});
+    $('#IdCliente').select2({
         theme: "bootstrap-5",
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
         placeholder: $(this).data('placeholder'),
     });
-    $('#l_servicios').select2({
+    $('#l_tipo_servicios').select2({
         theme: "bootstrap-5",
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
         placeholder: $(this).data('placeholder'),
@@ -248,7 +528,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             }
         });
     });
-    
     $('#lTipoPago').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
@@ -358,9 +637,26 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
     })
     function RemoveRow(o) {
-    //no clue what to put here?
-    var p = o.parentNode.parentNode;
-    p.parentNode.removeChild(p);
+        //no clue what to put here?
+        var p = o.parentNode.parentNode;
+        p.parentNode.removeChild(p);
     }
-    </script>
-    }
+    $(document).on("click", "#btnPrint", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $("#invocieContainer").printThis({
+            debug: false, // show the iframe for debugging
+            importCSS: true, // import page CSS
+            importStyle: true, // import style tags
+            printContainer: true, // grab outer container as well as the contents of the selector
+            loadCSS: "/assets/vendor/css/theme-default.css", // path to additional css file - us an array [] for multiple
+            pageTitle: "", // add title to print page
+            removeInline: false, // remove all inline styles from print elements
+            printDelay: 333, // variable print delay; depending on complexity a higher value may be necessary
+            header: null, // prefix to html
+            formValues: true // preserve input/form values
+        });
+
+    });
+</script>
+}

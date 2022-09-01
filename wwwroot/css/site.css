@@ -1,16 +1,11 @@
-@media print {
-    .no-print {
-      visibility: hidden;
-      min-width: 0px;
-        width:-8000px;
-        display: hidden;
-        top: 0%;
-    }
-    
+@page {
+    size: A4;
+    margin: 50px;
   }
-  @media (min-width: 0px) {
-    .sidebar {
-      width: 0px !important;
-      top: 0%;
+  @media print {
+    html, body {
+      width: 210mm;
+      height: 297mm;
     }
+    /* ... the rest of the rules ... */
   }

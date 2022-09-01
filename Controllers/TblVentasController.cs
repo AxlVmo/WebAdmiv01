@@ -149,6 +149,34 @@ namespace WebAdmin.Controllers
             return View(await fVentas.ToListAsync());
         }
 
+        [HttpGet]
+        public ActionResult NuevaVenta()
+        {
+            var fuser = _userService.GetUserId();
+            var nVenta = _context.TblVenta.Count();
+
+            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+
+            if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+            {
+                var nDatosVentaCent = from a in _context.TblUsuarios
+                                      join b in _context.TblCentros on a.IdCorporativo equals b.IdCentro
+                                      select new
+                                      {
+                                          IdVenta = nVenta + 1,
+                                          NombreCompletoUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoPaterno,
+                                          CentroDesc = b.NombreCentro,
+                                          CentroDireccion = b.Calle + " " + b.CodigoPostal + " " + b.Colonia + " " + b.Ciudad + " " + b.LocalidadMunicipio + " " + b.Ciudad + " " + b.Estado,
+                                          CentroContacto = b.CorreoElectronico + ", " + b.Telefono,
+                                          FechaRegistro = DateTime.Today,
+
+                                      };
+                var fDatosVentaCent = nDatosVentaCent.ToList();
+                return Json(fDatosVentaCent);
+            }
+            return Json(false);
+        }
         [HttpPost]
         public IActionResult Index([FromBody] VentasViewModel oVentaVM)
         {
@@ -239,12 +267,12 @@ namespace WebAdmin.Controllers
         public IActionResult Create()
         {
             var fTipoVenta = from a in _context.CatTipoVentas
-                                where a.IdEstatusRegistro == 1
-                                select new CatTipoVenta
-                                {
-                                    IdTipoVenta = a.IdTipoVenta,
-                                    TipoVentaDesc = a.TipoVentaDesc
-                                };
+                             where a.IdEstatusRegistro == 1
+                             select new CatTipoVenta
+                             {
+                                 IdTipoVenta = a.IdTipoVenta,
+                                 TipoVentaDesc = a.TipoVentaDesc
+                             };
             TempData["fTV"] = fTipoVenta.ToList();
             ViewBag.ListaTipoVenta = TempData["fTV"];
 
@@ -287,15 +315,15 @@ namespace WebAdmin.Controllers
             }
             else
             {
-            var fUsuariosCentros = from a in _context.TblAlumnos
-                                   where a.IdEstatusRegistro == 1
-                                   select new
-                                   {
-                                       IdUsuario = a.IdAlumno,
-                                       NombreUsuario = a.NombreAlumno + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno
-                                   };
-            TempData["fUC"] = fUsuariosCentros.ToList();
-            ViewBag.ListaUsuariosCentros = TempData["fUC"];
+                var fUsuariosCentros = from a in _context.TblAlumnos
+                                       where a.IdEstatusRegistro == 1
+                                       select new
+                                       {
+                                           IdUsuario = a.IdAlumno,
+                                           NombreUsuario = a.NombreAlumno + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno
+                                       };
+                TempData["fUC"] = fUsuariosCentros.ToList();
+                ViewBag.ListaUsuariosCentros = TempData["fUC"];
             }
             return View();
         }
@@ -420,9 +448,12 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
+
             var tblVenta = await _context.TblVenta.FindAsync(id);
-            _context.TblVenta.Remove(tblVenta);
+            tblVenta.IdEstatusRegistro = 2;
+            _context.SaveChanges();
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 
