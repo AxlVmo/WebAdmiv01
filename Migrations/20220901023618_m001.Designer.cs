@@ -12,7 +12,7 @@ using WebAdmin.Data;
 namespace WebAdmin.Migrations
 {
     [DbContext(typeof(nDbContext))]
-    [Migration("20220831150348_m001")]
+    [Migration("20220901023618_m001")]
     partial class m001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30978,19 +30978,25 @@ namespace WebAdmin.Migrations
                     b.Property<string>("CodigoPago")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("FechaAlterna")
+                    b.Property<int>("CompraDesc")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("FechaCompra")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("IdCliente")
-                        .HasColumnType("uuid");
+                    b.Property<int>("FolioCompra")
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdCorpCent")
                         .HasColumnType("integer");
 
                     b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdTipoCompra")
                         .HasColumnType("integer");
 
                     b.Property<int>("IdTipoPago")
@@ -30999,13 +31005,16 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUCorporativoCentro")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("IdUsuarioCompra")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("NumeroCompra")
+                    b.Property<double>("MontoPago")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("NombreUsuarioCompra")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProveedorCompra")
                         .HasColumnType("integer");
 
                     b.Property<double>("Total")
