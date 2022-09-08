@@ -6,7 +6,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <link rel="stylesheet" href="~/css/site.css" />
 }
 <style>
-.invoice-box {
+    .invoice-box {
 				max-width: 800px;
 				margin: auto;
 				padding: 5px;
@@ -172,13 +172,13 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                                     SERVICIO
                                                 </th>
                                                 <th style="text-align:center">
-                                                    TOTAL
+                                                    DESCUENTO
                                                 </th>
                                                 <th style="text-align:center">
                                                     PRECIO
                                                 </th>
                                                 <th style="text-align:center">
-                                                    DESCUENTO
+                                                    TOTAL
                                                 </th>
                                                 <th style="text-align:center">ACCIONES</th>
                                             </thead>
@@ -233,21 +233,17 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                     <div class="col-6">
                         <div class="table-responsive">
                             <table class="table">
-                                <tr>
+                                @* <tr>
                                     <th style="width:50%">Subtotal:</th>
-                                    <td>$0.00</td>
-                                </tr>
-                                <tr>
+                                    <td><label id="l_SubTotalVenta"></label></td>
+                                </tr> *@
+                                @* <tr>
                                     <th>IVA (16 %)</th>
-                                    <td>$0.00</td>
-                                </tr>
-                                <tr>
-                                    <th>Shipping:</th>
-                                    <td>$0.00</td>
-                                </tr>
+                                    <td><label id="l_IvaVenta"></label></td>
+                                </tr> *@
                                 <tr>
                                     <th>Total:</th>
-                                    <td>$0.00</td>
+                                    <td><label id="l_TotalVenta"></label></td>
                                 </tr>
                             </table>
                         </div>
@@ -263,7 +259,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
+                    <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;" hidden>
                         <table>
                             <tr class="top">
                                 <td colspan="2">
@@ -273,7 +269,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                                 <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
                                                     style="width: 128px; max-width: 128px" />
                                             </td>
-
                                             <td>
                                                 <label id="l_NumVenta"></label><br />
                                                 <label id="l_FechaCreacionVenta"></label><br />
@@ -284,7 +279,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                     </table>
                                 </td>
                             </tr>
-
                             <tr class="information">
                                 <td colspan="2">
                                     <table>
@@ -342,13 +336,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             </tr>
 
                             <tr class="total">
-                                <td><p><span class="text-muted fw-light">Intelimundo /</span>
-                            Contabilidad</p></td>
-
+                                <td><p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p></td>
                                 <td>Total: $0.00</td>
                             </tr>
                         </table>
-                       
                         <table>
                             <tr class="top">
                                 <td colspan="2">
@@ -432,7 +423,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                 <td>Total: $0.00</td>
                             </tr>
                         </table>
-                        
                     </div>
                 </div>
             </div>
@@ -470,17 +460,14 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         document.getElementById('l_DatosClienteVenta').innerHTML = 'Datos: ';
                         document.getElementById('l_DatosClienteVentaAlt').innerHTML = 'Contacto: ';
                         
-                        
                     }
 
                 }
             },
         });
-
-
-    
-
-});
+        
+      
+    });
     $('#IdCliente').select2({
         theme: "bootstrap-5",
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
@@ -570,21 +557,44 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         var f_precio = list[i].totalPrecioServicio;
                         var _desc = parseFloat($("#iDescuento").val())
                         var _prec = parseFloat(f_precio)
-                        var _tprecio = _prec - (100 * (_desc / 100))
+                        var _tprecio = _prec - ((_prec * _desc) / 100)
+
+                        
 
                         $("#tbProducto tbody").append(
                             $("<tr>").append(
                                 $("<td style='text-align:center'>").text(f_tipo_servicio),
                                 $("<td style='text-align:center'>").text(f_servicio),
-                                $("<td style='text-align:center'>").text(_tprecio),
-                                $("<td style='text-align:center'>").text(_prec),
                                 $("<td style='text-align:center'>").text(_desc),
+                                $("<td style='text-align:center'>").text(_prec),
+                                $("<td style='text-align:center'>").text(_tprecio),
                                 $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
                         )
                     }
+
+                    //Defino los totales de mis 2 columnas en 0
+                    var total_col1 = 0;
+                    var total_col2 = 0;
+                    //Recorro todos los tr ubicados en el tbody
+                    $('#tbProducto tbody').find('tr').each(function (i, el) {
+
+                    //Voy incrementando las variables segun la fila ( .eq(0) representa la fila 1 )     
+                    total_col1 += parseFloat($(this).find('td').eq(4).text());
+                    total_col2 += parseFloat($(this).find('td').eq(1).text());
+
+                    document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
+                    });
+                    //Muestro el resultado en el th correspondiente a la columna
+                    //$('#ejemplo tfoot tr th').eq(4).text("Total " + total_col1);
+                    //$('#ejemplo tfoot tr th').eq(1).text("Total " + total_col2);
+   
                     var $lista_servicios = $('#l_servicios');
                     $("#l_servicios").empty();
                     $lista_servicios.append('<option value="">SELECCIONAR</option>');
+
+                    var $l_tipo_servicios = $('#l_tipo_servicios');
+                    $("#l_tipo_servicios").empty();
+                    $l_tipo_servicios.append('<option value="">SELECCIONAR</option>');
                 }
             },
         });
@@ -642,6 +652,8 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         p.parentNode.removeChild(p);
     }
     $(document).on("click", "#btnPrint", function(e) {
+        
+          $('#invocieContainer').removeAttr('hidden');
         e.preventDefault();
         e.stopPropagation();
         $("#invocieContainer").printThis({
@@ -657,6 +669,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             formValues: true // preserve input/form values
         });
 
+document.getElementById("invocieContainer").setAttribute("hidden", true);
     });
 </script>
 }

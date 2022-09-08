@@ -31,17 +31,75 @@ namespace WebAdmin.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
-            // var fNominaTotales = from a in _context.TblSuministros
-            //                      where a.IdEstatusRegistro == 1
-            //                      select new
-            //                      {
-            //                          fRegistros = _context.TblNominas.Where(a => a.IdEstatusRegistro == 1).Count(),
-            //                          fMontos = _context.TblNominas.Where(p => p.IdUCorporativoCentro == fIdCentro.IdCentro).Select(i => Convert.ToDouble(i.UsuarioRemuneracion)).Sum()
-            //                      };
-            // var sResumen = fSuministrosTotales.Union(fNominaTotales);
+            var ValidaEstatus = _context.CatEstatus.ToList();
+
+            if (ValidaEstatus.Count == 2)
+            {
+                ViewBag.EstatusFlag = 1;
+                var ValidaEmpresa = _context.TblEmpresas.ToList();
+
+                if (ValidaEmpresa.Count == 1)
+                {
+                    ViewBag.EmpresaFlag = 1;
+                    var ValidaCorporativo = _context.TblCorporativos.ToList();
+
+                    if (ValidaCorporativo.Count >= 1)
+                    {
+                        ViewBag.CorporativoFlag = 1;
+                        var ValidaTipoSuministro = _context.CatTipoSuministros.ToList();
+
+                        if (ValidaTipoSuministro.Count >= 1)
+                        {
+                            ViewBag.TipoSuministroFlag = 1;
+                        }
+                        else
+                        {
+                            ViewBag.TipoSuministroFlag = 0;
+                            _notyf.Information("Favor de registrar los datos de Tipo Suministro para la Aplicación", 5);
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.CorporativoFlag = 0;
+                        _notyf.Information("Favor de registrar los datos de Corporativo para la Aplicación", 5);
+                    }
+                }
+                else
+                {
+                    ViewBag.EmpresaFlag = 0;
+                    _notyf.Information("Favor de registrar los datos de la Empresa para la Aplicación", 5);
+                }
+            }
+            else
+            {
+                ViewBag.EstatusFlag = 0;
+                _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
+            }
+
+            var fCent = from a in _context.TblCentros
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCentro,
+                            CentroDesc = a.NombreCentro
+                        };
+            var fCorp = from a in _context.TblCorporativos
+                        where a.IdEstatusRegistro == 1
+                        select new
+                        {
+                            IdCentro = a.IdCorporativo,
+                            CentroDesc = a.NombreCorporativo
+                        };
+            var sCorpCent = fCorp.Union(fCent);
+            TempData["fTS"] = sCorpCent.ToList();
+            ViewBag.ListaCorpCent = TempData["fTS"];
+
+            var fuser = _userService.GetUserId();
+            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
             return View();
         }

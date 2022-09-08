@@ -169,7 +169,7 @@ namespace WebAdmin.Controllers
                                           CentroDesc = b.NombreCentro,
                                           CentroDireccion = b.Calle + " " + b.CodigoPostal + " " + b.Colonia + " " + b.Ciudad + " " + b.LocalidadMunicipio + " " + b.Ciudad + " " + b.Estado,
                                           CentroContacto = b.CorreoElectronico + ", " + b.Telefono,
-                                          FechaRegistro = DateTime.Today,
+                                          FechaRegistro = DateTime.Today.ToShortDateString(),
 
                                       };
                 var fDatosVentaCent = nDatosVentaCent.ToList();
