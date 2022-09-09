@@ -151,20 +151,20 @@ namespace WebAdmin.Controllers
             return View(await fNomina.ToListAsync());
         }
         [HttpGet]
-        public ActionResult DatosResumen()
+        public ActionResult DatosNominas()
         {
             var fuser = _userService.GetUserId();
             var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
             var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
-            var fNominasTotales = from a in _context.TblNominas
+            var fTotales = from a in _context.TblNominas
                                   where a.IdEstatusRegistro == 1
                                   select new
                                   {
                                       fRegistros = _context.TblNominas.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
                                       fMontos = _context.TblNominas.Where(a => a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.UsuarioRemuneracion)).Sum()
                                   };
-            return Json(fNominasTotales);
+            return Json(fTotales);
         }
         // public IActionResult ImprimirNomina(int IdNomina)
         // {

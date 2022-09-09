@@ -106,6 +106,33 @@ namespace WebAdmin.Controllers
             return View(await fAlumno.ToListAsync());
         }
         [HttpGet]
+        public ActionResult DatosAlumnos()
+        {
+
+            var fuser = _userService.GetUserId();
+            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+
+            var fTotalesA = from a in _context.TblAlumnos
+                           where a.IdEstatusRegistro == 1 && a.IdTipoAlumno == 1
+                           select new
+                           {
+                               fRegistros = _context.TblAlumnos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
+                               fTipo = a.IdTipoAlumno
+                           };
+
+            var fTotalesD = from a in _context.TblAlumnos
+                           where a.IdEstatusRegistro == 1 && a.IdTipoAlumno == 2
+                           select new
+                           {
+                               fRegistros = _context.TblAlumnos.Where(a => a.IdEstatusRegistro == 2 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
+                               fTipo = a.IdTipoAlumno
+                           };
+            
+            var fTotales = fTotalesA.Union(fTotalesD);
+            return Json(fTotales);
+        }
+        [HttpGet]
         public ActionResult FiltroAlumno(Guid id)
         {
             var fAlumno = (from a in _context.TblAlumnos

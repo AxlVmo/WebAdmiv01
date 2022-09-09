@@ -148,7 +148,38 @@ namespace WebAdmin.Controllers
 
             return View(await fVentas.ToListAsync());
         }
+        [HttpGet]
+        public ActionResult DatosVentas()
+        {
+            var fuser = _userService.GetUserId();
+            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
+            var totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == fIdCentro.IdCentro)
+                .Join(_context.RelVentaProducto.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
+                .ToList().Sum(x => x.Quantity);
+
+            //   var totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == fIdCentro.IdCentro)
+            //     .Join(_context.RelCompraProductos.Where(x => x.PurchaseDate >= firstDay && x.PurchaseDate < lastDay), pl => pl.PurchaseId, p => p.PurchaseId, (pl, p) => new { Quantity = pl.Quantity })
+            //     .ToList().Sum(x => x.Quantity);
+            // return totalQuantity;
+            // var fVentas = _context.TblVenta
+            //                 .Where(rr => rr.IdUCorporativoCentro == fIdCentro.IdCentro)
+            //                 .SelectMany(rr => rr.RelVentaProductos)
+            //                 .GroupBy(ri => ri.TotalPrecio)
+            //                 .Select(g => new {
+            //                 Quantity = g.Sum(ri => ri.TotalPrecio)
+            //                 });
+
+            var fTotales = from a in _context.TblVenta
+                           where a.IdEstatusRegistro == 1
+                           select new
+                           {
+                               fRegistros = _context.TblVenta.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
+                               fMontos = Convert.ToDouble(totalQuantity)
+                           };
+            return Json(fTotales);
+        }
         [HttpGet]
         public ActionResult NuevaVenta()
         {

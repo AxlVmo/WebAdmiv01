@@ -144,7 +144,22 @@ namespace WebAdmin.Controllers
 
             return View(await fPrestamo.ToListAsync());
         }
+        [HttpGet]
+        public ActionResult DatosPrestamos()
+        {
+            var fuser = _userService.GetUserId();
+            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
+            var fTotales = from a in _context.TblPrestamos
+                                  where a.IdEstatusRegistro == 1
+                                  select new
+                                  {
+                                      fRegistros = _context.TblPrestamos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
+                                      fMontos = _context.TblPrestamos.Where(a => a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CantidadPrestamo)).Sum()
+                                  };
+            return Json(fTotales);
+        }
         // GET: TblPrestamos/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -252,14 +252,42 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="row">
                     <div class="col-sm-10">
                         <br>
-                        <button class="btn btn-success" id="btnTerminar">Guardar</button>
+                         <a class="btn btn-success" href="#" data-bs-toggle="modal"
+                          data-bs-target="#modalToggle">
+                        <span>Guardar</span>
+                      </a>
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                         <button class="btn btn-info" id="btnPrint">Imprimir</button>
                     </div>
                 </div>
                 <hr>
-                <div class="row">
-                    <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;" hidden>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div
+class="modal fade"
+id="modalToggle"
+aria-labelledby="modalToggleLabel"
+tabindex="-1"
+style="display: none"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-xl">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="modalToggleLabel">La venta se ha registrado con exito ¿deseas imprimir la nota de venta?</h5>
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal"
+aria-label="Close"
+></button>
+</div>
+<div class="modal-body">
+    <div class="row">
+                    <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
                         <table>
                             <tr class="top">
                                 <td colspan="2">
@@ -425,9 +453,15 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+</div>
+<div class="modal-footer">
+<form class="form-inline">
+<button type="submit" class="btn btn-danger">Cerrar sesión</button>
+
+</form>                             
+</div>
+</div>
+</div>
 </div>
 @section Scripts {
 @{
@@ -653,7 +687,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     $(document).on("click", "#btnPrint", function(e) {
         
-          $('#invocieContainer').removeAttr('hidden');
         e.preventDefault();
         e.stopPropagation();
         $("#invocieContainer").printThis({
@@ -669,7 +702,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             formValues: true // preserve input/form values
         });
 
-document.getElementById("invocieContainer").setAttribute("hidden", true);
     });
 </script>
 }

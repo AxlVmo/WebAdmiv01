@@ -158,7 +158,32 @@ namespace WebAdmin.Controllers
                            };
             return View(await UsuarioF.ToListAsync());
         }
+ [HttpGet]
+        public ActionResult DatosUsuarios()
+        {
 
+            var fuser = _userService.GetUserId();
+            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+
+            var fTotalesA = from a in _context.TblUsuarios
+                           where a.IdEstatusRegistro == 1
+                           select new
+                           {
+                               fRegistros = _context.TblUsuarios.Where(a => a.IdEstatusRegistro == 1 && a.IdCorporativo == fIdCentro.IdCentro).Count(),
+                               fTipo = "ACTIVO"
+                           };
+
+            var fTotalesD = from a in _context.TblUsuarios
+                           where a.IdEstatusRegistro == 2
+                           select new
+                           {
+                               fRegistros = _context.TblUsuarios.Where(a => a.IdEstatusRegistro == 2 && a.IdCorporativo == fIdCentro.IdCentro).Count(),
+                               fTipo = "DESACTIVO"
+                           };
+            var fTotales = fTotalesA.Union(fTotalesD);
+            return Json(fTotales);
+        }
         // GET: TblUsuarios/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
