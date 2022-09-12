@@ -86,6 +86,14 @@ namespace WebAdmin.Controllers
             return View(await CentroF.ToListAsync());
         }
         [HttpGet]
+        public ActionResult fDatosCentro()
+        {
+            var fuser = _userService.GetUserId();
+            var tblUsuario = _context.TblUsuarios.First(f => f.IdUsuario == Guid.Parse(fuser));
+            var fIdCentro = _context.TblCentros.First(c => c.IdUsuarioControl == Guid.Parse(fuser) && c.IdEstatusRegistro == 1);
+            return Json(fIdCentro);
+        }
+        [HttpGet]
         public ActionResult DatosPresupuesto()
         {
 

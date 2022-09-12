@@ -158,7 +158,20 @@ namespace WebAdmin.Controllers
                            };
             return View(await UsuarioF.ToListAsync());
         }
- [HttpGet]
+         [HttpGet]
+        public ActionResult fDatosUsuario()
+        {
+            var fuser = _userService.GetUserId();
+            var fUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+            return Json(fUsuario);
+        }
+             [HttpGet]
+        public ActionResult sDatosUsuario(Guid id)
+        {
+            var fUsuario = _context.TblUsuarios.First(m => m.IdUsuario == id);
+            return Json(fUsuario);
+        }
+        [HttpGet]
         public ActionResult DatosUsuarios()
         {
 

@@ -1,360 +1,505 @@
 ﻿@model WebAdmin.Models.TblNomina
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewData["Title"] = "Create";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
     .invoice-box {
-				max-width: 800px;
-				margin: auto;
-				padding: 5px;
-				border: 1px solid #eee;
-				
-				font-size: 14px;
-				line-height: 15px;
-				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-				color: #555;
-			}
+        max-width: 800px;
+        border: 1px solid #eee;
+        font-size: 14px;
+        line-height: 15px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
 
-			.invoice-box table {
-				width: 100%;
-				line-height: inherit;
-				text-align: left;
-				border-collapse: collapse;
-			}
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+        border-collapse: collapse;
+    }
 
-			.invoice-box table td {
-				padding: 10px;
-				vertical-align: top;
-			}
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+    }
 
-			.invoice-box table tr td:nth-child(2) {
-				text-align: right;
-			}
+    .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+    }
 
-			.invoice-box table tr.top table td {
-				padding-bottom: 10px;
-			}
+    .invoice-box table tr.top table td {
+        padding-bottom: 5px;
+    }
 
-			.invoice-box table tr.top table td.title {
-				font-size: 45px;
-				line-height: 20px;
-				color: #333;
-			}
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 10px;
+        color: #333;
+    }
 
-			.invoice-box table tr.information table td {
-				padding-bottom: 10px;
-			}
+    .invoice-box table tr.information table td {
+        padding-bottom: 2px;
+    }
 
-			.invoice-box table tr.heading td {
-				background: #eee;
-				border-bottom: 1px solid #ddd;
-				font-weight: bold;
-			}
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+    }
 
-			.invoice-box table tr.details td {
-				padding-bottom: 10px;
-			}
+    .invoice-box table tr.details td {
+        padding-bottom: 10px;
+    }
 
-			.invoice-box table tr.item td {
-				border-bottom: 1px solid #eee;
-			}
+    .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+    }
 
-			.invoice-box table tr.item.last td {
-				border-bottom: none;
-			}
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
 
-			.invoice-box table tr.total td:nth-child(2) {
-				border-top: 2px solid #eee;
-				font-weight: bold;
-			}
-
-
+    .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+    }
 </style>
 <div class="container-xxl flex-grow-1 container-p-y">
-  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Nómina</h4>
-  <!-- Basic with Icons -->
-  <div class="col-xxl">
-    <div class="card mb-8">
-      <div class="card-header d-flex align-items-center justify-content-between">
-      </div>
-      <div class="card-body">
-        <form asp-action="Create">
-        <div class="card-body">
-            <div class="row">
-                <div class="mb-3 col-md-3">
-                    <label for="IdUsuarioRemuneracion" class="form-label" asp-for="IdUsuarioRemuneracion"></label>
-                    <div class="input-group input-group-merge">
-                        <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                    class="bx bx-check-shield"></i></span>
-                            <select id="IdUsuarioRemuneracion" class="form-select" required asp-for="IdUsuarioRemuneracion"
-                                oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
-                                required
-                                asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
-                                <option value="">SELECCIONAR</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3 col-md-3">
-                    <label for="NominaDesc" class="form-label" asp-for="NominaDesc"></label>
-                    <div class="input-group input-group-merge">
-                        <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                        <input style="text-transform:uppercase" type="text" class="form-control" id="NominaDesc" asp-for="NominaDesc"
-                            placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                            oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required />
-                    </div>
-                </div>
-                <div class="mb-3 col-md-2">
-                    <label for="UsuarioRemuneracion" class="form-label" asp-for="UsuarioRemuneracion"></label>
-                    <div class="input-group input-group-merge">
-                        <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                        <input style="text-transform:uppercase" type="text" class="form-control" id="UsuarioRemuneracion"
-                            placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                            oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                            asp-for="UsuarioRemuneracion" />
-                    </div>
-                </div>
-                <div class="mb-3 col-md-2">
-                    <label for="IdTipoPago" class="form-label" asp-for="IdTipoPago"></label>
-                    <div class="input-group input-group-merge">
-                        <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                    class="bx bx-check-shield"></i></span>
-                            <select id="lTipoPago" class="form-select" required asp-for="IdTipoPago"
-                                oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
-                                required asp-items="@(new SelectList(ViewBag.ListaTipopago,"IdTipoPago","TipoPagoDesc"))">
-                                <option value="">SELECCIONAR</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3 col-md-2" id="lCodigoPago" hidden>
-                    <label for="CodigoPago" class="form-label" asp-for="CodigoPago"></label>
-                    <div class="input-group input-group-merge">
-                        <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                        <input style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPago"
-                            placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                            oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                            asp-for="CodigoPago" />
-                    </div>
-                </div>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Nómina</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+            <div class="card-header d-flex align-items-center justify-content-between">
             </div>
-            <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-success" />
-                <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                <a  class="btn btn-outline-secondary"
-                    title="Imprimir" id="btnPrint"><i class="fa-solid fa-print" style="font-size: 1em; color: #67C5C4 ;"></i></a>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <input type="hidden" asp-for="FolioNomina" id="i_FolioNomina" />
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label for="IdUsuarioRemuneracion" class="form-label"
+                                    asp-for="IdUsuarioRemuneracion"></label>
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                class="fa-solid fa-exclamation"></i></span>
+                                        <select id="IdUsuarioRemuneracion" class="form-select" required
+                                            asp-for="IdUsuarioRemuneracion"
+                                            oninvalid="this.setCustomValidity('Campo Requerido')"
+                                            onchange="this.setCustomValidity('')" required
+                                            asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                                            <option value="">SELECCIONAR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="NominaDesc" class="form-label" asp-for="NominaDesc"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
+                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                        id="NominaDesc" asp-for="NominaDesc" placeholder="Requerido"
+                                        aria-label="John Doe" aria-describedby="2"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-md-3">
+                                <label for="UsuarioRemuneracion" class="form-label"
+                                    asp-for="UsuarioRemuneracion"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
+                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                        id="UsuarioRemuneracion" placeholder="Requerido" aria-label="John Doe"
+                                        aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required asp-for="UsuarioRemuneracion"
+                                        value="0" />
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label for="IdTipoPago" class="form-label" asp-for="IdTipoPago"></label>
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                class="fa-solid fa-exclamation"></i></span>
+                                        <select id="lTipoPago" class="form-select" required asp-for="IdTipoPago"
+                                            oninvalid="this.setCustomValidity('Campo Requerido')"
+                                            onchange="this.setCustomValidity('')" disabled
+                                            asp-items="@(new SelectList(ViewBag.ListaTipopago,"IdTipoPago","TipoPagoDesc"))">
+                                            <option value="">SELECCIONAR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-3" id="lCodigoPago" hidden>
+                                <label for="CodigoPago" class="form-label" asp-for="CodigoPago"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
+                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                        id="iCodigoPago" placeholder="Requerido" aria-label="John Doe"
+                                        aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required asp-for="CodigoPago" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Crear" class="btn btn-success" />
+                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                            <button type="submit" class="btn btn-info" title="Imprimir" id="btnPrint" hidden><i
+                                    class="fa-solid fa-print" style="font-size: 1em; color: #ffff ;"></i>Imprimir</button>
+                        </div>
+                    </div>
+                   
+                </form>
             </div>
         </div>
-        </form>
-      </div>
     </div>
-  </div>
 </div>
-<div
-class="modal fade"
-id="modalToggle"
-aria-labelledby="modalToggleLabel"
-tabindex="-1"
-style="display: none"
-aria-hidden="true"
->
-<div class="modal-dialog modal-xl">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="modalToggleLabel">La venta se ha registrado con exito ¿deseas imprimir la nota de venta?</h5>
-<button
-type="button"
-class="btn-close"
-data-bs-dismiss="modal"
-aria-label="Close"
-></button>
-</div>
-<div class="modal-body">
-    <div class="row">
-                    <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
-                        <table>
-                            <tr class="top">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td class="title">
-                                                <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
-                                                    style="width: 128px; max-width: 128px" />
-                                            </td>
-                                            <td>
-                                                <label id="l_NumVenta"></label><br />
-                                                <label id="l_FechaCreacionVenta"></label><br />
-                                                <label id="l_FechaAlternaVenta"></label><br />
-                                                <label id="l_UsuarioVenta"></label>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr class="information">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label id="l_CentroVenta"></label><br />
-                                                <label id="l_DatosCentroVenta"></label><br />
-                                                <label id="l_DatosCentroVentaAlt"></label><br />
-                                            </td>
+<div class="modal fade" id="modalNomina" aria-labelledby="modalNominaLabel" tabindex="-1" style="display: none"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNominaLabel">La venta se ha registrado con exito ¿deseas imprimir la
+                    nota de venta?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="invoice-box" id="invocieContainer">
+                    <table>
+                        <tr class="top">
+                            <td colspan="2">
+                                <table>
+                                    <tr>
+                                        <td class="title">
+                                            <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
+                                                style="width: 128px; max-width: 128px" />
+                                        </td>
+                                        <td>
+                                            <label id="l_NumNomina"></label><br />
+                                            <label id="l_FechaCreacionNomina"></label><br />
+                                            <label id="l_UsuarioNomina"></label>
+                                            <label id="l_UsuarioContactoNomina"></label>
+                                        </td>
 
-                                            <td>
-                                                <label id="l_ClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVentaAlt"></label><br />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="l_CorporativoNomina"></label><br />
+                                            <label id="l_DatosCorporativoNomina"></label><br />
+                                            <label id="l_DatosCorporativoNominaAlt"></label><br />
+                                            <label id="l_DatosCorporativoContactoNomina"></label><br />
+                                        </td>
+                                        <td>
+                                            <label id="l_CentroNomina"></label><br />
+                                            <label id="l_DatosCentroNomina"></label><br />
+                                            <label id="l_DatosCentroNominaAlt"></label><br />
+                                            <label id="l_DatosCentroContactoNomina"></label><br />
+                                        </td>
 
-                            <tr class="heading">
-                                <td>Metodo de Pago</td>
+                                    </tr>
 
-                                <td>Pago #</td>
-                            </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="information">
+                            <td colspan="2">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label id="l_ClienteNomina"></label><br />
+                                            <label id="l_DatosClienteNomina"></label><br />
+                                            <label id="l_DatosClienteNominaAlt"></label><br />
+                                        </td>
 
-                            <tr class="details">
-                                <td>Efectivo</td>
+                                        <td>
 
-                                <td>1000</td>
-                            </tr>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
 
-                            <tr class="heading">
-                                <td>Total</td>
+                        <tr class="heading">
+                            <td>Metodo de Pago</td>
 
-                                <td>Precio</td>
-                            </tr>
+                            <td>Pago #</td>
+                        </tr>
 
-                            <tr class="item">
-                                <td>Test</td>
+                        <tr class="details">
+                            <td><label id="l_TipoPago">Tipo Pago</label></td>
 
-                                <td>$0.00</td>
-                            </tr>
+                            <td><label id="l_UsuarioRemuneracion">0</label></td>
+                        </tr>
+                        <tr class="">
+                            <td></td>
 
-                            <tr class="item">
-                                <td>Test</td>
+                            <td></td>
+                        </tr>
 
-                                <td>$0.00</td>
-                            </tr>
+                        <tr class="">
+                            <td></td>
 
-                            <tr class="item last">
-                                <td>Test</td>
+                            <td></td>
+                        </tr>
 
-                                <td>$0.00</td>
-                            </tr>
+                        <tr class="">
+                            <td></td>
 
-                            <tr class="total">
-                                <td><p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p></td>
-                                <td>Total: $0.00</td>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr class="top">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td class="title">
-                                                <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
-                                                    style="width: 128px; max-width: 128px" />
-                                            </td>
-                                            <td>
-                                                <label id="l_NumVenta"></label><br />
-                                                <label id="l_FechaCreacionVenta"></label><br />
-                                                <label id="l_FechaAlternaVenta"></label><br />
-                                                <label id="l_UsuarioVenta"></label>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+                            <td></td>
+                        </tr>
+                        <tr class="total">
+                            <td>Periodo Comprendido del 26-08-2022 al 10-09-2022</td>
+                            <td>Recursos Humanos</td>
+                        </tr>
+                        <tr class="">
+                            <td></td>
 
-                            <tr class="information">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label id="l_CentroVenta"></label><br />
-                                                <label id="l_DatosCentroVenta"></label><br />
-                                                <label id="l_DatosCentroVentaAlt"></label><br />
-                                            </td>
+                            <td></td>
+                        </tr>
 
-                                            <td>
-                                                <label id="l_ClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVentaAlt"></label><br />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+                        <tr class="">
+                            <td></td>
 
-                            <tr class="heading">
-                                <td>Metodo de Pago</td>
+                            <td></td>
+                        </tr>
 
-                                <td>Pago #</td>
-                            </tr>
+                        <tr class="">
+                            <td></td>
 
-                            <tr class="details">
-                                <td>Efectivo</td>
+                            <td></td>
+                        </tr>
+                        <tr class="total">
+                            <td>
+                                <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
+                            </td>
+                            <td><label id="f_ClienteNomina"></label></td>
+                        </tr>
 
-                                <td>1000</td>
-                            </tr>
+                    </table>
+                    <hr />
+                    <table>
+                        <tr class="top">
+                            <td colspan="2">
+                                <table>
+                                    <tr>
+                                        <td class="title">
+                                            <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
+                                                style="width: 128px; max-width: 128px" />
+                                        </td>
+                                        <td>
+                                            <label id="dl_NumNomina"></label><br />
+                                            <label id="dl_FechaCreacionNomina"></label><br />
+                                            <label id="dl_UsuarioNomina"></label>
+                                            <label id="dl_UsuarioContactoNomina"></label>
+                                        </td>
 
-                            <tr class="heading">
-                                <td>Total</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="dl_CorporativoNomina"></label><br />
+                                            <label id="dl_DatosCorporativoNomina"></label><br />
+                                            <label id="dl_DatosCorporativoNominaAlt"></label><br />
+                                            <label id="dl_DatosCorporativoContactoNomina"></label><br />
+                                        </td>
+                                        <td>
+                                            <label id="dl_CentroNomina"></label><br />
+                                            <label id="dl_DatosCentroNomina"></label><br />
+                                            <label id="dl_DatosCentroNominaAlt"></label><br />
+                                            <label id="dl_DatosCentroContactoNomina"></label><br />
+                                        </td>
 
-                                <td>Precio</td>
-                            </tr>
+                                    </tr>
 
-                            <tr class="item">
-                                <td>Test</td>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="information">
+                            <td colspan="2">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label id="dl_ClienteNomina"></label><br />
+                                            <label id="dl_DatosClienteNomina"></label><br />
+                                            <label id="dl_DatosClienteNominaAlt"></label><br />
+                                        </td>
 
-                                <td>$0.00</td>
-                            </tr>
+                                        <td>
 
-                            <tr class="item">
-                                <td>Test</td>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
 
-                                <td>$0.00</td>
-                            </tr>
+                        <tr class="heading">
+                            <td>Metodo de Pago</td>
 
-                            <tr class="item last">
-                                <td>Test</td>
+                            <td>Pago #</td>
+                        </tr>
 
-                                <td>$0.00</td>
-                            </tr>
+                        <tr class="details">
+                            <td><label id="dl_TipoPago">Tipo Pago</label></td>
 
-                            <tr class="total">
-                                <td><p><span class="text-muted fw-light">Intelimundo /</span>
-                            Cliente</p></td>
+                            <td><label id="dl_UsuarioRemuneracion">0</label></td>
+                        </tr>
+                        <tr class="">
+                            <td></td>
 
-                                <td>Total: $0.00</td>
-                            </tr>
-                        </table>
-                    </div>
+                            <td></td>
+                        </tr>
+
+                        <tr class="">
+                            <td></td>
+
+                            <td></td>
+                        </tr>
+
+                        <tr class="">
+                            <td></td>
+
+                            <td></td>
+                        </tr>
+                        <tr class="total">
+                            <td>Periodo Comprendido del 26-08-2022 al 10-09-2022</td>
+                            <td>Recursos Humanos</td>
+                        </tr>
+                        <tr class="">
+                            <td></td>
+
+                            <td></td>
+                        </tr>
+
+                        <tr class="">
+                            <td></td>
+
+                            <td></td>
+                        </tr>
+
+                        <tr class="">
+                            <td></td>
+
+                            <td></td>
+                        </tr>
+                        <tr class="total">
+                            <td>
+                                <p><span class="text-muted fw-light">Intelimundo /</span>Colaborador</p>
+                            </td>
+                            <td><label id="df_ClienteNomina"></label></td>
+                        </tr>
+
+                    </table>
                 </div>
-</div>
-<div class="modal-footer">
-<form class="form-inline">
-<button type="submit" class="btn btn-danger">Cerrar sesión</button>
 
-</form>                             
-</div>
-</div>
-</div>
+
+            </div>
+            <div class="modal-footer">
+                <form class="form-inline">
+                    <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
-    $(document).on("click", "#btnPrint", function(e) {
-        
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+    })
+    $(document).ready(function () {
+
+        const d1 = new Date();
+        const GeneraFolio = d1.getTime();
+        document.getElementById("i_FolioNomina").value = "iN-" + GeneraFolio;
+
+        $.ajax({
+            type: "GET",
+            url: "/TblCorporativoes/fDatosCorporativo/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_NumNomina').innerHTML = '# Nómina: ' + "iN-" + GeneraFolio;
+                    document.getElementById('dl_NumNomina').innerHTML = '# Nómina: ' + "iN-" + GeneraFolio;
+
+                    const dateObject = new Date(list.fechaRegistro);
+                    var month = dateObject.getMonth();
+                    var dateOfMonth = dateObject.getDate();
+                    var year = dateObject.getFullYear();
+                    var formattedDate = dateOfMonth + "/" + month + "/" + year;
+
+                    document.getElementById('l_FechaCreacionNomina').innerHTML = 'Fecha: ' + formattedDate;
+
+                    document.getElementById('l_CorporativoNomina').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
+                    document.getElementById('l_DatosCorporativoNomina').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('l_DatosCorporativoNominaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('l_DatosCorporativoContactoNomina').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+
+                    document.getElementById('dl_FechaCreacionNomina').innerHTML = 'Fecha: ' + formattedDate;
+
+                    document.getElementById('dl_CorporativoNomina').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
+                    document.getElementById('dl_DatosCorporativoNomina').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('dl_DatosCorporativoNominaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('dl_DatosCorporativoContactoNomina').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+                }
+            },
+
+        });
+        $.ajax({
+            type: "GET",
+            url: "/TblCentros/fDatosCentro/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_CentroNomina').innerHTML = 'Centro: ' + list.nombreCentro;
+                    document.getElementById('l_DatosCentroNomina').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('l_DatosCentroNominaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('l_DatosCentroContactoNomina').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+
+                    document.getElementById('dl_CentroNomina').innerHTML = 'Centro: ' + list.nombreCentro;
+                    document.getElementById('dl_DatosCentroNomina').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('dl_DatosCentroNominaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('dl_DatosCentroContactoNomina').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+                }
+            },
+        });
+        $.ajax({
+            type: "GET",
+            url: "/TblUsuarios/fDatosUsuario/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_UsuarioNomina').innerHTML = 'Usuario: ' + list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+
+                    document.getElementById('dl_UsuarioNomina').innerHTML = 'Usuario: ' + list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+                }
+            },
+        });
+
+
+    });
+    $(document).on("click", "#btnPrint", function (e) {
+        var nFolio = $('#i_FolioNomina').val();
+ 
         e.preventDefault();
         e.stopPropagation();
         $("#invocieContainer").printThis({
@@ -363,18 +508,18 @@ aria-label="Close"
             importStyle: true, // import style tags
             printContainer: true, // grab outer container as well as the contents of the selector
             loadCSS: "/assets/vendor/css/theme-default.css", // path to additional css file - us an array [] for multiple
-            pageTitle: "", // add title to print page
+            pageTitle: "Nómina_" + nFolio, // add title to print page
             removeInline: false, // remove all inline styles from print elements
             printDelay: 333, // variable print delay; depending on complexity a higher value may be necessary
             header: null, // prefix to html
-            formValues: true // preserve input/form values
+            formValues: false // preserve input/form values
         });
 
     });
     $('#IdUsuarioRemuneracion').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
-
+        $('#lTipoPago').removeAttr('disabled');
         $.ajax({
             type: "GET",
             url: "/TblUsuarios/fUsuarioNomina/",
@@ -398,17 +543,67 @@ aria-label="Close"
                 alert("Error!!")
             }
         });
+        $.ajax({
+            type: "GET",
+            url: "/TblUsuarios/sDatosUsuario/",
+            data: { id: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_ClienteNomina').innerHTML = 'Usuario: ' + list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+                    document.getElementById('f_ClienteNomina').innerHTML = list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+                    document.getElementById('l_DatosClienteNomina').innerHTML = 'Contacto: ' + list.correoAcceso + ', Teléfono: ' + list.telefono;
+
+                    document.getElementById('dl_ClienteNomina').innerHTML = 'Usuario: ' + list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+                    document.getElementById('df_ClienteNomina').innerHTML = list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+                    document.getElementById('dl_DatosClienteNomina').innerHTML = 'Contacto: ' + list.correoAcceso + ', Teléfono: ' + list.telefono;
+                }
+            },
+        });
     });
     $('#lTipoPago').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
+        var iUsuarioRemuneracion = $('#UsuarioRemuneracion').val();
+        var iNominaDesc = $('#NominaDesc').val();
+        var iCodigoPago = $('#CodigoPago').val();
 
-        if (SelectedValue != 1) {
-            $('#lCodigoPago').removeAttr('hidden');
+        if (SelectedText == "EFECTIVO") {
+            document.getElementById("lCodigoPago").setAttribute("hidden", true);
+            $('#btnPrint').removeAttr('hidden');
+
+            document.getElementById('l_TipoPago').innerHTML = iNominaDesc + "-" + SelectedText;
+            document.getElementById('l_UsuarioRemuneracion').innerHTML = formatter.format(iUsuarioRemuneracion);
+
+            document.getElementById('dl_TipoPago').innerHTML = iNominaDesc + "-" + SelectedText;
+            document.getElementById('dl_UsuarioRemuneracion').innerHTML = formatter.format(iUsuarioRemuneracion);
+        }
+        else if ( SelectedText == "SELECCIONAR")
+        {
+            document.getElementById("lCodigoPago").setAttribute("hidden", true);
+            document.getElementById("btnPrint").setAttribute("hidden", true);
+            document.getElementById('l_TipoPago').innerHTML = "Tipo Pago";
+            document.getElementById('l_UsuarioRemuneracion').innerHTML = "0";
+
+            document.getElementById('dl_TipoPago').innerHTML = "Tipo Pago";
+            document.getElementById('dl_UsuarioRemuneracion').innerHTML = "0";
         }
         else {
-            document.getElementById("lCodigoPago").setAttribute("hidden", true);
+            $('#lCodigoPago').removeAttr('hidden');
+            $('#btnPrint').removeAttr('hidden');
+            
+            document.getElementById('l_TipoPago').innerHTML = iNominaDesc + "-" + SelectedText;
+            document.getElementById('l_UsuarioRemuneracion').innerHTML = formatter.format(iUsuarioRemuneracion);
+
+            document.getElementById('dl_TipoPago').innerHTML = iNominaDesc + "-" + SelectedText;
+            document.getElementById('dl_UsuarioRemuneracion').innerHTML = formatter.format(iUsuarioRemuneracion);
+           
         }
     });
+
+
 </script>
 }

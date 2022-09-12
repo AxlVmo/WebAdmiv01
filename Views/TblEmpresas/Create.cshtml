@@ -19,7 +19,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
               <div class="mb-3 col-md-6">
                 <label for="NombreEmpresa" class="form-label" asp-for="NombreEmpresa"></label>
                 <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                  <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id=""
                     placeholder="Requerido" aria-label="John Doe" aria-describedby="2" asp-for="NombreEmpresa"
                     required oninvalid="this.setCustomValidity('Campo Requerido')"
@@ -29,7 +29,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
               <div class="mb-3 col-md-6">
                 <label for="GiroComercial" class="form-label" asp-for="GiroComercial"></label>
                 <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                  
                   <input style="text-transform:uppercase" type="text" class="form-control" id=""
                      aria-label="John Doe" aria-describedby="2" asp-for="GiroComercial" />
                 </div>
@@ -39,18 +39,15 @@ Layout = "~/Views/Shared/_Layout.cshtml";
               <div class="mb-3 col-md-6">
                 <label for="CorreoElectronico" class="form-label" asp-for="CorreoElectronico"></label>
                 <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                  <input  type="email" class="form-control" id=""
-                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico"
-                    required oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')" />
+                  <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
+                  <input  type="email" class="form-control" id="" placeholder="REQUERIDO" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico" required  />
                 </div>
               </div>
               <div class="mb-3 col-md-6">
-                <label for="Telefono" class="form-label" asp-for="Telefono"></label>
+                <label for="Telefono" class="form-label">Teléfono (10 Digitos)</label>
                 <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                  <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                  <span id="2" class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                  <input type="text" class="form-control" id="" placeholder="0000000000"
                      aria-label="John Doe" aria-describedby="2" asp-for="Telefono" />
                 </div>
               </div>
@@ -59,19 +56,19 @@ Layout = "~/Views/Shared/_Layout.cshtml";
               <div class="mb-3 col-md-6">
                 <label for="Calle" class="form-label" asp-for="Calle"></label>
                 <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                  <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                     aria-label="John Doe" aria-describedby="2" asp-for="Calle" />
+                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
+                  <input style="text-transform:uppercase" type="text" class="form-control" id="i_calle"
+                     aria-label="John Doe" aria-describedby="2" asp-for="Calle" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')"/>
                 </div>
               </div>
               <div class="mb-3 col-md-6">
                 <label for="CodigoPostal" class="form-label" asp-for="CodigoPostal"></label>
                 <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                  <input  type="text" class="form-control" id="iCodigoPostal"
+                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
+                  <input style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPostal"
                      aria-label="John Doe" aria-describedby="2" asp-for="CodigoPostal" />
-                  <button class="btn btn-outline-primary" type="button" id="button-addon2"
-                    onclick="filtro_cp()">Button</button>
+                  <button class="btn btn-outline-primary" type="button" id="btnCP">Buscar</button>
                 </div>
               </div>
             </div>
@@ -79,8 +76,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
               <div class="mb-3 col-md-6">
                 <label for="Colonia" class="form-label" asp-for="Colonia"></label>
                 <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                  <select id="drpColonias" class="form-select" asp-for="Colonia">
+                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
+                  <select id="l_colonias" class="form-select" asp-for="Colonia" oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')">
                     <option value="">SELECCIONAR</option>
                   </select>
                 </div>
@@ -88,7 +86,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
               <div class="mb-3 col-md-6">
                 <label for="LocalidadMunicipio" class="form-label" asp-for="LocalidadMunicipio"></label>
                 <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="idLocalidadMunicipio"
                      aria-label="John Doe" aria-describedby="2"
                     asp-for="LocalidadMunicipio" readonly />
@@ -99,7 +97,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
               <div class="mb-3 col-md-6">
                 <label for="Ciudad" class="form-label" asp-for="Ciudad"></label>
                 <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="idCiudad"
                      aria-label="John Doe" aria-describedby="2" asp-for="Ciudad"
                     readonly />
@@ -108,9 +106,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
               <div class="mb-3 col-md-6">
                 <label for="Estado" class="form-label" asp-for="Estado"></label>
                 <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="idEstados"
-                    placeholder=" Campo Requerido" aria-label="John Doe" aria-describedby="2" asp-for="Estado"
+                    aria-label="John Doe" aria-describedby="2" asp-for="Estado"
                     readonly />
                 </div>
               </div>
@@ -127,23 +125,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 </div>
 @section Scripts {
 @{
-
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
-
+}
 <script type="text/javascript">
-  $('input[type="email"]')
-    .on('invalid', function () {
-      return this.setCustomValidity('Ingresa una dirección de correo válida.');
-    })
-    .on('input', function () {
-      return this.setCustomValidity('');
-    });
-  $(document).ready(function () {
-
-  });
-
-  function filtro_cp() {
-
+      $("#btnCP").on("click", function () {
     var valor_cp = document.getElementById("iCodigoPostal").value;
 
     $.ajax({
@@ -153,12 +138,13 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
       contentType: "application/json;charset=utf-8",
       dataType: "json",
       success: function (list) {
-        var $select_colonias = $('#drpColonias');
-        $("#drpColonias").empty();
+        var $select_colonias = $('#l_colonias');
+        $("#l_colonias").empty();
 
         if (list.length == 0) {
           $select_colonias.append('<option value="">SELECCIONAR</option>');
           $select_colonias.attr('required', false);
+          document.getElementById("i_calle").attr('required', false);
           document.getElementById("idLocalidadMunicipio").value = null;
           document.getElementById("idCiudad").value = null;
           document.getElementById("idEstados").value = null;
@@ -166,8 +152,9 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         else {
           $select_colonias.append('<option value="">SELECCIONAR</option>');
           for (var i = 0, len = list.length; i < len; i++) {
-            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta.toUpperCase() + '</option>');
             $select_colonias.attr('required', true);
+            $('#i_calle').prop('required', true);
             document.getElementById("idLocalidadMunicipio").value = list[i].dmnpio;
             document.getElementById("idCiudad").value = list[i].dciudad;
             document.getElementById("idEstados").value = list[i].destado;
@@ -175,40 +162,19 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
       },
       error: function () {
-        alert("Error!!")
       }
     });
-  }
-  function filtro_colonias() {
 
-    var valor_col = document.getElementById("idColonia").value;
-    var $select_colonias = $('#drpColonias');
-
-    $.ajax({
-      type: "GET",
-      url: "/CatCodigosPostales/FiltroColonia/",
-      data: { id: valor_col },
-      contentType: "application/json;charset=utf-8",
-      dataType: "json",
-      success: function (list) {
-
-        if (list.length == 0) {
-          $select_colonias.append('<option value="">SELECCIONAR</option>');
-        }
-        else {
-
-          for (var i = 0, len = list.length; i < len; i++) {
-            $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
-          }
-        }
-      },
-      error: function () {
-        alert("Error!!")
-      }
+    })
+     
+  $('input[type="email"]')
+    .on('invalid', function () {
+      return this.setCustomValidity('Ingresa una dirección de correo válida.');
+    })
+    .on('input', function () {
+      return this.setCustomValidity('');
     });
-  }
-
+  $(document).ready(function () {
+  });
 </script>
-
-}
 }

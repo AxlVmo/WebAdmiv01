@@ -158,12 +158,12 @@ namespace WebAdmin.Controllers
             var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
             var fTotales = from a in _context.TblNominas
-                                  where a.IdEstatusRegistro == 1
-                                  select new
-                                  {
-                                      fRegistros = _context.TblNominas.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
-                                      fMontos = _context.TblNominas.Where(a => a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.UsuarioRemuneracion)).Sum()
-                                  };
+                           where a.IdEstatusRegistro == 1
+                           select new
+                           {
+                               fRegistros = _context.TblNominas.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
+                               fMontos = _context.TblNominas.Where(a => a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.UsuarioRemuneracion)).Sum()
+                           };
             return Json(fTotales);
         }
         // public IActionResult ImprimirNomina(int IdNomina)
@@ -266,7 +266,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoNomina,IdUsuarioRemuneracion,NominaDesc,IdTipoPago,UsuarioRemuneracion,CodigoPago")] TblNomina TblNomina)
+        public async Task<IActionResult> Create([Bind("IdTipoNomina,IdUsuarioRemuneracion,NominaDesc,IdTipoPago,UsuarioRemuneracion,CodigoPago,FolioNomina")] TblNomina TblNomina)
         {
             if (ModelState.IsValid)
             {
@@ -277,16 +277,17 @@ namespace WebAdmin.Controllers
                 var isLoggedIn = _userService.IsAuthenticated();
                 var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
                 var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
-                    fCentroCorporativo = fCorp.IdCorporativo;
-                    fCorpCent = 1;
-                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
-                    {
-                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
-                        fCentroCorporativo = fIdCentro.IdCentro;
-                        fCorpCent = 2;
-                    }
-                    TblNomina.IdCorpCent = fCorpCent;
-                    TblNomina.IdUCorporativoCentro = fCentroCorporativo;
+                fCentroCorporativo = fCorp.IdCorporativo;
+                fCorpCent = 1;
+                if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                {
+                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                    fCentroCorporativo = fIdCentro.IdCentro;
+                    fCorpCent = 2;
+                }
+                TblNomina.FolioNomina = TblNomina.FolioNomina;
+                TblNomina.IdCorpCent = fCorpCent;
+                TblNomina.IdUCorporativoCentro = fCentroCorporativo;
                 TblNomina.IdUsuarioModifico = Guid.Parse(fuser);
                 TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper().Trim();
                 TblNomina.FechaRegistro = DateTime.Now;

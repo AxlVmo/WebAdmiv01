@@ -4,74 +4,72 @@
     ViewData["Title"] = "Ventas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    .invoice-box {
-				max-width: 800px;
-				margin: auto;
-				padding: 5px;
-				border: 1px solid #eee;
-				
-				font-size: 14px;
-				line-height: 15px;
-				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-				color: #555;
-			}
+    <style>
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 5px;
+            border: 1px solid #eee;
 
-			.invoice-box table {
-				width: 100%;
-				line-height: inherit;
-				text-align: left;
-				border-collapse: collapse;
-			}
+            font-size: 14px;
+            line-height: 15px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
 
-			.invoice-box table td {
-				padding: 10px;
-				vertical-align: top;
-			}
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+            border-collapse: collapse;
+        }
 
-			.invoice-box table tr td:nth-child(2) {
-				text-align: right;
-			}
+        .invoice-box table td {
+            padding: 10px;
+            vertical-align: top;
+        }
 
-			.invoice-box table tr.top table td {
-				padding-bottom: 10px;
-			}
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
 
-			.invoice-box table tr.top table td.title {
-				font-size: 45px;
-				line-height: 20px;
-				color: #333;
-			}
+        .invoice-box table tr.top table td {
+            padding-bottom: 10px;
+        }
 
-			.invoice-box table tr.information table td {
-				padding-bottom: 10px;
-			}
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 20px;
+            color: #333;
+        }
 
-			.invoice-box table tr.heading td {
-				background: #eee;
-				border-bottom: 1px solid #ddd;
-				font-weight: bold;
-			}
+        .invoice-box table tr.information table td {
+            padding-bottom: 10px;
+        }
 
-			.invoice-box table tr.details td {
-				padding-bottom: 10px;
-			}
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
 
-			.invoice-box table tr.item td {
-				border-bottom: 1px solid #eee;
-			}
+        .invoice-box table tr.details td {
+            padding-bottom: 10px;
+        }
 
-			.invoice-box table tr.item.last td {
-				border-bottom: none;
-			}
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
 
-			.invoice-box table tr.total td:nth-child(2) {
-				border-top: 2px solid #eee;
-				font-weight: bold;
-			}
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
 
-
-</style>
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+    </style>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Ventas</h4>
     <div class="card">
@@ -189,8 +187,8 @@
 </div>
 <div
 class="modal fade"
-id="modalToggle"
-aria-labelledby="modalToggleLabel"
+id="modalVentas"
+aria-labelledby="VentasLabel"
 tabindex="-1"
 style="display: none"
 aria-hidden="true"
@@ -198,7 +196,8 @@ aria-hidden="true"
 <div class="modal-dialog modal-xl">
 <div class="modal-content">
 <div class="modal-header">
-<h5 class="modal-title" id="modalToggleLabel">La venta se ha registrado con exito ¿deseas imprimir la nota de venta?</h5>
+<h5 class="modal-title" id="VentasleLabel">La venta se ha registrado con exito ¿deseas imprimir la nota de venta?</h5>
+<input type="hidden"  id="i_FolioPrestamo" />
 <button
 type="button"
 class="btn-close"
@@ -208,7 +207,7 @@ aria-label="Close"
 </div>
 <div class="modal-body">
     <div class="row">
-                    <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
+                                         <div class="invoice-box" id="invocieContainer">
                         <table>
                             <tr class="top">
                                 <td colspan="2">
@@ -221,10 +220,27 @@ aria-label="Close"
                                             <td>
                                                 <label id="l_NumVenta"></label><br />
                                                 <label id="l_FechaCreacionVenta"></label><br />
-                                                <label id="l_FechaAlternaVenta"></label><br />
                                                 <label id="l_UsuarioVenta"></label>
+                                                <label id="l_UsuarioContactoVenta"></label>
                                             </td>
+
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <label id="l_CorporativoVenta"></label><br />
+                                                <label id="l_DatosCorporativoVenta"></label><br />
+                                                <label id="l_DatosCorporativoVentaAlt"></label><br />
+                                                <label id="l_DatosCorporativoContactoVenta"></label><br />
+                                            </td>
+                                            <td>
+                                                <label id="l_CentroVenta"></label><br />
+                                                <label id="l_DatosCentroVenta"></label><br />
+                                                <label id="l_DatosCentroVentaAlt"></label><br />
+                                                <label id="l_DatosCentroContactoVenta"></label><br />
+                                            </td>
+
+                                        </tr>
+
                                     </table>
                                 </td>
                             </tr>
@@ -233,15 +249,13 @@ aria-label="Close"
                                     <table>
                                         <tr>
                                             <td>
-                                                <label id="l_CentroVenta"></label><br />
-                                                <label id="l_DatosCentroVenta"></label><br />
-                                                <label id="l_DatosCentroVentaAlt"></label><br />
-                                            </td>
-
-                                            <td>
                                                 <label id="l_ClienteVenta"></label><br />
                                                 <label id="l_DatosClienteVenta"></label><br />
                                                 <label id="l_DatosClienteVentaAlt"></label><br />
+                                            </td>
+
+                                            <td>
+
                                             </td>
                                         </tr>
                                     </table>
@@ -255,40 +269,57 @@ aria-label="Close"
                             </tr>
 
                             <tr class="details">
-                                <td>Efectivo</td>
+                                <td><label id="l_TipoPago">Tipo Pago</label></td>
 
-                                <td>1000</td>
+                                <td><label id="l_UsuarioRemuneracion">0</label></td>
+                            </tr>
+                            <tr class="">
+                                <td></td>
+
+                                <td></td>
                             </tr>
 
-                            <tr class="heading">
-                                <td>Total</td>
+                            <tr class="">
+                                <td></td>
 
-                                <td>Precio</td>
+                                <td></td>
                             </tr>
 
-                            <tr class="item">
-                                <td>Test</td>
+                            <tr class="">
+                                <td></td>
 
-                                <td>$0.00</td>
+                                <td></td>
                             </tr>
-
-                            <tr class="item">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="item last">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
                             <tr class="total">
-                                <td><p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p></td>
-                                <td>Total: $0.00</td>
+                                <td></td>
+                                <td>Total</td>
                             </tr>
+                            <tr class="">
+                                <td></td>
+
+                                <td></td>
+                            </tr>
+
+                            <tr class="">
+                                <td></td>
+
+                                <td></td>
+                            </tr>
+
+                            <tr class="">
+                                <td></td>
+
+                                <td></td>
+                            </tr>
+                            <tr class="total">
+                                <td>
+                                    <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
+                                </td>
+                                <td><label id="f_ClienteVenta"></label></td>
+                            </tr>
+
                         </table>
+                        <hr />
                         <table>
                             <tr class="top">
                                 <td colspan="2">
@@ -299,30 +330,44 @@ aria-label="Close"
                                                     style="width: 128px; max-width: 128px" />
                                             </td>
                                             <td>
-                                                <label id="l_NumVenta"></label><br />
-                                                <label id="l_FechaCreacionVenta"></label><br />
-                                                <label id="l_FechaAlternaVenta"></label><br />
-                                                <label id="l_UsuarioVenta"></label>
+                                                <label id="dl_NumVenta"></label><br />
+                                                <label id="dl_FechaCreacionVenta"></label><br />
+                                                <label id="dl_UsuarioVenta"></label>
+                                                <label id="dl_UsuarioContactoVenta"></label>
                                             </td>
+
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <label id="dl_CorporativoVenta"></label><br />
+                                                <label id="dl_DatosCorporativoVenta"></label><br />
+                                                <label id="dl_DatosCorporativoVentaAlt"></label><br />
+                                                <label id="dl_DatosCorporativoContactoVenta"></label><br />
+                                            </td>
+                                            <td>
+                                                <label id="dl_CentroVenta"></label><br />
+                                                <label id="dl_DatosCentroVenta"></label><br />
+                                                <label id="dl_DatosCentroVentaAlt"></label><br />
+                                                <label id="dl_DatosCentroContactoVenta"></label><br />
+                                            </td>
+
+                                        </tr>
+
                                     </table>
                                 </td>
                             </tr>
-
                             <tr class="information">
                                 <td colspan="2">
                                     <table>
                                         <tr>
                                             <td>
-                                                <label id="l_CentroVenta"></label><br />
-                                                <label id="l_DatosCentroVenta"></label><br />
-                                                <label id="l_DatosCentroVentaAlt"></label><br />
+                                                <label id="dl_ClienteVenta"></label><br />
+                                                <label id="dl_DatosClienteVenta"></label><br />
+                                                <label id="dl_DatosClienteVentaAlt"></label><br />
                                             </td>
 
                                             <td>
-                                                <label id="l_ClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVentaAlt"></label><br />
+
                                             </td>
                                         </tr>
                                     </table>
@@ -336,41 +381,55 @@ aria-label="Close"
                             </tr>
 
                             <tr class="details">
-                                <td>Efectivo</td>
+                                <td><label id="dl_TipoPago">Tipo Pago</label></td>
 
-                                <td>1000</td>
+                                <td><label id="dl_UsuarioRemuneracion">0</label></td>
+                            </tr>
+                            <tr class="">
+                                <td></td>
+
+                                <td></td>
                             </tr>
 
-                            <tr class="heading">
-                                <td>Total</td>
+                            <tr class="">
+                                <td></td>
 
-                                <td>Precio</td>
+                                <td></td>
                             </tr>
 
-                            <tr class="item">
-                                <td>Test</td>
+                            <tr class="">
+                                <td></td>
 
-                                <td>$0.00</td>
+                                <td></td>
                             </tr>
-
-                            <tr class="item">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="item last">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
                             <tr class="total">
-                                <td><p><span class="text-muted fw-light">Intelimundo /</span>
-                            Cliente</p></td>
-
-                                <td>Total: $0.00</td>
+                                <td></td>
+                                <td>Total</td>
                             </tr>
+                            <tr class="">
+                                <td></td>
+
+                                <td></td>
+                            </tr>
+
+                            <tr class="">
+                                <td></td>
+
+                                <td></td>
+                            </tr>
+
+                            <tr class="">
+                                <td></td>
+
+                                <td></td>
+                            </tr>
+                            <tr class="total">
+                                <td>
+                                    <p><span class="text-muted fw-light">Intelimundo /</span>Colaborador</p>
+                                </td>
+                                <td><label id="df_ClienteVenta"></label></td>
+                            </tr>
+
                         </table>
                     </div>
                 </div>
@@ -389,6 +448,89 @@ aria-label="Close"
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script type="text/javascript">
+   $(document).ready(function () {
+
+        const d1 = new Date();
+        const GeneraFolio = d1.getTime();
+        document.getElementById("i_FolioPrestamo").value = "iV-" + GeneraFolio;
+
+        $.ajax({
+            type: "GET",
+            url: "/TblCorporativoes/fDatosCorporativo/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_NumVenta').innerHTML = '# Nómina: ' + "iV-" + GeneraFolio;
+                    document.getElementById('dl_NumVenta').innerHTML = '# Nómina: ' + "iV-" + GeneraFolio;
+
+                    const dateObject = new Date(list.fechaRegistro);
+                    var month = dateObject.getMonth();
+                    var dateOfMonth = dateObject.getDate();
+                    var year = dateObject.getFullYear();
+                    var formattedDate = dateOfMonth + "/" + month + "/" + year;
+
+                    document.getElementById('l_FechaCreacionVenta').innerHTML = 'Fecha: ' + formattedDate;
+
+                    document.getElementById('l_CorporativoVenta').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
+                    document.getElementById('l_DatosCorporativoVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('l_DatosCorporativoVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('l_DatosCorporativoContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+
+                    document.getElementById('dl_FechaCreacionVenta').innerHTML = 'Fecha: ' + formattedDate;
+
+                    document.getElementById('dl_CorporativoVenta').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
+                    document.getElementById('dl_DatosCorporativoVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('dl_DatosCorporativoVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('dl_DatosCorporativoContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+                }
+            },
+
+        });
+        $.ajax({
+            type: "GET",
+            url: "/TblCentros/fDatosCentro/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_CentroVenta').innerHTML = 'Centro: ' + list.nombreCentro;
+                    document.getElementById('l_DatosCentroVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('l_DatosCentroVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('l_DatosCentroContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+
+                    document.getElementById('dl_CentroVenta').innerHTML = 'Centro: ' + list.nombreCentro;
+                    document.getElementById('dl_DatosCentroVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('dl_DatosCentroVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('dl_DatosCentroContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+                }
+            },
+        });
+        $.ajax({
+            type: "GET",
+            url: "/TblUsuarios/fDatosUsuario/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_UsuarioVenta').innerHTML = 'Usuario: ' + list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+
+                    document.getElementById('dl_UsuarioVenta').innerHTML = 'Usuario: ' + list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+                }
+            },
+        });
+
+
+    });
  $(document).on("click", "#btnPrint", function(e) {
         
         e.preventDefault();

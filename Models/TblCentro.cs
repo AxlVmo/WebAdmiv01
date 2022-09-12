@@ -30,7 +30,7 @@ namespace WebAdmin.Models
         [Display(Name = "Calle")]
         public string Calle { get; set; }
 
-        [Display(Name = "Codigo Postal")]
+        [Display(Name = "Código Postal")]
         public string CodigoPostal { get; set; }
 
         public string IdColonia { get; set; }
@@ -47,11 +47,11 @@ namespace WebAdmin.Models
         [Display(Name = "Estado")]
         public string Estado { get; set; }
 
-        [Display(Name = "Correo Electronico")]
+        [Display(Name = "Correo Electrónico")]
         
         public string CorreoElectronico { get; set; }
 
-        [Display(Name = "Telefono")]
+        [Display(Name = "Teléfono")]
         public string Telefono { get; set; }
 
         [Display(Name = "Presupuesto")]

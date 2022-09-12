@@ -252,9 +252,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="row">
                     <div class="col-sm-10">
                         <br>
-                         <a class="btn btn-success" href="#" data-bs-toggle="modal"
-                          data-bs-target="#modalToggle">
+                        
+                         <a id="btnTerminar" class="btn btn-success">
                         <span>Guardar</span>
+                        
                       </a>
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                         <button class="btn btn-info" id="btnPrint">Imprimir</button>
@@ -268,8 +269,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 </div>
 <div
 class="modal fade"
-id="modalToggle"
-aria-labelledby="modalToggleLabel"
+id="modalVentas"
+aria-labelledby="modalVentasLabel"
 tabindex="-1"
 style="display: none"
 aria-hidden="true"
@@ -277,7 +278,7 @@ aria-hidden="true"
 <div class="modal-dialog modal-xl">
 <div class="modal-content">
 <div class="modal-header">
-<h5 class="modal-title" id="modalToggleLabel">La venta se ha registrado con exito ¿deseas imprimir la nota de venta?</h5>
+<h5 class="modal-title" id="modalVentasLabel">La venta se ha registrado con exito ¿deseas imprimir la nota de venta?</h5>
 <button
 type="button"
 class="btn-close"

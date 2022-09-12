@@ -24,11 +24,11 @@ namespace WebAdmin.Models
         
         public string NombreProveedorContacto { get; set; }
 
-        [Display(Name = "Correo Electronico")]
+        [Display(Name = "Correo Electrónico")]
         
         public string CorreoElectronico { get; set; }
 
-        [Display(Name = "Telefono")]
+        [Display(Name = "Teléfono")]
         public string Telefono { get; set; }
 
         [Display(Name = "Telefono Movil")]

@@ -51,7 +51,12 @@ namespace WebAdmin.Controllers
             }
             return View(await _context.TblCorporativos.ToListAsync());
         }
-
+        [HttpGet]
+        public ActionResult fDatosCorporativo()
+        {
+            var fCorporativo =  _context.TblCorporativos.First();   
+            return Json(fCorporativo);
+        }
         // GET: TblCorporativoes/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {

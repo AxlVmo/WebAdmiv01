@@ -8,7 +8,8 @@ namespace WebAdmin.Models
     {
         [Key]
         public int IdNomina { get; set; }
-
+        [Display(Name = "Folio Nomina")]
+        public string FolioNomina { get; set; }
         [NotMapped]
         public string CentroDesc { get; set; }
         [Display(Name = "Usuario")]

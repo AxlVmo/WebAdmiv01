@@ -59,10 +59,10 @@ namespace WebAdmin.Models
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
 
-        [Display(Name = "Correo Electronico")]
+        [Display(Name = "Correo Electrónico")]
         public string CorreoAcceso { get; set; }
 
-        [Display(Name = "Telefono")]
+        [Display(Name = "Teléfono")]
         public string Telefono { get; set; }
         [Display(Name = "Telefono Tutor")]
         public string TelefonoTutor { get; set; }
@@ -78,7 +78,7 @@ namespace WebAdmin.Models
         [Display(Name = "Calle")]
         public string Calle { get; set; }
 
-        [Display(Name = "Codigo Postal")]
+        [Display(Name = "Código Postal")]
         public string CodigoPostal { get; set; }
 
         public string IdColonia { get; set; }

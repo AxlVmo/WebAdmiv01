@@ -80,6 +80,7 @@
             </div>
             <div class="card-body">
                 <form asp-action="Create">
+                    <input type="hidden"  id="i_FolioNomina" />
                     <div class="row">
                           <div class="mb-3 col-md-2">
                     <label for="IdTipoPrestamo" class="form-label" asp-for="IdTipoPrestamo"></label>
@@ -217,8 +218,8 @@
                     <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-success" />
                 <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                <a  class="btn btn-outline-secondary"
-                    title="Imprimir" id="btnPrint"><i class="fa-solid fa-print" style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                  <button type="submit" class="btn btn-info" title="Imprimir" id="btnPrint" ><i
+                                    class="fa-solid fa-print" style="font-size: 1em; color: #ffff ;"></i>Imprimir</button>
             </div>
                   
                 </form>
@@ -226,10 +227,11 @@
         </div>
     </div>
 </div>
+
 <div
 class="modal fade"
-id="modalToggle"
-aria-labelledby="modalToggleLabel"
+id="modalPrestamos"
+aria-labelledby="modalPrestamosLabel"
 tabindex="-1"
 style="display: none"
 aria-hidden="true"
@@ -237,7 +239,7 @@ aria-hidden="true"
 <div class="modal-dialog modal-xl">
 <div class="modal-content">
 <div class="modal-header">
-<h5 class="modal-title" id="modalToggleLabel">La venta se ha registrado con exito ¿deseas imprimir la nota de venta?</h5>
+<h5 class="modal-title" id="modalPrestamosLabel">La venta se ha registrado con exito ¿deseas imprimir la nota de venta?</h5>
 <button
 type="button"
 class="btn-close"
@@ -247,172 +249,232 @@ aria-label="Close"
 </div>
 <div class="modal-body">
     <div class="row">
-                    <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
+        <div class="invoice-box" id="invocieContainer">
+            <table>
+                <tr class="top">
+                    <td colspan="2">
                         <table>
-                            <tr class="top">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td class="title">
-                                                <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
-                                                    style="width: 128px; max-width: 128px" />
-                                            </td>
-                                            <td>
-                                                <label id="l_NumVenta"></label><br />
-                                                <label id="l_FechaCreacionVenta"></label><br />
-                                                <label id="l_FechaAlternaVenta"></label><br />
-                                                <label id="l_UsuarioVenta"></label>
-                                            </td>
-                                        </tr>
-                                    </table>
+                            <tr>
+                                <td class="title">
+                                    <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
+                                        style="width: 128px; max-width: 128px" />
                                 </td>
-                            </tr>
-                            <tr class="information">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label id="l_CentroVenta"></label><br />
-                                                <label id="l_DatosCentroVenta"></label><br />
-                                                <label id="l_DatosCentroVentaAlt"></label><br />
-                                            </td>
-
-                                            <td>
-                                                <label id="l_ClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVentaAlt"></label><br />
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <td>
+                                    <label id="l_NumNomina"></label><br />
+                                    <label id="l_FechaCreacionNomina"></label><br />
+                                    <label id="l_UsuarioNomina"></label>
+                                    <label id="l_UsuarioContactoNomina"></label>
                                 </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="l_CorporativoNomina"></label><br />
+                                    <label id="l_DatosCorporativoNomina"></label><br />
+                                    <label id="l_DatosCorporativoNominaAlt"></label><br />
+                                    <label id="l_DatosCorporativoContactoNomina"></label><br />
+                                </td>
+                                <td>
+                                    <label id="l_CentroNomina"></label><br />
+                                    <label id="l_DatosCentroNomina"></label><br />
+                                    <label id="l_DatosCentroNominaAlt"></label><br />
+                                    <label id="l_DatosCentroContactoNomina"></label><br />
+                                </td>
+
                             </tr>
 
-                            <tr class="heading">
-                                <td>Metodo de Pago</td>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="information">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label id="l_ClienteNomina"></label><br />
+                                    <label id="l_DatosClienteNomina"></label><br />
+                                    <label id="l_DatosClienteNominaAlt"></label><br />
+                                </td>
 
-                                <td>Pago #</td>
-                            </tr>
+                                <td>
 
-                            <tr class="details">
-                                <td>Efectivo</td>
-
-                                <td>1000</td>
-                            </tr>
-
-                            <tr class="heading">
-                                <td>Total</td>
-
-                                <td>Precio</td>
-                            </tr>
-
-                            <tr class="item">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="item">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="item last">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="total">
-                                <td><p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p></td>
-                                <td>Total: $0.00</td>
+                                </td>
                             </tr>
                         </table>
+                    </td>
+                </tr>
+
+                <tr class="heading">
+                    <td>Metodo de Pago</td>
+
+                    <td>Pago #</td>
+                </tr>
+
+                <tr class="details">
+                    <td><label id="l_TipoPago">Tipo Pago</label></td>
+
+                    <td><label id="l_UsuarioRemuneracion">0</label></td>
+                </tr>
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+                <tr class="total">
+                    <td>Periodo Comprendido del 26-08-2022 al 10-09-2022</td>
+                    <td>Recursos Humanos</td>
+                </tr>
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+                <tr class="total">
+                    <td>
+                        <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
+                    </td>
+                    <td><label id="f_ClienteNomina"></label></td>
+                </tr>
+
+            </table>
+            <hr />
+            <table>
+                <tr class="top">
+                    <td colspan="2">
                         <table>
-                            <tr class="top">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td class="title">
-                                                <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
-                                                    style="width: 128px; max-width: 128px" />
-                                            </td>
-                                            <td>
-                                                <label id="l_NumVenta"></label><br />
-                                                <label id="l_FechaCreacionVenta"></label><br />
-                                                <label id="l_FechaAlternaVenta"></label><br />
-                                                <label id="l_UsuarioVenta"></label>
-                                            </td>
-                                        </tr>
-                                    </table>
+                            <tr>
+                                <td class="title">
+                                    <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
+                                        style="width: 128px; max-width: 128px" />
                                 </td>
-                            </tr>
-
-                            <tr class="information">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label id="l_CentroVenta"></label><br />
-                                                <label id="l_DatosCentroVenta"></label><br />
-                                                <label id="l_DatosCentroVentaAlt"></label><br />
-                                            </td>
-
-                                            <td>
-                                                <label id="l_ClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVentaAlt"></label><br />
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <td>
+                                    <label id="dl_NumNomina"></label><br />
+                                    <label id="dl_FechaCreacionNomina"></label><br />
+                                    <label id="dl_UsuarioNomina"></label>
+                                    <label id="dl_UsuarioContactoNomina"></label>
                                 </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label id="dl_CorporativoNomina"></label><br />
+                                    <label id="dl_DatosCorporativoNomina"></label><br />
+                                    <label id="dl_DatosCorporativoNominaAlt"></label><br />
+                                    <label id="dl_DatosCorporativoContactoNomina"></label><br />
+                                </td>
+                                <td>
+                                    <label id="dl_CentroNomina"></label><br />
+                                    <label id="dl_DatosCentroNomina"></label><br />
+                                    <label id="dl_DatosCentroNominaAlt"></label><br />
+                                    <label id="dl_DatosCentroContactoNomina"></label><br />
+                                </td>
+
                             </tr>
 
-                            <tr class="heading">
-                                <td>Metodo de Pago</td>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="information">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label id="dl_ClienteNomina"></label><br />
+                                    <label id="dl_DatosClienteNomina"></label><br />
+                                    <label id="dl_DatosClienteNominaAlt"></label><br />
+                                </td>
 
-                                <td>Pago #</td>
-                            </tr>
+                                <td>
 
-                            <tr class="details">
-                                <td>Efectivo</td>
-
-                                <td>1000</td>
-                            </tr>
-
-                            <tr class="heading">
-                                <td>Total</td>
-
-                                <td>Precio</td>
-                            </tr>
-
-                            <tr class="item">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="item">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="item last">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="total">
-                                <td><p><span class="text-muted fw-light">Intelimundo /</span>
-                            Cliente</p></td>
-
-                                <td>Total: $0.00</td>
+                                </td>
                             </tr>
                         </table>
-                    </div>
-                </div>
+                    </td>
+                </tr>
+
+                <tr class="heading">
+                    <td>Metodo de Pago</td>
+
+                    <td>Pago #</td>
+                </tr>
+
+                <tr class="details">
+                    <td><label id="dl_TipoPago">Tipo Pago</label></td>
+
+                    <td><label id="dl_UsuarioRemuneracion">0</label></td>
+                </tr>
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+                <tr class="total">
+                    <td>Periodo Comprendido del 26-08-2022 al 10-09-2022</td>
+                    <td>Recursos Humanos</td>
+                </tr>
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+
+                <tr class="">
+                    <td></td>
+
+                    <td></td>
+                </tr>
+                <tr class="total">
+                    <td>
+                        <p><span class="text-muted fw-light">Intelimundo /</span>Colaborador</p>
+                    </td>
+                    <td><label id="df_ClienteNomina"></label></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
 <form class="form-inline">
@@ -426,6 +488,94 @@ aria-label="Close"
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
+        const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+    })
+    $(document).ready(function () {
+
+        const d1 = new Date();
+        const GeneraFolio = d1.getTime();
+        document.getElementById("i_FolioNomina").value = "iP-" + GeneraFolio;
+
+        $.ajax({
+            type: "GET",
+            url: "/TblCorporativoes/fDatosCorporativo/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_NumNomina').innerHTML = '# Nómina: ' + "iP-" + GeneraFolio;
+                    document.getElementById('dl_NumNomina').innerHTML = '# Nómina: ' + "iP-" + GeneraFolio;
+
+                    const dateObject = new Date(list.fechaRegistro);
+                    var month = dateObject.getMonth();
+                    var dateOfMonth = dateObject.getDate();
+                    var year = dateObject.getFullYear();
+                    var formattedDate = dateOfMonth + "/" + month + "/" + year;
+
+                    document.getElementById('l_FechaCreacionNomina').innerHTML = 'Fecha: ' + formattedDate;
+
+                    document.getElementById('l_CorporativoNomina').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
+                    document.getElementById('l_DatosCorporativoNomina').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('l_DatosCorporativoNominaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('l_DatosCorporativoContactoNomina').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+
+                    document.getElementById('dl_FechaCreacionNomina').innerHTML = 'Fecha: ' + formattedDate;
+
+                    document.getElementById('dl_CorporativoNomina').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
+                    document.getElementById('dl_DatosCorporativoNomina').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('dl_DatosCorporativoNominaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('dl_DatosCorporativoContactoNomina').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+                }
+            },
+
+        });
+        $.ajax({
+            type: "GET",
+            url: "/TblCentros/fDatosCentro/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_CentroNomina').innerHTML = 'Centro: ' + list.nombreCentro;
+                    document.getElementById('l_DatosCentroNomina').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('l_DatosCentroNominaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('l_DatosCentroContactoNomina').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+
+                    document.getElementById('dl_CentroNomina').innerHTML = 'Centro: ' + list.nombreCentro;
+                    document.getElementById('dl_DatosCentroNomina').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('dl_DatosCentroNominaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('dl_DatosCentroContactoNomina').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+                }
+            },
+        });
+        $.ajax({
+            type: "GET",
+            url: "/TblUsuarios/fDatosUsuario/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_UsuarioNomina').innerHTML = 'Usuario: ' + list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+
+                    document.getElementById('dl_UsuarioNomina').innerHTML = 'Usuario: ' + list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+                }
+            },
+        });
+
+
+    });
     $(document).on("click", "#btnPrint", function(e) {
         
         e.preventDefault();
