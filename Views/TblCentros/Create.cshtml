@@ -55,9 +55,9 @@
                                 <label for="IdUsuarioControl" class="form-label" asp-for="IdUsuarioControl"></label>
                                 <div class="input-group input-group-merge">
                                     <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
-                                    <select id="l_id_usuario_control" class="form-select"
+                                    <select id="l_id_usuario_control" class="form-select" required
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required asp-for="IdUsuarioControl"
+                                        onchange="this.setCustomValidity('')"  asp-for="IdUsuarioControl"
                                         asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
@@ -70,14 +70,18 @@
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
                   <input type="number" class="form-control" id=""
-                     aria-label="John Doe" aria-describedby="2" asp-for="CentroPresupuesto" />
+                     aria-label="John Doe" aria-describedby="2" asp-for="CentroPresupuesto" required
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" />
                 </div>
               </div>
           <div class="mb-3 col-md-4">
                 <label for="CorreoElectronico" class="form-label" asp-for="CorreoElectronico"></label>
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
-                  <input  type="email" class="form-control" id="" placeholder="REQUERIDO" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico" required  />
+                  <input  type="email" class="form-control" id="" placeholder="REQUERIDO" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico" required
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')"  />
                 </div>
               </div>
               <div class="mb-3 col-md-4">
@@ -85,7 +89,9 @@
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-phone"></i></span>
                   <input type="text" class="form-control" id="" placeholder="0000000000"
-                     aria-label="John Doe" aria-describedby="2" asp-for="Telefono" />
+                     aria-label="John Doe" aria-describedby="2" asp-for="Telefono" required
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" />
                 </div>
               </div>
                             
@@ -97,8 +103,9 @@
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="i_calle"
-                     aria-label="John Doe" aria-describedby="2" asp-for="Calle" oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')"/>
+                     aria-label="John Doe" aria-describedby="2" asp-for="Calle" required
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')"/>
                 </div>
               </div>
               <div class="mb-3 col-md-6">
@@ -106,7 +113,9 @@
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPostal"
-                     aria-label="John Doe" aria-describedby="2" asp-for="CodigoPostal" />
+                     aria-label="John Doe" aria-describedby="2" asp-for="CodigoPostal" required
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')"/>
                   <button class="btn btn-outline-primary" type="button" id="btnCP">Buscar</button>
                 </div>
               </div>
@@ -116,8 +125,9 @@
                 <label for="Colonia" class="form-label" asp-for="Colonia"></label>
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
-                  <select id="l_colonias" class="form-select" asp-for="Colonia" oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')">
+                  <select id="l_colonias" class="form-select" asp-for="Colonia" required
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')">
                     <option value="">SELECCIONAR</option>
                   </select>
                 </div>

@@ -29,7 +29,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
               <div class="mb-3 col-md-6">
                 <label for="GiroComercial" class="form-label" asp-for="GiroComercial"></label>
                 <div class="input-group input-group-merge">
-                  
                   <input style="text-transform:uppercase" type="text" class="form-control" id=""
                      aria-label="John Doe" aria-describedby="2" asp-for="GiroComercial" />
                 </div>
@@ -48,7 +47,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-phone"></i></span>
                   <input type="text" class="form-control" id="" placeholder="0000000000"
-                     aria-label="John Doe" aria-describedby="2" asp-for="Telefono" />
+                     aria-label="John Doe" aria-describedby="2" asp-for="Telefono" required oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')" />
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="i_calle"
-                     aria-label="John Doe" aria-describedby="2" asp-for="Calle" oninvalid="this.setCustomValidity('Campo Requerido')"
+                     aria-label="John Doe" aria-describedby="2" asp-for="Calle" required oninvalid="this.setCustomValidity('Campo Requerido')"
                     onchange="this.setCustomValidity('')"/>
                 </div>
               </div>
@@ -67,7 +67,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
                   <input style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPostal"
-                     aria-label="John Doe" aria-describedby="2" asp-for="CodigoPostal" />
+                     aria-label="John Doe" aria-describedby="2" asp-for="CodigoPostal" required oninvalid="this.setCustomValidity('Campo Requerido')"
+                    onchange="this.setCustomValidity('')"/>
                   <button class="btn btn-outline-primary" type="button" id="btnCP">Buscar</button>
                 </div>
               </div>
@@ -77,7 +78,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <label for="Colonia" class="form-label" asp-for="Colonia"></label>
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
-                  <select id="l_colonias" class="form-select" asp-for="Colonia" oninvalid="this.setCustomValidity('Campo Requerido')"
+                  <select id="l_colonias" class="form-select" asp-for="Colonia" required oninvalid="this.setCustomValidity('Campo Requerido')"
                     onchange="this.setCustomValidity('')">
                     <option value="">SELECCIONAR</option>
                   </select>

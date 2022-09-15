@@ -256,7 +256,6 @@ namespace WebAdmin.Controllers
                     oVenta.IdCentro = fCentroCorporativo;
                     oVenta.FechaRegistro = DateTime.Now;
                     oVenta.IdEstatusRegistro = 1;
-                    oVenta.CodigoPago = "Generar";
                     _context.TblVenta.Add(oVenta);
                     _context.SaveChanges();
 

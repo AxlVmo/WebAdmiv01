@@ -64,7 +64,6 @@ namespace WebAdmin.Data
         public DbSet<CatPersonalEstudio> CatPersonalEstudios { get; set; }
         public DbSet<CatPeriodo> CatPeriodos { get; set; }
         public DbSet<CatTipoCancelacion> CatTipoCancelaciones { get; set; }
-
         public DbSet<CatTipoCompra> CatTipoCompras { get; set; }
         public DbSet<CatTipoVenta> CatTipoVentas { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -134,13 +133,13 @@ namespace WebAdmin.Data
                new CatPersonalEstudio { IdPersonalEstudio = 5, PersonalEstudioDesc = "MAESTRIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                new CatPersonalEstudio { IdPersonalEstudio = 6, PersonalEstudioDesc = "DOCTORADO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
            );
-           modelBuilder.Entity<CatTipoContratacion>().HasData(
-               new CatTipoContratacion { IdTipoContratacion = 1, TipoContratacionDesc = "FIJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-               new CatTipoContratacion { IdTipoContratacion = 2, TipoContratacionDesc = "TEMPORAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-               new CatTipoContratacion { IdTipoContratacion = 3, TipoContratacionDesc = "FORMACION/APRENDIZAJE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-               new CatTipoContratacion { IdTipoContratacion = 4, TipoContratacionDesc = "SERVICIO SOCIAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-               new CatTipoContratacion { IdTipoContratacion = 5, TipoContratacionDesc = "RESIENCIAS PROFESIONALES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
-           );
+            modelBuilder.Entity<CatTipoContratacion>().HasData(
+                new CatTipoContratacion { IdTipoContratacion = 1, TipoContratacionDesc = "FIJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatTipoContratacion { IdTipoContratacion = 2, TipoContratacionDesc = "TEMPORAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatTipoContratacion { IdTipoContratacion = 3, TipoContratacionDesc = "FORMACION/APRENDIZAJE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatTipoContratacion { IdTipoContratacion = 4, TipoContratacionDesc = "SERVICIO SOCIAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatTipoContratacion { IdTipoContratacion = 5, TipoContratacionDesc = "RESIENCIAS PROFESIONALES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+            );
             modelBuilder.Entity<CatRole>().HasData(
                 new CatRole { IdRol = 1, RolDesc = "DESARROLLADOR", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                 new CatRole { IdRol = 2, RolDesc = "ADMINISTRADOR", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
@@ -212,6 +211,14 @@ namespace WebAdmin.Data
               new CatPeriodoAmortiza { IdPeriodoAmortiza = 7, PeriodoAmortizaDesc = "24 MES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
               new CatPeriodoAmortiza { IdPeriodoAmortiza = 8, PeriodoAmortizaDesc = "36 MES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
           );
+            modelBuilder.Entity<CatTipoVenta>().HasData(
+                new CatTipoVenta { IdTipoVenta = 1, TipoVentaDesc = "DIRECTA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatTipoVenta { IdTipoVenta = 2, TipoVentaDesc = "DIFERIDA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+            );
+            modelBuilder.Entity<CatTipoCompra>().HasData(
+                new CatTipoCompra { IdTipoCompra = 1, TipoCompraDesc = "DIRECTA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatTipoCompra { IdTipoCompra = 2, TipoCompraDesc = "DIFERIDA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+            );
 
             modelBuilder.Entity<CatCodigosPostal>().HasData(
 
@@ -1736,7 +1743,7 @@ new CatCodigosPostal { IdCodigosPostales = 1516, Dcodigo = "16900", Dasenta = "S
 
             base.OnModelCreating(modelBuilder);
         }
-       
+
 
 
 

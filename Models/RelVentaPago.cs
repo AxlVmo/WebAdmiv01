@@ -11,6 +11,14 @@ namespace WebAdmin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdRelVentasPago { get; set; }
 
+        [Display(Name = "Tipo de Pago")]
+
+        public int IdTipoPago { get; set; }
+
+        [Display(Name = "Fecha Alterna")]
+        [DataType(DataType.Date)]
+        public DateTime FechaAlterna { get; set; }
+
         [Display(Name = "Codigo Referencia")]
         public string CodigoReferencia { get; set; }
 

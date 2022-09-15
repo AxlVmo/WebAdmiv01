@@ -8,6 +8,8 @@ namespace WebAdmin.Models
     {
         [Key]
         public int IdPrestamo { get; set; }
+        [Display(Name = "Folio Prestamo")]
+        public string FolioPrestamo { get; set; }
 
         [NotMapped]
         public string CentroDesc { get; set; }
