@@ -75,8 +75,7 @@ ViewData["Title"] = "Registro";
                                 asp-for="Input.ConfirmPassword"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input  type="password" class="form-control" id=""
-                                    placeholder="REQUERIDO" required aria-label="John Doe" aria-describedby="2"
+                                <input  type="password" class="form-control" id="" placeholder="REQUERIDO" required aria-label="John Doe" aria-describedby="2"
                                     asp-for="Input.ConfirmPassword" tabindex="6" />
                             </div>
                         </div>
@@ -90,10 +89,14 @@ ViewData["Title"] = "Registro";
     </div>
 </div>
 </div>
-
 @section Scripts {
-<partial name="_ValidationScriptsPartial" />
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 <script type="text/javascript">
+ $("#btnTerminar").on("click", function () {
+
+    });
     $.ajax({
         type: "GET",
         url: "/TblUsuarios/RegistroUsuario/",

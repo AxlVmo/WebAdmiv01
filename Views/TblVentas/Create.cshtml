@@ -3,7 +3,7 @@
 @{
 ViewData["Title"] = "Create";
 Layout = "~/Views/Shared/_Layout.cshtml";
-    <link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/css/site.css" />
 }
 <style>
     .invoice-box {
@@ -11,7 +11,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         margin: auto;
         padding: 5px;
         border: 1px solid #eee;
-        
+
         font-size: 14px;
         line-height: 15px;
         font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
@@ -70,8 +70,6 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         border-top: 2px solid #eee;
         font-weight: bold;
     }
-
-
 </style>
 
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -215,44 +213,44 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                     <input type="date" id="iFechaAlterna" class="form-control" />
                                 </div>
                             </div>
-                            </div>
-                            <br/>
-                            <div class="row">
-                                <div class="col-md-6">
-                                      <div class="form-group">
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label class="control-label">PAGO</label>
-                                    <input id="iPagoMonto" class="form-control"
+                                    <input type="number" id="iPagoMonto" class="form-control"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" required />
                                 </div>
-                                </div>
-                                <div class="col-md-6">
-                                      <div class="form-group">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label class="control-label">CAMBIO</label>
                                     <input id="iPagoDiferencia" class="form-control" readonly />
                                 </div>
-                                </div>
-                           
-                           
+                            </div>
+
+
                         </div>
-                          <br/>
-  <div class="row">
-                                <div class="col-md-6">
-                              <div class="form-group" id="lCodigoPago" hidden>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" id="lCodigoPago" hidden>
                                     <label class="control-label">CODIGO PAGO</label>
                                     <input id="iCodigoPago" class="form-control"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" required />
                                 </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group" id="lCantidadAbono" hidden>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" id="lCantidadAbono" hidden>
                                     <label class="control-label">DIFERENCIA</label>
-                                    <input id="iCantidadAbono" class="form-control"
+                                    <input type="number" id="iCantidadAbono" class="form-control"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" readonly />
                                 </div>
-                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.col -->
@@ -284,7 +282,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
                         </a>
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                        <button class="btn btn-info" id="btnPrint">Imprimir</button>
+                        <button class="btn btn-info" id="btnPrint" hidden>Imprimir</button>
                     </div>
                 </div>
                 <hr>
@@ -489,240 +487,305 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script>
-   const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2
-})
-$(document).ready(function () {
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+    })
+    $(document).ready(function () {
 
-    const d1 = new Date();
-    const GeneraFolio = d1.getTime();
-    document.getElementById("i_FolioVenta").value = "iN-" + GeneraFolio;
+        const d1 = new Date();
+        const GeneraFolio = d1.getTime();
+        document.getElementById("i_FolioVenta").value = "iV-" + GeneraFolio;
 
 
-});
-
-$('#IdCliente').select2({
-    theme: "bootstrap-5",
-    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-    placeholder: $(this).data('placeholder'),
-});
-$('#l_tipo_servicios').select2({
-    theme: "bootstrap-5",
-    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-    placeholder: $(this).data('placeholder'),
-});
-$('#l_servicios').select2({
-    theme: "bootstrap-5",
-    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-    placeholder: $(this).data('placeholder'),
-});
-$('#l_tipo_servicios').change(function () {
-    var SelectedText = $('option:selected', this).text();
-    var SelectedValue = $('option:selected', this).val();
-    $.ajax({
-        type: "GET",
-        url: "/TblServicios/FiltroServicios/",
-        data: { id: SelectedValue },
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (list) {
-            var $lista_servicios = $('#l_servicios');
-            $("#l_servicios").empty();
-
-            if (list.length == 0) {
-                $lista_servicios.append('<option value="">SELECCIONAR</option>');
-                $lista_servicios.attr('required', false);
-
-            }
-            else {
-                $lista_servicios.append('<option value="">SELECCIONAR</option>');
-                for (var i = 0, len = list.length; i < len; i++) {
-                    $lista_servicios.append('<option value=' + list[i].idServicio + '>' + list[i].descServicio + '</option>');
-                    $lista_servicios.attr('required', true);
-                }
-            }
-        },
-        error: function () {
-            alert("Error!!")
-        }
     });
-});
-$('#lTipoPago').change(function () {
-    var SelectedText = $('option:selected', this).text();
-    var SelectedValue = $('option:selected', this).val();
 
-    if (SelectedValue != 1) {
-        $('#lCodigoPago').removeAttr('hidden');
-    }
-    else {
-        document.getElementById("lCodigoPago").setAttribute("hidden", true);
-    }
-});
-$('#lIdTipoVenta').change(function () {
-    var SelectedText = $('option:selected', this).text();
-    var SelectedValue = $('option:selected', this).val();
+    $('#IdCliente').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_tipo_servicios').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_servicios').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_tipo_servicios').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+        $.ajax({
+            type: "GET",
+            url: "/TblServicios/FiltroServicios/",
+            data: { id: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $lista_servicios = $('#l_servicios');
+                $("#l_servicios").empty();
 
-    if (SelectedText == 'DIFERIDA') {
-        $('#lCantidadAbono').removeAttr('hidden');
-    }
-    else {
-        document.getElementById("lCantidadAbono").setAttribute("hidden", true);
-    }
-});
-$('#l_servicios').change(function () {
-    var SelectedText = $('option:selected', this).text();
-    var SelectedValue = $('option:selected', this).val();
+                if (list.length == 0) {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    $lista_servicios.attr('required', false);
 
-    $.ajax({
-        type: "GET",
-        url: "/TblServicios/fFiltroServicio/",
-        data: { idA: SelectedValue },
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (list) {
-            if (list.length == 0) {
-            }
-            else {
-                for (var i = 0, len = list.length; i < len; i++) {
-                    var f_tipo_servicio = list[i].tipoServicioDesc;
-                    var f_servicio = list[i].descServicio;
-                    var f_precio = list[i].totalPrecioServicio;
-                    var _desc = parseFloat($("#iDescuento").val())
-                    var _prec = parseFloat(f_precio)
-                    var _tprecio = _prec - ((_prec * _desc) / 100)
-
-
-
-                    $("#tbProducto tbody").append(
-                        $("<tr>").append(
-                            $("<td style='text-align:center'>").text(f_tipo_servicio),
-                            $("<td style='text-align:center'>").text(f_servicio),
-                            $("<td style='text-align:center'>").text(_desc),
-                            $("<td style='text-align:center'>").text(_prec),
-                            $("<td style='text-align:center'>").text(_tprecio),
-                            $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
-                    )
                 }
-
-                //Defino los totales de mis 2 columnas en 0
-                var total_col1 = 0;
-                var total_col2 = 0;
-                //Recorro todos los tr ubicados en el tbody
+                else {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $lista_servicios.append('<option value=' + list[i].idServicio + '>' + list[i].descServicio + '</option>');
+                        $lista_servicios.attr('required', true);
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    });
+    $( '#iPagoMonto' ).change(function() {
+        let total_col1 = 0;
                 $('#tbProducto tbody').find('tr').each(function (i, el) {
 
-                    //Voy incrementando las variables segun la fila ( .eq(0) representa la fila 1 )     
-                    total_col1 += parseFloat($(this).find('td').eq(4).text());
-                    total_col2 += parseFloat($(this).find('td').eq(1).text());
-
-                    document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
-                });
-                //Muestro el resultado en el th correspondiente a la columna
-                //$('#ejemplo tfoot tr th').eq(4).text("Total " + total_col1);
-                //$('#ejemplo tfoot tr th').eq(1).text("Total " + total_col2);
-
-
-            }
-        },
-    });
-});
-function validate(inputID) {
-    const input = document.getElementById(inputID);
-    const validityState = input.validity;
-    input.reportValidity();
-}
-$("#btnTerminar").on("click", function () {
-
-    var lIdTipoVenta = $('#lIdTipoVenta').val();
-    var IdCliente = $('#IdCliente').val();
-    var l_tipo_servicios = $('#l_tipo_servicios').val();
-    var l_servicios = $('#l_servicios').val();
-    var lTipoPago = $('#lTipoPago').val();
-
-    if (lIdTipoVenta == "") {
-        validate('lIdTipoVenta')
-    }
-    else if (IdCliente == "") {
-        validate('IdCliente')
-    }
-
-    else if (lTipoPago == "") {
-        validate('lTipoPago')
-    }
-    else {
-        var RelVenta_Pagos = []
-        var RelVenta_Productos = []
-        var total = 0;
-        $("#tbProducto > tbody > tr").each(function (i, tr) {
-           // FechaAlterna: $("#i_FolioVenta").val(),
-             //   CodigoPago: $("#i_FolioVenta").val()
-            RelVenta_Productos.push(
-                {
-                    TipoServicio: $(tr).find('td:eq(0)').text(),
-                    Servicio: $(tr).find('td:eq(1)').text(),
-                    TotalPrecio: $(tr).find('td:eq(2)').text(),
-                    Precio: $(tr).find('td:eq(3)').text(),
-                    Descuento: $(tr).find('td:eq(4)').text()
-
-                }
-            )
-
-        })
-
-        var oCompraVM = {
-            TblVentas: {
-                IdTipoVenta: $("#lIdTipoVenta").val(),
-                IdCliente: $("#IdCliente").val(),
-                IdTipoPago: $("#lTipoPago").val(),
-                FolioVenta: $("#i_FolioVenta").val(),
-
-            },
-            RelVentaProductos: RelVenta_Productos,
-            RelVentaPagos: RelVenta_Pagos
+            total_col1 += parseFloat($(this).find('td').eq(4).text());
+            });
+            let iPagoMonto = parseInt($('#iPagoMonto').val());
+            let tDiferencia = parseInt(iPagoMonto - total_col1);
+            let vTotal = iPagoMonto + tDiferencia;
+        document.getElementById("iPagoDiferencia").value = tDiferencia;
+        if (vTotal == total_col1) 
+        {
+            $('#btnPrint').removeAttr('hidden');
         }
+        else
+        {
+            document.getElementById("btnPrint").setAttribute("hidden", true);
+        }
+    
+    });
+    $('#lTipoPago').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
 
-        jQuery.ajax({
-            url: '@Url.Action("Index","TblVentas")',
-            type: "POST",
-            data: JSON.stringify(oCompraVM),
-            datatype: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
+        if (SelectedValue != 1) {
+            $('#lCodigoPago').removeAttr('hidden');
+        }
+        else {
+            document.getElementById("lCodigoPago").setAttribute("hidden", true);
+        }
+    });
+    $('#lIdTipoVenta').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
 
-                if (data.respuesta) {
-                    alert("Venta Registrada")
+        if (SelectedText == 'DIFERIDA') {
+            $('#lCantidadAbono').removeAttr('hidden');
+        }
+        else {
+            document.getElementById("lCantidadAbono").setAttribute("hidden", true);
+        }
+    });
+    $('#l_servicios').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
 
-                    location.reload();
+        $.ajax({
+            type: "GET",
+            url: "/TblServicios/fFiltroServicio/",
+            data: { idA: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        var f_tipo_servicio = list[i].tipoServicioDesc;
+                        var f_servicio = list[i].descServicio;
+                        var f_precio = list[i].totalPrecioServicio;
+                        var _desc = parseFloat($("#iDescuento").val())
+                        var _prec = parseFloat(f_precio)
+                        var _tprecio = _prec - ((_prec * _desc) / 100)
+
+
+
+                        $("#tbProducto tbody").append(
+                            $("<tr>").append(
+                                $("<td style='text-align:center'>").text(f_tipo_servicio),
+                                $("<td style='text-align:center'>").text(f_servicio),
+                                $("<td style='text-align:center'>").text(_desc),
+                                $("<td style='text-align:center'>").text(_prec),
+                                $("<td style='text-align:center'>").text(_tprecio),
+                                $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
+                        )
+                    }
+
+                    //Defino los totales de mis 2 columnas en 0
+                    var total_col1 = 0;
+                    var total_col2 = 0;
+                    //Recorro todos los tr ubicados en el tbody
+                    $('#tbProducto tbody').find('tr').each(function (i, el) {
+
+                        //Voy incrementando las variables segun la fila ( .eq(0) representa la fila 1 )     
+                        total_col1 += parseFloat($(this).find('td').eq(4).text());
+                        total_col2 += parseFloat($(this).find('td').eq(1).text());
+
+                        document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
+                    });
+                    //Muestro el resultado en el th correspondiente a la columna
+                    //$('#ejemplo tfoot tr th').eq(4).text("Total " + total_col1);
+                    //$('#ejemplo tfoot tr th').eq(1).text("Total " + total_col2);
+
+
+                }
+            },
+        });
+    });
+    function validate(inputID) {
+        const input = document.getElementById(inputID);
+        const validityState = input.validity;
+        input.reportValidity();
+    }
+    $("#btnTerminar").on("click", function () {
+
+        var lIdTipoVenta = $('#lIdTipoVenta').val();
+        var IdCliente = $('#IdCliente').val();
+        var rowCount = $('#tbProducto >tbody >tr').length;
+        var lTipoPago = $('#lTipoPago').val();
+        var iPagoMonto = $('#iPagoMonto').val();
+        var l_TotalVenta = $('#l_TotalVenta').val();
+        var iPagoDiferencia = $('#iPagoDiferencia').val();
+        
+        var total_col1 = 0;
+               $('#tbProducto tbody').find('tr').each(function (i, el) {
+
+        total_col1 += parseFloat($(this).find('td').eq(4).text());
+        });
+        
+
+        if (lIdTipoVenta == "") {
+            validate('lIdTipoVenta')
+        }
+        else if (IdCliente == "") {
+            validate('IdCliente')
+        }
+        else 
+        {
+            if(rowCount == 0)
+            {
+            vNotify.error({text:'Favor de agregar Servicios.', title:'Intelimundo.'});    
+            }
+             else if (lTipoPago == "") {
+            validate('lTipoPago')
+            }
+              else if (iPagoMonto == "") {
+            validate('iPagoMonto')
+            }
+              else if (iPagoMonto != total_col1) {
+                if (iPagoMonto - iPagoDiferencia == total_col1) {
+             var RelVenta_Pagos = []
+                var RelVenta_Productos = []
+                var total = 0;
+                $("#tbProducto > tbody > tr").each(function (i, tr) {
+                    // FechaAlterna: $("#i_FolioVenta").val(),
+                    //   CodigoPago: $("#i_FolioVenta").val()
+                    RelVenta_Productos.push(
+                        {
+                            TipoServicio: $(tr).find('td:eq(0)').text(),
+                            Servicio: $(tr).find('td:eq(1)').text(),
+                            Descuento: $(tr).find('td:eq(2)').text(),
+                            Precio: $(tr).find('td:eq(3)').text(),
+                            TotalPrecio: $(tr).find('td:eq(4)').text()
+                        }
+                    )
+                })
+                    var RelVenta_Pagos = [{
+                        IdTipoPago: $("#lTipoPago").val(),
+                    }];
+                var oCompraVM = {
+                    TblVentas: {
+                        IdTipoVenta: $("#lIdTipoVenta").val(),
+                        IdCliente: $("#IdCliente").val(),
+                        FolioVenta: $("#i_FolioVenta").val(),
+
+                    },
+                    RelVentaProductos: RelVenta_Productos,
+                    RelVentaPagos: RelVenta_Pagos
                 }
 
+                jQuery.ajax({
+                    url: '@Url.Action("Index","TblVentas")',
+                    type: "POST",
+                    data: JSON.stringify(oCompraVM),
+                    datatype: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                        if (data.respuesta) {
+                            vNotify.success({text:'Venta Registrada.', title:'Intelimundo.'});
+                            var url = '@Url.Action("Index", "TblVentas")';
+                            window.location.href = url;
+                        }
+                    }
+
+                });
+            }
+            else
+            {
+            vNotify.error({text:'Pago no es Igual a Total.', title:'Intelimundo.'});
+            }
+            
             }
 
-        })
+            else
+            {
+               vNotify.error({text:'Err.', title:'Intelimundo.'});
+            }
+        }
+    })
+    function RemoveRow(o) {
+        //no clue what to put here?
+        var p = o.parentNode.parentNode;
+        p.parentNode.removeChild(p);
+
+    var total_col1 = 0;
+    var rowCount = $('#tbProducto >tbody >tr').length;
+
+    if(rowCount == 0)
+    {
+        document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
+        document.getElementById('iPagoDiferencia').value = total_col1;
     }
-})
-function RemoveRow(o) {
-    //no clue what to put here?
-    var p = o.parentNode.parentNode;
-    p.parentNode.removeChild(p);
-}
-$(document).on("click", "#btnPrint", function (e) {
+    else
+    {
+        $('#tbProducto tbody').find('tr').each(function (i, el) {
 
-    e.preventDefault();
-    e.stopPropagation();
-    $("#invocieContainer").printThis({
-        debug: false, // show the iframe for debugging
-        importCSS: true, // import page CSS
-        importStyle: true, // import style tags
-        printContainer: true, // grab outer container as well as the contents of the selector
-        loadCSS: "/assets/vendor/css/theme-default.css", // path to additional css file - us an array [] for multiple
-        pageTitle: "", // add title to print page
-        removeInline: false, // remove all inline styles from print elements
-        printDelay: 333, // variable print delay; depending on complexity a higher value may be necessary
-        header: null, // prefix to html
-        formValues: true // preserve input/form values
+        total_col1 += parseFloat($(this).find('td').eq(4).text());
+        document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1; 
+        });
+    }
+    }
+    $(document).on("click", "#btnPrint", function (e) {
+
+        e.preventDefault();
+        e.stopPropagation();
+        $("#invocieContainer").printThis({
+            debug: false, // show the iframe for debugging
+            importCSS: true, // import page CSS
+            importStyle: true, // import style tags
+            printContainer: true, // grab outer container as well as the contents of the selector
+            loadCSS: "/assets/vendor/css/theme-default.css", // path to additional css file - us an array [] for multiple
+            pageTitle: "", // add title to print page
+            removeInline: false, // remove all inline styles from print elements
+            printDelay: 333, // variable print delay; depending on complexity a higher value may be necessary
+            header: null, // prefix to html
+            formValues: true // preserve input/form values
+        });
+
     });
-
-});
 </script>
 }

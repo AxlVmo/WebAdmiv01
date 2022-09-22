@@ -229,50 +229,34 @@ namespace WebAdmin.Controllers
 
             if (oVentaVM != null)
             {
-                try
+                foreach (var item in oVentaVM.RelVentaProductos)
                 {
-                    foreach (var item in oVentaVM.RelVentaProductos)
-                    {
-                        //item.IdRelVentaProducto = Guid.NewGuid();
-                        item.Cantidad = 1;
-                        item.Precio = 0;
-                        item.Total = 0;
-                        item.IdUsuarioModifico = Guid.Parse(fuser);
-                        item.FechaRegistro = DateTime.Now;
-                        item.IdEstatusRegistro = 1;
-                        item.IdVenta = nVenta;
-                        _context.RelVentaProducto.Add(item);
-                    }
-
-                    TblVenta oVenta = oVentaVM.TblVentas;
-
-
-                    oVenta.IdCorpCent = fCorpCent;
-                    oVenta.IdUCorporativoCentro = fCentroCorporativo;
-                    oVenta.IdUsuarioModifico = Guid.Parse(fuser);
-                    oVenta.IdVenta = nVenta;
-                    oVenta.NumeroVenta = _context.TblVenta.Count() + 1;
-                    oVenta.IdUsuarioVenta = Guid.Parse(fuser);
-                    oVenta.IdCentro = fCentroCorporativo;
-                    oVenta.FechaRegistro = DateTime.Now;
-                    oVenta.IdEstatusRegistro = 1;
-                    _context.TblVenta.Add(oVenta);
-                    _context.SaveChanges();
-
-                    respuesta = true;
-                    _notyf.Success("Venta creada con éxito", 5);
-
+                    //item.IdRelVentaProducto = Guid.NewGuid();
+                    item.Cantidad = 1;
+                    item.IdUsuarioModifico = Guid.Parse(fuser);
+                    item.FechaRegistro = DateTime.Now;
+                    item.IdEstatusRegistro = 1;
+                    item.IdVenta = nVenta;
+                    _context.RelVentaProducto.Add(item);
                 }
-                catch (Exception)
-                {
-                    respuesta = false;
-                    _notyf.Success("Err.", 5);
 
-                }
+                TblVenta oVenta = oVentaVM.TblVentas;
+
+                oVenta.IdCorpCent = fCorpCent;
+                oVenta.IdUCorporativoCentro = fCentroCorporativo;
+                oVenta.IdUsuarioModifico = Guid.Parse(fuser);
+                oVenta.IdVenta = nVenta;
+                oVenta.NumeroVenta = _context.TblVenta.Count() + 1;
+                oVenta.IdUsuarioVenta = Guid.Parse(fuser);
+                oVenta.IdCentro = fCentroCorporativo;
+                oVenta.FechaRegistro = DateTime.Now;
+                oVenta.IdEstatusRegistro = 1;
+                _context.TblVenta.Add(oVenta);
+                _context.SaveChanges();
+                
+                respuesta= true;
+                _notyf.Success("Registro creado con éxito", 5);
             }
-
-
-
             return Json(new { respuesta });
         }
         // GET: TblVentas/Details/5
