@@ -99,9 +99,9 @@ namespace WebAdmin.Controllers
 
                     if (vDuplicado.Count == 0)
                     {
-                        var fuser = _userService.GetUserId();
+                        var f_user = _userService.GetUserId();
                         var isLoggedIn = _userService.IsAuthenticated();
-                        tblCorporativo.IdUsuarioModifico = Guid.Parse(fuser);
+                        tblCorporativo.IdUsuarioModifico = Guid.Parse(f_user);
                         tblCorporativo.FechaRegistro = DateTime.Now;
                         tblCorporativo.NombreCorporativo = tblCorporativo.NombreCorporativo.ToString().ToUpper().Trim();
                         tblCorporativo.IdEstatusRegistro = 1;
@@ -167,9 +167,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblCorporativo.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblCorporativo.IdUsuarioModifico = Guid.Parse(f_user);
                     tblCorporativo.FechaRegistro = DateTime.Now;
                     tblCorporativo.NombreCorporativo = tblCorporativo.NombreCorporativo.ToString().ToUpper().Trim();
                     tblCorporativo.IdEstatusRegistro = tblCorporativo.IdEstatusRegistro;

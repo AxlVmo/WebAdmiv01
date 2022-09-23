@@ -102,9 +102,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblProveedor.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblProveedor.IdUsuarioModifico = Guid.Parse(f_user);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblProveedor.FechaRegistro = DateTime.Now;
                     tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper().Trim();
@@ -162,9 +162,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblProveedor.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblProveedor.IdUsuarioModifico = Guid.Parse(f_user);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblProveedor.FechaRegistro = DateTime.Now;
                     tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper().Trim();

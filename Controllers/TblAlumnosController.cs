@@ -68,9 +68,9 @@ namespace WebAdmin.Controllers
             TempData["fTS"] = sCorpCent.ToList();
             ViewBag.ListaCorpCent = TempData["fTS"];
 
-            var fuser = _userService.GetUserId();
-            var tblAlumno = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+            var f_user = _userService.GetUserId();
+            var tblAlumno = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
+            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
             if (tblAlumno.IdArea == 2 && tblAlumno.IdPerfil == 3 && tblAlumno.IdRol == 2)
             {
@@ -105,19 +105,28 @@ namespace WebAdmin.Controllers
                           };
             return View(await fAlumno.ToListAsync());
         }
+         [HttpGet]
+        public ActionResult sDatosAlumno(Guid id)
+        {
+            var f_alumno = _context.TblAlumnos.First(m => m.IdAlumno == id);
+            return Json(f_alumno);
+        }
         [HttpGet]
         public ActionResult DatosAlumnos()
         {
 
-            var fuser = _userService.GetUserId();
-            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+            {
+            var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
             var fTotalesA = from a in _context.TblAlumnos
                            where a.IdEstatusRegistro == 1 && a.IdTipoAlumno == 1
                            select new
                            {
-                               fRegistros = _context.TblAlumnos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
+                               fRegistros = _context.TblAlumnos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
                                fTipo = a.IdTipoAlumno
                            };
 
@@ -125,12 +134,18 @@ namespace WebAdmin.Controllers
                            where a.IdEstatusRegistro == 1 && a.IdTipoAlumno == 2
                            select new
                            {
-                               fRegistros = _context.TblAlumnos.Where(a => a.IdEstatusRegistro == 2 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
+                               fRegistros = _context.TblAlumnos.Where(a => a.IdEstatusRegistro == 2 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
                                fTipo = a.IdTipoAlumno
                            };
             
             var fTotales = fTotalesA.Union(fTotalesD);
-            return Json(fTotales);
+            return Json(fTotales);    
+            }
+            else
+            {
+                return Json(0);
+            
+            }
         }
         [HttpGet]
         public ActionResult FiltroAlumno(Guid id)
@@ -197,20 +212,20 @@ namespace WebAdmin.Controllers
                 {
                     Guid fCentroCorporativo = Guid.Empty;
                     int fCorpCent = 0;
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
                     fCentroCorporativo = fIdUsuario.IdCorporativo;
                     fCorpCent = 1;
                     if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                     {
-                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
                         fCentroCorporativo = fIdCentro.IdCentro;
                         fCorpCent = 2;
                     }
                     tblAlumno.IdCorpCent = fCorpCent;
                     tblAlumno.IdUCorporativoCentro = fCentroCorporativo;
-                    tblAlumno.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblAlumno.IdUsuarioModifico = Guid.Parse(f_user);
                     tblAlumno.FechaRegistro = DateTime.Now;
                     tblAlumno.NombreAlumno = tblAlumno.NombreAlumno.ToString().ToUpper().Trim();
                     tblAlumno.ApellidoPaterno = tblAlumno.ApellidoPaterno.ToUpper().Trim();
@@ -280,20 +295,20 @@ namespace WebAdmin.Controllers
                 {
                     Guid fCentroCorporativo = Guid.Empty;
                     int fCorpCent = 0;
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
                     fCentroCorporativo = fIdUsuario.IdCorporativo;
                     fCorpCent = 1;
                     if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                     {
-                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
                         fCentroCorporativo = fIdCentro.IdCentro;
                         fCorpCent = 2;
                     }
                     tblAlumno.IdCorpCent = fCorpCent;
                     tblAlumno.IdUCorporativoCentro = fCentroCorporativo;
-                    tblAlumno.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblAlumno.IdUsuarioModifico = Guid.Parse(f_user);
                     tblAlumno.FechaRegistro = DateTime.Now;
                     tblAlumno.NombreAlumno = tblAlumno.NombreAlumno.ToString().ToUpper().Trim();
                     tblAlumno.ApellidoPaterno = tblAlumno.ApellidoPaterno.ToUpper().Trim();

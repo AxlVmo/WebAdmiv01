@@ -76,8 +76,7 @@
             <h5 class="card-header">
                 <div class="row">
                     <div class="mb-3 col-md-6">
-                        <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create"><i
-                                class="fas fa-plus"></i> Nuevo</a>
+                        <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" hidden><i class="fas fa-plus"></i> Nuevo</a>
                     </div>
                     <div class="mb-3 col-md-6">
                         <div class="row mb-3" id="iCorpCent" hidden>
@@ -631,6 +630,7 @@
             var vCorporativoFlag = '@ViewBag.CorporativoFlag'
             var vCentrosFlag = '@ViewBag.CentrosFlag'
             var vUsuariosFlag = '@ViewBag.UsuariosFlag'
+            var vPresupuestoFlag = '@ViewBag.PresupuestoFlag'
 
             if (vEstatusFlag == 0) {
                 document.getElementById("iNuevo").style.visibility = "hidden";
@@ -652,7 +652,13 @@
                                 document.getElementById("iNuevo").style.visibility = "hidden";
                             }
                             else {
-                                document.getElementById("iNuevo").style.visibility = "visible";
+                                if (vPresupuestoFlag == 0) {
+                                document.getElementById("iNuevo").style.visibility = "hidden";
+                            }
+                            else {
+                                $('#iNuevo').removeAttr('hidden');
+                            }
+                                
                             }
                         }
                     }

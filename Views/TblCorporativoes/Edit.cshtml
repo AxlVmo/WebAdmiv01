@@ -1,8 +1,8 @@
 ﻿@model WebAdmin.Models.TblCorporativo
 
 @{
-ViewData["Title"] = "Editar Corporativo";
-Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Editar Corporativo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Corporativo</h4>
@@ -14,128 +14,150 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="card-body">
                 <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="IdCorporativo" />
-                     <input type="hidden" asp-for="IdColonia" />
+                    <input type="hidden" asp-for="IdCorporativo"/>
+                    <input type="hidden" asp-for="IdColonia"/>
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="NombreCorporativo" class="form-label" asp-for="NombreCorporativo"></label>
                                 <div class="input-group input-group-merge">
-                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <span id="2" class="input-group-text">
+                                        <i class="bx bx-check-shield"></i>
+                                    </span>
                                     <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                                        placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                        asp-for="NombreCorporativo" required
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" />
+                                           placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
+                                           asp-for="NombreCorporativo" required
+                                           oninvalid="this.setCustomValidity('Campo Requerido')"
+                                           onchange="this.setCustomValidity('')"/>
                                 </div>
                             </div>
-                            
                         </div>
-                        <div class="row">
-              <div class="mb-3 col-md-6">
-                <label for="CorreoElectronico" class="form-label" asp-for="CorreoElectronico"></label>
-                <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
-                  <input  type="email" class="form-control" id="" placeholder="REQUERIDO" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico" required  />
-                </div>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="Telefono" class="form-label">Teléfono (10 Digitos)</label>
-                <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="fa-solid fa-phone"></i></span>
-                  <input type="text" class="form-control" id="" placeholder="0000000000"
-                     aria-label="John Doe" aria-describedby="2" asp-for="Telefono" required oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')" />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="mb-3 col-md-6">
-                <label for="Calle" class="form-label" asp-for="Calle"></label>
-                <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
-                  <input style="text-transform:uppercase" type="text" class="form-control" id="i_calle"
-                     aria-label="John Doe" aria-describedby="2" asp-for="Calle" required oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')"/>
-                </div>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="CodigoPostal" class="form-label" asp-for="CodigoPostal"></label>
-                <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
-                  <input style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPostal"
-                     aria-label="John Doe" aria-describedby="2" asp-for="CodigoPostal" required oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')"/>
-                  <button class="btn btn-outline-primary" type="button" id="btnCP">Buscar</button>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="mb-3 col-md-6">
-                <label for="Colonia" class="form-label" asp-for="Colonia"></label>
-                <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
-                  <select id="l_colonias" class="form-select" asp-for="Colonia" required oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')">
-                    <option value="">SELECCIONAR</option>
-                  </select>
-                </div>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="LocalidadMunicipio" class="form-label" asp-for="LocalidadMunicipio"></label>
-                <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
-                  <input style="text-transform:uppercase" type="text" class="form-control" id="idLocalidadMunicipio"
-                     aria-label="John Doe" aria-describedby="2"
-                    asp-for="LocalidadMunicipio" readonly />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="mb-3 col-md-6">
-                <label for="Ciudad" class="form-label" asp-for="Ciudad"></label>
-                <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
-                  <input style="text-transform:uppercase" type="text" class="form-control" id="idCiudad"
-                     aria-label="John Doe" aria-describedby="2" asp-for="Ciudad"
-                    readonly />
-                </div>
-              </div>
-              <div class="mb-3 col-md-6">
-                <label for="Estado" class="form-label" asp-for="Estado"></label>
-                <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
-                  <input style="text-transform:uppercase" type="text" class="form-control" id="idEstados"
-                    aria-label="John Doe" aria-describedby="2" asp-for="Estado"
-                    readonly />
-                </div>
-              </div>
-            </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                               
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="CorreoElectronico" class="form-label" asp-for="CorreoElectronico"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-exclamation"></i>
+                                </span>
+                                <input type="email" class="form-control" id="" placeholder="REQUERIDO" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico" required/>
                             </div>
-                            <div class="mb-3 col-md-6">
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname"
-                                      asp-for="IdEstatusRegistro"></label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="bx bx-check-shield"></i></span>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="Telefono" class="form-label">Teléfono (10 Digitos)</label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-phone"></i>
+                                </span>
+                                <input type="text" class="form-control" id="" placeholder="0000000000"
+                                       aria-label="John Doe" aria-describedby="2" asp-for="Telefono" required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                       onchange="this.setCustomValidity('')"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="Calle" class="form-label" asp-for="Calle"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="i_calle"
+                                       aria-label="John Doe" aria-describedby="2" asp-for="Calle" required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                       onchange="this.setCustomValidity('')"/>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="CodigoPostal" class="form-label" asp-for="CodigoPostal"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPostal"
+                                       aria-label="John Doe" aria-describedby="2" asp-for="CodigoPostal" required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                       onchange="this.setCustomValidity('')"/>
+                                <button class="btn btn-outline-primary" type="button" id="btnCP">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="Colonia" class="form-label" asp-for="Colonia"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </span>
+                                <select id="l_colonias" class="form-select" asp-for="Colonia" required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')">
+                                    <option value="">SELECCIONAR</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="LocalidadMunicipio" class="form-label" asp-for="LocalidadMunicipio"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="idLocalidadMunicipio"
+                                       aria-label="John Doe" aria-describedby="2"
+                                       asp-for="LocalidadMunicipio" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="Ciudad" class="form-label" asp-for="Ciudad"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="idCiudad"
+                                       aria-label="John Doe" aria-describedby="2" asp-for="Ciudad"
+                                       readonly/>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="Estado" class="form-label" asp-for="Estado"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </span>
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="idEstados"
+                                       aria-label="John Doe" aria-describedby="2" asp-for="Estado"
+                                       readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname"
+                                       asp-for="IdEstatusRegistro">
+                                </label>
+                                <div class="col-sm-10">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-fullname2" class="input-group-text">
+                                            <i
+                                                class="bx bx-check-shield">
+                                            </i>
+                                        </span>
                                         <select class="form-select" required asp-for="IdEstatusRegistro"
-                                          asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
-                                          <option value="">SELECCIONAR</option>
+                                                asp-items="@(new SelectList(ViewBag.ListaCatEstatus, "IdEstatusRegistro", "EstatusDesc"))">
+                                            <option value="">SELECCIONAR</option>
                                         </select>
-                                      </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-2">
-                            <input type="submit" value="Actualizar" class="btn btn-warning" />
-                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <input type="submit" value="Actualizar" class="btn btn-warning"/>
+                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                    </div>
                 </form>
             </div>
         </div>
@@ -143,11 +165,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 </div>
 
 @section Scripts {
-@{
-
-await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-<script type="text/javascript">
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
 
     $(document).ready(function () {
         filtro_colonias();

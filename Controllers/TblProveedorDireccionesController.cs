@@ -135,9 +135,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblProveedorDirecciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblProveedorDirecciones.IdUsuarioModifico = Guid.Parse(f_user);
 
                     var fProveedor = (from c in _context.TblProveedores where c.IdProveedor == tblProveedorDirecciones.IdProveedor select c).Distinct().ToList();
                     var fTipoDireccion = (from c in _context.CatTipoDirecciones where c.IdTipoDireccion == tblProveedorDirecciones.IdTipoDireccion select c).Distinct().ToList();
@@ -213,9 +213,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblProveedorDirecciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblProveedorDirecciones.IdUsuarioModifico = Guid.Parse(f_user);
                     var fProveedor = (from c in _context.TblProveedores where c.IdProveedor == tblProveedorDirecciones.IdProveedor select c).Distinct().ToList();
                     var fTipoDireccion = (from c in _context.CatTipoDirecciones where c.IdTipoDireccion == tblProveedorDirecciones.IdTipoDireccion select c).Distinct().ToList();
                     tblProveedorDirecciones.FechaRegistro = DateTime.Now;

@@ -80,9 +80,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicados.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoDireccion.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoDireccion.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoDireccion.FechaRegistro = DateTime.Now;
                     catTipoDireccion.TipoDireccionDesc = catTipoDireccion.TipoDireccionDesc.ToString().ToUpper().Trim();
                     catTipoDireccion.IdEstatusRegistro = 1;
@@ -135,9 +135,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoDireccion.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoDireccion.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoDireccion.FechaRegistro = DateTime.Now;
                     catTipoDireccion.TipoDireccionDesc = catTipoDireccion.TipoDireccionDesc.ToString().ToUpper().Trim();
                     catTipoDireccion.IdEstatusRegistro = catTipoDireccion.IdEstatusRegistro;

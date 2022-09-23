@@ -80,9 +80,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    CatTipoDevoluciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    CatTipoDevoluciones.IdUsuarioModifico = Guid.Parse(f_user);
                     CatTipoDevoluciones.FechaRegistro = DateTime.Now;
                     CatTipoDevoluciones.TipoDevolucionDesc = CatTipoDevoluciones.TipoDevolucionDesc.ToString().ToUpper().Trim();
                     CatTipoDevoluciones.IdEstatusRegistro = 1;
@@ -135,9 +135,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    CatTipoDevoluciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    CatTipoDevoluciones.IdUsuarioModifico = Guid.Parse(f_user);
                     CatTipoDevoluciones.FechaRegistro = DateTime.Now;
                     CatTipoDevoluciones.TipoDevolucionDesc = CatTipoDevoluciones.TipoDevolucionDesc.ToString().ToUpper().Trim();
                     CatTipoDevoluciones.IdEstatusRegistro = CatTipoDevoluciones.IdEstatusRegistro;

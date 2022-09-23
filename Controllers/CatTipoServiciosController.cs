@@ -102,9 +102,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoServicio.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoServicio.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoServicio.FechaRegistro = DateTime.Now;
                     catTipoServicio.TipoServicioDesc = catTipoServicio.TipoServicioDesc.ToString().ToUpper().Trim();
                     catTipoServicio.IdEstatusRegistro = 1;
@@ -157,9 +157,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoServicio.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoServicio.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoServicio.FechaRegistro = DateTime.Now;
                     catTipoServicio.TipoServicioDesc = catTipoServicio.TipoServicioDesc.ToString().ToUpper().Trim();
                     catTipoServicio.IdEstatusRegistro = catTipoServicio.IdEstatusRegistro;

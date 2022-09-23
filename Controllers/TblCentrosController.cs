@@ -88,27 +88,44 @@ namespace WebAdmin.Controllers
         [HttpGet]
         public ActionResult fDatosCentro()
         {
-            var fuser = _userService.GetUserId();
-            var tblUsuario = _context.TblUsuarios.First(f => f.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro = _context.TblCentros.First(c => c.IdUsuarioControl == Guid.Parse(fuser) && c.IdEstatusRegistro == 1);
-            return Json(fIdCentro);
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+            
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+            {
+                var f_CorpCent = _context.TblCentros.First(m => m.IdUsuarioControl == f_usuario.IdUsuario);
+                return Json(f_CorpCent);
+            }
+            else
+            {
+                // f_CorpCent = _context.TblCorporativos.First(m => m.IdEstatusRegistro == 1);
+                return Json(0);
+            }
         }
         [HttpGet]
         public ActionResult DatosPresupuesto()
         {
 
-            var fuser = _userService.GetUserId();
-            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
 
-            var fTotales = from a in _context.TblCentros
-                           where a.IdEstatusRegistro == 1
-                           select new
-                           {
-                               fRegistros = _context.TblCentros.Where(a => a.IdEstatusRegistro == 1 && a.IdCentro == fIdCentro.IdCentro).Count(),
-                               fMontos = _context.TblCentros.Where(a => a.IdCentro == fIdCentro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum()
-                           };
-            return Json(fTotales);
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+            {
+                var f_cent = _context.TblCentros.First(m => m.IdUsuarioControl == f_usuario.IdUsuario);
+                var f_totales = from a in _context.TblCentros
+                                where a.IdEstatusRegistro == 1
+                                select new
+                                {
+                                    fRegistros = _context.TblCentros.Where(a => a.IdEstatusRegistro == 1 && a.IdCentro == f_cent.IdCentro).Count(),
+                                    fMontos = _context.TblCentros.Where(a => a.IdCentro == f_cent.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum()
+                                };
+                return Json(f_totales);
+
+            }
+            else
+            {
+                return Json(0);
+            }
         }
         [HttpGet]
         public ActionResult FiltroCentro(Guid id)
@@ -183,9 +200,9 @@ namespace WebAdmin.Controllers
 
                     if (vUsuarioAsignado.Count == 0)
                     {
-                        var fuser = _userService.GetUserId();
+                        var f_user = _userService.GetUserId();
                         var isLoggedIn = _userService.IsAuthenticated();
-                        tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
+                        tblCentros.IdUsuarioModifico = Guid.Parse(f_user);
                         var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                         tblCentros.FechaRegistro = DateTime.Now;
                         tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper().Trim();
@@ -279,9 +296,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblCentros.IdUsuarioModifico = Guid.Parse(f_user);
                     tblCentros.FechaRegistro = DateTime.Now;
                     tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper().Trim();
                     tblCentros.IdEstatusRegistro = tblCentros.IdEstatusRegistro;

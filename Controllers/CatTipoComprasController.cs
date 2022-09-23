@@ -112,9 +112,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoCompras.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoCompras.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoCompras.TipoCompraDesc = catTipoCompras.TipoCompraDesc.ToString().ToUpper().Trim();
                     catTipoCompras.FechaRegistro = DateTime.Now;
                     catTipoCompras.IdEstatusRegistro = 1;
@@ -168,9 +168,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoCompras.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoCompras.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoCompras.TipoCompraDesc = catTipoCompras.TipoCompraDesc.ToString().ToUpper().Trim();
                     catTipoCompras.FechaRegistro = DateTime.Now;
                     catTipoCompras.IdEstatusRegistro = catTipoCompras.IdEstatusRegistro;

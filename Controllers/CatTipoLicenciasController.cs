@@ -117,9 +117,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    CaTipotLicencia.IdUsuarioModifico = Guid.Parse(fuser);
+                    CaTipotLicencia.IdUsuarioModifico = Guid.Parse(f_user);
                     CaTipotLicencia.FechaRegistro = DateTime.Now;
                     CaTipotLicencia.LicenciaDesc = CaTipotLicencia.LicenciaDesc.ToUpper().Trim();
                     CaTipotLicencia.IdEstatusRegistro = 1;
@@ -173,9 +173,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    CaTipotLicencia.IdUsuarioModifico = Guid.Parse(fuser);
+                    CaTipotLicencia.IdUsuarioModifico = Guid.Parse(f_user);
                     CaTipotLicencia.FechaRegistro = DateTime.Now;
                     CaTipotLicencia.LicenciaDesc = CaTipotLicencia.LicenciaDesc.ToUpper().Trim();
                     CaTipotLicencia.IdEstatusRegistro = CaTipotLicencia.IdEstatusRegistro;

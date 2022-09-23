@@ -80,9 +80,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoContratacion.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoContratacion.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoContratacion.FechaRegistro = DateTime.Now;
                     catTipoContratacion.TipoContratacionDesc = catTipoContratacion.TipoContratacionDesc.ToString().ToUpper().Trim();
                     catTipoContratacion.IdEstatusRegistro = 1;
@@ -135,9 +135,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoContratacion.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoContratacion.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoContratacion.FechaRegistro = DateTime.Now;
                     catTipoContratacion.TipoContratacionDesc = catTipoContratacion.TipoContratacionDesc.ToString().ToUpper().Trim();
                     catTipoContratacion.IdEstatusRegistro = catTipoContratacion.IdEstatusRegistro;

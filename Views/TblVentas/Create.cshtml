@@ -1,9 +1,9 @@
 ﻿@model WebAdmin.ViewModels.VentasViewModel
 
 @{
-ViewData["Title"] = "Create";
-Layout = "~/Views/Shared/_Layout.cshtml";
-<link rel="stylesheet" href="~/css/site.css" />
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/css/site.css"/>
 }
 <style>
     .invoice-box {
@@ -73,275 +73,280 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 </style>
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Usuario</h4>
-    <!-- Basic with Icons -->
-    <div class="col-xxl">
-        <div class="card mb-8">
-            <div class="card-header d-flex align-items-center justify-content-between">
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Usuario</h4>
+<!-- Basic with Icons -->
+<div class="col-xxl">
+<div class="card mb-8">
+<div class="card-header d-flex align-items-center justify-content-between">
+</div>
+<div class="card-body">
+<div class="row">
+    <div class="mb-3 col-md-3">
+        <label for="TblVentas.IdTipoVenta" class="form-label" asp-for="TblVentas.IdTipoVenta"></label>
+        <div class="input-group input-group-merge">
+            <div class="input-group input-group-merge">
+                <span id="basic-icon-default-fullname2" class="input-group-text">
+                    <i
+                        class="bx bx-check-shield">
+                    </i>
+                </span>
+                <select id="l_tipo_venta" class="form-select" required asp-for="TblVentas.IdTipoVenta"
+                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                        onchange="this.setCustomValidity('')" required
+                        asp-items="@(new SelectList(ViewBag.ListaTipoVenta, "IdTipoVenta", "TipoVentaDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="mb-3 col-md-3">
-                        <label for="TblVentas.IdTipoVenta" class="form-label" asp-for="TblVentas.IdTipoVenta"></label>
-                        <div class="input-group input-group-merge">
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                        class="bx bx-check-shield"></i></span>
-                                <select id="lIdTipoVenta" class="form-select" required asp-for="TblVentas.IdTipoVenta"
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" required
-                                    asp-items="@(new SelectList(ViewBag.ListaTipoVenta,"IdTipoVenta","TipoVentaDesc"))">
-                                    <option value="">SELECCIONAR</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3 col-md-6">
-                        <label for="TblVentas.IdCliente" class="form-label" asp-for="TblVentas.IdCliente"></label>
-                        <div class="input-group input-group-merge">
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                        class="bx bx-check-shield"></i></span>
-                                <select id="IdCliente" class="form-select" required asp-for="TblVentas.IdCliente"
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" required
-                                    asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
-                                    <option value="">SELECCIONAR</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3 col-md-2">
-                        <label class="form-label"> Descuento</label>
-                        <div class="input-group input-group-merge">
-                            <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                            <input id="iDescuento" style="text-transform:uppercase" type="number" class="form-control"
-                                id="" min="0" max="100" value="0" aria-label="John Doe" aria-describedby="2" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="mb-3 col-md-4">
-                        <label class="form-label" asp-for="@Model.RelVentaProductos[0].TipoServicio"></label>
-                        <div class="input-group input-group-merge">
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                        class="bx bx-check-shield"></i></span>
-                                <select id="l_tipo_servicios" class="form-select"
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" required
-                                    asp-items="@(new SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
-                                    <option value="">SELECCIONAR</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3 col-md-8">
-                        <label class="form-label" asp-for="@Model.RelVentaProductos[0].Servicio"></label>
-                        <div class="input-group input-group-merge">
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                        class="bx bx-check-shield"></i></span>
-                                <select id="l_servicios" class="form-select" required
-                                    asp-for="@Model.RelVentaProductos[0].Servicio"
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" required>
-                                    <option value="">SELECCIONAR</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <!-- Main content -->
-                        <div class="invoice p-3 mb-3">
-                            <!-- Table row -->
-                            <div class="row">
-                                <div class="col-12 table-responsive">
-                                    <table class="table" id="tbProducto">
-                                        <tbody>
-                                            <thead>
-                                                </th>
-                                                <th style="text-align:center">
-                                                    TIPO SERVICIO
-                                                </th>
-                                                <th style="text-align:center">
-                                                    SERVICIO
-                                                </th>
-                                                <th style="text-align:center">
-                                                    DESCUENTO
-                                                </th>
-                                                <th style="text-align:center">
-                                                    PRECIO
-                                                </th>
-                                                <th style="text-align:center">
-                                                    TOTAL
-                                                </th>
-                                                <th style="text-align:center">ACCIONES</th>
-                                            </thead>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
-                            <!-- /.row -->
-                            <!-- this row will not appear when printing -->
-                        </div>
-                        <!-- /.invoice -->
-                    </div><!-- /.col -->
-                </div>
-                <div class="row">
-                    <!-- accepted payments column -->
-                    <div class="col-6">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">TIPO PAGO</label>
-                                    <select id="lTipoPago" class="form-select"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group" id="lFechaAlterna">
-                                    <label class="control-label">FECHA ALTERNA</label>
-                                    <input type="date" id="iFechaAlterna" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">PAGO</label>
-                                    <input type="number" id="iPagoMonto" class="form-control"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">CAMBIO</label>
-                                    <input id="iPagoDiferencia" class="form-control" readonly />
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group" id="lCodigoPago" hidden>
-                                    <label class="control-label">CODIGO PAGO</label>
-                                    <input id="iCodigoPago" class="form-control"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group" id="lCantidadAbono" hidden>
-                                    <label class="control-label">DIFERENCIA</label>
-                                    <input type="number" id="iCantidadAbono" class="form-control"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" readonly />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-6">
-                        <div class="table-responsive">
-                            <table class="table">
-                                @* <tr>
-                                    <th style="width:50%">Subtotal:</th>
-                                    <td><label id="l_SubTotalVenta"></label></td>
-                                </tr> *@
-                                @* <tr>
-                                    <th>IVA (16 %)</th>
-                                    <td><label id="l_IvaVenta"></label></td>
-                                </tr> *@
-                                <tr>
-                                    <th>Total:</th>
-                                    <td><label id="l_TotalVenta"></label></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-10">
-                        <br>
-
-                        <a id="btnTerminar" class="btn btn-success">
-                            <span>Guardar</span>
-
-                        </a>
-                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                        <button class="btn btn-info" id="btnPrint" hidden>Imprimir</button>
-                    </div>
-                </div>
-                <hr>
-
+        </div>
+    </div>
+    <div class="mb-3 col-md-6">
+        <label for="TblVentas.IdCliente" class="form-label" asp-for="TblVentas.IdCliente"></label>
+        <div class="input-group input-group-merge">
+            <div class="input-group input-group-merge">
+                <span id="basic-icon-default-fullname2" class="input-group-text">
+                    <i
+                        class="bx bx-check-shield">
+                    </i>
+                </span>
+                <select id="l_alumno" class="form-select" required asp-for="TblVentas.IdCliente"
+                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                        onchange="this.setCustomValidity('')" required
+                        asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros, "IdUsuario", "NombreUsuario"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 col-md-2">
+        <label class="form-label"> Descuento</label>
+        <div class="input-group input-group-merge">
+            <span id="2" class="input-group-text">
+                <i class="bx bx-check-shield"></i>
+            </span>
+            <input id="iDescuento" style="text-transform:uppercase" type="number" class="form-control"
+                   id="" min="0" max="100" value="0" aria-label="John Doe" aria-describedby="2"/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="mb-3 col-md-4">
+        <label class="form-label" asp-for="@Model.RelVentaProductos[0].TipoServicio"></label>
+        <div class="input-group input-group-merge">
+            <div class="input-group input-group-merge">
+                <span id="basic-icon-default-fullname2" class="input-group-text">
+                    <i
+                        class="bx bx-check-shield">
+                    </i>
+                </span>
+                <select id="l_tipo_servicios" class="form-select"
+                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                        onchange="this.setCustomValidity('')" required
+                        asp-items="@(new SelectList(ViewBag.ListaTipoServicio, "IdTipoServicio", "TipoServicioDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 col-md-8">
+        <label class="form-label" asp-for="@Model.RelVentaProductos[0].Servicio"></label>
+        <div class="input-group input-group-merge">
+            <div class="input-group input-group-merge">
+                <span id="basic-icon-default-fullname2" class="input-group-text">
+                    <i
+                        class="bx bx-check-shield">
+                    </i>
+                </span>
+                <select id="l_servicios" class="form-select" required
+                        asp-for="@Model.RelVentaProductos[0].Servicio"
+                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                        onchange="this.setCustomValidity('')" required>
+                    <option value="">SELECCIONAR</option>
+                </select>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalVentas" aria-labelledby="modalVentasLabel" tabindex="-1" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalVentasLabel">La venta se ha registrado con exito ¿deseas imprimir la
-                    nota de venta?</h5>
-                <input type="hidden" id="i_FolioVenta" />
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="row">
+    <div class="col-12">
+        <!-- Main content -->
+        <div class="invoice p-3 mb-3">
+            <!-- Table row -->
+            <div class="row">
+                <div class="col-12 table-responsive">
+                    <table class="table" id="tbProducto">
+                        <tbody>
+                        <thead>
+                        <th style="text-align:center">
+                            TIPO SERVICIO
+                        </th>
+                        <th style="text-align:center">
+                            SERVICIO
+                        </th>
+                        <th style="text-align:center">
+                            DESCUENTO
+                        </th>
+                        <th style="text-align:center">
+                            PRECIO
+                        </th>
+                        <th style="text-align:center">
+                            TOTAL
+                        </th>
+                        <th style="text-align:center">ACCIONES</th>
+                        </thead>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.col -->
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
+            <!-- /.row -->
+            <!-- /.row -->
+            <!-- this row will not appear when printing -->
+        </div>
+        <!-- /.invoice -->
+    </div><!-- /.col -->
+</div>
+<div class="row">
+    <!-- accepted payments column -->
+    <div class="col-6">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">TIPO PAGO</label>
+                    <select id="l_tipo_pago" class="form-select"
+                            oninvalid="this.setCustomValidity('Campo Requerido')"
+                            onchange="this.setCustomValidity('')" required
+                            asp-items="@(new SelectList(ViewBag.ListaTipoPago, "IdTipoPago", "TipoPagoDesc"))">
+                        <option value="">SELECCIONAR</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" id="lFechaAlterna">
+                    <label class="control-label">FECHA DE PAGO ALTERNA</label>
+                    <input type="date" id="iFechaAlterna" class="form-control"/>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">PAGO</label>
+                    <input type="number" id="i_pago_monto" class="form-control" value="0" required/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">CAMBIO</label>
+                    <input id="iPagoDiferencia" class="form-control" value="0" readonly/>
+                </div>
+            </div>
+
+
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" id="lCodigoPago" hidden>
+                    <label class="control-label">CODIGO PAGO</label>
+                    <input id="iCodigoPago" class="form-control"
+                           oninvalid="this.setCustomValidity('Campo Requerido')"
+                           onchange="this.setCustomValidity('')" required/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" id="lCantidadAbono" hidden>
+                    <label class="control-label">DIFERENCIA</label>
+                    <input type="number" id="iCantidadAbono" class="form-control"
+                           oninvalid="this.setCustomValidity('Campo Requerido')"
+                           onchange="this.setCustomValidity('')" readonly/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+    <div class="col-6">
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Total:</th>
+                    <td>
+                        <label id="l_TotalVenta"></label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-10">
+        <br>
+
+        <a id="btnTerminar" class="btn btn-success">
+            <span>Guardar</span>
+
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+        <button class="btn btn-info" id="btnPrint" hidden>Imprimir</button>
+    </div>
+</div>
+<hr>
+ <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
                         <table>
                             <tr class="top">
                                 <td colspan="2">
                                     <table>
-                                        <tr>
-                                            <td class="title">
-                                                <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
-                                                    style="width: 128px; max-width: 128px" />
-                                            </td>
-                                            <td>
-                                                <label id="l_NumVenta"></label><br />
-                                                <label id="l_FechaCreacionVenta"></label><br />
-                                                <label id="l_FechaAlternaVenta"></label><br />
-                                                <label id="l_UsuarioVenta"></label>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr class="information">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label id="l_CentroVenta"></label><br />
-                                                <label id="l_DatosCentroVenta"></label><br />
-                                                <label id="l_DatosCentroVentaAlt"></label><br />
-                                            </td>
+                                    <tr>
+                                        <td class="title">
+                                            <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
+                                                style="width: 128px; max-width: 128px" />
+                                        </td>
+                                        <td>
+                                            <label id="l_NumVenta"></label><br />
+                                            <label id="l_FechaCreacionVenta"></label><br />
+                                            <label id="l_UsuarioVenta"></label>
+                                            <label id="l_UsuarioContactoVenta"></label>
+                                        </td>
 
-                                            <td>
-                                                <label id="l_ClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVentaAlt"></label><br />
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="l_CorporativoVenta"></label><br />
+                                            <label id="l_DatosCorporativoVenta"></label><br />
+                                            <label id="l_DatosCorporativoVentaAlt"></label><br />
+                                            <label id="l_DatosCorporativoContactoVenta"></label><br />
+                                        </td>
+                                        <td>
+                                            <label id="l_CentroVenta"></label><br />
+                                            <label id="l_DatosCentroVenta"></label><br />
+                                            <label id="l_DatosCentroVentaAlt"></label><br />
+                                            <label id="l_DatosCentroContactoVenta"></label><br />
+                                        </td>
+
+                                    </tr>
+
+                                </table>
                                 </td>
                             </tr>
+                         </tr>
+                                  <tr class="information">
+                            <td colspan="2">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label id="l_ClienteVenta"></label><br />
+                                            <label id="l_DatosClienteVenta"></label><br />
+                                            <label id="l_DatosClienteVentaAlt"></label><br />
+                                        </td>
+
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
 
                             <tr class="heading">
                                 <td>Metodo de Pago</td>
@@ -386,45 +391,59 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                 <td>Total: $0.00</td>
                             </tr>
                         </table>
-                        <table>
+ <table>
                             <tr class="top">
                                 <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td class="title">
-                                                <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
-                                                    style="width: 128px; max-width: 128px" />
-                                            </td>
-                                            <td>
-                                                <label id="l_NumVenta"></label><br />
-                                                <label id="l_FechaCreacionVenta"></label><br />
-                                                <label id="l_FechaAlternaVenta"></label><br />
-                                                <label id="l_UsuarioVenta"></label>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                   <table>
+                                    <tr>
+                                        <td class="title">
+                                            <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
+                                                style="width: 128px; max-width: 128px" />
+                                        </td>
+                                        <td>
+                                            <label id="dl_NumVenta"></label><br />
+                                            <label id="dl_FechaCreacionVenta"></label><br />
+                                            <label id="dl_UsuarioVenta"></label>
+                                            <label id="dl_UsuarioContactoVenta"></label>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="dl_CorporativoVenta"></label><br />
+                                            <label id="dl_DatosCorporativoVenta"></label><br />
+                                            <label id="dl_DatosCorporativoVentaAlt"></label><br />
+                                            <label id="dl_DatosCorporativoContactoVenta"></label><br />
+                                        </td>
+                                        <td>
+                                            <label id="dl_CentroVenta"></label><br />
+                                            <label id="dl_DatosCentroVenta"></label><br />
+                                            <label id="dl_DatosCentroVentaAlt"></label><br />
+                                            <label id="dl_DatosCentroContactoVenta"></label><br />
+                                        </td>
+
+                                    </tr>
+
+                                </table>
                                 </td>
                             </tr>
+                                  <tr class="information">
+                            <td colspan="2">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label id="dl_ClienteVenta"></label><br />
+                                            <label id="dl_DatosClienteVenta"></label><br />
+                                            <label id="dl_DatosClienteVentaAlt"></label><br />
+                                        </td>
 
-                            <tr class="information">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label id="l_CentroVenta"></label><br />
-                                                <label id="l_DatosCentroVenta"></label><br />
-                                                <label id="l_DatosCentroVentaAlt"></label><br />
-                                            </td>
+                                        <td>
 
-                                            <td>
-                                                <label id="l_ClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVentaAlt"></label><br />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
 
                             <tr class="heading">
                                 <td>Metodo de Pago</td>
@@ -464,15 +483,29 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
                             <tr class="total">
                                 <td>
-                                    <p><span class="text-muted fw-light">Intelimundo /</span>
-                                        Cliente</p>
+                                    <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
                                 </td>
-
                                 <td>Total: $0.00</td>
                             </tr>
                         </table>
                     </div>
-                </div>
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="modalVentas" aria-labelledby="modalVentasLabel" tabindex="-1" style="display: none"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalVentasLabel">
+                    La venta se ha registrado con exito ¿deseas imprimir la
+                    nota de venta?
+                </h5>
+                <input type="hidden" id="i_FolioVenta"/>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
             </div>
             <div class="modal-footer">
                 <form class="form-inline">
@@ -482,10 +515,11 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         </div>
     </div>
 </div>
+
 @section Scripts {
-@{
-await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script>
         const formatter = new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -496,8 +530,87 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             const d1 = new Date();
             const GeneraFolio = d1.getTime();
             document.getElementById("i_FolioVenta").value = "iV-" + GeneraFolio;
+
+$.ajax({
+            type: "GET",
+            url: "/TblCorporativoes/fDatosCorporativo/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_NumVenta').innerHTML = '# Nómina: ' + "iV-" + GeneraFolio;
+                    document.getElementById('dl_NumVenta').innerHTML = '# Nómina: ' + "iV-" + GeneraFolio;
+
+                    const dateObject = new Date(list.fechaRegistro);
+                    var month = dateObject.getMonth();
+                    var dateOfMonth = dateObject.getDate();
+                    var year = dateObject.getFullYear();
+                    var formattedDate = dateOfMonth + "/" + month + "/" + year;
+
+                    document.getElementById('l_FechaCreacionVenta').innerHTML = 'Fecha: ' + formattedDate;
+
+                    document.getElementById('l_CorporativoVenta').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
+                    document.getElementById('l_DatosCorporativoVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('l_DatosCorporativoVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('l_DatosCorporativoContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+
+                    document.getElementById('dl_FechaCreacionVenta').innerHTML = 'Fecha: ' + formattedDate;
+
+                    document.getElementById('dl_CorporativoVenta').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
+                    document.getElementById('dl_DatosCorporativoVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('dl_DatosCorporativoVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('dl_DatosCorporativoContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+                }
+            },
+
         });
-        $('#IdCliente').select2({
+        $.ajax({
+            type: "GET",
+            url: "/TblCentros/fDatosCentro/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_CentroVenta').innerHTML = 'Centro: ' + list.nombreCentro;
+                    document.getElementById('l_DatosCentroVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('l_DatosCentroVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('l_DatosCentroContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+
+                    document.getElementById('dl_CentroVenta').innerHTML = 'Centro: ' + list.nombreCentro;
+                    document.getElementById('dl_DatosCentroVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
+                    document.getElementById('dl_DatosCentroVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
+                    document.getElementById('dl_DatosCentroContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
+                }
+            },
+        });
+         $.ajax({
+            type: "GET",
+            url: "/TblUsuarios/fDatosUsuario/",
+            data: {},
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_UsuarioVenta').innerHTML = 'Usuario: ' + list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+
+                    document.getElementById('dl_UsuarioVenta').innerHTML = 'Usuario: ' + list.nombres + ' ' + list.apellidoPaterno + ' ' + list.apellidoMaterno;
+                }
+            },
+        });
+
+
+
+
+        });
+        $('#l_alumno').select2({
             theme: "bootstrap-5",
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
             placeholder: $(this).data('placeholder'),
@@ -543,13 +656,13 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 }
             });
         });
-        $('#iPagoMonto' ).change(function() {
+        $('#i_pago_monto' ).change(function() {
             let total_col1 = 0;
                     $('#tbProducto tbody').find('tr').each(function (i, el) {
 
                 total_col1 += parseFloat($(this).find('td').eq(4).text());
                 });
-                let iPagoMonto = parseInt($('#iPagoMonto').val());
+                let iPagoMonto = parseInt($('#i_pago_monto').val());
                 let tDiferencia = parseInt(iPagoMonto - total_col1);
                 let vTotal = iPagoMonto + tDiferencia;
             document.getElementById("iPagoDiferencia").value = tDiferencia;
@@ -563,7 +676,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             }
         
         });
-        $('#lTipoPago').change(function () {
+        $('#l_tipo_pago').change(function () {
             var SelectedText = $('option:selected', this).text();
             var SelectedValue = $('option:selected', this).val();
 
@@ -574,7 +687,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 document.getElementById("lCodigoPago").setAttribute("hidden", true);
             }
         });
-        $('#lIdTipoVenta').change(function () {
+        $('#l_tipo_venta').change(function () {
             var SelectedText = $('option:selected', this).text();
             var SelectedValue = $('option:selected', this).val();
 
@@ -618,6 +731,22 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                                     $("<td style='text-align:center'>").text(_tprecio),
                                     $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
                             )
+                             $("#tbProductoA tbody").append(
+                                $("<tr>").append(
+                                    $("<td style='text-align:center'>").text(f_tipo_servicio),
+                                    $("<td style='text-align:center'>").text(f_servicio),
+                                    $("<td style='text-align:center'>").text(_desc),
+                                    $("<td style='text-align:center'>").text(_prec),
+                                    $("<td style='text-align:center'>").text(_tprecio)
+                            )
+                             $("#tbProductoB tbody").append(
+                                $("<tr>").append(
+                                    $("<td style='text-align:center'>").text(f_tipo_servicio),
+                                    $("<td style='text-align:center'>").text(f_servicio),
+                                    $("<td style='text-align:center'>").text(_desc),
+                                    $("<td style='text-align:center'>").text(_prec),
+                                    $("<td style='text-align:center'>").text(_tprecio)
+                            )
                         }
 
                         //Defino los totales de mis 2 columnas en 0
@@ -641,44 +770,69 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 },
             });
         });
+            $('#l_alumno').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        $.ajax({
+            type: "GET",
+            url: "/TblAlumnos/sDatosAlumno/",
+            data: { id: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    document.getElementById('l_ClienteVenta').innerHTML = 'Alumno: ' + list.nombreCompleto;
+                    document.getElementById('l_DatosClienteVenta').innerHTML = 'Contacto: ' + list.correoAcceso + ', Teléfono: ' + list.telefono;
+
+                    document.getElementById('dl_ClienteVenta').innerHTML = 'Alumno: ' + list.nombreCompleto;
+                    document.getElementById('dl_DatosClienteVenta').innerHTML = 'Contacto: ' + list.correoAcceso + ', Teléfono: ' + list.telefono;
+                }
+            },
+        });
+    });
         $("#btnTerminar").on("click", function () {
 
-            var lIdTipoVenta = $('#lIdTipoVenta').val();
-            var IdCliente = $('#IdCliente').val();
-            var rowCount = $('#tbProducto >tbody >tr').length;
-            var lTipoPago = $('#lTipoPago').val();
-            var iPagoMonto = $('#iPagoMonto').val();
+            var f_tipo_venta = $('#l_tipo_venta').val();
+            var f_alumno = $('#l_alumno').val();
+            var f_row_count = $('#tbProducto >tbody >tr').length;
+            var f_tipo_pago = $('#l_tipo_pago').val();
             var l_TotalVenta = $('#l_TotalVenta').val();
             var iPagoDiferencia = $('#iPagoDiferencia').val();
-            
-            var total_col1 = 0;
-                $('#tbProducto tbody').find('tr').each(function (i, el) {
+            let total_col1 = 0;
+            $('#tbProducto tbody').find('tr').each(function (i, el) {
 
             total_col1 += parseFloat($(this).find('td').eq(4).text());
             });
-            
-
-            if (lIdTipoVenta == "") {
-                validate('lIdTipoVenta')
+            let i_pago_monto = parseInt($('#i_pago_monto').val());
+            let tDiferencia = parseInt(i_pago_monto - total_col1);
+            let vTotal = i_pago_monto + tDiferencia;
+            document.getElementById("iPagoDiferencia").value = tDiferencia;
+           
+            if (f_tipo_venta == "") {
+                validate('l_tipo_venta')
             }
-            else if (IdCliente == "") {
-                validate('IdCliente')
+            else if (f_alumno == "") {
+                validate('l_alumno')
             }
             else 
             {
-                if(rowCount == 0)
+                if(f_row_count == 0)
                 {
                 vNotify.error({text:'Favor de agregar Servicios.', title:'Intelimundo.'});    
                 }
-                else if (lTipoPago == "") {
-                validate('lTipoPago')
+                else if (f_tipo_pago == "") {
+                validate('l_tipo_pago')
                 }
-                else if (iPagoMonto == "") {
-                validate('iPagoMonto')
+                else if (i_pago_monto == 0) {
+                validate('i_pago_monto')
                 }
-                else if (iPagoMonto != total_col1) {
-                    if (iPagoMonto - iPagoDiferencia == total_col1) {
-                var RelVenta_Pagos = []
+                else if (vTotal == total_col1)
+                 {
+                    if (i_pago_monto - iPagoDiferencia == total_col1) {
+                    var RelVenta_Pagos = []
                     var RelVenta_Productos = []
                     var total = 0;
                     $("#tbProducto > tbody > tr").each(function (i, tr) {
@@ -695,12 +849,12 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         )
                     })
                         var RelVenta_Pagos = [{
-                            IdTipoPago: $("#lTipoPago").val(),
+                            IdTipoPago: $("#l_tipo_pago").val(),
                         }];
                     var oCompraVM = {
                         TblVentas: {
-                            IdTipoVenta: $("#lIdTipoVenta").val(),
-                            IdCliente: $("#IdCliente").val(),
+                            IdTipoVenta: $("#l_tipo_venta").val(),
+                            IdCliente: $("#l_alumno").val(),
                             FolioVenta: $("#i_FolioVenta").val(),
 
                         },
@@ -709,7 +863,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     }
 
                     jQuery.ajax({
-                        url: '@Url.Action("Index","TblVentas")',
+                        url: '@Url.Action("Index", "TblVentas")',
                         type: "POST",
                         data: JSON.stringify(oCompraVM),
                         datatype: "json",
@@ -761,9 +915,22 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 }
         }
         function validate(inputID) {
-            const input = document.getElementById(inputID);
-            const validityState = input.validity;
-            input.reportValidity();
+            switch (inputID) {
+            case 'l_tipo_venta':
+                vNotify.error({text:'Tipo Venta, Requerido.', title:'Intelimundo.'});
+                break;
+            case 'l_alumno':
+                vNotify.error({text:'Alumno, Requerido.', title:'Intelimundo.'});
+                break;
+                case 'l_tipo_pago':
+                vNotify.error({text:'Tipo Pago, Requerido.', title:'Intelimundo.'});
+                break;
+                case 'i_pago_monto':
+                vNotify.error({text:'Pago, Requerido.', title:'Intelimundo.'});
+                break;
+            default:
+                vNotify.error({text:'Err.', title:'Intelimundo.'});
+            }
         }
         $(document).on("click", "#btnPrint", function (e) {
             e.preventDefault();

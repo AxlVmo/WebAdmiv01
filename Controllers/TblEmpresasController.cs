@@ -83,7 +83,7 @@ namespace WebAdmin.Controllers
 
                     if (vDuplicado.Count == 0)
                     {
-                        var fuser = _userService.GetUserId();
+                        var f_user = _userService.GetUserId();
                         var isLoggedIn = _userService.IsAuthenticated();
 
                         tblEmpresa.FechaRegistro = DateTime.Now;
@@ -97,7 +97,7 @@ namespace WebAdmin.Controllers
                         tblEmpresa.LocalidadMunicipio = !string.IsNullOrEmpty(tblEmpresa.LocalidadMunicipio) ? tblEmpresa.LocalidadMunicipio.ToUpper().Trim() : tblEmpresa.LocalidadMunicipio;
                         tblEmpresa.Ciudad = !string.IsNullOrEmpty(tblEmpresa.Ciudad) ? tblEmpresa.Ciudad.ToUpper().Trim() : tblEmpresa.Ciudad;
                         tblEmpresa.Estado = !string.IsNullOrEmpty(tblEmpresa.Estado) ? tblEmpresa.Estado.ToUpper().Trim() : tblEmpresa.Estado;
-                        tblEmpresa.IdUsuarioModifico = Guid.Parse(fuser);
+                        tblEmpresa.IdUsuarioModifico = Guid.Parse(f_user);
                         _context.SaveChanges();
                         _context.Add(tblEmpresa);
                         await _context.SaveChangesAsync();
@@ -152,9 +152,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblEmpresa.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblEmpresa.IdUsuarioModifico = Guid.Parse(f_user);
                     tblEmpresa.FechaRegistro = DateTime.Now;
                     tblEmpresa.NombreEmpresa = tblEmpresa.NombreEmpresa.ToString().ToUpper().Trim();
                     tblEmpresa.GiroComercial = !string.IsNullOrEmpty(tblEmpresa.GiroComercial) ? tblEmpresa.GiroComercial.ToUpper().Trim() : tblEmpresa.GiroComercial;

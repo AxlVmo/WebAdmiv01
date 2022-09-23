@@ -112,9 +112,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoCancelaciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoCancelaciones.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoCancelaciones.TipoCancelacionDesc = catTipoCancelaciones.TipoCancelacionDesc.ToString().ToUpper().Trim();
                     catTipoCancelaciones.FechaRegistro = DateTime.Now;
                     catTipoCancelaciones.IdEstatusRegistro = 1;
@@ -168,9 +168,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoCancelaciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoCancelaciones.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoCancelaciones.TipoCancelacionDesc = catTipoCancelaciones.TipoCancelacionDesc.ToString().ToUpper().Trim();
                     catTipoCancelaciones.FechaRegistro = DateTime.Now;
                     catTipoCancelaciones.IdEstatusRegistro = catTipoCancelaciones.IdEstatusRegistro;

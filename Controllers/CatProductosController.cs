@@ -179,9 +179,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catProductos.IdUsuarioModifico = Guid.Parse(fuser);
+                    catProductos.IdUsuarioModifico = Guid.Parse(f_user);
                     var fCategoria = (from c in _context.CatCategorias where c.IdCategoria == catProductos.IdCategoria select c).Distinct().ToList();
                     catProductos.FechaRegistro = DateTime.Now;
                     catProductos.IdEstatusRegistro = 1;
@@ -242,9 +242,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catProductos.IdUsuarioModifico = Guid.Parse(fuser);
+                    catProductos.IdUsuarioModifico = Guid.Parse(f_user);
                     var fCategoria = (from c in _context.CatCategorias where c.IdCategoria == catProductos.IdCategoria select c).Distinct().ToList();
                     catProductos.FechaRegistro = DateTime.Now;
                     catProductos.IdEstatusRegistro = catProductos.IdEstatusRegistro;

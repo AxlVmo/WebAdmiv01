@@ -159,9 +159,9 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                         var isLoggedIn = _userService.IsAuthenticated();
                         if (isLoggedIn)
                         {
-                            var fuser = _userService.GetUserId();
+                            var f_user = _userService.GetUserId();
                             var vUsuarios = _context.TblUsuarios
-                                    .Where(s => s.IdUsuario == Guid.Parse(fuser) && s.IdPerfil == 3 && s.IdRol == 2 && s.IdCorpCent == 2)
+                                    .Where(s => s.IdUsuario == Guid.Parse(f_user) && s.IdPerfil == 3 && s.IdRol == 2 && s.IdCorpCent == 2)
                                     .ToList();
                             if (vUsuarios.Count == 1)
                             {
@@ -204,7 +204,6 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                         {
                             _notyf.Warning("Err", 5);
                         }
-
                     }
                 }
                 else
@@ -216,8 +215,6 @@ namespace WebAdmin.Areas.Identity.Pages.Account
             {
                 _notyf.Warning("La Contraseña debe de contenr entre 2 a 8 caracteres, favor de revisar.", 5);
             }
-
-
             // If we got this far, something failed, redisplay form
             return Page();
         }

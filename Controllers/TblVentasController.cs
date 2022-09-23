@@ -108,9 +108,9 @@ namespace WebAdmin.Controllers
             ViewBag.ListaCorpCent = TempData["fTS"];
 
 
-            var fuser = _userService.GetUserId();
-            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+            var f_user = _userService.GetUserId();
+            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
+            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
             if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
             {
@@ -121,7 +121,7 @@ namespace WebAdmin.Controllers
                                   select new TblVenta
                                   {
                                       IdVenta = a.IdVenta,
-                                      NumeroVenta = a.NumeroVenta,
+                                      FolioVenta = a.FolioVenta,
                                       NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,
                                       CentroDesc = c.NombreCentro,
                                       IdUCorporativoCentro = a.IdUCorporativoCentro,
@@ -151,77 +151,59 @@ namespace WebAdmin.Controllers
         [HttpGet]
         public ActionResult DatosVentas()
         {
-            var fuser = _userService.GetUserId();
-            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
 
-            var totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == fIdCentro.IdCentro)
-                .Join(_context.RelVentaProducto.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
-                .ToList().Sum(x => x.Quantity);
-
-            //   var totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == fIdCentro.IdCentro)
-            //     .Join(_context.RelCompraProductos.Where(x => x.PurchaseDate >= firstDay && x.PurchaseDate < lastDay), pl => pl.PurchaseId, p => p.PurchaseId, (pl, p) => new { Quantity = pl.Quantity })
-            //     .ToList().Sum(x => x.Quantity);
-            // return totalQuantity;
-            // var fVentas = _context.TblVenta
-            //                 .Where(rr => rr.IdUCorporativoCentro == fIdCentro.IdCentro)
-            //                 .SelectMany(rr => rr.RelVentaProductos)
-            //                 .GroupBy(ri => ri.TotalPrecio)
-            //                 .Select(g => new {
-            //                 Quantity = g.Sum(ri => ri.TotalPrecio)
-            //                 });
-
-            var fTotales = from a in _context.TblVenta
-                           where a.IdEstatusRegistro == 1
-                           select new
-                           {
-                               fRegistros = _context.TblVenta.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
-                               fMontos = Convert.ToDouble(totalQuantity)
-                           };
-            return Json(fTotales);
-        }
-        [HttpGet]
-        public ActionResult NuevaVenta()
-        {
-            var fuser = _userService.GetUserId();
-            var nVenta = _context.TblVenta.Count();
-
-            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
-
-            if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
-                var nDatosVentaCent = from a in _context.TblUsuarios
-                                      join b in _context.TblCentros on a.IdCorporativo equals b.IdCentro
-                                      select new
-                                      {
-                                          IdVenta = nVenta + 1,
-                                          NombreCompletoUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoPaterno,
-                                          CentroDesc = b.NombreCentro,
-                                          CentroDireccion = b.Calle + " " + b.CodigoPostal + " " + b.Colonia + " " + b.Ciudad + " " + b.LocalidadMunicipio + " " + b.Ciudad + " " + b.Estado,
-                                          CentroContacto = b.CorreoElectronico + ", " + b.Telefono,
-                                          FechaRegistro = DateTime.Today.ToShortDateString(),
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
-                                      };
-                var fDatosVentaCent = nDatosVentaCent.ToList();
-                return Json(fDatosVentaCent);
+                var totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro)
+                    .Join(_context.RelVentaProducto.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
+                    .ToList().Sum(x => x.Quantity);
+
+                //   var totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == fIdCentro.IdCentro)
+                //     .Join(_context.RelCompraProductos.Where(x => x.PurchaseDate >= firstDay && x.PurchaseDate < lastDay), pl => pl.PurchaseId, p => p.PurchaseId, (pl, p) => new { Quantity = pl.Quantity })
+                //     .ToList().Sum(x => x.Quantity);
+                // return totalQuantity;
+                // var fVentas = _context.TblVenta
+                //                 .Where(rr => rr.IdUCorporativoCentro == fIdCentro.IdCentro)
+                //                 .SelectMany(rr => rr.RelVentaProductos)
+                //                 .GroupBy(ri => ri.TotalPrecio)
+                //                 .Select(g => new {
+                //                 Quantity = g.Sum(ri => ri.TotalPrecio)
+                //                 });
+
+                var fTotales = from a in _context.TblVenta
+                               where a.IdEstatusRegistro == 1
+                               select new
+                               {
+                                   fRegistros = _context.TblVenta.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
+                                   fMontos = Convert.ToDouble(totalQuantity)
+                               };
+                return Json(fTotales);
             }
-            return Json(false);
+            else
+            {
+                return Json(0);
+
+            }
         }
         [HttpPost]
         public IActionResult Index([FromBody] VentasViewModel oVentaVM)
         {
-            var fuser = _userService.GetUserId();
+            var f_user = _userService.GetUserId();
             Guid fCentroCorporativo = Guid.Empty;
             int fCorpCent = 0;
             var isLoggedIn = _userService.IsAuthenticated();
-            var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
-            fCentroCorporativo = fIdUsuario.IdCorporativo;
+            var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+            var fCorp = _context.TblCorporativos.First();
+            fCentroCorporativo = fCorp.IdCorporativo;
             fCorpCent = 1;
             if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
             {
-                var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
-                fCentroCorporativo = fIdCentro.IdCentro;
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                fCentroCorporativo = f_centro.IdCentro;
                 fCorpCent = 2;
             }
             var nVenta = Guid.NewGuid();
@@ -233,7 +215,7 @@ namespace WebAdmin.Controllers
                 {
                     //item.IdRelVentaProducto = Guid.NewGuid();
                     item.Cantidad = 1;
-                    item.IdUsuarioModifico = Guid.Parse(fuser);
+                    item.IdUsuarioModifico = Guid.Parse(f_user);
                     item.FechaRegistro = DateTime.Now;
                     item.IdEstatusRegistro = 1;
                     item.IdVenta = nVenta;
@@ -244,17 +226,17 @@ namespace WebAdmin.Controllers
 
                 oVenta.IdCorpCent = fCorpCent;
                 oVenta.IdUCorporativoCentro = fCentroCorporativo;
-                oVenta.IdUsuarioModifico = Guid.Parse(fuser);
+                oVenta.IdUsuarioModifico = Guid.Parse(f_user);
                 oVenta.IdVenta = nVenta;
                 oVenta.NumeroVenta = _context.TblVenta.Count() + 1;
-                oVenta.IdUsuarioVenta = Guid.Parse(fuser);
+                oVenta.IdUsuarioVenta = Guid.Parse(f_user);
                 oVenta.IdCentro = fCentroCorporativo;
                 oVenta.FechaRegistro = DateTime.Now;
                 oVenta.IdEstatusRegistro = 1;
                 _context.TblVenta.Add(oVenta);
                 _context.SaveChanges();
-                
-                respuesta= true;
+
+                respuesta = true;
                 _notyf.Success("Registro creado con éxito", 5);
             }
             return Json(new { respuesta });
@@ -310,12 +292,12 @@ namespace WebAdmin.Controllers
             TempData["fTP"] = fTipoPago.ToList();
             ViewBag.ListaTipoPago = TempData["fTP"];
 
-            var fuser = _userService.GetUserId();
-            var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
+            var f_user = _userService.GetUserId();
+            var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
 
             if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
             {
-                var fIdCentroCent = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                var fIdCentroCent = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
                 var fUsuariosCent = from a in _context.TblAlumnos
                                     where a.IdUCorporativoCentro == fIdCentroCent.IdCentro && a.IdCorpCent == 2
                                     where a.IdEstatusRegistro == 1
@@ -356,7 +338,7 @@ namespace WebAdmin.Controllers
             else
             {
 
-                var fuser = _userService.GetUserId();
+                var f_user = _userService.GetUserId();
                 var isLoggedIn = _userService.IsAuthenticated();
                 var idCorporativos = _context.TblCorporativos.FirstOrDefault();
 
@@ -364,9 +346,9 @@ namespace WebAdmin.Controllers
                 tblVenta.IdEstatusRegistro = 1;
                 tblVenta.IdVenta = Guid.NewGuid();
                 tblVenta.NumeroVenta = _context.TblVenta.Count();
-                tblVenta.IdUsuarioVenta = Guid.Parse(fuser);
+                tblVenta.IdUsuarioVenta = Guid.Parse(f_user);
                 tblVenta.IdCentro = idCorporativos.IdCorporativo;
-                tblVenta.IdUsuarioModifico = Guid.Parse(fuser);
+                tblVenta.IdUsuarioModifico = Guid.Parse(f_user);
                 tblVenta.FechaRegistro = DateTime.Now;
                 tblVenta.IdEstatusRegistro = 1;
                 _context.Add(tblVenta);
@@ -374,7 +356,7 @@ namespace WebAdmin.Controllers
                 var relVentaProductos = VentaProductos;
                 var VentaProduct = _context.RelVentaProducto;
 
-                // VentaProduct.IdUsuarioModifico = Guid.Parse(fuser);
+                // VentaProduct.IdUsuarioModifico = Guid.Parse(f_user);
                 // VentaProduct.IdRelVentaProducto = Guid.NewGuid();
                 // VentaProduct.FechaRegistro = DateTime.Now;
                 // VentaProduct.IdEstatusRegistro = 1;

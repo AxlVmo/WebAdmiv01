@@ -80,9 +80,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoPrestamo.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoPrestamo.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoPrestamo.FechaRegistro = DateTime.Now;
                     catTipoPrestamo.TipoPrestamoDesc = catTipoPrestamo.TipoPrestamoDesc.ToString().ToUpper().Trim();
                     catTipoPrestamo.IdEstatusRegistro = 1;
@@ -135,9 +135,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoPrestamo.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoPrestamo.IdUsuarioModifico = Guid.Parse(f_user);
                     catTipoPrestamo.FechaRegistro = DateTime.Now;
                     catTipoPrestamo.TipoPrestamoDesc = catTipoPrestamo.TipoPrestamoDesc.ToString().ToUpper().Trim();
                     catTipoPrestamo.IdEstatusRegistro = catTipoPrestamo.IdEstatusRegistro;

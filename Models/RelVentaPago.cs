@@ -17,13 +17,10 @@ namespace WebAdmin.Models
 
         [Display(Name = "Fecha Alterna")]
         [DataType(DataType.Date)]
-        public DateTime FechaAlterna { get; set; }
+        public DateTime FechaAlternaPago { get; set; }
 
         [Display(Name = "Codigo Referencia")]
         public string CodigoReferencia { get; set; }
-
-        [Display(Name = "Descuento")]
-        public int CantidadPago { get; set; }
 
          [Display(Name = "Descuento")]
         public int CantidadAbono { get; set; }
@@ -40,6 +37,7 @@ namespace WebAdmin.Models
         [Display(Name = "Fecha Registro")]
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }
+        
 
         [Display(Name = "Estatus")]
         

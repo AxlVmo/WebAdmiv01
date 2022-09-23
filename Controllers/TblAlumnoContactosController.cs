@@ -169,9 +169,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblAlumnoContacto.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblAlumnoContacto.IdUsuarioModifico = Guid.Parse(f_user);
                     var fAlumno = (from c in _context.TblAlumnos where c.IdAlumno == tblAlumnoContacto.IdAlumno select c).Distinct().ToList();
                     var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblAlumnoContacto.IdPerfil select c).Distinct().ToList();
                     tblAlumnoContacto.NombreAlumnoContacto = tblAlumnoContacto.NombreAlumnoContacto.ToString().ToUpper().Trim();
@@ -237,9 +237,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblAlumnoContacto.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblAlumnoContacto.IdUsuarioModifico = Guid.Parse(f_user);
                     var fAlumno = (from c in _context.TblAlumnos where c.IdAlumno == tblAlumnoContacto.IdAlumno select c).Distinct().ToList();
                     var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblAlumnoContacto.IdPerfil select c).Distinct().ToList();
                     tblAlumnoContacto.NombreAlumnoContacto = tblAlumnoContacto.NombreAlumnoContacto.ToString().ToUpper().Trim();

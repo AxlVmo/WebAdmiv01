@@ -136,9 +136,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicado.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblAlumnoDirecciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblAlumnoDirecciones.IdUsuarioModifico = Guid.Parse(f_user);
                     var fAlumno = (from c in _context.TblAlumnos where c.IdAlumno == tblAlumnoDirecciones.IdAlumno select c).Distinct().ToList();
                     var fTipoDireccion = (from c in _context.CatTipoDirecciones where c.IdTipoDireccion == tblAlumnoDirecciones.IdTipoDireccion select c).Distinct().ToList();
                     tblAlumnoDirecciones.FechaRegistro = DateTime.Now;
@@ -210,9 +210,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblAlumnoDirecciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblAlumnoDirecciones.IdUsuarioModifico = Guid.Parse(f_user);
                     var fAlumno = (from c in _context.TblAlumnos where c.IdAlumno == tblAlumnoDirecciones.IdAlumno select c).Distinct().ToList();
                     var fTipoDireccion = (from c in _context.CatTipoDirecciones where c.IdTipoDireccion == tblAlumnoDirecciones.IdTipoDireccion select c).Distinct().ToList();
                     tblAlumnoDirecciones.FechaRegistro = DateTime.Now;

@@ -58,37 +58,38 @@ ViewData["Title"] = "Registro";
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="mb-3 col-md-6">
-                            <label for="Input.Password" class="form-label" asp-for="Input.Password"></label>
-                            <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input type="password" class="form-control" id=""
-                                    placeholder="REQUERIDO" aria-label="John Doe" aria-describedby="2"
-                                    asp-for="Input.Password" required
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" tabindex="5" />
-                            </div>
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="Input.Password" class="form-label" asp-for="Input.Password"></label>
+                        <div class="input-group input-group-merge">
+                            <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                            <input type="password" class="form-control" id=""
+                                   placeholder="REQUERIDO" aria-label="John Doe" aria-describedby="2"
+                                   asp-for="Input.Password" required
+                                   oninvalid="this.setCustomValidity('Campo Requerido')"
+                                   onchange="this.setCustomValidity('')" tabindex="5" />
                         </div>
-                        <div class="mb-3 col-md-6">
-                            <label for="Input.ConfirmPassword" class="form-label"
-                                asp-for="Input.ConfirmPassword"></label>
-                            <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input  type="password" class="form-control" id="" placeholder="REQUERIDO" required aria-label="John Doe" aria-describedby="2"
-                                    asp-for="Input.ConfirmPassword" tabindex="6" />
-                            </div>
-                        </div>
-                        <div class="mt-2">
-                            <input type="submit" value="Crear" class="btn btn-success" tabindex="7"/>
-                            <a id="regresar_registro" hidden class="btn btn-secondary" asp-area="" asp-controller="TblUsuarios" asp-action="Index">Regresar</a>
-                          </div>
                     </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="Input.ConfirmPassword" class="form-label"
+                               asp-for="Input.ConfirmPassword"></label>
+                        <div class="input-group input-group-merge">
+                            <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                            <input  type="password" class="form-control" id="" placeholder="REQUERIDO" required aria-label="John Doe" aria-describedby="2"
+                                    asp-for="Input.ConfirmPassword" tabindex="6" />
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <input type="submit" value="Crear" class="btn btn-success" tabindex="7"/>
+                        <a id="regresar_registro" hidden class="btn btn-secondary" asp-area="" asp-controller="TblUsuarios" asp-action="Index">Regresar</a>
+                    </div>
+                </div>
+                   </div>
             </form>
         </div>
     </div>
 </div>
-</div>
+
 @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");

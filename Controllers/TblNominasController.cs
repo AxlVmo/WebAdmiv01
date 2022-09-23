@@ -35,6 +35,10 @@ namespace WebAdmin.Controllers
         // GET: TblNominas
         public async Task<IActionResult> Index()
         {
+
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+
             var ValidaEstatus = _context.CatEstatus.ToList();
 
             if (ValidaEstatus.Count == 2)
@@ -60,6 +64,26 @@ namespace WebAdmin.Controllers
                             if (ValidaUsuarios.Count >= 1)
                             {
                                 ViewBag.UsuariosFlag = 1;
+
+                                if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+                                {
+                                    var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                                    double f_presupuesto = _context.TblCentros.Where(a => a.IdCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum();
+
+                                    double totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro)
+                                        .Join(_context.RelVentaProducto.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
+                                        .ToList().Sum(x => x.Quantity);
+
+                                    if (totalQuantity > f_presupuesto)
+                                    {
+                                        ViewBag.PresupuestoFlag = 1;
+                                    }
+                                    else
+                                    {
+                                        _notyf.Information("Bancos sin Fondos", 5);
+                                    }
+                                }
+
                             }
                             else
                             {
@@ -109,11 +133,11 @@ namespace WebAdmin.Controllers
             TempData["fTS"] = sCorpCent.ToList();
             ViewBag.ListaCorpCent = TempData["fTS"];
 
-            var fuser = _userService.GetUserId();
-            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
 
-            if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+
+            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
                 var fNominaCntro = from a in _context.TblNominas
                                    join b in _context.TblUsuarios on a.IdUsuarioRemuneracion equals b.IdUsuario
@@ -153,18 +177,27 @@ namespace WebAdmin.Controllers
         [HttpGet]
         public ActionResult DatosNominas()
         {
-            var fuser = _userService.GetUserId();
-            var tblUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(fuser));
-            var fIdCentro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(fuser));
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
 
-            var fTotales = from a in _context.TblNominas
-                           where a.IdEstatusRegistro == 1
-                           select new
-                           {
-                               fRegistros = _context.TblNominas.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentro.IdCentro).Count(),
-                               fMontos = _context.TblNominas.Where(a => a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.UsuarioRemuneracion)).Sum()
-                           };
-            return Json(fTotales);
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+            {
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+
+                var fTotales = from a in _context.TblNominas
+                               where a.IdEstatusRegistro == 1
+                               select new
+                               {
+                                   fRegistros = _context.TblNominas.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
+                                   fMontos = _context.TblNominas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.UsuarioRemuneracion)).Sum()
+                               };
+                return Json(fTotales);
+            }
+            else
+            {
+                return Json(0);
+
+            }
         }
         // public IActionResult ImprimirNomina(int IdNomina)
         // {
@@ -214,19 +247,19 @@ namespace WebAdmin.Controllers
         // GET: TblNominas/Create
         public IActionResult Create()
         {
-            var fuser = _userService.GetUserId();
+            var f_user = _userService.GetUserId();
             var fIdUsuario = _context.TblUsuarios
-                .Where(a => a.IdPerfil == 3 && a.IdRol == 2 && a.IdArea == 2 && a.IdUsuario == Guid.Parse(fuser)).ToList();
+                .Where(a => a.IdPerfil == 3 && a.IdRol == 2 && a.IdArea == 2 && a.IdUsuario == Guid.Parse(f_user)).ToList();
 
             if (fIdUsuario.Count != 0)
             {
                 var fIdCentroCorp = _context.TblCentros
-                                      .Where(s => s.IdUsuarioControl == Guid.Parse(fuser))
+                                      .Where(s => s.IdUsuarioControl == Guid.Parse(f_user))
                                       .FirstOrDefault();
 
                 var fUsuariosCentrosCorp = from a in _context.TblUsuarios
                                            where a.IdCorporativo == fIdCentroCorp.IdCentro
-                                           where a.IdUsuario != Guid.Parse(fuser)
+                                           where a.IdUsuario != Guid.Parse(f_user)
                                            select new
                                            {
                                                IdUsuario = a.IdUsuario,
@@ -240,7 +273,7 @@ namespace WebAdmin.Controllers
             else
             {
                 var fUsuariosCentros = from a in _context.TblUsuarios
-                                       where a.IdUsuario != Guid.Parse(fuser)
+                                       where a.IdUsuario != Guid.Parse(f_user)
                                        select new
                                        {
                                            IdUsuario = a.IdUsuario,
@@ -273,22 +306,22 @@ namespace WebAdmin.Controllers
 
                 Guid fCentroCorporativo = Guid.Empty;
                 int fCorpCent = 0;
-                var fuser = _userService.GetUserId();
+                var f_user = _userService.GetUserId();
                 var isLoggedIn = _userService.IsAuthenticated();
-                var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
                 var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
                 fCentroCorporativo = fCorp.IdCorporativo;
                 fCorpCent = 1;
                 if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                 {
-                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
                     fCentroCorporativo = fIdCentro.IdCentro;
                     fCorpCent = 2;
                 }
                 TblNomina.FolioNomina = TblNomina.FolioNomina;
                 TblNomina.IdCorpCent = fCorpCent;
                 TblNomina.IdUCorporativoCentro = fCentroCorporativo;
-                TblNomina.IdUsuarioModifico = Guid.Parse(fuser);
+                TblNomina.IdUsuarioModifico = Guid.Parse(f_user);
                 TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper().Trim();
                 TblNomina.FechaRegistro = DateTime.Now;
                 TblNomina.IdEstatusRegistro = 1;
@@ -358,21 +391,21 @@ namespace WebAdmin.Controllers
                 {
                     Guid fCentroCorporativo = Guid.Empty;
                     int fCorpCent = 0;
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(fuser));
+                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
                     fCentroCorporativo = fIdUsuario.IdCorporativo;
                     fCorpCent = 1;
                     if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                     {
-                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(fuser));
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
                         fCentroCorporativo = fIdCentro.IdCentro;
                         fCorpCent = 2;
                     }
                     TblNomina.IdCorpCent = fCorpCent;
                     TblNomina.IdUCorporativoCentro = fCentroCorporativo;
                     TblNomina.NominaDesc = TblNomina.NominaDesc.ToString().ToUpper().Trim();
-                    TblNomina.IdUsuarioModifico = Guid.Parse(fuser);
+                    TblNomina.IdUsuarioModifico = Guid.Parse(f_user);
                     TblNomina.FechaRegistro = DateTime.Now;
                     TblNomina.IdEstatusRegistro = TblNomina.IdEstatusRegistro;
                     _context.Update(TblNomina);

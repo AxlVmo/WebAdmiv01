@@ -80,9 +80,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicados.Count == 0)
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catPerfil.IdUsuarioModifico = Guid.Parse(fuser);
+                    catPerfil.IdUsuarioModifico = Guid.Parse(f_user);
                     catPerfil.FechaRegistro = DateTime.Now;
                     catPerfil.PerfilDesc = catPerfil.PerfilDesc.ToString().ToUpper().Trim();
                     catPerfil.IdEstatusRegistro = 1;
@@ -135,9 +135,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var fuser = _userService.GetUserId();
+                    var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catPerfil.IdUsuarioModifico = Guid.Parse(fuser);
+                    catPerfil.IdUsuarioModifico = Guid.Parse(f_user);
                     catPerfil.FechaRegistro = DateTime.Now;
                     catPerfil.PerfilDesc = catPerfil.PerfilDesc.ToString().ToUpper().Trim();
                     catPerfil.IdEstatusRegistro = catPerfil.IdEstatusRegistro;
