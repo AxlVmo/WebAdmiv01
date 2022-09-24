@@ -345,53 +345,53 @@
                                     </tr>
                                 </table>
                             </td>
-                        </tr>
-
-
-                            <tr class="heading">
-                                <td>Metodo de Pago</td>
-
-                                <td>Pago #</td>
-                            </tr>
-
-                            <tr class="details">
-                                <td>Efectivo</td>
-
-                                <td>1000</td>
-                            </tr>
-
-                            <tr class="heading">
-                                <td>Total</td>
-
-                                <td>Precio</td>
-                            </tr>
-
-                            <tr class="item">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="item">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="item last">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="total">
-                                <td>
-                                    <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
-                                </td>
-                                <td>Total: $0.00</td>
-                            </tr>
+                        </tr>                          
                         </table>
- <table>
+                         <table class="table" id="tbProductoA">
+                        <tbody>
+                        <thead>
+                        <th style="text-align:center">
+                            TIPO SERVICIO
+                        </th>
+                        <th style="text-align:center">
+                            SERVICIO
+                        </th>
+                        <th style="text-align:center">
+                            DESCUENTO
+                        </th>
+                        <th style="text-align:center">
+                            PRECIO
+                        </th>
+                        <th style="text-align:center">
+                            TOTAL
+                        </th>
+                        </thead>
+                        </tbody>
+                          
+                    </table>
+                       <div class="row">
+            <div class="col-md-6">
+                 <br/>
+      <p><span class="text-muted fw-light">Periodo Comprendido del: </span>26-08-2022 al 10-09-2022</p>
+                    
+                    <br/>
+                            <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
+                       
+            </div>
+                     <div class="col-6">
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Total:</th>
+                    <td>
+                        <label id="l_TotalVenta"></label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </div>
+                     <table>
                             <tr class="top">
                                 <td colspan="2">
                                    <table>
@@ -444,50 +444,52 @@
                                 </table>
                             </td>
                         </tr>
-
-                            <tr class="heading">
-                                <td>Metodo de Pago</td>
-
-                                <td>Pago #</td>
-                            </tr>
-
-                            <tr class="details">
-                                <td>Efectivo</td>
-
-                                <td>1000</td>
-                            </tr>
-
-                            <tr class="heading">
-                                <td>Total</td>
-
-                                <td>Precio</td>
-                            </tr>
-
-                            <tr class="item">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="item">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="item last">
-                                <td>Test</td>
-
-                                <td>$0.00</td>
-                            </tr>
-
-                            <tr class="total">
-                                <td>
-                                    <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
-                                </td>
-                                <td>Total: $0.00</td>
-                            </tr>
+                           
                         </table>
+                         <table class="table" id="tbProductoB">
+                        <tbody>
+                        <thead>
+                        <th style="text-align:center">
+                            TIPO SERVICIO
+                        </th>
+                        <th style="text-align:center">
+                            SERVICIO
+                        </th>
+                        <th style="text-align:center">
+                            DESCUENTO
+                        </th>
+                        <th style="text-align:center">
+                            PRECIO
+                        </th>
+                        <th style="text-align:center">
+                            TOTAL
+                        </th>
+                        </thead>
+                        </tbody>
+                    </table>
+                    <div class="row">
+            <div class="col-md-6">
+   <br/>
+      <p><span class="text-muted fw-light">Periodo Comprendido del: </span>26-08-2022 al 10-09-2022</p>
+                    
+                    <br/>
+                            <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
+                      
+            </div>
+                     <div class="col-6">
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Total:</th>
+                    <td>
+                        <label id="l_TotalVenta"></label>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
+    </div>
                     </div>
 </div>
 </div>
@@ -720,7 +722,7 @@ $.ajax({
                             var _prec = parseFloat(f_precio)
                             var _tprecio = _prec - ((_prec * _desc) / 100)
 
-
+var rowCount = $('#tbProducto >tbody >tr').length;
 
                             $("#tbProducto tbody").append(
                                 $("<tr>").append(
@@ -731,22 +733,13 @@ $.ajax({
                                     $("<td style='text-align:center'>").text(_tprecio),
                                     $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
                             )
-                             $("#tbProductoA tbody").append(
-                                $("<tr>").append(
-                                    $("<td style='text-align:center'>").text(f_tipo_servicio),
-                                    $("<td style='text-align:center'>").text(f_servicio),
-                                    $("<td style='text-align:center'>").text(_desc),
-                                    $("<td style='text-align:center'>").text(_prec),
-                                    $("<td style='text-align:center'>").text(_tprecio)
-                            )
-                             $("#tbProductoB tbody").append(
-                                $("<tr>").append(
-                                    $("<td style='text-align:center'>").text(f_tipo_servicio),
-                                    $("<td style='text-align:center'>").text(f_servicio),
-                                    $("<td style='text-align:center'>").text(_desc),
-                                    $("<td style='text-align:center'>").text(_prec),
-                                    $("<td style='text-align:center'>").text(_tprecio)
-                            )
+
+                             var rowA = "<tr id='a" + rowCount  + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
+                             var rowB = "<tr id='b" + rowCount  + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
+                            $("#tbProductoA tbody").append(rowA);
+                            $("#tbProductoB tbody").append(rowB);
+                         
+                             
                         }
 
                         //Defino los totales de mis 2 columnas en 0
@@ -896,7 +889,10 @@ $.ajax({
             //no clue what to put here?
             var p = o.parentNode.parentNode;
             p.parentNode.removeChild(p);
-
+$('#a0').remove();
+$('#b0').remove();
+$('#a1').remove();
+$('#b1').remove();
             var total_col1 = 0;
             var rowCount = $('#tbProducto >tbody >tr').length;
 
