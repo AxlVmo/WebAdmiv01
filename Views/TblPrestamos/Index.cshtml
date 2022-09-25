@@ -637,6 +637,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var vCorporativoFlag = '@ViewBag.CorporativoFlag'
         var vCentrosFlag = '@ViewBag.CentrosFlag'
         var vUsuariosFlag = '@ViewBag.UsuariosFlag'
+          var vPresupuestoFlag = '@ViewBag.PresupuestoFlag'
 
         if (vEstatusFlag == 0) {
             document.getElementById("iNuevo").style.visibility = "hidden";
@@ -658,7 +659,12 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                             document.getElementById("iNuevo").style.visibility = "hidden";
                         }
                         else {
-                            document.getElementById("iNuevo").style.visibility = "visible";
+                            if (vPresupuestoFlag == 0) {
+                                document.getElementById("iNuevo").style.visibility = "hidden";
+                            }
+                            else {
+                                $('#iNuevo').removeAttr('hidden');
+                            }
                         }
                     }
                 }

@@ -27,6 +27,9 @@ namespace WebAdmin.Controllers
         // GET: TblPrestamos
         public async Task<IActionResult> Index()
         {
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+
             var ValidaEstatus = _context.CatEstatus.ToList();
 
             if (ValidaEstatus.Count == 2)
@@ -52,6 +55,24 @@ namespace WebAdmin.Controllers
                             if (ValidaUsuarios.Count >= 1)
                             {
                                 ViewBag.UsuariosFlag = 1;
+                                 if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+                                {
+                                    var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                                    double f_presupuesto = _context.TblCentros.Where(a => a.IdCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum();
+
+                                    double totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro)
+                                        .Join(_context.RelVentaProducto.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
+                                        .ToList().Sum(x => x.Quantity);
+
+                                    if (totalQuantity > f_presupuesto)
+                                    {
+                                        ViewBag.PresupuestoFlag = 1;
+                                    }
+                                    else
+                                    {
+                                        _notyf.Information("Bancos sin Fondos", 5);
+                                    }
+                                }
                             }
                             else
                             {
@@ -101,11 +122,10 @@ namespace WebAdmin.Controllers
             TempData["fTS"] = sCorpCent.ToList();
             ViewBag.ListaCorpCent = TempData["fTS"];
 
-            var f_user = _userService.GetUserId();
-            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
+
             var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
-            if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
                 var fPrestamoCntro = from a in _context.TblPrestamos
                                      join c in _context.CatTipoPrestamos on a.IdTipoPrestamo equals c.IdTipoPrestamo

@@ -259,7 +259,7 @@
                     <label class="control-label">DIFERENCIA</label>
                     <input type="number" id="iCantidadAbono" class="form-control"
                            oninvalid="this.setCustomValidity('Campo Requerido')"
-                           onchange="this.setCustomValidity('')" readonly/>
+                           onchange="this.setCustomValidity('')"/>
                 </div>
             </div>
         </div>
@@ -889,10 +889,6 @@ var rowCount = $('#tbProducto >tbody >tr').length;
             //no clue what to put here?
             var p = o.parentNode.parentNode;
             p.parentNode.removeChild(p);
-$('#a0').remove();
-$('#b0').remove();
-$('#a1').remove();
-$('#b1').remove();
             var total_col1 = 0;
             var rowCount = $('#tbProducto >tbody >tr').length;
 
@@ -929,20 +925,23 @@ $('#b1').remove();
             }
         }
         $(document).on("click", "#btnPrint", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            $("#invocieContainer").printThis({
-                debug: false, // show the iframe for debugging
-                importCSS: true, // import page CSS
-                importStyle: true, // import style tags
-                printContainer: true, // grab outer container as well as the contents of the selector
-                loadCSS: "/assets/vendor/css/theme-default.css", // path to additional css file - us an array [] for multiple
-                pageTitle: "", // add title to print page
-                removeInline: false, // remove all inline styles from print elements
-                printDelay: 333, // variable print delay; depending on complexity a higher value may be necessary
-                header: null, // prefix to html
-                formValues: true // preserve input/form values
-            });
+        var nFolio = $('#i_FolioVenta').val();
+ 
+        e.preventDefault();
+        e.stopPropagation();
+        $("#invocieContainer").printThis({
+            debug: false, // show the iframe for debugging
+            importCSS: true, // import page CSS
+            importStyle: true, // import style tags
+            printContainer: true, // grab outer container as well as the contents of the selector
+            loadCSS: "/assets/vendor/css/theme-default.css", // path to additional css file - us an array [] for multiple
+            pageTitle: "Venta_" + nFolio, // add title to print page
+            removeInline: false, // remove all inline styles from print elements
+            printDelay: 333, // variable print delay; depending on complexity a higher value may be necessary
+            header: null, // prefix to html
+            formValues: false // preserve input/form values
         });
+
+    });
     </script>
 }
