@@ -158,14 +158,14 @@ namespace WebAdmin.Controllers
                            };
             return View(await UsuarioF.ToListAsync());
         }
-         [HttpGet]
+        [HttpGet]
         public ActionResult fDatosUsuario()
         {
             var f_user = _userService.GetUserId();
             var fUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
             return Json(fUsuario);
         }
-             [HttpGet]
+        [HttpGet]
         public ActionResult sDatosUsuario(Guid id)
         {
             var fUsuario = _context.TblUsuarios.First(m => m.IdUsuario == id);
@@ -180,30 +180,30 @@ namespace WebAdmin.Controllers
 
             if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
-                  var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
-            var fTotalesA = from a in _context.TblUsuarios
-                           where a.IdEstatusRegistro == 1
-                           select new
-                           {
-                               fRegistros = _context.TblUsuarios.Where(a => a.IdEstatusRegistro == 1 && a.IdCorporativo == f_centro.IdCentro).Count(),
-                               fTipo = "ACTIVO"
-                           };
+                var fTotalesA = from a in _context.TblUsuarios
+                                where a.IdEstatusRegistro == 1
+                                select new
+                                {
+                                    fRegistros = _context.TblUsuarios.Where(a => a.IdEstatusRegistro == 1 && a.IdCorporativo == f_centro.IdCentro).Count(),
+                                    fTipo = "ACTIVO"
+                                };
 
-            var fTotalesD = from a in _context.TblUsuarios
-                           where a.IdEstatusRegistro == 2
-                           select new
-                           {
-                               fRegistros = _context.TblUsuarios.Where(a => a.IdEstatusRegistro == 2 && a.IdCorporativo == f_centro.IdCentro).Count(),
-                               fTipo = "DESACTIVO"
-                           };
-            var fTotales = fTotalesA.Union(fTotalesD);
-            return Json(fTotales);
-                
+                var fTotalesD = from a in _context.TblUsuarios
+                                where a.IdEstatusRegistro == 2
+                                select new
+                                {
+                                    fRegistros = _context.TblUsuarios.Where(a => a.IdEstatusRegistro == 2 && a.IdCorporativo == f_centro.IdCentro).Count(),
+                                    fTipo = "DESACTIVO"
+                                };
+                var fTotales = fTotalesA.Union(fTotalesD);
+                return Json(fTotales);
+
             }
             else
             {
-          return Json(0);
+                return Json(0);
             }
         }
         // GET: TblUsuarios/Details/5
@@ -254,7 +254,7 @@ namespace WebAdmin.Controllers
         // GET: TblUsuarios/Create
         public IActionResult Create()
         {
- 
+
             return View();
         }
         [HttpGet]
@@ -276,49 +276,44 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdUsuario,IdGenero,IdArea,IdPerfil,IdRol,FechaNacimiento,Nombres,ApellidoPaterno,ApellidoMaterno,CorreoAcceso")] TblUsuario tblUsuario)
         {
-            if (ModelState.IsValid)
+            var vDuplicados = _context.TblUsuarios
+                            .Where(s => s.Nombres == tblUsuario.Nombres && s.ApellidoPaterno == tblUsuario.ApellidoPaterno && s.ApellidoMaterno == tblUsuario.ApellidoMaterno)
+                            .ToList();
+
+            if (vDuplicados.Count == 0)
             {
-                var vDuplicados = _context.TblUsuarios
-                                .Where(s => s.Nombres == tblUsuario.Nombres && s.ApellidoPaterno == tblUsuario.ApellidoPaterno && s.ApellidoMaterno == tblUsuario.ApellidoMaterno)
-                                .ToList();
-
-                if (vDuplicados.Count == 0)
+                Guid fCentroCorporativo = Guid.Empty;
+                int fCorpCent = 0;
+                var f_user = _userService.GetUserId();
+                var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+                var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
+                fCentroCorporativo = fCorp.IdCorporativo;
+                fCorpCent = 1;
+                if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
                 {
-                    Guid fCentroCorporativo = Guid.Empty;
-                    int fCorpCent = 0;
-                    var f_user = _userService.GetUserId();
-                    var isLoggedIn = _userService.IsAuthenticated();
-                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
-                    var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
-                    fCentroCorporativo = fCorp.IdCorporativo;
-                    fCorpCent = 1;
-                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
-                    {
-                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
-                        fCentroCorporativo = fIdCentro.IdCentro;
-                        fCorpCent = 2;
-                    }
-                    tblUsuario.IdCorpCent = fCorpCent;
-                    tblUsuario.IdCorporativo = fCentroCorporativo;
-                    tblUsuario.IdUsuarioModifico = Guid.Parse(f_user);
-                    tblUsuario.FechaRegistro = DateTime.Now;
-                    tblUsuario.IdEstatusRegistro = 1;
-                    tblUsuario.Nombres = tblUsuario.Nombres.ToUpper().Trim();
-                    tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper().Trim();
-                    tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper().Trim();
-                    tblUsuario.IdUsuario = Guid.NewGuid();
-                    _context.Add(tblUsuario);
-                    await _context.SaveChangesAsync();
-                    _notyf.Success("Registro creado con éxito", 5);
+                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                    fCentroCorporativo = fIdCentro.IdCentro;
+                    fCorpCent = 2;
                 }
-                else
-                {
-                    _notyf.Warning("Favor de validar, existe Usuario con el mismo nombre.", 5);
-                }
-
-                return RedirectToAction(nameof(Index));
+                tblUsuario.IdCorpCent = fCorpCent;
+                tblUsuario.IdCorporativo = fCentroCorporativo;
+                tblUsuario.IdUsuarioModifico = Guid.Parse(f_user);
+                tblUsuario.FechaRegistro = DateTime.Now;
+                tblUsuario.IdEstatusRegistro = 1;
+                tblUsuario.Nombres = tblUsuario.Nombres.ToUpper().Trim();
+                tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper().Trim();
+                tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper().Trim();
+                tblUsuario.IdUsuario = Guid.NewGuid();
+                _context.Add(tblUsuario);
+                await _context.SaveChangesAsync();
+                _notyf.Success("Registro creado con éxito", 5);
             }
-            return View(tblUsuario);
+            else
+            {
+                _notyf.Warning("Favor de validar, existe Usuario con el mismo nombre.", 5);
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: TblUsuarios/Edit/5

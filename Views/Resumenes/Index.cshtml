@@ -29,22 +29,25 @@
               Presupuesto
             </h5>
             <div class="card-body">
-              <h5 class="card-title" id="i_fMontosPresupuesto"></h5>
-              <p class="card-text" id="i_fRegistrosPresupuesto"></p>
+              <h5 class="card-title" id="i_presupuesto_minimo"></h5>
+              <h5 class="card-text" id="i_presupuesto_preventivo"></h5>
             </div>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
-              Usuarios
+              Gastos
             </h5>
             <div class="card-body">
-              <h5 class="card-title" id="i_fMontosUsuarios"></h5>
-              <p class="card-text" id="i_fRegistrosUsuarios"></p>
+              <h5 class="card-title" id="i_gasto_fijo"></h5>
+              <p class="card-text" id="i_registros_gasto_fijo"></p>
+              <h5 class="card-text" id="i_gasto_variable"></h5>
+              <p class="card-text" id="i_registros_gasto_variable"></p>
             </div>
           </div>
         </div>
+        
         <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
@@ -106,11 +109,11 @@
         <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
-              Compras
+              Usuarios
             </h5>
             <div class="card-body">
-              <h5 class="card-title" id="i_fMontosCompras"></h5>
-              <p class="card-text" id="i_fRegistrosCompras"></p>
+              <h5 class="card-title" id="i_fMontosUsuarios"></h5>
+              <p class="card-text" id="i_fRegistrosUsuarios"></p>
             </div>
           </div>
         </div>
@@ -151,15 +154,9 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 <script>
   $(document).ready(function () {
     DatosPresupuesto();
-    DatosUsuarios();
-    DatosNominas();
-    DatosPrestamos();
-    DatosSuministros();
-    DatosAlumnos();
+    DatosGastos();
     DatosVentas();
-    DatosCompras();
-    DatosBancos();
-    DatosInversiones();
+ 
   });
   function DatosPresupuesto() {
     $.ajax({
@@ -170,26 +167,62 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
       dataType: "json",
       success: function (list) {
 
-        if (list.length == 0) {
-          document.getElementById("i_fRegistrosPresupuesto").value = null;
-          document.getElementById("i_fMontosPresupuesto").value = null;
+       if (list.length == 0) {
+          document.getElementById("i_presupuesto_preventivo").value = null;
+          document.getElementById("i_presupuesto_minimo").value = null;
         }
         else {
 
           for (var i = 0, len = list.length; i < len; i++) {
-            document.getElementById('i_fRegistrosPresupuesto').innerText = 'Acumulado: ' + list[i].fRegistros;
-            document.getElementById("i_fMontosPresupuesto").innerText = 'Minimo: ' + list[i].fMontos.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+            
+            var presupuesto_minimo = list[i].fMontos;
+            var presupuesto_preventivo = list[i].fMontos * 3;
+            document.getElementById("i_presupuesto_minimo").innerText = 'Minimo: ' + presupuesto_minimo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+            document.getElementById("i_presupuesto_preventivo").innerText = 'Preventivo: ' + presupuesto_preventivo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
           }
 
         }
       },
       error: function () {
         var v_fMontosPresupuesto = 0;
-        document.getElementById('i_fRegistrosPresupuesto').innerText = 'Acumulado: ' + v_fMontosPresupuesto;
-        document.getElementById("i_fMontosPresupuesto").innerText = 'Minimo: ' + v_fMontosPresupuesto.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+        document.getElementById('i_presupuesto_preventivo').innerText = 'Preventivo: ' + v_fMontosPresupuesto;
+        document.getElementById("i_presupuesto_minimo").innerText = 'Minimo: ' + v_fMontosPresupuesto.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
       }
     });
 
+    return false;
+  }
+  function DatosGastos() {
+     $.ajax({
+      type: "GET",
+      url: "/TblSuministroes/DatosSuministros/",
+      data: {},
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
+      success: function (list) {
+
+      if (list.length == 0) {
+      document.getElementById("i_gasto_fijo").value = null;
+      document.getElementById("i_registros_gasto_fijo").value = null;
+      }
+      else {
+
+      for (var i = 0, len = list.length; i < len; i++) {     
+      var v_gasto_fijo = list[i].fMontos;
+      var v_registros_gasto_fijo = list[i].fRegistros;
+      document.getElementById("i_gasto_fijo").innerText = 'Fijo: ' + v_gasto_fijo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+      document.getElementById('i_registros_gasto_fijo').innerText = 'Acumulado: ' + v_registros_gasto_fijo;
+      }
+
+      }
+      },
+      error: function () {
+      var v_fMontosSuministros = 0;
+      document.getElementById("i_gasto_fijo").innerText = 'Fijo: ' + v_fMontosSuministros.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+      document.getElementById('i_registros_gasto_fijo').innerText = 'Acumulado: ' + v_fMontosSuministros;
+      }
+    });
+    
     return false;
   }
   function DatosUsuarios() {
@@ -372,37 +405,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
       var v_fMontosVentas = 0;
         document.getElementById('i_fRegistrosVentas').innerText = 'Total: ' + v_fMontosVentas;
         document.getElementById("i_fMontosVentas").innerText = 'Monto: ' + v_fMontosVentas.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-      }
-    });
-
-    return false;
-  }
-  function DatosCompras() {
-    $.ajax({
-      type: "GET",
-      url: "/TblCompras/DatosCompras/",
-      data: {},
-      contentType: "application/json;charset=utf-8",
-      dataType: "json",
-      success: function (list) {
-
-        if (list.length == 0) {
-          document.getElementById("i_fRegistrosCompras").value = null;
-          document.getElementById("i_fMontosCompras").value = null;
-        }
-        else {
-
-          for (var i = 0, len = list.length; i < len; i++) {
-            document.getElementById('i_fRegistrosCompras').innerText = 'Total: ' + list[i].fRegistros;
-            document.getElementById("i_fMontosCompras").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          }
-
-        }
-      },
-      error: function () {
-    var v_fMontosCompras = 0;
-        document.getElementById('i_fRegistrosCompras').innerText = 'Total: ' + v_fMontosCompras;
-        document.getElementById("i_fMontosCompras").innerText = 'Monto: ' + v_fMontosCompras.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
       }
     });
 

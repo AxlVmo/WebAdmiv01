@@ -10,7 +10,7 @@ namespace WebAdmin.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdSuministro { get; set; }
+        public Guid IdSuministro { get; set; }
 
         [NotMapped]
         public string CentroDesc { get; set; }

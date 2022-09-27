@@ -171,6 +171,15 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                                 _context.Update(fIdUsuario);
                                 await _context.SaveChangesAsync();
                             }
+                            else
+                            {
+                                var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == nIdUsuario);
+                                var f_corporativo = await _context.TblCorporativos.FirstOrDefaultAsync();
+                                fIdUsuario.IdCorpCent = 1;
+                                fIdUsuario.IdCorporativo = f_corporativo.IdCorporativo;
+                                _context.Update(fIdUsuario);
+                                await _context.SaveChangesAsync();
+                            }
                         }
                         _notyf.Success("Registro creado con éxito", 5);
                         _logger.LogInformation("User created a new account with password.");

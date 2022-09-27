@@ -11,16 +11,15 @@ namespace WebAdmin.Models
         [Key]
         public int IdRelCompraProducto { get; set; }
 
+        [Display(Name = "Tipo Producto/Servicio")]
+        public int IdTipoProdServ { get; set; }
+        [Display(Name = "Articulo Descripción")]
+        [DataType(DataType.Text)]
+
+        public string ProdServDesc { get; set; }
+
         [Display(Name = "Cantidad")]
         public int Cantidad { get; set; }
-
-        [Display(Name = "Categoria")]
-        
-        public string Categoria { get; set; }
-
-        [Display(Name = "Producto")]
-        
-        public string Producto { get; set; }
 
         [Display(Name = "Precio")]
         public double Precio { get; set; }
@@ -42,7 +41,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        
+
         public int IdEstatusRegistro { get; set; }
 
         public Guid IdCompra { get; set; }

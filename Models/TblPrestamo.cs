@@ -7,7 +7,7 @@ namespace WebAdmin.Models
     public class TblPrestamo
     {
         [Key]
-        public int IdPrestamo { get; set; }
+        public Guid IdPrestamo { get; set; }
         [Display(Name = "Folio Prestamo")]
         public string FolioPrestamo { get; set; }
 

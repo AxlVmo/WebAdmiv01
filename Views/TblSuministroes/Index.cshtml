@@ -31,8 +31,8 @@
                 </div>
             </div>
         </h5>
-        <div class="table-responsive text-nowrap">
-            <div class="row">
+                <div class="table-responsive text-nowrap">
+        <div class="container">
                 <table class="table" id="tblSuministros">
                     <thead>
                         <tr>
@@ -221,6 +221,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var vEmpresaFlag = '@ViewBag.EmpresaFlag'
         var CorporativoFlag = '@ViewBag.CorporativoFlag'
         var vTipoSuministroFlag = '@ViewBag.TipoSuministroFlag'
+           var vPresupuestoFlag = '@ViewBag.PresupuestoFlag'
 
         if (vEstatusFlag == 0) {
             document.getElementById("iNuevo").style.visibility = "hidden";
@@ -238,7 +239,12 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         document.getElementById("iNuevo").style.visibility = "hidden";
                     }
                     else {
-                        document.getElementById("iNuevo").style.visibility = "visible";
+                         if (vPresupuestoFlag == 0) {
+                                document.getElementById("iNuevo").style.visibility = "hidden";
+                            }
+                            else {
+                                $('#iNuevo').removeAttr('hidden');
+                            }
                     }
                 }
             }

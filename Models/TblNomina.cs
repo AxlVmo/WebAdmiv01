@@ -7,7 +7,7 @@ namespace WebAdmin.Models
     public class TblNomina
     {
         [Key]
-        public int IdNomina { get; set; }
+        public Guid IdNomina { get; set; }
         [Display(Name = "Folio Nomina")]
         public string FolioNomina { get; set; }
         [NotMapped]

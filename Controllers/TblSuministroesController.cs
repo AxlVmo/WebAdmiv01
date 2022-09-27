@@ -26,6 +26,8 @@ namespace WebAdmin.Controllers
         // GET: TblSuministros
         public async Task<IActionResult> Index()
         {
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
             var ValidaEstatus = _context.CatEstatus.ToList();
 
             if (ValidaEstatus.Count == 2)
@@ -46,6 +48,24 @@ namespace WebAdmin.Controllers
                         if (ValidaTipoSuministro.Count >= 1)
                         {
                             ViewBag.TipoSuministroFlag = 1;
+                              if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+                                {
+                                    var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                                    double f_presupuesto = _context.TblCentros.Where(a => a.IdCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum();
+
+                                    double totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro)
+                                        .Join(_context.RelVentaProducto.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
+                                        .ToList().Sum(x => x.Quantity);
+
+                                    if (totalQuantity > f_presupuesto)
+                                    {
+                                        ViewBag.PresupuestoFlag = 1;
+                                    }
+                                    else
+                                    {
+                                        _notyf.Information("Caja sin Fondos", 5);
+                                    }
+                                }
                         }
                         else
                         {
@@ -89,11 +109,10 @@ namespace WebAdmin.Controllers
             TempData["fTS"] = sCorpCent.ToList();
             ViewBag.ListaCorpCent = TempData["fTS"];
 
-            var f_user = _userService.GetUserId();
-            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
+
             var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
-            if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
                 var fSuministroCntro = from a in _context.TblSuministros
                                        join b in _context.CatTipoSuministros on a.IdTipoSuministro equals b.IdTipoSuministro
@@ -135,7 +154,7 @@ namespace WebAdmin.Controllers
             return View(await fSuministro.ToListAsync());
         }
         [HttpGet]
-        public ActionResult DatosResumen()
+        public ActionResult DatosSuministros()
         {
 
             var f_user = _userService.GetUserId();
@@ -161,7 +180,7 @@ namespace WebAdmin.Controllers
             }
         }
         // GET: TblSuministros/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -277,7 +296,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,DiaFacturacion,IdPeriodo,MontoSuministro,IdEstatusRegistro")] TblSuministro tblSuministro)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,DiaFacturacion,IdPeriodo,MontoSuministro,IdEstatusRegistro")] TblSuministro tblSuministro)
         {
             if (id != tblSuministro.IdSuministro)
             {
@@ -327,7 +346,7 @@ namespace WebAdmin.Controllers
         }
 
         // GET: TblSuministros/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -347,7 +366,7 @@ namespace WebAdmin.Controllers
         // POST: TblSuministros/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var TblSuministro = await _context.TblSuministros.FindAsync(id);
             TblSuministro.IdEstatusRegistro = 2;
@@ -356,7 +375,7 @@ namespace WebAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TblSuministroExists(int id)
+        private bool TblSuministroExists(Guid id)
         {
             return _context.TblSuministros.Any(e => e.IdSuministro == id);
         }

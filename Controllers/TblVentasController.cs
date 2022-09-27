@@ -211,15 +211,24 @@ namespace WebAdmin.Controllers
 
             if (oVentaVM != null)
             {
-                foreach (var item in oVentaVM.RelVentaProductos)
+                foreach (var itemP in oVentaVM.RelVentaProductos)
                 {
                     //item.IdRelVentaProducto = Guid.NewGuid();
-                    item.Cantidad = 1;
+                    itemP.Cantidad = 1;
+                    itemP.IdUsuarioModifico = Guid.Parse(f_user);
+                    itemP.FechaRegistro = DateTime.Now;
+                    itemP.IdEstatusRegistro = 1;
+                    itemP.IdVenta = nVenta;
+                    _context.RelVentaProducto.Add(itemP);
+                }
+                foreach (var item in oVentaVM.RelVentaPagos)
+                {
+                    //item.IdRelVentaProducto = Guid.NewGuid();
                     item.IdUsuarioModifico = Guid.Parse(f_user);
                     item.FechaRegistro = DateTime.Now;
                     item.IdEstatusRegistro = 1;
                     item.IdVenta = nVenta;
-                    _context.RelVentaProducto.Add(item);
+                    _context.RelVentasPagos.Add(item);
                 }
 
                 TblVenta oVenta = oVentaVM.TblVentas;

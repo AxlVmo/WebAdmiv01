@@ -32,8 +32,9 @@
             </div>
         </h5>
         <div class="table-responsive text-nowrap">
-            <div class="row">
-                <table class="table" id="tblUsuarios">
+        <div class="container">
+            
+             <table class="display compact" id="tblUsuarios">
                     <thead>
                         <tr>
                             <th style="text-align:center" hidden>
@@ -120,8 +121,11 @@
                         </tr>
                     </tfoot>
                 </table>
+                <br/>
             </div>
-        </div>
+               </div>
+    
+        
     </div>
 </div>
 @section Scripts {
@@ -151,6 +155,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         });
         $('#tblUsuarios').DataTable(
             {
+               
                 initComplete: function () {
                     this.api()
                         .columns()

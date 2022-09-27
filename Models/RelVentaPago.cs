@@ -23,7 +23,7 @@ namespace WebAdmin.Models
         public string CodigoReferencia { get; set; }
 
          [Display(Name = "Descuento")]
-        public int CantidadAbono { get; set; }
+        public double CantidadPago { get; set; }
 
         [Display(Name = "Descuento %")]
         public int Descuento { get; set; }

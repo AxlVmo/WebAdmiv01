@@ -200,8 +200,9 @@
                             <label for="FechaContratacion" class="form-label" asp-for="FechaContratacion"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class=""></i></span>
-                                <input style="text-transform:uppercase" type="date" class="form-control" id=""
-                                    aria-label="John Doe" aria-describedby="2" asp-for="FechaContratacion" />
+                                <input style="text-transform:uppercase" type="date" class="form-control" id="iFechaContratacion"
+                                    aria-label="John Doe" aria-describedby="2" asp-for="FechaContratacion" oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required/>
                             </div>
                         </div>
                     </div>

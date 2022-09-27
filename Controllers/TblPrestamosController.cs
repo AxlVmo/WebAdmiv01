@@ -70,7 +70,7 @@ namespace WebAdmin.Controllers
                                     }
                                     else
                                     {
-                                        _notyf.Information("Bancos sin Fondos", 5);
+                                        _notyf.Information("Caja sin Fondos", 5);
                                     }
                                 }
                             }
@@ -190,7 +190,7 @@ namespace WebAdmin.Controllers
             }
         }
         // GET: TblPrestamos/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -364,7 +364,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoPrestamo,PrestamoDesc,NumeroReferencia,FechaFacturacion,MontoPrestamo,IdEstatusRegistro")] TblPrestamo TblPrestamo)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdTipoPrestamo,PrestamoDesc,NumeroReferencia,FechaFacturacion,MontoPrestamo,IdEstatusRegistro")] TblPrestamo TblPrestamo)
         {
             if (id != TblPrestamo.IdPrestamo)
             {
@@ -417,7 +417,7 @@ namespace WebAdmin.Controllers
         }
 
         // GET: TblPrestamos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -437,7 +437,7 @@ namespace WebAdmin.Controllers
         // POST: TblPrestamos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var TblPrestamo = await _context.TblPrestamos.FindAsync(id);
             TblPrestamo.IdEstatusRegistro = 2;
@@ -446,7 +446,7 @@ namespace WebAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TblPrestamoExists(int id)
+        private bool TblPrestamoExists(Guid id)
         {
             return _context.TblPrestamos.Any(e => e.IdPrestamo == id);
         }

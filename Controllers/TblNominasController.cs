@@ -80,7 +80,7 @@ namespace WebAdmin.Controllers
                                     }
                                     else
                                     {
-                                        _notyf.Information("Bancos sin Fondos", 5);
+                                        _notyf.Information("Caja sin Fondos", 5);
                                     }
                                 }
 
@@ -227,7 +227,7 @@ namespace WebAdmin.Controllers
         //     // return null;
         // }
         // GET: TblNominas/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -336,7 +336,7 @@ namespace WebAdmin.Controllers
         }
 
         // GET: TblNominas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
 
             var fIdUsuario = _context.TblNominas
@@ -378,7 +378,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdNomina,IdTipoNomina,NominaDesc,IdUsuarioRemuneracion,IdTipoPago,UsuarioRemuneracion,CodigoPago,IdEstatusRegistro")] TblNomina TblNomina)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdNomina,IdTipoNomina,NominaDesc,IdUsuarioRemuneracion,IdTipoPago,UsuarioRemuneracion,CodigoPago,IdEstatusRegistro")] TblNomina TblNomina)
         {
             if (id != TblNomina.IdNomina)
             {
@@ -429,7 +429,7 @@ namespace WebAdmin.Controllers
         }
 
         // GET: TblNominas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -449,7 +449,7 @@ namespace WebAdmin.Controllers
         // POST: TblNominas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var TblNomina = await _context.TblNominas.FindAsync(id);
             TblNomina.IdEstatusRegistro = 2;
@@ -458,7 +458,7 @@ namespace WebAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TblNominaExists(int id)
+        private bool TblNominaExists(Guid id)
         {
             return _context.TblNominas.Any(e => e.IdNomina == id);
         }
