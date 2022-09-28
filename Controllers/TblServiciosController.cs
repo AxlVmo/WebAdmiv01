@@ -99,7 +99,9 @@ namespace WebAdmin.Controllers
                              select new TblServicio
                              {
                                  IdServicio = a.IdServicio,
-                                 DescServicio = a.DescServicio + " - $ " + a.ServicioPrecioUno
+                                 DescServicio = a.DescServicio + " - $ " + a.ServicioPrecioUno,
+                                 Periodo = a.Periodo,
+                                 CodigoInterno = a.CodigoInterno
                              };
                              _notyf.Success("Carga de servicios correcta", 5);
             return Json(fServicios);
@@ -117,6 +119,8 @@ namespace WebAdmin.Controllers
                                  DescServicio = a.DescServicio,
                                  TotalPrecioServicio = a.ServicioPrecioUno,
                                  IdServicio = a.IdServicio,
+                                  Periodo = a.Periodo,
+                                 CodigoInterno = a.CodigoInterno
                              };
                              _notyf.Success("Seleccion de servicios correcta", 5);
             return Json(fServicios);

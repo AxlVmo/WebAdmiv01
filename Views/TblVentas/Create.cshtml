@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/css/site.css" />
 }
 <style>
     .invoice-box {
@@ -73,223 +73,220 @@
 </style>
 
 <div class="container-xxl flex-grow-1 container-p-y">
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Usuario</h4>
-<!-- Basic with Icons -->
-<div class="col-xxl">
-<div class="card mb-8">
-<div class="card-header d-flex align-items-center justify-content-between">
-</div>
-<div class="card-body">
-<div class="row">
-    <div class="mb-3 col-md-3">
-        <label for="TblVentas.IdTipoVenta" class="form-label" asp-for="TblVentas.IdTipoVenta"></label>
-        <div class="input-group input-group-merge">
-            <div class="input-group input-group-merge">
-                <span id="basic-icon-default-fullname2" class="input-group-text">
-                    <i
-                        class="bx bx-check-shield">
-                    </i>
-                </span>
-                <select id="l_tipo_venta" class="form-select" required asp-for="TblVentas.IdTipoVenta"
-                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                        onchange="this.setCustomValidity('')" required
-                        asp-items="@(new SelectList(ViewBag.ListaTipoVenta, "IdTipoVenta", "TipoVentaDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Usuario</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+            <div class="card-header d-flex align-items-center justify-content-between">
             </div>
-        </div>
-    </div>
-    <div class="mb-3 col-md-6">
-        <label for="TblVentas.IdCliente" class="form-label" asp-for="TblVentas.IdCliente"></label>
-        <div class="input-group input-group-merge">
-            <div class="input-group input-group-merge">
-                <span id="basic-icon-default-fullname2" class="input-group-text">
-                    <i
-                        class="bx bx-check-shield">
-                    </i>
-                </span>
-                <select id="l_alumno" class="form-select" required asp-for="TblVentas.IdCliente"
-                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                        onchange="this.setCustomValidity('')" required
-                        asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros, "IdUsuario", "NombreUsuario"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="mb-3 col-md-2">
-        <label class="form-label"> Descuento</label>
-        <div class="input-group input-group-merge">
-            <span id="2" class="input-group-text">
-                <i class="bx bx-check-shield"></i>
-            </span>
-            <input id="iDescuento" style="text-transform:uppercase" type="number" class="form-control"
-                   id="" min="0" max="100" value="0" aria-label="John Doe" aria-describedby="2"/>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="mb-3 col-md-4">
-        <label class="form-label" asp-for="@Model.RelVentaProductos[0].TipoServicio"></label>
-        <div class="input-group input-group-merge">
-            <div class="input-group input-group-merge">
-                <span id="basic-icon-default-fullname2" class="input-group-text">
-                    <i
-                        class="bx bx-check-shield">
-                    </i>
-                </span>
-                <select id="l_tipo_servicios" class="form-select"
-                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                        onchange="this.setCustomValidity('')" required
-                        asp-items="@(new SelectList(ViewBag.ListaTipoServicio, "IdTipoServicio", "TipoServicioDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="mb-3 col-md-8">
-        <label class="form-label" asp-for="@Model.RelVentaProductos[0].Servicio"></label>
-        <div class="input-group input-group-merge">
-            <div class="input-group input-group-merge">
-                <span id="basic-icon-default-fullname2" class="input-group-text">
-                    <i
-                        class="bx bx-check-shield">
-                    </i>
-                </span>
-                <select id="l_servicios" class="form-select" required
-                        asp-for="@Model.RelVentaProductos[0].Servicio"
-                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                        onchange="this.setCustomValidity('')" required>
-                    <option value="">SELECCIONAR</option>
-                </select>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <!-- Main content -->
-        <div class="invoice p-3 mb-3">
-            <!-- Table row -->
-            <div class="row">
-                <div class="col-12 table-responsive">
-                    <table class="table" id="tbProducto">
-                        <tbody>
-                        <thead>
-                        <th style="text-align:center">
-                            TIPO SERVICIO
-                        </th>
-                        <th style="text-align:center">
-                            SERVICIO
-                        </th>
-                        <th style="text-align:center">
-                            DESCUENTO
-                        </th>
-                        <th style="text-align:center">
-                            PRECIO
-                        </th>
-                        <th style="text-align:center">
-                            TOTAL
-                        </th>
-                        <th style="text-align:center">ACCIONES</th>
-                        </thead>
-                        </tbody>
-                    </table>
+            <div class="card-body">
+                      <input type="hidden" id="f_periodo" />
+                <div class="row">
+                    <div class="mb-3 col-md-3">
+                        <label for="TblVentas.IdTipoVenta" class="form-label" asp-for="TblVentas.IdTipoVenta"></label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text">
+                                    <i class="bx bx-check-shield">
+                                    </i>
+                                </span>
+                                <select id="l_tipo_venta" class="form-select" required asp-for="TblVentas.IdTipoVenta"
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" required
+                                    asp-items="@(new SelectList(ViewBag.ListaTipoVenta, "IdTipoVenta", "TipoVentaDesc"))">
+                                    <option value="">SELECCIONAR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="TblVentas.IdCliente" class="form-label" asp-for="TblVentas.IdCliente"></label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text">
+                                    <i class="bx bx-check-shield">
+                                    </i>
+                                </span>
+                                <select id="l_alumno" class="form-select" required asp-for="TblVentas.IdCliente"
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" required
+                                    asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros, "IdUsuario", "NombreUsuario"))">
+                                    <option value="">SELECCIONAR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-2">
+                        <label class="form-label"> Descuento</label>
+                        <div class="input-group input-group-merge">
+                            <span id="2" class="input-group-text">
+                                <i class="bx bx-check-shield"></i>
+                            </span>
+                            <input id="iDescuento" style="text-transform:uppercase" type="number" class="form-control"
+                                id="" min="0" max="100" value="0" aria-label="John Doe" aria-describedby="2" />
+                        </div>
+                    </div>
                 </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-            <!-- /.row -->
-            <!-- this row will not appear when printing -->
-        </div>
-        <!-- /.invoice -->
-    </div><!-- /.col -->
-</div>
-<div class="row">
-    <!-- accepted payments column -->
-    <div class="col-6">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">TIPO PAGO</label>
-                    <select id="l_tipo_pago" class="form-select"
-                            oninvalid="this.setCustomValidity('Campo Requerido')"
-                            onchange="this.setCustomValidity('')" required
-                            asp-items="@(new SelectList(ViewBag.ListaTipoPago, "IdTipoPago", "TipoPagoDesc"))">
-                        <option value="">SELECCIONAR</option>
-                    </select>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label class="form-label" asp-for="@Model.RelVentaProductos[0].TipoServicio"></label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text">
+                                    <i class="bx bx-check-shield">
+                                    </i>
+                                </span>
+                                <select id="l_tipo_servicios" class="form-select"
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" required
+                                    asp-items="@(new SelectList(ViewBag.ListaTipoServicio, "IdTipoServicio", "TipoServicioDesc"))">
+                                    <option value="">SELECCIONAR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label class="form-label" asp-for="@Model.RelVentaProductos[0].Servicio"></label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text">
+                                    <i class="bx bx-check-shield">
+                                    </i>
+                                </span>
+                                <select id="l_servicios" class="form-select" required
+                                    asp-for="@Model.RelVentaProductos[0].Servicio"
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" required>
+                                    <option value="">SELECCIONAR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group" id="lFechaAlterna">
-                    <label class="control-label">FECHA DE PAGO ALTERNA</label>
-                    <input type="date" id="i_fecha_alterna_pago" class="form-control"/>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Main content -->
+                        <div class="invoice p-3 mb-3">
+                            <!-- Table row -->
+                            <div class="row">
+                                <div class="col-12 table-responsive">
+                                    <table class="table" id="tbProducto">
+                                        <tbody>
+                                            <thead>
+                                                <th style="text-align:center">
+                                                    TIPO SERVICIO
+                                                </th>
+                                                <th style="text-align:center">
+                                                    SERVICIO
+                                                </th>
+                                                <th style="text-align:center">
+                                                    DESCUENTO
+                                                </th>
+                                                <th style="text-align:center">
+                                                    PRECIO
+                                                </th>
+                                                <th style="text-align:center">
+                                                    TOTAL
+                                                </th>
+                                                <th style="text-align:center">ACCIONES</th>
+                                            </thead>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                            <!-- /.row -->
+                            <!-- this row will not appear when printing -->
+                        </div>
+                        <!-- /.invoice -->
+                    </div><!-- /.col -->
                 </div>
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group" id="lCodigoPago" hidden>
-                    <label class="control-label">CODIGO PAGO</label>
-                    <input id="i_codigo_pago" class="form-control" required/>
-                </div>
-            </div>
-            <div class="col-md-6">
-              
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">PAGO</label>
-                    <input type="number" id="i_pago_monto" class="form-control" value="0" required/>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">DIFERENCIA</label>
-                    <input id="iPagoDiferencia" class="form-control" value="0" readonly/>
-                </div>
-            </div>
+                <div class="row">
+                    <!-- accepted payments column -->
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">TIPO PAGO</label>
+                                    <select id="l_tipo_pago" class="form-select"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoPago, "IdTipoPago", "TipoPagoDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" id="lFechaAlterna">
+                                    <label class="control-label">FECHA DE PAGO ALTERNA</label>
+                                    <input type="date" id="i_fecha_alterna_pago" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" id="lCodigoPago" hidden>
+                                    <label class="control-label">CODIGO PAGO</label>
+                                    <input id="i_codigo_pago" class="form-control" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">PAGO</label>
+                                    <input type="number" id="i_pago_monto" class="form-control" value="0" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">DIFERENCIA</label>
+                                    <input id="iPagoDiferencia" class="form-control" value="0" readonly />
+                                </div>
+                            </div>
 
 
-        </div>
-        <br/>
-        
-    </div>
-    <!-- /.col -->
-    <div class="col-6">
-        <div class="table-responsive">
-            <table class="table">
-                <tr>
-                    <th>Total:</th>
-                    <td>
-                        <label id="l_TotalVenta"></label>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-10">
-        <br>
+                        </div>
+                        <br />
 
-        <a id="btnTerminar" class="btn btn-success">
-            <span>Guardar</span>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-6">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>Total:</th>
+                                    <td>
+                                        <label id="l_TotalVenta"></label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10">
+                        <br>
 
-        </a>
-        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-        <button class="btn btn-info" id="btnPrint" hidden>Imprimir</button>
-    </div>
-</div>
-<hr>
- <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
-                        <table>
-                            <tr class="top">
-                                <td colspan="2">
-                                    <table>
+                        <a id="btnTerminar" class="btn btn-success">
+                            <span>Guardar</span>
+
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                        <button class="btn btn-info" id="btnPrint">Imprimir</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
+                    <table>
+                        <tr class="top">
+                            <td colspan="2">
+                                <table>
                                     <tr>
                                         <td class="title">
                                             <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
@@ -320,75 +317,71 @@
                                     </tr>
 
                                 </table>
-                                </td>
-                            </tr>
-                         </tr>
-                                  <tr class="information">
+                            </td>
+                        </tr>
+                        </tr>
+                        <tr class="information">
                             <td colspan="2">
                                 <table>
                                     <tr>
                                         <td>
                                             <label id="l_ClienteVenta"></label><br />
-                                            <label id="l_DatosClienteVenta"></label><br />
-                                            <label id="l_DatosClienteVentaAlt"></label><br />
                                         </td>
-
                                         <td>
-
                                         </td>
                                     </tr>
                                 </table>
                             </td>
-                        </tr>                          
-                        </table>
-                         <table class="table" id="tbProductoA">
-                        <tbody>
-                        <thead>
-                        <th style="text-align:center">
-                            TIPO SERVICIO
-                        </th>
-                        <th style="text-align:center">
-                            SERVICIO
-                        </th>
-                        <th style="text-align:center">
-                            DESCUENTO
-                        </th>
-                        <th style="text-align:center">
-                            PRECIO
-                        </th>
-                        <th style="text-align:center">
-                            TOTAL
-                        </th>
-                        </thead>
-                        </tbody>
-                          
+                        </tr>
                     </table>
-                       <div class="row">
-            <div class="col-md-6">
-                 <br/>
-      <p><span class="text-muted fw-light">Periodo Comprendido del: </span>26-08-2022 al 10-09-2022</p>
-                    
-                    <br/>
-                            <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
-                       
-            </div>
-                     <div class="col-6">
-        <div class="table-responsive">
-            <table class="table">
-                <tr>
-                    <th>Total:</th>
-                    <td>
-                        <label id="l_TotalVenta"></label>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    </div>
-                     <table>
-                            <tr class="top">
-                                <td colspan="2">
-                                   <table>
+                    <table class="table" id="tbProductoA">
+                        <tbody>
+                            <thead>
+                                  <th style="text-align:center">
+                                    CODIGO INTERNO
+                                </th>
+                                <th style="text-align:center">
+                                    TIPO SERVICIO
+                                </th>
+                                <th style="text-align:center">
+                                    SERVICIO
+                                </th>
+                                <th style="text-align:center">
+                                    DESCUENTO
+                                </th>
+                                <th style="text-align:center">
+                                    PRECIO
+                                </th>
+                                <th style="text-align:center">
+                                    TOTAL
+                                </th>
+                            </thead>
+                        </tbody>
+                        </table>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <br />
+                                    <p><span class="text-muted fw-light"><label id="l_peridoA"></label> </span><label id="l_fecha_periodoA"></label></p>
+                                    <br />
+                                    <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
+                                </div>
+                                <div class="col-6">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Total:</th>
+                                                <td>
+                                                    <label id="l_TotalVenta"></label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        <table>
+                        <tr class="top">
+                            <td colspan="2">
+                                <table>
                                     <tr>
                                         <td class="title">
                                             <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
@@ -415,82 +408,77 @@
                                             <label id="dl_DatosCentroVentaAlt"></label><br />
                                             <label id="dl_DatosCentroContactoVenta"></label><br />
                                         </td>
-
                                     </tr>
-
                                 </table>
-                                </td>
-                            </tr>
-                                  <tr class="information">
+                            </td>
+                        </tr>
+                        <tr class="information">
                             <td colspan="2">
                                 <table>
                                     <tr>
                                         <td>
                                             <label id="dl_ClienteVenta"></label><br />
-                                            <label id="dl_DatosClienteVenta"></label><br />
-                                            <label id="dl_DatosClienteVentaAlt"></label><br />
                                         </td>
-
                                         <td>
-
                                         </td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
-                           
-                        </table>
-                         <table class="table" id="tbProductoB">
+
+                    </table>
+                    <table class="table" id="tbProductoB">
                         <tbody>
-                        <thead>
-                        <th style="text-align:center">
-                            TIPO SERVICIO
-                        </th>
-                        <th style="text-align:center">
-                            SERVICIO
-                        </th>
-                        <th style="text-align:center">
-                            DESCUENTO
-                        </th>
-                        <th style="text-align:center">
-                            PRECIO
-                        </th>
-                        <th style="text-align:center">
-                            TOTAL
-                        </th>
-                        </thead>
+                            <thead>
+                                <th style="text-align:center">
+                                    TIPO SERVICIO
+                                </th>
+                                <th style="text-align:center">
+                                    SERVICIO
+                                </th>
+                                <th style="text-align:center">
+                                    DESCUENTO
+                                </th>
+                                <th style="text-align:center">
+                                    PRECIO
+                                </th>
+                                <th style="text-align:center">
+                                    TOTAL
+                                </th>
+                            </thead>
                         </tbody>
                     </table>
                     <div class="row">
-            <div class="col-md-6">
-   <br/>
-      <p><span class="text-muted fw-light">Periodo Comprendido del: </span>26-08-2022 al 10-09-2022</p>
-                    
-                    <br/>
+                        <div class="col-md-6">
+                            <br />
+                            <p><span class="text-muted fw-light">Periodo Comprendido del: </span>26-08-2022 al
+                                10-09-2022</p>
+
+                            <br />
                             <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
-                      
+
+                        </div>
+                        <div class="col-6">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>Total:</th>
+                                        <td>
+                                            <label id="l_TotalVenta"></label>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-                     <div class="col-6">
-        <div class="table-responsive">
-            <table class="table">
-                <tr>
-                    <th>Total:</th>
-                    <td>
-                        <label id="l_TotalVenta"></label>
-                    </td>
-                </tr>
-                
-            </table>
         </div>
     </div>
-    </div>
-                    </div>
-</div>
-</div>
-</div>
 </div>
 <div class="modal fade" id="modalVentas" aria-labelledby="modalVentasLabel" tabindex="-1" style="display: none"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -498,7 +486,7 @@
                     La venta se ha registrado con exito ¿deseas imprimir la
                     nota de venta?
                 </h5>
-                <input type="hidden" id="i_FolioVenta"/>
+                <input type="hidden" id="i_FolioVenta" />
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -513,19 +501,19 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    <script>
-        const formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 2
-        })
-        $(document).ready(function () {
-            const d1 = new Date();
-            const GeneraFolio = d1.getTime();
-            document.getElementById("i_FolioVenta").value = "iV-" + GeneraFolio;
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script>
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+    })
+    $(document).ready(function () {
+        const d1 = new Date();
+        const GeneraFolio = d1.getTime();
+        document.getElementById("i_FolioVenta").value = "iV-" + GeneraFolio;
 
         $.ajax({
             type: "GET",
@@ -546,14 +534,14 @@
                     var year = dateObject.getFullYear();
                     var formattedDate = dateOfMonth + "/" + month + "/" + year;
 
-                    document.getElementById('l_FechaCreacionVenta').innerHTML = 'Fecha: ' + formattedDate;
+                    document.getElementById('l_FechaCreacionVenta').innerHTML = 'Fecha Impresion: ' + formattedDate;
 
                     document.getElementById('l_CorporativoVenta').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
                     document.getElementById('l_DatosCorporativoVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
                     document.getElementById('l_DatosCorporativoVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
                     document.getElementById('l_DatosCorporativoContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
 
-                    document.getElementById('dl_FechaCreacionVenta').innerHTML = 'Fecha: ' + formattedDate;
+                    document.getElementById('dl_FechaCreacionVenta').innerHTML = 'Fecha Impresion: ' + formattedDate;
 
                     document.getElementById('dl_CorporativoVenta').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
                     document.getElementById('dl_DatosCorporativoVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
@@ -585,7 +573,7 @@
                 }
             },
         });
-         $.ajax({
+        $.ajax({
             type: "GET",
             url: "/TblUsuarios/fDatosUsuario/",
             data: {},
@@ -601,153 +589,153 @@
                 }
             },
         });
+    });
+    $('#l_alumno').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_tipo_servicios').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_servicios').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_tipo_servicios').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+        $.ajax({
+            type: "GET",
+            url: "/TblServicios/FiltroServicios/",
+            data: { id: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $lista_servicios = $('#l_servicios');
+                $("#l_servicios").empty();
 
-
-
-
-        });
-        $('#l_alumno').select2({
-            theme: "bootstrap-5",
-            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-            placeholder: $(this).data('placeholder'),
-        });
-        $('#l_tipo_servicios').select2({
-            theme: "bootstrap-5",
-            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-            placeholder: $(this).data('placeholder'),
-        });
-        $('#l_servicios').select2({
-            theme: "bootstrap-5",
-            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-            placeholder: $(this).data('placeholder'),
-        });
-        $('#l_tipo_servicios').change(function () {
-            var SelectedText = $('option:selected', this).text();
-            var SelectedValue = $('option:selected', this).val();
-            $.ajax({
-                type: "GET",
-                url: "/TblServicios/FiltroServicios/",
-                data: { id: SelectedValue },
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (list) {
-                    var $lista_servicios = $('#l_servicios');
-                    $("#l_servicios").empty();
-
-                    if (list.length == 0) {
-                        $lista_servicios.append('<option value="">SELECCIONAR</option>');
-                        $lista_servicios.attr('required', false);
-
-                    }
-                    else {
-                        $lista_servicios.append('<option value="">SELECCIONAR</option>');
-                        for (var i = 0, len = list.length; i < len; i++) {
-                            $lista_servicios.append('<option value=' + list[i].idServicio + '>' + list[i].descServicio + '</option>');
-                            $lista_servicios.attr('required', true);
-                        }
-                    }
-                },
-                error: function () {
-                    alert("Error!!")
+                if (list.length == 0) {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    $lista_servicios.attr('required', false);
                 }
-            });
+                else {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $lista_servicios.append('<option value=' + list[i].idServicio + '>' + list[i].descServicio + '</option>');
+                        $lista_servicios.attr('required', true);
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
         });
-         $('#i_fecha_alterna_pago' ).change(function() {
-            
-        
+    });
+    $('#i_fecha_alterna_pago').change(function () {
+    });
+    $('#i_pago_monto').change(function () {
+        let total_col1 = 0;
+        $('#tbProducto tbody').find('tr').each(function (i, el) {
+
+            total_col1 += parseFloat($(this).find('td').eq(4).text());
         });
-        $('#i_pago_monto' ).change(function() {
-            let total_col1 = 0;
+        let iPagoMonto = parseInt($('#i_pago_monto').val());
+        let tDiferencia = parseInt(iPagoMonto - total_col1);
+        let vTotal = iPagoMonto + tDiferencia;
+        document.getElementById("iPagoDiferencia").value = tDiferencia;
+        if (vTotal == total_col1) {
+            $('#btnPrint').removeAttr('hidden');
+        }
+        else {
+            document.getElementById("btnPrint").setAttribute("hidden", true);
+        }
+
+    });
+    $('#l_tipo_pago').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        if (SelectedValue != 1) {
+            $('#lCodigoPago').removeAttr('hidden');
+            document.getElementById("lCodigoPago").setAttribute("required", true);
+        }
+        else {
+            $('#lCodigoPago').removeAttr('required');
+            document.getElementById("lCodigoPago").setAttribute("hidden", true);
+        }
+    });
+    $('#l_servicios').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        $.ajax({
+            type: "GET",
+            url: "/TblServicios/fFiltroServicio/",
+            data: { idA: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                }
+                else {
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        var f_tipo_servicio = list[i].tipoServicioDesc;
+                        var f_servicio = list[i].descServicio;
+                        var f_precio = list[i].totalPrecioServicio;
+                        var _desc = parseFloat($("#iDescuento").val())
+                        var _prec = parseFloat(f_precio)
+                        var _tprecio = _prec - ((_prec * _desc) / 100)
+
+                        var rowCount = $('#tbProducto >tbody >tr').length;
+
+                        $("#tbProducto tbody").append(
+                            $("<tr>").append(
+                                $("<td style='text-align:center'>").text(f_tipo_servicio),
+                                $("<td style='text-align:center'>").text(f_tipo_servicio),
+                                $("<td style='text-align:center'>").text(f_servicio),
+                                $("<td style='text-align:center'>").text(_desc),
+                                $("<td style='text-align:center'>").text(_prec),
+                                $("<td style='text-align:center'>").text(_tprecio),
+                                $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
+                        )
+                        var rowA = "<tr id='a" + rowCount + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
+                        var rowB = "<tr id='b" + rowCount + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
+                        $("#tbProductoA tbody").append(rowA);
+                        $("#tbProductoB tbody").append(rowB);
+
+                        var dateObject = new Date();
+                        var month = dateObject.getMonth();
+                        var dateOfMonth = dateObject.getDate();
+                        var year = dateObject.getFullYear();
+                        var periodo_inicial = (dateOfMonth + 1) + "/" + month + "/" + year;
+                        var periodo_final = (dateOfMonth + 1) + "/" + (month + list[i].periodo) + "/" + year;
+                        document.getElementById('l_peridoA').innerHTML = 'item: ' + list[i].codigoInterno + ' con Periodo Comprendido del: ' + periodo_inicial + 'al: ' + periodo_final;
+                    }
+
+                    //Defino los totales de mis 2 columnas en 0
+                    var total_col1 = 0;
+                    var total_col2 = 0;
+                    //Recorro todos los tr ubicados en el tbody
                     $('#tbProducto tbody').find('tr').each(function (i, el) {
 
-                total_col1 += parseFloat($(this).find('td').eq(4).text());
-                });
-                let iPagoMonto = parseInt($('#i_pago_monto').val());
-                let tDiferencia = parseInt(iPagoMonto - total_col1);
-                let vTotal = iPagoMonto + tDiferencia;
-            document.getElementById("iPagoDiferencia").value = tDiferencia;
-            if (vTotal == total_col1) 
-            {
-                $('#btnPrint').removeAttr('hidden');
-            }
-            else
-            {
-                document.getElementById("btnPrint").setAttribute("hidden", true);
-            }
-        
+                        //Voy incrementando las variables segun la fila ( .eq(0) representa la fila 1 )     
+                        total_col1 += parseFloat($(this).find('td').eq(4).text());
+                        total_col2 += parseFloat($(this).find('td').eq(1).text());
+
+                        document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
+                    });
+                    //Muestro el resultado en el th correspondiente a la columna
+                    //$('#ejemplo tfoot tr th').eq(4).text("Total " + total_col1);
+                    //$('#ejemplo tfoot tr th').eq(1).text("Total " + total_col2);
+                }
+            },
         });
-        $('#l_tipo_pago').change(function () {
-            var SelectedText = $('option:selected', this).text();
-            var SelectedValue = $('option:selected', this).val();
-
-            if (SelectedValue != 1) {
-                $('#lCodigoPago').removeAttr('hidden');
-                document.getElementById("lCodigoPago").setAttribute("required", true);
-            }
-            else {
-                $('#lCodigoPago').removeAttr('required');
-                document.getElementById("lCodigoPago").setAttribute("hidden", true);
-            }
-        });
-        $('#l_servicios').change(function () {
-            var SelectedText = $('option:selected', this).text();
-            var SelectedValue = $('option:selected', this).val();
-
-            $.ajax({
-                type: "GET",
-                url: "/TblServicios/fFiltroServicio/",
-                data: { idA: SelectedValue },
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (list) {
-                    if (list.length == 0) {
-                    }
-                    else {
-                        for (var i = 0, len = list.length; i < len; i++) {
-                            var f_tipo_servicio = list[i].tipoServicioDesc;
-                            var f_servicio = list[i].descServicio;
-                            var f_precio = list[i].totalPrecioServicio;
-                            var _desc = parseFloat($("#iDescuento").val())
-                            var _prec = parseFloat(f_precio)
-                            var _tprecio = _prec - ((_prec * _desc) / 100)
-
-                            var rowCount = $('#tbProducto >tbody >tr').length;
-
-                            $("#tbProducto tbody").append(
-                                $("<tr>").append(
-                                    $("<td style='text-align:center'>").text(f_tipo_servicio),
-                                    $("<td style='text-align:center'>").text(f_servicio),
-                                    $("<td style='text-align:center'>").text(_desc),
-                                    $("<td style='text-align:center'>").text(_prec),
-                                    $("<td style='text-align:center'>").text(_tprecio),
-                                    $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
-                            ) 
-                             var rowA = "<tr id='a" + rowCount  + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
-                             var rowB = "<tr id='b" + rowCount  + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
-                            $("#tbProductoA tbody").append(rowA);
-                            $("#tbProductoB tbody").append(rowB);
-                        }
-
-                        //Defino los totales de mis 2 columnas en 0
-                        var total_col1 = 0;
-                        var total_col2 = 0;
-                        //Recorro todos los tr ubicados en el tbody
-                        $('#tbProducto tbody').find('tr').each(function (i, el) {
-
-                            //Voy incrementando las variables segun la fila ( .eq(0) representa la fila 1 )     
-                            total_col1 += parseFloat($(this).find('td').eq(4).text());
-                            total_col2 += parseFloat($(this).find('td').eq(1).text());
-
-                            document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
-                        });
-                        //Muestro el resultado en el th correspondiente a la columna
-                        //$('#ejemplo tfoot tr th').eq(4).text("Total " + total_col1);
-                        //$('#ejemplo tfoot tr th').eq(1).text("Total " + total_col2);
-                    }
-                },
-            });
-        });
-            $('#l_alumno').change(function () {
+    });
+    $('#l_alumno').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
 
@@ -762,59 +750,53 @@
                 }
                 else {
                     document.getElementById('l_ClienteVenta').innerHTML = 'Alumno: ' + list.nombreCompleto;
-                    document.getElementById('l_DatosClienteVenta').innerHTML = 'Contacto: ' + list.correoAcceso + ', Teléfono: ' + list.telefono;
-
                     document.getElementById('dl_ClienteVenta').innerHTML = 'Alumno: ' + list.nombreCompleto;
-                    document.getElementById('dl_DatosClienteVenta').innerHTML = 'Contacto: ' + list.correoAcceso + ', Teléfono: ' + list.telefono;
                 }
             },
         });
     });
-        $("#btnTerminar").on("click", function () {
-var dateObject = null;
-            var f_tipo_venta = $('#l_tipo_venta').val();
-            var f_alumno = $('#l_alumno').val();
-            var f_row_count = $('#tbProducto >tbody >tr').length;
-            var f_tipo_pago = $('#l_tipo_pago').val();
-            var l_TotalVenta = $('#l_TotalVenta').val();
-            var iPagoDiferencia = $('#iPagoDiferencia').val();
-            var i_codigo_pago = $('#i_codigo_pago').val();
-            
-            
-            let total_col1 = 0;
-            $('#tbProducto tbody').find('tr').each(function (i, el) {
+    $("#btnTerminar").on("click", function () {
+        var dateObject = null;
+        var f_tipo_venta = $('#l_tipo_venta').val();
+        var f_alumno = $('#l_alumno').val();
+        var f_row_count = $('#tbProducto >tbody >tr').length;
+        var f_tipo_pago = $('#l_tipo_pago').val();
+        var l_TotalVenta = $('#l_TotalVenta').val();
+        var iPagoDiferencia = $('#iPagoDiferencia').val();
+        var i_codigo_pago = $('#i_codigo_pago').val();
+
+
+        let total_col1 = 0;
+        $('#tbProducto tbody').find('tr').each(function (i, el) {
             total_col1 += parseFloat($(this).find('td').eq(4).text());
-            });
-            let i_pago_monto = parseInt($('#i_pago_monto').val());
-            let tDiferencia = parseInt(i_pago_monto - total_col1);
-            let vTotal = i_pago_monto - tDiferencia;
-            document.getElementById("iPagoDiferencia").value = tDiferencia;
-           
-            if (f_tipo_venta == "") {
-                validate('l_tipo_venta')
+        });
+        let i_pago_monto = parseInt($('#i_pago_monto').val());
+        let tDiferencia = parseInt(i_pago_monto - total_col1);
+        let vTotal = i_pago_monto - tDiferencia;
+        document.getElementById("iPagoDiferencia").value = tDiferencia;
+
+        if (f_tipo_venta == "") {
+            validate('l_tipo_venta')
+        }
+        else if (f_alumno == "") {
+            validate('l_alumno')
+        }
+        else {
+            if (f_row_count == 0) {
+                vNotify.error({ text: 'Favor de agregar Servicios.', title: 'Intelimundo.' });
             }
-            else if (f_alumno == "") {
-                validate('l_alumno')
-            }
-            else 
-            {
-                if(f_row_count == 0)
-                {
-                vNotify.error({text:'Favor de agregar Servicios.', title:'Intelimundo.'});    
-                }
-                else if (f_tipo_pago == "") {
+            else if (f_tipo_pago == "") {
                 validate('l_tipo_pago')
-                }
-                 else if (f_tipo_pago != 1 && i_codigo_pago == "") {
+            }
+            else if (f_tipo_pago != 1 && i_codigo_pago == "") {
                 validate('i_codigo_pago')
-                }
-                else if (i_pago_monto == 0) {
+            }
+            else if (i_pago_monto == 0) {
                 validate('i_pago_monto')
-                }
-                else if (vTotal == total_col1)
-                 {
-                    if (i_pago_monto - iPagoDiferencia == total_col1) {
-                    
+            }
+            else if (vTotal == total_col1) {
+                if (i_pago_monto - iPagoDiferencia == total_col1) {
+
                     var RelVenta_Pagos = []
                     var RelVenta_Productos = []
                     var total = 0;
@@ -831,38 +813,36 @@ var dateObject = null;
                             }
                         )
                     })
-                    var i_fecha_alterna_pago  = $('#i_fecha_alterna_pago').val();
-            
-                        if (i_fecha_alterna_pago != "") {
-                        
-                        dateObject = new Date(i_fecha_alterna_pago);
-                                
-                        }
-                        else
-                        {
-                        dateObject = new Date();
-                        }
-                        var catidad_abono = null;
+                    var i_fecha_alterna_pago = $('#i_fecha_alterna_pago').val();
 
-                         if (f_tipo_venta != 1) {
-                        
+                    if (i_fecha_alterna_pago != "") {
+
+                        dateObject = new Date(i_fecha_alterna_pago);
+
+                    }
+                    else {
+                        dateObject = new Date();
+                    }
+                    var catidad_abono = null;
+
+                    if (f_tipo_venta != 1) {
+
                         catidad_abono = $("#i_pago_monto").val();
-                                
-                        }
-                        else
-                        {
-                       catidad_abono = total_col1;
-                        }
-             
+
+                    }
+                    else {
+                        catidad_abono = total_col1;
+                    }
+
 
                     var RelVenta_Pagos = [{
 
-                            IdTipoPago: $("#l_tipo_pago").val(),
-                            FechaAlternaPago: dateObject,
-                            CodigoReferencia: $("#i_codigo_pago").val(),
-                            CantidadPago: catidad_abono,
-                            Total: total_col1
-                        }];    
+                        IdTipoPago: $("#l_tipo_pago").val(),
+                        FechaAlternaPago: dateObject,
+                        CodigoReferencia: $("#i_codigo_pago").val(),
+                        CantidadPago: catidad_abono,
+                        Total: total_col1
+                    }];
                     var oCompraVM = {
                         TblVentas: {
                             IdTipoVenta: $("#l_tipo_venta").val(),
@@ -883,7 +863,7 @@ var dateObject = null;
                         success: function (data) {
 
                             if (data.respuesta) {
-                                vNotify.success({text:'Venta Registrada.', title:'Intelimundo.'});
+                                vNotify.success({ text: 'Venta Registrada.', title: 'Intelimundo.' });
                                 var url = '@Url.Action("Index", "TblVentas")';
                                 window.location.href = url;
                             }
@@ -891,63 +871,59 @@ var dateObject = null;
 
                     });
                 }
-                else
-                {
-                vNotify.error({text:'Pago no es Igual a Total.', title:'Intelimundo.'});
-                }
-                
+                else {
+                    vNotify.error({ text: 'Pago no es Igual a Total.', title: 'Intelimundo.' });
                 }
 
-                else
-                {
-                vNotify.error({text:'Err.', title:'Intelimundo.'});
-                }
             }
-        })
-        function RemoveRow(o) {
-            //no clue what to put here?
-            var p = o.parentNode.parentNode;
-            p.parentNode.removeChild(p);
-            var total_col1 = 0;
-            var rowCount = $('#tbProducto >tbody >tr').length;
 
-                if(rowCount == 0)
-                {
-                    document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
-                    document.getElementById('iPagoDiferencia').value = total_col1;
-                }
-                else
-                {
-                    $('#tbProducto tbody').find('tr').each(function (i, el) {
-
-                    total_col1 += parseFloat($(this).find('td').eq(4).text());
-                    document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1; 
-                    });
-                }
+            else {
+                vNotify.error({ text: 'Err.', title: 'Intelimundo.' });
+            }
         }
-        function validate(inputID) {
-            switch (inputID) {
+    })
+    function RemoveRow(o) {
+        //no clue what to put here?
+        var p = o.parentNode.parentNode;
+        p.parentNode.removeChild(p);
+        var total_col1 = 0;
+        var rowCount = $('#tbProducto >tbody >tr').length;
+
+        if (rowCount == 0) {
+            document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
+            document.getElementById('iPagoDiferencia').value = total_col1;
+        }
+        else {
+            $('#tbProducto tbody').find('tr').each(function (i, el) {
+
+                total_col1 += parseFloat($(this).find('td').eq(4).text());
+                document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
+            });
+        }
+    }
+    function validate(inputID) {
+        switch (inputID) {
             case 'l_tipo_venta':
-                vNotify.error({text:'Tipo Venta, Requerido.', title:'Intelimundo.'});
+                vNotify.error({ text: 'Tipo Venta, Requerido.', title: 'Intelimundo.' });
                 break;
             case 'l_alumno':
-                vNotify.error({text:'Alumno, Requerido.', title:'Intelimundo.'});
+                vNotify.error({ text: 'Alumno, Requerido.', title: 'Intelimundo.' });
                 break;
-                case 'l_tipo_pago':
-                vNotify.error({text:'Tipo Pago, Requerido.', title:'Intelimundo.'});
+            case 'l_tipo_pago':
+                vNotify.error({ text: 'Tipo Pago, Requerido.', title: 'Intelimundo.' });
                 break;
-                case 'i_codigo_pago':
-                vNotify.error({text:'Codigo de Pago, Requerido.', title:'Intelimundo.'});
+            case 'i_codigo_pago':
+                vNotify.error({ text: 'Codigo de Pago, Requerido.', title: 'Intelimundo.' });
                 break;
-                case 'i_pago_monto':
-                vNotify.error({text:'Pago, Requerido.', title:'Intelimundo.'});
+            case 'i_pago_monto':
+                vNotify.error({ text: 'Pago, Requerido.', title: 'Intelimundo.' });
                 break;
             default:
-                vNotify.error({text:'Err.', title:'Intelimundo.'});
-            }
+                vNotify.error({ text: 'Err.', title: 'Intelimundo.' });
         }
-        $(document).on("click", "#btnPrint", function (e) {
+    }
+    $(document).on("click", "#btnPrint", function (e) {
         var nFolio = $('#i_FolioVenta').val();
     });
-    </script>
+</script>
 }

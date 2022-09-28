@@ -105,7 +105,7 @@ namespace WebAdmin.Controllers
                           };
             return View(await fAlumno.ToListAsync());
         }
-         [HttpGet]
+        [HttpGet]
         public ActionResult sDatosAlumno(Guid id)
         {
             var f_alumno = _context.TblAlumnos.First(m => m.IdAlumno == id);
@@ -120,31 +120,31 @@ namespace WebAdmin.Controllers
 
             if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
-            var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
-            var fTotalesA = from a in _context.TblAlumnos
-                           where a.IdEstatusRegistro == 1 && a.IdTipoAlumno == 1
-                           select new
-                           {
-                               fRegistros = _context.TblAlumnos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
-                               fTipo = a.IdTipoAlumno
-                           };
+                var fTotalesA = from a in _context.TblAlumnos
+                                where a.IdEstatusRegistro == 1 && a.IdTipoAlumno == 1
+                                select new
+                                {
+                                    fRegistros = _context.TblAlumnos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
+                                    fTipo = a.IdTipoAlumno
+                                };
 
-            var fTotalesD = from a in _context.TblAlumnos
-                           where a.IdEstatusRegistro == 1 && a.IdTipoAlumno == 2
-                           select new
-                           {
-                               fRegistros = _context.TblAlumnos.Where(a => a.IdEstatusRegistro == 2 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
-                               fTipo = a.IdTipoAlumno
-                           };
-            
-            var fTotales = fTotalesA.Union(fTotalesD);
-            return Json(fTotales);    
+                var fTotalesD = from a in _context.TblAlumnos
+                                where a.IdEstatusRegistro == 1 && a.IdTipoAlumno == 2
+                                select new
+                                {
+                                    fRegistros = _context.TblAlumnos.Where(a => a.IdEstatusRegistro == 2 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
+                                    fTipo = a.IdTipoAlumno
+                                };
+
+                var fTotales = fTotalesA.Union(fTotalesD);
+                return Json(fTotales);
             }
             else
             {
                 return Json(0);
-            
+
             }
         }
         [HttpGet]
@@ -205,7 +205,7 @@ namespace WebAdmin.Controllers
             if (ModelState.IsValid)
             {
                 var vDuplicado = _context.TblAlumnos
-                                      .Where(s => s.NombreAlumno == tblAlumno.NombreAlumno && s.ApellidoPaterno == tblAlumno.ApellidoPaterno && s.ApellidoMaterno == tblAlumno.ApellidoMaterno)
+                                      .Where(s => s.NombreAlumno == tblAlumno.NombreAlumno.ToString().ToUpper().Trim() && s.ApellidoPaterno == tblAlumno.ApellidoPaterno.ToString().ToUpper().Trim() && s.ApellidoMaterno == tblAlumno.ApellidoMaterno.ToString().ToUpper().Trim())
                                       .ToList();
 
                 if (vDuplicado.Count == 0)
