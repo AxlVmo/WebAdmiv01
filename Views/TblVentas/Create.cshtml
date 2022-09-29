@@ -80,7 +80,7 @@
             <div class="card-header d-flex align-items-center justify-content-between">
             </div>
             <div class="card-body">
-                      <input type="hidden" id="f_periodo" />
+                <input type="hidden" id="f_periodo" />
                 <div class="row">
                     <div class="mb-3 col-md-3">
                         <label for="TblVentas.IdTipoVenta" class="form-label" asp-for="TblVentas.IdTipoVenta"></label>
@@ -246,7 +246,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">DIFERENCIA</label>
-                                    <input id="iPagoDiferencia" class="form-control" value="0" readonly />
+                                    <input id="i_pago_diferencia" class="form-control" value="0" readonly />
                                 </div>
                             </div>
 
@@ -262,7 +262,7 @@
                                 <tr>
                                     <th>Total:</th>
                                     <td>
-                                        <label id="l_TotalVenta"></label>
+                                        <label id="l_total_venta"></label>
                                     </td>
                                 </tr>
                             </table>
@@ -278,11 +278,27 @@
 
                         </a>
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                        <button class="btn btn-info" id="btnPrint">Imprimir</button>
+                        <button class="btn btn-info" id="btnPrint" hidden>Imprimir</button>
                     </div>
                 </div>
-                <hr>
-                <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalVentas" aria-labelledby="modalVentasLabel" tabindex="-1" style="display: none"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalVentasLabel">
+                    La venta se ha registrado con exito ¿deseas imprimir la
+                    nota de venta?
+                </h5>
+                <input type="hidden" id="i_FolioVenta" />
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                                <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
                     <table>
                         <tr class="top">
                             <td colspan="2">
@@ -295,6 +311,7 @@
                                         <td>
                                             <label id="l_NumVenta"></label><br />
                                             <label id="l_FechaCreacionVenta"></label><br />
+                                            <label id="l_FechaAlternaVenta"></label><br />
                                             <label id="l_UsuarioVenta"></label>
                                             <label id="l_UsuarioContactoVenta"></label>
                                         </td>
@@ -313,9 +330,7 @@
                                             <label id="l_DatosCentroVentaAlt"></label><br />
                                             <label id="l_DatosCentroContactoVenta"></label><br />
                                         </td>
-
                                     </tr>
-
                                 </table>
                             </td>
                         </tr>
@@ -328,8 +343,14 @@
                                             <label id="l_ClienteVenta"></label><br />
                                         </td>
                                         <td>
+                                            <label id="v_tipo_venta"></label>
+                                            <label id="v_forma_pago"></label>
+                                            <label id="v_codigo_referencia"></label>
+                                            <label id="v_perido"></label>
+                                            <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
                                         </td>
                                     </tr>
+
                                 </table>
                             </td>
                         </tr>
@@ -337,9 +358,6 @@
                     <table class="table" id="tbProductoA">
                         <tbody>
                             <thead>
-                                  <th style="text-align:center">
-                                    CODIGO INTERNO
-                                </th>
                                 <th style="text-align:center">
                                     TIPO SERVICIO
                                 </th>
@@ -357,28 +375,22 @@
                                 </th>
                             </thead>
                         </tbody>
-                        </table>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <br />
-                                    <p><span class="text-muted fw-light"><label id="l_peridoA"></label> </span><label id="l_fecha_periodoA"></label></p>
-                                    <br />
-                                    <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
-                                </div>
-                                <div class="col-6">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tr>
-                                                <th>Total:</th>
-                                                <td>
-                                                    <label id="l_TotalVenta"></label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
+                    </table>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th><label id="v_total_venta"></label></th>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
-                        <table>
+                        </div>
+                    </div>
+                    <table>
                         <tr class="top">
                             <td colspan="2">
                                 <table>
@@ -390,6 +402,7 @@
                                         <td>
                                             <label id="dl_NumVenta"></label><br />
                                             <label id="dl_FechaCreacionVenta"></label><br />
+                                            <label id="dl_FechaAlternaVenta"></label><br />
                                             <label id="dl_UsuarioVenta"></label>
                                             <label id="dl_UsuarioContactoVenta"></label>
                                         </td>
@@ -420,8 +433,14 @@
                                             <label id="dl_ClienteVenta"></label><br />
                                         </td>
                                         <td>
+                                            <label id="dv_tipo_venta"></label>
+                                            <label id="dv_forma_pago"></label>
+                                            <label id="dv_codigo_referencia"></label>
+                                            <label id="dv_perido"></label>
+                                            <p><span class="text-muted fw-light">Intelimundo /</span>Colaborador</p>
                                         </td>
                                     </tr>
+
                                 </table>
                             </td>
                         </tr>
@@ -449,47 +468,20 @@
                         </tbody>
                     </table>
                     <div class="row">
-                        <div class="col-md-6">
-                            <br />
-                            <p><span class="text-muted fw-light">Periodo Comprendido del: </span>26-08-2022 al
-                                10-09-2022</p>
-
-                            <br />
-                            <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
-
-                        </div>
                         <div class="col-6">
                             <div class="table-responsive">
                                 <table class="table">
                                     <tr>
-                                        <th>Total:</th>
+                                        <th><label id="dv_total_venta"></label></th>
                                         <td>
-                                            <label id="l_TotalVenta"></label>
+
                                         </td>
                                     </tr>
-
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modalVentas" aria-labelledby="modalVentasLabel" tabindex="-1" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalVentasLabel">
-                    La venta se ha registrado con exito ¿deseas imprimir la
-                    nota de venta?
-                </h5>
-                <input type="hidden" id="i_FolioVenta" />
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
             </div>
             <div class="modal-footer">
                 <form class="form-inline">
@@ -499,7 +491,6 @@
         </div>
     </div>
 </div>
-
 @section Scripts {
 @{
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
@@ -525,8 +516,8 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 if (list.length == 0) {
                 }
                 else {
-                    document.getElementById('l_NumVenta').innerHTML = '# Nómina: ' + "iV-" + GeneraFolio;
-                    document.getElementById('dl_NumVenta').innerHTML = '# Nómina: ' + "iV-" + GeneraFolio;
+                    document.getElementById('l_NumVenta').innerHTML = '# Venta: ' + "iV-" + GeneraFolio;
+                    document.getElementById('dl_NumVenta').innerHTML = '# Venta: ' + "iV-" + GeneraFolio;
 
                     const dateObject = new Date(list.fechaRegistro);
                     var month = dateObject.getMonth();
@@ -536,12 +527,14 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
                     document.getElementById('l_FechaCreacionVenta').innerHTML = 'Fecha Impresion: ' + formattedDate;
 
+
                     document.getElementById('l_CorporativoVenta').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
                     document.getElementById('l_DatosCorporativoVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
                     document.getElementById('l_DatosCorporativoVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
                     document.getElementById('l_DatosCorporativoContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
 
                     document.getElementById('dl_FechaCreacionVenta').innerHTML = 'Fecha Impresion: ' + formattedDate;
+
 
                     document.getElementById('dl_CorporativoVenta').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
                     document.getElementById('dl_DatosCorporativoVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
@@ -635,7 +628,25 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             }
         });
     });
-    $('#i_fecha_alterna_pago').change(function () {
+    $('#l_tipo_venta').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        if (SelectedValue != 1) {
+
+            document.getElementById('v_tipo_venta').innerHTML = 'Tipo de Venta: ' + SelectedText + ',';
+            document.getElementById('dv_tipo_venta').innerHTML = 'Tipo de Venta: ' + SelectedText + ',';
+        }
+        else {
+
+            document.getElementById('v_tipo_venta').innerHTML = 'Tipo de Venta: ' + SelectedText + ',';
+            document.getElementById('dv_tipo_venta').innerHTML = 'Tipo de Venta: ' + SelectedText + ',';
+        }
+    });
+    $('#i_codigo_pago').change(function () {
+        var f_codigo_pago = $('#i_codigo_pago').val();
+        document.getElementById('v_codigo_referencia').innerHTML = 'Codigo de Referencia: ' + f_codigo_pago;
+        document.getElementById('dv_codigo_referencia').innerHTML = 'Codigo de Referencia: ' + f_codigo_pago;
     });
     $('#i_pago_monto').change(function () {
         let total_col1 = 0;
@@ -645,14 +656,9 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         });
         let iPagoMonto = parseInt($('#i_pago_monto').val());
         let tDiferencia = parseInt(iPagoMonto - total_col1);
-        let vTotal = iPagoMonto + tDiferencia;
-        document.getElementById("iPagoDiferencia").value = tDiferencia;
-        if (vTotal == total_col1) {
-            $('#btnPrint').removeAttr('hidden');
-        }
-        else {
-            document.getElementById("btnPrint").setAttribute("hidden", true);
-        }
+        let vTotal = iPagoMonto - tDiferencia;
+        document.getElementById("i_pago_diferencia").value = tDiferencia;
+        $('#btnPrint').removeAttr('hidden');
 
     });
     $('#l_tipo_pago').change(function () {
@@ -662,10 +668,14 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         if (SelectedValue != 1) {
             $('#lCodigoPago').removeAttr('hidden');
             document.getElementById("lCodigoPago").setAttribute("required", true);
+            document.getElementById('v_forma_pago').innerHTML = 'Forma de Pago: ' + SelectedText;
+            document.getElementById('dv_forma_pago').innerHTML = 'Forma de Pago: ' + SelectedText;
         }
         else {
             $('#lCodigoPago').removeAttr('required');
             document.getElementById("lCodigoPago").setAttribute("hidden", true);
+            document.getElementById('v_forma_pago').innerHTML = 'Forma de Pago: ' + SelectedText;
+            document.getElementById('dv_forma_pago').innerHTML = 'Forma de Pago: ' + SelectedText;
         }
     });
     $('#l_servicios').change(function () {
@@ -695,7 +705,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         $("#tbProducto tbody").append(
                             $("<tr>").append(
                                 $("<td style='text-align:center'>").text(f_tipo_servicio),
-                                $("<td style='text-align:center'>").text(f_tipo_servicio),
                                 $("<td style='text-align:center'>").text(f_servicio),
                                 $("<td style='text-align:center'>").text(_desc),
                                 $("<td style='text-align:center'>").text(_prec),
@@ -713,24 +722,18 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         var year = dateObject.getFullYear();
                         var periodo_inicial = (dateOfMonth + 1) + "/" + month + "/" + year;
                         var periodo_final = (dateOfMonth + 1) + "/" + (month + list[i].periodo) + "/" + year;
-                        document.getElementById('l_peridoA').innerHTML = 'item: ' + list[i].codigoInterno + ' con Periodo Comprendido del: ' + periodo_inicial + 'al: ' + periodo_final;
+                        document.getElementById('v_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
+                        document.getElementById('dv_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
                     }
 
-                    //Defino los totales de mis 2 columnas en 0
                     var total_col1 = 0;
                     var total_col2 = 0;
-                    //Recorro todos los tr ubicados en el tbody
                     $('#tbProducto tbody').find('tr').each(function (i, el) {
 
-                        //Voy incrementando las variables segun la fila ( .eq(0) representa la fila 1 )     
                         total_col1 += parseFloat($(this).find('td').eq(4).text());
                         total_col2 += parseFloat($(this).find('td').eq(1).text());
-
-                        document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
+                        document.getElementById('l_total_venta').innerHTML = "$ " + total_col1;
                     });
-                    //Muestro el resultado en el th correspondiente a la columna
-                    //$('#ejemplo tfoot tr th').eq(4).text("Total " + total_col1);
-                    //$('#ejemplo tfoot tr th').eq(1).text("Total " + total_col2);
                 }
             },
         });
@@ -756,131 +759,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         });
     });
     $("#btnTerminar").on("click", function () {
-        var dateObject = null;
-        var f_tipo_venta = $('#l_tipo_venta').val();
-        var f_alumno = $('#l_alumno').val();
-        var f_row_count = $('#tbProducto >tbody >tr').length;
-        var f_tipo_pago = $('#l_tipo_pago').val();
-        var l_TotalVenta = $('#l_TotalVenta').val();
-        var iPagoDiferencia = $('#iPagoDiferencia').val();
-        var i_codigo_pago = $('#i_codigo_pago').val();
-
-
-        let total_col1 = 0;
-        $('#tbProducto tbody').find('tr').each(function (i, el) {
-            total_col1 += parseFloat($(this).find('td').eq(4).text());
-        });
-        let i_pago_monto = parseInt($('#i_pago_monto').val());
-        let tDiferencia = parseInt(i_pago_monto - total_col1);
-        let vTotal = i_pago_monto - tDiferencia;
-        document.getElementById("iPagoDiferencia").value = tDiferencia;
-
-        if (f_tipo_venta == "") {
-            validate('l_tipo_venta')
-        }
-        else if (f_alumno == "") {
-            validate('l_alumno')
-        }
-        else {
-            if (f_row_count == 0) {
-                vNotify.error({ text: 'Favor de agregar Servicios.', title: 'Intelimundo.' });
-            }
-            else if (f_tipo_pago == "") {
-                validate('l_tipo_pago')
-            }
-            else if (f_tipo_pago != 1 && i_codigo_pago == "") {
-                validate('i_codigo_pago')
-            }
-            else if (i_pago_monto == 0) {
-                validate('i_pago_monto')
-            }
-            else if (vTotal == total_col1) {
-                if (i_pago_monto - iPagoDiferencia == total_col1) {
-
-                    var RelVenta_Pagos = []
-                    var RelVenta_Productos = []
-                    var total = 0;
-                    $("#tbProducto > tbody > tr").each(function (i, tr) {
-                        // FechaAlterna: $("#i_FolioVenta").val(),
-                        //   CodigoPago: $("#i_FolioVenta").val()
-                        RelVenta_Productos.push(
-                            {
-                                TipoServicio: $(tr).find('td:eq(0)').text(),
-                                Servicio: $(tr).find('td:eq(1)').text(),
-                                Descuento: $(tr).find('td:eq(2)').text(),
-                                Precio: $(tr).find('td:eq(3)').text(),
-                                TotalPrecio: $(tr).find('td:eq(4)').text()
-                            }
-                        )
-                    })
-                    var i_fecha_alterna_pago = $('#i_fecha_alterna_pago').val();
-
-                    if (i_fecha_alterna_pago != "") {
-
-                        dateObject = new Date(i_fecha_alterna_pago);
-
-                    }
-                    else {
-                        dateObject = new Date();
-                    }
-                    var catidad_abono = null;
-
-                    if (f_tipo_venta != 1) {
-
-                        catidad_abono = $("#i_pago_monto").val();
-
-                    }
-                    else {
-                        catidad_abono = total_col1;
-                    }
-
-
-                    var RelVenta_Pagos = [{
-
-                        IdTipoPago: $("#l_tipo_pago").val(),
-                        FechaAlternaPago: dateObject,
-                        CodigoReferencia: $("#i_codigo_pago").val(),
-                        CantidadPago: catidad_abono,
-                        Total: total_col1
-                    }];
-                    var oCompraVM = {
-                        TblVentas: {
-                            IdTipoVenta: $("#l_tipo_venta").val(),
-                            IdCliente: $("#l_alumno").val(),
-                            FolioVenta: $("#i_FolioVenta").val(),
-
-                        },
-                        RelVentaProductos: RelVenta_Productos,
-                        RelVentaPagos: RelVenta_Pagos
-                    }
-
-                    jQuery.ajax({
-                        url: '@Url.Action("Index", "TblVentas")',
-                        type: "POST",
-                        data: JSON.stringify(oCompraVM),
-                        datatype: "json",
-                        contentType: "application/json; charset=utf-8",
-                        success: function (data) {
-
-                            if (data.respuesta) {
-                                vNotify.success({ text: 'Venta Registrada.', title: 'Intelimundo.' });
-                                var url = '@Url.Action("Index", "TblVentas")';
-                                window.location.href = url;
-                            }
-                        }
-
-                    });
-                }
-                else {
-                    vNotify.error({ text: 'Pago no es Igual a Total.', title: 'Intelimundo.' });
-                }
-
-            }
-
-            else {
-                vNotify.error({ text: 'Err.', title: 'Intelimundo.' });
-            }
-        }
+        valida_venta();
     })
     function RemoveRow(o) {
         //no clue what to put here?
@@ -890,15 +769,143 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var rowCount = $('#tbProducto >tbody >tr').length;
 
         if (rowCount == 0) {
-            document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
-            document.getElementById('iPagoDiferencia').value = total_col1;
+            document.getElementById('l_total_venta').innerHTML = "$ " + total_col1;
+            document.getElementById('i_pago_diferencia').value = total_col1;
         }
         else {
             $('#tbProducto tbody').find('tr').each(function (i, el) {
 
                 total_col1 += parseFloat($(this).find('td').eq(4).text());
-                document.getElementById('l_TotalVenta').innerHTML = "$ " + total_col1;
+                document.getElementById('l_total_venta').innerHTML = "$ " + total_col1;
             });
+        }
+    }
+    function registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, dateObject, total_col1) {
+
+        var RelVenta_Pagos = []
+        var RelVenta_Productos = []
+        $("#tbProducto > tbody > tr").each(function (i, tr) {
+            // FechaAlterna: $("#i_FolioVenta").val(),
+            //   CodigoPago: $("#i_FolioVenta").val()
+            RelVenta_Productos.push(
+                {
+                    TipoServicio: $(tr).find('td:eq(0)').text(),
+                    Servicio: $(tr).find('td:eq(1)').text(),
+                    Descuento: $(tr).find('td:eq(2)').text(),
+                    Precio: $(tr).find('td:eq(3)').text(),
+                    TotalPrecio: $(tr).find('td:eq(4)').text()
+                }
+            )
+        })
+
+        var RelVenta_Pagos = [{
+
+            IdTipoPago: f_tipo_pago,
+            FechaAlternaPago: dateObject,
+            CodigoReferencia: f_codigo_pago,
+            CantidadPago: catidad_abono,
+            Total: total_col1
+        }];
+        var oCompraVM = {
+            TblVentas: {
+                IdTipoVenta: $("#l_tipo_venta").val(),
+                IdCliente: $("#l_alumno").val(),
+                FolioVenta: $("#i_FolioVenta").val(),
+
+            },
+            RelVentaProductos: RelVenta_Productos,
+            RelVentaPagos: RelVenta_Pagos
+        }
+
+        jQuery.ajax({
+            url: '@Url.Action("Index", "TblVentas")',
+            type: "POST",
+            data: JSON.stringify(oCompraVM),
+            datatype: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                if (data.respuesta) {
+                    vNotify.success({ text: 'Venta Registrada.', title: 'Intelimundo.' });
+                    var url = '@Url.Action("Index", "TblVentas")';
+                    window.location.href = url;
+                }
+            }
+        });
+    }
+    function valida_venta() {
+        var dateObject = null;
+        var f_tipo_venta = $('#l_tipo_venta').val();
+        var f_alumno = $('#l_alumno').val();
+        var f_registros_tabla = $('#tbProducto >tbody >tr').length;
+        var f_tipo_pago = $('#l_tipo_pago').val();
+        var f_total_venta = $('#l_total_venta').val();
+        var f_pago_diferencia = $('#i_pago_diferencia').val();
+        var f_codigo_pago = $('#i_codigo_pago').val();
+        var total_col1 = 0;
+        $('#tbProducto tbody').find('tr').each(function (i, el) {
+            total_col1 += parseFloat($(this).find('td').eq(4).text());
+        });
+        var i_pago_monto = parseInt($('#i_pago_monto').val());
+        var t_diferencia = parseInt(i_pago_monto - total_col1);
+        var v_total = i_pago_monto - t_diferencia;
+
+        var i_fecha_alterna_pago = $('#i_fecha_alterna_pago').val();
+
+        if (i_fecha_alterna_pago != "") {
+
+            dateObject = new Date(i_fecha_alterna_pago);
+
+        }
+        else {
+            dateObject = new Date();
+        }
+        var catidad_abono = null;
+
+        if (f_tipo_venta != 1) {
+
+            catidad_abono = $("#i_pago_monto").val();
+        }
+        else {
+            catidad_abono = total_col1;
+        }
+
+        if (f_tipo_venta == "") {
+            validate('l_tipo_venta')
+        }
+        else if (f_alumno == "") {
+            validate('l_alumno')
+        }
+        else {
+            if (f_registros_tabla == 0) {
+                vNotify.error({ text: 'Favor de agregar Servicios.', title: 'Intelimundo.' });
+            }
+            else if (f_tipo_pago == "") {
+                validate('l_tipo_pago')
+            }
+            else if (f_tipo_pago != 1 && f_codigo_pago == "") {
+                validate('i_codigo_pago')
+            }
+            else if (i_pago_monto == 0) {
+                validate('i_pago_monto')
+            }
+            else if (f_tipo_venta == 1) {
+                if (v_total == total_col1) {
+
+                    registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, dateObject, total_col1);
+
+                }
+            }
+            else if (f_tipo_venta == 2) {
+                if (v_total == total_col1) {
+
+                    registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, dateObject, total_col1);
+
+                }
+            }
+            else {
+                vNotify.error({ text: 'Err.', title: 'Intelimundo.' });
+            }
         }
     }
     function validate(inputID) {
@@ -924,6 +931,48 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     $(document).on("click", "#btnPrint", function (e) {
         var nFolio = $('#i_FolioVenta').val();
+        var dateObject = null;
+        var month = null;
+        var dateOfMonth = null;
+        var year = null;
+        var fecha_alterna_pago = null;
+        var i_fecha_alterna_pago = $('#i_fecha_alterna_pago').val();
+        var f_tipo_venta = $('#l_tipo_venta').val();
+
+        if (i_fecha_alterna_pago != "") {
+            dateObject = new Date(i_fecha_alterna_pago);
+            month = dateObject.getMonth();
+            dateOfMonth = dateObject.getDate();
+            year = dateObject.getFullYear();
+            fecha_alterna_pago = (dateOfMonth + 1) + "/" + month + "/" + year;
+            document.getElementById('l_FechaAlternaVenta').innerHTML = 'Fecha Alterna de Pago: ' + fecha_alterna_pago;
+            document.getElementById('dl_FechaAlternaVenta').innerHTML = 'Fecha Alterna de Pago: ' + fecha_alterna_pago;
+        }
+        var total_col1 = 0;
+        $('#tbProducto tbody').find('tr').each(function (i, el) {
+            total_col1 += parseFloat($(this).find('td').eq(4).text());
+        });
+
+        if (f_tipo_venta == 2) {
+            var i_pago_monto = parseInt($('#i_pago_monto').val());
+            var t_diferencia = parseInt(i_pago_monto - total_col1);
+            document.getElementById('v_total_venta').innerHTML = 'Pago: ' + i_pago_monto + ', Restante: ' + t_diferencia * -1;
+            document.getElementById('dv_total_venta').innerHTML = 'Pago: ' + i_pago_monto + ', Restante: ' + t_diferencia * -1;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        $("#invocieContainer").printThis({
+            debug: false, // show the iframe for debugging
+            importCSS: true, // import page CSS
+            importStyle: true, // import style tags
+            printContainer: true, // grab outer container as well as the contents of the selector
+            loadCSS: "/assets/vendor/css/theme-default.css", // path to additional css file - us an array [] for multiple
+            pageTitle: "Venta_" + nFolio, // add title to print page
+            removeInline: false, // remove all inline styles from print elements
+            printDelay: 333, // variable print delay; depending on complexity a higher value may be necessary
+            header: null, // prefix to html
+            formValues: false // preserve input/form values
+        });
     });
 </script>
 }

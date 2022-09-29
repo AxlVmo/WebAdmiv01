@@ -11,21 +11,20 @@ using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
-    public class CatTipoServiciosController : Controller
+    public class CatTipoFlujosCajaController : Controller
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatTipoServiciosController(nDbContext context, INotyfService notyf, IUserService userService)
+        public CatTipoFlujosCajaController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
         }
 
-
-        // GET: CatTipoServicios
+        // GET: CatTipoFlujosCaja
         public async Task<IActionResult> Index()
         {
             var ValidaEstatus = _context.CatEstatus.ToList();
@@ -61,10 +60,10 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.CatTipoServicios.ToListAsync());
+            return View(await _context.CatTipoFlujosCaja.ToListAsync());
         }
 
-        // GET: CatTipoServicios/Details/5
+        // GET: CatTipoFlujosCaja/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -72,44 +71,44 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoServicio = await _context.CatTipoServicios
-                .FirstOrDefaultAsync(m => m.IdTipoServicio == id);
-            if (catTipoServicio == null)
+            var catTipoFlujoCaja = await _context.CatTipoFlujosCaja
+                .FirstOrDefaultAsync(m => m.IdTipoFlujoCaja == id);
+            if (catTipoFlujoCaja == null)
             {
                 return NotFound();
             }
 
-            return View(catTipoServicio);
+            return View(catTipoFlujoCaja);
         }
 
-        // GET: CatTipoServicios/Create
+        // GET: CatTipoFlujosCaja/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CatTipoServicios/Create
+        // POST: CatTipoFlujosCaja/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoServicio,TipoServicioDesc")] CatTipoServicio catTipoServicio)
+        public async Task<IActionResult> Create([Bind("IdTipoFlujoCaja,TipoFlujoCajaDesc")] CatTipoFlujoCaja catTipoFlujoCaja)
         {
             if (ModelState.IsValid)
             {
-                var vDuplicado = _context.CatTipoServicios
-                       .Where(s => s.TipoServicioDesc == catTipoServicio.TipoServicioDesc)
+                var vDuplicado = _context.CatTipoFlujosCaja
+                       .Where(s => s.TipoFlujoCajaDesc == catTipoFlujoCaja.TipoFlujoCajaDesc)
                        .ToList();
 
                 if (vDuplicado.Count == 0)
                 {
                     var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoServicio.IdUsuarioModifico = Guid.Parse(f_user);
-                    catTipoServicio.FechaRegistro = DateTime.Now;
-                    catTipoServicio.TipoServicioDesc = catTipoServicio.TipoServicioDesc.ToString().ToUpper().Trim();
-                    catTipoServicio.IdEstatusRegistro = 1;
-                    _context.Add(catTipoServicio);
+                    catTipoFlujoCaja.IdUsuarioModifico = Guid.Parse(f_user);
+                    catTipoFlujoCaja.FechaRegistro = DateTime.Now;
+                    catTipoFlujoCaja.TipoFlujoCajaDesc = catTipoFlujoCaja.TipoFlujoCajaDesc.ToString().ToUpper().Trim();
+                    catTipoFlujoCaja.IdEstatusRegistro = 1;
+                    _context.Add(catTipoFlujoCaja);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -120,10 +119,10 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catTipoServicio);
+            return View(catTipoFlujoCaja);
         }
 
-        // GET: CatTipoServicios/Edit/5
+        // GET: CatTipoFlujosCaja/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
@@ -134,22 +133,22 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoServicio = await _context.CatTipoServicios.FindAsync(id);
-            if (catTipoServicio == null)
+            var catTipoFlujoCaja = await _context.CatTipoFlujosCaja.FindAsync(id);
+            if (catTipoFlujoCaja == null)
             {
                 return NotFound();
             }
-            return View(catTipoServicio);
+            return View(catTipoFlujoCaja);
         }
 
-        // POST: CatTipoServicios/Edit/5
+        // POST: CatTipoFlujosCaja/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoServicio,TipoServicioDesc,FechaRegistro,IdEstatusRegistro")] CatTipoServicio catTipoServicio)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTipoFlujoCaja,TipoFlujoCajaDesc,FechaRegistro,IdEstatusRegistro")] CatTipoFlujoCaja catTipoFlujoCaja)
         {
-            if (id != catTipoServicio.IdTipoServicio)
+            if (id != catTipoFlujoCaja.IdTipoFlujoCaja)
             {
                 return NotFound();
             }
@@ -160,16 +159,16 @@ namespace WebAdmin.Controllers
                 {
                     var f_user = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catTipoServicio.IdUsuarioModifico = Guid.Parse(f_user);
-                    catTipoServicio.FechaRegistro = DateTime.Now;
-                    catTipoServicio.TipoServicioDesc = catTipoServicio.TipoServicioDesc.ToString().ToUpper().Trim();
-                    catTipoServicio.IdEstatusRegistro = catTipoServicio.IdEstatusRegistro;
-                    _context.Update(catTipoServicio);
+                    catTipoFlujoCaja.IdUsuarioModifico = Guid.Parse(f_user);
+                    catTipoFlujoCaja.FechaRegistro = DateTime.Now;
+                    catTipoFlujoCaja.TipoFlujoCajaDesc = catTipoFlujoCaja.TipoFlujoCajaDesc.ToString().ToUpper().Trim();
+                    catTipoFlujoCaja.IdEstatusRegistro = catTipoFlujoCaja.IdEstatusRegistro;
+                    _context.Update(catTipoFlujoCaja);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatTipoServicioExists(catTipoServicio.IdTipoServicio))
+                    if (!CatTipoFlujoCajaExists(catTipoFlujoCaja.IdTipoFlujoCaja))
                     {
                         return NotFound();
                     }
@@ -180,10 +179,10 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catTipoServicio);
+            return View(catTipoFlujoCaja);
         }
 
-        // GET: CatTipoServicios/Delete/5
+        // GET: CatTipoFlujosCaja/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -191,31 +190,31 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catTipoServicio = await _context.CatTipoServicios
-                .FirstOrDefaultAsync(m => m.IdTipoServicio == id);
-            if (catTipoServicio == null)
+            var catTipoFlujoCaja = await _context.CatTipoFlujosCaja
+                .FirstOrDefaultAsync(m => m.IdTipoFlujoCaja == id);
+            if (catTipoFlujoCaja == null)
             {
                 return NotFound();
             }
 
-            return View(catTipoServicio);
+            return View(catTipoFlujoCaja);
         }
 
-        // POST: CatTipoServicios/Delete/5
+        // POST: CatTipoFlujosCaja/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catTipoServicio = await _context.CatTipoServicios.FindAsync(id);
-            catTipoServicio.IdEstatusRegistro = 2;
+            var catTipoFlujoCaja = await _context.CatTipoFlujosCaja.FindAsync(id);
+            catTipoFlujoCaja.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CatTipoServicioExists(int id)
+        private bool CatTipoFlujoCajaExists(int id)
         {
-            return _context.CatTipoServicios.Any(e => e.IdTipoServicio == id);
+            return _context.CatTipoFlujosCaja.Any(e => e.IdTipoFlujoCaja == id);
         }
     }
 }

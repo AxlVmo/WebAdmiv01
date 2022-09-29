@@ -8,31 +8,31 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public class TblGasto
+    public class TblFlujoCaja
     {
         [Key]
-        public Guid IdGasto { get; set; }
-        [Display(Name = "Tipo de Gasto")]
-        public int IdTipoGasto { get; set; }
+        public Guid IdFlujoCaja { get; set; }
+        [Display(Name = "Tipo de FlujoCaja")]
+        public int IdTipoFlujoCaja { get; set; }
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
         [NotMapped]
-        public string TipoGastoDesc { get; set; }
+        public string TipoFlujoCajaDesc { get; set; }
 
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
 
-        public string GastoDesc { get; set; }
+        public string FlujoCajaDesc { get; set; }
 
         [Display(Name = "Monto Suministro")]
         
-        public double MontoGasto { get; set; }
-        [Display(Name = "ID Referencia de Gasto")]
-        public Guid IdRefereciaGasto { get; set; }
+        public double MontoFlujoCaja { get; set; }
+        [Display(Name = "ID Referencia de FlujoCaja")]
+        public Guid IdRefereciaFlujoCaja { get; set; }
 
-        [Display(Name = "Referencia de Gasto")]
+        [Display(Name = "Referencia de FlujoCaja")]
         
-        public double RefereciaGasto { get; set; }
+        public double RefereciaFlujoCaja { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
