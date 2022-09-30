@@ -1,20 +1,20 @@
-﻿@model WebAdmin.Models.CatTipoFlujoCaja
+﻿@model WebAdmin.Models.CatTipoRecurso
 
 @{
-    ViewData["Title"] = "Desactivar Género";
+    ViewData["Title"] = "Detalles Género";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Tipo de FlujoCaja</h4>
+<div class="container-xxl flex-grow-1 container-p-Rol">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Tipo de Movimiento</h4>
     <div class="col-xxl">
         <div class="card mb-4">
             <div class="card-body">
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoFlujoCajaDesc)
+            @Html.DisplayNameFor(model => model.TipoRecursoDesc)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TipoFlujoCajaDesc)
+            @Html.DisplayFor(model => model.TipoRecursoDesc)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)
@@ -28,13 +28,11 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdEstatusRegistro)
         </dd>
-         <form asp-action="Delete">
-        <input type="hidden" asp-for="IdTipoFlujoCaja" />
-        <input type="submit" value="Desactivar" class="btn btn-danger" />
-        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-    </form>
     </dl>
- </div>
+    <div class="form-group">
+        <a asp-action="Index" class="btn btn-info">Regresar</a>
+    </div>
+            </div>
         </div>
     </div>
 </div>

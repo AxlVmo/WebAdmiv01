@@ -1,20 +1,20 @@
-﻿@model WebAdmin.Models.CatTipoFlujoCaja
+﻿@model WebAdmin.Models.CatSubTipoMovimiento
 
 @{
     ViewData["Title"] = "Detalles Género";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-Rol">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Tipo de FlujoCaja</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Tipo de Movimiento</h4>
     <div class="col-xxl">
         <div class="card mb-4">
             <div class="card-body">
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoFlujoCajaDesc)
+            @Html.DisplayNameFor(model => model.SubTipoMovimientoDesc)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TipoFlujoCajaDesc)
+            @Html.DisplayFor(model => model.SubTipoMovimientoDesc)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)

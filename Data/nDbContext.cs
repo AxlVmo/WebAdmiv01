@@ -66,11 +66,13 @@ namespace WebAdmin.Data
         public DbSet<CatTipoCancelacion> CatTipoCancelaciones { get; set; }
         public DbSet<CatTipoCompra> CatTipoCompras { get; set; }
         public DbSet<CatTipoVenta> CatTipoVentas { get; set; }
-        public DbSet<CatTipoFlujoCaja> CatTipoFlujosCaja { get; set; }
-        public DbSet<TblFlujoCaja> TblFlujosCaja { get; set; }
+        public DbSet<CatTipoMovimiento> CatTipoMovimientos { get; set; }
+        public DbSet<CatCaracteristicaMovimiento> CatCaracteristicaMovimientos { get; set; }
+        public DbSet<CatSubTipoMovimiento> CatSubTipoMovimientos { get; set; }
+        public DbSet<CatTipoRecurso> CatTipoRecursos { get; set; }
+        public DbSet<TblMovimiento> TblMovimientos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             base.OnModelCreating(modelBuilder);
             // builder.HasDefaultSchema("Identity");
             modelBuilder.Entity<IdentityUser>(entity =>
@@ -102,8 +104,6 @@ namespace WebAdmin.Data
                 entity.ToTable("UserTokens");
             });
             //modelBuilder.Entity<IdentityRole>().Ignore("IdentityRole");
-
-
             modelBuilder.Entity<CatEstatus>().HasData(
                 new CatEstatus { IdEstatusRegistro = 1, EstatusDesc = "ACTIVO", FechaRegistro = DateTime.Today },
                 new CatEstatus { IdEstatusRegistro = 2, EstatusDesc = "DESACTIVO", FechaRegistro = DateTime.Today }
@@ -220,6 +220,26 @@ namespace WebAdmin.Data
             modelBuilder.Entity<CatTipoCompra>().HasData(
                 new CatTipoCompra { IdTipoCompra = 1, TipoCompraDesc = "DIRECTA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                 new CatTipoCompra { IdTipoCompra = 2, TipoCompraDesc = "DIFERIDA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+            );
+
+             modelBuilder.Entity<CatTipoMovimiento>().HasData(
+                new CatTipoMovimiento { IdTipoMovimiento = 1, TipoMovimientoDesc = "INGRESOS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatTipoMovimiento { IdTipoMovimiento = 2, TipoMovimientoDesc = "EGRESOS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+            );
+
+             modelBuilder.Entity<CatCaracteristicaMovimiento>().HasData(
+                new CatCaracteristicaMovimiento { IdCaracteristicaMovimiento = 1, CaracteristicaMovimientoDesc = "FIJO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatCaracteristicaMovimiento { IdCaracteristicaMovimiento = 2, CaracteristicaMovimientoDesc = "VARIABLE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+            );
+             modelBuilder.Entity<CatTipoRecurso>().HasData(
+                new CatTipoRecurso { IdTipoRecurso = 1, TipoRecursoDesc = "EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatTipoRecurso { IdTipoRecurso = 2, TipoRecursoDesc = "DIGITAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+            );
+
+              modelBuilder.Entity<CatSubTipoMovimiento>().HasData(
+                new CatSubTipoMovimiento { IdSubTipoMovimiento = 1, SubTipoMovimientoDesc = "DEPOSITO INCIAL EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatSubTipoMovimiento { IdSubTipoMovimiento = 2, SubTipoMovimientoDesc = "DEPOSITO INCIAL DIGITAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatSubTipoMovimiento { IdSubTipoMovimiento = 3, SubTipoMovimientoDesc = "CORTE CAJA EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
             );
 
             modelBuilder.Entity<CatCodigosPostal>().HasData(

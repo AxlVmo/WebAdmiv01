@@ -7,15 +7,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public partial class CatTipoFlujoCaja
+    public partial class CatTipoMovimiento
     {
         [Key]
-        public int IdTipoFlujoCaja { get; set; }
+        public int IdTipoMovimiento { get; set; }
 
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
         
-        public string TipoFlujoCajaDesc { get; set; }
+        public string TipoMovimientoDesc { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
