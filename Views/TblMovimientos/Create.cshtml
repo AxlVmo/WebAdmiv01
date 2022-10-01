@@ -1,11 +1,11 @@
-﻿@model WebAdmin.Models.TblSuministro
+﻿@model WebAdmin.Models.TblMovimiento
 
 @{
-    ViewData["Title"] = "Crear Tipo de Suministro";
+    ViewData["Title"] = "Crear Tipo de Movimiento";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Suministro</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Movimiento</h4>
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
@@ -14,25 +14,42 @@
             <div class="card-body">
                 <form asp-action="Create">
                     <div class="row">
-                        <div class="mb-3 col-md-2">
-                            <label for="IdTipoSuministro" class="form-label" asp-for="IdTipoSuministro"></label>
+                        <div class="mb-3 col-md-3">
+                            <label for="IdSubTipoMovimiento" class="form-label" asp-for="IdSubTipoMovimiento"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
                                         <i class="bx bx-check-shield">
                                         </i>
                                     </span>
-                                    <select id="lTipoSuministro" class="form-select" required asp-for="IdTipoSuministro"
+                                    <select id="lSubTipoMovimiento" class="form-select" required asp-for="IdSubTipoMovimiento"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')"
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoSuministro, "IdTipoSuministro", "TipoSuministroDesc"))">
+                                        asp-items="@(new SelectList(ViewBag.ListaSubTipoMovimiento, "IdSubTipoMovimiento", "SubTipoMovimientoDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="SuministroDesc" class="form-label" asp-for="SuministroDesc"></label>
+                         <div class="mb-3 col-md-3">
+                            <label for="IdTipoRecurso" class="form-label" asp-for="IdTipoRecurso"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="bx bx-check-shield">
+                                        </i>
+                                    </span>
+                                    <select id="lTipoRecurso" class="form-select" required asp-for="IdTipoRecurso"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoRecurso, "IdTipoRecurso", "TipoRecursoDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <label for="MovimientoDesc" class="form-label" asp-for="MovimientoDesc"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
@@ -40,25 +57,12 @@
                                 <input style="text-transform:uppercase" type="text" class="form-control" id="" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
-                                    asp-for="SuministroDesc" />
+                                    asp-for="MovimientoDesc" />
                             </div>
                         </div>
 
-
-                        <div class="mb-3 col-md-2">
-                            <label for="NumeroReferencia" class="form-label" asp-for="NumeroReferencia"></label>
-                            <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
-                                </span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="NumeroReferencia" />
-                            </div>
-                        </div>
-                        <div class="mb-3 col-md-2">
-                            <label for="DiaFacturacion" class="form-label" asp-for="DiaFacturacion"></label>
+                        <div class="mb-3 col-md-3">
+                            <label for="MontoMovimiento" class="form-label" asp-for="MontoMovimiento"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
@@ -66,19 +70,7 @@
                                 <input style="text-transform:uppercase" type="number" class="form-control" id=""
                                     required oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="DiaFacturacion" />
-                            </div>
-                        </div>
-                        <div class="mb-3 col-md-2">
-                            <label for="MontoSuministro" class="form-label" asp-for="MontoSuministro"></label>
-                            <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
-                                </span>
-                                <input style="text-transform:uppercase" type="number" class="form-control" id=""
-                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="MontoSuministro" />
+                                    aria-describedby="2" asp-for="MontoMovimiento" />
                             </div>
                         </div>
                     </div>

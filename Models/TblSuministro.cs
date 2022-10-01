@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -45,6 +46,12 @@ namespace WebAdmin.Models
         [Display(Name = "Monto Suministro")]
         
         public double MontoSuministro { get; set; }
+        [Display(Name = "Tipo Pago")]
+        [NotMapped]
+        public int IdTipoPago { get; set; }
+        [Display(Name = "Tipo Pago")]
+        [NotMapped]
+        public string TipoPagoDesc { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
@@ -64,5 +71,7 @@ namespace WebAdmin.Models
         [Display(Name = "Estatus")]
         
         public int IdEstatusRegistro { get; set; }
+
+        public virtual List<RelSuministroPago> RelSuministroPagos { get; set; }
     }
 }

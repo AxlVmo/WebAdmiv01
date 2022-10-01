@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Suministros</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Compras</h4>
     <div class="card">
         <h5 class="card-header">
             <div class="row">
@@ -33,7 +33,7 @@
         </h5>
         <div class="table-responsive text-nowrap">
              <div class="container">
-<table class="table">
+<table class="table" id="tblCompras">
     <thead>
         <tr>
             <th>
@@ -100,3 +100,112 @@
         </div>
     </div>
 </div>
+@section Scripts {
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#drpCorpCent').change(function () {
+            var SelectedText = $('option:selected', this).text();
+            var SelectedValue = $('option:selected', this).val();
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("drpCorpCent");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("tblSuministros");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+
+        });
+
+        $('#tblCompras').DataTable(
+            {
+                initComplete: function () {
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            var column = this;
+                            var select = $('<select class="form-select">SELECCIONAR<option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+
+                            column
+                                .data()
+                                .unique()
+                                .sort()
+                                .each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>');
+                                });
+                        });
+                },
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            }
+        );
+
+        var vEstatusFlag = '@ViewBag.EstatusFlag'
+        var vEmpresaFlag = '@ViewBag.EmpresaFlag'
+        var CorporativoFlag = '@ViewBag.CorporativoFlag'
+        var vTipoCompraFlag = '@ViewBag.TipoCompraFlag'
+           var vPresupuestoFlag = '@ViewBag.PresupuestoFlag'
+
+        if (vEstatusFlag == 0) {
+            document.getElementById("iNuevo").style.visibility = "hidden";
+        }
+        else {
+            if (vEmpresaFlag == 0) {
+                document.getElementById("iNuevo").style.visibility = "hidden";
+            }
+            else {
+                if (CorporativoFlag == 0) {
+                    document.getElementById("iNuevo").style.visibility = "hidden";
+                }
+                else {
+                    if (vTipoCompraFlag == 0) {
+                        document.getElementById("iNuevo").style.visibility = "hidden";
+                    }
+                    else {
+                         if (vPresupuestoFlag == 0) {
+                                document.getElementById("iNuevo").style.visibility = "hidden";
+                            }
+                            else {
+                                $('#iNuevo').removeAttr('hidden');
+                            }
+                    }
+                }
+            }
+        }
+    });
+</script>
+}

@@ -519,11 +519,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     document.getElementById('l_NumVenta').innerHTML = '# Venta: ' + "iV-" + GeneraFolio;
                     document.getElementById('dl_NumVenta').innerHTML = '# Venta: ' + "iV-" + GeneraFolio;
 
-                    const dateObject = new Date(list.fechaRegistro);
-                    var month = dateObject.getMonth();
+                    const dateObject = new Date();
+                    var month = dateObject.getMonth() + 1;
                     var dateOfMonth = dateObject.getDate();
                     var year = dateObject.getFullYear();
-                    var formattedDate = dateOfMonth + "/" + month + "/" + year;
+                    var formattedDate = dateOfMonth + "/" + month  + "/" + year;
 
                     document.getElementById('l_FechaCreacionVenta').innerHTML = 'Fecha Impresion: ' + formattedDate;
 
@@ -717,11 +717,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         $("#tbProductoB tbody").append(rowB);
 
                         var dateObject = new Date();
-                        var month = dateObject.getMonth();
+                        var month = dateObject.getMonth() + 1;
                         var dateOfMonth = dateObject.getDate();
                         var year = dateObject.getFullYear();
-                        var periodo_inicial = (dateOfMonth + 1) + "/" + month + "/" + year;
-                        var periodo_final = (dateOfMonth + 1) + "/" + (month + list[i].periodo) + "/" + year;
+                        var periodo_inicial = (dateOfMonth + 1) + "/" + month  + "/" + year;
+                        var periodo_final = (dateOfMonth + 1) + "/" + (month + list[i].periodo - 1) + "/" + year;
                         document.getElementById('v_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
                         document.getElementById('dv_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
                     }

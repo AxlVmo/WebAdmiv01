@@ -1,26 +1,26 @@
-﻿@model WebAdmin.Models.TblSuministro
+﻿@model WebAdmin.Models.TblMovimiento
 
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Suministro</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Movimiento</h4>
     <div class="col-xxl">
         <div class="card mb-4">
             <div class="card-body">
                 <dl class="row">
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.IdTipoSuministro)
+                        @Html.DisplayNameFor(model => model.IdTipoMovimiento)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.IdTipoSuministro)
+                        @Html.DisplayFor(model => model.IdTipoMovimiento)
                     </dd>
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.SuministroDesc)
+                        @Html.DisplayNameFor(model => model.MovimientoDesc)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.SuministroDesc)
+                        @Html.DisplayFor(model => model.MovimientoDesc)
                     </dd>
                     <dt class="col-sm-2">
                         @Html.DisplayNameFor(model => model.IdCorpCent)

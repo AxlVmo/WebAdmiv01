@@ -29,6 +29,8 @@ namespace WebAdmin.Controllers
         // GET: TblCompras
         public async Task<IActionResult> Index()
         {
+              var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
             var ValidaEstatus = _context.CatEstatus.ToList();
 
             if (ValidaEstatus.Count == 2)
@@ -49,6 +51,47 @@ namespace WebAdmin.Controllers
                         if (ValidaTipoCompra.Count >= 1)
                         {
                             ViewBag.TipoCompraFlag = 1;
+                             var ValidaCentro = _context.TblCentros.ToList();
+
+                        if (ValidaCentro.Count >= 1)
+                        {
+                            ViewBag.CentrosFlag = 1;
+                            var ValidaUsuarios = _context.TblUsuarios.ToList();
+
+                            if (ValidaUsuarios.Count >= 1)
+                            {
+                                ViewBag.UsuariosFlag = 1;
+
+                                if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+                                {
+                                   var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                                int f_dia = DateTime.Now.Day;
+                                int f_mes = DateTime.Now.Day;
+                                var f_caja_centro_efectivo = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+                                var f_caja_centro_digital = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+
+                                if (f_caja_centro_efectivo > 0 || f_caja_centro_digital > 0)
+                                {
+                                    ViewBag.PresupuestoFlag = 1;
+                                }
+                                else
+                                {
+                                    _notyf.Information("Caja sin Fondos", 5);
+                                }
+                                }
+
+                            }
+                            else
+                            {
+                                ViewBag.UsuariosFlag = 0;
+                                _notyf.Information("Favor de registrar los datos de Usuarios para la Aplicación", 5);
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.CentrosFlag = 0;
+                            _notyf.Information("Favor de registrar los datos de Centros para la Aplicación", 5);
+                        }
                         }
                         else
                         {
@@ -92,11 +135,10 @@ namespace WebAdmin.Controllers
             TempData["fTS"] = sCorpCent.ToList();
             ViewBag.ListaCorpCent = TempData["fTS"];
 
-            var f_user = _userService.GetUserId();
-            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
+
             var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
-            if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
                 var fCompraCntro = from a in _context.TblCompras
                                        join b in _context.CatTipoCompras on a.IdTipoCompra equals b.IdTipoCompra

@@ -43,7 +43,7 @@ namespace WebAdmin.Models
 
         public string MovimientoDesc { get; set; }
 
-        [Display(Name = "Monto Suministro")]
+        [Display(Name = "Monto Movimiento")]
         
         public double MontoMovimiento { get; set; }
         [Display(Name = "ID Referencia de Movimiento")]

@@ -54,6 +54,7 @@ namespace WebAdmin.Data
         public DbSet<TblBanco> TblBancos { get; set; }
         public DbSet<TblCompra> TblCompras { get; set; }
         public DbSet<TblSuministro> TblSuministros { get; set; }
+        public DbSet<RelSuministroPago> RelSuministroPagos { get; set; }
         public DbSet<TblPrestamo> TblPrestamos { get; set; }
         public DbSet<TblVenta> TblVenta { get; set; }
         public DbSet<RelVentaPagos> RelVentasPagos { get; set; }

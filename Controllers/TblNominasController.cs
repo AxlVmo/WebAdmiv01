@@ -67,21 +67,20 @@ namespace WebAdmin.Controllers
 
                                 if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
                                 {
-                                    var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
-                                    double f_presupuesto = _context.TblCentros.Where(a => a.IdCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum();
+                                   var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                                int f_dia = DateTime.Now.Day;
+                                int f_mes = DateTime.Now.Day;
+                                var f_caja_centro_efectivo = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+                                var f_caja_centro_digital = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
 
-                                    double totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro)
-                                        .Join(_context.RelVentaProducto.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
-                                        .ToList().Sum(x => x.Quantity);
-
-                                    if (totalQuantity > f_presupuesto)
-                                    {
-                                        ViewBag.PresupuestoFlag = 1;
-                                    }
-                                    else
-                                    {
-                                        _notyf.Information("Caja sin Fondos", 5);
-                                    }
+                                if (f_caja_centro_efectivo > 0 || f_caja_centro_digital > 0)
+                                {
+                                    ViewBag.PresupuestoFlag = 1;
+                                }
+                                else
+                                {
+                                    _notyf.Information("Caja sin Fondos", 5);
+                                }
                                 }
 
                             }

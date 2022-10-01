@@ -48,24 +48,23 @@ namespace WebAdmin.Controllers
                         if (ValidaTipoSuministro.Count >= 1)
                         {
                             ViewBag.TipoSuministroFlag = 1;
-                              if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+                            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+                            {
+                                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                                int f_dia = DateTime.Now.Day;
+                                int f_mes = DateTime.Now.Day;
+                                var f_caja_centro_efectivo = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+                                var f_caja_centro_digital = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+
+                                if (f_caja_centro_efectivo > 0 || f_caja_centro_digital > 0)
                                 {
-                                    var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
-                                    double f_presupuesto = _context.TblCentros.Where(a => a.IdCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum();
-
-                                    double totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro)
-                                        .Join(_context.RelVentaProducto.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
-                                        .ToList().Sum(x => x.Quantity);
-
-                                    if (totalQuantity > f_presupuesto)
-                                    {
-                                        ViewBag.PresupuestoFlag = 1;
-                                    }
-                                    else
-                                    {
-                                        _notyf.Information("Caja sin Fondos", 5);
-                                    }
+                                    ViewBag.PresupuestoFlag = 1;
                                 }
+                                else
+                                {
+                                    _notyf.Information("Caja sin Fondos", 5);
+                                }
+                            }
                         }
                         else
                         {
@@ -162,21 +161,21 @@ namespace WebAdmin.Controllers
 
             if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
-            var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
-            var fSuministrosTotales = from a in _context.TblSuministros
-                                      where a.IdEstatusRegistro == 1
-                                      select new
-                                      {
-                                          fRegistros = _context.TblSuministros.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
-                                          fMontos = _context.TblSuministros.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoSuministro)).Sum()
-                                      };
-            return Json(fSuministrosTotales);    
+                var fSuministrosTotales = from a in _context.TblSuministros
+                                          where a.IdEstatusRegistro == 1
+                                          select new
+                                          {
+                                              fRegistros = _context.TblSuministros.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
+                                              fMontos = _context.TblSuministros.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoSuministro)).Sum()
+                                          };
+                return Json(fSuministrosTotales);
             }
             else
             {
                 return Json(0);
-            
+
             }
         }
         // GET: TblSuministros/Details/5
@@ -235,12 +234,18 @@ namespace WebAdmin.Controllers
                     var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
                     fCentroCorporativo = fCorp.IdCorporativo;
                     fCorpCent = 1;
+                    int f_dia = DateTime.Now.Day;
+                    int f_mes = DateTime.Now.Day;
                     if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
                     {
                         var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
                         fCentroCorporativo = fIdCentro.IdCentro;
                         fCorpCent = 2;
                     }
+
+                    var f_caja_centro_efectivo = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == fCentroCorporativo && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+                    var f_caja_centro_digital = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == fCentroCorporativo && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+
                     tblSuministro.IdCorpCent = fCorpCent;
                     tblSuministro.IdUCorporativoCentro = fCentroCorporativo;
                     tblSuministro.IdUsuarioModifico = Guid.Parse(f_user);
@@ -248,6 +253,8 @@ namespace WebAdmin.Controllers
                     tblSuministro.FechaRegistro = DateTime.Now;
                     tblSuministro.IdEstatusRegistro = 1;
                     _context.Add(tblSuministro);
+
+
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -262,7 +269,7 @@ namespace WebAdmin.Controllers
         }
 
         // GET: TblSuministros/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
@@ -291,18 +298,52 @@ namespace WebAdmin.Controllers
             return View(TblSuministro);
         }
 
+        public async Task<IActionResult> Payment(Guid? id)
+        {
+            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
+            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
+
+            var fTipoSuministro = from a in _context.CatTipoSuministros
+                                  where a.IdEstatusRegistro == 1
+                                  select new CatTipoSuministro
+                                  {
+                                      IdTipoSuministro = a.IdTipoSuministro,
+                                      TipoSuministroDesc = a.TipoSuministroDesc
+                                  };
+
+            ViewBag.ListaTipoSuministro = fTipoSuministro.ToList(); ;
+
+            var fTipopago = from a in _context.CatTipoPagos
+                            where a.IdEstatusRegistro == 1
+                            select new CatTipoPago
+                            {
+                                IdTipoPago = a.IdTipoPago,
+                                TipoPagoDesc = a.TipoPagoDesc
+                            };
+
+            ViewBag.ListaTipopago = fTipopago.ToList(); ;
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var TblSuministro = await _context.TblSuministros.FindAsync(id);
+            if (TblSuministro == null)
+            {
+                return NotFound();
+            }
+            return View(TblSuministro);
+        }
+
         // POST: TblSuministros/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,DiaFacturacion,IdPeriodo,MontoSuministro,IdEstatusRegistro")] TblSuministro tblSuministro)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,DiaFacturacion,IdPeriodo,MontoSuministro,IdTipoPago,IdEstatusRegistro")] TblSuministro tblSuministro)
         {
-            if (id != tblSuministro.IdSuministro)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
@@ -326,6 +367,39 @@ namespace WebAdmin.Controllers
                     tblSuministro.IdUsuarioModifico = Guid.Parse(f_user);
                     tblSuministro.FechaRegistro = DateTime.Now;
                     tblSuministro.IdEstatusRegistro = tblSuministro.IdEstatusRegistro;
+
+                    if (tblSuministro.IdTipoPago == 1)
+                    {
+
+                    var addRelSuministroPago = new RelSuministroPago
+                    {
+                       
+                        IdTipoPago = tblSuministro.IdTipoPago,
+                        CantidadPago = tblSuministro.MontoSuministro,
+                        FechaRegistro = DateTime.Now,
+                        IdUsuarioModifico = Guid.Parse(f_user),                        
+                        IdEstatusRegistro = 1,
+                        IdSuministro = tblSuministro.IdSuministro,
+                    };
+                    _context.Add(addRelSuministroPago);
+                    var addMovimiento = new TblMovimiento
+                    {
+                        IdMovimiento = Guid.NewGuid(),
+                        IdSubTipoMovimiento = 3,
+                        IdTipoMovimiento = 2,
+                        MovimientoDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim(),
+                        MontoMovimiento = tblSuministro.MontoSuministro,
+                        IdUCorporativoCentro = fCentroCorporativo,
+                        IdCaracteristicaMovimiento = 1,
+                        IdTipoRecurso = 1,
+                        FechaRegistro = DateTime.Now,
+                        IdUsuarioModifico = Guid.Parse(f_user),
+                        IdCorpCent = fCorpCent,
+                        IdEstatusRegistro = 1
+                    };
+                    _context.Add(addMovimiento);
+                    }
+
                     _context.Update(tblSuministro);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
