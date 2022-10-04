@@ -219,8 +219,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group" id="lFechaAlterna">
-                                    <label class="control-label">FECHA DE PAGO ALTERNA</label>
-                                    <input type="date" id="i_fecha_alterna_pago" class="form-control" />
+                                    <label class="control-label">FECHA DE PAGO</label>
+                                    <input type="text" id="i_fecha_alterna_pago" class="form-control"  readonly/>
                                 </div>
                             </div>
                         </div>
@@ -680,7 +680,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
     $('#l_servicios').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
-
+total_venta = 0;
         $.ajax({
             type: "GET",
             url: "/TblServicios/fFiltroServicio/",
@@ -700,9 +700,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                             var _desc = parseFloat($("#iDescuento").val())
                             var _prec = parseFloat(f_precio)
                             var _tprecio = _prec - ((_prec * _desc) / 100)
-
-
-
+                            
                             $("#tbProducto tbody").append(
                                 $("<tr>").append(
                                     $("<td style='text-align:center'>").text(f_tipo_servicio),
@@ -724,17 +722,20 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                             document.getElementById('v_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
                             document.getElementById('dv_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
                         }
+                          $('#tbProducto tbody').find('tr').each(function (i, el) {
+
+                        total_venta += parseFloat($(this).find('td').eq(4).text());
+                        document.getElementById('l_total_venta').innerHTML = "$ " + total_venta;
+
+                        document.getElementById("i_fecha_alterna_pago").value = periodo_inicial; 
+                    });
                     }
                     else {
                         vNotify.info({ text: 'Limitado a 1 Servicio por Venta.', title: 'Intelimundo.' });
                     }
 
 
-                    $('#tbProducto tbody').find('tr').each(function (i, el) {
-
-                        total_venta += parseFloat($(this).find('td').eq(4).text());
-                        document.getElementById('l_total_venta').innerHTML = "$ " + total_venta;
-                    });
+                  
                 }
             },
         });
@@ -763,10 +764,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         valida_venta();
     })
     function RemoveRow(o) {
-        //no clue what to put here?
+      var total_col1 = 0;
         var p = o.parentNode.parentNode;
         p.parentNode.removeChild(p);
-        var total_col1 = 0;
+
         var rowCount = $('#tbProducto >tbody >tr').length;
 
         if (rowCount == 0) {
@@ -774,11 +775,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             document.getElementById('i_pago_diferencia').value = total_col1;
         }
         else {
-            $('#tbProducto tbody').find('tr').each(function (i, el) {
-
-                total_col1 += parseFloat($(this).find('td').eq(4).text());
-                document.getElementById('l_total_venta').innerHTML = "$ " + total_col1;
-            });
+            document.getElementById('l_total_venta').innerHTML = "$ " + total_col1;
         }
     }
     function registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1) {

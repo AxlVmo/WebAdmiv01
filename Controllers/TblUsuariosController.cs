@@ -276,41 +276,49 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdUsuario,IdGenero,IdArea,IdPerfil,IdRol,FechaNacimiento,Nombres,ApellidoPaterno,ApellidoMaterno,CorreoAcceso")] TblUsuario tblUsuario)
         {
-            var vDuplicados = _context.TblUsuarios
-                            .Where(s => s.Nombres == tblUsuario.Nombres && s.ApellidoPaterno == tblUsuario.ApellidoPaterno && s.ApellidoMaterno == tblUsuario.ApellidoMaterno)
-                            .ToList();
-
-            if (vDuplicados.Count == 0)
+            if (ModelState.IsValid)
             {
-                Guid fCentroCorporativo = Guid.Empty;
-                int fCorpCent = 0;
-                var f_user = _userService.GetUserId();
-                var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
-                var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
-                fCentroCorporativo = fCorp.IdCorporativo;
-                fCorpCent = 1;
-                if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+                var vDuplicados = _context.TblUsuarios
+                             .Where(s => s.Nombres == tblUsuario.Nombres && s.ApellidoPaterno == tblUsuario.ApellidoPaterno && s.ApellidoMaterno == tblUsuario.ApellidoMaterno)
+                             .ToList();
+
+                if (vDuplicados.Count == 0)
                 {
-                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
-                    fCentroCorporativo = fIdCentro.IdCentro;
-                    fCorpCent = 2;
+                    Guid fCentroCorporativo = Guid.Empty;
+                    int fCorpCent = 0;
+                    var f_user = _userService.GetUserId();
+                    var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+                    var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
+                    fCentroCorporativo = fCorp.IdCorporativo;
+                    fCorpCent = 1;
+                    if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+                    {
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                        fCentroCorporativo = fIdCentro.IdCentro;
+                        fCorpCent = 2;
+                    }
+                    tblUsuario.IdCorpCent = fCorpCent;
+                    tblUsuario.IdCorporativo = fCentroCorporativo;
+                    tblUsuario.IdUsuarioModifico = Guid.Parse(f_user);
+                    tblUsuario.FechaRegistro = DateTime.Now;
+                    tblUsuario.IdEstatusRegistro = 1;
+                    tblUsuario.Nombres = tblUsuario.Nombres.ToUpper().Trim();
+                    tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper().Trim();
+                    tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper().Trim();
+                    tblUsuario.IdUsuario = Guid.NewGuid();
+                    _context.Add(tblUsuario);
+                    await _context.SaveChangesAsync();
+                    _notyf.Success("Registro creado con éxito", 5);
                 }
-                tblUsuario.IdCorpCent = fCorpCent;
-                tblUsuario.IdCorporativo = fCentroCorporativo;
-                tblUsuario.IdUsuarioModifico = Guid.Parse(f_user);
-                tblUsuario.FechaRegistro = DateTime.Now;
-                tblUsuario.IdEstatusRegistro = 1;
-                tblUsuario.Nombres = tblUsuario.Nombres.ToUpper().Trim();
-                tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper().Trim();
-                tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper().Trim();
-                tblUsuario.IdUsuario = Guid.NewGuid();
-                _context.Add(tblUsuario);
-                await _context.SaveChangesAsync();
-                _notyf.Success("Registro creado con éxito", 5);
+                else
+                {
+                    _notyf.Warning("Favor de validar, existe Usuario con el mismo nombre.", 5);
+                }
             }
             else
             {
-                _notyf.Warning("Favor de validar, existe Usuario con el mismo nombre.", 5);
+                // Codigo normal
+                return RedirectToAction(nameof(Index));
             }
 
             return RedirectToAction(nameof(Index));
@@ -390,7 +398,7 @@ namespace WebAdmin.Controllers
                 }
                 tblUsuario.IdUsuarioModifico = Guid.Parse(f_user);
                 tblUsuario.FechaRegistro = DateTime.Now;
-                 tblUsuario.Nombres = tblUsuario.Nombres.ToUpper().Trim();
+                tblUsuario.Nombres = tblUsuario.Nombres.ToUpper().Trim();
                 tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper().Trim();
                 tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper().Trim();
                 var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblUsuario.Colonia).FirstOrDefault();

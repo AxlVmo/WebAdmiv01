@@ -10,15 +10,16 @@ namespace WebAdmin.Models
         [Key]
         public Guid IdUsuario { get; set; }
 
+ [Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Nombre (s)")]
         
         public string Nombres { get; set; }
 
-        
+        [Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Apellido Paterno")]
         public string ApellidoPaterno { get; set; }
 
-        
+        [Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Apellido Materno")]
         public string ApellidoMaterno { get; set; }
 
@@ -28,19 +29,19 @@ namespace WebAdmin.Models
 
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
-
+[Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Area")]
         
         public int IdArea { get; set; }
-
+[Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Genero")]
         
         public int IdGenero { get; set; }
-
+[Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Perfil")]
         
         public int IdPerfil { get; set; }
-
+[Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Rol")]
         
         public int IdRol { get; set; }
@@ -48,7 +49,7 @@ namespace WebAdmin.Models
         [Display(Name = "Fecha de Nacimiento")]
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
-
+[Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Correo de Acceso")]
         
         public string CorreoAcceso { get; set; }
@@ -64,28 +65,28 @@ namespace WebAdmin.Models
 
         [Display(Name = "NSS")]
         public string UsuarioNss { get; set; }
-
+[Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Tipo Contratacion")]
         
         public int IdTipoContratacion { get; set; }
-
+[Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Remuneracion")]
         
         public double UsuarioRemuneracion { get; set; }
-
+[Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Tipo Forma Pago")]
         
         public int IdTipoFormaPago { get; set; }
-
+[Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Estudios")]
         
         public int IdPersonalEstudio { get; set; }
 
         [Display(Name = "Fecha Contratacion")]
-        
+        [Required(ErrorMessage = "Campo Requerido.")]
         [DataType(DataType.Date)]
         public DateTime FechaContratacion { get; set; }
-
+[Required(ErrorMessage = "Campo Requerido.")]
          [DataType(DataType.Date)]
         public DateTime FechaIngreso { get; set; }
 

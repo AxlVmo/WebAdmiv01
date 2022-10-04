@@ -58,6 +58,39 @@ namespace WebAdmin.Controllers
                             if (ValidaUsuarios.Count >= 1)
                             {
                                 ViewBag.UsuariosFlag = 1;
+                                var ValidaTipoServicio = _context.CatTipoServicios.ToList();
+
+                                if (ValidaTipoServicio.Count >= 1)
+                                {
+                                    ViewBag.TipoServiciosFlag = 1;
+                                    var ValidaServicio = _context.TblServicio.ToList();
+
+                                    if (ValidaServicio.Count >= 1)
+                                    {
+                                        ViewBag.ServiciosFlag = 1;
+                                        var ValidaAlumnos = _context.TblAlumnos.ToList();
+
+                                        if (ValidaAlumnos.Count >= 1)
+                                        {
+                                            ViewBag.AlumnosFlag = 1;
+                                        }
+                                        else
+                                        {
+                                            ViewBag.AlumnosFlag = 0;
+                                            _notyf.Information("Favor de registrar los datos de Alumnos para la Aplicación", 5);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ViewBag.TipoServicioFlag = 0;
+                                        _notyf.Information("Favor de registrar los datos de Servicios para la Aplicación", 5);
+                                    }
+                                }
+                                else
+                                {
+                                    ViewBag.TipoServicioFlag = 0;
+                                    _notyf.Information("Favor de registrar los datos de Tipo Servicio para la Aplicación", 5);
+                                }
                             }
                             else
                             {
