@@ -298,7 +298,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                                <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
+                <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
                     <table>
                         <tr class="top">
                             <td colspan="2">
@@ -501,10 +501,17 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         currency: 'USD',
         minimumFractionDigits: 2
     })
+    const fecha_objeto = new Date();
+    let fecha_mes = 1 + fecha_objeto.getUTCMonth();
+    let fecha_dia = fecha_objeto.getDate();
+    let fecha_anio = fecha_objeto.getFullYear();
+    const fecha_formato = fecha_dia + "/" + fecha_mes + "/" + fecha_anio;
+    const folio_venta = fecha_objeto.getTime();
+    var total_venta = 0;
+
     $(document).ready(function () {
-        const d1 = new Date();
-        const GeneraFolio = d1.getTime();
-        document.getElementById("i_FolioVenta").value = "iV-" + GeneraFolio;
+
+        document.getElementById("i_FolioVenta").value = "iV-" + folio_venta;
 
         $.ajax({
             type: "GET",
@@ -516,25 +523,17 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 if (list.length == 0) {
                 }
                 else {
-                    document.getElementById('l_NumVenta').innerHTML = '# Venta: ' + "iV-" + GeneraFolio;
-                    document.getElementById('dl_NumVenta').innerHTML = '# Venta: ' + "iV-" + GeneraFolio;
+                    document.getElementById('l_NumVenta').innerHTML = '# Venta: ' + "iV-" + folio_venta;
+                    document.getElementById('dl_NumVenta').innerHTML = '# Venta: ' + "iV-" + folio_venta;
 
-                    const dateObject = new Date();
-                    var month = dateObject.getMonth() + 1;
-                    var dateOfMonth = dateObject.getDate();
-                    var year = dateObject.getFullYear();
-                    var formattedDate = dateOfMonth + "/" + month  + "/" + year;
-
-                    document.getElementById('l_FechaCreacionVenta').innerHTML = 'Fecha Impresion: ' + formattedDate;
-
+                    document.getElementById('l_FechaCreacionVenta').innerHTML = 'Fecha Impresion: ' + fecha_formato;
 
                     document.getElementById('l_CorporativoVenta').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
                     document.getElementById('l_DatosCorporativoVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
                     document.getElementById('l_DatosCorporativoVentaAlt').innerHTML = list.localidadMunicipio + ', ' + list.ciudad + ', ' + list.estado
                     document.getElementById('l_DatosCorporativoContactoVenta').innerHTML = 'Contacto: ' + list.correoElectronico + ', Teléfono: ' + list.telefono;
 
-                    document.getElementById('dl_FechaCreacionVenta').innerHTML = 'Fecha Impresion: ' + formattedDate;
-
+                    document.getElementById('dl_FechaCreacionVenta').innerHTML = 'Fecha Impresion: ' + fecha_formato;
 
                     document.getElementById('dl_CorporativoVenta').innerHTML = 'Corporativo: ' + list.nombreCorporativo;
                     document.getElementById('dl_DatosCorporativoVenta').innerHTML = 'Dirección: ' + list.calle + ', ' + list.codigoPostal + ', ' + list.colonia + ',';
@@ -692,47 +691,49 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 if (list.length == 0) {
                 }
                 else {
-                    for (var i = 0, len = list.length; i < len; i++) {
-                        var f_tipo_servicio = list[i].tipoServicioDesc;
-                        var f_servicio = list[i].descServicio;
-                        var f_precio = list[i].totalPrecioServicio;
-                        var _desc = parseFloat($("#iDescuento").val())
-                        var _prec = parseFloat(f_precio)
-                        var _tprecio = _prec - ((_prec * _desc) / 100)
+                    var rowCount = $('#tbProducto >tbody >tr').length;
+                    if (rowCount == 0) {
+                        for (var i = 0, len = list.length; i < len; i++) {
+                            var f_tipo_servicio = list[i].tipoServicioDesc;
+                            var f_servicio = list[i].descServicio;
+                            var f_precio = list[i].totalPrecioServicio;
+                            var _desc = parseFloat($("#iDescuento").val())
+                            var _prec = parseFloat(f_precio)
+                            var _tprecio = _prec - ((_prec * _desc) / 100)
 
-                        var rowCount = $('#tbProducto >tbody >tr').length;
 
-                        $("#tbProducto tbody").append(
-                            $("<tr>").append(
-                                $("<td style='text-align:center'>").text(f_tipo_servicio),
-                                $("<td style='text-align:center'>").text(f_servicio),
-                                $("<td style='text-align:center'>").text(_desc),
-                                $("<td style='text-align:center'>").text(_prec),
-                                $("<td style='text-align:center'>").text(_tprecio),
-                                $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
-                        )
-                        var rowA = "<tr id='a" + rowCount + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
-                        var rowB = "<tr id='b" + rowCount + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
-                        $("#tbProductoA tbody").append(rowA);
-                        $("#tbProductoB tbody").append(rowB);
 
-                        var dateObject = new Date();
-                        var month = dateObject.getMonth() + 1;
-                        var dateOfMonth = dateObject.getDate();
-                        var year = dateObject.getFullYear();
-                        var periodo_inicial = (dateOfMonth + 1) + "/" + month  + "/" + year;
-                        var periodo_final = (dateOfMonth + 1) + "/" + (month + list[i].periodo - 1) + "/" + year;
-                        document.getElementById('v_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
-                        document.getElementById('dv_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
+                            $("#tbProducto tbody").append(
+                                $("<tr>").append(
+                                    $("<td style='text-align:center'>").text(f_tipo_servicio),
+                                    $("<td style='text-align:center'>").text(f_servicio),
+                                    $("<td style='text-align:center'>").text(_desc),
+                                    $("<td style='text-align:center'>").text(_prec),
+                                    $("<td style='text-align:center'>").text(_tprecio),
+                                    $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
+                            )
+                            var rowA = "<tr id='a" + rowCount + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
+                            var rowB = "<tr id='b" + rowCount + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
+                            $("#tbProductoA tbody").append(rowA);
+                            $("#tbProductoB tbody").append(rowB);
+
+
+                            var periodo_inicial = (fecha_dia + 1) + "/" + fecha_mes + "/" + fecha_anio;
+                            var periodo_final = (fecha_dia + 1) + "/" + (fecha_mes + list[i].periodo) + "/" + fecha_anio;
+
+                            document.getElementById('v_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
+                            document.getElementById('dv_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
+                        }
+                    }
+                    else {
+                        vNotify.info({ text: 'Limitado a 1 Servicio por Venta.', title: 'Intelimundo.' });
                     }
 
-                    var total_col1 = 0;
-                    var total_col2 = 0;
+
                     $('#tbProducto tbody').find('tr').each(function (i, el) {
 
-                        total_col1 += parseFloat($(this).find('td').eq(4).text());
-                        total_col2 += parseFloat($(this).find('td').eq(1).text());
-                        document.getElementById('l_total_venta').innerHTML = "$ " + total_col1;
+                        total_venta += parseFloat($(this).find('td').eq(4).text());
+                        document.getElementById('l_total_venta').innerHTML = "$ " + total_venta;
                     });
                 }
             },
@@ -780,7 +781,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             });
         }
     }
-    function registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, dateObject, total_col1) {
+    function registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1) {
 
         var RelVenta_Pagos = []
         var RelVenta_Productos = []
@@ -801,7 +802,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var RelVenta_Pagos = [{
 
             IdTipoPago: f_tipo_pago,
-            FechaAlternaPago: dateObject,
+            FechaAlternaPago: fecha_objeto,
             CodigoReferencia: f_codigo_pago,
             CantidadPago: catidad_abono,
             Total: total_col1
@@ -834,7 +835,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         });
     }
     function valida_venta() {
-        var dateObject = null;
+        var fecha_objeto = null;
         var f_tipo_venta = $('#l_tipo_venta').val();
         var f_alumno = $('#l_alumno').val();
         var f_registros_tabla = $('#tbProducto >tbody >tr').length;
@@ -854,11 +855,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
         if (i_fecha_alterna_pago != "") {
 
-            dateObject = new Date(i_fecha_alterna_pago);
+            fecha_objeto = new Date(i_fecha_alterna_pago);
 
         }
         else {
-            dateObject = new Date();
+            fecha_objeto = new Date();
         }
         var catidad_abono = null;
 
@@ -890,16 +891,19 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 validate('i_pago_monto')
             }
             else if (f_tipo_venta == 1) {
-                if (v_total == total_col1) {
+                if (i_pago_monto == total_col1) {
 
-                    registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, dateObject, total_col1);
+                    registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
 
+                }
+                else {
+                    vNotify.error({ text: 'Favor de pagar el total de la venta.', title: 'Intelimundo.' });
                 }
             }
             else if (f_tipo_venta == 2) {
                 if (v_total == total_col1) {
 
-                    registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, dateObject, total_col1);
+                    registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
 
                 }
             }
@@ -930,32 +934,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     }
     $(document).on("click", "#btnPrint", function (e) {
-        var nFolio = $('#i_FolioVenta').val();
-        var dateObject = null;
-        var month = null;
-        var dateOfMonth = null;
-        var year = null;
-        var fecha_alterna_pago = null;
-        var i_fecha_alterna_pago = $('#i_fecha_alterna_pago').val();
-        var f_tipo_venta = $('#l_tipo_venta').val();
-
-        if (i_fecha_alterna_pago != "") {
-            dateObject = new Date(i_fecha_alterna_pago);
-            month = dateObject.getMonth();
-            dateOfMonth = dateObject.getDate();
-            year = dateObject.getFullYear();
-            fecha_alterna_pago = (dateOfMonth + 1) + "/" + month + "/" + year;
-            document.getElementById('l_FechaAlternaVenta').innerHTML = 'Fecha Alterna de Pago: ' + fecha_alterna_pago;
-            document.getElementById('dl_FechaAlternaVenta').innerHTML = 'Fecha Alterna de Pago: ' + fecha_alterna_pago;
-        }
-        var total_col1 = 0;
-        $('#tbProducto tbody').find('tr').each(function (i, el) {
-            total_col1 += parseFloat($(this).find('td').eq(4).text());
-        });
+        var f_tipo_venta = $('#l_tipo_venta').val()
 
         if (f_tipo_venta == 2) {
             var i_pago_monto = parseInt($('#i_pago_monto').val());
-            var t_diferencia = parseInt(i_pago_monto - total_col1);
+            var t_diferencia = parseInt(i_pago_monto - total_venta);
             document.getElementById('v_total_venta').innerHTML = 'Pago: ' + i_pago_monto + ', Restante: ' + t_diferencia * -1;
             document.getElementById('dv_total_venta').innerHTML = 'Pago: ' + i_pago_monto + ', Restante: ' + t_diferencia * -1;
         }
@@ -967,7 +950,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             importStyle: true, // import style tags
             printContainer: true, // grab outer container as well as the contents of the selector
             loadCSS: "/assets/vendor/css/theme-default.css", // path to additional css file - us an array [] for multiple
-            pageTitle: "Venta_" + nFolio, // add title to print page
+            pageTitle: "Venta_" + folio_venta, // add title to print page
             removeInline: false, // remove all inline styles from print elements
             printDelay: 333, // variable print delay; depending on complexity a higher value may be necessary
             header: null, // prefix to html
