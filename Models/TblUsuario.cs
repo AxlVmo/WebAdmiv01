@@ -86,6 +86,9 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         public DateTime FechaContratacion { get; set; }
 
+         [DataType(DataType.Date)]
+        public DateTime FechaIngreso { get; set; }
+
         [Display(Name = "Tipo Direccion")]
         public int IdTipoDireccion { get; set; }
 

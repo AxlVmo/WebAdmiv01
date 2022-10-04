@@ -38,7 +38,6 @@ namespace WebAdmin
             services.AddDbContext<nDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("pgSQLDataSource")));
-
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)

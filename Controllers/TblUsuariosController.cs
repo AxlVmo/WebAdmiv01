@@ -361,7 +361,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdUsuario,IdGenero,IdArea,IdCorpCent,IdCorporativo,IdPerfil,IdRol,FechaNacimiento,Nombres,ApellidoPaterno,ApellidoMaterno,CorreoAcceso,Telefono,UsuarioCurp,UsuarioRfc,UsuarioNss,IdTipoContratacion,FechaContratacion,IdTipoFormaPago,IdPersonalEstudio,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,UsuarioRemuneracion,IdEstatusRegistro")] TblUsuario tblUsuario)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdUsuario,IdGenero,IdArea,IdCorpCent,IdCorporativo,IdPerfil,IdRol,FechaNacimiento,Nombres,ApellidoPaterno,ApellidoMaterno,CorreoAcceso,Telefono,UsuarioCurp,UsuarioRfc,UsuarioNss,IdTipoContratacion,FechaContratacion,FechaIngreso,IdTipoFormaPago,IdPersonalEstudio,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,UsuarioRemuneracion,IdEstatusRegistro")] TblUsuario tblUsuario)
         {
             if (id != tblUsuario.IdUsuario)
             {
@@ -390,7 +390,7 @@ namespace WebAdmin.Controllers
                 }
                 tblUsuario.IdUsuarioModifico = Guid.Parse(f_user);
                 tblUsuario.FechaRegistro = DateTime.Now;
-                tblUsuario.Nombres = tblUsuario.Nombres.ToUpper().Trim();
+                 tblUsuario.Nombres = tblUsuario.Nombres.ToUpper().Trim();
                 tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper().Trim();
                 tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper().Trim();
                 var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblUsuario.Colonia).FirstOrDefault();

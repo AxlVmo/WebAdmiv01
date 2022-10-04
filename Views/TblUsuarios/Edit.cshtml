@@ -19,14 +19,12 @@
                     <input type="hidden" asp-for="IdColonia" />
                     <div class="row">
                          <div class="mb-3 col-md-3">
-                            <label for="IdGenero" class="form-label" asp-for="IdGenero"></label>
+                            <label class="form-label" asp-for="IdGenero"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="fa-solid fa-exclamation"></i></span>
-                                    <select class="form-select" required asp-for="IdGenero"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required
+                                    <select class="form-select" required asp-for="IdGenero" id="l_genero" required
                                         asp-items="@(new SelectList(ViewBag.ListaGenero,"IdGenero","GeneroDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
@@ -45,20 +43,16 @@
                             <label for="Nombres" class="form-label" asp-for="Nombres"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" required asp-for="Nombres" />
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="i_nombres"
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" required asp-for="Nombres" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-3">
                             <label for="ApellidoPaterno" class="form-label" asp-for="ApellidoPaterno"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" required asp-for="ApellidoPaterno" />
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="i_apellido_paterno"
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" required asp-for="ApellidoPaterno" />
                             </div>
                         </div>
                     </div>
@@ -67,10 +61,8 @@
                             <label for="ApellidoMaterno" class="form-label" asp-for="ApellidoMaterno"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
-                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" required asp-for="ApellidoMaterno" />
+                                <input style="text-transform:uppercase" type="text" class="form-control" id="i_apellido_materno"
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" required asp-for="ApellidoMaterno" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-3">
@@ -112,10 +104,8 @@
                             <label for="CorreoAcceso" class="form-label" asp-for="CorreoAcceso"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
-                                <input type="text" class="form-control" id="" placeholder="REQUERIDO"
-                                    aria-label="John Doe" aria-describedby="2"
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" required asp-for="CorreoAcceso" />
+                                <input type="text" class="form-control" id="i_correo_acceso" placeholder="REQUERIDO"
+                                    aria-label="John Doe" aria-describedby="2" required asp-for="CorreoAcceso" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-3">
@@ -125,9 +115,7 @@
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="fa-solid fa-exclamation"></i></span>
-                                    <select class="form-select" required asp-for="IdPersonalEstudio"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required
+                                    <select class="form-select" asp-for="IdPersonalEstudio" id="l_personal_estudio" required
                                         asp-items="@(new SelectList(ViewBag.ListaPersonalEstudio,"IdPersonalEstudio","PersonalEstudioDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
@@ -140,9 +128,7 @@
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="fa-solid fa-exclamation"></i></span>
-                                    <select class="form-select" required asp-for="IdArea"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required
+                                    <select class="form-select" required asp-for="IdArea" id="l_area" required
                                         asp-items="@(new SelectList(ViewBag.ListaArea,"IdArea","AreaDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
@@ -157,9 +143,7 @@
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="fa-solid fa-exclamation"></i></span>
-                                    <select class="form-select" required asp-for="IdPerfil"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required
+                                    <select class="form-select" required asp-for="IdPerfil" id="l_perfil" required
                                         asp-items="@(new SelectList(ViewBag.ListaPerfil,"IdPerfil","PerfilDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
@@ -172,9 +156,7 @@
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="fa-solid fa-exclamation"></i></span>
-                                    <select class="form-select" required asp-for="IdRol"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required
+                                    <select class="form-select" required asp-for="IdRol" id="l_rol" required
                                         asp-items="@(new SelectList(ViewBag.ListaRol,"IdRol","RolDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
@@ -202,6 +184,15 @@
                                 <span id="2" class="input-group-text"><i class=""></i></span>
                                 <input style="text-transform:uppercase" type="date" class="form-control" id="iFechaContratacion"
                                     aria-label="John Doe" aria-describedby="2" asp-for="FechaContratacion" oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required/>
+                            </div>
+                        </div>
+                          <div class="mb-3 col-md-3">
+                            <label for="FechaIngreso" class="form-label" asp-for="FechaIngreso"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class=""></i></span>
+                                <input style="text-transform:uppercase" type="date" class="form-control" id="iFechaIngreso"
+                                    aria-label="John Doe" aria-describedby="2" asp-for="FechaIngreso" oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" required/>
                             </div>
                         </div>
