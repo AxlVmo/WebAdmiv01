@@ -331,8 +331,8 @@ namespace WebAdmin.Controllers
                                  IdTipoVenta = a.IdTipoVenta,
                                  TipoVentaDesc = a.TipoVentaDesc
                              };
-            TempData["fTV"] = fTipoVenta.ToList();
-            ViewBag.ListaTipoVenta = TempData["fTV"];
+
+            ViewBag.ListaTipoVenta = fTipoVenta.ToList();
 
             var fTipoServicio = from a in _context.CatTipoServicios
                                 where a.IdEstatusRegistro == 1
@@ -341,8 +341,8 @@ namespace WebAdmin.Controllers
                                     IdTipoServicio = a.IdTipoServicio,
                                     TipoServicioDesc = a.TipoServicioDesc
                                 };
-            TempData["fTS"] = fTipoServicio.ToList();
-            ViewBag.ListaTipoServicio = TempData["fTS"];
+        
+            ViewBag.ListaTipoServicio = fTipoServicio.ToList();
 
             var fTipoPago = from a in _context.CatTipoPagos
                             where a.IdEstatusRegistro == 1
@@ -351,8 +351,8 @@ namespace WebAdmin.Controllers
                                 IdTipoPago = a.IdTipoPago,
                                 TipoPagoDesc = a.TipoPagoDesc
                             };
-            TempData["fTP"] = fTipoPago.ToList();
-            ViewBag.ListaTipoPago = TempData["fTP"];
+
+            ViewBag.ListaTipoPago = fTipoPago.ToList();
 
             var f_user = _userService.GetUserId();
             var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
@@ -368,8 +368,8 @@ namespace WebAdmin.Controllers
                                         IdUsuario = a.IdAlumno,
                                         NombreUsuario = a.NombreAlumno + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno
                                     };
-                TempData["fUC"] = fUsuariosCent.ToList();
-                ViewBag.ListaUsuariosCentros = TempData["fUC"];
+
+                ViewBag.ListaUsuariosCentros = fUsuariosCent.ToList();
             }
             else
             {
@@ -380,8 +380,7 @@ namespace WebAdmin.Controllers
                                            IdUsuario = a.IdAlumno,
                                            NombreUsuario = a.NombreAlumno + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno
                                        };
-                TempData["fUC"] = fUsuariosCentros.ToList();
-                ViewBag.ListaUsuariosCentros = TempData["fUC"];
+                ViewBag.ListaUsuariosCentros = fUsuariosCentros.ToList();
             }
             return View();
         }

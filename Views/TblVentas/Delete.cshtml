@@ -4,20 +4,11 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Ventas</li>
-        <li class="breadcrumb-item active" aria-current="page">Desactivar Ventas</li>
-    </ol>
-</nav>
-<p>
-    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-area="Identity" asp-page="/Account/Register" ><i class="fas fa-plus"></i> Nuevo</a>
-    @* <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i class="fas fa-plus"></i> Nuevo</a> *@
-</p>
-<div>
-
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Venta</h4>
+    <div class="col-xxl">
+        <div class="card mb-4">
+            <div class="card-body">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.NumeroVenta)
@@ -69,4 +60,7 @@
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
+            </div>
+        </div>
+    </div>
 </div>

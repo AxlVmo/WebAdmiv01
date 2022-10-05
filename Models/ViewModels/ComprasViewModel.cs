@@ -5,7 +5,7 @@ namespace WebAdmin.ViewModels
 {
     public class ComprasViewModel
     {
-        public TblCompra TblComprras { get; set; }
+        public TblCompra TblCompras { get; set; }
         public List<RelCompraProducto> RelCompraProductos { get; set; }
     }
 }

@@ -206,8 +206,8 @@ namespace WebAdmin.Controllers
                                       IdTipoSuministro = a.IdTipoSuministro,
                                       TipoSuministroDesc = a.TipoSuministroDesc
                                   };
-            TempData["fTS"] = fTipoSuministro.ToList();
-            ViewBag.ListaTipoSuministro = TempData["fTS"];
+                                  
+            ViewBag.ListaTipoSuministro = fTipoSuministro.ToList();
             return View();
         }
 
@@ -368,37 +368,82 @@ namespace WebAdmin.Controllers
                     tblSuministro.FechaRegistro = DateTime.Now;
                     tblSuministro.IdEstatusRegistro = tblSuministro.IdEstatusRegistro;
 
-                    if (tblSuministro.IdTipoPago == 1)
+                    var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                    int f_dia = DateTime.Now.Day;
+                    int f_mes = DateTime.Now.Day;
+                    var f_caja_centro_efectivo = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+                    var f_caja_centro_digital = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+                    if (tblSuministro.IdTipoPago == 1 && f_caja_centro_efectivo == tblSuministro.MontoSuministro)
                     {
 
-                    var addRelSuministroPago = new RelSuministroPago
-                    {
-                       
-                        IdTipoPago = tblSuministro.IdTipoPago,
-                        CantidadPago = tblSuministro.MontoSuministro,
-                        FechaRegistro = DateTime.Now,
-                        IdUsuarioModifico = Guid.Parse(f_user),                        
-                        IdEstatusRegistro = 1,
-                        IdSuministro = tblSuministro.IdSuministro,
-                    };
-                    _context.Add(addRelSuministroPago);
-                    var addMovimiento = new TblMovimiento
-                    {
-                        IdMovimiento = Guid.NewGuid(),
-                        IdSubTipoMovimiento = 3,
-                        IdTipoMovimiento = 2,
-                        MovimientoDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim(),
-                        MontoMovimiento = tblSuministro.MontoSuministro,
-                        IdUCorporativoCentro = fCentroCorporativo,
-                        IdCaracteristicaMovimiento = 1,
-                        IdTipoRecurso = 1,
-                        FechaRegistro = DateTime.Now,
-                        IdUsuarioModifico = Guid.Parse(f_user),
-                        IdCorpCent = fCorpCent,
-                        IdEstatusRegistro = 1
-                    };
-                    _context.Add(addMovimiento);
+                        var addRelSuministroPago = new RelSuministroPago
+                        {
+
+                            IdTipoPago = tblSuministro.IdTipoPago,
+                            CantidadPago = tblSuministro.MontoSuministro,
+                            FechaRegistro = DateTime.Now,
+                            IdUsuarioModifico = Guid.Parse(f_user),
+                            IdEstatusRegistro = 1,
+                            IdSuministro = tblSuministro.IdSuministro,
+                        };
+                        _context.Add(addRelSuministroPago);
+                        var addMovimiento = new TblMovimiento
+                        {
+                            IdMovimiento = Guid.NewGuid(),
+                            IdSubTipoMovimiento = 3,
+                            IdTipoMovimiento = 2,
+                            MovimientoDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim(),
+                            MontoMovimiento = tblSuministro.MontoSuministro,
+                            IdUCorporativoCentro = fCentroCorporativo,
+                            IdCaracteristicaMovimiento = 1,
+                            IdTipoRecurso = 1,
+                            FechaRegistro = DateTime.Now,
+                            IdUsuarioModifico = Guid.Parse(f_user),
+                            IdCorpCent = fCorpCent,
+                            IdEstatusRegistro = 1
+                        };
+                        _context.Add(addMovimiento);
                     }
+                    else
+                    {
+                        _notyf.Error("Efectivo insuficiente para realizar el pago", 5);
+                    }
+                    if (tblSuministro.IdTipoPago == 2 && f_caja_centro_digital == tblSuministro.MontoSuministro)
+                    {
+
+                        var addRelSuministroPago = new RelSuministroPago
+                        {
+
+                            IdTipoPago = tblSuministro.IdTipoPago,
+                            CantidadPago = tblSuministro.MontoSuministro,
+                            FechaRegistro = DateTime.Now,
+                            IdUsuarioModifico = Guid.Parse(f_user),
+                            IdEstatusRegistro = 1,
+                            IdSuministro = tblSuministro.IdSuministro,
+                        };
+                        _context.Add(addRelSuministroPago);
+                        var addMovimiento = new TblMovimiento
+                        {
+                            IdMovimiento = Guid.NewGuid(),
+                            IdSubTipoMovimiento = 3,
+                            IdTipoMovimiento = 2,
+                            MovimientoDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim(),
+                            MontoMovimiento = tblSuministro.MontoSuministro,
+                            IdUCorporativoCentro = fCentroCorporativo,
+                            IdCaracteristicaMovimiento = 1,
+                            IdTipoRecurso = 1,
+                            FechaRegistro = DateTime.Now,
+                            IdUsuarioModifico = Guid.Parse(f_user),
+                            IdCorpCent = fCorpCent,
+                            IdEstatusRegistro = 1
+                        };
+                        _context.Add(addMovimiento);
+                    }
+                    else
+                    {
+                        _notyf.Error("Banca insuficiente para realizar el pago", 5);
+                    }
+
 
                     _context.Update(tblSuministro);
                     await _context.SaveChangesAsync();

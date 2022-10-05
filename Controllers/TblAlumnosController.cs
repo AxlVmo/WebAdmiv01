@@ -189,9 +189,46 @@ namespace WebAdmin.Controllers
         // GET: TblAlumnoes/Create
         public IActionResult Create()
         {
-            List<CatTipoAlumno> ListaTipoAlumnos = new List<CatTipoAlumno>();
-            ListaTipoAlumnos = (from c in _context.CatTipoAlumnos select c).Distinct().ToList();
-            ViewBag.ListaTipoAlumnos = ListaTipoAlumnos;
+            
+            var fTipoAlumnos = from a in _context.CatTipoAlumnos
+                                  where a.IdEstatusRegistro == 1
+                                  select new CatTipoAlumno
+                                  {
+                                      IdTipoAlumno = a.IdTipoAlumno,
+                                      TipoAlumnoDesc = a.TipoAlumnoDesc
+                                  };
+                                  
+            ViewBag.ListaTipoAlumnos = fTipoAlumnos.ToList();
+
+            var fNivelEscolar = from a in _context.CatNivelEscolares
+                                  where a.IdEstatusRegistro == 1
+                                  select new CatNivelEscolar
+                                  {
+                                      IdNivelEscolar = a.IdNivelEscolar,
+                                      NivelEscolarDesc = a.NivelEscolarDesc
+                                  };
+                                  
+            ViewBag.ListaNivelEscolar = fNivelEscolar.ToList();
+
+            var fEscolaridades = from a in _context.CatEscolaridades
+                                  where a.IdEstatusRegistro == 1
+                                  select new CatEscolaridad
+                                  {
+                                      IdEscolaridad = a.IdEscolaridad,
+                                      EscolaridadDesc = a.EscolaridadDesc
+                                  };
+                                  
+            ViewBag.ListaEscolaridades = fEscolaridades.ToList();
+
+            var fTipoSuministro = from a in _context.CatTipoSuministros
+                                  where a.IdEstatusRegistro == 1
+                                  select new CatTipoSuministro
+                                  {
+                                      IdTipoSuministro = a.IdTipoSuministro,
+                                      TipoSuministroDesc = a.TipoSuministroDesc
+                                  };
+                                  
+            ViewBag.ListaTipoSuministro = fTipoSuministro.ToList();
             return View();
         }
 

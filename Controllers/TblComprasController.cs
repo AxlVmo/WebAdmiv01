@@ -202,8 +202,18 @@ namespace WebAdmin.Controllers
                                       IdTipoCompra = a.IdTipoCompra,
                                       TipoCompraDesc = a.TipoCompraDesc
                                   };
-            TempData["fTS"] = fTipoCompra.ToList();
-            ViewBag.ListaTipoCompra = TempData["fTS"];
+
+             var fTipoPago = from a in _context.CatTipoPagos
+                            where a.IdEstatusRegistro == 1
+                            select new CatTipoPago
+                            {
+                                IdTipoPago = a.IdTipoPago,
+                                TipoPagoDesc = a.TipoPagoDesc
+                            };
+
+            ViewBag.ListaTipoPago = fTipoPago.ToList();
+            
+            ViewBag.ListaTipoCompra = fTipoCompra.ToList();
             return View();
         }
 

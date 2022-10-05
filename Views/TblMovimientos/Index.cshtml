@@ -31,7 +31,6 @@
                 </div>
             </div>
         </h5>
-        <div class="table-responsive text-nowrap">
             <div class="container">
                 <table class="table" id="tblMovimientos">
                     <thead>
@@ -41,9 +40,6 @@
                             </th>
                             <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.TipoMovimientoDesc)
-                            </th>
-                            <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.MovimientoDesc)
                             </th>
                             <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.IdSubTipoMovimiento)
@@ -72,9 +68,6 @@
                                 </td>
                                 <td style="text-align:center">
                                     @Html.DisplayFor(modelItem => item.TipoMovimientoDesc)
-                                </td>
-                                <td style="text-align:center">
-                                    @Html.DisplayFor(modelItem => item.MovimientoDesc)
                                 </td>
                                 <td style="text-align:center">
                                     @Html.DisplayFor(modelItem => item.IdSubTipoMovimiento)
@@ -140,7 +133,6 @@
                     </tfoot>
                 </table>
             </div>
-        </div>
     </div>
 </div>
 @section Scripts {
@@ -240,7 +232,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         document.getElementById("iNuevo").style.visibility = "hidden";
                     }
                     else {
-                         document.getElementById("iNuevo").style.visibility = "visible";
+                        document.getElementById("iNuevo").style.visibility = "visible";
                     }
                 }
             }
