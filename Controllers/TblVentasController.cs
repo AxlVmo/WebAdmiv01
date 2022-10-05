@@ -276,6 +276,26 @@ namespace WebAdmin.Controllers
                 oVenta.FechaRegistro = DateTime.Now;
                 oVenta.IdEstatusRegistro = 1;
                 _context.TblVenta.Add(oVenta);
+
+                var pago_venta = oVentaVM.RelVentaPagos.Where(a => a.IdVenta == nVenta).Select(i => Convert.ToDouble(i.CantidadPago)).Sum();
+
+                var addMovimiento = new TblMovimiento
+                    {
+                        IdMovimiento = Guid.NewGuid(),
+                        IdSubTipoMovimiento = 4,
+                        IdTipoMovimiento = 1,
+                        MovimientoDesc = oVenta.FolioVenta,
+                        MontoMovimiento = pago_venta,
+                        IdUCorporativoCentro = fCentroCorporativo,
+                        IdCaracteristicaMovimiento = 2,
+                        IdTipoRecurso = oVentaVM.RelVentaPagos[0].IdTipoPago,
+                        IdRefereciaMovimiento = nVenta,
+                        FechaRegistro = DateTime.Now,
+                        IdUsuarioModifico = Guid.Parse(f_user),
+                        IdCorpCent = fCorpCent,
+                        IdEstatusRegistro = 1
+                    };
+                    _context.Add(addMovimiento);
                 _context.SaveChanges();
 
                 respuesta = true;

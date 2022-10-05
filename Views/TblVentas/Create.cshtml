@@ -73,7 +73,7 @@
 </style>
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Usuario</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Venta</h4>
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
@@ -246,7 +246,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">DIFERENCIA</label>
-                                    <input id="i_pago_diferencia" class="form-control" value="0" readonly />
+                                    <input type="number" id="i_pago_diferencia" class="form-control" value="0" readonly />
                                 </div>
                             </div>
 
@@ -837,10 +837,10 @@ total_venta = 0;
         var f_alumno = $('#l_alumno').val();
         var f_registros_tabla = $('#tbProducto >tbody >tr').length;
         var f_tipo_pago = $('#l_tipo_pago').val();
-        var f_total_venta = $('#l_total_venta').val();
-        var f_pago_diferencia = $('#i_pago_diferencia').val();
+        let f_total_venta = $('#l_total_venta').val();
+        let f_pago_diferencia = parseInt($('#i_pago_diferencia').val());
         var f_codigo_pago = $('#i_codigo_pago').val();
-        var total_col1 = 0;
+        let total_col1 = 0;
         $('#tbProducto tbody').find('tr').each(function (i, el) {
             total_col1 += parseFloat($(this).find('td').eq(4).text());
         });
@@ -888,7 +888,8 @@ total_venta = 0;
                 validate('i_pago_monto')
             }
             else if (f_tipo_venta == 1) {
-                if (i_pago_monto == total_col1) {
+                var v_pago = (total_col1 + f_pago_diferencia);
+                if (i_pago_monto == v_pago) {
 
                     registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
 
@@ -898,7 +899,7 @@ total_venta = 0;
                 }
             }
             else if (f_tipo_venta == 2) {
-                if (v_total == total_col1) {
+                if (v_total == (total_col1 )) {
 
                     registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
 

@@ -238,9 +238,8 @@ namespace WebAdmin.Data
             );
 
               modelBuilder.Entity<CatSubTipoMovimiento>().HasData(
-                new CatSubTipoMovimiento { IdSubTipoMovimiento = 1, SubTipoMovimientoDesc = "DEPOSITO INCIAL EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatSubTipoMovimiento { IdSubTipoMovimiento = 2, SubTipoMovimientoDesc = "DEPOSITO INCIAL DIGITAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatSubTipoMovimiento { IdSubTipoMovimiento = 3, SubTipoMovimientoDesc = "CORTE CAJA EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+                new CatSubTipoMovimiento { IdSubTipoMovimiento = 1, SubTipoMovimientoDesc = "DEPOSITO INICIAL CAJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatSubTipoMovimiento { IdSubTipoMovimiento = 2, SubTipoMovimientoDesc = "CORTE CAJA EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
             );
 
             modelBuilder.Entity<CatCodigosPostal>().HasData(
