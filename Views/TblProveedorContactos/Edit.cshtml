@@ -18,7 +18,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 <div class="row">
     <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')"
+        <input spellcheck="true" style="text-transform:uppercase" type="text" oninvalid="this.setCustomValidity('Campo Requerido')"
             onchange="this.setCustomValidity('')" required type="hidden" asp-for="IdProveedorContacto" />
         <div class="row">
             <div class="col-md-4">
@@ -44,7 +44,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="NombreProveedorContacto" class="control-label"></label>
-                    <input style="text-transform:uppercase" type="text"
+                    <input spellcheck="true" style="text-transform:uppercase" type="text"
                         oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
                         required asp-for="NombreProveedorContacto" class="form-control" />
 
@@ -53,7 +53,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="CorreoElectronico" class="control-label"></label>
-                    <input asp-for="CorreoElectronico" class="form-control" type="email" />
+                    <input spellcheck="true" asp-for="CorreoElectronico" class="form-control" type="email" />
                     <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
                 </div>
 
@@ -63,7 +63,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="Telefono" class="control-label"></label>
-                    <input style="text-transform:uppercase" type="text"
+                    <input spellcheck="true" style="text-transform:uppercase" type="text"
                         oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
                         required asp-for="Telefono" class="form-control" type="number" />
 
@@ -73,7 +73,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
                 <div class="form-group">
                     <label asp-for="TelefonoMovil" class="control-label"></label>
-                    <input style="text-transform:uppercase" type="text"
+                    <input spellcheck="true" style="text-transform:uppercase" type="text"
                         oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
                         required asp-for="TelefonoMovil" class="form-control" type="number" />
 
@@ -95,7 +95,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Actualizar" class="btn btn-warning" />
+            <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
             <a asp-action="Index" class="btn btn-secondary">Regresar</a>
         </div>
     </form>

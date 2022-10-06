@@ -31,7 +31,7 @@
                             <label for="DescServicio" class="form-label" asp-for="DescServicio"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required  oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required  oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
                                      aria-label="John Doe" aria-describedby="2"
                                     asp-for="DescServicio" />
                             </div>
@@ -42,7 +42,7 @@
                             <label for="ServicioPrecioUno" class="form-label" asp-for="ServicioPrecioUno"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="number" class="form-control" id="" required oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id="" required oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
                                     placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                                     asp-for="ServicioPrecioUno" />
                             </div>
@@ -51,14 +51,14 @@
                             <label for="Periodo" class="form-label" asp-for="Periodo"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="number" class="form-control" id="" required  oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id="" required  oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
                                     placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                                     asp-for="Periodo" />
                             </div>
                         </div>
                     </div>
    <div class="form-group">
-                                <input type="submit" value="Crear" class="btn btn-success" />
+                                <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
                                 <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                             </div>
 </form>

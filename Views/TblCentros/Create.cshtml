@@ -49,7 +49,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-exclamation"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id=""
                                         placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" required asp-for="NombreCentro" />
@@ -78,7 +78,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-exclamation"></i>
                                     </span>
-                                    <input type="number" class="form-control" id="" aria-label="John Doe"
+                                    <input spellcheck="true" type="number" class="form-control" id="" aria-label="John Doe"
                                         aria-describedby="2" asp-for="CentroPresupuesto" required
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" />
@@ -90,7 +90,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-phone"></i>
                                     </span>
-                                    <input type="text" class="form-control" id="" placeholder="0000000000"
+                                    <input spellcheck="true" type="text" class="form-control" id="" placeholder="0000000000"
                                         aria-label="John Doe" aria-describedby="2" asp-for="Telefono" required
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" />
@@ -104,7 +104,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-exclamation"></i>
                                     </span>
-                                    <input type="email" class="form-control" id="" placeholder="REQUERIDO"
+                                    <input spellcheck="true" type="email" class="form-control" id="" placeholder="REQUERIDO"
                                         aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico" required
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" />
@@ -116,7 +116,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-map-location-dot"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="i_calle" aria-label="John Doe" aria-describedby="2" asp-for="Calle" required
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" />
@@ -130,7 +130,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-map-location-dot"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="iCodigoPostal" aria-label="John Doe" aria-describedby="2"
                                         asp-for="CodigoPostal" required
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
@@ -157,7 +157,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-map-location-dot"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="idLocalidadMunicipio" aria-label="John Doe" aria-describedby="2"
                                         asp-for="LocalidadMunicipio" readonly />
                                 </div>
@@ -170,7 +170,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-map-location-dot"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="idCiudad" aria-label="John Doe" aria-describedby="2" asp-for="Ciudad"
                                         readonly />
                                 </div>
@@ -181,14 +181,14 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-map-location-dot"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="idEstados" aria-label="John Doe" aria-describedby="2" asp-for="Estado"
                                         readonly />
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Crear" class="btn btn-success" />
+                            <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
                             <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                         </div>
                 </form>

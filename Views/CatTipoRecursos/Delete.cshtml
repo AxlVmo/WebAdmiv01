@@ -29,8 +29,8 @@
             @Html.DisplayFor(model => model.IdEstatusRegistro)
         </dd>
          <form asp-action="Delete">
-        <input type="hidden" asp-for="IdTipoRecurso" />
-        <input type="submit" value="Desactivar" class="btn btn-danger" />
+        <input spellcheck="true" type="hidden" asp-for="IdTipoRecurso" />
+        <input spellcheck="true" type="submit" value="Desactivar" class="btn btn-danger" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
     </form>
     </dl>

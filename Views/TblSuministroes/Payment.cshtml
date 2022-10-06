@@ -13,7 +13,7 @@
             </div>
             <div class="card-body">
                 <form asp-action="Edit">
-                    <input type="hidden" asp-for="IdSuministro" />
+                    <input spellcheck="true" type="hidden" asp-for="IdSuministro" />
                     <div class="row">
                         <div class="mb-3 col-md-2">
                             <label  class="form-label"
@@ -35,7 +35,7 @@
                                 asp-for="SuministroDesc"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input readonly="true" style="text-transform:uppercase" type="text" class="form-control"
+                                <input spellcheck="true" readonly="true" style="text-transform:uppercase" type="text" class="form-control"
                                     id="" required aria-label="John Doe" aria-describedby="2"
                                     asp-for="SuministroDesc" />
                             </div>
@@ -44,7 +44,7 @@
                             <label  class="form-label" asp-for="NumeroReferencia"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input readonly="true" style="text-transform:uppercase" type="text" class="form-control"
+                                <input spellcheck="true" readonly="true" style="text-transform:uppercase" type="text" class="form-control"
                                     id="" required placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                                     asp-for="NumeroReferencia" />
                             </div>
@@ -53,7 +53,7 @@
                             <label  class="form-label" asp-for="DiaFacturacion"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input readonly="true" style="text-transform:uppercase" type="number"
+                                <input spellcheck="true" readonly="true" style="text-transform:uppercase" type="number"
                                     class="form-control" id="" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2" asp-for="DiaFacturacion" />
                             </div>
@@ -62,7 +62,7 @@
                             <label  class="form-label" asp-for="MontoSuministro"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input readonly="true" style="text-transform:uppercase" type="number"
+                                <input spellcheck="true" readonly="true" style="text-transform:uppercase" type="number"
                                     class="form-control" id="" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2" asp-for="MontoSuministro" />
                             </div>
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                     <div class="mt-2">
-                        <input type="submit" value="Actualizar" class="btn btn-warning" />
+                        <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>

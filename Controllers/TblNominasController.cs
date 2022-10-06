@@ -38,7 +38,7 @@ namespace WebAdmin.Controllers
 
             var f_user = _userService.GetUserId();
             var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
-            var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+            
 
             var ValidaEstatus = _context.CatEstatus.ToList();
 
@@ -63,6 +63,7 @@ namespace WebAdmin.Controllers
 
                             if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
                             {
+                                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
                                 var ValidaUsuarios = _context.TblUsuarios.Where(m => m.IdCorporativo == f_centro.IdCentro && m.IdUsuario != Guid.Parse(f_user)).ToList() ;
 
                                 if (ValidaUsuarios.Count != 0)

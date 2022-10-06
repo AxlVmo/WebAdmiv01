@@ -10,9 +10,9 @@ namespace WebAdmin.Models
         [Key]
         public Guid IdUsuario { get; set; }
 
- [Required(ErrorMessage = "Campo Requerido.")]
+        [Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Nombre (s)")]
-        
+
         public string Nombres { get; set; }
 
         [Required(ErrorMessage = "Campo Requerido.")]
@@ -24,34 +24,34 @@ namespace WebAdmin.Models
         public string ApellidoMaterno { get; set; }
 
         [Display(Name = "Corporativo")]
-        
+
         public Guid IdCorporativo { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
-[Required(ErrorMessage = "Campo Requerido.")]
-        [Display(Name = "Area")]
-        
+        [Required(ErrorMessage = "Campo Requerido.")]
+        [Display(Name = "Área")]
+
         public int IdArea { get; set; }
-[Required(ErrorMessage = "Campo Requerido.")]
-        [Display(Name = "Genero")]
-        
+        [Required(ErrorMessage = "Campo Requerido.")]
+        [Display(Name = "Género")]
+
         public int IdGenero { get; set; }
-[Required(ErrorMessage = "Campo Requerido.")]
+        [Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Perfil")]
-        
+
         public int IdPerfil { get; set; }
-[Required(ErrorMessage = "Campo Requerido.")]
+        [Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Rol")]
-        
+
         public int IdRol { get; set; }
 
         [Display(Name = "Fecha de Nacimiento")]
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
-[Required(ErrorMessage = "Campo Requerido.")]
+        [Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Correo de Acceso")]
-        
+
         public string CorreoAcceso { get; set; }
 
         [Display(Name = "Teléfono")]
@@ -65,29 +65,29 @@ namespace WebAdmin.Models
 
         [Display(Name = "NSS")]
         public string UsuarioNss { get; set; }
-[Required(ErrorMessage = "Campo Requerido.")]
-        [Display(Name = "Tipo Contratacion")]
-        
+        [Required(ErrorMessage = "Campo Requerido.")]
+        [Display(Name = "Tipo Contratación")]
+
         public int IdTipoContratacion { get; set; }
-[Required(ErrorMessage = "Campo Requerido.")]
-        [Display(Name = "Remuneracion")]
-        
+        [Required(ErrorMessage = "Campo Requerido.")]
+        [Display(Name = "Remuneración")]
+
         public double UsuarioRemuneracion { get; set; }
-[Required(ErrorMessage = "Campo Requerido.")]
+        [Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Tipo Forma Pago")]
-        
+
         public int IdTipoFormaPago { get; set; }
-[Required(ErrorMessage = "Campo Requerido.")]
+        [Required(ErrorMessage = "Campo Requerido.")]
         [Display(Name = "Estudios")]
-        
+
         public int IdPersonalEstudio { get; set; }
 
         [Display(Name = "Fecha Contratacion")]
         [Required(ErrorMessage = "Campo Requerido.")]
         [DataType(DataType.Date)]
         public DateTime FechaContratacion { get; set; }
-[Required(ErrorMessage = "Campo Requerido.")]
-         [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Campo Requerido.")]
+        [DataType(DataType.Date)]
         public DateTime FechaIngreso { get; set; }
 
         [Display(Name = "Tipo Direccion")]
@@ -124,7 +124,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        
+
         public int IdEstatusRegistro { get; set; }
     }
 }

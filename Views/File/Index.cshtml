@@ -19,8 +19,8 @@
     </div>
 }
 <form method="post" enctype="multipart/form-data">
-    <input type="file" name="files" multiple required />
-    <input type="text" autocomplete="off" placeholder="Descripcion" name="description" required />
+    <input spellcheck="true" type="file" name="files" multiple required />
+    <input spellcheck="true" type="text" autocomplete="off" placeholder="Descripcion" name="description" required />
     <button type="submit" class="btn btn-success" asp-controller="File" asp-action="UploadToFileSystem">Subir al sistema de archivos</button>
     <button class="btn btn-success" type="submit" asp-controller="File" asp-action="UploadToDatabase">Subir a la base de datos</button>
 </form>

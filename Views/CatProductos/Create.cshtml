@@ -23,7 +23,7 @@
         <div class="col-md-5">
             <div class="form-group">
                 <label asp-for="DescProducto" class="control-label"></label>
-                <input  style="text-transform:uppercase" placeholder="Requerido" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="DescProducto" class="form-control" type="text" />
+                <input spellcheck="true"  style="text-transform:uppercase" placeholder="Requerido" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="DescProducto" class="form-control" type="text" />
                 <span asp-validation-for="DescProducto" class="text-danger"></span>
             </div>
         </div>
@@ -41,21 +41,21 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="CodigoExterno" class="control-label"></label>
-                <input  style="text-transform:uppercase" placeholder="Requerido" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="CodigoExterno" class="form-control" type="text" />
+                <input spellcheck="true"  style="text-transform:uppercase" placeholder="Requerido" type="text" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required asp-for="CodigoExterno" class="form-control" type="text" />
                 
             </div>
         </div>
       <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ProductoPrecioUno" class="control-label"></label>
-                <input asp-for="ProductoPrecioUno" class="form-control" type="number" />
+                <input spellcheck="true" asp-for="ProductoPrecioUno" class="form-control" type="number" />
                 <span asp-validation-for="ProductoPrecioUno" class="text-danger"></span>
             </div>
         </div>
     </div>
   <br />
         <div class="form-group">
-            <input type="submit" value="Crear" class="btn btn-success" />
+            <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
             <a asp-action="Index" class="btn btn-secondary">Regresar</a>
         </div>
 </form>

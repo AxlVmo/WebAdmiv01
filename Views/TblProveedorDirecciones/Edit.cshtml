@@ -19,8 +19,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
     <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="IdProveedorDirecciones" />
-        <input type="hidden" asp-for="IdColonia" />
+        <input spellcheck="true" type="hidden" asp-for="IdProveedorDirecciones" />
+        <input spellcheck="true" type="hidden" asp-for="IdColonia" />
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
@@ -48,7 +48,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Calle" class="control-label"></label>
-                    <input style="text-transform:uppercase" type="text"
+                    <input spellcheck="true" style="text-transform:uppercase" type="text"
                         oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
                         required asp-for="Calle" class="form-control" />
 
@@ -60,7 +60,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="form-group">
                     <label asp-for="CodigoPostal" class="control-label"></label>
                     <div class="input-group mb-3">
-                        <input type="number" asp-for="CodigoPostal" class="form-control" id="iCodigoPostal"
+                        <input spellcheck="true" type="number" asp-for="CodigoPostal" class="form-control" id="iCodigoPostal"
                             aria-label="CodigoPostal" aria-describedby="basic-addon2" pattern="[0-9]"
                             title="Solo números. Tamaño mínimo: 6">
                         <div class="input-group-append">
@@ -85,7 +85,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="LocalidadMunicipio" class="control-label"></label>
-                    <input id="idLocalidadMunicipio" style="text-transform:uppercase" asp-for="LocalidadMunicipio"
+                    <input spellcheck="true" id="idLocalidadMunicipio" style="text-transform:uppercase" asp-for="LocalidadMunicipio"
                         class="form-control" readonly="readonly" />
                     <span asp-validation-for="LocalidadMunicipio" class="text-danger"></span>
                 </div>
@@ -93,7 +93,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="Ciudad" class="control-label"></label>
-                    <input id="idCiudad" style="text-transform:uppercase" asp-for="Ciudad" class="form-control"
+                    <input spellcheck="true" id="idCiudad" style="text-transform:uppercase" asp-for="Ciudad" class="form-control"
                         readonly="readonly" />
                     <span asp-validation-for="Ciudad" class="text-danger"></span>
                 </div>
@@ -101,7 +101,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="Estado" class="control-label"></label>
-                    <input id="idEstados" style="text-transform:uppercase" asp-for="Estado" class="form-control"
+                    <input spellcheck="true" id="idEstados" style="text-transform:uppercase" asp-for="Estado" class="form-control"
                         readonly="readonly" />
                     <span asp-validation-for="Estado" class="text-danger"></span>
                 </div>
@@ -111,14 +111,14 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="CorreoElectronico" class="control-label"></label>
-                    <input id="iCorreoElectronico" asp-for="CorreoElectronico" class="form-control" type="email" />
+                    <input spellcheck="true" id="iCorreoElectronico" asp-for="CorreoElectronico" class="form-control" type="email" />
                     <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="Telefono" class="control-label"></label>
-                    <input asp-for="Telefono" class="form-control" type="number" />
+                    <input spellcheck="true" asp-for="Telefono" class="form-control" type="number" />
                     <span asp-validation-for="Telefono" class="text-danger"></span>
                 </div>
             </div>
@@ -137,7 +137,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Actualizar" class="btn btn-warning" />
+            <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
             <a asp-action="Index" class="btn btn-secondary">Regresar</a>
         </div>
     </form>

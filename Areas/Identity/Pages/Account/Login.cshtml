@@ -29,7 +29,7 @@
           <form id="account" class="mb-3" method="POST">
             <div class="mb-3">
               <label for="email" class="form-label" asp-for="Input.Email"></label>
-              <input type="email" class="form-control" placeholder="Requerido" autofocus asp-for="Input.Email"
+              <input spellcheck="true" type="email" class="form-control" placeholder="Requerido" autofocus asp-for="Input.Email"
                 required oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" />
             </div>
             <div class="mb-3 form-password-toggle">
@@ -37,19 +37,19 @@
                 <label class="form-label" for="password">Password</label>
               </div>
               <div class="input-group input-group-merge">
-                <input type="password" class="form-control"
+                <input spellcheck="true" type="password" class="form-control"
                   placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                   aria-describedby="password" asp-for="Input.Password" required />
                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
               </div>
-              <a href="#">
+              <a href="#" id="btn_olvido_clave">
                 <small>¿Has olvidado tu contraseña?</small>
               </a>
             </div>
             <div class="mb-3">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="remember-me" asp-for="Input.RememberMe" />
-                <label class="form-check-label" for="remember-me"> @Html.DisplayNameFor(m => m.Input.RememberMe)
+                <input  class="form-check-input" type="checkbox" id="remember-me" asp-for="Input.RememberMe"  />
+                <label class="form-check-label" for="remember-me" > @Html.DisplayNameFor(m => m.Input.RememberMe)
                 </label>
               </div>
             </div>
@@ -60,7 +60,7 @@
 
           <p class="text-center">
             <span>¿Nueva/o en nuestra plataforma?</span>
-            <a href="#">
+            <a href="#" id="btn_crear_cuenta">
               <span>Crear Cuenta</span>
             </a>
           </p>
@@ -107,6 +107,16 @@
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
 <script type="text/javascript">
+
+ $("#btn_olvido_clave").on("click", function () {
+        vNotify.notify({ text: 'En Construcción.', title: 'Intelimundo.' });
+    })
+    $("#btn_crear_cuenta").on("click", function () {
+        vNotify.notify({ text: 'En Construcción.', title: 'Intelimundo.' });
+    })
+     $("#remember-me").on("click", function () {
+        vNotify.notify({ text: 'En Construcción.', title: 'Intelimundo.' });
+    })
 
   $.ajax({
     type: "GET",

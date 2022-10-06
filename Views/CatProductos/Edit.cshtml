@@ -18,13 +18,13 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="IdProducto" id="IdMarca" />
-    <input type="hidden" asp-for="CodigoInterno" id="IdMarca" />
+    <input spellcheck="true" type="hidden" asp-for="IdProducto" id="IdMarca" />
+    <input spellcheck="true" type="hidden" asp-for="CodigoInterno" id="IdMarca" />
     <div class="row">
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="CodigoExterno" class="control-label"></label>
-                <input style="text-transform:uppercase" type="text"
+                <input spellcheck="true" style="text-transform:uppercase" type="text"
                     oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                     asp-for="CodigoExterno" class="form-control" type="text" />
                 <span asp-validation-for="CodigoExterno" class="text-danger"></span>
@@ -45,7 +45,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <div class="col-md-5">
             <div class="form-group">
                 <label asp-for="DescProducto" class="control-label"></label>
-                <input style="text-transform:uppercase" type="text"
+                <input spellcheck="true" style="text-transform:uppercase" type="text"
                     oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                     asp-for="DescProducto" class="form-control" type="text" />
 
@@ -57,21 +57,21 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <div class="col-md-1">
             <div class="form-group">
                 <label asp-for="CantidadMinima" class="control-label"></label>
-                <input asp-for="CantidadMinima" class="form-control" type="number" />
+                <input spellcheck="true" asp-for="CantidadMinima" class="form-control" type="number" />
                 <span asp-validation-for="CantidadMinima" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-1">
             <div class="form-group">
                 <label asp-for="ProductoPrecioUno" class="control-label"></label>
-                <input asp-for="ProductoPrecioUno" class="form-control" type="number" />
+                <input spellcheck="true" asp-for="ProductoPrecioUno" class="form-control" type="number" />
                 <span asp-validation-for="ProductoPrecioUno" class="text-danger"></span>
             </div>
         </div>
         @* <div class="col-md-1">
             <div class="form-group">
                 <label asp-for="PorcentajePrecioUno" class="control-label"></label>
-                <input asp-for="PorcentajePrecioUno" class="form-control" type="number" value="35"
+                <input spellcheck="true" asp-for="PorcentajePrecioUno" class="form-control" type="number" value="35"
                     readonly="readonly" />
                 <span asp-validation-for="PorcentajePrecioUno" class="text-danger"></span>
             </div>
@@ -92,7 +92,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Actualizar" class="btn btn-warning" />
+        <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
     </div>
 </form>

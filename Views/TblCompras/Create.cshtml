@@ -38,7 +38,7 @@
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
                                     asp-for="TblCompras.CompraDesc" />
@@ -50,7 +50,7 @@
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2" asp-for="TblCompras.FolioCompra" />
@@ -62,7 +62,7 @@
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input style="text-transform:uppercase" type="date" class="form-control" id=""
+                                <input spellcheck="true" style="text-transform:uppercase" type="date" class="form-control" id=""
                                     required oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2" asp-for="TblCompras.FechaCompra" />
@@ -75,14 +75,14 @@
                                     <div class="form-group">
                                         <label class="control-label"
                                             asp-for="@Model.RelCompraProductos[0].Cantidad"></label>
-                                        <input type="number" id="i_pago_monto" class="form-control" value="0"
+                                        <input spellcheck="true" type="number" id="i_pago_monto" class="form-control" value="0"
                                             asp-for="@Model.RelCompraProductos[0].Cantidad" required />
                                     </div>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <label class="control-label" asp-for="@Model.RelCompraProductos[0].ProdServDesc"></label>
-                                        <input type="text" id="i_pago_diferencia" class="form-control"  asp-for="@Model.RelCompraProductos[0].ProdServDesc"
+                                        <input spellcheck="true" type="text" id="i_pago_diferencia" class="form-control"  asp-for="@Model.RelCompraProductos[0].ProdServDesc"
                                              />
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                 <label  class="form-label" asp-for="@Model.RelCompraProductos[0].Precio"></label>
                 <div class="input-group input-group-merge">
                   <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
-                  <input style="text-transform:uppercase" type="number" class="form-control" id="iCodigoPostal"
+                  <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id="iCodigoPostal"
                      aria-label="John Doe" aria-describedby="2" asp-for="@Model.RelCompraProductos[0].Precio" required oninvalid="this.setCustomValidity('Campo Requerido')"
                     onchange="this.setCustomValidity('')"/>
                   <button class="btn btn-outline-primary" type="button" id="btnCP">Agregar</button>
@@ -117,7 +117,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group" id="lCodigoPago" hidden>
                                         <label class="control-label">CODIGO PAGO</label>
-                                        <input id="i_codigo_pago" class="form-control" required />
+                                        <input spellcheck="true" id="i_codigo_pago" class="form-control" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -132,14 +132,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">PAGO</label>
-                                        <input type="number" id="i_pago_monto" class="form-control" value="0"
+                                        <input spellcheck="true" type="number" id="i_pago_monto" class="form-control" value="0"
                                             required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">DIFERENCIA</label>
-                                        <input type="number" id="i_pago_diferencia" class="form-control" value="0"
+                                        <input spellcheck="true" type="number" id="i_pago_diferencia" class="form-control" value="0"
                                             readonly />
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Crear" class="btn btn-success" />
+                        <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>

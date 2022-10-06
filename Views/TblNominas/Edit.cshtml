@@ -13,7 +13,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       </div>
       <div class="card-body">
 <form asp-action="Edit">
-    <input type="hidden" asp-for="IdNomina" />
+    <input spellcheck="true" type="hidden" asp-for="IdNomina" />
               <div class="card-body">
                  <div class="row">
                         <div class="mb-3 col-md-3">
@@ -33,7 +33,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                              <label for="NominaDesc" class="form-label" asp-for="NominaDesc"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id="NominaDesc"
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="NominaDesc"
                                     aria-label="John Doe" aria-describedby="2"
                                     asp-for="NominaDesc" />
                             </div>
@@ -42,7 +42,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                              <label for="UsuarioRemuneracion" class="form-label" asp-for="UsuarioRemuneracion"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id="UsuarioRemuneracion"
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="UsuarioRemuneracion"
                                     placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                                     asp-for="UsuarioRemuneracion" />
                             </div>
@@ -64,7 +64,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                              <label for="CodigoPago" class="form-label" asp-for="CodigoPago"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPago" 
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPago" 
                                     placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                                     asp-for="CodigoPago" />
                             </div>
@@ -92,7 +92,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             </div>
                         </div>
     <div class="mt-2">
-                            <input type="submit" value="Actualizar" class="btn btn-warning" />
+                            <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
                             <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                         </div>
  </div>

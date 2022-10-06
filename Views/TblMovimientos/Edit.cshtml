@@ -13,7 +13,7 @@
             </div>
             <div class="card-body">
                 <form asp-action="Edit">
-                    <input type="hidden" asp-for="IdMovimiento" />
+                    <input spellcheck="true" type="hidden" asp-for="IdMovimiento" />
                     <div class="row">
                         <div class="mb-3 col-md-2">
                             <label for="IdTipoMovimiento" class="form-label" asp-for="IdTipoMovimiento"></label>
@@ -34,7 +34,7 @@
                             <label for="MovimientoDesc" class="form-label" asp-for="MovimientoDesc"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
                                     asp-for="MovimientoDesc" />
@@ -44,7 +44,7 @@
                             <label for="MontoMovimiento" class="form-label" asp-for="MontoMovimiento"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="number" class="form-control" id=""
+                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id=""
                                     required oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2" asp-for="MontoMovimiento" />
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="mt-2">
-                        <input type="submit" value="Actualizar" class="btn btn-warning" />
+                        <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>

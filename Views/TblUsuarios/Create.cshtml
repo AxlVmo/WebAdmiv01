@@ -27,7 +27,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label asp-for="FechaNacimiento" class="control-label"></label>
-                                    <input asp-for="FechaNacimiento" class="form-control" />
+                                    <input spellcheck="true" asp-for="FechaNacimiento" class="form-control" />
                                     <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label asp-for="Nombres" class="control-label"></label>
-                                    <input style="text-transform:uppercase" type="text"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" required asp-for="Nombres"
                                         class="form-control" />
@@ -78,7 +78,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label asp-for="ApellidoPaterno" class="control-label"></label>
-                                    <input style="text-transform:uppercase" type="text"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" required asp-for="ApellidoPaterno"
                                         class="form-control" />
@@ -87,7 +87,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label asp-for="ApellidoMaterno" class="control-label"></label>
-                                    <input style="text-transform:uppercase" type="text"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" required asp-for="ApellidoMaterno"
                                         class="form-control" />
@@ -100,13 +100,13 @@
                                         <button class="btn btn-outline-secondary" type="button"
                                             onclick="">Generar</button>
                                     </div>
-                                    <input type="email" asp-for="CorreoAcceso" class="form-control" id="iCorreoAcceso"
+                                    <input spellcheck="true" type="email" asp-for="CorreoAcceso" class="form-control" id="iCorreoAcceso"
                                         aria-describedby="basic-addon2">
                                 </div>
                             </div>
                         </div>
                     <div class="form-group">
-                        <input type="submit" value="Crear" class="btn btn-success" />
+                        <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                        </div>

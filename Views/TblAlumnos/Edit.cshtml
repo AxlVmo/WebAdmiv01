@@ -12,9 +12,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             <div class="card-header d-flex align-items-center justify-content-between">
             </div>
             <div class="card-body">
-                <input type="hidden" asp-for="IdAlumno" />
-                <input type="hidden" asp-for="IdCorpCent" />
-                <input type="hidden" asp-for="IdColonia" />
+                <input spellcheck="true" type="hidden" asp-for="IdAlumno" />
+                <input spellcheck="true" type="hidden" asp-for="IdCorpCent" />
+                <input spellcheck="true" type="hidden" asp-for="IdColonia" />
                 <div class="row">
                     <div class="mb-3 col-md-2">
                             <label for="IdTipoAlumno" class="form-label" asp-for="IdTipoAlumno"></label>
@@ -46,7 +46,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <label for="FechaNacimiento" class="form-label" asp-for="FechaNacimiento"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="date" class="form-control" id=""
+                                <input spellcheck="true" style="text-transform:uppercase" type="date" class="form-control" id=""
                                      aria-label="John Doe" aria-describedby="2" 
                                     asp-for="FechaNacimiento" />
                             </div>
@@ -68,7 +68,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                              <label for="NombreAlumno" class="form-label" asp-for="NombreAlumno"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id=""
                                     placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                                     asp-for="NombreAlumno" />
                             </div>
@@ -80,7 +80,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <label for="ApellidoPaterno" class="form-label" asp-for="ApellidoPaterno"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id=""
                                     placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                                     asp-for="ApellidoPaterno" />
                             </div>
@@ -89,7 +89,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                               <label for="ApellidoMaterno" class="form-label" asp-for="ApellidoMaterno"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id=""
                                     placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                                     asp-for="ApellidoMaterno" />
                             </div>
@@ -98,7 +98,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <label for="CorreoAcceso" class="form-label" asp-for="CorreoAcceso"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input placeholder="Requerido (usuario@dominio.com)"  type="email" class="form-control" id=""
+                                <input spellcheck="true" placeholder="Requerido (usuario@dominio.com)"  type="email" class="form-control" id=""
                                      aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                                     asp-for="CorreoAcceso" />
                             </div>
@@ -107,7 +107,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <label for="Telefono" class="form-label" asp-for="Telefono"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id=""
                                      aria-label="John Doe" aria-describedby="2"
                                     asp-for="Telefono" />
                             </div>
@@ -118,7 +118,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <label for="AlumnoCurp" class="form-label" asp-for="AlumnoCurp"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id=""
                                      aria-label="John Doe" aria-describedby="2"
                                     asp-for="AlumnoCurp" />
                             </div>
@@ -127,7 +127,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <label for="AlumnoGrupoSanguineo" class="form-label" asp-for="AlumnoGrupoSanguineo"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id=""
                                      aria-label="John Doe" aria-describedby="2"
                                     asp-for="AlumnoGrupoSanguineo" />
                             </div>
@@ -136,7 +136,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                              <label for="Calle" class="form-label" asp-for="Calle"></label>
                                 <div class="input-group input-group-merge">
                                     <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id=""
                                          aria-label="John Doe" aria-describedby="2"
                                         asp-for="Calle" />
                                 </div>
@@ -147,7 +147,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                 <label for="CodigoPostal" class="form-label" asp-for="CodigoPostal"></label>
                                 <div class="input-group input-group-merge">
                                     <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="iCodigoPostal"  aria-label="John Doe"
                                         aria-describedby="2" asp-for="CodigoPostal" />
                                     <button class="btn btn-outline-primary" type="button" id="button-addon2"
@@ -167,7 +167,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                 <label for="LocalidadMunicipio" class="form-label" asp-for="LocalidadMunicipio"></label>
                                 <div class="input-group input-group-merge">
                                     <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="idLocalidadMunicipio"  aria-label="John Doe"
                                         aria-describedby="2" asp-for="LocalidadMunicipio" readonly />
                                 </div>
@@ -178,7 +178,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                 <label for="Ciudad" class="form-label" asp-for="Ciudad"></label>
                                 <div class="input-group input-group-merge">
                                     <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="idCiudad"  aria-label="John Doe"
                                         aria-describedby="2" asp-for="Ciudad" readonly />
                                 </div>
@@ -187,7 +187,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                 <label for="Estado" class="form-label" asp-for="Estado"></label>
                                 <div class="input-group input-group-merge">
                                     <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="idEstados"  aria-label="John Doe"
                                         aria-describedby="2" asp-for="Estado" readonly />
                                 </div>
@@ -215,7 +215,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             </div>
                         </div>
                      <div class="mt-2">
-                            <input type="submit" value="Actualizar" class="btn btn-warning" />
+                            <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
                             <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                         </div>
             </div>

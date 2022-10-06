@@ -13,7 +13,7 @@
             </div>
             <div class="card-body">
         <form asp-action="Edit">
-            <input type="hidden" asp-for="IdPrestamo" />
+            <input spellcheck="true" type="hidden" asp-for="IdPrestamo" />
              <div class="row">
                           <div class="mb-3 col-md-2">
                     <label for="IdTipoPrestamo" class="form-label" asp-for="IdTipoPrestamo"></label>
@@ -34,7 +34,7 @@
                     <label for="PrestamoDesc" class="form-label" asp-for="PrestamoDesc"></label>
                     <div class="input-group input-group-merge">
                         <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                        <input style="text-transform:uppercase" type="text" class="form-control" id="PrestamoDesc" asp-for="PrestamoDesc"
+                        <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="PrestamoDesc" asp-for="PrestamoDesc"
                             placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                             oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required />
                     </div>
@@ -43,7 +43,7 @@
                     <label for="CantidadPrestamo" class="form-label" asp-for="CantidadPrestamo"></label>
                     <div class="input-group input-group-merge">
                         <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                        <input style="text-transform:uppercase" type="number" class="form-control" id="CantidadPrestamo"
+                        <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id="CantidadPrestamo"
                             placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                             oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
                             asp-for="CantidadPrestamo" />
@@ -100,7 +100,7 @@
                     <label for="Nombres" class="form-label" asp-for="Nombres"></label>
                     <div class="input-group input-group-merge">
                         <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                        <input style="text-transform:uppercase" type="text" class="form-control" id="Nombres" asp-for="Nombres"
+                        <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="Nombres" asp-for="Nombres"
                             placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                             oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required />
                     </div>
@@ -109,7 +109,7 @@
                     <label for="ApellidoPaterno" class="form-label" asp-for="ApellidoPaterno"></label>
                     <div class="input-group input-group-merge">
                         <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                        <input style="text-transform:uppercase" type="text" class="form-control" id="ApellidoPaterno" asp-for="ApellidoPaterno"
+                        <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="ApellidoPaterno" asp-for="ApellidoPaterno"
                             placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                             oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required />
                     </div>
@@ -118,7 +118,7 @@
                     <label for="ApellidoMaterno" class="form-label" asp-for="ApellidoMaterno"></label>
                     <div class="input-group input-group-merge">
                         <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                        <input style="text-transform:uppercase" type="text" class="form-control" id="ApellidoMaterno" asp-for="ApellidoMaterno"
+                        <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="ApellidoMaterno" asp-for="ApellidoMaterno"
                             placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                             oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required />
                     </div>
@@ -127,7 +127,7 @@
                     <label for="ine" class="form-label" asp-for="ine"></label>
                     <div class="input-group input-group-merge">
                         <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                        <input style="text-transform:uppercase" type="text" class="form-control" id="ine" asp-for="ine"
+                        <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="ine" asp-for="ine"
                             placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                             oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required />
                     </div>
@@ -137,7 +137,7 @@
                     <label for="curp" class="form-label" asp-for="curp"></label>
                     <div class="input-group input-group-merge">
                         <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                        <input style="text-transform:uppercase" type="text" class="form-control" id="curp" asp-for="curp"
+                        <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="curp" asp-for="curp"
                             placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
                             oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required />
                     </div>
@@ -145,7 +145,7 @@
 
                     </div>
                     <div class="mt-2">
-                        <input type="submit" value="Actualizar" class="btn btn-warning" />
+                        <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                   

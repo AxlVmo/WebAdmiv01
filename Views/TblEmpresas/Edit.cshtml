@@ -14,8 +14,8 @@
             <div class="card-body">
                 <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="IdEmpresa"/>
-                    <input type="hidden" asp-for="IdColonia"/>
+                    <input spellcheck="true" type="hidden" asp-for="IdEmpresa"/>
+                    <input spellcheck="true" type="hidden" asp-for="IdColonia"/>
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-3 col-md-6">
@@ -24,7 +24,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-exclamation"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id=""
                                            placeholder="Requerido" aria-label="John Doe" aria-describedby="2" asp-for="NombreEmpresa"
                                            required oninvalid="this.setCustomValidity('Campo Requerido')"
                                            onchange="this.setCustomValidity('')"/>
@@ -34,7 +34,7 @@
                                 <label for="GiroComercial" class="form-label" asp-for="GiroComercial"></label>
                                 <div class="input-group input-group-merge">
 
-                                    <input style="text-transform:uppercase" type="text" class="form-control" id=""
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id=""
                                            aria-label="John Doe" aria-describedby="2" asp-for="GiroComercial"/>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-exclamation"></i>
                                     </span>
-                                    <input type="email" class="form-control" id="" placeholder="REQUERIDO" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico" required/>
+                                    <input spellcheck="true" type="email" class="form-control" id="" placeholder="REQUERIDO" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico" required/>
                                 </div>
                             </div>
                             <div class="mb-3 col-md-6">
@@ -55,7 +55,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-phone"></i>
                                     </span>
-                                    <input type="text" class="form-control" id="" placeholder="0000000000"
+                                    <input spellcheck="true" type="text" class="form-control" id="" placeholder="0000000000"
                                            aria-label="John Doe" aria-describedby="2" asp-for="Telefono" required oninvalid="this.setCustomValidity('Campo Requerido')"
                                            onchange="this.setCustomValidity('')"/>
                                 </div>
@@ -68,7 +68,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-map-location-dot"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control" id="i_calle"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="i_calle"
                                            aria-label="John Doe" aria-describedby="2" asp-for="Calle" required oninvalid="this.setCustomValidity('Campo Requerido')"
                                            onchange="this.setCustomValidity('')"/>
                                 </div>
@@ -79,7 +79,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-map-location-dot"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPostal"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPostal"
                                            aria-label="John Doe" aria-describedby="2" asp-for="CodigoPostal" required oninvalid="this.setCustomValidity('Campo Requerido')"
                                            onchange="this.setCustomValidity('')"/>
                                     <button class="btn btn-outline-primary" type="button" id="btnCP">Buscar</button>
@@ -105,7 +105,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-map-location-dot"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control" id="idLocalidadMunicipio"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="idLocalidadMunicipio"
                                            aria-label="John Doe" aria-describedby="2"
                                            asp-for="LocalidadMunicipio" readonly/>
                                 </div>
@@ -118,7 +118,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-map-location-dot"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control" id="idCiudad"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="idCiudad"
                                            aria-label="John Doe" aria-describedby="2" asp-for="Ciudad"
                                            readonly/>
                                 </div>
@@ -129,7 +129,7 @@
                                     <span id="2" class="input-group-text">
                                         <i class="fa-solid fa-map-location-dot"></i>
                                     </span>
-                                    <input style="text-transform:uppercase" type="text" class="form-control" id="idEstados"
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="idEstados"
                                            aria-label="John Doe" aria-describedby="2" asp-for="Estado"
                                            readonly/>
                                 </div>
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                         <div class="mt-2">
-                            <input type="submit" value="Actualizar" class="btn btn-warning"/>
+                            <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning"/>
                             <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                         </div>
                     </div>
