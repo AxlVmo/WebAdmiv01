@@ -832,7 +832,7 @@ total_venta = 0;
         });
     }
     function valida_venta() {
-        var fecha_objeto = null;
+     
         var f_tipo_venta = $('#l_tipo_venta').val();
         var f_alumno = $('#l_alumno').val();
         var f_registros_tabla = $('#tbProducto >tbody >tr').length;
@@ -848,16 +848,7 @@ total_venta = 0;
         var t_diferencia = parseInt(i_pago_monto - total_col1);
         var v_total = i_pago_monto - t_diferencia;
 
-        var i_fecha_alterna_pago = $('#i_fecha_alterna_pago').val();
-
-        if (i_fecha_alterna_pago != "") {
-
-            fecha_objeto = new Date(i_fecha_alterna_pago);
-
-        }
-        else {
-            fecha_objeto = new Date();
-        }
+       
         var catidad_abono = null;
 
         if (f_tipo_venta != 1) {

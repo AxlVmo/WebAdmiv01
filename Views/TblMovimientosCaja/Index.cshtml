@@ -1,17 +1,17 @@
-﻿@model IEnumerable<WebAdmin.Models.TblSuministro>
+﻿@model IEnumerable<WebAdmin.Models.TblMovimientoCaja>
 
 @{
-    ViewData["Title"] = "Suministros";
+    ViewData["Title"] = "MovimientoCajas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Suministros</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Movimientos Cajas</h4>
     <div class="card">
         <h5 class="card-header">
             <div class="row">
                 <div class="mb-3 col-md-6">
                     <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create"><i
-                            class="fas fa-plus" hidden></i> Nuevo</a>
+                            class="fas fa-plus"></i> Nuevo</a>
                 </div>
                 <div class="mb-3 col-md-6">
                     <div class="row mb-3" id="iCorpCent" hidden>
@@ -31,28 +31,24 @@
                 </div>
             </div>
         </h5>
-        <div class="table-responsive text-nowrap">
             <div class="container">
-                <table class="table" id="tblSuministros">
+                <table class="table" id="tblMovimientoCajas">
                     <thead>
                         <tr>
                             <th style="text-align:center" hidden>
                                 @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
                             </th>
                             <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.TipoSuministroDesc)
+                                @Html.DisplayNameFor(model => model.TipoMovimientoCajaDesc)
                             </th>
                             <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.SuministroDesc)
+                                @Html.DisplayNameFor(model => model.SubTipoMovimientoCajaDesc)
                             </th>
                             <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.NumeroReferencia)
+                                @Html.DisplayNameFor(model => model.CaracteristicaMovimientoCajaDesc)
                             </th>
                             <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.DiaFacturacion)
-                            </th>
-                            <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.MontoSuministro)
+                                @Html.DisplayNameFor(model => model.MontoMovimientoCaja)
                             </th>
                             <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.FechaRegistro)
@@ -71,19 +67,16 @@
                                     @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
                                 </td>
                                 <td style="text-align:center">
-                                    @Html.DisplayFor(modelItem => item.TipoSuministroDesc)
+                                    @Html.DisplayFor(modelItem => item.TipoMovimientoCajaDesc)
                                 </td>
                                 <td style="text-align:center">
-                                    @Html.DisplayFor(modelItem => item.SuministroDesc)
+                                    @Html.DisplayFor(modelItem => item.SubTipoMovimientoCajaDesc)
                                 </td>
                                 <td style="text-align:center">
-                                    @Html.DisplayFor(modelItem => item.NumeroReferencia)
+                                    @Html.DisplayFor(modelItem => item.CaracteristicaMovimientoCajaDesc)
                                 </td>
                                 <td style="text-align:center">
-                                    @Html.DisplayFor(modelItem => item.DiaFacturacion)
-                                </td>
-                                <td style="text-align:center">
-                                    @Html.DisplayFor(modelItem => item.MontoSuministro)
+                                    @Html.DisplayFor(modelItem => item.MontoMovimientoCaja)
                                 </td>
                                 <td style="text-align:center">
                                     @Html.DisplayFor(modelItem => item.FechaRegistro)
@@ -99,17 +92,13 @@
                                     }
                                 </td>
                                 <td style="text-align:center">
-                                    <a asp-action="Payment" asp-route-id="@item.IdSuministro"
-                                    class="btn btn-outline-secondary" title="Editar"><i
-                                        class="fa-solid fa-cash-register"
-                                        style="font-size: 1em; color: #15b73e;"></i></a>
-                                    <a asp-action="Edit" asp-route-id="@item.IdSuministro" class="btn btn-outline-secondary"
+                                    <a asp-action="Edit" asp-route-id="@item.IdMovimientoCaja" class="btn btn-outline-secondary"
                                     title="Editar"><i class="far fa-edit"
                                         style="font-size: 1em; color: #FFC300;"></i></a>
-                                    <a asp-action="Details" asp-route-id="@item.IdSuministro"
+                                    <a asp-action="Details" asp-route-id="@item.IdMovimientoCaja"
                                     class="btn btn-outline-secondary" title="Detalles"><i class="far fa-list-alt"
                                         style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                                    <a asp-action="Delete" asp-route-id="@item.IdSuministro"
+                                    <a asp-action="Delete" asp-route-id="@item.IdMovimientoCaja"
                                     class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle"
                                         style="font-size: 1em; color: #FF9333;"></i></a>
                                 </td>
@@ -122,19 +111,19 @@
                                 @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
                             </th>
                             <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.TipoSuministroDesc)
+                                @Html.DisplayNameFor(model => model.TipoMovimientoCajaDesc)
                             </th>
                             <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.SuministroDesc)
+                                @Html.DisplayNameFor(model => model.MovimientoCajaDesc)
                             </th>
                             <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.NumeroReferencia)
+                                @Html.DisplayNameFor(model => model.IdSubTipoMovimientoCaja)
                             </th>
                             <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.DiaFacturacion)
+                                @Html.DisplayNameFor(model => model.IdCaracteristicaMovimientoCaja)
                             </th>
                             <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.MontoSuministro)
+                                @Html.DisplayNameFor(model => model.MontoMovimientoCaja)
                             </th>
                             <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.FechaRegistro)
@@ -144,7 +133,6 @@
                     </tfoot>
                 </table>
             </div>
-        </div>
     </div>
 </div>
 @section Scripts {
@@ -159,7 +147,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             var input, filter, table, tr, td, i;
             input = document.getElementById("drpCorpCent");
             filter = input.value.toUpperCase();
-            table = document.getElementById("tblSuministros");
+            table = document.getElementById("tblMovimientoCajas");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[0];
@@ -174,7 +162,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
         });
 
-        $('#tblSuministros').DataTable(
+        $('#tblMovimientoCajas').DataTable(
             {
                 initComplete: function () {
                     this.api()
@@ -223,9 +211,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
         var vEstatusFlag = '@ViewBag.EstatusFlag'
         var vEmpresaFlag = '@ViewBag.EmpresaFlag'
-        var CorporativoFlag = '@ViewBag.CorporativoFlag'
-        var vTipoSuministroFlag = '@ViewBag.TipoSuministroFlag'
-        var vPresupuestoFlag = '@ViewBag.PresupuestoFlag'
+        var vCorporativoFlag = '@ViewBag.CorporativoFlag'
+        var vCentroFlag = '@ViewBag.CentroFlag'
+        var vTipoMovimientoCajaFlag = '@ViewBag.TipoMovimientoCajaFlag'
+
 
         if (vEstatusFlag == 0) {
             document.getElementById("iNuevo").style.visibility = "hidden";
@@ -235,20 +224,15 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 document.getElementById("iNuevo").style.visibility = "hidden";
             }
             else {
-                if (CorporativoFlag == 0) {
+                if (vCorporativoFlag == 0) {
                     document.getElementById("iNuevo").style.visibility = "hidden";
                 }
                 else {
-                    if (vTipoSuministroFlag == 0) {
+                    if (vCentroFlag == 0) {
                         document.getElementById("iNuevo").style.visibility = "hidden";
                     }
                     else {
-                        if (vPresupuestoFlag == 0) {
-                            document.getElementById("iNuevo").style.visibility = "hidden";
-                        }
-                        else {
-                            $('#iNuevo').removeAttr('hidden');
-                        }
+                        document.getElementById("iNuevo").style.visibility = "visible";
                     }
                 }
             }

@@ -49,17 +49,7 @@ namespace WebAdmin.Controllers
                     if (ValidaCorporativo.Count >= 1)
                     {
                         ViewBag.CorporativoFlag = 1;
-                        var ValidaTipoSuministro = _context.CatTipoSuministros.ToList();
-
-                        if (ValidaTipoSuministro.Count >= 1)
-                        {
-                            ViewBag.TipoSuministroFlag = 1;
-                        }
-                        else
-                        {
-                            ViewBag.TipoSuministroFlag = 0;
-                            _notyf.Information("Favor de registrar los datos de Tipo Suministro para la Aplicación", 5);
-                        }
+                       
                     }
                     else
                     {

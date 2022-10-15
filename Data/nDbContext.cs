@@ -71,7 +71,11 @@ namespace WebAdmin.Data
         public DbSet<CatCaracteristicaMovimiento> CatCaracteristicaMovimientos { get; set; }
         public DbSet<CatSubTipoMovimiento> CatSubTipoMovimientos { get; set; }
         public DbSet<CatTipoRecurso> CatTipoRecursos { get; set; }
-        public DbSet<TblMovimiento> TblMovimientos { get; set; }
+        public DbSet<TblMovimientoCaja> TblMovimientoCajas { get; set; }
+        public DbSet<CatTipoPresupuesto> CatTipoPresupuestos { get; set; }
+        public DbSet<TblPresupuesto> TblPresupuestos { get; set; }
+
+        public DbSet<CatMes> CatMeses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -131,7 +135,7 @@ namespace WebAdmin.Data
             modelBuilder.Entity<CatPersonalEstudio>().HasData(
                new CatPersonalEstudio { IdPersonalEstudio = 1, PersonalEstudioDesc = "BACHILLERATO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                new CatPersonalEstudio { IdPersonalEstudio = 2, PersonalEstudioDesc = "BACHILLERATO TECNICO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-               new CatPersonalEstudio { IdPersonalEstudio = 3, PersonalEstudioDesc = "LICNECIATURA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatPersonalEstudio { IdPersonalEstudio = 3, PersonalEstudioDesc = "LICENCIATURA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                new CatPersonalEstudio { IdPersonalEstudio = 4, PersonalEstudioDesc = "INGENIERIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                new CatPersonalEstudio { IdPersonalEstudio = 5, PersonalEstudioDesc = "MAESTRIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                new CatPersonalEstudio { IdPersonalEstudio = 6, PersonalEstudioDesc = "DOCTORADO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
@@ -238,9 +242,29 @@ namespace WebAdmin.Data
             );
 
               modelBuilder.Entity<CatSubTipoMovimiento>().HasData(
-                new CatSubTipoMovimiento { IdSubTipoMovimiento = 1, SubTipoMovimientoDesc = "DEPOSITO INICIAL CAJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatSubTipoMovimiento { IdSubTipoMovimiento = 2, SubTipoMovimientoDesc = "CORTE CAJA EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+                new CatSubTipoMovimiento { IdSubTipoMovimiento = 1, SubTipoMovimientoDesc = "DEPOSITO CAJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+                new CatSubTipoMovimiento { IdSubTipoMovimiento = 2, SubTipoMovimientoDesc = "CORTE CAJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
             );
+
+            modelBuilder.Entity<CatTipoPresupuesto>().HasData(
+              new CatTipoPresupuesto { IdTipoPresupuesto = 1, TipoPresupuestoDesc = "GASTO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatTipoPresupuesto { IdTipoPresupuesto = 2, TipoPresupuestoDesc = "INGRESO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+          );
+
+            modelBuilder.Entity<CatMes>().HasData(
+              new CatMes { IdMes = 1, MesDesc = "ENERO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 2, MesDesc = "FEBRERO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 3, MesDesc = "MARZO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 4, MesDesc = "ABRIL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 5, MesDesc = "MAYO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 6, MesDesc = "JUNIO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 7, MesDesc = "JULIO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 8, MesDesc = "AGOSTO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 9, MesDesc = "SEPTIEMBRE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 10, MesDesc = "OCTUBRE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 11, MesDesc = "NOVIEMBRE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatMes { IdMes = 12, MesDesc = "DICIEMBRE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+          );
 
             modelBuilder.Entity<CatCodigosPostal>().HasData(
 

@@ -53,8 +53,8 @@ namespace WebAdmin.Controllers
                                 var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
                                 int f_dia = DateTime.Now.Day;
                                 int f_mes = DateTime.Now.Day;
-                                var f_caja_centro_efectivo = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
-                                var f_caja_centro_digital = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+                                var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+                                    var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
 
                                 if (f_caja_centro_efectivo > 0 || f_caja_centro_digital > 0)
                                 {
@@ -105,8 +105,7 @@ namespace WebAdmin.Controllers
                             CentroDesc = a.NombreCorporativo
                         };
             var sCorpCent = fCorp.Union(fCent);
-            TempData["fTS"] = sCorpCent.ToList();
-            ViewBag.ListaCorpCent = TempData["fTS"];
+            ViewBag.ListaCorpCent = sCorpCent.ToList();;
 
 
             var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
@@ -243,8 +242,8 @@ namespace WebAdmin.Controllers
                         fCorpCent = 2;
                     }
 
-                    var f_caja_centro_efectivo = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == fCentroCorporativo && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
-                    var f_caja_centro_digital = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == fCentroCorporativo && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+                    var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == fCentroCorporativo && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+                    var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == fCentroCorporativo && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
 
                     tblSuministro.IdCorpCent = fCorpCent;
                     tblSuministro.IdUCorporativoCentro = fCentroCorporativo;
@@ -371,8 +370,8 @@ namespace WebAdmin.Controllers
                     var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
                     int f_dia = DateTime.Now.Day;
                     int f_mes = DateTime.Now.Day;
-                    var f_caja_centro_efectivo = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
-                    var f_caja_centro_digital = _context.TblMovimientos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimiento == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimiento)).Sum();
+                    var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+                    var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
                     if (tblSuministro.IdTipoPago == 1 && f_caja_centro_efectivo == tblSuministro.MontoSuministro)
                     {
 
@@ -387,15 +386,15 @@ namespace WebAdmin.Controllers
                             IdSuministro = tblSuministro.IdSuministro,
                         };
                         _context.Add(addRelSuministroPago);
-                        var addMovimiento = new TblMovimiento
+                        var addMovimiento = new TblMovimientoCaja
                         {
-                            IdMovimiento = Guid.NewGuid(),
-                            IdSubTipoMovimiento = 3,
-                            IdTipoMovimiento = 2,
-                            MovimientoDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim(),
-                            MontoMovimiento = tblSuministro.MontoSuministro,
+                            IdMovimientoCaja = Guid.NewGuid(),
+                            IdSubTipoMovimientoCaja = 3,
+                            IdTipoMovimientoCaja = 2,
+                            MovimientoCajaDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim(),
+                            MontoMovimientoCaja = tblSuministro.MontoSuministro,
                             IdUCorporativoCentro = fCentroCorporativo,
-                            IdCaracteristicaMovimiento = 1,
+                            IdCaracteristicaMovimientoCaja= 1,
                             IdTipoRecurso = 1,
                             FechaRegistro = DateTime.Now,
                             IdUsuarioModifico = Guid.Parse(f_user),
@@ -422,15 +421,15 @@ namespace WebAdmin.Controllers
                             IdSuministro = tblSuministro.IdSuministro,
                         };
                         _context.Add(addRelSuministroPago);
-                        var addMovimiento = new TblMovimiento
+                        var addMovimiento = new TblMovimientoCaja
                         {
-                            IdMovimiento = Guid.NewGuid(),
-                            IdSubTipoMovimiento = 3,
-                            IdTipoMovimiento = 2,
-                            MovimientoDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim(),
-                            MontoMovimiento = tblSuministro.MontoSuministro,
+                              IdMovimientoCaja = Guid.NewGuid(),
+                            IdSubTipoMovimientoCaja = 3,
+                            IdTipoMovimientoCaja = 2,
+                            MovimientoCajaDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim(),
+                            MontoMovimientoCaja = tblSuministro.MontoSuministro,
                             IdUCorporativoCentro = fCentroCorporativo,
-                            IdCaracteristicaMovimiento = 1,
+                            IdCaracteristicaMovimientoCaja= 1,
                             IdTipoRecurso = 1,
                             FechaRegistro = DateTime.Now,
                             IdUsuarioModifico = Guid.Parse(f_user),

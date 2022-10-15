@@ -8,26 +8,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public class TblMovimiento
+    public class TblMovimientoCaja
     {
         [Key]
-        public Guid IdMovimiento { get; set; }
-        [Display(Name = "Tipo de Movimiento")]
-        public int IdTipoMovimiento { get; set; }
-        [Display(Name = "SubTipo de Movimiento")]
-        public int IdSubTipoMovimiento { get; set; }
-         [Display(Name = "Caracteristica de Movimiento")]
-        public int IdCaracteristicaMovimiento { get; set; }
-         [Display(Name = "Tipo de Recurso")]
+        public Guid IdMovimientoCaja { get; set; }
+        [Display(Name = "Tipo de Movimiento Caja")]
+        public int IdTipoMovimientoCaja { get; set; }
+        [Display(Name = "SubTipo de Movimiento Caja")]
+        public int IdSubTipoMovimientoCaja { get; set; }
+        [Display(Name = "Caracteristica de Movimiento Caja")]
+        public int IdCaracteristicaMovimientoCaja { get; set; }
+        [Display(Name = "Tipo de Recurso")]
         public int IdTipoRecurso { get; set; }
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
         [NotMapped]
-        public string TipoMovimientoDesc { get; set; }
-         [Display(Name = "Descripción")]
+        public string TipoMovimientoCajaDesc { get; set; }
+        [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
         [NotMapped]
-        public string SubTipoMovimientoDesc { get; set; }
+        public string SubTipoMovimientoCajaDesc { get; set; }
 
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
@@ -35,23 +35,23 @@ namespace WebAdmin.Models
         public string TipoRecursoDesc { get; set; }
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
-         [NotMapped]
-        public string CaracteristicaMovimientoDesc { get; set; }
+        [NotMapped]
+        public string CaracteristicaMovimientoCajaDesc { get; set; }
 
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
 
-        public string MovimientoDesc { get; set; }
+        public string MovimientoCajaDesc { get; set; }
 
-        [Display(Name = "Monto Movimiento")]
-        
-        public double MontoMovimiento { get; set; }
-        [Display(Name = "ID Referencia de Movimiento")]
-        public Guid IdRefereciaMovimiento { get; set; }
+        [Display(Name = "Monto Movimiento Caja")]
 
-        [Display(Name = "Referencia de Movimiento")]
-        
-        public double RefereciaMovimiento { get; set; }
+        public double MontoMovimientoCaja { get; set; }
+        [Display(Name = "ID Referencia de Movimiento Caja")]
+        public Guid IdRefereciaMovimientoCaja { get; set; }
+
+        [Display(Name = "Referencia de Movimiento Caja")]
+
+        public double RefereciaMovimientoCaja { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }

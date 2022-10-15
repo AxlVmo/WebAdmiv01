@@ -1,11 +1,11 @@
-﻿@model WebAdmin.Models.TblMovimiento
+﻿@model WebAdmin.Models.TblMovimientoCaja
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Movimiento</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Movimientos Caja</h4>
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
@@ -13,41 +13,41 @@
             </div>
             <div class="card-body">
                 <form asp-action="Edit">
-                    <input spellcheck="true" type="hidden" asp-for="IdMovimiento" />
+                    <input spellcheck="true" type="hidden" asp-for="IdMovimientoCaja" />
                     <div class="row">
                         <div class="mb-3 col-md-2">
-                            <label for="IdTipoMovimiento" class="form-label" asp-for="IdTipoMovimiento"></label>
+                            <label for="IdTipoMovimientoCaja" class="form-label" asp-for="IdTipoMovimientoCaja"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="bx bx-check-shield"></i></span>
-                                    <select id="lTipoMovimiento" class="form-select" required asp-for="IdTipoMovimiento"
+                                    <select id="lTipoMovimientoCaja" class="form-select" required asp-for="IdTipoMovimientoCaja"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')"
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoMovimiento,"IdTipoMovimiento","TipoMovimientoDesc"))">
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoMovimientoCaja,"IdTipoMovimientoCaja","TipoMovimientoCajaDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                            </div>
                             </div>
                         </div>
                         <div class="mb-3 col-md-4">
-                            <label for="MovimientoDesc" class="form-label" asp-for="MovimientoDesc"></label>
+                            <label for="MovimientoCajaDesc" class="form-label" asp-for="MovimientoCajaDesc"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
-                                    asp-for="MovimientoDesc" />
+                                    asp-for="MovimientoCajaDesc" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
-                            <label for="MontoMovimiento" class="form-label" asp-for="MontoMovimiento"></label>
+                            <label for="MontoMovimientoCaja" class="form-label" asp-for="MontoMovimientoCaja"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id=""
                                     required oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="MontoMovimiento" />
+                                    aria-describedby="2" asp-for="MontoMovimientoCaja" />
                             </div>
                         </div>
                     </div>

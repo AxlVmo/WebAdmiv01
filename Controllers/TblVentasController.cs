@@ -279,29 +279,34 @@ namespace WebAdmin.Controllers
 
                 var pago_venta = oVentaVM.RelVentaPagos.Where(a => a.IdVenta == nVenta).Select(i => Convert.ToDouble(i.CantidadPago)).Sum();
 
-                var addMovimiento = new TblMovimiento
-                    {
-                        IdMovimiento = Guid.NewGuid(),
-                        IdSubTipoMovimiento = 4,
-                        IdTipoMovimiento = 1,
-                        MovimientoDesc = oVenta.FolioVenta,
-                        MontoMovimiento = pago_venta,
-                        IdUCorporativoCentro = fCentroCorporativo,
-                        IdCaracteristicaMovimiento = 2,
-                        IdTipoRecurso = oVentaVM.RelVentaPagos[0].IdTipoPago,
-                        IdRefereciaMovimiento = nVenta,
-                        FechaRegistro = DateTime.Now,
-                        IdUsuarioModifico = Guid.Parse(f_user),
-                        IdCorpCent = fCorpCent,
-                        IdEstatusRegistro = 1
-                    };
-                    _context.Add(addMovimiento);
+                var addMovimiento = new TblMovimientoCaja
+                {
+                    IdMovimientoCaja = Guid.NewGuid(),
+                    IdSubTipoMovimientoCaja = 4,
+                    IdTipoMovimientoCaja = 1,
+                    MovimientoCajaDesc = oVenta.FolioVenta,
+                    MontoMovimientoCaja = pago_venta,
+                    IdUCorporativoCentro = fCentroCorporativo,
+                    IdCaracteristicaMovimientoCaja = 2,
+                    IdTipoRecurso = oVentaVM.RelVentaPagos[0].IdTipoPago,
+                    IdRefereciaMovimientoCaja = nVenta,
+                    FechaRegistro = DateTime.Now,
+                    IdUsuarioModifico = Guid.Parse(f_user),
+                    IdCorpCent = fCorpCent,
+                    IdEstatusRegistro = 1
+                };
+                _context.Add(addMovimiento);
                 _context.SaveChanges();
 
                 respuesta = true;
-                _notyf.Success("Registro creado con éxito", 5);
+                return Json(new { respuesta });
             }
-            return Json(new { respuesta });
+            else
+            {
+                respuesta = false;
+                return Json(new { respuesta });
+            }
+
         }
         // GET: TblVentas/Details/5
         public async Task<IActionResult> Details(Guid? id)
@@ -341,7 +346,7 @@ namespace WebAdmin.Controllers
                                     IdTipoServicio = a.IdTipoServicio,
                                     TipoServicioDesc = a.TipoServicioDesc
                                 };
-        
+
             ViewBag.ListaTipoServicio = fTipoServicio.ToList();
 
             var fTipoPago = from a in _context.CatTipoPagos
