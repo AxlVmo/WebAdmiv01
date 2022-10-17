@@ -1,4 +1,4 @@
-﻿@model WebAdmin.Models.TblSuministro
+﻿@model WebAdmin.ViewModels.SuministrosViewModel
 
 @{
     ViewData["Title"] = "Crear Tipo de Suministro";
@@ -15,14 +15,14 @@
                 <form asp-action="Create">
                     <div class="row">
                         <div class="mb-3 col-md-2">
-                            <label for="IdTipoSuministro" class="form-label" asp-for="IdTipoSuministro"></label>
+                            <label for="IdTipoSuministro" class="form-label" asp-for="@Model.TblSuministros.IdTipoSuministro"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
                                         <i class="bx bx-check-shield">
                                         </i>
                                     </span>
-                                    <select id="lTipoSuministro" class="form-select" required asp-for="IdTipoSuministro"
+                                    <select id="l_tipo_suministro" class="form-select" required asp-for="@Model.TblSuministros.IdTipoSuministro"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')"
                                         asp-items="@(new SelectList(ViewBag.ListaTipoSuministro, "IdTipoSuministro", "TipoSuministroDesc"))">
@@ -31,59 +31,98 @@
                                 </div>
                             </div>
                         </div>
+                    
                         <div class="mb-3 col-md-4">
-                            <label for="SuministroDesc" class="form-label" asp-for="SuministroDesc"></label>
+                            <label class="form-label" asp-for="@Model.TblSuministros.SuministroDesc"></label>
                             <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
-                                </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
-                                    asp-for="SuministroDesc" />
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="bx bx-check-shield">
+                                        </i>
+                                    </span>
+                                    <select id="l_suministro" class="form-select" required asp-for="@Model.TblSuministros.SuministroDesc"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required>
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
-
                         <div class="mb-3 col-md-2">
-                            <label for="NumeroReferencia" class="form-label" asp-for="NumeroReferencia"></label>
+                            <label for="NumeroReferencia" class="form-label" asp-for="@Model.TblSuministros.NumeroReferencia"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                    class="form-control" id="i_numero_referencia" required readonly
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="NumeroReferencia" />
+                                    aria-describedby="2" asp-for="@Model.TblSuministros.NumeroReferencia" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
-                            <label for="DiaFacturacion" class="form-label" asp-for="DiaFacturacion"></label>
+                            <label for="DiaCorte" class="form-label" asp-for="@Model.TblSuministros.DiaCorte"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id=""
-                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                    class="form-control" id="i_dia_corte" required readonly
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="DiaFacturacion" />
+                                    aria-describedby="2" asp-for="@Model.TblSuministros.DiaCorte" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
-                            <label for="MontoSuministro" class="form-label" asp-for="MontoSuministro"></label>
+                            <label for="MontoSuministro" class="form-label">Monto Presupuesto</label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id=""
-                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                    class="form-control" id="i_monto_suministro" required readonly
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="MontoSuministro" />
+                                    aria-describedby="2"  />
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-2">
+                            <label for="MontoSuministro" class="form-label" asp-for="@Model.TblSuministros.MontoSuministro"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="bx bx-check-shield"></i>
+                                </span>
+                                <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                    class="form-control" id="i_monto_suministro" required 
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="@Model.TblSuministros.MontoSuministro" />
+                            </div>
+                        </div>
+                         <div class="mb-3 col-md-2">
+                                <div class="form-group">
+                                    <label class="form-label">TIPO PAGO</label>
+                                    <select id="l_tipo_pago" class="form-select"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoPago, "IdTipoPago", "TipoPagoDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                              <div class="mb-3 col-md-3">
+                                <div class="form-group" id="lCodigoPago" hidden>
+                                    <label class="form-label">CODIGO PAGO</label>
+                                    <input spellcheck="true" id="i_codigo_pago" class="form-control" required />
+                                </div>
+                            </div>
+                    </div>
                     <div class="form-group">
-                        <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
+                        <input spellcheck="true" type="submit" value="Guardar" class="btn btn-success" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>
@@ -96,4 +135,89 @@
 @{
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
+<script>
+ $('#l_suministro').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+     $('#l_tipo_pago').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        if (SelectedValue != 1) {
+            $('#lCodigoPago').removeAttr('hidden');
+            document.getElementById("lCodigoPago").setAttribute("required", true);
+            document.getElementById('v_forma_pago').innerHTML = 'Forma de Pago: ' + SelectedText;
+            document.getElementById('dv_forma_pago').innerHTML = 'Forma de Pago: ' + SelectedText;
+        }
+        else {
+            $('#lCodigoPago').removeAttr('required');
+            document.getElementById("lCodigoPago").setAttribute("hidden", true);
+            document.getElementById('v_forma_pago').innerHTML = 'Forma de Pago: ' + SelectedText;
+            document.getElementById('dv_forma_pago').innerHTML = 'Forma de Pago: ' + SelectedText;
+        }
+    });
+     $('#l_tipo_suministro').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+        $.ajax({
+            type: "GET",
+            url: "/TblSuministroes/FiltroSuministros/",
+            data: { id: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $lista_servicios = $('#l_suministro');
+                $("#l_suministro").empty();
+
+                if (list.length == 0) {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    $lista_servicios.attr('required', false);
+                }
+                else {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $lista_servicios.append('<option value=' + list[i].idPresupuesto + '>' + list[i].presupuestoDesc + '</option>');
+                        $lista_servicios.attr('required', true);
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    });
+     $('#l_suministro').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+        $.ajax({
+            type: "GET",
+            url: "/TblSuministroes/FiltroSuministro/",
+            data: { id: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $lista_servicios = $('#l_suministro');
+
+                if (list.length == 0) {
+                    document.getElementById("i_numero_referencia").value =  null; 
+                         document.getElementById("i_dia_corte").value = null; 
+                         document.getElementById("i_monto_suministro").value = null; 
+                }
+                else {
+                    
+                    for (var i = 0, len = list.length; i < len; i++) {
+                         document.getElementById("i_numero_referencia").value =  list[i].numeroReferencia; 
+                         document.getElementById("i_dia_corte").value = list[i].diaCorte; 
+                         document.getElementById("i_monto_suministro").value = list[i].montoPresupuesto; 
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    });
+    </script>
 }

@@ -22,7 +22,59 @@ namespace WebAdmin.Controllers
             _notyf = notyf;
             _userService = userService;
         }
+        [HttpGet]
+        public ActionResult FiltroSuministros(int id)
+        {
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
 
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+            {
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                var fServicios = from a in _context.TblPresupuestos
+                                 join b in _context.CatTipoSuministros on a.IdTipoSuministro equals b.IdTipoSuministro
+                                 where b.IdTipoSuministro == id && a.IdUCorporativoCentro == f_centro.IdCentro
+                                 select new TblPresupuesto
+                                 {
+                                     IdPresupuesto = a.IdPresupuesto,
+                                     PresupuestoDesc = a.PresupuestoDesc
+   
+                                 };
+                return Json(fServicios);
+            }
+            else
+            {
+                return Json(0);
+
+            }
+
+        }
+         [HttpGet]
+        public ActionResult FiltroSuministro(Guid id)
+        {
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+            {
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                var fServicios = from a in _context.TblPresupuestos
+                                 where a.IdPresupuesto == id
+                                 select new TblPresupuesto
+                                 {
+                                     NumeroReferencia = a.NumeroReferencia,
+                                     DiaCorte = a.DiaCorte,
+                                     MontoPresupuesto = a.MontoPresupuesto
+                                 };
+                return Json(fServicios);
+            }
+            else
+            {
+                return Json(0);
+
+            }
+
+        }
         // GET: TblSuministros
         public async Task<IActionResult> Index()
         {
@@ -54,7 +106,7 @@ namespace WebAdmin.Controllers
                                 int f_dia = DateTime.Now.Day;
                                 int f_mes = DateTime.Now.Day;
                                 var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
-                                    var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+                                var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
 
                                 if (f_caja_centro_efectivo > 0 || f_caja_centro_digital > 0)
                                 {
@@ -105,7 +157,7 @@ namespace WebAdmin.Controllers
                             CentroDesc = a.NombreCorporativo
                         };
             var sCorpCent = fCorp.Union(fCent);
-            ViewBag.ListaCorpCent = sCorpCent.ToList();;
+            ViewBag.ListaCorpCent = sCorpCent.ToList(); ;
 
 
             var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
@@ -121,7 +173,7 @@ namespace WebAdmin.Controllers
                                            IdSuministro = a.IdSuministro,
                                            SuministroDesc = a.SuministroDesc,
                                            NumeroReferencia = a.NumeroReferencia,
-                                           DiaFacturacion = a.DiaFacturacion,
+                                           DiaCorte = a.DiaCorte,
                                            MontoSuministro = a.MontoSuministro,
                                            IdUCorporativoCentro = a.IdUCorporativoCentro,
                                            FechaRegistro = a.FechaRegistro,
@@ -141,7 +193,7 @@ namespace WebAdmin.Controllers
                                   IdSuministro = a.IdSuministro,
                                   SuministroDesc = a.SuministroDesc,
                                   NumeroReferencia = a.NumeroReferencia,
-                                  DiaFacturacion = a.DiaFacturacion,
+                                  DiaCorte = a.DiaCorte,
                                   MontoSuministro = a.MontoSuministro,
                                   IdUCorporativoCentro = a.IdUCorporativoCentro,
                                   FechaRegistro = a.FechaRegistro,
@@ -157,6 +209,7 @@ namespace WebAdmin.Controllers
 
             var f_user = _userService.GetUserId();
             var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+
 
             if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
@@ -205,8 +258,18 @@ namespace WebAdmin.Controllers
                                       IdTipoSuministro = a.IdTipoSuministro,
                                       TipoSuministroDesc = a.TipoSuministroDesc
                                   };
-                                  
+
             ViewBag.ListaTipoSuministro = fTipoSuministro.ToList();
+
+              var fTipoPago = from a in _context.CatTipoPagos
+                            where a.IdEstatusRegistro == 1
+                            select new CatTipoPago
+                            {
+                                IdTipoPago = a.IdTipoPago,
+                                TipoPagoDesc = a.TipoPagoDesc
+                            };
+
+            ViewBag.ListaTipoPago = fTipoPago.ToList();
             return View();
         }
 
@@ -215,7 +278,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,DiaFacturacion,IdPeriodo,MontoSuministro")] TblSuministro tblSuministro)
+        public async Task<IActionResult> Create([Bind("IdSuministro,IdTipoSuministro,SuministroDesc,NumeroReferencia,DiaCorte,IdPeriodo,MontoSuministro")] TblSuministro tblSuministro)
         {
             if (ModelState.IsValid)
             {
@@ -394,7 +457,7 @@ namespace WebAdmin.Controllers
                             MovimientoCajaDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim(),
                             MontoMovimientoCaja = tblSuministro.MontoSuministro,
                             IdUCorporativoCentro = fCentroCorporativo,
-                            IdCaracteristicaMovimientoCaja= 1,
+                            IdCaracteristicaMovimientoCaja = 1,
                             IdTipoRecurso = 1,
                             FechaRegistro = DateTime.Now,
                             IdUsuarioModifico = Guid.Parse(f_user),
@@ -423,13 +486,13 @@ namespace WebAdmin.Controllers
                         _context.Add(addRelSuministroPago);
                         var addMovimiento = new TblMovimientoCaja
                         {
-                              IdMovimientoCaja = Guid.NewGuid(),
+                            IdMovimientoCaja = Guid.NewGuid(),
                             IdSubTipoMovimientoCaja = 3,
                             IdTipoMovimientoCaja = 2,
                             MovimientoCajaDesc = tblSuministro.SuministroDesc.ToString().ToUpper().Trim(),
                             MontoMovimientoCaja = tblSuministro.MontoSuministro,
                             IdUCorporativoCentro = fCentroCorporativo,
-                            IdCaracteristicaMovimientoCaja= 1,
+                            IdCaracteristicaMovimientoCaja = 1,
                             IdTipoRecurso = 1,
                             FechaRegistro = DateTime.Now,
                             IdUsuarioModifico = Guid.Parse(f_user),

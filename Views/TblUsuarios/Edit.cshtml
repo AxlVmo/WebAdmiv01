@@ -394,7 +394,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
             validate('l_tipo_forma_pago')
         }
-        else if (f_usuario_remuneracion == "") {
+        else if (f_usuario_remuneracion == "" || f_usuario_remuneracion == "0") {
 
             validate('i_usuario_remuneracion')
         }
@@ -441,7 +441,7 @@ function validate(inputID) {
                 vNotify.error({ text: 'Fecha de Ingreso, Requerido.', title: 'Intelimundo.' });
                 break;
                 case 'l_tipo_forma_pago':
-                vNotify.error({ text: 'Tipo Contratacion, Requerido.', title: 'Intelimundo.' });
+                vNotify.error({ text: 'Tipo Forma de Pago, Requerido.', title: 'Intelimundo.' });
                 break;
                 case 'i_usuario_remuneracion':
                 vNotify.error({ text: 'Remuneracion, Requerido.', title: 'Intelimundo.' });

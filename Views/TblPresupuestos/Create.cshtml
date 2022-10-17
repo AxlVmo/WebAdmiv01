@@ -12,7 +12,7 @@
             <div class="card-header d-flex align-items-center justify-content-between">
             </div>
             <div class="card-body">
- <form asp-action="Create">
+                <form asp-action="Create">
                     <div class="row">
                         <div class="mb-3 col-md-3">
                             <label for="IdMes" class="form-label" asp-for="IdMes"></label>
@@ -22,7 +22,7 @@
                                         <i class="bx bx-check-shield">
                                         </i>
                                     </span>
-                                    <select  id="lMes" class="form-select" required asp-for="IdMes"
+                                    <select id="lMes" class="form-select" required asp-for="IdMes"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')"
                                         asp-items="@(new SelectList(ViewBag.ListaMes, "IdMes", "MesDesc"))">
@@ -31,9 +31,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        
-                        <div class="mb-3 col-md-3">
+                        <div class="mb-3 col-md-2">
                             <label for="IdTipoPresupuesto" class="form-label" asp-for="IdTipoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
@@ -41,7 +39,8 @@
                                         <i class="bx bx-check-shield">
                                         </i>
                                     </span>
-                                    <select id="lTipoPresupuesto" class="form-select" required asp-for="IdTipoPresupuesto"
+                                    <select id="lTipoPresupuesto" class="form-select" required
+                                        asp-for="IdTipoPresupuesto"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')"
                                         asp-items="@(new SelectList(ViewBag.ListaTipoPresupuesto, "IdTipoPresupuesto", "TipoPresupuestoDesc"))">
@@ -50,29 +49,106 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-4">
+                        <div class="mb-3 col-md-3">
+                            <label for="IdTipoSuministro" class="form-label" asp-for="IdTipoSuministro"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="bx bx-check-shield">
+                                        </i>
+                                    </span>
+                                    <select id="lTipoSuministro" class="form-select" required asp-for="IdTipoSuministro"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoSuministro, "IdTipoSuministro", "TipoSuministroDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-4" id="c_tipo_servicios" hidden>
+                            <label class="form-label">Tipo de Servicio</label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="bx bx-check-shield">
+                                        </i>
+                                    </span>
+                                    <select id="l_tipo_servicios" class="form-select"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoServicio, "IdTipoServicio", "TipoServicioDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label for="DiaCorte" class="form-label" asp-for="DiaCorte"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="bx bx-check-shield"></i>
+                                </span>
+                                <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                    class="form-control" id="iDiaCorte" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="DiaCorte" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6" id="c_servicios" hidden>
+                            <label class="form-label"> Servicios</label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="bx bx-check-shield">
+                                        </i>
+                                    </span>
+                                    <select id="l_servicios" class="form-select" required
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required>
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-4" id="c_presupuesto_desc">
                             <label for="PresupuestoDesc" class="form-label" asp-for="PresupuestoDesc"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                    class="form-control" id="iPresupuestoDesc" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
-                                    asp-for="PresupuestoDesc" />
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="PresupuestoDesc" />
                             </div>
                         </div>
-                       
                         <div class="mb-3 col-md-2">
                             <label for="MontoPresupuesto" class="form-label" asp-for="MontoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id=""
-                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                    class="form-control" id="iMontoPresupuesto" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2" asp-for="MontoPresupuesto" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label for="NumeroReferencia" class="form-label" asp-for="NumeroReferencia"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="bx bx-check-shield"></i>
+                                </span>
+                                <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                    class="form-control" id="iNumeroReferencia" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="NumeroReferencia" />
                             </div>
                         </div>
                     </div>
@@ -81,10 +157,115 @@
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>
-           </div>
+            </div>
         </div>
     </div>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+
+    $('#lTipoPresupuesto').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        if (SelectedValue == 0 || SelectedValue == '' || SelectedValue == 1) {
+            document.getElementById("c_tipo_servicios").setAttribute("hidden", true);
+            document.getElementById("c_servicios").setAttribute("hidden", true);
+
+            $('#c_presupuesto_desc').removeAttr('hidden');
+            $('#iDiaCorte').removeAttr('readonly');
+            $('#iNumeroReferencia').removeAttr('readonly');
+            $('#iPresupuestoDesc').removeAttr('readonly');
+            document.getElementById("iDiaCorte").value = null;
+
+
+        }
+
+        else if (SelectedValue == 2) {
+            $('#c_tipo_servicios').removeAttr('hidden');
+            $('#c_servicios').removeAttr('hidden');
+            document.getElementById("iDiaCorte").value = 0;
+            document.getElementById("iDiaCorte").setAttribute("readonly", true);
+            document.getElementById("iNumeroReferencia").setAttribute("readonly", true);
+            document.getElementById("iPresupuestoDesc").setAttribute("readonly", true);
+
+
+        }
+
+    });
+    $('#l_servicios').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_tipo_servicios').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+        $.ajax({
+            type: "GET",
+            url: "/TblServicios/FiltroServicios/",
+            data: { id: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $lista_servicios = $('#l_servicios');
+                $("#l_servicios").empty();
+
+                if (list.length == 0) {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    $lista_servicios.attr('required', false);
+                }
+                else {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $lista_servicios.append('<option value=' + list[i].idServicio + '>' + list[i].descServicio + '</option>');
+                        $lista_servicios.attr('required', true);
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    });
+    $('#l_tipo_servicios').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_servicios').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        $.ajax({
+            type: "GET",
+            url: "/TblServicios/fFiltroServicio/",
+            data: { idA: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                    document.getElementById("iMontoPresupuesto").value = null;
+                }
+                else {
+                    var rowCount = $('#tbProducto >tbody >tr').length;
+                    if (rowCount == 0) {
+                        for (var i = 0, len = list.length; i < len; i++) {
+                            var f_tipo_servicio = list[i].tipoServicioDesc;
+                            var f_servicio = list[i].descServicio;
+                            var f_precio = list[i].totalPrecioServicio;
+
+                            document.getElementById("iPresupuestoDesc").value = f_tipo_servicio + ',' + f_servicio;
+                            document.getElementById("iMontoPresupuesto").value = f_precio;
+                        }
+                    }
+                    else {
+                        vNotify.info({ text: 'Limitado a 1 Servicio por Venta.', title: 'Intelimundo.' });
+                    }
+                }
+            },
+        });
+    });
+</script>
 }

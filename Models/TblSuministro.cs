@@ -33,9 +33,9 @@ namespace WebAdmin.Models
         
         public string NumeroReferencia { get; set; }
 
-        [Display(Name = "Dia de Facturacion")]
+        [Display(Name = "Dia de Corte")]
         
-        public int DiaFacturacion { get; set; }
+        public int DiaCorte { get; set; }
         [Display(Name = "Periodo de Facturacion")]
         
         public int IdPeriodo { get; set; }

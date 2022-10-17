@@ -53,23 +53,7 @@ namespace WebAdmin.Controllers
                             if (ValidaTipoPresupuesto.Count >= 1)
                             {
                                 ViewBag.TipoPresupuestoFlag = 1;
-                                if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
-                                {
-                                    var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
-                                    int f_dia = DateTime.Now.Day;
-                                    int f_mes = DateTime.Now.Day;
-                                    var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
-                                    var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
-
-                                    if (f_caja_centro_efectivo > 0 || f_caja_centro_digital > 0)
-                                    {
-                                        ViewBag.PresupuestoFlag = 1;
-                                    }
-                                    else
-                                    {
-                                        _notyf.Information("Caja sin Fondos", 5);
-                                    }
-                                }
+                               
                             }
                             else
                             {
@@ -225,6 +209,25 @@ namespace WebAdmin.Controllers
                        };
 
             ViewBag.ListaMes = fMes.ToList();
+            var fTipoSuministro = from a in _context.CatTipoSuministros
+                                  where a.IdEstatusRegistro == 1
+                                  select new CatTipoSuministro
+                                  {
+                                      IdTipoSuministro = a.IdTipoSuministro,
+                                      TipoSuministroDesc = a.TipoSuministroDesc
+                                  };
+                                  
+            ViewBag.ListaTipoSuministro = fTipoSuministro.ToList();
+
+             var fTipoServicio = from a in _context.CatTipoServicios
+                                where a.IdEstatusRegistro == 1
+                                select new CatTipoServicio
+                                {
+                                    IdTipoServicio = a.IdTipoServicio,
+                                    TipoServicioDesc = a.TipoServicioDesc
+                                };
+
+            ViewBag.ListaTipoServicio = fTipoServicio.ToList();
             return View();
         }
 
@@ -233,7 +236,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdPresupuesto,IdTipoPresupuesto,IdMes,PresupuestoDesc,NumeroReferencia,DiaFacturacion,IdPeriodo,MontoPresupuesto")] TblPresupuesto tblPresupuesto)
+        public async Task<IActionResult> Create([Bind("IdPresupuesto,IdTipoPresupuesto,IdMes,IdTipoSuministro,PresupuestoDesc,NumeroReferencia,DiaCorte,MontoPresupuesto")] TblPresupuesto tblPresupuesto)
         {
             if (ModelState.IsValid)
             {
@@ -292,16 +295,43 @@ namespace WebAdmin.Controllers
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaCatEstatus = ListaCatEstatus;
 
-            var fTipoPresupuesto = from a in _context.CatTipoPresupuestos
+             var fTipoPresupuesto = from a in _context.CatTipoPresupuestos
                                    where a.IdEstatusRegistro == 1
                                    select new CatTipoPresupuesto
                                    {
                                        IdTipoPresupuesto = a.IdTipoPresupuesto,
                                        TipoPresupuestoDesc = a.TipoPresupuestoDesc
                                    };
-            TempData["fTS"] = fTipoPresupuesto.ToList();
-            ViewBag.ListaTipoPresupuesto = TempData["fTS"];
 
+            ViewBag.ListaTipoPresupuesto = fTipoPresupuesto.ToList();
+            var fMes = from a in _context.CatMeses
+                       where a.IdEstatusRegistro == 1
+                       select new CatMes
+                       {
+                           IdMes = a.IdMes,
+                           MesDesc = a.MesDesc
+                       };
+
+            ViewBag.ListaMes = fMes.ToList();
+            var fTipoSuministro = from a in _context.CatTipoSuministros
+                                  where a.IdEstatusRegistro == 1
+                                  select new CatTipoSuministro
+                                  {
+                                      IdTipoSuministro = a.IdTipoSuministro,
+                                      TipoSuministroDesc = a.TipoSuministroDesc
+                                  };
+                                  
+            ViewBag.ListaTipoSuministro = fTipoSuministro.ToList();
+
+             var fTipoServicio = from a in _context.CatTipoServicios
+                                where a.IdEstatusRegistro == 1
+                                select new CatTipoServicio
+                                {
+                                    IdTipoServicio = a.IdTipoServicio,
+                                    TipoServicioDesc = a.TipoServicioDesc
+                                };
+
+            ViewBag.ListaTipoServicio = fTipoServicio.ToList();
             if (id == null)
             {
                 return NotFound();
