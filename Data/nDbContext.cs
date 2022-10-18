@@ -75,6 +75,8 @@ namespace WebAdmin.Data
         public DbSet<CatTipoPresupuesto> CatTipoPresupuestos { get; set; }
         public DbSet<TblPresupuesto> TblPresupuestos { get; set; }
 
+        public DbSet<TblProveedorCompra> TblProveedorCompras { get; set; }
+
         public DbSet<CatMes> CatMeses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

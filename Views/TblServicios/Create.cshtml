@@ -6,62 +6,69 @@
 }
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Servicio</h4>
-    <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
             <div class="card-header d-flex align-items-center justify-content-between">
             </div>
             <div class="card-body">
-<form asp-action="Create">
-    <div class="row">
-        <div class="mb-3 col-md-4">
+                <form asp-action="Create">
+                    <div class="row">
+                        <div class="mb-3 col-md-4">
                             <label for="IdTipoServicio" class="form-label" asp-for="IdTipoServicio"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="bx bx-check-shield"></i></span>
-                                    <select id="IdTipoServicio" class="form-select" required asp-for="IdTipoServicio" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
+                                    <select id="IdTipoServicio" class="form-select" required asp-for="IdTipoServicio"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')"
                                         asp-items="@(new SelectList(ViewBag.ListaTipoServicio,"IdTipoServicio","TipoServicioDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                          <div class="mb-3 col-md-4">
+                        <div class="mb-3 col-md-4">
                             <label for="DescServicio" class="form-label" asp-for="DescServicio"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required  oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
-                                     aria-label="John Doe" aria-describedby="2"
+                                <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                    class="form-control" id="" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
                                     asp-for="DescServicio" />
                             </div>
                         </div>
-                          
-                        
-                         <div class="mb-3 col-md-2">
+
+
+                        <div class="mb-3 col-md-2">
                             <label for="ServicioPrecioUno" class="form-label" asp-for="ServicioPrecioUno"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id="" required oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
-                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                    asp-for="ServicioPrecioUno" />
+                                <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                    class="form-control" id="" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="ServicioPrecioUno" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
                             <label for="Periodo" class="form-label" asp-for="Periodo"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id="" required  oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')"
-                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                    asp-for="Periodo" />
+                                <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                    class="form-control" id="" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="Periodo" />
                             </div>
                         </div>
                     </div>
-   <div class="form-group">
-                                <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
-                                <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                            </div>
-</form>
+                    <div class="form-group">
+                        <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-﻿@model WebAdmin.ViewModels.SuministrosViewModel
+﻿@model WebAdmin.Models.TblSuministro
 
 @{
     ViewData["Title"] = "Crear Tipo de Suministro";
@@ -13,16 +13,17 @@
             </div>
             <div class="card-body">
                 <form asp-action="Create">
+                    <input spellcheck="true" type="hidden" id="iSuministroDesc" asp-for="SuministroDesc" />
                     <div class="row">
                         <div class="mb-3 col-md-2">
-                            <label for="IdTipoSuministro" class="form-label" asp-for="@Model.TblSuministros.IdTipoSuministro"></label>
+                            <label for="IdTipoSuministro" class="form-label" asp-for="IdTipoSuministro"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
                                         <i class="bx bx-check-shield">
                                         </i>
                                     </span>
-                                    <select id="l_tipo_suministro" class="form-select" required asp-for="@Model.TblSuministros.IdTipoSuministro"
+                                    <select id="l_tipo_suministro" class="form-select" required asp-for="IdTipoSuministro"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')"
                                         asp-items="@(new SelectList(ViewBag.ListaTipoSuministro, "IdTipoSuministro", "TipoSuministroDesc"))">
@@ -31,16 +32,15 @@
                                 </div>
                             </div>
                         </div>
-                    
                         <div class="mb-3 col-md-4">
-                            <label class="form-label" asp-for="@Model.TblSuministros.SuministroDesc"></label>
+                            <label class="form-label" ></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
                                         <i class="bx bx-check-shield">
                                         </i>
                                     </span>
-                                    <select id="l_suministro" class="form-select" required asp-for="@Model.TblSuministros.SuministroDesc"
+                                    <select id="l_suministro" class="form-select" required
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" required>
                                         <option value="">SELECCIONAR</option>
@@ -48,9 +48,8 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="mb-3 col-md-2">
-                            <label for="NumeroReferencia" class="form-label" asp-for="@Model.TblSuministros.NumeroReferencia"></label>
+                            <label for="NumeroReferencia" class="form-label" asp-for="NumeroReferencia"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
@@ -59,11 +58,11 @@
                                     class="form-control" id="i_numero_referencia" required readonly
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="@Model.TblSuministros.NumeroReferencia" />
+                                    aria-describedby="2" asp-for="NumeroReferencia" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
-                            <label for="DiaCorte" class="form-label" asp-for="@Model.TblSuministros.DiaCorte"></label>
+                            <label for="DiaCorte" class="form-label" asp-for="DiaCorte"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
@@ -72,7 +71,7 @@
                                     class="form-control" id="i_dia_corte" required readonly
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="@Model.TblSuministros.DiaCorte" />
+                                    aria-describedby="2" asp-for="DiaCorte" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
@@ -91,7 +90,7 @@
                     </div>
                     <div class="row">
                         <div class="mb-3 col-md-2">
-                            <label for="MontoSuministro" class="form-label" asp-for="@Model.TblSuministros.MontoSuministro"></label>
+                            <label for="MontoSuministro" class="form-label" asp-for="MontoSuministro"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
@@ -100,7 +99,7 @@
                                     class="form-control" id="i_monto_suministro" required 
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="@Model.TblSuministros.MontoSuministro" />
+                                    aria-describedby="2" asp-for="MontoSuministro" />
                             </div>
                         </div>
                          <div class="mb-3 col-md-2">
@@ -191,6 +190,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
      $('#l_suministro').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
+        var n_numeroReferencia = null;
         $.ajax({
             type: "GET",
             url: "/TblSuministroes/FiltroSuministro/",
@@ -208,9 +208,20 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 else {
                     
                     for (var i = 0, len = list.length; i < len; i++) {
-                         document.getElementById("i_numero_referencia").value =  list[i].numeroReferencia; 
+
+                        if(list[i].numeroReferencia == null)
+                        {
+                            n_numeroReferencia = 'N/A';
+                        }
+                        else
+                        {
+                            n_numeroReferencia = list[i].numeroReferencia;
+                        }
+                         document.getElementById("i_numero_referencia").value =  n_numeroReferencia; 
                          document.getElementById("i_dia_corte").value = list[i].diaCorte; 
                          document.getElementById("i_monto_suministro").value = list[i].montoPresupuesto; 
+                         document.getElementById("iSuministroDesc").value = list[i].presupuestoDesc; 
+                         
                     }
                 }
             },

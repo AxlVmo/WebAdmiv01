@@ -14,6 +14,23 @@
             <div class="card-body">
                 <form asp-action="Create">
                     <div class="row">
+                          <div class="mb-3 col-md-2">
+                            <label  class="form-label" asp-for="TblCompras.IdProveedorCompra"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="bx bx-check-shield">
+                                        </i>
+                                    </span>
+                                    <select id="l_proveedor_compra" class="form-select" required asp-for="TblCompras.IdProveedorCompra"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')"
+                                        asp-items="@(new SelectList(ViewBag.ListaProveedorCompra, "IdProveedorCompra", "NombreProveedorCompra"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-3 col-md-3">
                             <label class="form-label" asp-for="TblCompras.IdTipoCompra"></label>
                             <div class="input-group input-group-merge">
@@ -38,7 +55,8 @@
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                    class="form-control" id="" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
                                     asp-for="TblCompras.CompraDesc" />
@@ -50,7 +68,8 @@
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                    class="form-control" id="" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2" asp-for="TblCompras.FolioCompra" />
@@ -62,42 +81,45 @@
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="date" class="form-control" id=""
-                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                <input spellcheck="true" style="text-transform:uppercase" type="date"
+                                    class="form-control" id="" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2" asp-for="TblCompras.FechaCompra" />
                             </div>
                         </div>
-                       
+
                     </div>
                     <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="control-label"
-                                            asp-for="@Model.RelCompraProductos[0].Cantidad"></label>
-                                        <input spellcheck="true" type="number" id="i_pago_monto" class="form-control" value="0"
-                                            asp-for="@Model.RelCompraProductos[0].Cantidad" required />
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="form-group">
-                                        <label class="control-label" asp-for="@Model.RelCompraProductos[0].ProdServDesc"></label>
-                                        <input spellcheck="true" type="text" id="i_pago_diferencia" class="form-control"  asp-for="@Model.RelCompraProductos[0].ProdServDesc"
-                                             />
-                                    </div>
-                                </div>
- <div class="mb-3 col-md-3">
-                <label  class="form-label" asp-for="@Model.RelCompraProductos[0].Precio"></label>
-                <div class="input-group input-group-merge">
-                  <span id="2" class="input-group-text"><i class="fa-solid fa-map-location-dot"></i></span>
-                  <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id="iCodigoPostal"
-                     aria-label="John Doe" aria-describedby="2" asp-for="@Model.RelCompraProductos[0].Precio" required oninvalid="this.setCustomValidity('Campo Requerido')"
-                    onchange="this.setCustomValidity('')"/>
-                  <button class="btn btn-outline-primary" type="button" id="btnCP">Agregar</button>
-                </div>
-              </div>
-                                
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label" asp-for="@Model.RelCompraProductos[0].Cantidad"></label>
+                                <input spellcheck="true" type="number" id="i_pago_monto" class="form-control" value="0"
+                                    asp-for="@Model.RelCompraProductos[0].Cantidad" required />
                             </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label class="control-label"
+                                    asp-for="@Model.RelCompraProductos[0].ProdServDesc"></label>
+                                <input spellcheck="true" type="text" id="i_pago_diferencia" class="form-control"
+                                    asp-for="@Model.RelCompraProductos[0].ProdServDesc" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="@Model.RelCompraProductos[0].Precio"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i
+                                        class="fa-solid fa-map-location-dot"></i></span>
+                                <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                    class="form-control" id="iCodigoPostal" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="@Model.RelCompraProductos[0].Precio" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" />
+                                <button class="btn btn-outline-primary" type="button" id="btnCP">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <!-- accepted payments column -->
                         <div class="col-6">
@@ -113,41 +135,35 @@
                                         </select>
                                     </div>
                                 </div>
-                               <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group" id="lCodigoPago" hidden>
-                                        <label class="control-label">CODIGO PAGO</label>
-                                        <input spellcheck="true" id="i_codigo_pago" class="form-control" required />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group" id="lCodigoPago" hidden>
+                                            <label class="control-label">CODIGO PAGO</label>
+                                            <input spellcheck="true" id="i_codigo_pago" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-
-                                </div>
-                            </div>
                             </div>
                             <br />
-                            
-                            
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">PAGO</label>
-                                        <input spellcheck="true" type="number" id="i_pago_monto" class="form-control" value="0"
-                                            required />
+                                        <input spellcheck="true" type="number" id="i_pago_monto" class="form-control" value="0" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">DIFERENCIA</label>
-                                        <input spellcheck="true" type="number" id="i_pago_diferencia" class="form-control" value="0"
-                                            readonly />
+                                        <input spellcheck="true" type="number" id="i_pago_diferencia"
+                                            class="form-control" value="0" readonly />
                                     </div>
                                 </div>
-
-
                             </div>
                             <br />
-
                         </div>
                         <!-- /.col -->
                         <div class="col-6">

@@ -106,6 +106,8 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
+                catTipoSuministro.TipoSuministroDesc = catTipoSuministro.TipoSuministroDesc.ToString().ToUpper().Trim();
+
                 var vDuplicado = _context.CatTipoSuministros
                .Where(s => s.TipoSuministroDesc == catTipoSuministro.TipoSuministroDesc)
                .ToList();
@@ -124,7 +126,7 @@ namespace WebAdmin.Controllers
                 }
                 else
                 {
-                    _notyf.Warning("Favor de validar, existe una TipoSuministro con el mismo nombre", 5);
+                    _notyf.Warning("Favor de validar, existe una Tipo de Suministro con el mismo nombre", 5);
                 }
                 return RedirectToAction(nameof(Index));
             }

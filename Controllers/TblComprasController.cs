@@ -214,6 +214,34 @@ namespace WebAdmin.Controllers
             ViewBag.ListaTipoPago = fTipoPago.ToList();
             
             ViewBag.ListaTipoCompra = fTipoCompra.ToList();
+
+            var f_user = _userService.GetUserId();
+            var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+            if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+            {
+                var fIdCentroCent = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                var fProveedorCompra = from a in _context.TblProveedorCompras
+                                  where a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentroCent.IdCentro
+                                  select new TblProveedorCompra
+                                  {
+                                      IdProveedorCompra = a.IdProveedorCompra,
+                                      NombreProveedorCompra = a.NombreProveedorCompra
+                                  };
+
+            ViewBag.ListaProveedorCompra = fProveedorCompra.ToList();
+            }
+            else
+            {
+               var fProveedorCompra = from a in _context.TblProveedorCompras
+                                  where a.IdEstatusRegistro == 1 
+                                  select new TblProveedorCompra
+                                  {
+                                      IdProveedorCompra = a.IdProveedorCompra,
+                                      NombreProveedorCompra = a.NombreProveedorCompra
+                                  };
+
+            ViewBag.ListaProveedorCompra = fProveedorCompra.ToList();
+            }
             return View();
         }
 
