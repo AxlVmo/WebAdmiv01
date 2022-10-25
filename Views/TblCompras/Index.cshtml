@@ -32,70 +32,71 @@
             </div>
         </h5>
         <div class="table-responsive text-nowrap">
-             <div class="container">
-<table class="table" id="tblCompras">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoCompraDesc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreUsuarioCompra)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCompra)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FolioCompra)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompraDesc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoCompraDesc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreUsuarioCompra)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCompra)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FolioCompra)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompraDesc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdEstatusRegistro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCompra">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCompra">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCompra">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <div class="container">
+                <table class="table" id="tblCompras">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TipoCompraDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NombreUsuarioCompra)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaCompra)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FolioCompra)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CompraDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaRegistro)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoCompraDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NombreUsuarioCompra)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaCompra)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FolioCompra)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompraDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaRegistro)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdEstatusRegistro)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Total)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.IdCompra">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.IdCompra">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.IdCompra">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -174,11 +175,13 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             }
         );
 
-        var vEstatusFlag = '@ViewBag.EstatusFlag'
-        var vEmpresaFlag = '@ViewBag.EmpresaFlag'
-        var CorporativoFlag = '@ViewBag.CorporativoFlag'
-        var vTipoCompraFlag = '@ViewBag.TipoCompraFlag'
-           var vPresupuestoFlag = '@ViewBag.PresupuestoFlag'
+        var vEstatusFlag = '@ViewBag.EstatusFlag';
+        var vEmpresaFlag = '@ViewBag.EmpresaFlag';
+        var vCorporativoFlag = '@ViewBag.CorporativoFlag';
+        var vTipoCompraFlag = '@ViewBag.TipoCompraFlag';
+        var vCentrosFlag = '@ViewBag.CentrosFlag';
+        var vUsuariosFlag = '@ViewBag.UsuariosFlag';
+        var vProveedorComprasFlag = '@ViewBag.ProveedorComprasFlag';
 
         if (vEstatusFlag == 0) {
             document.getElementById("iNuevo").style.visibility = "hidden";
@@ -188,7 +191,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 document.getElementById("iNuevo").style.visibility = "hidden";
             }
             else {
-                if (CorporativoFlag == 0) {
+                if (vCorporativoFlag == 0) {
                     document.getElementById("iNuevo").style.visibility = "hidden";
                 }
                 else {
@@ -196,12 +199,22 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         document.getElementById("iNuevo").style.visibility = "hidden";
                     }
                     else {
-                         if (vPresupuestoFlag == 0) {
+                        if (vTipoCompraFlag == 0) {
+                            document.getElementById("iNuevo").style.visibility = "hidden";
+                        }
+                        else {
+                            if (vCentrosFlag == 0) {
                                 document.getElementById("iNuevo").style.visibility = "hidden";
                             }
                             else {
-                                $('#iNuevo').removeAttr('hidden');
+                                if (vProveedorComprasFlag == 0) {
+                                    document.getElementById("iNuevo").style.visibility = "hidden";
+                                }
+                                else {
+                                    $('#iNuevo').removeAttr('hidden');
+                                }
                             }
+                        }
                     }
                 }
             }

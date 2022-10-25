@@ -162,7 +162,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProveedorCompra,NombreProveedorCompra,Rfc,GiroComercial,IdCorpCent,IdUsuarioModifico,IdUCorporativoCentro,FechaRegistro,IdEstatusRegistro")] TblProveedorCompra tblProveedorCompra)
+        public async Task<IActionResult> Create([Bind("IdProveedorCompra,NombreProveedorCompra,Rfc,GiroComercial")] TblProveedorCompra tblProveedorCompra)
         {
             if (ModelState.IsValid)
             {
@@ -190,9 +190,9 @@ namespace WebAdmin.Controllers
                 tblProveedorCompra.IdCorpCent = fCorpCent;
                 tblProveedorCompra.IdUCorporativoCentro = fCentroCorporativo;
                 tblProveedorCompra.IdUsuarioModifico = Guid.Parse(f_user);
-                tblProveedorCompra.GiroComercial = tblProveedorCompra.GiroComercial.ToString().ToUpper().Trim();
-                tblProveedorCompra.Rfc = tblProveedorCompra.Rfc.ToString().ToUpper().Trim();
-                tblProveedorCompra.NombreProveedorCompra = tblProveedorCompra.NombreProveedorCompra.ToString().ToUpper().Trim();
+                tblProveedorCompra.GiroComercial = !string.IsNullOrEmpty(tblProveedorCompra.GiroComercial) ? tblProveedorCompra.GiroComercial.ToString().ToUpper().Trim() : tblProveedorCompra.GiroComercial; 
+                tblProveedorCompra.Rfc = !string.IsNullOrEmpty(tblProveedorCompra.Rfc) ? tblProveedorCompra.Rfc.ToString().ToUpper().Trim() : tblProveedorCompra.Rfc; 
+                tblProveedorCompra.NombreProveedorCompra =!string.IsNullOrEmpty(tblProveedorCompra.NombreProveedorCompra) ? tblProveedorCompra.NombreProveedorCompra.ToString().ToUpper().Trim() : tblProveedorCompra.NombreProveedorCompra; 
                 tblProveedorCompra.FechaRegistro = DateTime.Now;
                 tblProveedorCompra.IdEstatusRegistro = 1;
                 _context.Add(tblProveedorCompra);
@@ -227,7 +227,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdProveedorCompra,NombreProveedor,Rfc,GiroComercial,IdCorpCent,IdUsuarioModifico,IdUCorporativoCentro,FechaRegistro,IdEstatusRegistro")] TblProveedorCompra tblProveedorCompra)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdProveedorCompra,NombreProveedor,Rfc,GiroComercial,IdEstatusRegistro")] TblProveedorCompra tblProveedorCompra)
         {
             if (id != tblProveedorCompra.IdProveedorCompra)
             {

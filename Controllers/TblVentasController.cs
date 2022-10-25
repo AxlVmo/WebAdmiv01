@@ -27,7 +27,6 @@ namespace WebAdmin.Controllers
             _context = context;
             _notyf = notyf;
             _userService = userService;
-
         }
 
         // GET: TblVentas
@@ -223,6 +222,7 @@ namespace WebAdmin.Controllers
             }
         }
         [HttpPost]
+        // [ValidateAntiForgeryToken]
         public IActionResult Index([FromBody] VentasViewModel oVentaVM)
         {
             var f_user = _userService.GetUserId();

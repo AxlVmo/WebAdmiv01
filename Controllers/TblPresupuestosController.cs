@@ -209,15 +209,15 @@ namespace WebAdmin.Controllers
                        };
 
             ViewBag.ListaMes = fMes.ToList();
-            var fTipoSuministro = from a in _context.CatTipoSuministros
+            var fSubTipoPresupuesto = from a in _context.CatSubTipoPresupuestos
                                   where a.IdEstatusRegistro == 1
-                                  select new CatTipoSuministro
+                                  select new CatSubTipoPresupuesto
                                   {
-                                      IdTipoSuministro = a.IdTipoSuministro,
-                                      TipoSuministroDesc = a.TipoSuministroDesc
+                                      IdSubTipoPresupuesto = a.IdSubTipoPresupuesto,
+                                      SubTipoPresupuestoDesc = a.SubTipoPresupuestoDesc
                                   };
                                   
-            ViewBag.ListaTipoSuministro = fTipoSuministro.ToList();
+            ViewBag.ListaSubTipoPresupuesto = fSubTipoPresupuesto.ToList();
 
              var fTipoServicio = from a in _context.CatTipoServicios
                                 where a.IdEstatusRegistro == 1
@@ -236,7 +236,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdPresupuesto,IdTipoPresupuesto,IdMes,IdTipoSuministro,PresupuestoDesc,NumeroReferencia,DiaCorte,MontoPresupuesto")] TblPresupuesto tblPresupuesto)
+        public async Task<IActionResult> Create([Bind("IdPresupuesto,IdTipoPresupuesto,IdMes,IdSubTipoPresupuesto,PresupuestoDesc,NumeroReferencia,DiaCorte,MontoPresupuesto")] TblPresupuesto tblPresupuesto)
         {
             if (ModelState.IsValid)
             {
@@ -313,15 +313,15 @@ namespace WebAdmin.Controllers
                        };
 
             ViewBag.ListaMes = fMes.ToList();
-            var fTipoSuministro = from a in _context.CatTipoSuministros
+            var fSubTipoPresupuesto = from a in _context.CatSubTipoPresupuestos
                                   where a.IdEstatusRegistro == 1
-                                  select new CatTipoSuministro
+                                  select new CatSubTipoPresupuesto
                                   {
-                                      IdTipoSuministro = a.IdTipoSuministro,
-                                      TipoSuministroDesc = a.TipoSuministroDesc
+                                      IdSubTipoPresupuesto = a.IdSubTipoPresupuesto,
+                                      SubTipoPresupuestoDesc = a.SubTipoPresupuestoDesc
                                   };
                                   
-            ViewBag.ListaTipoSuministro = fTipoSuministro.ToList();
+            ViewBag.ListaSubTipoPresupuesto = fSubTipoPresupuesto.ToList();
 
              var fTipoServicio = from a in _context.CatTipoServicios
                                 where a.IdEstatusRegistro == 1
@@ -389,7 +389,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdPresupuesto,IdTipoPresupuesto,PresupuestoDesc,NumeroReferencia,DiaFacturacion,IdPeriodo,MontoPresupuesto,IdTipoPago,IdEstatusRegistro")] TblPresupuesto tblPresupuesto)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdPresupuesto,IdTipoPresupuesto,IdMes,IdSubTipoPresupuesto,PresupuestoDesc,NumeroReferencia,DiaCorte,MontoPresupuesto,IdEstatusRegistro")] TblPresupuesto tblPresupuesto)
         {
             if (ModelState.IsValid)
             {

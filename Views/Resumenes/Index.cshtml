@@ -23,7 +23,7 @@
     </h5>
     <div class="card-body">
       <div class="row">
-          <div class="col-sm-3">
+        <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
               Movimientos por Dia
@@ -38,6 +38,21 @@
             </div>
           </div>
         </div>
+         <div class="col-sm-3">
+          <div class="card">
+            <h5 class="card-header">
+              Acumulado de Movimientos 
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title" id="i_caja_centro_efectivo_mes"></h5>
+              <h5 class="card-title" id="i_caja_centro_digital_mes"></h5>
+              <h5 class="card-text" id="i_entradas_centro_efectivo_mes"></h5>
+              <h5 class="card-text" id="i_entradas_centro_digital_mes"></h5>
+              <h5 class="card-text" id="i_salidas_centro_efectivo_mes"></h5>
+              <h5 class="card-text" id="i_salidas_centro_digital_mes"></h5>
+            </div>
+          </div>
+        </div>
         <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
@@ -49,7 +64,20 @@
             </div>
           </div>
         </div>
-       
+        <div class="col-sm-3">
+          <div class="card">
+            <h5 class="card-header">
+              Variacion de Presupuesto
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title" id="i_presupuesto_prospectado"></h5>
+              <h5 class="card-text" id="i_presupuesto_real"></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
         <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
@@ -63,7 +91,7 @@
             </div>
           </div>
         </div>
-         <div class="col-sm-3">
+        <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
               Ventas
@@ -74,11 +102,7 @@
             </div>
           </div>
         </div>
-     
-      </div>
-      <br/>
-      <div class="row">
-                <div class="col-sm-3">
+        <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
               Bancos
@@ -100,7 +124,7 @@
             </div>
           </div>
         </div>
-        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -115,7 +139,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
     DatosGastos();
     DatosMovimientos();
     DatosVentas();
- 
+
   });
   function DatosPresupuesto() {
     $.ajax({
@@ -126,18 +150,18 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
       dataType: "json",
       success: function (list) {
 
-       if (list.length == 0) {
+        if (list.length == 0) {
           document.getElementById("i_presupuesto_preventivo").value = null;
           document.getElementById("i_presupuesto_minimo").value = null;
         }
         else {
 
           for (var i = 0, len = list.length; i < len; i++) {
-            
+
             var presupuesto_minimo = list[i].fMontos;
             var presupuesto_preventivo = list[i].fMontos * 3;
-            document.getElementById("i_presupuesto_minimo").innerText = 'Minimo: ' + presupuesto_minimo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-            document.getElementById("i_presupuesto_preventivo").innerText = 'Preventivo: ' + presupuesto_preventivo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+            document.getElementById("i_presupuesto_minimo").innerText = 'Minimo: ' + presupuesto_minimo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            document.getElementById("i_presupuesto_preventivo").innerText = 'Preventivo: ' + presupuesto_preventivo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
           }
 
         }
@@ -145,14 +169,14 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
       error: function () {
         var v_fMontosPresupuesto = 0;
         document.getElementById('i_presupuesto_preventivo').innerText = 'Preventivo: ' + v_fMontosPresupuesto;
-        document.getElementById("i_presupuesto_minimo").innerText = 'Minimo: ' + v_fMontosPresupuesto.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+        document.getElementById("i_presupuesto_minimo").innerText = 'Minimo: ' + v_fMontosPresupuesto.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
       }
     });
 
     return false;
   }
   function DatosGastos() {
-     $.ajax({
+    $.ajax({
       type: "GET",
       url: "/TblSuministroes/DatosSuministros/",
       data: {},
@@ -160,28 +184,28 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
       dataType: "json",
       success: function (list) {
 
-      if (list.length == 0) {
-      document.getElementById("i_gasto_fijo").value = null;
-      document.getElementById("i_registros_gasto_fijo").value = null;
-      }
-      else {
+        if (list.length == 0) {
+          document.getElementById("i_gasto_fijo").value = null;
+          document.getElementById("i_registros_gasto_fijo").value = null;
+        }
+        else {
 
-      for (var i = 0, len = list.length; i < len; i++) {     
-      var v_gasto_fijo = list[i].fMontos;
-      var v_registros_gasto_fijo = list[i].fRegistros;
-      document.getElementById("i_gasto_fijo").innerText = 'Fijo: ' + v_gasto_fijo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-      document.getElementById('i_registros_gasto_fijo').innerText = 'Acumulado: ' + v_registros_gasto_fijo;
-      }
+          for (var i = 0, len = list.length; i < len; i++) {
+            var v_gasto_fijo = list[i].fMontos;
+            var v_registros_gasto_fijo = list[i].fRegistros;
+            document.getElementById("i_gasto_fijo").innerText = 'Fijo: ' + v_gasto_fijo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            document.getElementById('i_registros_gasto_fijo').innerText = 'Acumulado: ' + v_registros_gasto_fijo;
+          }
 
-      }
+        }
       },
       error: function () {
-      var v_fMontosSuministros = 0;
-      document.getElementById("i_gasto_fijo").innerText = 'Fijo: ' + v_fMontosSuministros.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-      document.getElementById('i_registros_gasto_fijo').innerText = 'Acumulado: ' + v_fMontosSuministros;
+        var v_fMontosSuministros = 0;
+        document.getElementById("i_gasto_fijo").innerText = 'Fijo: ' + v_fMontosSuministros.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+        document.getElementById('i_registros_gasto_fijo').innerText = 'Acumulado: ' + v_fMontosSuministros;
       }
     });
-    
+
     return false;
   }
   function DatosUsuarios() {
@@ -238,9 +262,9 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
       },
       error: function () {
-      var v_fMontosNominas = 0;
+        var v_fMontosNominas = 0;
         document.getElementById('i_fRegistrosNominas').innerText = 'Total: ' + v_fMontosNominas;
-        document.getElementById("i_fMontosNominas").innerText = 'Monto: ' + v_fMontosNominas.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+        document.getElementById("i_fMontosNominas").innerText = 'Monto: ' + v_fMontosNominas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
       }
     });
   }
@@ -257,22 +281,22 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
           document.getElementById("i_fRegistrosPrestamos").value = null;
           document.getElementById("i_fMontosPrestamos").value = null;
           var v_fMontosPrestamos = 0;
-        document.getElementById('i_fRegistrosPrestamos').innerText = 'Total: ' + v_fMontosPrestamos;
-        document.getElementById("i_fMontosPrestamos").innerText = 'Monto: ' + v_fMontosPrestamos.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+          document.getElementById('i_fRegistrosPrestamos').innerText = 'Total: ' + v_fMontosPrestamos;
+          document.getElementById("i_fMontosPrestamos").innerText = 'Monto: ' + v_fMontosPrestamos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
         }
         else {
 
           for (var i = 0, len = list.length; i < len; i++) {
             document.getElementById('i_fRegistrosPrestamos').innerText = 'Total: ' + list[i].fRegistros;
-            document.getElementById("i_fMontosPrestamos").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+            document.getElementById("i_fMontosPrestamos").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
           }
 
         }
       },
       error: function () {
-      var v_fMontosPrestamos = 0;
+        var v_fMontosPrestamos = 0;
         document.getElementById('i_fRegistrosPrestamos').innerText = 'Total: ' + v_fMontosPrestamos;
-        document.getElementById("i_fMontosPrestamos").innerText = 'Monto: ' + v_fMontosPrestamos.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+        document.getElementById("i_fMontosPrestamos").innerText = 'Monto: ' + v_fMontosPrestamos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
       }
     });
 
@@ -295,15 +319,15 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
           for (var i = 0, len = list.length; i < len; i++) {
             document.getElementById('i_fRegistrosSuministros').innerText = 'Total: ' + list[i].fRegistros;
-            document.getElementById("i_fMontosSuministros").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+            document.getElementById("i_fMontosSuministros").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
           }
 
         }
       },
       error: function () {
-      var v_fMontosSuministros = 0;
+        var v_fMontosSuministros = 0;
         document.getElementById('i_fRegistrosSuministros').innerText = 'Total: ' + v_fMontosSuministros;
-        document.getElementById("i_fMontosSuministros").innerText = 'Monto: ' + v_fMontosSuministros.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+        document.getElementById("i_fMontosSuministros").innerText = 'Monto: ' + v_fMontosSuministros.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
       }
     });
 
@@ -358,25 +382,25 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         else {
 
           for (var i = 0, len = list.length; i < len; i++) {
-             document.getElementById("i_caja_centro_efectivo").innerText = 'Caja Efectivo: ' + list[i].v_caja_centro_efectivo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          document.getElementById("i_caja_centro_digital").innerText = 'Caja Digital: ' + list[i].v_caja_centro_digital.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          document.getElementById("i_entradas_centro_efectivo").innerText = 'Ingresos Efectivo: ' + list[i].v_entradas_centro_efectivo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          document.getElementById("i_entradas_centro_digital").innerText = 'Ingresos Digital: ' + list[i].v_entradas_centro_digital.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          document.getElementById("i_salidas_centro_efectivo").innerText = 'Egresos Efectivo: ' + list[i].v_salidas_centro_efectivo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          document.getElementById("i_salidas_centro_digital").innerText = 'Egresos Digital: ' + list[i].v_salidas_centro_digital.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+            document.getElementById("i_caja_centro_efectivo").innerText = 'Caja Efectivo: ' + list[i].v_caja_centro_efectivo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            document.getElementById("i_caja_centro_digital").innerText = 'Caja Digital: ' + list[i].v_caja_centro_digital.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            document.getElementById("i_entradas_centro_efectivo").innerText = 'Ingresos Efectivo: ' + list[i].v_entradas_centro_efectivo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            document.getElementById("i_entradas_centro_digital").innerText = 'Ingresos Digital: ' + list[i].v_entradas_centro_digital.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            document.getElementById("i_salidas_centro_efectivo").innerText = 'Egresos Efectivo: ' + list[i].v_salidas_centro_efectivo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            document.getElementById("i_salidas_centro_digital").innerText = 'Egresos Digital: ' + list[i].v_salidas_centro_digital.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
 
           }
 
         }
       },
       error: function () {
-      var v_fMontosVentas = 0;
-           document.getElementById("i_caja_centro_efectivo").innerText = 'Caja Efectivo: ' + v_fMontosVentas.v_caja_centro_efectivo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          document.getElementById("i_caja_centro_digital").innerText = 'Caja Digital: ' + v_fMontosVentas.v_caja_centro_digital.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          document.getElementById("i_entradas_centro_efectivo").innerText = 'Ingresos Efectivo: ' + v_fMontosVentas.v_entradas_centro_efectivo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          document.getElementById("i_entradas_centro_digital").innerText = 'Ingresos Digital: ' + v_fMontosVentas.v_entradas_centro_digital.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          document.getElementById("i_salidas_centro_efectivo").innerText = 'Egresos Efectivo: ' + v_fMontosVentas.v_salidas_centro_efectivo.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
-          document.getElementById("i_salidas_centro_digital").innerText = 'Egresos Digital: ' + v_fMontosVentas.v_salidas_centro_digital.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+        var v_fMontosVentas = 0;
+        document.getElementById("i_caja_centro_efectivo").innerText = 'Caja Efectivo: ' + v_fMontosVentas.v_caja_centro_efectivo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+        document.getElementById("i_caja_centro_digital").innerText = 'Caja Digital: ' + v_fMontosVentas.v_caja_centro_digital.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+        document.getElementById("i_entradas_centro_efectivo").innerText = 'Ingresos Efectivo: ' + v_fMontosVentas.v_entradas_centro_efectivo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+        document.getElementById("i_entradas_centro_digital").innerText = 'Ingresos Digital: ' + v_fMontosVentas.v_entradas_centro_digital.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+        document.getElementById("i_salidas_centro_efectivo").innerText = 'Egresos Efectivo: ' + v_fMontosVentas.v_salidas_centro_efectivo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+        document.getElementById("i_salidas_centro_digital").innerText = 'Egresos Digital: ' + v_fMontosVentas.v_salidas_centro_digital.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
       }
     });
 
@@ -399,15 +423,15 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
           for (var i = 0, len = list.length; i < len; i++) {
             document.getElementById('i_fRegistrosBancos').innerText = 'Total: ' + list[i].fRegistros;
-            document.getElementById("i_fMontosBancos").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+            document.getElementById("i_fMontosBancos").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
           }
 
         }
       },
       error: function () {
-      var v_fMontosBancos = 0;
+        var v_fMontosBancos = 0;
         document.getElementById('i_fRegistrosBancos').innerText = 'Total: ' + v_fMontosBancos;
-        document.getElementById("i_fMontosBancos").innerText = 'Monto: ' + v_fMontosBancos.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+        document.getElementById("i_fMontosBancos").innerText = 'Monto: ' + v_fMontosBancos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
       }
     });
 
@@ -430,21 +454,21 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
           for (var i = 0, len = list.length; i < len; i++) {
             document.getElementById('i_fRegistrosInversiones').innerText = 'Total: ' + list[i].fRegistros;
-            document.getElementById("i_fMontosInversiones").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+            document.getElementById("i_fMontosInversiones").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
           }
 
         }
       },
       error: function () {
-      var v_fMontosInversiones = 0;
+        var v_fMontosInversiones = 0;
         document.getElementById('i_fRegistrosInversiones').innerText = 'Total: ' + v_fMontosInversiones;
-        document.getElementById("i_fMontosInversiones").innerText = 'Monto: ' + v_fMontosInversiones.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+        document.getElementById("i_fMontosInversiones").innerText = 'Monto: ' + v_fMontosInversiones.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
       }
     });
 
     return false;
   }
-    function DatosVentas() {
+  function DatosVentas() {
     $.ajax({
       type: "GET",
       url: "/TblVentas/DatosVentas/",
@@ -461,15 +485,15 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
           for (var i = 0, len = list.length; i < len; i++) {
             document.getElementById('i_fRegistrosVentas').innerText = 'Total: ' + list[i].fRegistros;
-            document.getElementById("i_fMontosVentas").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+            document.getElementById("i_fMontosVentas").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
           }
 
         }
       },
       error: function () {
-      var v_fMontosVentas = 0;
+        var v_fMontosVentas = 0;
         document.getElementById('i_fRegistrosVentas').innerText = 'Total: ' + v_fMontosVentas;
-        document.getElementById("i_fMontosVentas").innerText = 'Monto: ' + v_fMontosVentas.toLocaleString('en-US', {style: 'currency',currency: 'USD',});
+        document.getElementById("i_fMontosVentas").innerText = 'Monto: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
       }
     });
 

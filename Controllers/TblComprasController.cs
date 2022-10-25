@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
+using WebAdmin.ViewModels;
 
 namespace WebAdmin.Controllers
 {
@@ -29,7 +30,7 @@ namespace WebAdmin.Controllers
         // GET: TblCompras
         public async Task<IActionResult> Index()
         {
-              var f_user = _userService.GetUserId();
+            var f_user = _userService.GetUserId();
             var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
             var ValidaEstatus = _context.CatEstatus.ToList();
 
@@ -51,47 +52,43 @@ namespace WebAdmin.Controllers
                         if (ValidaTipoCompra.Count >= 1)
                         {
                             ViewBag.TipoCompraFlag = 1;
-                             var ValidaCentro = _context.TblCentros.ToList();
+                            var ValidaCentro = _context.TblCentros.ToList();
 
-                        if (ValidaCentro.Count >= 1)
-                        {
-                            ViewBag.CentrosFlag = 1;
-                            var ValidaUsuarios = _context.TblUsuarios.ToList();
-
-                            if (ValidaUsuarios.Count >= 1)
+                            if (ValidaCentro.Count >= 1)
                             {
-                                ViewBag.UsuariosFlag = 1;
+                                ViewBag.CentrosFlag = 1;
+                                var ValidaUsuarios = _context.TblUsuarios.ToList();
 
-                                if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+                                if (ValidaUsuarios.Count >= 1)
                                 {
-                                   var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
-                                int f_dia = DateTime.Now.Day;
-                                int f_mes = DateTime.Now.Day;
-                                var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
-                                var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+                                    ViewBag.UsuariosFlag = 1;
+                                    if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+                                    {
+                                        var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                                        var ValidaProveedorCompras = _context.TblProveedorCompras.ToLookup(f => f.IdUCorporativoCentro == f_centro.IdCentro);
 
-                                if (f_caja_centro_efectivo > 0 || f_caja_centro_digital > 0)
-                                {
-                                    ViewBag.PresupuestoFlag = 1;
+                                        if (ValidaProveedorCompras.Count >= 1)
+                                        {
+                                            ViewBag.ProveedorComprasFlag = 1;
+                                        }
+                                        else
+                                        {
+                                            ViewBag.ProveedorComprasFlag = 0;
+                                            _notyf.Information("Favor de registrar proveedores de compras para la Aplicación", 5);
+                                        }
+                                    }
                                 }
                                 else
                                 {
-                                    _notyf.Information("Caja sin Fondos", 5);
+                                    ViewBag.UsuariosFlag = 0;
+                                    _notyf.Information("Favor de registrar los datos de Usuarios para la Aplicación", 5);
                                 }
-                                }
-
                             }
                             else
                             {
-                                ViewBag.UsuariosFlag = 0;
-                                _notyf.Information("Favor de registrar los datos de Usuarios para la Aplicación", 5);
+                                ViewBag.CentrosFlag = 0;
+                                _notyf.Information("Favor de registrar los datos de Centros para la Aplicación", 5);
                             }
-                        }
-                        else
-                        {
-                            ViewBag.CentrosFlag = 0;
-                            _notyf.Information("Favor de registrar los datos de Centros para la Aplicación", 5);
-                        }
                         }
                         else
                         {
@@ -141,34 +138,34 @@ namespace WebAdmin.Controllers
             if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
                 var fCompraCntro = from a in _context.TblCompras
-                                       join b in _context.CatTipoCompras on a.IdTipoCompra equals b.IdTipoCompra
-                                       where a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdCorpCent == 2
-                                       select new TblCompra
-                                       {
-                                           TipoCompraDesc = b.TipoCompraDesc,
-                                           IdCompra = a.IdCompra,
-                                           CompraDesc = a.CompraDesc,
-                                           IdUCorporativoCentro = a.IdUCorporativoCentro,
-                                           FechaRegistro = a.FechaRegistro,
-                                           IdEstatusRegistro = a.IdEstatusRegistro
-                                       };
+                                   join b in _context.CatTipoCompras on a.IdTipoCompra equals b.IdTipoCompra
+                                   where a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdCorpCent == 2
+                                   select new TblCompra
+                                   {
+                                       TipoCompraDesc = b.TipoCompraDesc,
+                                       IdCompra = a.IdCompra,
+                                       CompraDesc = a.CompraDesc,
+                                       IdUCorporativoCentro = a.IdUCorporativoCentro,
+                                       FechaRegistro = a.FechaRegistro,
+                                       IdEstatusRegistro = a.IdEstatusRegistro
+                                   };
                 return View(await fCompraCntro.ToListAsync());
             }
 
 
             var fCompra = from a in _context.TblCompras
-                              join b in _context.CatTipoCompras on a.IdTipoCompra equals b.IdTipoCompra
+                          join b in _context.CatTipoCompras on a.IdTipoCompra equals b.IdTipoCompra
 
-                              select new TblCompra
-                              {
+                          select new TblCompra
+                          {
 
-                                  TipoCompraDesc = b.TipoCompraDesc,
-                                  IdCompra = a.IdCompra,
-                                  CompraDesc = a.CompraDesc,
-                                  IdUCorporativoCentro = a.IdUCorporativoCentro,
-                                  FechaRegistro = a.FechaRegistro,
-                                  IdEstatusRegistro = a.IdEstatusRegistro
-                              };
+                              TipoCompraDesc = b.TipoCompraDesc,
+                              IdCompra = a.IdCompra,
+                              CompraDesc = a.CompraDesc,
+                              IdUCorporativoCentro = a.IdUCorporativoCentro,
+                              FechaRegistro = a.FechaRegistro,
+                              IdEstatusRegistro = a.IdEstatusRegistro
+                          };
 
 
             return View(await fCompra.ToListAsync());
@@ -191,19 +188,101 @@ namespace WebAdmin.Controllers
 
             return View(tblCompra);
         }
+        [HttpPost]
+        // [ValidateAntiForgeryToken]
+        public IActionResult Index([FromBody] ComprasViewModel oCompraVM)
+        {
+            var f_user = _userService.GetUserId();
+            Guid fCentroCorporativo = Guid.Empty;
+            int fCorpCent = 0;
+            var isLoggedIn = _userService.IsAuthenticated();
+            var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+            var fCorp = _context.TblCorporativos.First();
+            fCentroCorporativo = fCorp.IdCorporativo;
+            fCorpCent = 1;
+            if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+            {
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                fCentroCorporativo = f_centro.IdCentro;
+                fCorpCent = 2;
+            }
+            var nCompra = Guid.NewGuid();
+            bool respuesta = false;
 
+            if (oCompraVM != null)
+            {
+                foreach (var itemP in oCompraVM.RelCompraProductos)
+                {
+                    //item.IdRelCompraProducto = Guid.NewGuid();
+                    itemP.Cantidad = 1;
+                    itemP.IdUsuarioModifico = Guid.Parse(f_user);
+                    itemP.FechaRegistro = DateTime.Now;
+                    itemP.IdEstatusRegistro = 1;
+                    itemP.IdCompra = nCompra;
+                    _context.RelCompraProductos.Add(itemP);
+                }
+                foreach (var item in oCompraVM.RelCompraPagos)
+                {
+                    //item.IdRelVentaProducto = Guid.NewGuid();
+                    item.IdUsuarioModifico = Guid.Parse(f_user);
+                    item.FechaRegistro = DateTime.Now;
+                    item.IdEstatusRegistro = 1;
+                    item.IdCompra = nCompra;
+                    _context.RelCompraPagos.Add(item);
+                }
+                TblCompra oCompra = oCompraVM.TblCompras;
+
+                oCompra.IdCorpCent = fCorpCent;
+                oCompra.IdUCorporativoCentro = fCentroCorporativo;
+                oCompra.IdUsuarioModifico = Guid.Parse(f_user);
+                oCompra.IdCompra = nCompra;
+                oCompra.FechaRegistro = DateTime.Now;
+                oCompra.IdEstatusRegistro = 1;
+                _context.TblCompras.Add(oCompra);
+
+                var pago_Compra = oCompraVM.RelCompraPagos.Where(a => a.IdCompra == nCompra).Select(i => Convert.ToDouble(i.CantidadPago)).Sum();
+
+                var addMovimiento = new TblMovimientoCaja
+                {
+                    IdMovimientoCaja = Guid.NewGuid(),
+                    IdSubTipoMovimientoCaja = 4,
+                    IdTipoMovimientoCaja = 1,
+                    MovimientoCajaDesc = oCompra.FolioCompra.ToString(),
+                    MontoMovimientoCaja = pago_Compra,
+                    IdUCorporativoCentro = fCentroCorporativo,
+                    IdCaracteristicaMovimientoCaja = 2,
+                    IdTipoRecurso = oCompraVM.RelCompraPagos[0].IdTipoPago,
+                    IdRefereciaMovimientoCaja = nCompra,
+                    FechaRegistro = DateTime.Now,
+                    IdUsuarioModifico = Guid.Parse(f_user),
+                    IdCorpCent = fCorpCent,
+                    IdEstatusRegistro = 1
+                };
+                _context.Add(addMovimiento);
+                _context.SaveChanges();
+
+                respuesta = true;
+                return Json(new { respuesta });
+            }
+            else
+            {
+                respuesta = false;
+                return Json(new { respuesta });
+            }
+
+        }
         // GET: TblCompras/Create
         public IActionResult Create()
         {
             var fTipoCompra = from a in _context.CatTipoCompras
-                                  where a.IdEstatusRegistro == 1
-                                  select new CatTipoCompra
-                                  {
-                                      IdTipoCompra = a.IdTipoCompra,
-                                      TipoCompraDesc = a.TipoCompraDesc
-                                  };
+                              where a.IdEstatusRegistro == 1
+                              select new CatTipoCompra
+                              {
+                                  IdTipoCompra = a.IdTipoCompra,
+                                  TipoCompraDesc = a.TipoCompraDesc
+                              };
 
-             var fTipoPago = from a in _context.CatTipoPagos
+            var fTipoPago = from a in _context.CatTipoPagos
                             where a.IdEstatusRegistro == 1
                             select new CatTipoPago
                             {
@@ -212,7 +291,7 @@ namespace WebAdmin.Controllers
                             };
 
             ViewBag.ListaTipoPago = fTipoPago.ToList();
-            
+
             ViewBag.ListaTipoCompra = fTipoCompra.ToList();
 
             var f_user = _userService.GetUserId();
@@ -221,26 +300,26 @@ namespace WebAdmin.Controllers
             {
                 var fIdCentroCent = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
                 var fProveedorCompra = from a in _context.TblProveedorCompras
-                                  where a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentroCent.IdCentro
-                                  select new TblProveedorCompra
-                                  {
-                                      IdProveedorCompra = a.IdProveedorCompra,
-                                      NombreProveedorCompra = a.NombreProveedorCompra
-                                  };
+                                       where a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentroCent.IdCentro
+                                       select new TblProveedorCompra
+                                       {
+                                           IdProveedorCompra = a.IdProveedorCompra,
+                                           NombreProveedorCompra = a.NombreProveedorCompra
+                                       };
 
-            ViewBag.ListaProveedorCompra = fProveedorCompra.ToList();
+                ViewBag.ListaProveedorCompra = fProveedorCompra.ToList();
             }
             else
             {
-               var fProveedorCompra = from a in _context.TblProveedorCompras
-                                  where a.IdEstatusRegistro == 1 
-                                  select new TblProveedorCompra
-                                  {
-                                      IdProveedorCompra = a.IdProveedorCompra,
-                                      NombreProveedorCompra = a.NombreProveedorCompra
-                                  };
+                var fProveedorCompra = from a in _context.TblProveedorCompras
+                                       where a.IdEstatusRegistro == 1
+                                       select new TblProveedorCompra
+                                       {
+                                           IdProveedorCompra = a.IdProveedorCompra,
+                                           NombreProveedorCompra = a.NombreProveedorCompra
+                                       };
 
-            ViewBag.ListaProveedorCompra = fProveedorCompra.ToList();
+                ViewBag.ListaProveedorCompra = fProveedorCompra.ToList();
             }
             return View();
         }
@@ -250,6 +329,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create([Bind("IdCompra,NumeroCompra,IdUsuarioCompra,IdCentro,IdCliente,IdTipoPago,CodigoPago,FechaAlterna,IdCorpCent,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro,Total")] TblCompra tblCompra)
         {
             if (ModelState.IsValid)

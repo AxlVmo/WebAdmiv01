@@ -1,32 +1,30 @@
-﻿@model WebAdmin.Models.TblSuministro
+﻿@model WebAdmin.Models.TblPresupuestoMovimiento
 
 @{
-    ViewData["Title"] = "Crear Tipo de Suministro";
+    ViewData["Title"] = "Crear Tipo de PresupuestoMovimientos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Suministro</h4>
-    <!-- Basic with Icons -->
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> PresupuestoMovimientos</h4>
     <div class="col-xxl">
         <div class="card mb-8">
-            <div class="card-header d-flex align-items-center justify-content-between">
-            </div>
+            
             <div class="card-body">
                 <form asp-action="Create">
-                    <input spellcheck="true" type="hidden" id="iSuministroDesc" asp-for="SuministroDesc" />
+                    <input spellcheck="true" type="hidden" id="iPresupuestoMovimientosDesc" asp-for="IdPresupuestoMovimiento" />
                     <div class="row">
                         <div class="mb-3 col-md-2">
-                            <label for="IdTipoSuministro" class="form-label" asp-for="IdTipoSuministro"></label>
+                            <label for="IdTipoPresupuesto" class="form-label" asp-for="IdTipoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
                                         <i class="bx bx-check-shield">
                                         </i>
                                     </span>
-                                    <select id="l_tipo_suministro" class="form-select" required asp-for="IdTipoSuministro"
+                                    <select id="l_tipo_PresupuestoMovimientos" class="form-select" required asp-for="IdTipoPresupuesto"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')"
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoSuministro, "IdTipoSuministro", "TipoSuministroDesc"))">
+                                        asp-items="@(new SelectList(ViewBag.ListaSubTipoPresupuesto, "IdTipoPresupuesto", "TipoPresupuestoDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
@@ -40,7 +38,7 @@
                                         <i class="bx bx-check-shield">
                                         </i>
                                     </span>
-                                    <select id="l_suministro" class="form-select" required
+                                    <select id="l_PresupuestoMovimientos" class="form-select" required
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
                                         onchange="this.setCustomValidity('')" required>
                                         <option value="">SELECCIONAR</option>
@@ -75,13 +73,13 @@
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
-                            <label for="MontoSuministro" class="form-label">Monto Presupuesto</label>
+                            <label for="MontoPresupuestoMovimientos" class="form-label">Monto Presupuesto</label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="number"
-                                    class="form-control" id="i_monto_suministro" required readonly
+                                    class="form-control" id="i_monto_PresupuestoMovimientos" required readonly
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2"  />
@@ -90,16 +88,16 @@
                     </div>
                     <div class="row">
                         <div class="mb-3 col-md-2">
-                            <label for="MontoSuministro" class="form-label" asp-for="MontoSuministro"></label>
+                            <label for="MontoPresupuestoMovimientos" class="form-label" asp-for="MontoPresupuestoMovimiento"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
                                     <i class="bx bx-check-shield"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="number"
-                                    class="form-control" id="i_monto_suministro" required 
+                                    class="form-control" id="i_monto_PresupuestoMovimientos" required 
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="MontoSuministro" />
+                                    aria-describedby="2" asp-for="MontoPresupuestoMovimiento" />
                             </div>
                         </div>
                          <div class="mb-3 col-md-2">
@@ -135,7 +133,7 @@
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script>
- $('#l_suministro').select2({
+ $('#l_PresupuestoMovimientos').select2({
         theme: "bootstrap-5",
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
         placeholder: $(this).data('placeholder'),
@@ -157,18 +155,18 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             document.getElementById('dv_forma_pago').innerHTML = 'Forma de Pago: ' + SelectedText;
         }
     });
-     $('#l_tipo_suministro').change(function () {
+     $('#l_tipo_PresupuestoMovimientos').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
         $.ajax({
             type: "GET",
-            url: "/TblSuministroes/FiltroSuministros/",
+            url: "/TblPresupuestoMovimientoses/FiltroPresupuestoMovimientoss/",
             data: { id: SelectedValue },
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (list) {
-                var $lista_servicios = $('#l_suministro');
-                $("#l_suministro").empty();
+                var $lista_servicios = $('#l_PresupuestoMovimientos');
+                $("#l_PresupuestoMovimientos").empty();
 
                 if (list.length == 0) {
                     $lista_servicios.append('<option value="">SELECCIONAR</option>');
@@ -187,23 +185,23 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             }
         });
     });
-     $('#l_suministro').change(function () {
+     $('#l_PresupuestoMovimientos').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
         var n_numeroReferencia = null;
         $.ajax({
             type: "GET",
-            url: "/TblSuministroes/FiltroSuministro/",
+            url: "/TblPresupuestoMovimientoses/FiltroPresupuestoMovimientos/",
             data: { id: SelectedValue },
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (list) {
-                var $lista_servicios = $('#l_suministro');
+                var $lista_servicios = $('#l_PresupuestoMovimientos');
 
                 if (list.length == 0) {
                     document.getElementById("i_numero_referencia").value =  null; 
                          document.getElementById("i_dia_corte").value = null; 
-                         document.getElementById("i_monto_suministro").value = null; 
+                         document.getElementById("i_monto_PresupuestoMovimientos").value = null; 
                 }
                 else {
                     
@@ -219,8 +217,8 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         }
                          document.getElementById("i_numero_referencia").value =  n_numeroReferencia; 
                          document.getElementById("i_dia_corte").value = list[i].diaCorte; 
-                         document.getElementById("i_monto_suministro").value = list[i].montoPresupuesto; 
-                         document.getElementById("iSuministroDesc").value = list[i].presupuestoDesc; 
+                         document.getElementById("i_monto_PresupuestoMovimientos").value = list[i].montoPresupuesto; 
+                         document.getElementById("iPresupuestoMovimientosDesc").value = list[i].presupuestoDesc; 
                          
                     }
                 }

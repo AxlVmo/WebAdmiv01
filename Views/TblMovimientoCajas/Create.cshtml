@@ -1,7 +1,7 @@
 ﻿@model WebAdmin.Models.TblMovimientoCaja
 
 @{
-    ViewData["Title"] = "Crear Tipo de MovimientoCaja";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -9,8 +9,7 @@
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
-            <div class="card-header d-flex align-items-center justify-content-between">
-            </div>
+            
             <div class="card-body">
                 <form asp-action="Create">
                     <div class="row">
@@ -85,7 +84,5 @@
 </div>
 
 @section Scripts {
-@{
-await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

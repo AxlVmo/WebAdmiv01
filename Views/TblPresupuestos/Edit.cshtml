@@ -9,8 +9,7 @@
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
-            <div class="card-header d-flex align-items-center justify-content-between">
-            </div>
+            
             <div class="card-body">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -52,17 +51,16 @@
                             </div>
                         </div>
                         <div class="mb-3 col-md-3">
-                            <label for="IdTipoSuministro" class="form-label" asp-for="IdTipoSuministro"></label>
+                            <label for="IdSubTipoPresupuesto" class="form-label" asp-for="IdSubTipoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
                                         <i class="bx bx-check-shield">
                                         </i>
                                     </span>
-                                    <select id="lTipoSuministro" class="form-select" required asp-for="IdTipoSuministro"
+                                    <select id="lSubTipoPresupuesto" class="form-select" required asp-for="IdSubTipoPresupuesto"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')"
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoSuministro, "IdTipoSuministro", "TipoSuministroDesc"))">
+                                        onchange="this.setCustomValidity('')">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>

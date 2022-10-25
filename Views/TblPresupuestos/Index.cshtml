@@ -31,112 +31,109 @@
                 </div>
             </div>
         </h5>
-        <div class="table-responsive text-nowrap">
-            <div class="container">
-                <table class="table" id="tblPresupuestos">
-                    <thead>
+        <div class="container">
+            <table class="table" id="tblPresupuestos">
+                <thead>
+                    <tr>
+                        <th style="text-align:center" hidden>
+                            @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MesDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TipoPresupuestoDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PresupuestoDesc)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.MontoPresupuesto)
+                        </th>
+
+                        <th style="text-align:center">
+                            @Html.DisplayNameFor(model => model.FechaRegistro)
+                        </th>
+                        <th style="text-align:center">
+                            @Html.DisplayNameFor(model => model.IdEstatusRegistro)
+                        </th>
+                        <th style="text-align:center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
                             <th style="text-align:center" hidden>
                                 @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.MesDesc)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TipoPresupuestoDesc)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PresupuestoDesc)
-                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MesDesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TipoPresupuestoDesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PresupuestoDesc)
+                            </td>
 
-                            <th>
-                                @Html.DisplayNameFor(model => model.MontoPresupuesto)
-                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MontoPresupuesto)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.FechaRegistro)
+                            </td>
+                            <td style="text-align:center">
+                                @if (item.IdEstatusRegistro == 1)
+                                {
+                                    <i class="fas fa-check-circle" style="font-size: 1em; color: green;"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-stop-circle" style="font-size: 1em; color: red;"></i>
+                                }
+                            </td>
+                            <td style="text-align:center">
 
-                            <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.FechaRegistro)
-                            </th>
-                            <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
-                            </th>
-                            <th style="text-align:center">Acciones</th>
+                                <a asp-action="Edit" asp-route-id="@item.IdPresupuesto" class="btn btn-outline-secondary"
+                                title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
+                                <a asp-action="Details" asp-route-id="@item.IdPresupuesto" class="btn btn-outline-secondary"
+                                title="Detalles"><i class="far fa-list-alt"
+                                    style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.IdPresupuesto" class="btn btn-outline-secondary"
+                                title="Desactivar"><i class="far fa-stop-circle"
+                                    style="font-size: 1em; color: #FF9333;"></i></a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <th style="text-align:center" hidden>
-                                    @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
-                                </th>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MesDesc)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TipoPresupuestoDesc)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PresupuestoDesc)
-                                </td>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th style="text-align:center" hidden>
+                            @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MesDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TipoPresupuestoDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PresupuestoDesc)
+                        </th>
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MontoPresupuesto)
-                                </td>
-                                <td style="text-align:center">
-                                    @Html.DisplayFor(modelItem => item.FechaRegistro)
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.IdEstatusRegistro == 1)
-                                    {
-                                        <i class="fas fa-check-circle" style="font-size: 1em; color: green;"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fas fa-stop-circle" style="font-size: 1em; color: red;"></i>
-                                    }
-                                </td>
-                                <td style="text-align:center">
-
-                                    <a asp-action="Edit" asp-route-id="@item.IdPresupuesto"
-                                    class="btn btn-outline-secondary" title="Editar"><i class="far fa-edit"
-                                        style="font-size: 1em; color: #FFC300;"></i></a>
-                                    <a asp-action="Details" asp-route-id="@item.IdPresupuesto"
-                                    class="btn btn-outline-secondary" title="Detalles"><i class="far fa-list-alt"
-                                        style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                                    <a asp-action="Delete" asp-route-id="@item.IdPresupuesto"
-                                    class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle"
-                                        style="font-size: 1em; color: #FF9333;"></i></a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th style="text-align:center" hidden>
-                                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.MesDesc)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TipoPresupuestoDesc)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PresupuestoDesc)
-                            </th>
-
-                            <th>
-                                @Html.DisplayNameFor(model => model.MontoPresupuesto)
-                            </th>
-                            <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.FechaRegistro)
-                            </th>
-
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MontoPresupuesto)
+                        </th>
+                        <th style="text-align:center">
+                            @Html.DisplayNameFor(model => model.FechaRegistro)
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
+
     </div>
 </div>
 @section Scripts {

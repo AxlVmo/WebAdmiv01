@@ -1,86 +1,80 @@
-﻿@model WebAdmin.Models.TblSuministro
+﻿@model WebAdmin.Models.TblPresupuestoMovimiento
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Suministro</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Presupuesto</h4>
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
-            <div class="card-header d-flex align-items-center justify-content-between">
-            </div>
+            
             <div class="card-body">
                 <form asp-action="Edit">
-                    <input spellcheck="true" type="hidden" asp-for="IdSuministro" />
+                    <input spellcheck="true" type="hidden" asp-for="IdPresupuestoMovimiento" />
                     <div class="row">
                         <div class="mb-3 col-md-2">
-                            <label  class="form-label"
-                                asp-for="IdTipoSuministro"></label>
+                            <label for="IdTipoPresupuesto" class="form-label" asp-for="IdTipoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                             class="bx bx-check-shield"></i></span>
-                                    <select readonly="true" id="lTipoSuministro" class="form-select" required
-                                        asp-for="IdTipoSuministro"
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoSuministro,"IdTipoSuministro","TipoSuministroDesc"))">
+                                    <select id="lTipoPresupuesto" class="form-select" required asp-for="IdTipoPresupuesto"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoPresupuesto,"IdTipoPresupuesto","TipoPresupuestoDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
-                                </div>
+                           </div>
                             </div>
                         </div>
                         <div class="mb-3 col-md-4">
-                            <label  class="form-label"
-                                asp-for="SuministroDesc"></label>
+                            <label  class="form-label" asp-for="PresupuestoMovimientoDesc"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input spellcheck="true" readonly="true" style="text-transform:uppercase" type="text" class="form-control"
-                                    id="" required aria-label="John Doe" aria-describedby="2"
-                                    asp-for="SuministroDesc" />
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="PresupuestoMovimientoDesc" />
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3 col-md-2">
+                            <label for="NumeroReferencia" class="form-label" asp-for="NumeroReferencia"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
+                                    oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="NumeroReferencia" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
-                            <label  class="form-label" asp-for="NumeroReferencia"></label>
+                            <label for="DiaCorte" class="form-label" asp-for="DiaCorte"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input spellcheck="true" readonly="true" style="text-transform:uppercase" type="text" class="form-control"
-                                    id="" required placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
-                                    asp-for="NumeroReferencia" />
-                            </div>
-                        </div>
-                        <div class="mb-3 col-md-2">
-                            <label  class="form-label" asp-for="DiaCorte"></label>
-                            <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input spellcheck="true" readonly="true" style="text-transform:uppercase" type="number"
-                                    class="form-control" id="" placeholder="Requerido" aria-label="John Doe"
+                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id=""
+                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2" asp-for="DiaCorte" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
-                            <label  class="form-label" asp-for="MontoSuministro"></label>
+                            <label  class="form-label" asp-for="MontoPresupuestoMovimiento"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input spellcheck="true" readonly="true" style="text-transform:uppercase" type="number"
-                                    class="form-control" id="" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="MontoSuministro" />
+                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id=""
+                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
+                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="MontoPresupuestoMovimiento" />
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mb-3 col-md-4">
-                            <label  class="form-label" asp-for="IdTipoPago"></label>
-                            <div class="input-group input-group-merge">
-                                <div class="input-group input-group-merge">
-                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="fa-solid fa-exclamation"></i></span>
-                                    <select id="lTipoPago" class="form-select" required asp-for="IdTipoPago"
-                                        asp-items="@(new SelectList(ViewBag.ListaTipopago,"IdTipoPago","TipoPagoDesc"))">
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="mb-3 col-md-6">
+
                         </div>
                         <div class="mb-3 col-md-6">
                             <div class="row mb-3">
@@ -90,7 +84,7 @@
                                     <div class="input-group input-group-merge">
                                         <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                                 class="bx bx-check-shield"></i></span>
-                                        <select readonly="true" class="form-select" required asp-for="IdEstatusRegistro"
+                                        <select class="form-select" required asp-for="IdEstatusRegistro"
                                             asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
                                             <option value="">SELECCIONAR</option>
                                         </select>

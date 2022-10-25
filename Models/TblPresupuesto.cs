@@ -24,13 +24,13 @@ namespace WebAdmin.Models
         [NotMapped]
         public string TipoPresupuestoDesc { get; set; }
 
-        [Display(Name = "Tipo Suministro")]
+        [Display(Name = "SubTipo Presupuesto")]
 
-        public int IdTipoSuministro { get; set; }
+        public int IdSubTipoPresupuesto { get; set; }
 
-        [Display(Name = "Tipo Suministro")]
+        [Display(Name = "SubTipo Presupuesto")]
         [NotMapped]
-        public string TipoSuministroDesc { get; set; }
+        public string SubTipoPresupuestoDesc { get; set; }
 
         [Display(Name = "Presupuesto")]
         [DataType(DataType.Text)]

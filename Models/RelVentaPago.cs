@@ -38,7 +38,6 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }
         
-
         [Display(Name = "Estatus")]
         
         public int IdEstatusRegistro { get; set; }

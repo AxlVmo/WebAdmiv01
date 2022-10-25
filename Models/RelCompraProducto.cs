@@ -10,9 +10,7 @@ namespace WebAdmin.Models
         [Display(Name = "ID Compras Productos")]
         [Key]
         public int IdRelCompraProducto { get; set; }
-
-        [Display(Name = "Tipo Producto/Servicio")]
-        public int IdTipoProdServ { get; set; }
+        
         [Display(Name = "Articulo Descripción")]
         [DataType(DataType.Text)]
 

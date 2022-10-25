@@ -48,13 +48,13 @@ namespace WebAdmin.Data
         public DbSet<CatCorpCent> CatCorpCents { get; set; }
         public DbSet<CatPeriodoAmortiza> CatPeriodosAmortizaciones { get; set; }
         public DbSet<CatProdServ> CatProdServs { get; set; }
-        public DbSet<CatTipoSuministro> CatTipoSuministros { get; set; }
+        public DbSet<CatSubTipoPresupuesto> CatSubTipoPresupuestos { get; set; }
         public DbSet<RelCompraPago> RelCompraPagos { get; set; }
         public DbSet<RelCompraProducto> RelCompraProductos { get; set; }
         public DbSet<TblBanco> TblBancos { get; set; }
         public DbSet<TblCompra> TblCompras { get; set; }
-        public DbSet<TblSuministro> TblSuministros { get; set; }
-        public DbSet<RelSuministroPago> RelSuministroPagos { get; set; }
+        public DbSet<TblPresupuestoMovimiento> TblPresupuestoMovimientos { get; set; }
+        public DbSet<RelPresupuestoMovimientoPago> RelPresupuestoMovimientoPagos { get; set; }
         public DbSet<TblPrestamo> TblPrestamos { get; set; }
         public DbSet<TblVenta> TblVenta { get; set; }
         public DbSet<RelVentaPagos> RelVentasPagos { get; set; }
@@ -147,7 +147,7 @@ namespace WebAdmin.Data
                 new CatTipoContratacion { IdTipoContratacion = 2, TipoContratacionDesc = "TEMPORAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                 new CatTipoContratacion { IdTipoContratacion = 3, TipoContratacionDesc = "FORMACION/APRENDIZAJE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
                 new CatTipoContratacion { IdTipoContratacion = 4, TipoContratacionDesc = "SERVICIO SOCIAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatTipoContratacion { IdTipoContratacion = 5, TipoContratacionDesc = "RESIENCIAS PROFESIONALES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+                new CatTipoContratacion { IdTipoContratacion = 5, TipoContratacionDesc = "RESIDENCIAS PROFESIONALES", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
             );
             modelBuilder.Entity<CatRole>().HasData(
                 new CatRole { IdRol = 1, RolDesc = "DESARROLLADOR", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
@@ -176,9 +176,8 @@ namespace WebAdmin.Data
             modelBuilder.Entity<CatTipoPago>().HasData(
             new CatTipoPago { IdTipoPago = 1, TipoPagoDesc = "EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
             new CatTipoPago { IdTipoPago = 2, TipoPagoDesc = "TRANSFERENCIA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-            new CatTipoPago { IdTipoPago = 3, TipoPagoDesc = "CREDITO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-            new CatTipoPago { IdTipoPago = 4, TipoPagoDesc = "TDC", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-            new CatTipoPago { IdTipoPago = 5, TipoPagoDesc = "TDD", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+            new CatTipoPago { IdTipoPago = 3, TipoPagoDesc = "TARJETA DE DEBITO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+            new CatTipoPago { IdTipoPago = 4, TipoPagoDesc = "TARJETA DE CRÉDITO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
 
         );
             modelBuilder.Entity<CatGenero>().HasData(
@@ -240,7 +239,7 @@ namespace WebAdmin.Data
             );
              modelBuilder.Entity<CatTipoRecurso>().HasData(
                 new CatTipoRecurso { IdTipoRecurso = 1, TipoRecursoDesc = "EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatTipoRecurso { IdTipoRecurso = 2, TipoRecursoDesc = "DIGITAL", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+                new CatTipoRecurso { IdTipoRecurso = 2, TipoRecursoDesc = "ELECTRÓNICO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
             );
 
               modelBuilder.Entity<CatSubTipoMovimiento>().HasData(
@@ -249,8 +248,9 @@ namespace WebAdmin.Data
             );
 
             modelBuilder.Entity<CatTipoPresupuesto>().HasData(
-              new CatTipoPresupuesto { IdTipoPresupuesto = 1, TipoPresupuestoDesc = "GASTO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-              new CatTipoPresupuesto { IdTipoPresupuesto = 2, TipoPresupuestoDesc = "INGRESO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+              new CatTipoPresupuesto { IdTipoPresupuesto = 1, TipoPresupuestoDesc = "VENTAS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatTipoPresupuesto { IdTipoPresupuesto = 2, TipoPresupuestoDesc = "COMPRAS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatTipoPresupuesto { IdTipoPresupuesto = 3, TipoPresupuestoDesc = "OPERATIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
           );
 
             modelBuilder.Entity<CatMes>().HasData(

@@ -1,20 +1,20 @@
-﻿@model WebAdmin.Models.CatTipoSuministro
+﻿@model WebAdmin.Models.CatSubTipoPresupuesto
 
 @{
     ViewData["Title"] = "Desactivar Tipo de Suministro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> Tipo de Suministro</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Catálogos /</span> SubTipo de Suministro</h4>
     <div class="col-xxl">
         <div class="card mb-4">
             <div class="card-body">
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoSuministroDesc)
+            @Html.DisplayNameFor(model => model.SubTipoPresupuestoDesc)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TipoSuministroDesc)
+            @Html.DisplayFor(model => model.SubTipoPresupuestoDesc)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)
@@ -29,7 +29,7 @@
             @Html.DisplayFor(model => model.IdEstatusRegistro)
         </dd>
          <form asp-action="Delete">
-        <input spellcheck="true" type="hidden" asp-for="IdTipoSuministro" />
+        <input spellcheck="true" type="hidden" asp-for="IdSubTipoPresupuesto" />
         <input spellcheck="true" type="submit" value="Desactivar" class="btn btn-danger" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
     </form>

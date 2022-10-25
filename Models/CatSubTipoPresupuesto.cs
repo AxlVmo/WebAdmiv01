@@ -4,15 +4,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public class CatTipoSuministro
+    public class CatSubTipoPresupuesto
     {
         [Key]
-        public int IdTipoSuministro { get; set; }
+        public int IdSubTipoPresupuesto { get; set; }
+        [Display(Name = "Tipo de Presupuesto")]
+        public int IdTipoPresupuesto { get; set; }
 
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
-        
-        public string TipoSuministroDesc { get; set; }
+        [NotMapped]
+
+        public string TipoPresupuestoDesc { get; set; }
+        [Display(Name = "Descripción")]
+        [DataType(DataType.Text)]
+
+        public string SubTipoPresupuestoDesc { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
@@ -23,7 +30,10 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
-        
+
         public int IdEstatusRegistro { get; set; }
+
+
+
     }
 }

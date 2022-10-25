@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public class RelSuministroPago
+    public class RelPresupuestoMovimientoPago
     {
-        [Display(Name = "ID Suministros Pagos")]
+        [Display(Name = "ID PresupuestoMovimientos Pagos")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdRelSuministrosPago { get; set; }
+        public int IdRelPresupuestoMovimientosPago { get; set; }
 
         [Display(Name = "Tipo de Pago")]
 
@@ -43,6 +43,6 @@ namespace WebAdmin.Models
         
         public int IdEstatusRegistro { get; set; }
 
-        public Guid IdSuministro { get; set; }
+        public Guid IdPresupuestoMovimiento { get; set; }
     }
 }

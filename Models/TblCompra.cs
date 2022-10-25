@@ -33,16 +33,7 @@ namespace WebAdmin.Models
         [Display(Name = "Folio Compra")]
         public int FolioCompra { get; set; }
 
-        [Display(Name = "Proveedor Compra")]
-        public int ProveedorCompra { get; set; }
-
-        [Display(Name = "Tipo de Pago")]
-
-        public int IdTipoPago { get; set; }
-
-        [Display(Name = "Codigo / Referencia")]
-        public string CodigoPago { get; set; }
-        [Display(Name = "Codigo / Referencia")]
+        [Display(Name = "Monto de Pago")]
         public double MontoPago { get; set; }
 
         [Display(Name = "Corporativo / Centro")]

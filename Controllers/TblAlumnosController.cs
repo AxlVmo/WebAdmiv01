@@ -220,15 +220,6 @@ namespace WebAdmin.Controllers
                                   
             ViewBag.ListaEscolaridades = fEscolaridades.ToList();
 
-            var fTipoSuministro = from a in _context.CatTipoSuministros
-                                  where a.IdEstatusRegistro == 1
-                                  select new CatTipoSuministro
-                                  {
-                                      IdTipoSuministro = a.IdTipoSuministro,
-                                      TipoSuministroDesc = a.TipoSuministroDesc
-                                  };
-                                  
-            ViewBag.ListaTipoSuministro = fTipoSuministro.ToList();
             return View();
         }
 

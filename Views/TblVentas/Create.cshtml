@@ -77,8 +77,7 @@
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
-            <div class="card-header d-flex align-items-center justify-content-between">
-            </div>
+            
             <div class="card-body">
                 <input spellcheck="true" type="hidden" id="f_periodo" />
                 <div class="row">
@@ -680,7 +679,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
     $('#l_servicios').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
-total_venta = 0;
+    total_venta = 0;
         $.ajax({
             type: "GET",
             url: "/TblServicios/fFiltroServicio/",

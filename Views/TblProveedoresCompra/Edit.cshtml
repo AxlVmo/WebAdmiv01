@@ -8,8 +8,7 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Proveedores Compra</h4>
     <div class="col-xxl">
         <div class="card mb-8">
-            <div class="card-header d-flex align-items-center justify-content-between">
-            </div>
+            
             <div class="card-body">
                 <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -18,7 +17,7 @@
                         <div class="mb-3 col-md-6">
                             <label for="NombreEmpresa" class="form-label" asp-for="NombreProveedorCompra"></label>
                             <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
+                                <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i></span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="text"
                                     class="form-control" id="" placeholder="Requerido" aria-label="John Doe"
                                     aria-describedby="2" asp-for="NombreProveedorCompra" required

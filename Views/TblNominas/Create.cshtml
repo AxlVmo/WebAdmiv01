@@ -71,8 +71,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
-            <div class="card-header d-flex align-items-center justify-content-between">
-            </div>
+            
             <div class="card-body">
                 <form asp-action="Create">
                     <input spellcheck="true" type="hidden" asp-for="FolioNomina" id="i_FolioNomina" />
@@ -98,7 +97,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <div class="mb-3 col-md-6">
                                 <label for="NominaDesc" class="form-label" asp-for="NominaDesc"></label>
                                 <div class="input-group input-group-merge">
-                                    <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
+                                    <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i></span>
                                     <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="NominaDesc" asp-for="NominaDesc" placeholder="Requerido"
                                         aria-label="John Doe" aria-describedby="2"
@@ -112,7 +111,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                 <label for="UsuarioRemuneracion" class="form-label"
                                     asp-for="UsuarioRemuneracion"></label>
                                 <div class="input-group input-group-merge">
-                                    <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
+                                    <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i></span>
                                     <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="UsuarioRemuneracion" placeholder="Requerido" aria-label="John Doe"
                                         aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')"
@@ -138,7 +137,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <div class="mb-3 col-md-3" id="lCodigoPago" hidden>
                                 <label for="CodigoPago" class="form-label" asp-for="CodigoPago"></label>
                                 <div class="input-group input-group-merge">
-                                    <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"></i></span>
+                                    <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i></span>
                                     <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control"
                                         id="iCodigoPago" placeholder="Requerido" aria-label="John Doe"
                                         aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')"

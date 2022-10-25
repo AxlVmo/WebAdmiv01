@@ -9,8 +9,7 @@
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
-            <div class="card-header d-flex align-items-center justify-content-between">
-            </div>
+
             <div class="card-body">
                 <form asp-action="Create">
                     <div class="row">
@@ -19,8 +18,7 @@
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                        <i class="bx bx-check-shield">
-                                        </i>
+                                       <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="lMes" class="form-select" required asp-for="IdMes"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
@@ -31,13 +29,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-2">
-                            <label for="IdTipoPresupuesto" class="form-label" asp-for="IdTipoPresupuesto"></label>
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="IdTipoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                        <i class="bx bx-check-shield">
-                                        </i>
+                                       <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="lTipoPresupuesto" class="form-select" required
                                         asp-for="IdTipoPresupuesto"
@@ -50,17 +47,16 @@
                             </div>
                         </div>
                         <div class="mb-3 col-md-3">
-                            <label for="IdTipoSuministro" class="form-label" asp-for="IdTipoSuministro"></label>
+                            <label class="form-label" asp-for="IdSubTipoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                        <i class="bx bx-check-shield">
-                                        </i>
+                                       <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
-                                    <select id="lTipoSuministro" class="form-select" required asp-for="IdTipoSuministro"
+                                    <select id="lSubTipoPresupuesto" class="form-select" required
+                                        asp-for="IdSubTipoPresupuesto"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')"
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoSuministro, "IdTipoSuministro", "TipoSuministroDesc"))">
+                                        onchange="this.setCustomValidity('')">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
@@ -71,8 +67,7 @@
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                        <i class="bx bx-check-shield">
-                                        </i>
+                                       <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="l_tipo_servicios" class="form-select"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
@@ -87,13 +82,13 @@
                             <label for="DiaCorte" class="form-label" asp-for="DiaCorte"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="number"
                                     class="form-control" id="iDiaCorte" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="DiaCorte" />
+                                    aria-describedby="2" asp-for="DiaCorte" min="0" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-6" id="c_servicios" hidden>
@@ -101,8 +96,7 @@
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                        <i class="bx bx-check-shield">
-                                        </i>
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="l_servicios" class="form-select" required
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
@@ -114,11 +108,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mb-3 col-md-4" id="c_presupuesto_desc">
+                        <div class="mb-3 col-md-8" id="c_presupuesto_desc">
                             <label for="PresupuestoDesc" class="form-label" asp-for="PresupuestoDesc"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="text"
                                     class="form-control" id="iPresupuestoDesc" required
@@ -131,7 +125,7 @@
                             <label for="MontoPresupuesto" class="form-label" asp-for="MontoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="number"
                                     class="form-control" id="iMontoPresupuesto" required
@@ -144,7 +138,7 @@
                             <label for="NumeroReferencia" class="form-label" asp-for="NumeroReferencia"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="text"
                                     class="form-control" id="iNumeroReferencia" aria-label="John Doe"
@@ -169,7 +163,9 @@
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
 
-        if (SelectedValue == 0 || SelectedValue == '' || SelectedValue == 1) {
+        document.getElementById("iPresupuestoDesc").value = null;
+        document.getElementById("iMontoPresupuesto").value = null;
+        if (SelectedValue == 0 || SelectedValue == '' || SelectedValue != 1) {
             document.getElementById("c_tipo_servicios").setAttribute("hidden", true);
             document.getElementById("c_servicios").setAttribute("hidden", true);
 
@@ -178,19 +174,17 @@
             $('#iNumeroReferencia').removeAttr('readonly');
             $('#iPresupuestoDesc').removeAttr('readonly');
             document.getElementById("iDiaCorte").value = null;
-
-
+            document.getElementById("iNumeroReferencia").value = null;
         }
 
-        else if (SelectedValue == 2) {
+        else if (SelectedValue == 1) {
             $('#c_tipo_servicios').removeAttr('hidden');
             $('#c_servicios').removeAttr('hidden');
             document.getElementById("iDiaCorte").value = 0;
+            document.getElementById("iNumeroReferencia").value = 'N/A';
             document.getElementById("iDiaCorte").setAttribute("readonly", true);
             document.getElementById("iNumeroReferencia").setAttribute("readonly", true);
             document.getElementById("iPresupuestoDesc").setAttribute("readonly", true);
-
-
         }
 
     });
@@ -255,9 +249,11 @@
                             var f_tipo_servicio = list[i].tipoServicioDesc;
                             var f_servicio = list[i].descServicio;
                             var f_precio = list[i].totalPrecioServicio;
+                            var f_codigo_interno = list[i].codigoInterno;
 
                             document.getElementById("iPresupuestoDesc").value = f_tipo_servicio + ',' + f_servicio;
                             document.getElementById("iMontoPresupuesto").value = f_precio;
+                            document.getElementById("iNumeroReferencia").value = f_codigo_interno;
                         }
                     }
                     else {
@@ -265,6 +261,37 @@
                     }
                 }
             },
+        });
+    });
+    $('#lTipoPresupuesto').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        $.ajax({
+            type: "GET",
+            url: "/CatSubTipoPresupuestos/fSubTipoPresupuesto/",
+            data: { idA: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $lista_servicios = $('#lSubTipoPresupuesto');
+                $("#lSubTipoPresupuesto").empty();
+
+                if (list.length == 0) {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    $lista_servicios.attr('required', false);
+                }
+                else {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $lista_servicios.append('<option value=' + list[i].idSubTipoPresupuesto + '>' + list[i].subTipoPresupuestoDesc + '</option>');
+                        $lista_servicios.attr('required', true);
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
         });
     });
 </script>

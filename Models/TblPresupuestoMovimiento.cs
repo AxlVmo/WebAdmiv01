@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-#nullable disable
-
 namespace WebAdmin.Models
 {
-    public partial class TblSuministro
+    public partial class TblPresupuestoMovimiento
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid IdSuministro { get; set; }
+        public Guid IdPresupuestoMovimiento { get; set; }
 
         [NotMapped]
         public string CentroDesc { get; set; }
 
-        [Display(Name = "Tipo Suministro")]
+        [Display(Name = "Tipo PresupuestoMovimiento")]
         
-        public int IdTipoSuministro { get; set; }
+        public int IdTipoPresupuesto { get; set; }
 
-        [Display(Name = "Tipo Suministro")]
+        [Display(Name = "Tipo PresupuestoMovimiento")]
         [NotMapped]
-        public string TipoSuministroDesc { get; set; }
+        public string TipoPresupuestoDesc { get; set; }
 
-        [Display(Name = "Suministro")]
+        [Display(Name = "PresupuestoMovimiento")]
         [DataType(DataType.Text)]
         
-        public string SuministroDesc { get; set; }
+        public string PresupuestoMovimientoDesc { get; set; }
 
         [Display(Name = "Numero de Referencia")]
         
@@ -43,9 +41,9 @@ namespace WebAdmin.Models
         [NotMapped]
         public string PeriodoDesc { get; set; }
 
-        [Display(Name = "Monto Suministro")]
+        [Display(Name = "Monto PresupuestoMovimiento")]
         
-        public double MontoSuministro { get; set; }
+        public double MontoPresupuestoMovimiento { get; set; }
         [Display(Name = "Tipo Pago")]
         [NotMapped]
         public int IdTipoPago { get; set; }
@@ -72,6 +70,6 @@ namespace WebAdmin.Models
         
         public int IdEstatusRegistro { get; set; }
 
-        public virtual List<RelSuministroPago> RelSuministroPagos { get; set; }
+        public virtual List<RelPresupuestoMovimientoPago> RelPresupuestoMovimientoPagos { get; set; }
     }
 }

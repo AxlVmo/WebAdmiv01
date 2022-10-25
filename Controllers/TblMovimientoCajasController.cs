@@ -10,13 +10,13 @@ using WebAdmin.Models;
 using WebAdmin.Services;
 namespace WebAdmin.Controllers
 {
-    public class TblMovimientosCajaController : Controller
+    public class TblMovimientoCajasController : Controller
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblMovimientosCajaController(nDbContext context, INotyfService notyf, IUserService userService)
+        public TblMovimientoCajasController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -101,57 +101,57 @@ namespace WebAdmin.Controllers
                             CentroDesc = a.NombreCorporativo
                         };
             var sCorpCent = fCorp.Union(fCent);
-            TempData["fTS"] = sCorpCent.ToList();
-            ViewBag.ListaCorpCent = TempData["fTS"];
 
-
-            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+            ViewBag.ListaCorpCent = sCorpCent.ToList();
 
             if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
-                var fMovimientoCajaCntro = from a in _context.TblMovimientoCajas
-                                           join b in _context.CatTipoMovimientos on a.IdTipoMovimientoCaja equals b.IdTipoMovimiento
-                                           join c in _context.CatSubTipoMovimientos on a.IdSubTipoMovimientoCaja equals c.IdSubTipoMovimiento
-                                           join d in _context.CatCaracteristicaMovimientos on a.IdCaracteristicaMovimientoCaja equals d.IdCaracteristicaMovimiento
-                                           where a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdCorpCent == 2
-                                           select new TblMovimientoCaja
-                                           {
-                                               TipoMovimientoCajaDesc = b.TipoMovimientoDesc,
-                                               IdMovimientoCaja = a.IdMovimientoCaja,
-                                               MovimientoCajaDesc = a.MovimientoCajaDesc,
-                                               SubTipoMovimientoCajaDesc = c.SubTipoMovimientoDesc,
-                                               CaracteristicaMovimientoCajaDesc = d.CaracteristicaMovimientoDesc,
-                                               IdTipoRecurso = a.IdTipoRecurso,
-                                               MontoMovimientoCaja = a.MontoMovimientoCaja,
-                                               IdUCorporativoCentro = a.IdUCorporativoCentro,
-                                               FechaRegistro = a.FechaRegistro,
-                                               IdEstatusRegistro = a.IdEstatusRegistro
-                                           };
-                return View(await fMovimientoCajaCntro.ToListAsync());
+                var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                var fMovimientoCaja = from a in _context.TblMovimientoCajas
+                                      join b in _context.CatTipoMovimientos on a.IdTipoMovimientoCaja equals b.IdTipoMovimiento
+                                      join c in _context.CatSubTipoMovimientos on a.IdSubTipoMovimientoCaja equals c.IdSubTipoMovimiento
+                                      join d in _context.CatCaracteristicaMovimientos on a.IdCaracteristicaMovimientoCaja equals d.IdCaracteristicaMovimiento
+                                      where a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdCorpCent == 2
+                                      select new TblMovimientoCaja
+                                      {
+                                          TipoMovimientoCajaDesc = b.TipoMovimientoDesc,
+                                          IdMovimientoCaja = a.IdMovimientoCaja,
+                                          MovimientoCajaDesc = a.MovimientoCajaDesc,
+                                          SubTipoMovimientoCajaDesc = c.SubTipoMovimientoDesc,
+                                          CaracteristicaMovimientoCajaDesc = d.CaracteristicaMovimientoDesc,
+                                          IdTipoRecurso = a.IdTipoRecurso,
+                                          MontoMovimientoCaja = a.MontoMovimientoCaja,
+                                          IdUCorporativoCentro = a.IdUCorporativoCentro,
+                                          FechaRegistro = a.FechaRegistro,
+                                          IdEstatusRegistro = a.IdEstatusRegistro
+                                      };
+
+                return View(await fMovimientoCaja.ToListAsync());
+            }
+            else
+            {
+                var fMovimientoCaja = from a in _context.TblMovimientoCajas
+                                      join b in _context.CatTipoMovimientos on a.IdTipoMovimientoCaja equals b.IdTipoMovimiento
+                                      join c in _context.CatSubTipoMovimientos on a.IdSubTipoMovimientoCaja equals c.IdSubTipoMovimiento
+                                      join d in _context.CatCaracteristicaMovimientos on a.IdCaracteristicaMovimientoCaja equals d.IdCaracteristicaMovimiento
+                                      select new TblMovimientoCaja
+                                      {
+                                          TipoMovimientoCajaDesc = b.TipoMovimientoDesc,
+                                          IdMovimientoCaja = a.IdMovimientoCaja,
+                                          MovimientoCajaDesc = a.MovimientoCajaDesc,
+                                          SubTipoMovimientoCajaDesc = c.SubTipoMovimientoDesc,
+                                          CaracteristicaMovimientoCajaDesc = d.CaracteristicaMovimientoDesc,
+                                          IdTipoRecurso = a.IdTipoRecurso,
+                                          MontoMovimientoCaja = a.MontoMovimientoCaja,
+                                          IdUCorporativoCentro = a.IdUCorporativoCentro,
+                                          FechaRegistro = a.FechaRegistro,
+                                          IdEstatusRegistro = a.IdEstatusRegistro
+                                      };
+
+                return View(await fMovimientoCaja.ToListAsync());
             }
 
 
-            var fMovimientoCaja = from a in _context.TblMovimientoCajas
-                                  join b in _context.CatTipoMovimientos on a.IdTipoMovimientoCaja equals b.IdTipoMovimiento
-                                  join c in _context.CatSubTipoMovimientos on a.IdSubTipoMovimientoCaja equals c.IdSubTipoMovimiento
-                                  join d in _context.CatCaracteristicaMovimientos on a.IdCaracteristicaMovimientoCaja equals d.IdCaracteristicaMovimiento
-                                  select new TblMovimientoCaja
-                                  {
-
-                                      TipoMovimientoCajaDesc = b.TipoMovimientoDesc,
-                                      IdMovimientoCaja = a.IdMovimientoCaja,
-                                      MovimientoCajaDesc = a.MovimientoCajaDesc,
-                                      SubTipoMovimientoCajaDesc = c.SubTipoMovimientoDesc,
-                                               CaracteristicaMovimientoCajaDesc = d.CaracteristicaMovimientoDesc,
-                                      IdTipoRecurso = a.IdTipoRecurso,
-                                      MontoMovimientoCaja = a.MontoMovimientoCaja,
-                                      IdUCorporativoCentro = a.IdUCorporativoCentro,
-                                      FechaRegistro = a.FechaRegistro,
-                                      IdEstatusRegistro = a.IdEstatusRegistro
-                                  };
-
-
-            return View(await fMovimientoCaja.ToListAsync());
         }
         [HttpGet]
         public ActionResult DatosMovimientoCajas()

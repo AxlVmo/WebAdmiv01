@@ -9,8 +9,7 @@
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
-            <div class="card-header d-flex align-items-center justify-content-between">
-            </div>
+            
             <div class="card-body">
                 <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -38,7 +37,7 @@
                             <label for="CorreoElectronico" class="form-label" asp-for="CorreoElectronico"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="fa-solid fa-exclamation"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" type="email" class="form-control" id="" placeholder="REQUERIDO" aria-label="John Doe" aria-describedby="2" asp-for="CorreoElectronico" required/>
                             </div>

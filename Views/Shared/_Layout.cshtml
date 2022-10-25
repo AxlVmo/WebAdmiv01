@@ -83,352 +83,350 @@
       <div class="layout-container">
         @if (SignInManager.IsSignedIn(User))
       {
-              <!-- Menu -->
+                    <!-- Menu -->
 
-              <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar">
-                <div class="app-brand demo">
-                  <a href="index.html" class="app-brand-link">
-                    <span class="app-brand-logo demo">
-         <img  class="img-profile" style="width:40px;height:40px" src="~/assets/img/logo1.png">
-                    </span>
-                    <span class="app-brand-text demo menu-text fw-bolder ms-2"><img style="width:100px;height:40px" src="~/assets/img/logo2.png"></span>
-                  </a>
+                    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar">
+                      <div class="app-brand demo">
+                        <a href="index.html" class="app-brand-link">
+                          <span class="app-brand-logo demo">
+               <img  class="img-profile" style="width:40px;height:40px" src="~/assets/img/logo1.png">
+                          </span>
+                          <span class="app-brand-text demo menu-text fw-bolder ms-2"><img style="width:100px;height:40px" src="~/assets/img/logo2.png"></span>
+                        </a>
 
-                  <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-                    <i class="bx bx-chevron-left bx-sm align-middle"></i>
-                  </a>
-                </div>
+                        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                          <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                        </a>
+                      </div>
 
-                <div class="menu-inner-shadow"></div>
+                      <div class="menu-inner-shadow"></div>
 
-                <ul class="menu-inner py-1">
-                  <!-- Dashboard -->
+                      <ul class="menu-inner py-1">
+                        <!-- Dashboard -->
             <li class="menu-item active">
-                    <a asp-controller="Resumenes" asp-action="Index" class="menu-link">
-                      <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                      <div data-i18n="Analytics">Resumen</div>
-                    </a>
-                  </li>
-                  <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Administración</span>
-                  </li>
-                              <!-- Layouts -->
+                          <a asp-controller="Resumenes" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Resumen</div>
+                          </a>
+                        </li>
+                        <li class="menu-header small text-uppercase">
+                          <span class="menu-header-text">Administración</span>
+                        </li>
+                                    <!-- Layouts -->
             <li class="menu-item" id="i_catalogos_c" hidden>
-                     <a href="javascript:void(0);" class="menu-link menu-toggle">
-                      <i class="menu-icon tf-icons bx bx-layout"></i>
-                      <div data-i18n="">Catálogos Centros</div>
-                    </a>
+                           <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <div data-i18n="">Catálogos Centros</div>
+                          </a>
 
-                    <ul class="menu-sub">
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatEstatus" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Estatus de Registro</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatCorpCents" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Corporativo / Centro</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatAreas" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Áreas</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoCentroes" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos de Centro</div>
-                        </a>
-                      </li>
-                       <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoMovimientos" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos Movimientos</div>
-                        </a>
-                      </li>
-                       <li class="menu-item">
-                        <a asp-area="" asp-controller="CatSubTipoMovimientos" asp-action="Index" class="menu-link">
-                          <div data-i18n="">SubTipos Movimientos</div>
-                        </a>
-                      </li>
-                       <li class="menu-item">
-                        <a asp-area="" asp-controller="CatCaracteristicaMovimientos" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Caracteristicas Movimientos</div>
-                        </a>
-                      </li>
-                       <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoRecursos" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos Recuros</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoDireccions" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos de Direcciones</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoLicencias" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Licencias</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoDevoluciones" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos Devoluciones</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatPeriodos" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Periodos</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatProdServs" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Producto / Servicio</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoPrestamoes" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos de Préstamos</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoContratacions" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos de Contrataciones</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoPagoes" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos de Pagos</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoFormaPagoes" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos Formas de Pagos</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-area="" asp-controller="CatPeriodoAmortizas" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Periodos Amortizaciones</div>
-                        </a>
-                      </li>
-                       <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoCompras" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos de Compras</div>
-                        </a>
-                      </li>
-                       <li class="menu-item">
-                        <a asp-area="" asp-controller="CatTipoVentas" asp-action="Index" class="menu-link">
-                          <div data-i18n="">Tipos de Ventas</div>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="menu-item" id="i_catalogos_u" hidden>
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                      <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                      <div data-i18n="Account Settings">Catálogos Usuarios</div>
-                    </a>
-                    <ul class="menu-sub">
-                      <li class="menu-item">
-                        <a asp-controller="CatGeneroes" asp-action="Index"class="menu-link">
-                          <div data-i18n="Notifications">Géneros</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="CatRoles" asp-action="Index"class="menu-link">
-                          <div data-i18n="Connections">Roles</div>
-                        </a>
-                      </li>
-                        <li class="menu-item">
-                        <a asp-controller="CatPerfiles" asp-action="Index" class="menu-link">
-                          <div data-i18n="Account">Perfiles</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="CatEscolaridads" asp-action="Index"class="menu-link">
-                          <div data-i18n="Notifications">Escolaridades</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="CatNivelEscolars" asp-action="Index"class="menu-link">
-                          <div data-i18n="Connections">Niveles Escolares</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="CatTipoAlumnoes" asp-action="Index"class="menu-link">
-                          <div data-i18n="Connections">Tipos de Alumnos</div>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="menu-item" id="i_empresa_n" hidden>
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                      <i class="menu-icon tf-icons bx bx-buildings"></i>
-                      <div data-i18n="Authentications">Empresa</div>
-                    </a>
-                    <ul class="menu-sub">
-                      <li class="menu-item">
-                        <a asp-controller="TblCorporativoes" asp-action="Index" class="menu-link">
-                          <div data-i18n="Basic">Corporativo</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="TblUsuarios" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Usuarios</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="TblCentros" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Centros</div>
-                        </a>
-                      </li>
-                      <li class="menu-item" hidden>
-                        <a asp-controller="TblNominas" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Nóminas</div>
-                        </a>
-                      </li>
-                      <li class="menu-item" hidden>
-                        <a asp-controller="TblPrestamos" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Préstamos</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="CatTipoSuministroes" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Tipos de Suministros</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="TblSuministroes" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Suministros</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="CatTipoServicios" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Tipos de Servicios</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="TblServicios" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Servicios</div>
-                        </a>
-                      </li>
-                      <li class="menu-item" hidden>
-                        <a asp-controller="TblAlumnos" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Alumnos</div>
-                        </a>
-                      </li>
-                      <li class="menu-item" hidden>
-                        <a asp-controller="TblVentas" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Ventas</div>
-                        </a>
-                      </li>
-                      <li class="menu-item" hidden>
-                        <a asp-controller="TblCompras" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Compras</div>
-                        </a>
-                      </li>
-                      <li class="menu-item" hidden>
-                        <a asp-controller="TblBancoes" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Bancos</div>
-                        </a>
-                      </li>
-                      <li class="menu-item" hidden>
-                        <a asp-controller="" asp-action="" class="menu-link" >
-                          <div data-i18n="Basic">Inversiones</div>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="menu-item" id="i_centro_n" hidden>
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                      <i class="menu-icon tf-icons bx bx-buildings"></i>
-                      <div data-i18n="Authentications">Centro</div>
-                    </a>
-                    <ul class="menu-sub">
-                     <li class="menu-item">
-                        <a asp-controller="TblMovimientosCaja" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Movimientos Caja</div>
-                        </a>
-                      </li>
-                       <li class="menu-item">
-                        <a asp-controller="CatTipoSuministroes" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Tipos de Suministros</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="TblPresupuestos" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Presupuesto</div>
-                        </a>
-                      </li>
-                       <li class="menu-item">
-                        <a asp-controller="TblSuministroes" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Suministros</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="TblUsuarios" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Usuarios</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="TblNominas" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Nóminas</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="TblPrestamos" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Préstamos</div>
-                        </a>
-                      </li>
-                     
-                      <li class="menu-item">
-                        <a asp-controller="TblAlumnos" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Alumnos</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="TblVentas" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Ventas</div>
-                        </a>
-                      </li>
-                       <li class="menu-item">
-                        <a asp-controller="TblProveedoresCompra" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Proveedores Compras</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a asp-controller="TblCompras" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Compras</div>
-                        </a>
-                      </li>
-                      <li class="menu-item" hidden>
-                        <a asp-controller="TblBancoes" asp-action="Index" class="menu-link" >
-                          <div data-i18n="Basic">Bancos</div>
-                        </a>
-                      </li>
-                      <li class="menu-item" hidden>
-                        <a asp-controller="" asp-action="" class="menu-link" >
-                          <div data-i18n="Basic">Inversiones</div>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="menu-item" hidden>
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                      <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                      <div data-i18n="Misc">Consultas</div>
-                    </a>
-                    <ul class="menu-sub">
-                      <li class="menu-item">
-                        <a href="" class="menu-link">
-                          <div data-i18n="Error">Estados de Cuenta</div>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
+                          <ul class="menu-sub">
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatEstatus" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Estatus de Registro</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatCorpCents" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Corporativo / Centro</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatAreas" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Áreas</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoCentroes" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos de Centro</div>
+                              </a>
+                            </li>
+                             <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoMovimientos" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos Movimientos</div>
+                              </a>
+                            </li>
+                             <li class="menu-item">
+                              <a asp-area="" asp-controller="CatSubTipoMovimientos" asp-action="Index" class="menu-link">
+                                <div data-i18n="">SubTipos Movimientos</div>
+                              </a>
+                            </li>
+                             <li class="menu-item">
+                              <a asp-area="" asp-controller="CatCaracteristicaMovimientos" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Caracteristicas Movimientos</div>
+                              </a>
+                            </li>
+                             <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoPresupuestos" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos de Presupuestos</div>
+                              </a>
+                            </li>
+                              <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoRecursos" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos Recuros</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoDireccions" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos de Direcciones</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoLicencias" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Licencias</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoDevoluciones" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos Devoluciones</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatPeriodos" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Periodos</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatProdServs" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Producto / Servicio</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoPrestamoes" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos de Préstamos</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoContratacions" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos de Contrataciones</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoPagoes" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos de Pagos</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoFormaPagoes" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos Formas de Pagos</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-area="" asp-controller="CatPeriodoAmortizas" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Periodos Amortizaciones</div>
+                              </a>
+                            </li>
+                             <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoCompras" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos de Compras</div>
+                              </a>
+                            </li>
+                             <li class="menu-item">
+                              <a asp-area="" asp-controller="CatTipoVentas" asp-action="Index" class="menu-link">
+                                <div data-i18n="">Tipos de Ventas</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="menu-item" id="i_catalogos_u" hidden>
+                          <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                            <div data-i18n="Account Settings">Catálogos Usuarios</div>
+                          </a>
+                          <ul class="menu-sub">
+                            <li class="menu-item">
+                              <a asp-controller="CatGeneroes" asp-action="Index"class="menu-link">
+                                <div data-i18n="Notifications">Géneros</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="CatRoles" asp-action="Index"class="menu-link">
+                                <div data-i18n="Connections">Roles</div>
+                              </a>
+                            </li>
+                              <li class="menu-item">
+                              <a asp-controller="CatPerfiles" asp-action="Index" class="menu-link">
+                                <div data-i18n="Account">Perfiles</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="CatEscolaridads" asp-action="Index"class="menu-link">
+                                <div data-i18n="Notifications">Escolaridades</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="CatNivelEscolars" asp-action="Index"class="menu-link">
+                                <div data-i18n="Connections">Niveles Escolares</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="CatTipoAlumnoes" asp-action="Index"class="menu-link">
+                                <div data-i18n="Connections">Tipos de Alumnos</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="menu-item" id="i_empresa_n" hidden>
+                          <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-buildings"></i>
+                            <div data-i18n="Authentications">Empresa</div>
+                          </a>
+                          <ul class="menu-sub">
+                            <li class="menu-item">
+                              <a asp-controller="TblCorporativoes" asp-action="Index" class="menu-link">
+                                <div data-i18n="Basic">Corporativo</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="TblUsuarios" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Usuarios</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="TblCentros" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Centros</div>
+                              </a>
+                            </li>
+                            <li class="menu-item" hidden>
+                              <a asp-controller="TblNominas" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Nóminas</div>
+                              </a>
+                            </li>
+                            <li class="menu-item" hidden>
+                              <a asp-controller="TblPrestamos" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Préstamos</div>
+                              </a>
+                            </li>
+                           
+                            <li class="menu-item">
+                              <a asp-controller="CatTipoServicios" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Tipos de Servicios</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="TblServicios" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Servicios</div>
+                              </a>
+                            </li>
+                            <li class="menu-item" hidden>
+                              <a asp-controller="TblAlumnos" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Alumnos</div>
+                              </a>
+                            </li>
+                            <li class="menu-item" hidden>
+                              <a asp-controller="TblVentas" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Ventas</div>
+                              </a>
+                            </li>
+                            <li class="menu-item" hidden>
+                              <a asp-controller="TblCompras" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Compras</div>
+                              </a>
+                            </li>
 
-                </ul>
-              </aside>
-              <!-- / Menu -->
+                            <li class="menu-item" hidden>
+                              <a asp-controller="TblBancoes" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Bancos</div>
+                              </a>
+                            </li>
+                            <li class="menu-item" hidden>
+                              <a asp-controller="" asp-action="" class="menu-link" >
+                                <div data-i18n="Basic">Inversiones</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="menu-item" id="i_centro_n" hidden>
+                          <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-buildings"></i>
+                            <div data-i18n="Authentications">Centro</div>
+                          </a>
+                          <ul class="menu-sub">
+                           <li class="menu-item">
+                              <a asp-controller="TblMovimientoCajas" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Movimientos Caja</div>
+                              </a>
+                            </li>
+                             <li class="menu-item">
+                              <a asp-controller="CatSubTipoPresupuestos" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">SubTipos de Presupuesto</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="TblPresupuestos" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Presupuesto Prospectado</div>
+                              </a>
+                            </li>
+                             <li class="menu-item">
+                              <a asp-controller="TblPresupuestoMovimientos" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Presupuesto Real</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="TblUsuarios" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Usuarios</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="TblNominas" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Nóminas</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="TblPrestamos" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Préstamos</div>
+                              </a>
+                            </li>
+
+                            <li class="menu-item">
+                              <a asp-controller="TblAlumnos" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Alumnos</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="TblVentas" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Ventas</div>
+                              </a>
+                            </li>
+                             <li class="menu-item">
+                              <a asp-controller="TblProveedoresCompra" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Proveedores Compras</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a asp-controller="TblCompras" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Compras</div>
+                              </a>
+                            </li>
+
+                            <li class="menu-item" hidden>
+                              <a asp-controller="TblBancoes" asp-action="Index" class="menu-link" >
+                                <div data-i18n="Basic">Bancos</div>
+                              </a>
+                            </li>
+                            <li class="menu-item" hidden>
+                              <a asp-controller="" asp-action="" class="menu-link" >
+                                <div data-i18n="Basic">Inversiones</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="menu-item" hidden>
+                          <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                            <div data-i18n="Misc">Consultas</div>
+                          </a>
+                          <ul class="menu-sub">
+                            <li class="menu-item">
+                              <a href="" class="menu-link">
+                                <div data-i18n="Error">Estados de Cuenta</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+
+                      </ul>
+                    </aside>
+                    <!-- / Menu -->
       }
         <!-- Layout container -->
         <div class="layout-page">
@@ -449,90 +447,90 @@
               <ul class="navbar-nav flex-row align-items-center ms-auto">
               @if (SignInManager.IsSignedIn(User))
               {
-                      <!-- User -->
-                      <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                          <div class="avatar avatar-online">
+                            <!-- User -->
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                              <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <div class="avatar avatar-online">
                       @if (UserManager.GetUserAsync(User).Result.ProfilePicture != null)
                       {
-                                  <img id="profilePicture" class="img-profile rounded-circle"
+                                              <img id="profilePicture" class="img-profile rounded-circle"
                                     style="width:32px;height:32px; object-fit:cover"
                                     src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))">
                       }
                       else
                       {
-                                                  <img id="profilePicture" class="img-profile rounded-circle"
+                                                              <img id="profilePicture" class="img-profile rounded-circle"
                                     style="width:32px;height:32px; object-fit:cover" src="~/img/blank-profile.jpg">
                       }
-                          </div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                          <li>
-                            <a class="dropdown-item" href="#">
-                              <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                  <div class="avatar avatar-online">
+                                </div>
+                              </a>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <a class="dropdown-item" href="#">
+                                    <div class="d-flex">
+                                      <div class="flex-shrink-0 me-3">
+                                        <div class="avatar avatar-online">
                               @if (UserManager.GetUserAsync(User).Result.ProfilePicture != null)
                               {
-                                  <img id="profilePicture" class="img-profile rounded-circle"
+                                              <img id="profilePicture" class="img-profile rounded-circle"
                                     style="width:32px;height:32px; object-fit:cover"
                                     src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))">
                               }
                               else
                               {
-                                                  <img id="profilePicture" class="img-profile rounded-circle"
+                                                              <img id="profilePicture" class="img-profile rounded-circle"
                                     style="width:32px;height:32px; object-fit:cover" src="~/img/blank-profile.jpg">
                               }
-                                  </div>
-                                </div>
-                                <div class="flex-grow-1">
-                                  <span class="fw-semibold d-block">@User.Identity?.Name</span>
-                                  <small class="text-muted">Admin</small>
-                                </div>
-                              </div>
-                            </a>
-                          </li>
-                          <li>
-                            <div class="dropdown-divider" id="i_empresa_d" hidden></div>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index" id="i_empresa_p" hidden>
-                              <i class="bx bx-buildings me-2"></i>
-                              <span class="align-middle">Empresa</span>
-                            </a>
-                          </li>
-                          <li>
-                            <div class="dropdown-divider"></div>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                              <i class="bx bx-user me-2"></i>
-                              <span class="align-middle">Perfil</span>
-                            </a>
-                          </li>
-                          <li>
-                            <div class="dropdown-divider"></div>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        </div>
+                                      </div>
+                                      <div class="flex-grow-1">
+                                        <span class="fw-semibold d-block">@User.Identity?.Name</span>
+                                        <small class="text-muted">Admin</small>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </li>
+                                <li>
+                                  <div class="dropdown-divider" id="i_empresa_d" hidden></div>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index" id="i_empresa_p" hidden>
+                                    <i class="bx bx-buildings me-2"></i>
+                                    <span class="align-middle">Empresa</span>
+                                  </a>
+                                </li>
+                                <li>
+                                  <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                                    <i class="bx bx-user me-2"></i>
+                                    <span class="align-middle">Perfil</span>
+                                  </a>
+                                </li>
+                                <li>
+                                  <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item" href="#" data-bs-toggle="modal"
                           data-bs-target="#modalToggle">
-                              <i class="bx bx-power-off me-2"></i>
-                              <span class="align-middle">Salir</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </li>
-                      <!--/ User -->
+                                    <i class="bx bx-power-off me-2"></i>
+                                    <span class="align-middle">Salir</span>
+                                  </a>
+                                </li>
+                              </ul>
+                            </li>
+                            <!--/ User -->
               }
               else
               {
-                       <li class="nav-item" id="btn_Registro" hidden>
-                                      <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registro</a>
-                                  </li>
-                                  <li class="nav-item">
-                                      <a class="nav-link" asp-area="Identity" asp-page="/Account/Login"><i
+                             <li class="nav-item" id="btn_Registro" hidden>
+                                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registro</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Login"><i
                                     class="fa-solid fa-user-lock"></i> Acceso</a>
-                                  </li>
+                                        </li>
               }
               </ul>
             </div>

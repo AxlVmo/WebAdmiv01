@@ -11,12 +11,12 @@ namespace WebAdmin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdRelComprasPago { get; set; }
 
-        [Display(Name = "Tipo de Pago")]
+       [Display(Name = "Tipo de Pago")]
 
         public int IdTipoPago { get; set; }
 
-        [Display(Name = "Codigo Referencia")]
-        public string CodigoReferencia { get; set; }
+        [Display(Name = "Codigo / Referencia")]
+        public string FolioPago { get; set; }
 
         [Display(Name = "Descuento")]
         public int CantidadPago { get; set; }
