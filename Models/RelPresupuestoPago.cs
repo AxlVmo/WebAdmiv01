@@ -4,32 +4,32 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public class RelPresupuestoMovimientoPago
+    public class RelPresupuestoPago
     {
         [Display(Name = "ID PresupuestoMovimientos Pagos")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdRelPresupuestoMovimientosPago { get; set; }
+        public int IdRelPresupuestoPago { get; set; }
 
         [Display(Name = "Tipo de Pago")]
-
         public int IdTipoPago { get; set; }
+         [Display(Name = "Descripción")]
+        [DataType(DataType.Text)]
+        [NotMapped]
+        public string TipoPagoDesc { get; set; }
 
         [Display(Name = "Fecha Alterna")]
         [DataType(DataType.Date)]
         public DateTime FechaAlternaPago { get; set; }
 
-        [Display(Name = "Codigo Referencia")]
-        public string CodigoReferencia { get; set; }
+        [Display(Name = "Folio de Pago")]
+        public string FolioPago { get; set; }
 
-         [Display(Name = "Descuento")]
-        public double CantidadPago { get; set; }
+        [Display(Name = "Descuento")]
+        public double MontoPresupuestoReal { get; set; }
 
-        [Display(Name = "Descuento %")]
-        public int Descuento { get; set; }
-
-        [Display(Name = "Total Precio Producto")]
-        public double Total { get; set; }
+         [Display(Name = "Comentarios")]
+        public string Comentarios { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
@@ -37,12 +37,11 @@ namespace WebAdmin.Models
         [Display(Name = "Fecha Registro")]
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }
-        
 
         [Display(Name = "Estatus")]
-        
+
         public int IdEstatusRegistro { get; set; }
 
-        public Guid IdPresupuestoMovimiento { get; set; }
+        public Guid IdPresupuesto { get; set; }
     }
 }

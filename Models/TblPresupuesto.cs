@@ -32,7 +32,7 @@ namespace WebAdmin.Models
         [NotMapped]
         public string SubTipoPresupuestoDesc { get; set; }
 
-        [Display(Name = "Presupuesto")]
+        [Display(Name = "Descripcion")]
         [DataType(DataType.Text)]
 
         public string PresupuestoDesc { get; set; }
@@ -66,6 +66,17 @@ namespace WebAdmin.Models
         [Display(Name = "Tipo Pago")]
         [NotMapped]
         public string TipoPagoDesc { get; set; }
+        [Display(Name = "Folio de Pago")]
+        [NotMapped]
+        public string FolioPago { get; set; }
+
+        [Display(Name = "Monto de Pago")]
+        [NotMapped]
+        public double MontoPresupuestoReal { get; set; }
+
+        [Display(Name = "Comentarios")]
+        [NotMapped]
+        public string Comentarios { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }

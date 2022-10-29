@@ -53,8 +53,8 @@ namespace WebAdmin.Data
         public DbSet<RelCompraProducto> RelCompraProductos { get; set; }
         public DbSet<TblBanco> TblBancos { get; set; }
         public DbSet<TblCompra> TblCompras { get; set; }
-        public DbSet<TblPresupuestoMovimiento> TblPresupuestoMovimientos { get; set; }
-        public DbSet<RelPresupuestoMovimientoPago> RelPresupuestoMovimientoPagos { get; set; }
+        public DbSet<TblPresupuesto> TblPresupuestos { get; set; }
+        public DbSet<RelPresupuestoPago> RelPresupuestoPagos { get; set; }
         public DbSet<TblPrestamo> TblPrestamos { get; set; }
         public DbSet<TblVenta> TblVenta { get; set; }
         public DbSet<RelVentaPagos> RelVentasPagos { get; set; }
@@ -73,7 +73,6 @@ namespace WebAdmin.Data
         public DbSet<CatTipoRecurso> CatTipoRecursos { get; set; }
         public DbSet<TblMovimientoCaja> TblMovimientoCajas { get; set; }
         public DbSet<CatTipoPresupuesto> CatTipoPresupuestos { get; set; }
-        public DbSet<TblPresupuesto> TblPresupuestos { get; set; }
 
         public DbSet<TblProveedorCompra> TblProveedorCompras { get; set; }
 
@@ -228,24 +227,24 @@ namespace WebAdmin.Data
                 new CatTipoCompra { IdTipoCompra = 2, TipoCompraDesc = "DIFERIDA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
             );
 
-             modelBuilder.Entity<CatTipoMovimiento>().HasData(
-                new CatTipoMovimiento { IdTipoMovimiento = 1, TipoMovimientoDesc = "INGRESOS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatTipoMovimiento { IdTipoMovimiento = 2, TipoMovimientoDesc = "EGRESOS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
-            );
+            modelBuilder.Entity<CatTipoMovimiento>().HasData(
+               new CatTipoMovimiento { IdTipoMovimiento = 1, TipoMovimientoDesc = "INGRESOS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatTipoMovimiento { IdTipoMovimiento = 2, TipoMovimientoDesc = "EGRESOS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+           );
 
-             modelBuilder.Entity<CatCaracteristicaMovimiento>().HasData(
-                new CatCaracteristicaMovimiento { IdCaracteristicaMovimiento = 1, CaracteristicaMovimientoDesc = "FIJO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatCaracteristicaMovimiento { IdCaracteristicaMovimiento = 2, CaracteristicaMovimientoDesc = "VARIABLE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
-            );
-             modelBuilder.Entity<CatTipoRecurso>().HasData(
-                new CatTipoRecurso { IdTipoRecurso = 1, TipoRecursoDesc = "EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatTipoRecurso { IdTipoRecurso = 2, TipoRecursoDesc = "ELECTRÓNICO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
-            );
+            modelBuilder.Entity<CatCaracteristicaMovimiento>().HasData(
+               new CatCaracteristicaMovimiento { IdCaracteristicaMovimiento = 1, CaracteristicaMovimientoDesc = "FIJO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatCaracteristicaMovimiento { IdCaracteristicaMovimiento = 2, CaracteristicaMovimientoDesc = "VARIABLE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+           );
+            modelBuilder.Entity<CatTipoRecurso>().HasData(
+               new CatTipoRecurso { IdTipoRecurso = 1, TipoRecursoDesc = "EFECTIVO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+               new CatTipoRecurso { IdTipoRecurso = 2, TipoRecursoDesc = "ELECTRÓNICO", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+           );
 
-              modelBuilder.Entity<CatSubTipoMovimiento>().HasData(
-                new CatSubTipoMovimiento { IdSubTipoMovimiento = 1, SubTipoMovimientoDesc = "DEPOSITO CAJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-                new CatSubTipoMovimiento { IdSubTipoMovimiento = 2, SubTipoMovimientoDesc = "CORTE CAJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
-            );
+            modelBuilder.Entity<CatSubTipoMovimiento>().HasData(
+              new CatSubTipoMovimiento { IdSubTipoMovimiento = 1, SubTipoMovimientoDesc = "DEPOSITO CAJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+              new CatSubTipoMovimiento { IdSubTipoMovimiento = 2, SubTipoMovimientoDesc = "CORTE CAJA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
+          );
 
             modelBuilder.Entity<CatTipoPresupuesto>().HasData(
               new CatTipoPresupuesto { IdTipoPresupuesto = 1, TipoPresupuestoDesc = "VENTAS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },

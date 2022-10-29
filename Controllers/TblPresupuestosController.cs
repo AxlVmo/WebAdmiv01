@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
+using WebAdmin.ViewModels;
+
 namespace WebAdmin.Controllers
 {
     public class TblPresupuestosController : Controller
@@ -53,7 +55,7 @@ namespace WebAdmin.Controllers
                             if (ValidaTipoPresupuesto.Count >= 1)
                             {
                                 ViewBag.TipoPresupuestoFlag = 1;
-                               
+
                             }
                             else
                             {
@@ -170,6 +172,85 @@ namespace WebAdmin.Controllers
 
             }
         }
+        [HttpGet]
+        public ActionResult VariacionPresupuestos()
+        {
+
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+            {
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+
+                var fPresupuestosProspectado = from a in _context.TblPresupuestos
+                                               where a.IdEstatusRegistro == 1
+                                               select new
+                                               {
+                                                   fTippo = 1,
+                                                   fRegistros = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
+                                                   fMontos = _context.TblPresupuestos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum()
+                                               };
+                var fPresupuestosReal = from a in _context.RelPresupuestoPagos
+                                        where a.IdUsuarioModifico == Guid.Parse(f_user)
+                                        where a.IdEstatusRegistro == 1
+                                        select new
+                                        {
+                                            fTippo = 2,
+                                            fRegistros = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 && a.IdUsuarioModifico == Guid.Parse(f_user)).Count(),
+                                            fMontos = _context.RelPresupuestoPagos.Where(a => a.IdUsuarioModifico == Guid.Parse(f_user) && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
+                                        };
+
+                var fPresupuestos = fPresupuestosProspectado.Union(fPresupuestosReal);
+                return Json(fPresupuestos);
+            }
+            else
+            {
+                return Json(0);
+
+            }
+        }
+        [HttpGet]
+        public ActionResult fPresupuestos(Guid? id)
+        {
+            var fPresupuestoCntro = from a in _context.TblPresupuestos
+                                    join b in _context.CatMeses on a.IdMes equals b.IdMes
+                                    join c in _context.CatTipoPresupuestos on a.IdTipoPresupuesto equals c.IdTipoPresupuesto
+                                    join d in _context.CatSubTipoPresupuestos on a.IdSubTipoPresupuesto equals d.IdSubTipoPresupuesto
+                                    where a.IdPresupuesto == id
+                                    select new
+                                    {
+                                        IdPresupuesto = a.IdPresupuesto,
+                                        TipoPresupuestoDesc = c.TipoPresupuestoDesc,
+                                        SubTipoPresupuestoDesc = d.SubTipoPresupuestoDesc,
+                                        PresupuestoDesc = a.PresupuestoDesc,
+                                        MesDesc = b.MesDesc,
+                                        DiaCorte = a.DiaCorte,
+                                        MontoPresupuesto = a.MontoPresupuesto,
+                                        NumeroReferencia = a.NumeroReferencia,
+                                        IdUCorporativoCentro = a.IdUCorporativoCentro,
+                                        FechaRegistro = a.FechaRegistro,
+                                        IdEstatusRegistro = a.IdEstatusRegistro
+                                    };
+            return Json(fPresupuestoCntro);
+        }
+        [HttpGet]
+        public ActionResult fPresupuestosPagos(Guid? id)
+        {
+            var fPresupuestoCntro = from a in _context.RelPresupuestoPagos
+                                    join b in _context.CatTipoPagos on a.IdTipoPago equals b.IdTipoPago
+                                    where a.IdPresupuesto == id
+                                    select new RelPresupuestoPago
+                                    {
+                                        IdPresupuesto = a.IdPresupuesto,
+                                        TipoPagoDesc = b.TipoPagoDesc,
+                                        FolioPago = a.FolioPago,
+                                        MontoPresupuestoReal = a.MontoPresupuestoReal,
+                                        FechaRegistro = a.FechaRegistro,
+                                        IdEstatusRegistro = a.IdEstatusRegistro
+                                    };
+            return Json(fPresupuestoCntro);
+        }
         // GET: TblPresupuestos/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -210,16 +291,16 @@ namespace WebAdmin.Controllers
 
             ViewBag.ListaMes = fMes.ToList();
             var fSubTipoPresupuesto = from a in _context.CatSubTipoPresupuestos
-                                  where a.IdEstatusRegistro == 1
-                                  select new CatSubTipoPresupuesto
-                                  {
-                                      IdSubTipoPresupuesto = a.IdSubTipoPresupuesto,
-                                      SubTipoPresupuestoDesc = a.SubTipoPresupuestoDesc
-                                  };
-                                  
+                                      where a.IdEstatusRegistro == 1
+                                      select new CatSubTipoPresupuesto
+                                      {
+                                          IdSubTipoPresupuesto = a.IdSubTipoPresupuesto,
+                                          SubTipoPresupuestoDesc = a.SubTipoPresupuestoDesc
+                                      };
+
             ViewBag.ListaSubTipoPresupuesto = fSubTipoPresupuesto.ToList();
 
-             var fTipoServicio = from a in _context.CatTipoServicios
+            var fTipoServicio = from a in _context.CatTipoServicios
                                 where a.IdEstatusRegistro == 1
                                 select new CatTipoServicio
                                 {
@@ -295,7 +376,7 @@ namespace WebAdmin.Controllers
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaCatEstatus = ListaCatEstatus;
 
-             var fTipoPresupuesto = from a in _context.CatTipoPresupuestos
+            var fTipoPresupuesto = from a in _context.CatTipoPresupuestos
                                    where a.IdEstatusRegistro == 1
                                    select new CatTipoPresupuesto
                                    {
@@ -314,16 +395,16 @@ namespace WebAdmin.Controllers
 
             ViewBag.ListaMes = fMes.ToList();
             var fSubTipoPresupuesto = from a in _context.CatSubTipoPresupuestos
-                                  where a.IdEstatusRegistro == 1
-                                  select new CatSubTipoPresupuesto
-                                  {
-                                      IdSubTipoPresupuesto = a.IdSubTipoPresupuesto,
-                                      SubTipoPresupuestoDesc = a.SubTipoPresupuestoDesc
-                                  };
-                                  
+                                      where a.IdEstatusRegistro == 1
+                                      select new CatSubTipoPresupuesto
+                                      {
+                                          IdSubTipoPresupuesto = a.IdSubTipoPresupuesto,
+                                          SubTipoPresupuestoDesc = a.SubTipoPresupuestoDesc
+                                      };
+
             ViewBag.ListaSubTipoPresupuesto = fSubTipoPresupuesto.ToList();
 
-             var fTipoServicio = from a in _context.CatTipoServicios
+            var fTipoServicio = from a in _context.CatTipoServicios
                                 where a.IdEstatusRegistro == 1
                                 select new CatTipoServicio
                                 {
@@ -369,7 +450,36 @@ namespace WebAdmin.Controllers
                                 TipoPagoDesc = a.TipoPagoDesc
                             };
 
-            ViewBag.ListaTipopago = fTipopago.ToList(); ;
+            ViewBag.ListaTipopago = fTipopago.ToList();
+
+            var fMes = from a in _context.CatMeses
+                       where a.IdEstatusRegistro == 1
+                       select new CatMes
+                       {
+                           IdMes = a.IdMes,
+                           MesDesc = a.MesDesc
+                       };
+
+            ViewBag.ListaMes = fMes.ToList();
+            var fSubTipoPresupuesto = from a in _context.CatSubTipoPresupuestos
+                                      where a.IdEstatusRegistro == 1
+                                      select new CatSubTipoPresupuesto
+                                      {
+                                          IdSubTipoPresupuesto = a.IdSubTipoPresupuesto,
+                                          SubTipoPresupuestoDesc = a.SubTipoPresupuestoDesc
+                                      };
+
+            ViewBag.ListaSubTipoPresupuesto = fSubTipoPresupuesto.ToList();
+
+            var fTipoServicio = from a in _context.CatTipoServicios
+                                where a.IdEstatusRegistro == 1
+                                select new CatTipoServicio
+                                {
+                                    IdTipoServicio = a.IdTipoServicio,
+                                    TipoServicioDesc = a.TipoServicioDesc
+                                };
+
+            ViewBag.ListaTipoServicio = fTipoServicio.ToList();
 
             if (id == null)
             {
@@ -382,6 +492,69 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
             return View(TblPresupuesto);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Payment(Guid id, [Bind("IdPresupuesto,IdTipoPresupuesto,IdMes,IdSubTipoPresupuesto,PresupuestoDesc,NumeroReferencia,DiaCorte,MontoPresupuesto,IdTipoPago,FolioPago,MontoPresupuestoReal,Comentarios,IdEstatusRegistro")] TblPresupuesto tblPresupuesto)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Guid fCentroCorporativo = Guid.Empty;
+                    int fCorpCent = 0;
+                    var f_user = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
+                    fCentroCorporativo = fIdUsuario.IdCorporativo;
+                    fCorpCent = 1;
+                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                    {
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                        fCentroCorporativo = fIdCentro.IdCentro;
+                        fCorpCent = 2;
+                    }
+                    tblPresupuesto.IdCorpCent = fCorpCent;
+                    tblPresupuesto.IdUCorporativoCentro = fCentroCorporativo;
+                    tblPresupuesto.PresupuestoDesc = tblPresupuesto.PresupuestoDesc.ToString().ToUpper().Trim();
+                    tblPresupuesto.IdUsuarioModifico = Guid.Parse(f_user);
+                    tblPresupuesto.FechaRegistro = DateTime.Now;
+                    tblPresupuesto.IdEstatusRegistro = tblPresupuesto.IdEstatusRegistro;
+
+                    var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                    int f_dia = DateTime.Now.Day;
+                    int f_mes = DateTime.Now.Day;
+                    var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+                    var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+
+                    var addRelPresupeustoPagos = new RelPresupuestoPago
+                    {
+                        IdPresupuesto = tblPresupuesto.IdPresupuesto,
+                        IdTipoPago = tblPresupuesto.IdTipoPago,
+                        FolioPago = tblPresupuesto.FolioPago,
+                        MontoPresupuestoReal = tblPresupuesto.MontoPresupuestoReal,
+                        Comentarios = tblPresupuesto.Comentarios,
+                        IdUsuarioModifico = Guid.Parse(f_user),
+                        FechaRegistro = DateTime.Now,
+                        IdEstatusRegistro = 1
+                    };
+                    _context.Add(addRelPresupeustoPagos);
+                    await _context.SaveChangesAsync();
+                    _notyf.Warning("Registro actualizado con éxito", 5);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TblPresupuestoExists(tblPresupuesto.IdPresupuesto))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: TblPresupuestos/Edit/5

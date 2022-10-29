@@ -136,9 +136,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 <script>
   $(document).ready(function () {
     DatosPresupuesto();
-    DatosGastos();
+    
     DatosMovimientos();
     DatosVentas();
+    DatosPresupuestos();
 
   });
   function DatosPresupuesto() {
@@ -175,39 +176,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
     return false;
   }
-  function DatosGastos() {
-    $.ajax({
-      type: "GET",
-      url: "/TblSuministroes/DatosSuministros/",
-      data: {},
-      contentType: "application/json;charset=utf-8",
-      dataType: "json",
-      success: function (list) {
 
-        if (list.length == 0) {
-          document.getElementById("i_gasto_fijo").value = null;
-          document.getElementById("i_registros_gasto_fijo").value = null;
-        }
-        else {
-
-          for (var i = 0, len = list.length; i < len; i++) {
-            var v_gasto_fijo = list[i].fMontos;
-            var v_registros_gasto_fijo = list[i].fRegistros;
-            document.getElementById("i_gasto_fijo").innerText = 'Fijo: ' + v_gasto_fijo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-            document.getElementById('i_registros_gasto_fijo').innerText = 'Acumulado: ' + v_registros_gasto_fijo;
-          }
-
-        }
-      },
-      error: function () {
-        var v_fMontosSuministros = 0;
-        document.getElementById("i_gasto_fijo").innerText = 'Fijo: ' + v_fMontosSuministros.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-        document.getElementById('i_registros_gasto_fijo').innerText = 'Acumulado: ' + v_fMontosSuministros;
-      }
-    });
-
-    return false;
-  }
   function DatosUsuarios() {
     $.ajax({
       type: "GET",
@@ -302,37 +271,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
     return false;
   }
-  function DatosSuministros() {
-    $.ajax({
-      type: "GET",
-      url: "/TblSuministroes/DatosResumen/",
-      data: {},
-      contentType: "application/json;charset=utf-8",
-      dataType: "json",
-      success: function (list) {
 
-        if (list.length == 0) {
-          document.getElementById("i_fRegistrosSuministros").value = null;
-          document.getElementById("i_fMontosSuministros").value = null;
-        }
-        else {
-
-          for (var i = 0, len = list.length; i < len; i++) {
-            document.getElementById('i_fRegistrosSuministros').innerText = 'Total: ' + list[i].fRegistros;
-            document.getElementById("i_fMontosSuministros").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-          }
-
-        }
-      },
-      error: function () {
-        var v_fMontosSuministros = 0;
-        document.getElementById('i_fRegistrosSuministros').innerText = 'Total: ' + v_fMontosSuministros;
-        document.getElementById("i_fMontosSuministros").innerText = 'Monto: ' + v_fMontosSuministros.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-      }
-    });
-
-    return false;
-  }
   function DatosAlumnos() {
     $.ajax({
       type: "GET",
@@ -362,10 +301,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
       }
     });
   }
-  function DatosMovimientos() {
+function DatosMovimientos() {
     $.ajax({
       type: "GET",
-      url: "/TblMovimientosCaja/DatosMovimientoCajas/",
+      url: "/TblMovimientoCajas/DatosMovimientoCajas/",
       data: {},
       contentType: "application/json;charset=utf-8",
       dataType: "json",
@@ -401,6 +340,37 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         document.getElementById("i_entradas_centro_digital").innerText = 'Ingresos Digital: ' + v_fMontosVentas.v_entradas_centro_digital.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
         document.getElementById("i_salidas_centro_efectivo").innerText = 'Egresos Efectivo: ' + v_fMontosVentas.v_salidas_centro_efectivo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
         document.getElementById("i_salidas_centro_digital").innerText = 'Egresos Digital: ' + v_fMontosVentas.v_salidas_centro_digital.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+      }
+    });
+
+    return false;
+  }
+    function DatosPresupuestos() {
+    $.ajax({
+      type: "GET",
+      url: "/TblPresupuestos/VariacionPresupuestos/",
+      data: {},
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
+      success: function (list) {
+
+        if (list.length == 0) {
+          document.getElementById("i_presupuesto_prospectado").value = null;
+          document.getElementById("i_presupuesto_real").value = null;
+        }
+        else {
+
+          document.getElementById("i_presupuesto_prospectado").innerText = 'Prospectado: ' + list[1].fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            document.getElementById("i_presupuesto_real").innerText = 'Real: ' + list[0].fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            
+
+        }
+      },
+      error: function () {
+        var v_fMontosVentas = 0;
+        document.getElementById("i_presupuesto_prospectado").innerText = 'Caja Efectivo: ' + v_fMontosVentas.fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+        document.getElementById("i_presupuesto_real").innerText = 'Caja Digital: ' + v_fMontosVentas.fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+        
       }
     });
 

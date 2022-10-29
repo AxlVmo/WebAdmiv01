@@ -22,7 +22,7 @@ namespace WebAdmin.Models
         public int CantidadPago { get; set; }
 
       [Display(Name = "Descuento %")]
-        public int Descuento { get; set; }
+        public int Diferencia { get; set; }
 
         [Display(Name = "Total Precio Producto")]
         public double Total { get; set; }

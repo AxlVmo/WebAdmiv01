@@ -233,7 +233,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdServicio,CodigoExterno,IdTipoServicio,DescServicio,ServicioPrecioUno,Periodo,IdEstatusRegistro")] TblServicio catServicios)
+        public async Task<IActionResult> Edit(int id, [Bind("IdServicio,CodigoInterno,IdTipoServicio,DescServicio,ServicioPrecioUno,Periodo,IdEstatusRegistro")] TblServicio catServicios)
         {
             if (id != catServicios.IdServicio)
             {

@@ -33,9 +33,6 @@ namespace WebAdmin.Models
         [Display(Name = "Folio Compra")]
         public int FolioCompra { get; set; }
 
-        [Display(Name = "Monto de Pago")]
-        public double MontoPago { get; set; }
-
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
 
@@ -55,10 +52,6 @@ namespace WebAdmin.Models
         [Display(Name = "Estatus")]
 
         public int IdEstatusRegistro { get; set; }
-
-        [Display(Name = "Total")]
-        public double Total { get; set; }
-
         public virtual List<RelCompraProducto> RelCompraProductos { get; set; }
     }
 }

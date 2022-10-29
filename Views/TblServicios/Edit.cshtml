@@ -12,7 +12,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
              <form asp-action="Edit">
             
             <div class="card-body">
-                    <input spellcheck="true" type="hidden" asp-for="IdServicio" />
+                    <input type="hidden" asp-for="IdServicio" />
+                    <input type="hidden" asp-for="CodigoInterno" />
                     <div class="row">
                         <div class="mb-3 col-md-4">
                             <label for="DescServicio" class="form-label" asp-for="DescServicio"></label>

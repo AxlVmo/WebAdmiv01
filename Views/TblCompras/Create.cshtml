@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-3">
+                        <div class="mb-3 col-md-3">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
                             <label class="form-label" asp-for="TblCompras.IdTipoCompra"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
@@ -230,7 +230,7 @@
                     </div>
                     <div class="form-group">
                         <input spellcheck="true" type="button" value="Validar" class="btn btn-info" id="btn_validar" />
-                        <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" id="btn_guardar"
+                        <input spellcheck="true" type="button" value="Crear" class="btn btn-success" id="btn_guardar"
                             disabled />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
@@ -301,8 +301,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
             )
             total_tabla();
-
         }
+    })
+    $("#btn_guardar").on("click", function () {
+        valida_compra();
     })
     $("#btn_validar").on("click", function () {
 
@@ -371,8 +373,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         let tDiferencia = parseFloat(iPagoMonto - total_col1).toFixed(2);
         let vTotal = iPagoMonto - tDiferencia;
         document.getElementById("i_pago_diferencia").value = tDiferencia;
-
-
     });
     function total_tabla() {
         let total_col1 = 0;
@@ -390,7 +390,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
         if (rowCount == 0) {
             document.getElementById('l_total_compra').innerHTML = "$ " + total_col1;
-
         }
         else {
             total_tabla();
@@ -405,28 +404,29 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             //   CodigoPago: $("#i_Foliocompra").val()
             Relcompra_Productos.push(
                 {
-                    TipoServicio: $(tr).find('td:eq(0)').text(),
-                    Servicio: $(tr).find('td:eq(1)').text(),
+                    Cantidad: $(tr).find('td:eq(0)').text(),
+                    ProdServDesc: $(tr).find('td:eq(1)').text(),
                     Descuento: $(tr).find('td:eq(2)').text(),
                     Precio: $(tr).find('td:eq(3)').text(),
                     TotalPrecio: $(tr).find('td:eq(4)').text()
                 }
             )
         })
-
         var Relcompra_Pagos = [{
 
             IdTipoPago: f_tipo_pago,
-            FechaAlternaPago: fecha_objeto,
-            CodigoReferencia: f_codigo_pago,
+            FolioPago: f_codigo_pago,
             CantidadPago: catidad_abono,
+            Diferencia: catidad_diferencia,
             Total: total_col1
         }];
         var oCompraVM = {
             Tblcompras: {
+                IdProveedorCompra: $("#l_tipo_compra").val(),
                 IdTipocompra: $("#l_tipo_compra").val(),
                 IdCliente: $("#l_alumno").val(),
                 Foliocompra: $("#i_Foliocompra").val(),
+                CompraDesc: $("#i_Foliocompra").val(),
 
             },
             RelcompraProductos: Relcompra_Productos,
@@ -456,14 +456,14 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var f_registros_tabla = $('#tbProducto >tbody >tr').length;
         var f_tipo_pago = $('#l_tipo_pago').val();
         let f_total_compra = $('#l_total_compra').val();
-        let f_pago_diferencia = parseInt($('#i_pago_diferencia').val());
-        var f_codigo_pago = $('#i_codigo_pago').val();
+        let f_pago_diferencia = parseFloat($('#i_pago_diferencia').val());
+        var f_codigo_pago = $('#i_folio_pago').val();
         let total_col1 = 0;
         $('#tbProducto tbody').find('tr').each(function (i, el) {
-            total_col1 += parseFloat($(this).find('td').eq(4).text());
+            total_col1 += parseFloat($(this).find('td').eq(3).text());
         });
-        var i_pago_monto = parseInt($('#i_pago_monto').val());
-        var t_diferencia = parseInt(i_pago_monto - total_col1);
+        var i_pago_monto = parseFloat($('#i_pago_monto').val());
+        var t_diferencia = parseFloat(i_pago_monto - total_col1);
         var v_total = i_pago_monto - t_diferencia;
 
 
@@ -491,7 +491,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 validate('l_tipo_pago')
             }
             else if (f_tipo_pago != 1 && f_codigo_pago == "") {
-                validate('i_codigo_pago')
+                validate('i_folio_pago')
             }
             else if (i_pago_monto == 0) {
                 validate('i_pago_monto')
