@@ -173,6 +173,34 @@ namespace WebAdmin.Controllers
             }
         }
         [HttpGet]
+        public ActionResult ProyectarPresupuestos()
+        {
+
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+
+            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
+            {
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+
+                var fPresupuestosTotales = (from p in _context.TblPresupuestos
+                                            where p.IdUCorporativoCentro == f_centro.IdCentro
+                                            select p).Distinct().ToList();
+
+                foreach (var order in fPresupuestosTotales)
+                {
+                    Console.WriteLine(order.PresupuestoDesc);
+                }
+
+                return Json(fPresupuestosTotales);
+            }
+            else
+            {
+                return Json(0);
+
+            }
+        }
+        [HttpGet]
         public ActionResult VariacionPresupuestos()
         {
 
@@ -185,10 +213,12 @@ namespace WebAdmin.Controllers
 
                 var fPresupuestos = new
                 {
-                    fR_pp = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
-                    fM_pp = _context.TblPresupuestos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
-                    fR_pr = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 && a.IdUsuarioModifico == Guid.Parse(f_user)).Count(),
-                    fM_pr = _context.RelPresupuestoPagos.Where(a => a.IdUsuarioModifico == Guid.Parse(f_user) && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
+                    fR_pp_i = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro && a.IdTipoPresupuesto == 1).Count(),
+                    fM_pp_i = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro && a.IdTipoPresupuesto == 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
+                    fR_pp_g = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro && a.IdTipoPresupuesto != 1).Count(),
+                    fM_pp_g = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro && a.IdTipoPresupuesto != 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
+                    fR_pr_g = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 && a.IdUsuarioModifico == Guid.Parse(f_user)).Count(),
+                    fM_pr_g = _context.RelPresupuestoPagos.Where(a => a.IdUsuarioModifico == Guid.Parse(f_user) && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
                 };
                 return Json(fPresupuestos);
             }
@@ -196,10 +226,12 @@ namespace WebAdmin.Controllers
             {
                 var fPresupuestos = new
                 {
-                    fR_pp = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1).Count(),
-                    fM_pp = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
-                    fR_pr = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 ).Count(),
-                    fM_pr = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
+                    fR_pp_i = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdTipoPresupuesto == 1).Count(),
+                    fM_pp_i = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdTipoPresupuesto == 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
+                    fR_pp_g = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdTipoPresupuesto != 1).Count(),
+                    fM_pp_g = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdTipoPresupuesto != 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
+                    fR_pr_g = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1).Count(),
+                    fM_pr_g = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
                 };
                 return Json(fPresupuestos);
 
@@ -316,39 +348,39 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                    Guid fCentroCorporativo = Guid.Empty;
-                    int fCorpCent = 0;
-                    var f_user = _userService.GetUserId();
-                    var isLoggedIn = _userService.IsAuthenticated();
-                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
-                    var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
-                    fCentroCorporativo = fCorp.IdCorporativo;
-                    fCorpCent = 1;
-                    int f_dia = DateTime.Now.Day;
-                    int f_mes = DateTime.Now.Day;
-                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
-                    {
-                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
-                        fCentroCorporativo = fIdCentro.IdCentro;
-                        fCorpCent = 2;
-                    }
 
-                    var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == fCentroCorporativo && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
-                    var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == fCentroCorporativo && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+                Guid fCentroCorporativo = Guid.Empty;
+                int fCorpCent = 0;
+                var f_user = _userService.GetUserId();
+                var isLoggedIn = _userService.IsAuthenticated();
+                var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
+                var fCorp = await _context.TblCorporativos.FirstOrDefaultAsync();
+                fCentroCorporativo = fCorp.IdCorporativo;
+                fCorpCent = 1;
+                int f_dia = DateTime.Now.Day;
+                int f_mes = DateTime.Now.Day;
+                if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                {
+                    var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                    fCentroCorporativo = fIdCentro.IdCentro;
+                    fCorpCent = 2;
+                }
 
-                    tblPresupuesto.IdCorpCent = fCorpCent;
-                    tblPresupuesto.IdUCorporativoCentro = fCentroCorporativo;
-                    tblPresupuesto.IdUsuarioModifico = Guid.Parse(f_user);
-                    tblPresupuesto.PresupuestoDesc = tblPresupuesto.PresupuestoDesc.ToString().ToUpper().Trim();
-                    tblPresupuesto.FechaRegistro = DateTime.Now;
-                    tblPresupuesto.IdEstatusRegistro = 1;
-                    _context.Add(tblPresupuesto);
+                var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == fCentroCorporativo && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+                var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == fCentroCorporativo && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+
+                tblPresupuesto.IdCorpCent = fCorpCent;
+                tblPresupuesto.IdUCorporativoCentro = fCentroCorporativo;
+                tblPresupuesto.IdUsuarioModifico = Guid.Parse(f_user);
+                tblPresupuesto.PresupuestoDesc = tblPresupuesto.PresupuestoDesc.ToString().ToUpper().Trim();
+                tblPresupuesto.FechaRegistro = DateTime.Now;
+                tblPresupuesto.IdEstatusRegistro = 1;
+                _context.Add(tblPresupuesto);
 
 
-                    await _context.SaveChangesAsync();
-                    _notyf.Success("Registro creado con éxito", 5);
-               
+                await _context.SaveChangesAsync();
+                _notyf.Success("Registro creado con éxito", 5);
+
                 return RedirectToAction(nameof(Index));
             }
             //ViewData["IdTipoPresupuesto"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", TblPresupuesto.IdTipoPresupuesto);

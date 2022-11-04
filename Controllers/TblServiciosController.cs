@@ -95,7 +95,7 @@ namespace WebAdmin.Controllers
         {
             var fServicios = from a in _context.TblServicio
                              join b in _context.CatTipoServicios on a.IdTipoServicio equals b.IdTipoServicio
-                             where b.IdTipoServicio == id
+                             where b.IdTipoServicio == id && a.IdEstatusRegistro == 1
                              select new TblServicio
                              {
                                  IdServicio = a.IdServicio,
