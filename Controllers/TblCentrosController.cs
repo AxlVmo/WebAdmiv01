@@ -116,19 +116,21 @@ namespace WebAdmin.Controllers
             if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
             {
                 var f_cent = _context.TblCentros.First(m => m.IdUsuarioControl == f_usuario.IdUsuario);
-                var f_totales = from a in _context.TblCentros
-                                where a.IdEstatusRegistro == 1
-                                select new
-                                {
-                                    fRegistros = _context.TblCentros.Where(a => a.IdEstatusRegistro == 1 && a.IdCentro == f_cent.IdCentro).Count(),
-                                    fMontos = _context.TblCentros.Where(a => a.IdCentro == f_cent.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum()
-                                };
+                var f_totales = new
+                {
+                    fRegistros = _context.TblCentros.Where(a => a.IdEstatusRegistro == 1 && a.IdCentro == f_cent.IdCentro).Count(),
+                    fMontos = _context.TblCentros.Where(a => a.IdCentro == f_cent.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum()
+                };
                 return Json(f_totales);
-
             }
             else
             {
-                return Json(0);
+                var fPresupuestos = new
+                {
+                    fRegistros = _context.TblCentros.Where(a => a.IdEstatusRegistro == 1).Count(),
+                    fMontos = _context.TblCentros.Where(a => a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum()
+                };
+                return Json(fPresupuestos);
             }
         }
         [HttpGet]

@@ -183,30 +183,25 @@ namespace WebAdmin.Controllers
             {
                 var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
-                var fPresupuestosProspectado = from a in _context.TblPresupuestos
-                                               where a.IdEstatusRegistro == 1
-                                               select new
-                                               {
-                                                   fTippo = 1,
-                                                   fRegistros = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
-                                                   fMontos = _context.TblPresupuestos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum()
-                                               };
-                var fPresupuestosReal = from a in _context.RelPresupuestoPagos
-                                        where a.IdUsuarioModifico == Guid.Parse(f_user)
-                                        where a.IdEstatusRegistro == 1
-                                        select new
-                                        {
-                                            fTippo = 2,
-                                            fRegistros = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 && a.IdUsuarioModifico == Guid.Parse(f_user)).Count(),
-                                            fMontos = _context.RelPresupuestoPagos.Where(a => a.IdUsuarioModifico == Guid.Parse(f_user) && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
-                                        };
-
-                var fPresupuestos = fPresupuestosProspectado.Union(fPresupuestosReal);
+                var fPresupuestos = new
+                {
+                    fR_pp = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
+                    fM_pp = _context.TblPresupuestos.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
+                    fR_pr = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 && a.IdUsuarioModifico == Guid.Parse(f_user)).Count(),
+                    fM_pr = _context.RelPresupuestoPagos.Where(a => a.IdUsuarioModifico == Guid.Parse(f_user) && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
+                };
                 return Json(fPresupuestos);
             }
             else
             {
-                return Json(0);
+                var fPresupuestos = new
+                {
+                    fR_pp = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1).Count(),
+                    fM_pp = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
+                    fR_pr = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 ).Count(),
+                    fM_pr = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
+                };
+                return Json(fPresupuestos);
 
             }
         }
@@ -321,12 +316,7 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var vDuplicado = _context.TblPresupuestos
-               .Where(s => s.PresupuestoDesc == tblPresupuesto.PresupuestoDesc)
-               .ToList();
-
-                if (vDuplicado.Count == 0)
-                {
+                
                     Guid fCentroCorporativo = Guid.Empty;
                     int fCorpCent = 0;
                     var f_user = _userService.GetUserId();
@@ -358,11 +348,7 @@ namespace WebAdmin.Controllers
 
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
-                }
-                else
-                {
-                    _notyf.Warning("Favor de validar, existe una TipoPresupuesto con el mismo nombre", 5);
-                }
+               
                 return RedirectToAction(nameof(Index));
             }
             //ViewData["IdTipoPresupuesto"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", TblPresupuesto.IdTipoPresupuesto);
