@@ -134,82 +134,81 @@
                     <div class="row">
                         <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="f_enero">
+                                <input class="form-check-input" type="checkbox" id="f_enero" name="meses" />
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Enero</label>
                             </div>
                         </div>
                         <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="f_febrero">
+                                <input class="form-check-input" type="checkbox" id="f_febrero" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Febrero</label>
                             </div>
                         </div>
                         <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="f_marzo">
+                                <input class="form-check-input" type="checkbox" id="f_marzo" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Marzo</label>
                             </div>
                         </div>
                         <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="f_abril">
+                                <input class="form-check-input" type="checkbox" id="f_abril" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Abril</label>
                             </div>
                         </div>
                         <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="f_mayo">
+                                <input class="form-check-input" type="checkbox" id="f_mayo" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Mayo</label>
                             </div>
                         </div>
                         <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="f_junio">
+                                <input class="form-check-input" type="checkbox" id="f_junio" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Junio</label>
                             </div>
                         </div>
                     </div>
-                      <div class="row">
+                    <div class="row">
                         <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="f_julio">
+                                <input class="form-check-input" type="checkbox" id="f_julio" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Julio</label>
                             </div>
                         </div>
                         <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="f_agosto">
+                                <input class="form-check-input" type="checkbox" id="f_agosto" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Agosto</label>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-2" id="f_septiembre">
+                        <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <input class="form-check-input" type="checkbox" id="f_septiembre" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Septiempre</label>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-2" id="f_octubre">
+                        <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <input class="form-check-input" type="checkbox" id="f_octubre" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Octubre</label>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-2" id="f_novimebre">
+                        <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <input class="form-check-input" type="checkbox" id="f_novimebre" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Novimbre</label>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-2" id="f_diciembre">
+                        <div class="mb-3 col-md-2" id="">
                             <div class="form-check form-switch mb-2">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <input class="form-check-input" type="checkbox" id="f_diciembre" name="meses">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Diciembre</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input spellcheck="true" type="button" value="Validar" class="btn btn-info" id="btn_validar"  />
-                        <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
+                        <input spellcheck="true" type="button" value="Guardar" class="btn btn-info" id="btn_validar" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>
@@ -361,9 +360,136 @@
             }
         });
     });
-       $("#btn_validar").on("click", function () {
-        var f_genero = $('#f_enero:checked').val();
-        alert(f_genero);
+    $("#btn_validar").on("click", function () {
+        var f_tipo_presupuesto = $('#lTipoPresupuesto').val();
+        var f_sub_tipo_presupuesto = $('#lSubTipoPresupuesto').val();
+        var f_dia_corte = $('#iDiaCorte').val();
+        var f_presupuesto_desc = $('#iPresupuestoDesc').val();
+        var f_monto_resupuesto = $('#iMontoPresupuesto').val();
+        var f_numero_referencia = $('#iNumeroReferencia').val();
+        var f_tipo_servicios = $('#l_tipo_servicios').val();
+        var f_servicios = $('#l_servicios').val();
+
+        var cuenta_meses = 0;
+        var text_meses = [];
+
+        if (f_tipo_presupuesto == "") {
+            validate('lTipoPresupuesto')
+        }
+        else {
+            if (f_tipo_presupuesto == 1) {
+                if (f_sub_tipo_presupuesto == "") {
+                    validate('lSubTipoPresupuesto')
+                }
+                else if (f_tipo_servicios == "") {
+                    validate('l_tipo_servicios')
+                }
+                else if (f_servicios == "") {
+                    validate('l_servicios')
+                }
+                else if (f_monto_resupuesto == "") {
+                    validate('iMontoPresupuesto')
+                }
+                else {
+                    var checkboxes =
+                        document.getElementsByName('meses');
+
+                    var result = 0;
+
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        if (checkboxes[i].checked) {
+                            result = result + 1;
+                            
+
+                        }
+                    }
+                    if (result == 0) {
+                        vNotify.error({ text: 'Favor de seleccionar al menos 1 mes.', title: 'Intelimundo.' });
+                    }
+                    else {
+                        registra_presupuestos(result, f_tipo_presupuesto, f_sub_tipo_presupuesto, f_dia_corte, f_presupuesto_desc, f_monto_resupuesto, f_numero_referencia, f_tipo_servicios, f_servicios);
+                    }
+
+                }
+            }
+            else {
+                if (f_sub_tipo_presupuesto == "") {
+                    validate('lSubTipoPresupuesto')
+                }
+                else if (f_dia_corte == "") {
+                    validate('iDiaCorte')
+                }
+                else if (f_presupuesto_desc == "") {
+                    validate('iPresupuestoDesc')
+                }
+                else if (f_monto_resupuesto == "") {
+                    validate('iMontoPresupuesto')
+                }
+                else if (f_numero_referencia == "") {
+                    validate('iNumeroReferencia')
+                }
+                else {
+                    var checkboxes =
+                        document.getElementsByName('meses');
+
+                    var result = 0;
+
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        if (checkboxes[i].checked) {
+                            result = result + 1;
+                        }
+                    }
+                    if (result == 0) {
+                        vNotify.error({ text: 'Favor de seleccionar al menos 1 mes.', title: 'Intelimundo.' });
+                    }
+                    else {
+                        registra_presupuestos(result, f_tipo_presupuesto, f_sub_tipo_presupuesto, f_dia_corte, f_presupuesto_desc, f_monto_resupuesto, f_numero_referencia, f_tipo_servicios, f_servicios);
+                    }
+                }
+            }
+        }
     });
+    function validate(inputID) {
+        switch (inputID) {
+            case 'lTipoPresupuesto':
+                vNotify.error({ text: 'Tipo Presupuesto, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'lSubTipoPresupuesto':
+                vNotify.error({ text: 'SubTipo Presupuesto,, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'iDiaCorte':
+                vNotify.error({ text: 'Dia de Corte, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'iPresupuestoDesc':
+                vNotify.error({ text: 'Descripcion, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'iMontoPresupuesto':
+                vNotify.error({ text: 'Monto, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'iNumeroReferencia':
+                vNotify.error({ text: 'Numero de Referencia, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'l_tipo_servicios':
+                vNotify.error({ text: 'Tipo de Servicios, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'l_servicios':
+                vNotify.error({ text: 'Servicio, Requerido.', title: 'Intelimundo.' });
+                break;
+
+            default:
+                vNotify.error({ text: 'Err.', title: 'Intelimundo.' });
+        }
+    }
+    function registra_presupuestos(cuenta_meses, f_tipo_presupuesto, f_sub_tipo_presupuesto, f_dia_corte, f_presupuesto_desc, f_monto_resupuesto, f_numero_referencia, f_tipo_servicios, f_servicios) {
+
+        if (cuenta_meses == 0) {
+
+        }
+        else {
+            for (var i = 0; i < cuenta_meses; i++) {
+                vNotify.error({ text: 'Guarda.' + i, title: 'Intelimundo.' });
+            }
+        }
+    }
 </script>
 }
