@@ -14,27 +14,11 @@
                 <form asp-action="Create">
                     <div class="row">
                         <div class="mb-3 col-md-3">
-                            <label for="IdMes" class="form-label" asp-for="IdMes"></label>
-                            <div class="input-group input-group-merge">
-                                <div class="input-group input-group-merge">
-                                    <span id="basic-icon-default-fullname2" class="input-group-text">
-                                       <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
-                                    </span>
-                                    <select id="lMes" class="form-select" required asp-for="IdMes"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')"
-                                        asp-items="@(new SelectList(ViewBag.ListaMes, "IdMes", "MesDesc"))">
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3 col-md-3">
                             <label class="form-label" asp-for="IdTipoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                       <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="lTipoPresupuesto" class="form-select" required
                                         asp-for="IdTipoPresupuesto"
@@ -51,7 +35,7 @@
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                       <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="lSubTipoPresupuesto" class="form-select" required
                                         asp-for="IdSubTipoPresupuesto"
@@ -67,7 +51,7 @@
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                       <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="l_tipo_servicios" class="form-select"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
@@ -88,7 +72,8 @@
                                     class="form-control" id="iDiaCorte" required
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="DiaCorte" min="0" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
+                                    aria-describedby="2" asp-for="DiaCorte" min="0"
+                                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-6" id="c_servicios" hidden>
@@ -146,7 +131,84 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-2" id="">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="f_enero">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Enero</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2" id="">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="f_febrero">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Febrero</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2" id="">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="f_marzo">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Marzo</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2" id="">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="f_abril">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Abril</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2" id="">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="f_mayo">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Mayo</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2" id="">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="f_junio">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Junio</label>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="row">
+                        <div class="mb-3 col-md-2" id="">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="f_julio">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Julio</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2" id="">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="f_agosto">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Agosto</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2" id="f_septiembre">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Septiempre</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2" id="f_octubre">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Octubre</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2" id="f_novimebre">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Novimbre</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2" id="f_diciembre">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Diciembre</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
+                        <input spellcheck="true" type="button" value="Validar" class="btn btn-info" id="btn_validar"  />
                         <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
@@ -187,6 +249,11 @@
             document.getElementById("iPresupuestoDesc").setAttribute("readonly", true);
         }
 
+    });
+    $('#lMes').select2({
+
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
     });
     $('#l_servicios').select2({
         theme: "bootstrap-5",
@@ -293,6 +360,10 @@
                 alert("Error!!")
             }
         });
+    });
+       $("#btn_validar").on("click", function () {
+        var f_genero = $('#f_enero:checked').val();
+        alert(f_genero);
     });
 </script>
 }
