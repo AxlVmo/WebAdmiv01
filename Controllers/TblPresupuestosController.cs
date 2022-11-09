@@ -338,7 +338,46 @@ namespace WebAdmin.Controllers
             ViewBag.ListaTipoServicio = fTipoServicio.ToList();
             return View();
         }
+        public IActionResult GuardaAlt([FromBody] TblPresupuesto n_presupuesto)
+        {
+            bool respuesta = false;
+            var f_user = _userService.GetUserId();
+            Guid fCentroCorporativo = Guid.Empty;
+            int fCorpCent = 0;
+            var isLoggedIn = _userService.IsAuthenticated();
+            var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+            var fCorp = _context.TblCorporativos.First();
+            fCentroCorporativo = fCorp.IdCorporativo;
+            fCorpCent = 1;
+            if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+            {
+                var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                fCentroCorporativo = f_centro.IdCentro;
+                fCorpCent = 2;
+            }
+            var nPresupuesto = Guid.NewGuid();
+            var addMovimiento = new TblPresupuesto
+            {
+                IdPresupuesto = Guid.NewGuid(),
+                IdTipoPresupuesto = n_presupuesto.IdTipoPresupuesto,
+                IdSubTipoPresupuesto = n_presupuesto.IdSubTipoPresupuesto,
+                PresupuestoDesc = n_presupuesto.PresupuestoDesc,
+                IdMes = n_presupuesto.IdMes,
+                NumeroReferencia = n_presupuesto.NumeroReferencia,
+                DiaCorte = n_presupuesto.DiaCorte,
+                MontoPresupuesto = n_presupuesto.MontoPresupuesto,
+                IdUCorporativoCentro = fCentroCorporativo,
+                FechaRegistro = DateTime.Now,
+                IdUsuarioModifico = Guid.Parse(f_user),
+                IdCorpCent = fCorpCent,
+                IdEstatusRegistro = 1
+            };
+            _context.Add(addMovimiento);
+            _context.SaveChanges();
 
+            respuesta = true;
+            return Json(new { respuesta });
+        }
         // POST: TblPresupuestos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
