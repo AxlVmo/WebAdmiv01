@@ -22,8 +22,6 @@
                                     </span>
                                     <select id="lTipoPresupuesto" class="form-select" required
                                         asp-for="IdTipoPresupuesto"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')"
                                         asp-items="@(new SelectList(ViewBag.ListaTipoPresupuesto, "IdTipoPresupuesto", "TipoPresupuestoDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
@@ -38,9 +36,7 @@
                                         <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="lSubTipoPresupuesto" class="form-select" required
-                                        asp-for="IdSubTipoPresupuesto"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')">
+                                        asp-for="IdSubTipoPresupuesto">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
@@ -53,9 +49,7 @@
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
                                         <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
-                                    <select id="l_tipo_servicios" class="form-select"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required
+                                    <select id="l_tipo_servicios" class="form-select" required
                                         asp-items="@(new SelectList(ViewBag.ListaTipoServicio, "IdTipoServicio", "TipoServicioDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
@@ -69,10 +63,8 @@
                                     <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="number"
-                                    class="form-control" id="iDiaCorte" required
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="DiaCorte" min="0"
+                                    class="form-control" id="iDiaCorte" required placeholder="Requerido"
+                                    aria-label="John Doe" aria-describedby="2" asp-for="DiaCorte" min="0"
                                     onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                             </div>
                         </div>
@@ -83,9 +75,7 @@
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
                                         <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
-                                    <select id="l_servicios" class="form-select" required
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')" required>
+                                    <select id="l_servicios" class="form-select" required>
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
@@ -100,10 +90,8 @@
                                     <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="text"
-                                    class="form-control" id="iPresupuestoDesc" required
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="PresupuestoDesc" />
+                                    class="form-control" id="iPresupuestoDesc" required placeholder="Requerido"
+                                    aria-label="John Doe" aria-describedby="2" asp-for="PresupuestoDesc" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
@@ -113,10 +101,9 @@
                                     <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="number"
-                                    class="form-control" id="iMontoPresupuesto" required
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="MontoPresupuesto" />
+                                    class="form-control" id="iMontoPresupuesto" required placeholder="Requerido"
+                                    aria-label="John Doe" aria-describedby="2" asp-for="MontoPresupuesto" min="0"
+                                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
@@ -146,74 +133,125 @@
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_enero" name="meses" />
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Enero</label>
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoEnero" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_febrero" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Febrero</label>
+                                         <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoFebrero" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_marzo" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Marzo</label>
+                                         <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoMarzo" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_abril" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Abril</label>
+                                         <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoAbril" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_mayo" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Mayo</label>
+                                         <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoMayo" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_junio" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Junio</label>
+                                         <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoJunio" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_julio" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Julio</label>
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoJulio" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_agosto" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Agosto</label>
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoAgosto" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_septiembre" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Septiempre</label>
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoSeptiembre" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_octubre" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Octubre</label>
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoOctubre" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_novimebre" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Novimbre</label>
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoNoviembre" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-2" id="">
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_diciembre" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Diciembre</label>
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                            class="form-control" id="iMontoPresupuestoDiciembre" required
+                                            aria-label="John Doe" aria-describedby="2" min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                                     </div>
                                 </div>
                             </div>
@@ -222,7 +260,9 @@
                     </div>
 
                     <div class="form-group">
+                        
                         <input spellcheck="true" type="button" value="Guardar" class="btn btn-info" id="btn_validar" />
+                        <input spellcheck="true" type="button" value="Calendario" class="btn btn-secondary" id="btn_calendario" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>
@@ -233,9 +273,9 @@
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
-$('#checkAll').click(function () {    
-    $(':checkbox.form-check-input').prop('checked', this.checked);    
- });
+    $('#checkAll').click(function () {
+        $(':checkbox.form-check-input').prop('checked', this.checked);
+    });
     $('#lTipoPresupuesto').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
