@@ -57,7 +57,7 @@ namespace WebAdmin.Models
         [NotMapped]
         public string PeriodoDesc { get; set; }
 
-        [Display(Name = "Monto Suministro")]
+        [Display(Name = "Monto Presupuesto")]
 
         public double MontoPresupuesto { get; set; }
         [Display(Name = "Tipo Pago")]

@@ -20,8 +20,7 @@
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                        <i class="bx bx-check-shield">
-                                        </i>
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="lMes" class="form-select" required asp-for="IdMes"
                                         oninvalid="this.setCustomValidity('Campo Requerido')"
@@ -37,8 +36,7 @@
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                        <i class="bx bx-check-shield">
-                                        </i>
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="lTipoPresupuesto" class="form-select" required
                                         asp-for="IdTipoPresupuesto"
@@ -55,8 +53,7 @@
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                        <i class="bx bx-check-shield">
-                                        </i>
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
                                     <select id="lSubTipoPresupuesto" class="form-select" required
                                         asp-for="IdSubTipoPresupuesto"
@@ -89,7 +86,7 @@
                             <label for="DiaCorte" class="form-label" asp-for="DiaCorte"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="number"
                                     class="form-control" id="iDiaCorte" required
@@ -120,7 +117,7 @@
                             <label for="PresupuestoDesc" class="form-label" asp-for="PresupuestoDesc"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="text"
                                     class="form-control" id="iPresupuestoDesc" required
@@ -133,7 +130,7 @@
                             <label for="MontoPresupuesto" class="form-label" asp-for="MontoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="number"
                                     class="form-control" id="iMontoPresupuesto" required
@@ -146,7 +143,7 @@
                             <label for="NumeroReferencia" class="form-label" asp-for="NumeroReferencia"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="text"
                                     class="form-control" id="iNumeroReferencia" aria-label="John Doe"
@@ -206,7 +203,7 @@
                             <label class="form-label" asp-for="Comentarios"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="text"
                                     class="form-control" id="iComentarios" required
@@ -259,8 +256,8 @@
      
     $(document).ready(function () {
         $('#lMes').prop('disabled', true);
-        $('#l_tipo_compra').prop('disabled', true);
-        $('#lMes').prop('disabled', true);
+        $('#lTipoPresupuesto').prop('disabled', true);
+        $('#lSubTipoPresupuesto').prop('disabled', true);
         CargaPresupuestoPagos();
     });
     $('#l_tipo_pago').change(function () {

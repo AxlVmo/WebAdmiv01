@@ -34,6 +34,10 @@ namespace WebAdmin.Models
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
+         [Display(Name = "Corporativo / Centro")]
+
+        public Guid IdUCorporativoCentro { get; set; }
+
         [Display(Name = "Fecha Registro")]
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }

@@ -64,7 +64,7 @@
                                 </span>
                                 <input spellcheck="true" style="text-transform:uppercase" type="number"
                                     class="form-control" id="iDiaCorte" required placeholder="Requerido"
-                                    aria-label="John Doe" aria-describedby="2" asp-for="DiaCorte" min="0"
+                                    aria-label="John Doe" aria-describedby="2" asp-for="DiaCorte" min="0" max="30"
                                     onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                             </div>
                         </div>
@@ -143,7 +143,7 @@
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_febrero" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Febrero</label>
-                                         <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
                                             class="form-control" id="iMontoPresupuestoFebrero" required
                                             aria-label="John Doe" aria-describedby="2" min="0"
                                             onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
@@ -153,7 +153,7 @@
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_marzo" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Marzo</label>
-                                         <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
                                             class="form-control" id="iMontoPresupuestoMarzo" required
                                             aria-label="John Doe" aria-describedby="2" min="0"
                                             onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
@@ -163,7 +163,7 @@
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_abril" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Abril</label>
-                                         <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
                                             class="form-control" id="iMontoPresupuestoAbril" required
                                             aria-label="John Doe" aria-describedby="2" min="0"
                                             onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
@@ -173,7 +173,7 @@
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_mayo" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Mayo</label>
-                                         <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
                                             class="form-control" id="iMontoPresupuestoMayo" required
                                             aria-label="John Doe" aria-describedby="2" min="0"
                                             onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
@@ -183,7 +183,7 @@
                                     <div class="form-check form-switch mb-2">
                                         <input class="form-check-input" type="checkbox" id="f_junio" name="meses">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Junio</label>
-                                         <input spellcheck="true" style="text-transform:uppercase" type="number"
+                                        <input spellcheck="true" style="text-transform:uppercase" type="number"
                                             class="form-control" id="iMontoPresupuestoJunio" required
                                             aria-label="John Doe" aria-describedby="2" min="0"
                                             onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
@@ -260,15 +260,218 @@
                     </div>
 
                     <div class="form-group">
-                        
-                        <input spellcheck="true" type="button" value="Guardar" class="btn btn-info" id="btn_validar" />
-                        <input spellcheck="true" type="button" value="Calendario" class="btn btn-secondary" id="btn_calendario" />
+
+                        <input type="button" value="Guardar" class="btn btn-info" id="btn_validar" />
+                        <input type="button" value="Calendario" class="btn btn-secondary" id="btn_calendario"
+                            data-bs-toggle="modal" data-bs-target="#modalCalendario" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade" id="modalCalendario" aria-labelledby="modalNominaLabel" tabindex="-1" style="display: none"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNominaLabel">Calendario de Servicios Intelimundo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 table-responsive">
+                        <table class="table" id="tbProducto">
+                            <thead>
+                                <th style="text-align:center">
+                                    Enero
+                                </th>
+                                <th style="text-align:center">
+                                    Febrero
+                                </th>
+                                <th style="text-align:center">
+                                    Marzo
+                                </th>
+                                <th style="text-align:center">
+                                    Abril
+                                </th>
+                                <th style="text-align:center">
+                                    Mayo
+                                </th>
+                                <th style="text-align:center">
+                                    Junio
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        COMIPEMS
+                                    </td>
+                                    <td>
+                                        COMIPEMS
+                                    </td>
+                                    <td>
+                                        COMIPEMS
+                                    </td>
+                                    <td>
+                                        REGULARIZACION
+                                    </td>
+                                    <td>
+                                        VERANO FANTASTICO
+                                    </td>
+                                    <td>
+                                        VERANO FANTASTICO
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        IDANIS
+                                    </td>
+                                    <td>
+                                        IDANIS
+                                    </td>
+                                    <td>
+                                        IDANIS
+                                    </td>
+                                    <td>
+                                        IDANIS
+                                    </td>
+                                    <td>
+                                        IDANIS
+                                    </td>
+                                    <td>
+                                        IDANIS
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        CLUB DE TAREAS
+                                    </td>
+                                    <td>
+                                        CLUB DE TAREAS
+                                    </td>
+                                    <td>
+                                        CLUB DE TAREAS
+                                    </td>
+                                    <td>
+                                        CLUB DE TAREAS
+                                    </td>
+                                    <td>
+                                        CLUB DE TAREAS
+                                    </td>
+                                    <td>
+                                        CLUB DE TAREAS
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 table-responsive">
+                    <table class="table" id="tbProducto">
+                        <thead>
+                            <th style="text-align:center">
+                                Julio
+                            </th>
+                            <th style="text-align:center">
+                                Agosto
+                            </th>
+                            <th style="text-align:center">
+                                Septiembre
+                            </th>
+                            <th style="text-align:center">
+                                Octubre
+                            </th>
+                            <th style="text-align:center">
+                                Novimbre
+                            </th>
+                            <th style="text-align:center">
+                                Diciembre
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    VERANO FANTASTICO
+                                </td>
+                                <td>
+                                    COMIPEMS
+                                </td>
+                                <td>
+                                    COMIPEMS
+                                </td>
+                                <td>
+                                    COMIPEMS
+                                </td>
+                                <td>
+                                    COMIPEMS
+                                </td>
+                                <td>
+                                    COMIPEMS
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    REGULARIZACION
+                                </td>
+                                <td>
+                                    REGULARIZACION
+                                </td>
+                                <td>
+                                    REGULARIZACION
+                                </td>
+                                <td>
+                                    REGULARIZACION
+                                </td>
+                                <td>
+                                    REGULARIZACION
+                                </td>
+                                <td>
+                                    REGULARIZACION
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    CLUB DE TAREAS
+
+                                </td>
+                                <td>
+                                    CLUB DE TAREAS
+                                </td>
+                                <td>
+                                    CLUB DE TAREAS
+                                </td>
+                                <td>
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+</div>
 </div>
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -365,21 +568,16 @@
                     document.getElementById("iMontoPresupuesto").value = null;
                 }
                 else {
-                    var rowCount = $('#tbProducto >tbody >tr').length;
-                    if (rowCount == 0) {
-                        for (var i = 0, len = list.length; i < len; i++) {
-                            var f_tipo_servicio = list[i].tipoServicioDesc;
-                            var f_servicio = list[i].descServicio;
-                            var f_precio = list[i].totalPrecioServicio;
-                            var f_codigo_interno = list[i].codigoInterno;
 
-                            document.getElementById("iPresupuestoDesc").value = f_tipo_servicio + ',' + f_servicio;
-                            document.getElementById("iMontoPresupuesto").value = f_precio;
-                            document.getElementById("iNumeroReferencia").value = f_codigo_interno;
-                        }
-                    }
-                    else {
-                        vNotify.info({ text: 'Limitado a 1 Servicio por Venta.', title: 'Intelimundo.' });
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        var f_tipo_servicio = list[i].tipoServicioDesc;
+                        var f_servicio = list[i].descServicio;
+                        var f_precio = list[i].totalPrecioServicio;
+                        var f_codigo_interno = list[i].codigoInterno;
+
+                        document.getElementById("iPresupuestoDesc").value = f_tipo_servicio + ',' + f_servicio;
+                        document.getElementById("iMontoPresupuesto").value = f_precio;
+                        document.getElementById("iNumeroReferencia").value = f_codigo_interno;
                     }
                 }
             },
@@ -420,9 +618,9 @@
         var f_tipo_presupuesto = $('#lTipoPresupuesto').val();
         var f_sub_tipo_presupuesto = $('#lSubTipoPresupuesto').val();
         var f_dia_corte = $('#iDiaCorte').val();
-        var f_presupuesto_desc = $('#iPresupuestoDesc').val();
+        var f_presupuesto_desc = $('#iPresupuestoDesc').val().toUpperCase();
         var f_monto_resupuesto = $('#iMontoPresupuesto').val();
-        var f_numero_referencia = $('#iNumeroReferencia').val();
+        var f_numero_referencia = $('#iNumeroReferencia').val().toUpperCase();;
         var f_tipo_servicios = $('#l_tipo_servicios').val();
         var f_servicios = $('#l_servicios').val();
 
@@ -447,26 +645,299 @@
                     validate('iMontoPresupuesto')
                 }
                 else {
-                    var checkboxes =
-                        document.getElementsByName('meses');
+                    var checkboxes = document.getElementsByName('meses');
 
-                    var result = 0;
+                    if (checkboxes[0].checked != true) {
 
-                    for (var i = 0; i < checkboxes.length; i++) {
-                        if (checkboxes[i].checked) {
-                            result = result + 1;
-                            var f_enero = $('#f_enero').val();
-                            if (f_enero == "") {
+                        var result = 0;
 
+                        for (var i = 0; i < checkboxes.length; i++) {
+                            if (checkboxes[i].checked) {
+                                result = result + 1;
+                            }
+                        }
+                        if (result == 0) {
+                            vNotify.error({ text: 'Favor de seleccionar al menos 1 mes.', title: 'Intelimundo.' });
+                        }
+                        else {
+                            if (checkboxes[1].checked == true) {
+                                let i_MontoPresupuestoEnero = $('#iMontoPresupuestoEnero').val();
+
+                                if (i_MontoPresupuestoEnero == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad para Enero.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoEnero, "Mes": "Enero", "idMes": 1 });
+                                }
+                            }
+                            if (checkboxes[2].checked == true) {
+                                let i_MontoPresupuestoFebrero = $('#iMontoPresupuestoFebrero').val();
+
+                                if (i_MontoPresupuestoFebrero == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Febrero.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoFebrero, "Mes": "Febrero", "idMes": 2 });
+                                }
+
+                            }
+                            if (checkboxes[3].checked == true) {
+                                let i_MontoPresupuestoMarzo = $('#iMontoPresupuestoMarzo').val();
+
+                                if (i_MontoPresupuestoMarzo == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Marzo.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoMarzo, "Mes": "Marzo", "idMes": 3 });
+                                }
+
+                            }
+                            if (checkboxes[4].checked == true) {
+                                let i_MontoPresupuestoAbril = $('#iMontoPresupuestoAbril').val();
+
+                                if (i_MontoPresupuestoAbril == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Abril.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoAbril, "Mes": "Abril", "idMes": 4 });
+                                }
+
+                            }
+                            if (checkboxes[5].checked == true) {
+                                let i_MontoPresupuestoMayo = $('#iMontoPresupuestoMayo').val();
+
+                                if (i_MontoPresupuestoMayo == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Mayo.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoMayo, "Mes": "Mayo", "idMes": 5 });
+                                }
+
+                            }
+                            if (checkboxes[6].checked == true) {
+                                let i_MontoPresupuestoJunio = $('#iMontoPresupuestoJunio').val();
+
+                                if (i_MontoPresupuestoJunio == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Junio.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoJunio, "Mes": "Junio", "idMes": 6 });
+                                }
+
+                            }
+                            if (checkboxes[7].checked == true) {
+                                let i_MontoPresupuestoJulio = $('#iMontoPresupuestoJulio').val();
+
+                                if (i_MontoPresupuestoJulio == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Julio.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoJulio, "Mes": "Julio", "idMes": 7 });
+                                }
+
+                            }
+                            if (checkboxes[8].checked == true) {
+                                let i_MontoPresupuestoAgosto = $('#iMontoPresupuestoAgosto').val();
+
+                                if (i_MontoPresupuestoAgosto == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Agosto.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoAgosto, "Mes": "Agosto", "idMes": 8 });
+                                }
+
+                            }
+                            if (checkboxes[9].checked == true) {
+                                let i_MontoPresupuestoSeptiembre = $('#iMontoPresupuestoSeptiembre').val();
+
+                                if (i_MontoPresupuestoSeptiembre == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Septiembre.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoSeptiembre, "Mes": "Septiembre", "idMes": 9 });
+                                }
+
+                            }
+                            if (checkboxes[10].checked == true) {
+                                let i_MontoPresupuestoOctubre = $('#iMontoPresupuestoOctubre').val();
+
+                                if (i_MontoPresupuestoOctubre == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Octubre.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoOctubre, "Mes": "Octubre", "idMes": 10 });
+                                }
+
+                            }
+                            if (checkboxes[11].checked == true) {
+                                let i_MontoPresupuestoNoviembre = $('#iMontoPresupuestoNoviembre').val();
+
+                                if (i_MontoPresupuestoNoviembre == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Noviembre.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoNoviembre, "Mes": "Noviembre", "idMes": 11 });
+                                }
+
+                            }
+                            if (checkboxes[12].checked == true) {
+                                let i_MontoPresupuestoDiciembre = $('#iMontoPresupuestoDiciembre').val();
+
+                                if (i_MontoPresupuestoDiciembre == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Diciembre.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoDiciembre, "Mes": "Diciembre", "idMes": 12 });
+                                }
+
+                            }
+                            if (text_meses.length != 0) {
+                                registra_presupuestos(text_meses, f_tipo_presupuesto, f_sub_tipo_presupuesto, f_dia_corte, f_presupuesto_desc, f_monto_resupuesto, f_numero_referencia);
+                            }
+                            else {
+                                vNotify.error({ text: 'Favor de completar todos los meses.', title: 'Intelimundo.' });
+                            }
+                        }
+                    }
+                    else {
+                        if (checkboxes[1].checked == true) {
+                            let i_MontoPresupuestoEnero = $('#iMontoPresupuestoEnero').val();
+
+                            if (i_MontoPresupuestoEnero == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad para Enero.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoEnero, "Mes": "Enero", "idMes": 1 });
+                            }
+                        }
+                        if (checkboxes[2].checked == true) {
+                            let i_MontoPresupuestoFebrero = $('#iMontoPresupuestoFebrero').val();
+
+                            if (i_MontoPresupuestoFebrero == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Febrero.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoFebrero, "Mes": "Febrero", "idMes": 2 });
                             }
 
                         }
-                    }
-                    if (result == 0) {
-                        vNotify.error({ text: 'Favor de seleccionar al menos 1 mes.', title: 'Intelimundo.' });
-                    }
-                    else {
-                        registra_presupuestos(result, f_tipo_presupuesto, f_sub_tipo_presupuesto, f_dia_corte, f_presupuesto_desc, f_monto_resupuesto, f_numero_referencia);
+                        if (checkboxes[3].checked == true) {
+                            let i_MontoPresupuestoMarzo = $('#iMontoPresupuestoMarzo').val();
+
+                            if (i_MontoPresupuestoMarzo == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Marzo.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoMarzo, "Mes": "Marzo", "idMes": 3 });
+                            }
+
+                        }
+                        if (checkboxes[4].checked == true) {
+                            let i_MontoPresupuestoAbril = $('#iMontoPresupuestoAbril').val();
+
+                            if (i_MontoPresupuestoAbril == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Abril.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoAbril, "Mes": "Abril", "idMes": 4 });
+                            }
+
+                        }
+                        if (checkboxes[5].checked == true) {
+                            let i_MontoPresupuestoMayo = $('#iMontoPresupuestoMayo').val();
+
+                            if (i_MontoPresupuestoMayo == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Mayo.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoMayo, "Mes": "Mayo", "idMes": 5 });
+                            }
+
+                        }
+                        if (checkboxes[6].checked == true) {
+                            let i_MontoPresupuestoJunio = $('#iMontoPresupuestoJunio').val();
+
+                            if (i_MontoPresupuestoJunio == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Junio.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoJunio, "Mes": "Junio", "idMes": 6 });
+                            }
+
+                        }
+                        if (checkboxes[7].checked == true) {
+                            let i_MontoPresupuestoJulio = $('#iMontoPresupuestoJulio').val();
+
+                            if (i_MontoPresupuestoJulio == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Julio.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoJulio, "Mes": "Julio", "idMes": 7 });
+                            }
+
+                        }
+                        if (checkboxes[8].checked == true) {
+                            let i_MontoPresupuestoAgosto = $('#iMontoPresupuestoAgosto').val();
+
+                            if (i_MontoPresupuestoAgosto == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Agosto.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoAgosto, "Mes": "Agosto", "idMes": 8 });
+                            }
+
+                        }
+                        if (checkboxes[9].checked == true) {
+                            let i_MontoPresupuestoSeptiembre = $('#iMontoPresupuestoSeptiembre').val();
+
+                            if (i_MontoPresupuestoSeptiembre == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Septiembre.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoSeptiembre, "Mes": "Septiembre", "idMes": 9 });
+                            }
+
+                        }
+                        if (checkboxes[10].checked == true) {
+                            let i_MontoPresupuestoOctubre = $('#iMontoPresupuestoOctubre').val();
+
+                            if (i_MontoPresupuestoOctubre == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Octubre.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoOctubre, "Mes": "Octubre", "idMes": 10 });
+                            }
+
+                        }
+                        if (checkboxes[11].checked == true) {
+                            let i_MontoPresupuestoNoviembre = $('#iMontoPresupuestoNoviembre').val();
+
+                            if (i_MontoPresupuestoNoviembre == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Noviembre.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoNoviembre, "Mes": "Noviembre", "idMes": 11 });
+                            }
+
+                        }
+                        if (checkboxes[12].checked == true) {
+                            let i_MontoPresupuestoDiembre = $('#iMontoPresupuestoDiciembre').val();
+
+                            if (i_MontoPresupuestoDiembre == "") {
+
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoDiembre, "Mes": "Diciembre", "idMes": 12 });
+                            }
+
+                        }
+                        if (text_meses.length == 12) {
+                            registra_presupuestos(text_meses, f_tipo_presupuesto, f_sub_tipo_presupuesto, f_dia_corte, f_presupuesto_desc, f_monto_resupuesto, f_numero_referencia);
+                        }
+                        else {
+                            vNotify.error({ text: 'Favor de completar todos los meses.', title: 'Intelimundo.' });
+                        }
+
                     }
 
                 }
@@ -490,47 +961,297 @@
                 else {
                     var checkboxes = document.getElementsByName('meses');
 
-                    if (checkboxes.length == 0) {
-                        vNotify.error({ text: 'Favor de seleccionar al menos 1 mes.', title: 'Intelimundo.' });
+                    if (checkboxes[0].checked != true) {
+
+                        var result = 0;
+
+                        for (var i = 0; i < checkboxes.length; i++) {
+                            if (checkboxes[i].checked) {
+                                result = result + 1;
+                            }
+                        }
+                        if (result == 0) {
+                            vNotify.error({ text: 'Favor de seleccionar al menos 1 mes.', title: 'Intelimundo.' });
+                        }
+                        else {
+                            if (checkboxes[1].checked == true) {
+                                let i_MontoPresupuestoEnero = $('#iMontoPresupuestoEnero').val();
+
+                                if (i_MontoPresupuestoEnero == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad para Enero.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoEnero, "Mes": "Enero", "idMes": 1 });
+                                }
+                            }
+                            if (checkboxes[2].checked == true) {
+                                let i_MontoPresupuestoFebrero = $('#iMontoPresupuestoFebrero').val();
+
+                                if (i_MontoPresupuestoFebrero == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Febrero.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoFebrero, "Mes": "Febrero", "idMes": 2 });
+                                }
+
+                            }
+                            if (checkboxes[3].checked == true) {
+                                let i_MontoPresupuestoMarzo = $('#iMontoPresupuestoMarzo').val();
+
+                                if (i_MontoPresupuestoMarzo == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Marzo.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoMarzo, "Mes": "Marzo", "idMes": 3 });
+                                }
+
+                            }
+                            if (checkboxes[4].checked == true) {
+                                let i_MontoPresupuestoAbril = $('#iMontoPresupuestoAbril').val();
+
+                                if (i_MontoPresupuestoAbril == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Abril.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoAbril, "Mes": "Abril", "idMes": 4 });
+                                }
+
+                            }
+                            if (checkboxes[5].checked == true) {
+                                let i_MontoPresupuestoMayo = $('#iMontoPresupuestoMayo').val();
+
+                                if (i_MontoPresupuestoMayo == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Mayo.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoMayo, "Mes": "Mayo", "idMes": 5 });
+                                }
+
+                            }
+                            if (checkboxes[6].checked == true) {
+                                let i_MontoPresupuestoJunio = $('#iMontoPresupuestoJunio').val();
+
+                                if (i_MontoPresupuestoJunio == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Junio.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoJunio, "Mes": "Junio", "idMes": 6 });
+                                }
+
+                            }
+                            if (checkboxes[7].checked == true) {
+                                let i_MontoPresupuestoJulio = $('#iMontoPresupuestoJulio').val();
+
+                                if (i_MontoPresupuestoJulio == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Julio.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoJulio, "Mes": "Julio", "idMes": 7 });
+                                }
+
+                            }
+                            if (checkboxes[8].checked == true) {
+                                let i_MontoPresupuestoAgosto = $('#iMontoPresupuestoAgosto').val();
+
+                                if (i_MontoPresupuestoAgosto == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Agosto.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoAgosto, "Mes": "Agosto", "idMes": 8 });
+                                }
+
+                            }
+                            if (checkboxes[9].checked == true) {
+                                let i_MontoPresupuestoSeptiembre = $('#iMontoPresupuestoSeptiembre').val();
+
+                                if (i_MontoPresupuestoSeptiembre == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Septiembre.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoSeptiembre, "Mes": "Septiembre", "idMes": 9 });
+                                }
+
+                            }
+                            if (checkboxes[10].checked == true) {
+                                let i_MontoPresupuestoOctubre = $('#iMontoPresupuestoOctubre').val();
+
+                                if (i_MontoPresupuestoOctubre == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Octubre.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoOctubre, "Mes": "Octubre", "idMes": 10 });
+                                }
+
+                            }
+                            if (checkboxes[11].checked == true) {
+                                let i_MontoPresupuestoNoviembre = $('#iMontoPresupuestoNoviembre').val();
+
+                                if (i_MontoPresupuestoNoviembre == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Noviembre.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoNoviembre, "Mes": "Noviembre", "idMes": 11 });
+                                }
+
+                            }
+                            if (checkboxes[12].checked == true) {
+                                let i_MontoPresupuestoDiciembre = $('#iMontoPresupuestoDiciembre').val();
+
+                                if (i_MontoPresupuestoDiciembre == "") {
+                                    vNotify.error({ text: 'Favor de agregar una cantidad Diciembre.', title: 'Intelimundo.' });
+                                }
+                                else {
+                                    text_meses.push({ "Cantidad": i_MontoPresupuestoDiciembre, "Mes": "Diciembre", "idMes": 12 });
+                                }
+
+                            }
+                            if (text_meses.length != 0) {
+                                registra_presupuestos(text_meses, f_tipo_presupuesto, f_sub_tipo_presupuesto, f_dia_corte, f_presupuesto_desc, f_monto_resupuesto, f_numero_referencia);
+                            }
+                            else {
+                                vNotify.error({ text: 'Favor de completar todos los meses.', title: 'Intelimundo.' });
+                            }
+                        }
                     }
                     else {
-                        if (checkboxes[0].checked == true) {
-                            text_meses.push({ "Mes": "Enero", "idMes": 1 });
-                        }
                         if (checkboxes[1].checked == true) {
-                            text_meses.push({ "Mes": "Febrero", "idMes": 2 });
+                            let i_MontoPresupuestoEnero = $('#iMontoPresupuestoEnero').val();
+
+                            if (i_MontoPresupuestoEnero == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad para Enero.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoEnero, "Mes": "Enero", "idMes": 1 });
+                            }
                         }
                         if (checkboxes[2].checked == true) {
-                            text_meses.push({ "Mes": "Marzo", "idMes": 3 });
+                            let i_MontoPresupuestoFebrero = $('#iMontoPresupuestoFebrero').val();
+
+                            if (i_MontoPresupuestoFebrero == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Febrero.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoFebrero, "Mes": "Febrero", "idMes": 2 });
+                            }
+
                         }
                         if (checkboxes[3].checked == true) {
-                            text_meses.push({ "Mes": "Abril", "idMes": 4 });
+                            let i_MontoPresupuestoMarzo = $('#iMontoPresupuestoMarzo').val();
+
+                            if (i_MontoPresupuestoMarzo == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Marzo.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoMarzo, "Mes": "Marzo", "idMes": 3 });
+                            }
+
                         }
                         if (checkboxes[4].checked == true) {
-                            text_meses.push({ "Mes": "Mayo", "idMes": 5 });
+                            let i_MontoPresupuestoAbril = $('#iMontoPresupuestoAbril').val();
+
+                            if (i_MontoPresupuestoAbril == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Abril.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoAbril, "Mes": "Abril", "idMes": 4 });
+                            }
+
                         }
                         if (checkboxes[5].checked == true) {
-                            text_meses.push({ "Mes": "Junio", "idMes": 6 });
+                            let i_MontoPresupuestoMayo = $('#iMontoPresupuestoMayo').val();
+
+                            if (i_MontoPresupuestoMayo == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Mayo.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoMayo, "Mes": "Mayo", "idMes": 5 });
+                            }
+
                         }
                         if (checkboxes[6].checked == true) {
-                            text_meses.push({ "Mes": "Julio", "idMes": 7 });
+                            let i_MontoPresupuestoJunio = $('#iMontoPresupuestoJunio').val();
+
+                            if (i_MontoPresupuestoJunio == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Junio.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoJunio, "Mes": "Junio", "idMes": 6 });
+                            }
+
                         }
                         if (checkboxes[7].checked == true) {
-                            text_meses.push({ "Mes": "Agosto", "idMes": 8 });
+                            let i_MontoPresupuestoJulio = $('#iMontoPresupuestoJulio').val();
+
+                            if (i_MontoPresupuestoJulio == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Julio.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoJulio, "Mes": "Julio", "idMes": 7 });
+                            }
+
                         }
                         if (checkboxes[8].checked == true) {
-                            text_meses.push({ "Mes": "Septiempre", "idMes": 9 });
+                            let i_MontoPresupuestoAgosto = $('#iMontoPresupuestoAgosto').val();
+
+                            if (i_MontoPresupuestoAgosto == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Agosto.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoAgosto, "Mes": "Agosto", "idMes": 8 });
+                            }
+
                         }
                         if (checkboxes[9].checked == true) {
-                            text_meses.push({ "Mes": "Octubre", "idMes": 10 });
+                            let i_MontoPresupuestoSeptiembre = $('#iMontoPresupuestoSeptiembre').val();
+
+                            if (i_MontoPresupuestoSeptiembre == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Septiembre.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoSeptiembre, "Mes": "Septiembre", "idMes": 9 });
+                            }
+
                         }
                         if (checkboxes[10].checked == true) {
-                            text_meses.push({ "Mes": "Novimbre", "idMes": 11 });
+                            let i_MontoPresupuestoOctubre = $('#iMontoPresupuestoOctubre').val();
+
+                            if (i_MontoPresupuestoOctubre == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Octubre.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoOctubre, "Mes": "Octubre", "idMes": 10 });
+                            }
+
                         }
                         if (checkboxes[11].checked == true) {
-                            text_meses.push({ "Mes": "Diciembre", "idMes": 12 });
+                            let i_MontoPresupuestoNoviembre = $('#iMontoPresupuestoNoviembre').val();
+
+                            if (i_MontoPresupuestoNoviembre == "") {
+                                vNotify.error({ text: 'Favor de agregar una cantidad Noviembre.', title: 'Intelimundo.' });
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoNoviembre, "Mes": "Noviembre", "idMes": 11 });
+                            }
+
                         }
-                        registra_presupuestos(text_meses, f_tipo_presupuesto, f_sub_tipo_presupuesto, f_dia_corte, f_presupuesto_desc, f_monto_resupuesto, f_numero_referencia);
+                        if (checkboxes[12].checked == true) {
+                            let i_MontoPresupuestoDiembre = $('#iMontoPresupuestoDiciembre').val();
+
+                            if (i_MontoPresupuestoDiembre == "") {
+
+                            }
+                            else {
+                                text_meses.push({ "Cantidad": i_MontoPresupuestoDiembre, "Mes": "Diciembre", "idMes": 12 });
+                            }
+
+                        }
+                        if (text_meses.length == 12) {
+                            registra_presupuestos(text_meses, f_tipo_presupuesto, f_sub_tipo_presupuesto, f_dia_corte, f_presupuesto_desc, f_monto_resupuesto, f_numero_referencia);
+                        }
+                        else {
+                            vNotify.error({ text: 'Favor de completar todos los meses.', title: 'Intelimundo.' });
+                        }
+
                     }
                 }
             }
@@ -576,30 +1297,33 @@
             var n_presupuesto = new Object();
             for (var i = 0; i < o_meses.length; i++) {
 
-                n_presupuesto.IdMes = o_meses[i].idMes;
-                n_presupuesto.IdTipoPresupuesto = f_tipo_presupuesto;
-                n_presupuesto.IdSubTipoPresupuesto = f_sub_tipo_presupuesto;
-                n_presupuesto.DiaCorte = f_dia_corte;
-                n_presupuesto.PresupuestoDesc = f_presupuesto_desc;
-                n_presupuesto.MontoPresupuesto = f_monto_resupuesto;
-                n_presupuesto.NumeroReferencia = f_numero_referencia;
+                let f_cantidad = o_meses[i].Cantidad;
+                for (r = 0; r < f_cantidad; r++) {
 
+                    n_presupuesto.IdMes = o_meses[i].idMes;
+                    n_presupuesto.IdTipoPresupuesto = f_tipo_presupuesto;
+                    n_presupuesto.IdSubTipoPresupuesto = f_sub_tipo_presupuesto;
+                    n_presupuesto.DiaCorte = f_dia_corte;
+                    n_presupuesto.PresupuestoDesc = f_presupuesto_desc;
+                    n_presupuesto.MontoPresupuesto = f_monto_resupuesto;
+                    n_presupuesto.NumeroReferencia = f_numero_referencia;
 
-                jQuery.ajax({
-                    url: '@Url.Action("GuardaAlt", "TblPresupuestos")',
-                    type: "POST",
-                    data: JSON.stringify(n_presupuesto),
-                    datatype: "json",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
+                    jQuery.ajax({
+                        url: '@Url.Action("GuardaAlt", "TblPresupuestos")',
+                        type: "POST",
+                        data: JSON.stringify(n_presupuesto),
+                        datatype: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
 
-                        if (data.respuesta) {
-                            vNotify.success({ text: 'Presupuesto(s) Registrado(s).', title: 'Intelimundo.' });
-                            var url = '@Url.Action("Index", "TblPresupuestos")';
-                            window.location.href = url;
+                            if (data.respuesta) {
+                                vNotify.success({ text: 'Presupuesto(s) Registrado(s).', title: 'Intelimundo.' });
+                                var url = '@Url.Action("Index", "TblPresupuestos")';
+                                window.location.href = url;
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
     }

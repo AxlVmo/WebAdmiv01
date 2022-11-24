@@ -71,6 +71,7 @@
             </h5>
             <div class="card-body">
               <h5 class="card-title" id="i_Mpp_g"></h5>
+              <h5 class="card-title" id="i_Mppp_g"></h5>
               <h5 class="card-title" id="i_Mpr_g"></h5>
               <h5 class="card-text" id="i_Mpp_i"></h5>
               <h5 class="card-text" id="i_Mpr_i"></h5>
@@ -355,16 +356,19 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
         if (list.length == 0) {
           document.getElementById("i_Mpp_g").value = null;
+          document.getElementById("i_Mppp_g").value = null;
           document.getElementById("i_Mpp_i").value = null;
           document.getElementById("i_Mpr_g").value = null;
-          
+
         }
         else {
 
+          let fM_ppp_g = list.fM_pp_g / 12;
           document.getElementById("i_Mpp_g").innerText = 'Gastos Prospectados: ' + list.fM_pp_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+          document.getElementById("i_Mppp_g").innerText = 'Gastos Promedio Mensual: ' + fM_ppp_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
           document.getElementById("i_Mpp_i").innerText = 'Ventas Prospectadas: ' + list.fM_pp_i.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
           document.getElementById("i_Mpr_g").innerText = 'Gastos Reales: ' + list.fM_pr_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-          
+
 
 
         }
@@ -374,7 +378,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         document.getElementById("i_Mpp_g").innerText = 'Prospectado: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
         document.getElementById("i_Mpp_i").innerText = 'Real: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
         document.getElementById("i_Mpp_g").innerText = 'Prospectado: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-        
+
 
       }
     });

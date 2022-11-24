@@ -110,14 +110,15 @@ namespace WebAdmin.Controllers
             {
                 var fPresupuestoCntro = from a in _context.TblPresupuestos
                                         join b in _context.CatTipoPresupuestos on a.IdTipoPresupuesto equals b.IdTipoPresupuesto
-                                        join c in _context.CatMeses on a.IdMes equals c.IdMes
+                                        join c in _context.CatSubTipoPresupuestos on a.IdSubTipoPresupuesto equals c.IdSubTipoPresupuesto
+                                        join d in _context.CatMeses on a.IdMes equals d.IdMes
                                         where a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdCorpCent == 2
                                         select new TblPresupuesto
                                         {
-                                            TipoPresupuestoDesc = b.TipoPresupuestoDesc,
                                             IdPresupuesto = a.IdPresupuesto,
-                                            PresupuestoDesc = a.PresupuestoDesc,
-                                            MesDesc = c.MesDesc,
+                                            MesDesc = d.MesDesc,
+                                            TipoPresupuestoDesc = b.TipoPresupuestoDesc,
+                                            SubTipoPresupuestoDesc = c.SubTipoPresupuestoDesc,
                                             MontoPresupuesto = a.MontoPresupuesto,
                                             IdUCorporativoCentro = a.IdUCorporativoCentro,
                                             FechaRegistro = a.FechaRegistro,
@@ -129,14 +130,14 @@ namespace WebAdmin.Controllers
 
             var fPresupuesto = from a in _context.TblPresupuestos
                                join b in _context.CatTipoPresupuestos on a.IdTipoPresupuesto equals b.IdTipoPresupuesto
-                               join c in _context.CatMeses on a.IdMes equals c.IdMes
+                               join c in _context.CatSubTipoPresupuestos on a.IdSubTipoPresupuesto equals c.IdSubTipoPresupuesto
+                               join d in _context.CatMeses on a.IdMes equals d.IdMes
                                select new TblPresupuesto
                                {
-
-                                   TipoPresupuestoDesc = b.TipoPresupuestoDesc,
                                    IdPresupuesto = a.IdPresupuesto,
-                                   PresupuestoDesc = a.PresupuestoDesc,
-                                   MesDesc = c.MesDesc,
+                                   MesDesc = d.MesDesc,
+                                   TipoPresupuestoDesc = b.TipoPresupuestoDesc,
+                                   SubTipoPresupuestoDesc = c.SubTipoPresupuestoDesc,
                                    MontoPresupuesto = a.MontoPresupuesto,
                                    IdUCorporativoCentro = a.IdUCorporativoCentro,
                                    FechaRegistro = a.FechaRegistro,
@@ -217,8 +218,8 @@ namespace WebAdmin.Controllers
                     fM_pp_i = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro && a.IdTipoPresupuesto == 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
                     fR_pp_g = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro && a.IdTipoPresupuesto != 1).Count(),
                     fM_pp_g = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro && a.IdTipoPresupuesto != 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
-                    fR_pr_g = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 && a.IdUsuarioModifico == Guid.Parse(f_user)).Count(),
-                    fM_pr_g = _context.RelPresupuestoPagos.Where(a => a.IdUsuarioModifico == Guid.Parse(f_user) && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
+                    fR_pr_g = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
+                    fM_pr_g = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
                 };
                 return Json(fPresupuestos);
             }
@@ -584,20 +585,58 @@ namespace WebAdmin.Controllers
                     var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
                     var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
 
-                    var addRelPresupeustoPagos = new RelPresupuestoPago
+                    if (tblPresupuesto.IdTipoPago == 1)
                     {
-                        IdPresupuesto = tblPresupuesto.IdPresupuesto,
-                        IdTipoPago = tblPresupuesto.IdTipoPago,
-                        FolioPago = tblPresupuesto.FolioPago,
-                        MontoPresupuestoReal = tblPresupuesto.MontoPresupuestoReal,
-                        Comentarios = tblPresupuesto.Comentarios,
-                        IdUsuarioModifico = Guid.Parse(f_user),
-                        FechaRegistro = DateTime.Now,
-                        IdEstatusRegistro = 1
-                    };
-                    _context.Add(addRelPresupeustoPagos);
-                    await _context.SaveChangesAsync();
-                    _notyf.Warning("Registro actualizado con éxito", 5);
+                        if (f_caja_centro_efectivo > tblPresupuesto.MontoPresupuesto)
+                        {
+                            var addRelPresupeustoPagos = new RelPresupuestoPago
+                            {
+                                IdPresupuesto = tblPresupuesto.IdPresupuesto,
+                                IdTipoPago = tblPresupuesto.IdTipoPago,
+                                FolioPago = tblPresupuesto.FolioPago,
+                                MontoPresupuestoReal = tblPresupuesto.MontoPresupuestoReal,
+                                Comentarios = tblPresupuesto.Comentarios,
+                                IdUsuarioModifico = Guid.Parse(f_user),
+                                IdUCorporativoCentro = fCentroCorporativo,
+                                FechaRegistro = DateTime.Now,
+                                IdEstatusRegistro = 1
+                            };
+                            _context.Add(addRelPresupeustoPagos);
+                            await _context.SaveChangesAsync();
+                            _notyf.Warning("Registro actualizado con éxito", 5);
+                        }
+                        else
+                        {
+                            _notyf.Warning("Sin recursos en efectivo suficientes para esta transaccion", 5);
+                        }
+                    }
+                    else
+                    {
+                        if (f_caja_centro_digital > tblPresupuesto.MontoPresupuesto)
+                        {
+                            var addRelPresupeustoPagos = new RelPresupuestoPago
+                            {
+                                IdPresupuesto = tblPresupuesto.IdPresupuesto,
+                                IdTipoPago = tblPresupuesto.IdTipoPago,
+                                FolioPago = tblPresupuesto.FolioPago,
+                                MontoPresupuestoReal = tblPresupuesto.MontoPresupuestoReal,
+                                Comentarios = tblPresupuesto.Comentarios,
+                                IdUsuarioModifico = Guid.Parse(f_user),
+                                IdUCorporativoCentro = fCentroCorporativo,
+                                FechaRegistro = DateTime.Now,
+                                IdEstatusRegistro = 1
+                            };
+                            _context.Add(addRelPresupeustoPagos);
+                            await _context.SaveChangesAsync();
+                            _notyf.Warning("Registro actualizado con éxito", 5);
+                        }
+                        else
+                        {
+                            _notyf.Warning("Sin recursos en electronico suficientes para esta transaccion", 5);
+                        }
+                    }
+
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
