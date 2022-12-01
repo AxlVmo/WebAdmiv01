@@ -1,32 +1,29 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public class RelVentaProducto
+    public class RelServicioPago
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "ID Ventas Productos")]
+        [Display(Name = "ID Ventas Pagos")]
         [Key]
-        public int IdRelVentaProducto { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdRelVentasPago { get; set; }
 
-        [Display(Name = "Cantidad")]
-        public int Cantidad { get; set; }
+        [Display(Name = "Tipo de Pago")]
 
-        [Display(Name = "Tipo Servicio")]
-        
-        public string TipoServicio { get; set; }
+        public int IdTipoPago { get; set; }
 
-        [Display(Name = "Servicio")]
-        
-        public string Servicio { get; set; }
+        [Display(Name = "Fecha Alterna")]
+        [DataType(DataType.Date)]
+        public DateTime FechaAlternaPago { get; set; }
 
-        [Display(Name = "Precio")]
-        public double Precio { get; set; }
+        [Display(Name = "Codigo Referencia")]
+        public string CodigoReferencia { get; set; }
 
-        [Display(Name = "Total Costo Producto")]
-        public double TotalPrecio { get; set; }
+         [Display(Name = "Descuento")]
+        public double CantidadPago { get; set; }
 
         [Display(Name = "Descuento %")]
         public int Descuento { get; set; }
@@ -40,7 +37,7 @@ namespace WebAdmin.Models
         [Display(Name = "Fecha Registro")]
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }
-
+        
         [Display(Name = "Estatus")]
         
         public int IdEstatusRegistro { get; set; }

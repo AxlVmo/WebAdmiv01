@@ -117,7 +117,7 @@ namespace WebAdmin.Models
         {
             get
             {
-                return NombreAlumno + ", " + ApellidoMaterno + " " + ApellidoMaterno;
+                return NombreAlumno + ", " + ApellidoPaterno + " " + ApellidoMaterno;
             }
         }
     }

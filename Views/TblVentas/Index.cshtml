@@ -76,8 +76,9 @@
         <h5 class="card-header">
             <div class="row">
                 <div class="mb-3 col-md-6">
-                    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create"><i
-                            class="fas fa-plus"></i> Nuevo</a>
+                    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create">
+                        <i class="fas fa-plus"></i> Nuevo
+                    </a>
                 </div>
                 <div class="mb-3 col-md-6">
                     <div class="row mb-3" id="iCorpCent" hidden>
@@ -153,12 +154,30 @@
                                     }
                                 </td>
                                 <td style="text-align:center">
-                                    <a class="btn btn-outline-secondary" title="Imprimir" id="btnPrint"><i
+                                    @if (item.IdTipoVenta == 2)
+                                    {
+
+                                        <a class="btn btn-outline-secondary" title="Venta X Cobrar" id="btnCobrar"><i
+                                        class="fa-solid fa-cash-register"
+                                        style="font-size: 1em; color: #BC4E57 ;"></i></a>
+                                        <a class="btn btn-outline-secondary" title="Imprimir" id="btnPrint"><i
                                         class="fa-solid fa-print" style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                                    <a asp-action="Delete" asp-route-id="@item.IdVenta" class="btn btn-outline-secondary"
+                                        <a asp-action="Delete" asp-route-id="@item.IdVenta" class="btn btn-outline-secondary"
                                     title="Desactivar"><i class="fa-solid fa-ban"
                                         style="font-size: 1em; color: #FF9333;"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-outline-secondary" title="Imprimir" id="btnPrint"><i
+                                        class="fa-solid fa-print" style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                                        <a asp-action="Delete" asp-route-id="@item.IdVenta" class="btn btn-outline-secondary"
+                                    title="Desactivar"><i class="fa-solid fa-ban"
+                                        style="font-size: 1em; color: #FF9333;"></i></a>
+
+                                    }
+
                                 </td>
+
                             </tr>
                         }
                     </tbody>
@@ -187,6 +206,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="modalVentas" aria-labelledby="VentasLabel" tabindex="-1" style="display: none"
     aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -523,24 +543,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
 
     });
-    $(document).on("click", "#btnPrint", function (e) {
+    $("#btnCobrar").on("click", function () {
+        vNotify.warning({ text: 'Modulo en Construccion.', title: 'Intelimundo.' });
+    })
 
-        e.preventDefault();
-        e.stopPropagation();
-        $("#invocieContainer").printThis({
-            debug: false, // show the iframe for debugging
-            importCSS: true, // import page CSS
-            importStyle: true, // import style tags
-            printContainer: true, // grab outer container as well as the contents of the selector
-            loadCSS: "/assets/vendor/css/theme-default.css", // path to additional css file - us an array [] for multiple
-            pageTitle: "", // add title to print page
-            removeInline: false, // remove all inline styles from print elements
-            printDelay: 333, // variable print delay; depending on complexity a higher value may be necessary
-            header: null, // prefix to html
-            formValues: true // preserve input/form values
-        });
-
-    });
     $(document).ready(function () {
         $('#drpCorpCent').change(function () {
             var SelectedText = $('option:selected', this).text();
@@ -619,7 +625,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var vServiciosFlag = '@ViewBag.ServiciosFlag'
         var vAlumnosFlag = '@ViewBag.AlumnosFlag'
 
-
         if (vEstatusFlag == 0) {
             document.getElementById("iNuevo").style.visibility = "hidden";
         }
@@ -662,5 +667,24 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             }
         }
     });
+    $("#btnPrint").click(function () {
+        var values = [];
+        var $row = $(this).closest("tr");    // Find the row
+        var $tds = $row.find("td");
+
+        $.each($tds, function () {
+            values.push($(this).text().replace("\n                                    ", "").replace("\n                                ", "")
+            );
+        });
+        for (var i = 0; i < values.length; i++) {
+            if (i == 2)
+            {
+vNotify.warning({ text: 'Modulo en Construccion, imprimir venta:' + values[i], title: 'Intelimundo.' });
+            }
+            
+        }
+
+    });
+
 </script>
 }

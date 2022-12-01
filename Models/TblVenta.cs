@@ -38,9 +38,6 @@ namespace WebAdmin.Models
         [Display(Name = "Tiene Inscripcion")]
         public bool Inscripcion { get; set; }
 
-        [Display(Name = "Monto de Inscripcion")]
-        public double MontoInscripcion { get; set; }
-
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
 
@@ -62,7 +59,7 @@ namespace WebAdmin.Models
 
         public int IdEstatusRegistro { get; set; }
 
-        public virtual List<RelVentaProducto> RelVentaProductos { get; set; }
-        public virtual List<RelVentaPagos> RelVentaPagos { get; set; }
+        public virtual List<RelVentaServicio> RelVentaServicios { get; set; }
+        public virtual List<RelServicioPago> RelServicioPagos { get; set; }
     }
 }

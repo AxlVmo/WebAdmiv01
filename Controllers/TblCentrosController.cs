@@ -91,20 +91,11 @@ namespace WebAdmin.Controllers
             var f_user = _userService.GetUserId();
             var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
 
-            if (f_usuario.IdArea == 2 && f_usuario.IdPerfil == 3 && f_usuario.IdRol == 2)
-            {
+
                 var f_CorpCent = _context.TblCentros.First(m => m.IdUsuarioControl == f_usuario.IdUsuario);
                 return Json(f_CorpCent);
-            }
-            else
-            {
-                var fCorporativo = _context.TblCorporativos.First();
-                if (fCorporativo != null)
-                {
-                    return Json(fCorporativo);
-                }
-                return Json(0);
-            }
+            
+
         }
         [HttpGet]
         public ActionResult DatosPresupuesto()

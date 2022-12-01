@@ -8,11 +8,9 @@
 <style>
     .invoice-box {
         max-width: 800px;
-        
+        margin: auto;
         padding: 5px;
-        
-
-        font-size: 14px;
+        font-size: 12px;
         line-height: 15px;
         font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
         color: #555;
@@ -159,7 +157,7 @@
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-4">
-                        <label class="form-label" asp-for="@Model.RelVentaProductos[0].TipoServicio"></label>
+                        <label class="form-label" asp-for="@Model.RelVentaServicios[0].TipoServicio"></label>
                         <div class="input-group input-group-merge">
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text">
@@ -176,7 +174,7 @@
                         </div>
                     </div>
                     <div class="mb-3 col-md-8">
-                        <label class="form-label" asp-for="@Model.RelVentaProductos[0].Servicio"></label>
+                        <label class="form-label" asp-for="@Model.RelVentaServicios[0].Servicio"></label>
                         <div class="input-group input-group-merge">
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text">
@@ -184,7 +182,7 @@
                                     </i>
                                 </span>
                                 <select id="l_servicios" class="form-select" required
-                                    asp-for="@Model.RelVentaProductos[0].Servicio"
+                                    asp-for="@Model.RelVentaServicios[0].Servicio"
                                     oninvalid="this.setCustomValidity('Campo Requerido')"
                                     onchange="this.setCustomValidity('')" required>
                                     <option value="">SELECCIONAR</option>
@@ -290,7 +288,19 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
-                                    <th>Total:</th>
+                                    <th>Total Servicio:</th>
+                                    <td>
+                                        <label id="l_total_servicio"></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Total Inscripcion:</th>
+                                    <td>
+                                        <label id="l_total_inscripcion"></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Total Venta:</th>
                                     <td>
                                         <label id="l_total_venta"></label>
                                     </td>
@@ -309,7 +319,24 @@
                         <button class="btn btn-info" id="btnPrint" hidden>Imprimir</button>
                     </div>
                 </div>
-                <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalVentas" aria-labelledby="modalVentasLabel" tabindex="-1" style="display: none"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalVentasLabel">
+                    La venta se ha registrado con exito ¿deseas imprimir la
+                    nota de venta?
+                </h5>
+                <input spellcheck="true" type="hidden" id="i_FolioVenta" />
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+ <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
                     <table>
                         <tr class="top">
                             <td colspan="2">
@@ -321,8 +348,8 @@
                                         </td>
                                         <td>
                                             <label id="l_NumVenta"></label><br />
-                                            <label id="l_FechaCreacionVenta"></label><br/>
-                                            <label id="l_FechaAlternaVenta"></label><br/>
+                                            <label id="l_FechaCreacionVenta"></label><br />
+                                            <label id="l_FechaAlternaVenta"></label><br />
                                             <label id="l_UsuarioVenta"></label>
                                             <label id="l_UsuarioContactoVenta"></label>
                                         </td>
@@ -357,7 +384,7 @@
                                             <label id="v_tipo_venta"></label>
                                             <label id="v_forma_pago"></label>
                                             <label id="v_codigo_referencia"></label>
-                                            <label id="v_perido"></label>
+                                            <h6 id="v_perido"></h6>
                                             <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
                                         </td>
                                     </tr>
@@ -396,19 +423,25 @@
                             <img src="~/assets/img/im_pagado.png" alt="Intelimundo Pagado" style="width: 128px" />
                         </div>
                         <div class="col-6">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tr>
-                                        <th><label id="v_incripcion"></label></th>
-                                        <th><label id="v_total_venta"></label></th>
-                                        <td>
 
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                            <table class="table">
+                                <tr>
+                                    <th>Total Inscripcion:</th>
+                                    <td style="text-align:center">
+                                        <label id="v_incripcion"></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Total Venta:</th>
+                                    <td style="text-align:center">
+                                        <label id="v_total_venta"></label>
+                                    </td>
+                                </tr>
+                            </table>
+
                         </div>
                     </div>
+                    <hr>
                     <table>
                         <tr class="top">
                             <td colspan="2">
@@ -455,7 +488,7 @@
                                             <label id="dv_tipo_venta"></label>
                                             <label id="dv_forma_pago"></label>
                                             <label id="dv_codigo_referencia"></label>
-                                            <label id="dv_perido"></label>
+                                            <h6 id="dv_perido"></h6>
                                             <p><span class="text-muted fw-light">Intelimundo /</span>Colaborador</p>
                                         </td>
                                     </tr>
@@ -464,6 +497,7 @@
                             </td>
                         </tr>
                     </table>
+
                     <table class="table" id="tbProductoB">
                         <tbody>
                             <thead>
@@ -477,7 +511,7 @@
                                     DESCUENTO
                                 </th>
                                 <th style="text-align:center">
-                                    PRECIO
+                                    PRECIO200
                                 </th>
                                 <th style="text-align:center">
                                     TOTAL
@@ -486,18 +520,25 @@
                         </tbody>
                     </table>
                     <div class="row">
-                            <div class="col-3">
-                            </div>
-                            <div class="col-3">
-                                <br>
-                                <img src="~/assets/img/im_pagado.png" alt="Intelimundo Pagado" style="width: 128px" />
-                            </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                            <br>
+                            <img src="~/assets/img/im_pagado.png" alt="Intelimundo Pagado" style="width: 128px" />
+                        </div>
                         <div class="col-6">
                             <div class="table-responsive">
                                 <table class="table">
                                     <tr>
-                                        <th><label id="dv_total_venta"></label></th>
-                                        <td>
+                                        <th>Total Inscripcion:</th>
+                                        <td style="text-align:center">
+                                            <label id="dv_incripcion"></label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Venta:</th>
+                                        <td style="text-align:center">
+                                            <label id="dv_total_venta"></label>
                                         </td>
                                     </tr>
                                 </table>
@@ -505,24 +546,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modalVentas" aria-labelledby="modalVentasLabel" tabindex="-1" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalVentasLabel">
-                    La venta se ha registrado con exito ¿deseas imprimir la
-                    nota de venta?
-                </h5>
-                <input spellcheck="true" type="hidden" id="i_FolioVenta" />
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
             </div>
             <div class="modal-footer">
                 <form class="form-inline">
@@ -543,9 +566,9 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         minimumFractionDigits: 2
     })
     const fecha_objeto = new Date();
-    let fecha_mes = 1 + fecha_objeto.getUTCMonth();
-    let fecha_dia = fecha_objeto.getDate();
-    let fecha_anio = fecha_objeto.getFullYear();
+    const fecha_mes = 1 + fecha_objeto.getUTCMonth();
+    const fecha_dia = fecha_objeto.getDate();
+    const fecha_anio = fecha_objeto.getFullYear();
     const fecha_formato = fecha_dia + "/" + fecha_mes + "/" + fecha_anio;
     const folio_venta = fecha_objeto.getTime();
     var total_venta = 0;
@@ -690,6 +713,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         if (SelectedValue == 2 || SelectedValue == 0) {
 
             document.getElementById("iMontoInscripcion").setAttribute("readonly", true);
+            document.getElementById('iMontoInscripcion').value = 0;
         }
         else {
 
@@ -708,8 +732,12 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
             total_col1 += parseFloat($(this).find('td').eq(4).text());
         });
+        let i_servicio = total_col1;
+        let i_inscrpcion = parseInt($('#iMontoInscripcion').val());
         let iPagoMonto = parseInt($('#i_pago_monto').val());
-        let tDiferencia = parseInt(iPagoMonto - total_col1);
+
+        let t_venta = i_servicio + i_inscrpcion;
+        let tDiferencia = parseInt(iPagoMonto - t_venta);
         let vTotal = iPagoMonto - tDiferencia;
         document.getElementById("i_pago_diferencia").value = tDiferencia;
         $('#btnPrint').removeAttr('hidden');
@@ -748,48 +776,57 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 else {
                     var rowCount = $('#tbProducto >tbody >tr').length;
                     if (rowCount == 0) {
-                        for (var i = 0, len = list.length; i < len; i++) {
-                            var f_tipo_servicio = list[i].tipoServicioDesc;
-                            var f_servicio = list[i].descServicio;
-                            var f_precio = list[i].totalPrecioServicio;
-                            var _desc = parseFloat($("#iDescuento").val())
-                            var _prec = parseFloat(f_precio)
-                            var _tprecio = _prec - _desc
 
-                            $("#tbProducto tbody").append(
-                                $("<tr>").append(
-                                    $("<td style='text-align:center'>").text(f_tipo_servicio),
-                                    $("<td style='text-align:center'>").text(f_servicio),
-                                    $("<td style='text-align:center'>").text(_desc),
-                                    $("<td style='text-align:center'>").text(_prec),
-                                    $("<td style='text-align:center'>").text(_tprecio),
-                                    $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
-                            )
-                            var rowA = "<tr id='a" + rowCount + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
-                            var rowB = "<tr id='b" + rowCount + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
-                            $("#tbProductoA tbody").append(rowA);
-                            $("#tbProductoB tbody").append(rowB);
+                        var f_tipo_servicio = list[0].tipoServicioDesc;
+                        var f_servicio = list[0].descServicio;
+                        var f_precio = list[0].totalPrecioServicio;
+                        var _desc = parseFloat($("#iDescuento").val())
+                        var _prec = parseFloat(f_precio)
+                        var _tprecio = _prec - _desc
+
+                        $("#tbProducto tbody").append(
+                            $("<tr>").append(
+                                $("<td style='text-align:center'>").text(f_tipo_servicio),
+                                $("<td style='text-align:center'>").text(f_servicio),
+                                $("<td style='text-align:center'>").text(_desc),
+                                $("<td style='text-align:center'>").text(_prec),
+                                $("<td style='text-align:center'>").text(_tprecio),
+                                $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
+                        )
+                        var rowA = "<tr id='a" + rowCount + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
+                        var rowB = "<tr id='b" + rowCount + "'><td style='text-align:center'>" + f_tipo_servicio + "</td><td style='text-align:center'>" + f_servicio + "</td><td style='text-align:center'>" + _desc + "</td><td style='text-align:center'>" + _prec + "</td><td style='text-align:center'>" + _tprecio + "</td></tr>";
+                        $("#tbProductoA tbody").append(rowA);
+                        $("#tbProductoB tbody").append(rowB);
 
 
-                            var periodo_inicial = (fecha_dia + 1) + "/" + fecha_mes + "/" + fecha_anio;
-                            var periodo_final = (fecha_dia + 1) + "/" + (fecha_mes + list[i].periodo) + "/" + fecha_anio;
+                        var periodo_inicial = (fecha_dia + 1) + "/" + fecha_mes + "/" + fecha_anio;
+                        var periodo_final = (fecha_dia + 1) + "/" + (fecha_mes + list[0].periodo) + "/" + fecha_anio;
 
-                            document.getElementById('v_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
-                            document.getElementById('dv_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
-                        }
+                        document.getElementById('v_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
+                        document.getElementById('dv_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
+                        document.getElementById("i_fecha_alterna_pago").value = periodo_inicial;
                         $('#tbProducto tbody').find('tr').each(function (i, el) {
 
                             total_venta += parseFloat($(this).find('td').eq(4).text());
-                            document.getElementById('l_total_venta').innerHTML = "$ " + total_venta;
+                            document.getElementById('l_total_servicio').innerHTML = "$ " + total_venta;
 
-                            document.getElementById("i_fecha_alterna_pago").value = periodo_inicial;
+
                         });
 
                         let i_inscrpcion = parseInt($('#iMontoInscripcion').val());
-                        let i_pago_monto = parseInt($('#i_pago_monto').val());
                         let t_venta = total_venta + i_inscrpcion;
-                        document.getElementById('v_incripcion').innerHTML = 'Inscripcion: ' + i_inscrpcion;
-                        document.getElementById('v_total_venta').innerHTML = 'Total Venta: ' + t_venta;
+                        document.getElementById('l_total_inscripcion').innerHTML = "$ " + i_inscrpcion;
+                        document.getElementById('l_total_venta').innerHTML = "$ " + t_venta;
+
+                        let i_pago_monto = parseInt($('#i_pago_monto').val());
+
+                        document.getElementById('v_incripcion').innerHTML = i_inscrpcion;
+                        document.getElementById('v_total_venta').innerHTML = t_venta;
+                        document.getElementById('dv_incripcion').innerHTML = i_inscrpcion;
+                        document.getElementById('dv_total_venta').innerHTML = t_venta;
+
+                        $("#l_servicios").empty();
+                        $("#l_servicios").append('<option value="">SELECCIONAR</option>');
                     }
                     else {
                         vNotify.info({ text: 'Limitado a 1 Servicio por Venta.', title: 'Intelimundo.' });
@@ -828,18 +865,24 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var total_col1 = 0;
         var p = o.parentNode.parentNode;
         p.parentNode.removeChild(p);
+        $("#tbProductoA tbody").empty();
+        $("#tbProductoB tbody").remove();
 
         var rowCount = $('#tbProducto >tbody >tr').length;
 
         if (rowCount == 0) {
-            document.getElementById('l_total_venta').innerHTML = "$ " + total_col1;
-            document.getElementById('i_pago_diferencia').value = total_col1;
+            document.getElementById('l_total_servicio').innerHTML = "$ " + 0;
+            document.getElementById('l_total_inscripcion').innerHTML = "$ " + 0;
+            document.getElementById('l_total_venta').innerHTML = "$ " + 0;
+            document.getElementById('i_pago_diferencia').value = 0;
         }
         else {
-            document.getElementById('l_total_venta').innerHTML = "$ " + total_col1;
+            document.getElementById('l_total_servicio').innerHTML = "$ " + 0;
+            document.getElementById('l_total_inscripcion').innerHTML = "$ " + 0;
+            document.getElementById('l_total_venta').innerHTML = "$ " + 0;
         }
     }
-    function registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1) {
+    function registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion) {
 
         var RelVenta_Pagos = []
         var RelVenta_Productos = []
@@ -852,7 +895,9 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     Servicio: $(tr).find('td:eq(1)').text(),
                     Descuento: $(tr).find('td:eq(2)').text(),
                     Precio: $(tr).find('td:eq(3)').text(),
-                    TotalPrecio: $(tr).find('td:eq(4)').text()
+                    TotalPrecio: $(tr).find('td:eq(4)').text(),
+                    Cantidad: 1,
+                    MontoInscripcion: f_monto_inscripcion
                 }
             )
         })
@@ -872,8 +917,8 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 FolioVenta: $("#i_FolioVenta").val(),
 
             },
-            RelVentaProductos: RelVenta_Productos,
-            RelVentaPagos: RelVenta_Pagos
+            RelVentaServicios: RelVenta_Productos,
+            RelServicioPagos: RelVenta_Pagos
         }
 
         jQuery.ajax({
@@ -896,11 +941,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
         var f_tipo_venta = $('#l_tipo_venta').val();
         var f_inscripcion = $('#l_Inscripcion').val();
-        var f_monto_inscripcion = $('#iMontoInscripcion').val();
+        var f_monto_inscripcion = parseInt($('#iMontoInscripcion').val());
         var f_alumno = $('#l_alumno').val();
         var f_registros_tabla = $('#tbProducto >tbody >tr').length;
         var f_tipo_pago = $('#l_tipo_pago').val();
-        let f_total_venta = $('#l_total_venta').val();
+        let f_total_venta = $('#l_total_servicio').val();
         let f_pago_diferencia = parseInt($('#i_pago_diferencia').val());
         var f_codigo_pago = $('#i_codigo_pago').val();
         let total_col1 = 0;
@@ -932,7 +977,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         else {
             if (f_inscripcion == 1) {
 
-                if (f_monto_inscripcion == "" || f_monto_inscripcion == "0  ") {
+                if (f_monto_inscripcion == "" || f_monto_inscripcion == "0") {
                     validate('i_monto_inscripcion')
                 }
                 else {
@@ -952,10 +997,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         validate('i_pago_monto')
                     }
                     else if (f_tipo_venta == 1) {
-                        var v_pago = (total_col1 + f_pago_diferencia);
+                        var v_pago = (total_col1 + f_pago_diferencia + f_monto_inscripcion);
                         if (i_pago_monto == v_pago) {
 
-                            registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
+                            registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion);
 
                         }
                         else {
@@ -965,7 +1010,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     else if (f_tipo_venta == 2) {
                         if (v_total == (total_col1)) {
 
-                            registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
+                            registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion);
 
                         }
                     }
@@ -992,10 +1037,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     validate('i_pago_monto')
                 }
                 else if (f_tipo_venta == 1) {
-                    var v_pago = (total_col1 + f_pago_diferencia);
+                    var v_pago = (total_col1 + f_pago_diferencia + f_monto_inscripcion);
                     if (i_pago_monto == v_pago) {
 
-                        registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
+                        registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion);
 
                     }
                     else {
@@ -1005,7 +1050,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 else if (f_tipo_venta == 2) {
                     if (v_total == (total_col1)) {
 
-                        registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
+                        registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion);
 
                     }
                 }

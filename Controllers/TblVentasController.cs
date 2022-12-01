@@ -32,6 +32,9 @@ namespace WebAdmin.Controllers
         // GET: TblVentas
         public async Task<IActionResult> Index()
         {
+            var f_user = _userService.GetUserId();
+            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+
             var ValidaEstatus = _context.CatEstatus.ToList();
 
             if (ValidaEstatus.Count == 2)
@@ -67,7 +70,7 @@ namespace WebAdmin.Controllers
                                     if (ValidaServicio.Count >= 1)
                                     {
                                         ViewBag.ServiciosFlag = 1;
-                                        var ValidaAlumnos = _context.TblAlumnos.ToList();
+                                        var ValidaAlumnos = _context.TblAlumnos.Where(m => m.IdUCorporativoCentro == fIdCentro.IdCentro).ToList();
 
                                         if (ValidaAlumnos.Count >= 1)
                                         {
@@ -140,18 +143,19 @@ namespace WebAdmin.Controllers
             ViewBag.ListaCorpCent = TempData["fTS"];
 
 
-            var f_user = _userService.GetUserId();
             var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
-            var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+
 
             if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
             {
                 var fVentasCnto = from a in _context.TblVenta
                                   join b in _context.TblAlumnos on a.IdCliente equals b.IdAlumno
                                   join c in _context.TblCentros on a.IdUCorporativoCentro equals c.IdCentro
+                                  join d in _context.CatTipoVentas on a.IdTipoVenta equals d.IdTipoVenta
                                   where a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdCorpCent == 2
                                   select new TblVenta
                                   {
+                                      IdTipoVenta = d.IdTipoVenta,
                                       IdVenta = a.IdVenta,
                                       FolioVenta = a.FolioVenta,
                                       NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,
@@ -163,22 +167,27 @@ namespace WebAdmin.Controllers
 
                 return View(await fVentasCnto.ToListAsync());
             }
+            else
+            {
+                var fVentas = from a in _context.TblVenta
+                              join b in _context.TblAlumnos on a.IdCliente equals b.IdAlumno
+                              join c in _context.TblCentros on a.IdUCorporativoCentro equals c.IdCentro
+                              join d in _context.CatTipoVentas on a.IdTipoVenta equals d.IdTipoVenta
+                              select new TblVenta
+                              {
+                                 IdTipoVenta = d.IdTipoVenta,
+                                  IdVenta = a.IdVenta,
+                                  NumeroVenta = a.NumeroVenta,
+                                  NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,
+                                  CentroDesc = c.NombreCentro,
+                                  IdUCorporativoCentro = a.IdUCorporativoCentro,
+                                  FechaRegistro = a.FechaRegistro,
+                                  IdEstatusRegistro = a.IdEstatusRegistro
+                              };
 
-            var fVentas = from a in _context.TblVenta
-                          join b in _context.TblAlumnos on a.IdCliente equals b.IdAlumno
-                          join c in _context.TblCentros on a.IdUCorporativoCentro equals c.IdCentro
-                          select new TblVenta
-                          {
-                              IdVenta = a.IdVenta,
-                              NumeroVenta = a.NumeroVenta,
-                              NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,
-                              CentroDesc = c.NombreCentro,
-                              IdUCorporativoCentro = a.IdUCorporativoCentro,
-                              FechaRegistro = a.FechaRegistro,
-                              IdEstatusRegistro = a.IdEstatusRegistro
-                          };
+                return View(await fVentas.ToListAsync());
+            }
 
-            return View(await fVentas.ToListAsync());
         }
         [HttpGet]
         public ActionResult DatosVentas()
@@ -191,7 +200,7 @@ namespace WebAdmin.Controllers
                 var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
                 var totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro)
-                    .Join(_context.RelVentaProducto.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
+                    .Join(_context.RelVentaServicios.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
                     .ToList().Sum(x => x.Quantity);
 
                 //   var totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == fIdCentro.IdCentro)
@@ -244,7 +253,7 @@ namespace WebAdmin.Controllers
 
             if (oVentaVM != null)
             {
-                foreach (var itemP in oVentaVM.RelVentaProductos)
+                foreach (var itemP in oVentaVM.RelVentaServicios)
                 {
                     //item.IdRelVentaProducto = Guid.NewGuid();
                     itemP.Cantidad = 1;
@@ -252,16 +261,16 @@ namespace WebAdmin.Controllers
                     itemP.FechaRegistro = DateTime.Now;
                     itemP.IdEstatusRegistro = 1;
                     itemP.IdVenta = nVenta;
-                    _context.RelVentaProducto.Add(itemP);
+                    _context.RelVentaServicios.Add(itemP);
                 }
-                foreach (var item in oVentaVM.RelVentaPagos)
+                foreach (var item in oVentaVM.RelServicioPagos)
                 {
                     //item.IdRelVentaProducto = Guid.NewGuid();
                     item.IdUsuarioModifico = Guid.Parse(f_user);
                     item.FechaRegistro = DateTime.Now;
                     item.IdEstatusRegistro = 1;
                     item.IdVenta = nVenta;
-                    _context.RelVentasPagos.Add(item);
+                    _context.RelServicioPagos.Add(item);
                 }
 
                 TblVenta oVenta = oVentaVM.TblVentas;
@@ -277,7 +286,7 @@ namespace WebAdmin.Controllers
                 oVenta.IdEstatusRegistro = 1;
                 _context.TblVenta.Add(oVenta);
 
-                var pago_venta = oVentaVM.RelVentaPagos.Where(a => a.IdVenta == nVenta).Select(i => Convert.ToDouble(i.CantidadPago)).Sum();
+                var pago_venta = oVentaVM.RelServicioPagos.Where(a => a.IdVenta == nVenta).Select(i => Convert.ToDouble(i.CantidadPago)).Sum();
 
                 var addMovimiento = new TblMovimientoCaja
                 {
@@ -288,7 +297,7 @@ namespace WebAdmin.Controllers
                     MontoMovimientoCaja = pago_venta,
                     IdUCorporativoCentro = fCentroCorporativo,
                     IdCaracteristicaMovimientoCaja = 2,
-                    IdTipoRecurso = oVentaVM.RelVentaPagos[0].IdTipoPago,
+                    IdTipoRecurso = oVentaVM.RelServicioPagos[0].IdTipoPago,
                     IdRefereciaMovimientoCaja = nVenta,
                     FechaRegistro = DateTime.Now,
                     IdUsuarioModifico = Guid.Parse(f_user),
@@ -316,7 +325,7 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var tblVenta = await _context.TblVenta.Include(u => u.RelVentaProductos)
+            var tblVenta = await _context.TblVenta.Include(u => u.RelVentaServicios)
                 .FirstOrDefaultAsync(m => m.IdVenta == id);
             if (tblVenta == null)
             {
@@ -395,7 +404,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdVenta,IdUsuarioVenta,IdAlumno,Descuento,IdTipoPago,FechaAlterna")] TblVenta tblVenta, RelVentaProducto[] VentaProductos)
+        public async Task<IActionResult> Create([Bind("IdVenta,IdUsuarioVenta,IdAlumno,Descuento,IdTipoPago,FechaAlterna")] TblVenta tblVenta, RelVentaServicio[] VentaServicio)
         {
             if (ModelState.IsValid)
             {
@@ -419,14 +428,14 @@ namespace WebAdmin.Controllers
                 tblVenta.IdEstatusRegistro = 1;
                 _context.Add(tblVenta);
 
-                var relVentaProductos = VentaProductos;
-                var VentaProduct = _context.RelVentaProducto;
+                var relVentaProductos = VentaServicio;
+                var VentaProduct = _context.RelVentaServicios;
 
                 // VentaProduct.IdUsuarioModifico = Guid.Parse(f_user);
                 // VentaProduct.IdRelVentaProducto = Guid.NewGuid();
                 // VentaProduct.FechaRegistro = DateTime.Now;
                 // VentaProduct.IdEstatusRegistro = 1;
-                _context.Add(VentaProductos);
+                _context.Add(VentaServicio);
 
                 await _context.SaveChangesAsync();
                 _notyf.Success("Registro creado con éxito", 5);
