@@ -92,9 +92,9 @@ namespace WebAdmin.Controllers
             var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
 
 
-                var f_CorpCent = _context.TblCentros.First(m => m.IdUsuarioControl == f_usuario.IdUsuario);
-                return Json(f_CorpCent);
-            
+            var f_CorpCent = _context.TblCentros.First(m => m.IdUsuarioControl == f_usuario.IdUsuario);
+            return Json(f_CorpCent);
+
 
         }
         [HttpGet]
@@ -123,6 +123,21 @@ namespace WebAdmin.Controllers
                 };
                 return Json(fPresupuestos);
             }
+        }
+        [HttpGet]
+        public ActionResult DatosPresupuestoCentro(Guid id)
+        {
+
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+            var f_totales = new
+            {
+                fRegistros = _context.TblCentros.Where(a => a.IdEstatusRegistro == 1 && a.IdCentro == id).Count(),
+                fMontos = _context.TblCentros.Where(a => a.IdCentro == id && a.IdEstatusRegistro == 1).Select(i => Convert.ToDouble(i.CentroPresupuesto)).Sum()
+            };
+            return Json(f_totales);
+
+
         }
         [HttpGet]
         public ActionResult FiltroCentro(Guid id)

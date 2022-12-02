@@ -34,6 +34,7 @@ namespace WebAdmin.Controllers
         {
             var f_user = _userService.GetUserId();
             var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+             var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
 
             var ValidaEstatus = _context.CatEstatus.ToList();
 
@@ -70,16 +71,19 @@ namespace WebAdmin.Controllers
                                     if (ValidaServicio.Count >= 1)
                                     {
                                         ViewBag.ServiciosFlag = 1;
-                                        var ValidaAlumnos = _context.TblAlumnos.Where(m => m.IdUCorporativoCentro == fIdCentro.IdCentro).ToList();
+                                        if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
+                                        {
+                                            var ValidaAlumnos = _context.TblAlumnos.Where(m => m.IdUCorporativoCentro == fIdCentro.IdCentro).ToList();
 
-                                        if (ValidaAlumnos.Count >= 1)
-                                        {
-                                            ViewBag.AlumnosFlag = 1;
-                                        }
-                                        else
-                                        {
-                                            ViewBag.AlumnosFlag = 0;
-                                            _notyf.Information("Favor de registrar los datos de Alumnos para la Aplicación", 5);
+                                            if (ValidaAlumnos.Count >= 1)
+                                            {
+                                                ViewBag.AlumnosFlag = 1;
+                                            }
+                                            else
+                                            {
+                                                ViewBag.AlumnosFlag = 0;
+                                                _notyf.Information("Favor de registrar los datos de Alumnos para la Aplicación", 5);
+                                            }
                                         }
                                     }
                                     else
@@ -143,7 +147,7 @@ namespace WebAdmin.Controllers
             ViewBag.ListaCorpCent = TempData["fTS"];
 
 
-            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
+           
 
 
             if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
@@ -175,7 +179,7 @@ namespace WebAdmin.Controllers
                               join d in _context.CatTipoVentas on a.IdTipoVenta equals d.IdTipoVenta
                               select new TblVenta
                               {
-                                 IdTipoVenta = d.IdTipoVenta,
+                                  IdTipoVenta = d.IdTipoVenta,
                                   IdVenta = a.IdVenta,
                                   NumeroVenta = a.NumeroVenta,
                                   NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,

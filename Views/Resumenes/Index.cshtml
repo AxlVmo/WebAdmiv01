@@ -137,14 +137,59 @@
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script>
+  $('#drpCorpCent').change(function () {
+    var SelectedText = $('option:selected', this).text();
+    var SelectedValue = $('option:selected', this).val();
+    if (SelectedValue == "") {
+      DatosPresupuesto();
+      DatosMovimientos();
+      DatosVentas();
+      DatosPresupuestos();
+    }
+    else {
+      fDatosPresupuesto(SelectedValue);
+       fDatosPresupuestos(SelectedValue);
+    }
+
+  });
   $(document).ready(function () {
     DatosPresupuesto();
-
     DatosMovimientos();
     DatosVentas();
     DatosPresupuestos();
 
   });
+  function fDatosPresupuesto(SelectedValue) {
+    $.ajax({
+      type: "GET",
+      url: "/TblCentros/DatosPresupuestoCentro/",
+      data: { id: SelectedValue },
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
+      success: function (list) {
+
+        if (list.length == 0) {
+          document.getElementById("i_presupuesto_preventivo").value = null;
+          document.getElementById("i_presupuesto_minimo").value = null;
+        }
+        else {
+
+          var presupuesto_minimo = list.fMontos;
+          var presupuesto_preventivo = list.fMontos * 3;
+          document.getElementById("i_presupuesto_minimo").innerText = 'Minimo: ' + presupuesto_minimo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+          document.getElementById("i_presupuesto_preventivo").innerText = 'Preventivo: ' + presupuesto_preventivo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+
+        }
+      },
+      error: function () {
+        var v_fMontosPresupuesto = 0;
+        document.getElementById('i_presupuesto_preventivo').innerText = 'Preventivo: ' + v_fMontosPresupuesto;
+        document.getElementById("i_presupuesto_minimo").innerText = 'Minimo: ' + v_fMontosPresupuesto.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+      }
+    });
+
+    return false;
+  }
   function DatosPresupuesto() {
     $.ajax({
       type: "GET",
@@ -340,6 +385,46 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         document.getElementById("i_entradas_centro_digital").innerText = 'Ingresos Digital: ' + v_fMontosVentas.v_entradas_centro_digital.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
         document.getElementById("i_salidas_centro_efectivo").innerText = 'Egresos Efectivo: ' + v_fMontosVentas.v_salidas_centro_efectivo.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
         document.getElementById("i_salidas_centro_digital").innerText = 'Egresos Digital: ' + v_fMontosVentas.v_salidas_centro_digital.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+      }
+    });
+
+    return false;
+  }
+   function fDatosPresupuestos(SelectedValue) {
+    $.ajax({
+      type: "GET",
+      url: "/TblPresupuestos/VariacionPresupuestosCentro/",
+       data: { id: SelectedValue },
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
+      success: function (list) {
+
+        if (list.length == 0) {
+          document.getElementById("i_Mpp_g").value = null;
+          document.getElementById("i_Mppp_g").value = null;
+          document.getElementById("i_Mpp_i").value = null;
+          document.getElementById("i_Mpr_g").value = null;
+
+        }
+        else {
+
+          let fM_ppp_g = list.fM_pp_g / 12;
+          document.getElementById("i_Mpp_g").innerText = 'Gastos Prospectados: ' + list.fM_pp_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+          document.getElementById("i_Mppp_g").innerText = 'Gastos Promedio Mensual: ' + fM_ppp_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+          document.getElementById("i_Mpp_i").innerText = 'Ventas Prospectadas: ' + list.fM_pp_i.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+          document.getElementById("i_Mpr_g").innerText = 'Gastos Reales: ' + list.fM_pr_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+
+
+
+        }
+      },
+      error: function () {
+        var v_fMontosVentas = 0;
+        document.getElementById("i_Mpp_g").innerText = 'Prospectado: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+        document.getElementById("i_Mpp_i").innerText = 'Real: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+        document.getElementById("i_Mpp_g").innerText = 'Prospectado: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+
+
       }
     });
 

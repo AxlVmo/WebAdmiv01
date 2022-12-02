@@ -10,7 +10,7 @@ namespace WebAdmin.Models
     public partial class TblPresupuesto
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public Guid IdPresupuesto { get; set; }
 
         [NotMapped]
@@ -84,10 +84,11 @@ namespace WebAdmin.Models
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
+
         [Display(Name = "Corporativo / Centro")]
-
+        
         public Guid IdUCorporativoCentro { get; set; }
-
+        
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]

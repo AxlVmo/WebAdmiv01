@@ -126,26 +126,30 @@ namespace WebAdmin.Controllers
                                         };
                 return View(await fPresupuestoCntro.ToListAsync());
             }
+            else
+            {
+                var fPresupuesto = from a in _context.TblPresupuestos
+                                   join b in _context.CatTipoPresupuestos on a.IdTipoPresupuesto equals b.IdTipoPresupuesto
+                                   join c in _context.CatSubTipoPresupuestos on a.IdSubTipoPresupuesto equals c.IdSubTipoPresupuesto
+                                   join d in _context.CatMeses on a.IdMes equals d.IdMes
+                                   select new TblPresupuesto
+                                   {
+                                       IdPresupuesto = a.IdPresupuesto,
+                                       MesDesc = d.MesDesc,
+                                       TipoPresupuestoDesc = b.TipoPresupuestoDesc,
+                                       SubTipoPresupuestoDesc = c.SubTipoPresupuestoDesc,
+                                       MontoPresupuesto = a.MontoPresupuesto,
+                                       IdUCorporativoCentro = a.IdUCorporativoCentro,
+                                       FechaRegistro = a.FechaRegistro,
+                                       IdEstatusRegistro = a.IdEstatusRegistro
+                                   };
 
 
-            var fPresupuesto = from a in _context.TblPresupuestos
-                               join b in _context.CatTipoPresupuestos on a.IdTipoPresupuesto equals b.IdTipoPresupuesto
-                               join c in _context.CatSubTipoPresupuestos on a.IdSubTipoPresupuesto equals c.IdSubTipoPresupuesto
-                               join d in _context.CatMeses on a.IdMes equals d.IdMes
-                               select new TblPresupuesto
-                               {
-                                   IdPresupuesto = a.IdPresupuesto,
-                                   MesDesc = d.MesDesc,
-                                   TipoPresupuestoDesc = b.TipoPresupuestoDesc,
-                                   SubTipoPresupuestoDesc = c.SubTipoPresupuestoDesc,
-                                   MontoPresupuesto = a.MontoPresupuesto,
-                                   IdUCorporativoCentro = a.IdUCorporativoCentro,
-                                   FechaRegistro = a.FechaRegistro,
-                                   IdEstatusRegistro = a.IdEstatusRegistro
-                               };
+                return View(await fPresupuesto.ToListAsync());
+            }
 
 
-            return View(await fPresupuesto.ToListAsync());
+
         }
         [HttpGet]
         public ActionResult DatosPresupuestos()
@@ -237,6 +241,25 @@ namespace WebAdmin.Controllers
                 return Json(fPresupuestos);
 
             }
+        }
+        [HttpGet]
+        public ActionResult VariacionPresupuestosCentro(Guid id)
+        {
+
+            var f_user = _userService.GetUserId();
+            var f_usuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+
+            var fPresupuestos = new
+            {
+                fR_pp_i = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == id && a.IdTipoPresupuesto == 1).Count(),
+                fM_pp_i = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == id && a.IdTipoPresupuesto == 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
+                fR_pp_g = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == id && a.IdTipoPresupuesto != 1).Count(),
+                fM_pp_g = _context.TblPresupuestos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == id && a.IdTipoPresupuesto != 1).Select(i => Convert.ToDouble(i.MontoPresupuesto)).Sum(),
+                fR_pr_g = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == id).Count(),
+                fM_pr_g = _context.RelPresupuestoPagos.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == id).Select(i => Convert.ToDouble(i.MontoPresupuestoReal)).Sum()
+            };
+            return Json(fPresupuestos);
+
         }
         [HttpGet]
         public ActionResult fPresupuestos(Guid? id)

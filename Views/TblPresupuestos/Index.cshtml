@@ -31,122 +31,113 @@
                 </div>
             </div>
         </h5>
-        <div class="container">
-            <table class="table" id="tblPresupuestos">
-                <thead>
-                    <tr>
-                        <th style="text-align:center" hidden>
-                            @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.MesDesc)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TipoPresupuestoDesc)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.SubTipoPresupuestoDesc)
-                        </th>
-
-                        <th>
-                            @Html.DisplayNameFor(model => model.MontoPresupuesto)
-                        </th>
-
-                        <th style="text-align:center">
-                            @Html.DisplayNameFor(model => model.FechaRegistro)
-                        </th>
-                        <th style="text-align:center">
-                            @Html.DisplayNameFor(model => model.IdEstatusRegistro)
-                        </th>
-                        <th style="text-align:center">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+        <div class="table-responsive text-nowrap">
+            <div class="container">
+                <table class="table" id="tblPresupuestos">
+                    <thead>
                         <tr>
                             <th style="text-align:center" hidden>
                                 @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
                             </th>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MesDesc)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TipoPresupuestoDesc)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SubTipoPresupuestoDesc)
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MesDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TipoPresupuestoDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SubTipoPresupuestoDesc)
+                            </th>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MontoPresupuesto)
-                            </td>
-                            <td style="text-align:center">
-                                @Html.DisplayFor(modelItem => item.FechaRegistro)
-                            </td>
-                            <td style="text-align:center">
-                                @if (item.IdEstatusRegistro == 1)
-                                {
-                                    <i class="fas fa-check-circle" style="font-size: 1em; color: green;"></i>
-                                }
-                                else
-                                {
-                                    <i class="fas fa-stop-circle" style="font-size: 1em; color: red;"></i>
-                                    
-                                }
-                            </td>
-                            <td style="text-align:center">
-                                 @if (item.TipoPresupuestoDesc == "VENTAS")
-                                {
-                                    
-                                <a asp-action="Edit" asp-route-id="@item.IdPresupuesto" class="btn btn-outline-secondary"
-                                title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
-                                <a asp-action="Delete" asp-route-id="@item.IdPresupuesto" class="btn btn-outline-secondary"
-                                title="Desactivar"><i class="far fa-stop-circle"
-                                    style="font-size: 1em; color: #FF9333;"></i></a>
-                                }
-                                else
-                                {
-                                   <a asp-action="Payment" asp-route-id="@item.IdPresupuesto" class="btn btn-outline-secondary"
-                                title="Editar"><i class="fas fa-cash-register" style="font-size: 1em; color: #cb2821  ;"></i></a>
-                                <a asp-action="Edit" asp-route-id="@item.IdPresupuesto" class="btn btn-outline-secondary"
-                                title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
-                                <a asp-action="Delete" asp-route-id="@item.IdPresupuesto" class="btn btn-outline-secondary"
-                                title="Desactivar"><i class="far fa-stop-circle"
-                                    style="font-size: 1em; color: #FF9333;"></i></a>
-                                    
-                                }
-                               
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MontoPresupuesto)
+                            </th>
+
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.FechaRegistro)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
+                            </th>
+                            <th style="text-align:center">Acciones</th>
                         </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th style="text-align:center" hidden>
-                            @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.MesDesc)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TipoPresupuestoDesc)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.PresupuestoDesc)
-                        </th>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th style="text-align:center" hidden>
+                                    @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MesDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoPresupuestoDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SubTipoPresupuestoDesc)
+                                </td>
 
-                        <th>
-                            @Html.DisplayNameFor(model => model.MontoPresupuesto)
-                        </th>
-                        <th style="text-align:center">
-                            @Html.DisplayNameFor(model => model.FechaRegistro)
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MontoPresupuesto)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.FechaRegistro)
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.IdEstatusRegistro == 1)
+                                    {
+                                        <i class="fas fa-check-circle" style="font-size: 1em; color: green;"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-stop-circle" style="font-size: 1em; color: red;"></i>
+
+                                    }
+                                </td>
+                                <td style="text-align:center">
+
+
+                                    <a asp-action="Edit" asp-route-id="@item.IdPresupuesto"
+                                    class="btn btn-outline-secondary" title="Editar"><i class="far fa-edit"
+                                        style="font-size: 1em; color: #FFC300;"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.IdPresupuesto"
+                                    class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle"
+                                        style="font-size: 1em; color: #FF9333;"></i></a>
+
+
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th style="text-align:center" hidden>
+                                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MesDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TipoPresupuestoDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PresupuestoDesc)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.MontoPresupuesto)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.FechaRegistro)
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
-
     </div>
 </div>
 @section Scripts {
@@ -154,73 +145,61 @@
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script type="text/javascript">
+
     $(document).ready(function () {
+
+        dataTable = $("#tblPresupuestos").DataTable({
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function () {
+                        var column = this;
+                        var select = $('<select class="form-select">SELECCIONAR<option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
+                            });
+
+                        column
+                            .data()
+                            .unique()
+                            .sort()
+                            .each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>');
+                            });
+                    });
+            },
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+
+
+        });
+
         $('#drpCorpCent').change(function () {
             var SelectedText = $('option:selected', this).text();
             var SelectedValue = $('option:selected', this).val();
-            var input, filter, table, tr, td, i;
-            input = document.getElementById("drpCorpCent");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("tblSuministros");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
+            dataTable.column(0).search(SelectedValue).draw();
         });
-
-        $('#tblPresupuestos').DataTable(
-            {
-                initComplete: function () {
-                    this.api()
-                        .columns()
-                        .every(function () {
-                            var column = this;
-                            var select = $('<select class="form-select">SELECCIONAR<option value=""></option></select>')
-                                .appendTo($(column.footer()).empty())
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
-                                });
-
-                            column
-                                .data()
-                                .unique()
-                                .sort()
-                                .each(function (d, j) {
-                                    select.append('<option value="' + d + '">' + d + '</option>');
-                                });
-                        });
-                },
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin resultados encontrados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
-            }
-        );
 
         var vEstatusFlag = '@ViewBag.EstatusFlag'
         var vEmpresaFlag = '@ViewBag.EmpresaFlag'

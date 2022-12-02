@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<WebAdmin.Models.TblAlumno>
-    
+
 
 @{
     ViewData["Title"] = "Alumnos";
@@ -11,122 +11,128 @@
         <h5 class="card-header">
             <div class="row">
                 <div class="mb-3 col-md-6">
-                    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create"><i class="fas fa-plus"></i> Nuevo</a>
+                    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create"><i
+                            class="fas fa-plus"></i> Nuevo</a>
                 </div>
-                 <div class="mb-3 col-md-6">
-                     <div class="row mb-3" id="iCorpCent" hidden>
-                                    <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Corporativo / Centro</label>
-                                    <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="bx bx-check-shield"></i></span>
-                                        <select class="form-select" id="drpCorpCent"
-                                          asp-items="@(new SelectList(ViewBag.ListaCorpCent,"IdCentro","CentroDesc"))">
-                                          <option value="">SELECCIONAR</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                </div>
+                <div class="mb-3 col-md-6">
+                    <div class="row mb-3" id="iCorpCent" hidden>
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Corporativo /
+                            Centro</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                        class="bx bx-check-shield"></i></span>
+                                <select class="form-select" id="drpCorpCent"
+                                    asp-items="@(new SelectList(ViewBag.ListaCorpCent,"IdCentro","CentroDesc"))">
+                                    <option value="">SELECCIONAR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </h5>
         <div class="table-responsive text-nowrap">
-          <div class="container">
-<table class="table" id="tblAlumnos">
-    <thead>
-        <tr>
-<th style="text-align:center" hidden>
-                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.TipoAlumnoDesc)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.NombreAlumno)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.ApellidoPaterno)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.ApellidoMaterno)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
-            </th>
-            <th style="text-align:center">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                   <td style="text-align:center" hidden>
-                    @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
-                </td>
-                <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.TipoAlumnoDesc)
-                </td>
-                <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.NombreAlumno)
-                </td>
-                <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.ApellidoPaterno)
-                </td>
-                <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.ApellidoMaterno)
-                </td>
-                <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.FechaRegistro)
-                </td>
-                <td style="text-align:center">
-                    @if (item.IdEstatusRegistro == 1)
-                    {
-                        <i class="fas fa-check-circle" style="font-size: 1em; color: green;"></i>
-                    }
-                    else
-                    {
-                        <i class="fas fa-stop-circle" style="font-size: 1em; color: red;"></i>
-                    }
-                </td>
-                <td style="text-align:center">
-                    <a asp-action="Edit" asp-route-id="@item.IdAlumno" class="btn btn-outline-secondary" title="Editar"><i
-                        class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
-                    <a asp-action="Details" asp-route-id="@item.IdAlumno" class="btn btn-outline-secondary"
-                    title="Detalles"><i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.IdAlumno" class="btn btn-outline-secondary"
-                    title="Desactivar"><i class="far fa-stop-circle" style="font-size: 1em; color: #FF9333;"></i></a>
-                </td>
-            </tr>
-        }
-    </tbody>
-     <tfoot>
-        <tr> <th style="text-align:center" hidden>
-                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
-            </th>
-             <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.TipoAlumnoDesc)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.NombreAlumno)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.ApellidoPaterno)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.ApellidoMaterno)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
-            </th>
-        </tr>
-    </tfoot>
-</table>
+            <div class="container">
+                <table class="table" id="tblAlumnos">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center" hidden>
+                                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.TipoAlumnoDesc)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.NombreAlumno)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.ApellidoPaterno)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.ApellidoMaterno)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.FechaRegistro)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
+                            </th>
+                            <th style="text-align:center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align:center" hidden>
+                                    @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.TipoAlumnoDesc)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.NombreAlumno)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.ApellidoPaterno)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.ApellidoMaterno)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.FechaRegistro)
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.IdEstatusRegistro == 1)
+                                    {
+                                        <i class="fas fa-check-circle" style="font-size: 1em; color: green;"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-stop-circle" style="font-size: 1em; color: red;"></i>
+                                    }
+                                </td>
+                                <td style="text-align:center">
+                                    <a asp-action="Edit" asp-route-id="@item.IdAlumno" class="btn btn-outline-secondary"
+                                    title="Editar"><i class="far fa-edit"
+                                        style="font-size: 1em; color: #FFC300;"></i></a>
+                                    <a asp-action="Details" asp-route-id="@item.IdAlumno" class="btn btn-outline-secondary"
+                                    title="Detalles"><i class="far fa-list-alt"
+                                        style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.IdAlumno" class="btn btn-outline-secondary"
+                                    title="Desactivar"><i class="far fa-stop-circle"
+                                        style="font-size: 1em; color: #FF9333;"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th style="text-align:center" hidden>
+                                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.TipoAlumnoDesc)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.NombreAlumno)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.ApellidoPaterno)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.ApellidoMaterno)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.FechaRegistro)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
@@ -136,8 +142,7 @@
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script type="text/javascript">
-    $(document).ready(function () {
- $('#drpCorpCent').change(function () {
+$('#drpCorpCent').change(function () {
             var SelectedText = $('option:selected', this).text();
             var SelectedValue = $('option:selected', this).val();
             var input, filter, table, tr, td, i;
@@ -157,6 +162,8 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             }
 
         });
+    $(document).ready(function () {
+        
         $('#tblAlumnos').DataTable(
             {
                 initComplete: function () {

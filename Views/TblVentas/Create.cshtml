@@ -336,7 +336,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
- <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
+                <div class="invoice-box" id="invocieContainer" style="height:297mm;width:210mm;">
                     <table>
                         <tr class="top">
                             <td colspan="2">
@@ -739,8 +739,31 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         let t_venta = i_servicio + i_inscrpcion;
         let tDiferencia = parseInt(iPagoMonto - t_venta);
         let vTotal = iPagoMonto - tDiferencia;
-        document.getElementById("i_pago_diferencia").value = tDiferencia;
+
+
+        if (tDiferencia < 0) {
+            document.getElementById("i_pago_diferencia").value = tDiferencia * - 1;
+        }
+        else {
+            document.getElementById("i_pago_diferencia").value = tDiferencia;
+        }
+
+
         $('#btnPrint').removeAttr('hidden');
+
+    });
+    $('#iDescuento').change(function () {
+
+        $("#tbProducto tbody").empty();
+        $("#tbProductoA tbody").empty();
+        $("#tbProductoB tbody").empty();
+
+
+
+        document.getElementById('l_total_servicio').innerHTML = "$ " + 0;
+        document.getElementById('l_total_inscripcion').innerHTML = "$ " + 0;
+        document.getElementById('l_total_venta').innerHTML = "$ " + 0;
+        document.getElementById('i_pago_diferencia').value = 0;
 
     });
     $('#l_tipo_pago').change(function () {
@@ -761,6 +784,8 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     });
     $('#l_servicios').change(function () {
+
+        $("#tbProducto tbody").empty();
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
         total_venta = 0;
@@ -866,6 +891,8 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var p = o.parentNode.parentNode;
         p.parentNode.removeChild(p);
         $("#tbProductoA tbody").empty();
+        $("#tbProductoA tbody").remove();
+        $("#tbProductoB tbody").empty();
         $("#tbProductoB tbody").remove();
 
         var rowCount = $('#tbProducto >tbody >tr').length;
@@ -883,7 +910,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     }
     function registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion) {
-
+        vNotify.warning({ text: 'Se va a cargar la Venta favor de esperar unos segundos.', title: 'Intelimundo.' });
         var RelVenta_Pagos = []
         var RelVenta_Productos = []
         $("#tbProducto > tbody > tr").each(function (i, tr) {
@@ -997,7 +1024,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         validate('i_pago_monto')
                     }
                     else if (f_tipo_venta == 1) {
-                        var v_pago = (total_col1 + f_pago_diferencia + f_monto_inscripcion);
+                        var v_pago = (total_col1 + f_monto_inscripcion + (f_pago_diferencia));
                         if (i_pago_monto == v_pago) {
 
                             registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion);
@@ -1037,7 +1064,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     validate('i_pago_monto')
                 }
                 else if (f_tipo_venta == 1) {
-                    var v_pago = (total_col1 + f_pago_diferencia + f_monto_inscripcion);
+                    var v_pago = (total_col1 + f_monto_inscripcion + (f_pago_diferencia));
                     if (i_pago_monto == v_pago) {
 
                         registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion);
@@ -1093,8 +1120,9 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var f_tipo_venta = $('#l_tipo_venta').val()
 
         if (f_tipo_venta == 2) {
+            var f_monto_inscripcion = parseInt($('#iMontoInscripcion').val());
             var i_pago_monto = parseInt($('#i_pago_monto').val());
-            var t_diferencia = parseInt(i_pago_monto - total_venta);
+            var t_diferencia = parseInt((total_venta + f_monto_inscripcion) - i_pago_monto);
             document.getElementById('v_total_venta').innerHTML = 'Pago: ' + i_pago_monto + ', Restante: ' + t_diferencia * -1;
             document.getElementById('dv_total_venta').innerHTML = 'Pago: ' + i_pago_monto + ', Restante: ' + t_diferencia * -1;
         }
