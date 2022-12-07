@@ -19,7 +19,7 @@ namespace WebAdmin.Models
         [Display(Name = "Extension")]
         public string Extension { get; set; }
 
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Descripción")]
         public string Description { get; set; }
 
         [Display(Name = "Usuario")]

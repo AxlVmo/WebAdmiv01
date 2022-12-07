@@ -12,6 +12,35 @@
             <div class="card-body">
                 <form asp-action="Create">
                     <div class="row">
+                         <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="TblCompras.IdTipoPresupuesto"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                    </span>
+                                    <select id="lTipoPresupuesto" class="form-select" required
+                                        asp-for="TblCompras.IdTipoPresupuesto"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoPresupuesto, "IdTipoPresupuesto", "TipoPresupuestoDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="TblCompras.IdSubTipoPresupuesto"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                    </span>
+                                    <select id="lSubTipoPresupuesto" class="form-select" required
+                                        asp-for="TblCompras.IdSubTipoPresupuesto">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label" asp-for="TblCompras.IdProveedorCompra"></label>
                             <div class="input-group input-group-merge">
@@ -531,7 +560,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 vNotify.error({ text: 'Folio de Compra, Requerido.', title: 'Intelimundo.' });
                 break;
             case 'i_compra_desc':
-                vNotify.error({ text: 'Descripcion de Compra, Requerido.', title: 'Intelimundo.' });
+                vNotify.error({ text: 'Descripción de Compra, Requerido.', title: 'Intelimundo.' });
                 break;
             case 'i_fecha_Compra':
                 vNotify.error({ text: 'Fecha de Compra, Requerido.', title: 'Intelimundo.' });
@@ -540,7 +569,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 vNotify.error({ text: 'Cantidad, Requerido.', title: 'Intelimundo.' });
                 break;
             case 'i_articulo_desc':
-                vNotify.error({ text: 'Descripcion de Articulo, Requerido.', title: 'Intelimundo.' });
+                vNotify.error({ text: 'Descripción de Articulo, Requerido.', title: 'Intelimundo.' });
                 break;
 
             case 'i_precio':

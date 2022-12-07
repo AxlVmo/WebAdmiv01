@@ -274,6 +274,25 @@ namespace WebAdmin.Controllers
         // GET: TblCompras/Create
         public IActionResult Create()
         {
+             var fTipoPresupuesto = from a in _context.CatTipoPresupuestos
+                                   where a.IdEstatusRegistro == 1
+                                   select new CatTipoPresupuesto
+                                   {
+                                       IdTipoPresupuesto = a.IdTipoPresupuesto,
+                                       TipoPresupuestoDesc = a.TipoPresupuestoDesc
+                                   };
+
+            ViewBag.ListaTipoPresupuesto = fTipoPresupuesto.ToList();
+            
+            var fSubTipoPresupuesto = from a in _context.CatSubTipoPresupuestos
+                                      where a.IdEstatusRegistro == 1
+                                      select new CatSubTipoPresupuesto
+                                      {
+                                          IdSubTipoPresupuesto = a.IdSubTipoPresupuesto,
+                                          SubTipoPresupuestoDesc = a.SubTipoPresupuestoDesc
+                                      };
+
+            ViewBag.ListaSubTipoPresupuesto = fSubTipoPresupuesto.ToList();
             var fTipoCompra = from a in _context.CatTipoCompras
                               where a.IdEstatusRegistro == 1
                               select new CatTipoCompra

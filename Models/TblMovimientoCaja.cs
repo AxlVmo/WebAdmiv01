@@ -20,20 +20,20 @@ namespace WebAdmin.Models
         public int IdCaracteristicaMovimientoCaja { get; set; }
         [Display(Name = "Tipo de Recurso")]
         public int IdTipoRecurso { get; set; }
-        [Display(Name = "Descripción")]
+        [Display(Name = "Tipo Movimiento")]
         [DataType(DataType.Text)]
         [NotMapped]
         public string TipoMovimientoCajaDesc { get; set; }
-        [Display(Name = "Descripción")]
+        [Display(Name = "SubTipo Movimiento")]
         [DataType(DataType.Text)]
         [NotMapped]
         public string SubTipoMovimientoCajaDesc { get; set; }
 
-        [Display(Name = "Descripción")]
+        [Display(Name = "Recurso")]
         [DataType(DataType.Text)]
         [NotMapped]
         public string TipoRecursoDesc { get; set; }
-        [Display(Name = "Descripción")]
+        [Display(Name = "Caracteristica")]
         [DataType(DataType.Text)]
         [NotMapped]
         public string CaracteristicaMovimientoCajaDesc { get; set; }

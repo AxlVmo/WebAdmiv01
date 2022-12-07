@@ -22,11 +22,11 @@ namespace WebAdmin.Models
         
         public int IdTipoServicio { get; set; }
 
-        [Display(Name = "Descripcion Tipo Servicio")]
+        [Display(Name = "Descripción Tipo Servicio")]
         [NotMapped]
         public string TipoServicioDesc { get; set; }
 
-        [Display(Name = "Descripcion Servicio")]
+        [Display(Name = "Descripción Servicio")]
         public string DescServicio { get; set; }
 
         [Display(Name = "Periodo / Meses")]
@@ -49,9 +49,9 @@ namespace WebAdmin.Models
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
-        [Column("FechaRegistro")]
-        [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
+        [DataType(DataType.Date)]
+        
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]

@@ -19,7 +19,7 @@ namespace WebAdmin.Models
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
-        [Column("FechaRegistro")]
+        [Display(Name = "Fecha Registro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
         public DateTime FechaRegistro { get; set; }

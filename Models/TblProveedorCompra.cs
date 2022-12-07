@@ -32,9 +32,9 @@ namespace WebAdmin.Models
         
         public Guid IdUCorporativoCentro { get; set; }
 
-        [Column("FechaRegistro")]
-        [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
+        [DataType(DataType.Date)]
+        
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]

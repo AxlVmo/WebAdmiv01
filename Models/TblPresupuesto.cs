@@ -32,7 +32,7 @@ namespace WebAdmin.Models
         [NotMapped]
         public string SubTipoPresupuestoDesc { get; set; }
 
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
 
         public string PresupuestoDesc { get; set; }
@@ -47,7 +47,7 @@ namespace WebAdmin.Models
 
         public string NumeroReferencia { get; set; }
 
-        [Display(Name = "Dia de Corte")]
+        [Display(Name = "Día de Corte")]
 
         public int DiaCorte { get; set; }
         [Display(Name = "Periodo de Facturacion")]
@@ -89,9 +89,9 @@ namespace WebAdmin.Models
         
         public Guid IdUCorporativoCentro { get; set; }
         
-        [Column("FechaRegistro")]
-        [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
+        [DataType(DataType.Date)]
+        
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]

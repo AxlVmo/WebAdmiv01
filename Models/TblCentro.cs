@@ -72,9 +72,9 @@ namespace WebAdmin.Models
         [Display(Name = "Usuario Control")]
         public Guid IdUsuarioControl { get; set; }
 
-        [Column("FechaRegistro")]
-        [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
+        [DataType(DataType.Date)]
+        
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]

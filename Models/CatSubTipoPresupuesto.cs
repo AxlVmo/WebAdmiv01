@@ -11,12 +11,12 @@ namespace WebAdmin.Models
         [Display(Name = "Tipo de Presupuesto")]
         public int IdTipoPresupuesto { get; set; }
 
-        [Display(Name = "Descripción")]
+        [Display(Name = "Tipo de Presupuesto")]
         [DataType(DataType.Text)]
         [NotMapped]
 
         public string TipoPresupuestoDesc { get; set; }
-        [Display(Name = "Descripción")]
+        [Display(Name = "SubTipo Presupuesto")]
         [DataType(DataType.Text)]
 
         public string SubTipoPresupuestoDesc { get; set; }
@@ -24,9 +24,9 @@ namespace WebAdmin.Models
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
-        [Column("FechaRegistro")]
-        [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
+        [DataType(DataType.Date)]
+        
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
