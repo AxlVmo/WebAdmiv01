@@ -27,6 +27,15 @@
                     $('#i_catalogos_u').removeAttr('hidden');
                     $('#iCorpCent').removeAttr('hidden');
                 }
+                if (list[0].idPerfil == 2 && list[0].idRol == 2 && list[0].idCorpCent == 1 && list[0].idArea == 2) {
+                    $('#i_empresa_d').removeAttr('hidden');
+                    $('#i_empresa_p').removeAttr('hidden');
+                    $('#i_empresa_n').removeAttr('hidden');
+                    
+                    $('#i_catalogos_c').removeAttr('hidden');
+                    $('#i_catalogos_u').removeAttr('hidden');
+                    $('#iCorpCent').removeAttr('hidden');
+                }
             }
         },
         error: function () {      

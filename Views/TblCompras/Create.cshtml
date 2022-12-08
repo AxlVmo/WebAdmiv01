@@ -589,5 +589,36 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 vNotify.error({ text: 'Err.', title: 'Intelimundo.' });
         }
     }
+    $('#lTipoPresupuesto').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        $.ajax({
+            type: "GET",
+            url: "/CatSubTipoPresupuestos/fSubTipoPresupuesto/",
+            data: { idA: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $lista_servicios = $('#lSubTipoPresupuesto');
+                $("#lSubTipoPresupuesto").empty();
+
+                if (list.length == 0) {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    $lista_servicios.attr('required', false);
+                }
+                else {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $lista_servicios.append('<option value=' + list[i].idSubTipoPresupuesto + '>' + list[i].subTipoPresupuestoDesc + '</option>');
+                        $lista_servicios.attr('required', true);
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    });
 </script>
 }
