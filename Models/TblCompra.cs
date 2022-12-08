@@ -44,9 +44,9 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         public DateTime FechaCompra { get; set; }
         [Display(Name = "Descripción")]
-        public int CompraDesc { get; set; }
+        public string CompraDesc { get; set; }
         [Display(Name = "Folio Compra")]
-        public int FolioCompra { get; set; }
+        public string FolioCompra { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
@@ -54,6 +54,7 @@ namespace WebAdmin.Models
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
         [Display(Name = "Proveedor Compra")]
+        [NotMapped]
         public int NombreUsuarioCompra { get; set; }
 
         [Display(Name = "Corporativo / Centro")]

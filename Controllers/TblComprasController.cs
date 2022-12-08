@@ -275,7 +275,7 @@ namespace WebAdmin.Controllers
         public IActionResult Create()
         {
              var fTipoPresupuesto = from a in _context.CatTipoPresupuestos
-                                   where a.IdEstatusRegistro == 1
+                                   where a.IdEstatusRegistro == 1 && a.IdTipoPresupuesto != 1
                                    select new CatTipoPresupuesto
                                    {
                                        IdTipoPresupuesto = a.IdTipoPresupuesto,

@@ -12,7 +12,7 @@
             <div class="card-body">
                 <form asp-action="Create">
                     <div class="row">
-                         <div class="mb-3 col-md-3">
+                        <div class="mb-3 col-md-3">
                             <label class="form-label" asp-for="TblCompras.IdTipoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-3">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                        <div class="mb-3 col-md-3">
                             <label class="form-label" asp-for="TblCompras.IdTipoCompra"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
@@ -279,13 +279,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         currency: 'USD',
         minimumFractionDigits: 2
     })
-    const fecha_objeto = new Date();
-    let fecha_mes = 1 + fecha_objeto.getUTCMonth();
-    let fecha_dia = fecha_objeto.getDate();
-    let fecha_anio = fecha_objeto.getFullYear();
-    const fecha_formato = fecha_dia + "/" + fecha_mes + "/" + fecha_anio;
-    const folio_compra = fecha_objeto.getTime();
-    var total_compra = 0;
+
     $('#l_proveedor_compra').select2({
         theme: "bootstrap-5",
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
@@ -302,6 +296,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             $('#d_codigo_pago').removeAttr('hidden');
             document.getElementById("d_codigo_pago").setAttribute("required", true);
         }
+    });
+    $('#i_compra_desc').change(function () {
+
+        var _i_compra_desc = $("#i_compra_desc").val();
+        document.getElementById("i_articulo_desc").value = _i_compra_desc;
     });
     $("#btn_agrega_compra").on("click", function () {
 
@@ -336,7 +335,8 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         valida_compra();
     })
     $("#btn_validar").on("click", function () {
-
+        var f_tipo_presupuesto = $('#lTipoPresupuesto').val();
+        var f_sub_tipo_presupuesto = $('#lSubTipoPresupuesto').val();
         var _l_proveedor_compra = $("#l_proveedor_compra").val();
         var _l_tipo_compra = $("#l_tipo_compra").val();
         var _i_folio_compra = $("#i_folio_compra").val();
@@ -351,7 +351,13 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var _i_folio_pago = $("#i_folio_pago").val();
         var _i_pago_monto = $("#i_pago_monto").val();
 
-        if (_l_proveedor_compra == "" || _l_proveedor_compra == "0") {
+        if (f_tipo_presupuesto == "" || f_tipo_presupuesto == "0") {
+            validate('lTipoPresupuesto')
+        }
+        else if (f_sub_tipo_presupuesto == "" || f_sub_tipo_presupuesto == "0") {
+            validate('lSubTipoPresupuesto')
+        }
+        else if (_l_proveedor_compra == "" || _l_proveedor_compra == "0") {
             validate('l_proveedor_compra')
         }
         else if (_l_tipo_compra == "" || _l_tipo_compra == "0") {
@@ -388,8 +394,15 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             validate('i_pago_monto')
         }
         else {
+            let total_col1 = 0;
+            $('#tbProducto tbody').find('tr').each(function (i, el) {
+                total_col1 += parseFloat($(this).find('td').eq(3).text());
+                document.getElementById('l_total_compra').innerHTML = "$ " + total_col1;
+            });
+            const fecha_objeto = new Date(_i_fecha_Compra);
+            registra_compra(f_tipo_presupuesto, f_sub_tipo_presupuesto, _l_tipo_pago, _i_folio_compra, _i_pago_monto, fecha_objeto, total_col1)
             vNotify.info({ text: 'Se completaron los campos requeridos.', title: 'Intelimundo.' });
-            document.getElementById("btn_guardar").removeAttribute("disabled");
+
         }
     })
     $('#i_pago_monto').change(function () {
@@ -424,7 +437,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             total_tabla();
         }
     }
-    function registra_compra(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1) {
+    function registra_compra(f_tipo_presupuesto, f_sub_tipo_presupuesto, f_tipo_pago, _i_folio_compra, catidad_abono, fecha_objeto, total_col1) {
 
         var Relcompra_Pagos = []
         var Relcompra_Productos = []
@@ -435,35 +448,35 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 {
                     Cantidad: $(tr).find('td:eq(0)').text(),
                     ProdServDesc: $(tr).find('td:eq(1)').text(),
-                    Descuento: $(tr).find('td:eq(2)').text(),
-                    Precio: $(tr).find('td:eq(3)').text(),
-                    TotalPrecio: $(tr).find('td:eq(4)').text()
+                    Precio: $(tr).find('td:eq(2)').text(),
+                    TotalPrecio: $(tr).find('td:eq(3)').text()
                 }
             )
-        })
+        });
         var Relcompra_Pagos = [{
 
             IdTipoPago: f_tipo_pago,
-            FolioPago: f_codigo_pago,
+            FolioPago: $("#i_folio_pago").val(),
             CantidadPago: catidad_abono,
-            Diferencia: catidad_diferencia,
             Total: total_col1
         }];
         var oCompraVM = {
-            Tblcompras: {
-                IdProveedorCompra: $("#l_tipo_compra").val(),
+            TblCompras: {
+                IdTipoPresupuesto: parseInt($("#lTipoPresupuesto").val()),
+                IdSubTipoPresupuesto: parseInt($("#lSubTipoPresupuesto").val()),
+                IdProveedorCompra: $("#l_proveedor_compra").val(),
                 IdTipocompra: $("#l_tipo_compra").val(),
-                IdCliente: $("#l_alumno").val(),
-                Foliocompra: $("#i_Foliocompra").val(),
-                CompraDesc: $("#i_Foliocompra").val(),
-
+                FechaCompra: fecha_objeto,
+                FolioCompra: $("#i_folio_compra").val(),
+                CompraDesc: $("#i_compra_desc").val()
             },
-            RelcompraProductos: Relcompra_Productos,
-            RelcompraPagos: Relcompra_Pagos
+            RelCompraProductos: Relcompra_Productos,
+            RelCompraPagos: Relcompra_Pagos
         }
 
+
         jQuery.ajax({
-            url: '@Url.Action("Index", "Tblcompras")',
+            url: '@Url.Action("Index", "TblCompras")',
             type: "POST",
             data: JSON.stringify(oCompraVM),
             datatype: "json",
@@ -472,7 +485,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
                 if (data.respuesta) {
                     vNotify.success({ text: 'compra Registrada.', title: 'Intelimundo.' });
-                    var url = '@Url.Action("Index", "Tblcompras")';
+                    var url = '@Url.Action("Index", "TblCompras")';
                     window.location.href = url;
                 }
             }
@@ -550,6 +563,12 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     function validate(inputID) {
         switch (inputID) {
+            case 'lTipoPresupuesto':
+                vNotify.error({ text: 'Tipo Presupuesto, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'lSubTipoPresupuesto':
+                vNotify.error({ text: 'SubTipo Presupuesto,, Requerido.', title: 'Intelimundo.' });
+                break;
             case 'l_proveedor_compra':
                 vNotify.error({ text: 'Proveedor compra, Requerido.', title: 'Intelimundo.' });
                 break;
