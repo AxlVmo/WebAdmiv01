@@ -445,8 +445,8 @@ namespace WebAdmin.Controllers
 
                 ViewBag.ListaProveedorCompra = fProveedorCompra.ToList();
             }
-            return View();
             return View(tblCompra);
+
         }
 
         // POST: TblCompras/Edit/5
