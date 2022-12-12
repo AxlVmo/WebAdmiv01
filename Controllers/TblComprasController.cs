@@ -66,8 +66,8 @@ namespace WebAdmin.Controllers
                                     {
                                         var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
                                         var ValidaProveedorCompras = _context.TblProveedorCompras.Where(s => s.IdUCorporativoCentro == f_centro.IdCentro).ToList();
-      
-           
+
+
                                         if (ValidaProveedorCompras.Count == 1)
                                         {
                                             ViewBag.ProveedorComprasFlag = 1;
@@ -140,14 +140,17 @@ namespace WebAdmin.Controllers
             {
                 var fCompraCntro = from a in _context.TblCompras
                                    join b in _context.CatTipoCompras on a.IdTipoCompra equals b.IdTipoCompra
+                                   join c in _context.TblUsuarios on a.IdUsuarioModifico equals c.IdUsuario
                                    where a.IdUCorporativoCentro == fIdCentro.IdCentro && a.IdCorpCent == 2
                                    select new TblCompra
                                    {
                                        TipoCompraDesc = b.TipoCompraDesc,
                                        IdCompra = a.IdCompra,
+                                       FolioCompra = a.FolioCompra,
                                        CompraDesc = a.CompraDesc,
                                        IdUCorporativoCentro = a.IdUCorporativoCentro,
-                                       FechaRegistro = a.FechaRegistro,
+                                       FechaCompra = a.FechaCompra,
+                                       NombreUsuarioCompra = c.Nombres + ' ' + c.ApellidoPaterno + ' ' + c.ApellidoMaterno,
                                        IdEstatusRegistro = a.IdEstatusRegistro
                                    };
                 return View(await fCompraCntro.ToListAsync());
@@ -275,7 +278,7 @@ namespace WebAdmin.Controllers
         // GET: TblCompras/Create
         public IActionResult Create()
         {
-             var fTipoPresupuesto = from a in _context.CatTipoPresupuestos
+            var fTipoPresupuesto = from a in _context.CatTipoPresupuestos
                                    where a.IdEstatusRegistro == 1 && a.IdTipoPresupuesto != 1
                                    select new CatTipoPresupuesto
                                    {
@@ -284,7 +287,7 @@ namespace WebAdmin.Controllers
                                    };
 
             ViewBag.ListaTipoPresupuesto = fTipoPresupuesto.ToList();
-            
+
             var fSubTipoPresupuesto = from a in _context.CatSubTipoPresupuestos
                                       where a.IdEstatusRegistro == 1
                                       select new CatSubTipoPresupuesto
@@ -365,6 +368,7 @@ namespace WebAdmin.Controllers
         // GET: TblCompras/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
+
             if (id == null || _context.TblCompras == null)
             {
                 return NotFound();
@@ -375,6 +379,73 @@ namespace WebAdmin.Controllers
             {
                 return NotFound();
             }
+              var fTipoPresupuesto = from a in _context.CatTipoPresupuestos
+                                   where a.IdEstatusRegistro == 1 && a.IdTipoPresupuesto != 1
+                                   select new CatTipoPresupuesto
+                                   {
+                                       IdTipoPresupuesto = a.IdTipoPresupuesto,
+                                       TipoPresupuestoDesc = a.TipoPresupuestoDesc
+                                   };
+
+            ViewBag.ListaTipoPresupuesto = fTipoPresupuesto.ToList();
+
+            var fSubTipoPresupuesto = from a in _context.CatSubTipoPresupuestos
+                                      where a.IdEstatusRegistro == 1
+                                      select new CatSubTipoPresupuesto
+                                      {
+                                          IdSubTipoPresupuesto = a.IdSubTipoPresupuesto,
+                                          SubTipoPresupuestoDesc = a.SubTipoPresupuestoDesc
+                                      };
+
+            ViewBag.ListaSubTipoPresupuesto = fSubTipoPresupuesto.ToList();
+            var fTipoCompra = from a in _context.CatTipoCompras
+                              where a.IdEstatusRegistro == 1
+                              select new CatTipoCompra
+                              {
+                                  IdTipoCompra = a.IdTipoCompra,
+                                  TipoCompraDesc = a.TipoCompraDesc
+                              };
+
+            var fTipoPago = from a in _context.CatTipoPagos
+                            where a.IdEstatusRegistro == 1
+                            select new CatTipoPago
+                            {
+                                IdTipoPago = a.IdTipoPago,
+                                TipoPagoDesc = a.TipoPagoDesc
+                            };
+
+            ViewBag.ListaTipoPago = fTipoPago.ToList();
+
+            ViewBag.ListaTipoCompra = fTipoCompra.ToList();
+
+            var f_user = _userService.GetUserId();
+            var fIdUsuario = _context.TblUsuarios.First(m => m.IdUsuario == Guid.Parse(f_user));
+            if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+            {
+                var fIdCentroCent = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                var fProveedorCompra = from a in _context.TblProveedorCompras
+                                       where a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == fIdCentroCent.IdCentro
+                                       select new TblProveedorCompra
+                                       {
+                                           IdProveedorCompra = a.IdProveedorCompra,
+                                           NombreProveedorCompra = a.NombreProveedorCompra
+                                       };
+
+                ViewBag.ListaProveedorCompra = fProveedorCompra.ToList();
+            }
+            else
+            {
+                var fProveedorCompra = from a in _context.TblProveedorCompras
+                                       where a.IdEstatusRegistro == 1
+                                       select new TblProveedorCompra
+                                       {
+                                           IdProveedorCompra = a.IdProveedorCompra,
+                                           NombreProveedorCompra = a.NombreProveedorCompra
+                                       };
+
+                ViewBag.ListaProveedorCompra = fProveedorCompra.ToList();
+            }
+            return View();
             return View(tblCompra);
         }
 

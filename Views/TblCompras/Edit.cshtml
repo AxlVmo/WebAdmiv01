@@ -1,4 +1,4 @@
-﻿@model WebAdmin.Models.TblCompra
+﻿@model WebAdmin.Models.ComprasViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -9,86 +9,715 @@
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
-            
+ 
             <div class="card-body">
-        <form asp-action="Edit">
-            <input spellcheck="true" type="hidden" asp-for="IdCompra" />
-             <div class="row">
-                        <div class="mb-3 col-md-2">
-                            <label for="IdTipoCompra" class="form-label" asp-for="IdTipoCompra"></label>
+                <form asp-action="Edit">
+                    <input spellcheck="true" type="hidden" asp-for="IdCompra" />
+                   <div class="row">
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="TblCompras.IdTipoPresupuesto"></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text">
-                                        <i class="bx bx-check-shield">
-                                        </i>
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                     </span>
-                                    <select id="lTipoCompra" class="form-select" required asp-for="IdTipoCompra"
-                                        oninvalid="this.setCustomValidity('Campo Requerido')"
-                                        onchange="this.setCustomValidity('')"
-                                        asp-items="@(new SelectList(ViewBag.ListaTipoCompra,"IdTipoCompra", "TipoCompraDesc"))">
+                                    <select id="lTipoPresupuesto" class="form-select" required
+                                        asp-for="TblCompras.IdTipoPresupuesto" tabindex="1"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoPresupuesto, "IdTipoPresupuesto", "TipoPresupuestoDesc"))">
                                         <option value="">SELECCIONAR</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="CompraDesc" class="form-label" asp-for="CompraDesc"></label>
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="TblCompras.IdSubTipoPresupuesto"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                    </span>
+                                    <select id="lSubTipoPresupuesto" class="form-select" required tabindex="2"
+                                        asp-for="TblCompras.IdSubTipoPresupuesto">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label" asp-for="TblCompras.IdProveedorCompra"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                    </span>
+                                    <select id="l_proveedor_compra" class="form-select" required
+                                        asp-for="TblCompras.IdProveedorCompra" tabindex="3"
+                                        asp-items="@(new SelectList(ViewBag.ListaProveedorCompra, "IdProveedorCompra", "NombreProveedorCompra"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="TblCompras.IdTipoCompra"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                    </span>
+                                    <select id="l_tipo_compra" class="form-select" required
+                                        asp-for="TblCompras.IdTipoCompra" tabindex="4"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoCompra, "IdTipoCompra", "TipoCompraDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="TblCompras.FolioCompra"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" aria-label="John Doe" aria-describedby="2"
-                                    asp-for="CompraDesc" />
+                                <input style="text-transform:uppercase" type="text" class="form-control"
+                                    id="i_folio_compra" required placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="TblCompras.FolioCompra" tabindex="5" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
-                            <label for="FolioCompra" class="form-label" asp-for="FolioCompra"></label>
+                            <label class="form-label" asp-for="TblCompras.DescuentoCompra"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="" required
-                                    oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="FolioCompra" />
+                                <input style="text-transform:uppercase" type="number" class="form-control"
+                                    id="i_descuento_compra" required placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="TblCompras.DescuentoCompra" tabindex="6"
+                                    placeholder="0" min="0"
+                                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-9">
+                            <label class="form-label" asp-for="TblCompras.CompraDesc"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                </span>
+                                <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                    class="form-control" id="i_compra_desc" required placeholder="Requerido"
+                                    aria-label="John Doe" aria-describedby="2" asp-for="TblCompras.CompraDesc"
+                                    tabindex="7" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <label for="FechaCompra" class="form-label" asp-for="TblCompras.FechaCompra"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                </span>
+                                <input type="date" class="form-control" id="i_fecha_Compra" required
+                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2"
+                                    asp-for="TblCompras.FechaCompra" tabindex="8" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-2">
+                            <label class="form-label" asp-for="@Model.RelCompraProductos[0].Cantidad"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"
+                                        style="font-size: 1em; color: #ff0000;"></i></span>
+                                <input type="number" class="form-control" id="i_cantidad" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="@Model.RelCompraProductos[0].Cantidad" required
+                                    placeholder="0" tabindex="9" min="0"
+                                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-5">
+                            <label class="form-label" asp-for="@Model.RelCompraProductos[0].ProdServDesc"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                </span>
+                                <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                    class="form-control" id="i_articulo_desc" required placeholder="Requerido"
+                                    aria-label="John Doe" aria-describedby="2" tabindex="10"
+                                    asp-for="@Model.RelCompraProductos[0].ProdServDesc" tabindex="7" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-2">
-                            <label for="FechaCompra" class="form-label" asp-for="FechaCompra"></label>
+                            <label class="form-label" asp-for="@Model.RelCompraProductos[0].Descuento"></label>
                             <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
-                                </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id=""
-                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2" asp-for="FechaCompra" />
+                                <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"
+                                        style="font-size: 1em; color: #ff0000;"></i></span>
+                                <input type="number" class="form-control" id="i_descuento" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="@Model.RelCompraProductos[0].Descuento" required
+                                    placeholder="0" tabindex="9" min="0"
+                                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                             </div>
                         </div>
-                        <div class="mb-3 col-md-2">
-                            <label for="MontoPago" class="form-label" ></label>
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="@Model.RelCompraProductos[0].Precio"></label>
                             <div class="input-group input-group-merge">
                                 <span id="2" class="input-group-text">
-                                    <i class="bx bx-check-shield"></i>
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
                                 </span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="number" class="form-control" id=""
-                                    required oninvalid="this.setCustomValidity('Campo Requerido')"
-                                    onchange="this.setCustomValidity('')" placeholder="Requerido" aria-label="John Doe"
-                                    aria-describedby="2"  />
+                                <input type="number" class="form-control" id="i_precio" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="@Model.RelCompraProductos[0].Precio" required
+                                    placeholder="0" tabindex="11" min="0"
+                                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
+                                <button class="btn btn-outline-primary" type="button"
+                                    id="btn_agrega_compra">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Main content -->
+                            <div class="invoice p-3 mb-3">
+                                <!-- Table row -->
+                                <div class="row">
+                                    <div class="col-12 table-responsive">
+                                        <table class="table" id="tbProducto">
+                                            <tbody>
+                                                <thead>
+                                                    <th style="text-align:center">
+                                                        Cantidad
+                                                    </th>
+                                                    <th style="text-align:center">
+                                                        Articulo Descripción
+                                                    </th>
+                                                    <th style="text-align:center">
+                                                        Precio
+                                                    </th>
+                                                    <th style="text-align:center">
+                                                        Descuento %
+                                                    </th>
+                                                    <th style="text-align:center">
+                                                        Total
+                                                    </th>
+                                                    <th style="text-align:center">Acciones</th>
+                                                </thead>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
+                                <!-- /.row -->
+                                <!-- this row will not appear when printing -->
+                            </div>
+                            <!-- /.invoice -->
+                        </div><!-- /.col -->
+                    </div>
+                    <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">TIPO DE PAGO</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-fullname2" class="input-group-text">
+                                                <i class="fa-solid fa-exclamation"
+                                                    style="font-size: 1em; color: #ff0000;"></i>
+                                            </span>
+                                            <select id="l_tipo_pago" class="form-select" required
+                                                oninvalid="this.setCustomValidity('Campo Requerido')"
+                                                onchange="this.setCustomValidity('')"
+                                                asp-items="@(new SelectList(ViewBag.ListaTipoPago, "IdTipoPago", "TipoPagoDesc"))">
+                                                <option value="">SELECCIONAR</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-md-6" hidden id="d_codigo_pago">
+                                    <label class="form-label">FOLIO PAGO</label>
+                                    <div class="input-group input-group-merge">
+                                        <span id="2" class="input-group-text">
+                                            <i class="fa-solid fa-exclamation"
+                                                style="font-size: 1em; color: #ff0000;"></i>
+                                        </span>
+                                        <input style="text-transform:uppercase" type="text" class="form-control"
+                                            id="i_folio_pago" required
+                                            oninvalid="this.setCustomValidity('Campo Requerido')"
+                                            onchange="this.setCustomValidity('')" placeholder="Requerido"
+                                            aria-label="John Doe" aria-describedby="2" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label"> PAGO</label>
+                                    <div class="input-group input-group-merge">
+                                        <span id="2" class="input-group-text"><i class="fa-solid fa-exclamation"
+                                                style="font-size: 1em; color: #ff0000;"></i></span>
+                                        <input type="number" class="form-control" id="i_pago_monto"
+                                            aria-label="John Doe" aria-describedby="2" value="0" required min="0"
+                                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">DIFERENCIA</label>
+                                        <input spellcheck="true" type="number" id="i_pago_diferencia"
+                                            class="form-control" value="0" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>Descuento %:</th>
+                                        <td>
+                                            <label id="l_descuento_compra"></label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total:</th>
+                                        <td>
+                                            <label id="l_total_compra"></label>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input spellcheck="true" type="submit" value="Crear" class="btn btn-success" />
+                        <input spellcheck="true" type="button" value="Guardar" class="btn btn-success"
+                            id="btn_validar" />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
-        </form>
+                </form>
             </div>
         </div>
     </div>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+    })
+
+    $('#l_proveedor_compra').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#l_tipo_pago').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        if (SelectedValue == 1 || SelectedValue == 0) {
+            document.getElementById("d_codigo_pago").setAttribute("hidden", true);
+        }
+        else {
+            $('#d_codigo_pago').removeAttr('hidden');
+            document.getElementById("d_codigo_pago").setAttribute("required", true);
+        }
+    });
+    $('#i_compra_desc').change(function () {
+
+        var _i_compra_desc = $("#i_compra_desc").val();
+        document.getElementById("i_articulo_desc").value = _i_compra_desc;
+    });
+    $("#btn_agrega_compra").on("click", function () {
+        var _i_descuento_compra = $("#i_descuento_compra").val();
+        var _cantidad = $("#i_cantidad").val();
+        var _desc = $("#i_articulo_desc").val().toUpperCase();
+        var _descuento = $("#i_descuento").val();
+        var _prec = $("#i_precio").val();
+        var _tprecio = 0;
+
+        if (_cantidad == "" || _cantidad == "0") {
+            validate('i_cantidad')
+        }
+        else if (_desc == "") {
+            validate('i_articulo_desc')
+        }
+        else if (_descuento == "") {
+            validate('i_descuento')
+        }
+        else if (_prec == "" || _prec == "0") {
+            validate('i_precio')
+        }
+        else {
+            if (parseInt(_descuento) == 0) {
+                _tprecio = (parseInt(_cantidad) * parseFloat(_prec));
+            }
+            else {
+                _tprecio = (parseInt(_cantidad) * parseFloat(_prec)) - ((parseInt(_cantidad) * parseFloat(_prec)) * (parseInt(_descuento) / 100));
+            }
+            $("#tbProducto tbody").append(
+                $("<tr>").append(
+                    $("<td style='text-align:center'>").text(_cantidad),
+                    $("<td style='text-align:center'>").text(_desc),
+                    $("<td style='text-align:center'>").text(_prec),
+                    $("<td style='text-align:center'>").text(_descuento),
+                    $("<td style='text-align:center'>").text(_tprecio),
+                    $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
+            )
+            if (parseInt(_i_descuento_compra) == 0) {
+                let total_col1 = 0;
+                $('#tbProducto tbody').find('tr').each(function (i, el) {
+                    total_col1 += parseFloat($(this).find('td').eq(4).text());
+                    document.getElementById('l_descuento_compra').innerHTML = "0 %";
+                    document.getElementById('l_total_compra').innerHTML = "$ " + total_col1;
+                });
+            }
+            else {
+                let total_col1 = 0;
+                $('#tbProducto tbody').find('tr').each(function (i, el) {
+                    total_col1 += parseFloat($(this).find('td').eq(4).text());
+                    _tprecio = (parseFloat(total_col1) - (parseFloat(total_col1)) * (parseInt(_i_descuento_compra) / 100));
+                    document.getElementById('l_descuento_compra').innerHTML = _i_descuento_compra + " %";
+                    document.getElementById('l_total_compra').innerHTML = "$ " + _tprecio;
+                });
+            }
+
+        }
+    })
+    $("#btn_validar").on("click", function () {
+        var f_tipo_presupuesto = $('#lTipoPresupuesto').val();
+        var f_sub_tipo_presupuesto = $('#lSubTipoPresupuesto').val();
+        var _l_proveedor_compra = $("#l_proveedor_compra").val();
+        var _l_tipo_compra = $("#l_tipo_compra").val();
+        var _i_folio_compra = $("#i_folio_compra").val();
+        var _i_compra_desc = $("#i_compra_desc").val();
+        var _i_descuento_compra = $("#i_descuento_compra").val();
+        var _i_fecha_Compra = $("#i_fecha_Compra").val();
+        var _cantidad = $("#i_cantidad").val();
+        var _desc = $("#i_articulo_desc").val();
+        var _i_descuento = $("#i_descuento").val();
+        var _prec = parseFloat($("#i_precio").val());
+        var _tprecio = (_cantidad * _prec);
+        var f_registros_tabla = $('#tbProducto >tbody >tr').length;
+        var _l_tipo_pago = $("#l_tipo_pago").val();
+        var _i_folio_pago = $("#i_folio_pago").val();
+        var _i_pago_monto = $("#i_pago_monto").val();
+
+        if (f_tipo_presupuesto == "" || f_tipo_presupuesto == "0") {
+            validate('lTipoPresupuesto')
+        }
+        else if (f_sub_tipo_presupuesto == "" || f_sub_tipo_presupuesto == "0") {
+            validate('lSubTipoPresupuesto')
+        }
+        else if (_l_proveedor_compra == "" || _l_proveedor_compra == "0") {
+            validate('l_proveedor_compra')
+        }
+        else if (_l_tipo_compra == "" || _l_tipo_compra == "0") {
+            validate('l_tipo_compra')
+        }
+        else if (_i_folio_compra == "") {
+            validate('i_folio_compra')
+        }
+        else if (_i_descuento_compra == "") {
+            validate('i_descuento_compra')
+        }
+        else if (_i_compra_desc == "") {
+            validate('i_compra_desc')
+        }
+        else if (_i_fecha_Compra == "") {
+            validate('i_fecha_Compra')
+        }
+        else if (_cantidad == "" || _cantidad == "0") {
+            validate('i_cantidad')
+        }
+        else if (_desc == "") {
+            validate('i_articulo_desc')
+        }
+        else if (_i_descuento == "") {
+            validate('i_descuento')
+        }
+        else if (_prec == "" || _prec == "0") {
+            validate('i_precio')
+        }
+        else if (f_registros_tabla == 0) {
+            vNotify.error({ text: 'Favor de agregar Articulos.', title: 'Intelimundo.' });
+        }
+        else if (_l_tipo_pago == "") {
+            validate('l_tipo_pago')
+        }
+        else if (_l_tipo_pago != 1 && _i_folio_pago == "") {
+            validate('i_folio_pago')
+        }
+        else if (_i_pago_monto == 0) {
+            validate('i_pago_monto')
+        }
+        else {
+            let total_col1 = 0;
+            $('#tbProducto tbody').find('tr').each(function (i, el) {
+                total_col1 += parseFloat($(this).find('td').eq(4).text());
+                document.getElementById('l_total_compra').innerHTML = "$ " + total_col1;
+            });
+            const fecha_objeto = new Date(_i_fecha_Compra);
+            registra_compra(f_tipo_presupuesto, f_sub_tipo_presupuesto, _l_tipo_pago, _i_folio_compra, _i_pago_monto, fecha_objeto, total_col1)
+            vNotify.info({ text: 'Se completaron los campos requeridos.', title: 'Intelimundo.' });
+
+        }
+    })
+    $('#i_pago_monto').change(function () {
+        var _i_descuento_compra = $("#i_descuento_compra").val();
+        if (parseInt(_i_descuento_compra) == 0) {
+            let total_col1 = 0;
+            $('#tbProducto tbody').find('tr').each(function (i, el) {
+
+                total_col1 += parseFloat($(this).find('td').eq(4).text());
+            });
+            let iPagoMonto = parseFloat($('#i_pago_monto').val());
+            let tDiferencia = parseFloat(iPagoMonto - total_col1).toFixed(2);
+            let vTotal = iPagoMonto - tDiferencia;
+            document.getElementById("i_pago_diferencia").value = tDiferencia;
+        }
+        else {
+
+            let total_col1 = 0;
+            $('#tbProducto tbody').find('tr').each(function (i, el) {
+
+                total_col1 += parseFloat($(this).find('td').eq(4).text());
+            });
+            _tprecio = (parseFloat(total_col1) - (parseFloat(total_col1)) * (parseInt(_i_descuento_compra) / 100));
+            let iPagoMonto = parseFloat($('#i_pago_monto').val());
+            let tDiferencia = parseFloat(iPagoMonto - _tprecio).toFixed(2);
+            let vTotal = iPagoMonto - tDiferencia;
+            document.getElementById("i_pago_diferencia").value = tDiferencia;
+        }
+
+    });
+
+    function RemoveRow(o) {
+        var total_col1 = 0;
+        var p = o.parentNode.parentNode;
+        p.parentNode.removeChild(p);
+
+        var rowCount = $('#tbProducto >tbody >tr').length;
+
+        if (rowCount == 0) {
+            document.getElementById('l_total_compra').innerHTML = "$ " + total_col1;
+        }
+        else {
+            total_tabla();
+        }
+    }
+    function registra_compra(f_tipo_presupuesto, f_sub_tipo_presupuesto, f_tipo_pago, _i_folio_compra, catidad_abono, fecha_objeto, total_col1) {
+
+        var Relcompra_Pagos = []
+        var Relcompra_Productos = []
+        $("#tbProducto > tbody > tr").each(function (i, tr) {
+            // FechaAlterna: $("#i_Foliocompra").val(),
+            //   CodigoPago: $("#i_Foliocompra").val()
+            Relcompra_Productos.push(
+                {
+                    Cantidad: $(tr).find('td:eq(0)').text(),
+                    ProdServDesc: $(tr).find('td:eq(1)').text(),
+                    Precio: $(tr).find('td:eq(2)').text(),
+                    Descuento: $(tr).find('td:eq(3)').text(),
+                    TotalPrecio: $(tr).find('td:eq(4)').text()
+                }
+            )
+        });
+        var Relcompra_Pagos = [{
+
+            IdTipoPago: f_tipo_pago,
+            FolioPago: $("#i_folio_pago").val(),
+            CantidadPago: catidad_abono,
+            Total: total_col1
+        }];
+        var oCompraVM = {
+            TblCompras: {
+                IdTipoPresupuesto: parseInt($("#lTipoPresupuesto").val()),
+                IdSubTipoPresupuesto: parseInt($("#lSubTipoPresupuesto").val()),
+                IdProveedorCompra: $("#l_proveedor_compra").val(),
+                IdTipocompra: $("#l_tipo_compra").val(),
+                FechaCompra: fecha_objeto,
+                DescuentoCompra: $("#i_descuento_compra").val(),
+                FolioCompra: $("#i_folio_compra").val().toUpperCase(),
+                CompraDesc: $("#i_compra_desc").val().toUpperCase()
+            },
+            RelCompraProductos: Relcompra_Productos,
+            RelCompraPagos: Relcompra_Pagos
+        }
+
+
+        jQuery.ajax({
+            url: '@Url.Action("Index", "TblCompras")',
+            type: "POST",
+            data: JSON.stringify(oCompraVM),
+            datatype: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                if (data.respuesta) {
+                    vNotify.success({ text: 'compra Registrada.', title: 'Intelimundo.' });
+                    var url = '@Url.Action("Index", "TblCompras")';
+                    window.location.href = url;
+                }
+            }
+        });
+    }
+    function valida_compra() {
+
+        var f_tipo_compra = $('#l_tipo_compra').val();
+        var f_alumno = $('#l_alumno').val();
+        var f_registros_tabla = $('#tbProducto >tbody >tr').length;
+        var f_tipo_pago = $('#l_tipo_pago').val();
+        let f_total_compra = $('#l_total_compra').val();
+        let f_pago_diferencia = parseFloat($('#i_pago_diferencia').val());
+        var f_codigo_pago = $('#i_folio_pago').val();
+        let total_col1 = 0;
+        $('#tbProducto tbody').find('tr').each(function (i, el) {
+            total_col1 += parseFloat($(this).find('td').eq(3).text());
+        });
+        var i_pago_monto = parseFloat($('#i_pago_monto').val());
+        var t_diferencia = parseFloat(i_pago_monto - total_col1);
+        var v_total = i_pago_monto - t_diferencia;
+
+
+        var catidad_abono = null;
+
+        if (f_tipo_compra != 1) {
+
+            catidad_abono = $("#i_pago_monto").val();
+        }
+        else {
+            catidad_abono = total_col1;
+        }
+
+        if (f_tipo_compra == "") {
+            validate('l_tipo_compra')
+        }
+        else if (f_alumno == "") {
+            validate('l_alumno')
+        }
+        else {
+            if (f_registros_tabla == 0) {
+                vNotify.error({ text: 'Favor de agregar Servicios.', title: 'Intelimundo.' });
+            }
+            else if (f_tipo_pago == "") {
+                validate('l_tipo_pago')
+            }
+            else if (f_tipo_pago != 1 && f_codigo_pago == "") {
+                validate('i_folio_pago')
+            }
+            else if (i_pago_monto == 0) {
+                validate('i_pago_monto')
+            }
+            else if (f_tipo_compra == 1) {
+                var v_pago = (total_col1 + f_pago_diferencia);
+                if (i_pago_monto == v_pago) {
+
+                    registra_compra(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
+
+                }
+                else {
+                    vNotify.error({ text: 'Favor de pagar el total de la compra.', title: 'Intelimundo.' });
+                }
+            }
+            else if (f_tipo_compra == 2) {
+                if (v_total == (total_col1)) {
+
+                    registra_compra(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
+
+                }
+            }
+            else {
+                vNotify.error({ text: 'Err.', title: 'Intelimundo.' });
+            }
+        }
+    }
+    function validate(inputID) {
+        switch (inputID) {
+            case 'lTipoPresupuesto':
+                vNotify.error({ text: 'Tipo Presupuesto, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'lSubTipoPresupuesto':
+                vNotify.error({ text: 'SubTipo Presupuesto,, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'l_proveedor_compra':
+                vNotify.error({ text: 'Proveedor compra, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'l_tipo_compra':
+                vNotify.error({ text: 'Tipo de Compra, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'i_folio_compra':
+                vNotify.error({ text: 'Folio de Compra, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'i_compra_desc':
+                vNotify.error({ text: 'Descripción de Compra, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'i_descuento_compra':
+                vNotify.error({ text: 'Descuento de Compra, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'i_fecha_Compra':
+                vNotify.error({ text: 'Fecha de Compra, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'i_cantidad':
+                vNotify.error({ text: 'Cantidad, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'i_articulo_desc':
+                vNotify.error({ text: 'Descripción de Articulo, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'i_descuento':
+                vNotify.error({ text: 'Descuento, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'i_precio':
+                vNotify.error({ text: 'Precio, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'l_tipo_pago':
+                vNotify.error({ text: 'Tipo de Pago, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'i_folio_pago':
+                vNotify.error({ text: 'Folio de Tipo Pago, Requerido.', title: 'Intelimundo.' });
+                break;
+            case 'i_pago_monto':
+                vNotify.error({ text: 'Monto de Pago, Requerido.', title: 'Intelimundo.' });
+                break;
+
+            default:
+                vNotify.error({ text: 'Err.', title: 'Intelimundo.' });
+        }
+    }
+    $('#lTipoPresupuesto').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        $.ajax({
+            type: "GET",
+            url: "/CatSubTipoPresupuestos/fSubTipoPresupuesto/",
+            data: { idA: SelectedValue },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $lista_servicios = $('#lSubTipoPresupuesto');
+                $("#lSubTipoPresupuesto").empty();
+
+                if (list.length == 0) {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    $lista_servicios.attr('required', false);
+                }
+                else {
+                    $lista_servicios.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $lista_servicios.append('<option value=' + list[i].idSubTipoPresupuesto + '>' + list[i].subTipoPresupuestoDesc + '</option>');
+                        $lista_servicios.attr('required', true);
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    });
+</script>
 }

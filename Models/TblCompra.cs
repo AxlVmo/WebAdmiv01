@@ -28,10 +28,10 @@ namespace WebAdmin.Models
         [Display(Name = "Nombre Proveedor")]
         public Guid IdProveedorCompra { get; set; }
 
-        [Display(Name = "Nombre Proveedor")]
+        [Display(Name = "Nombre Usuario")]
         [NotMapped]
 
-        public string NombreProveedorCompra { get; set; }
+        public string NombreUsuarioCompra { get; set; }
 
         [Display(Name = "Tipo de Compra")]
         public int IdTipoCompra { get; set; }
@@ -55,10 +55,7 @@ namespace WebAdmin.Models
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
-        [Display(Name = "Proveedor Compra")]
-        [NotMapped]
-        public int NombreUsuarioCompra { get; set; }
-
+      
         [Display(Name = "Corporativo / Centro")]
 
         public Guid IdUCorporativoCentro { get; set; }

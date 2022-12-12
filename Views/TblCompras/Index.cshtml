@@ -36,14 +36,14 @@
                 <table class="table" id="tblCompras">
                     <thead>
                         <tr>
+                              <th style="text-align:center" hidden>
+                                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.TipoCompraDesc)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.NombreUsuarioCompra)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.FechaCompra)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.FolioCompra)
@@ -52,7 +52,7 @@
                                 @Html.DisplayNameFor(model => model.CompraDesc)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.FechaRegistro)
+                                @Html.DisplayNameFor(model => model.FechaCompra)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.IdEstatusRegistro)
@@ -64,14 +64,14 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+                                  <td style="text-align:center" hidden>
+                                    @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
+                                </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TipoCompraDesc)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.NombreUsuarioCompra)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FechaCompra)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.FolioCompra)
@@ -80,20 +80,52 @@
                                     @Html.DisplayFor(modelItem => item.CompraDesc)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.FechaRegistro)
+                                    @Html.DisplayFor(modelItem => item.FechaCompra)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IdEstatusRegistro)
-                                </td>
+                                <td style="text-align:center">
+                                    @if (item.IdEstatusRegistro == 1)
+                                    {
+                                        <i class="fas fa-check-circle" style="font-size: 1em; color: green;"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-stop-circle" style="font-size: 1em; color: red;"></i>
 
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.IdCompra">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.IdCompra">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.IdCompra">Delete</a>
+                                    }
+                                </td>
+                                <td style="text-align:center">
+                                    <a asp-action="Edit" asp-route-id="@item.IdCompra" class="btn btn-outline-secondary"
+                                    title="Editar"><i class="far fa-edit"
+                                        style="font-size: 1em; color: #FFC300;"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.IdCompra" class="btn btn-outline-secondary"
+                                    title="Desactivar"><i class="far fa-stop-circle"
+                                        style="font-size: 1em; color: #FF9333;"></i></a>
                                 </td>
                             </tr>
                         }
                     </tbody>
+                     <tfoot>
+                        <tr>
+                            <th style="text-align:center" hidden>
+                                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
+                            </th>
+                             <th>
+                                @Html.DisplayNameFor(model => model.TipoCompraDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NombreUsuarioCompra)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FolioCompra)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CompraDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaCompra)
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -111,7 +143,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             var input, filter, table, tr, td, i;
             input = document.getElementById("drpCorpCent");
             filter = input.value.toUpperCase();
-            table = document.getElementById("tblSuministros");
+            table = document.getElementById("tblCompras");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[0];
