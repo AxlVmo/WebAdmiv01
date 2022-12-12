@@ -47,6 +47,8 @@ namespace WebAdmin.Models
         public string CompraDesc { get; set; }
         [Display(Name = "Folio Compra")]
         public string FolioCompra { get; set; }
+        [Display(Name = "Descuento %")]
+        public int DescuentoCompra { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
         public int IdCorpCent { get; set; }
