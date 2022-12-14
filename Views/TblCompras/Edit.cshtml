@@ -1,0 +1,119 @@
+@model WebAdmin.Models.TblCompra
+@{
+    ViewData["Title"] = "Crear Tipo de Compra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Compra</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <input spellcheck="true" type="hidden" asp-for="IdCompra" />
+ <div class="row">
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="IdTipoPresupuesto"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                    </span>
+                                    <select id="lTipoPresupuesto" class="form-select" required
+                                        asp-for="IdTipoPresupuesto" tabindex="1"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoPresupuesto, "IdTipoPresupuesto", "TipoPresupuestoDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="IdSubTipoPresupuesto"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                    </span>
+                                    <select id="lSubTipoPresupuesto" class="form-select" required tabindex="2"
+                                        asp-for="IdSubTipoPresupuesto">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label" asp-for="IdProveedorCompra"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                    </span>
+                                    <select id="l_proveedor_compra" class="form-select" required
+                                        asp-for="IdProveedorCompra" tabindex="3"
+                                        asp-items="@(new SelectList(ViewBag.ListaProveedorCompra, "IdProveedorCompra", "NombreProveedorCompra"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="IdTipoCompra"></label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text">
+                                        <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                    </span>
+                                    <select id="l_tipo_compra" class="form-select" required
+                                        asp-for="IdTipoCompra" tabindex="4"
+                                        asp-items="@(new SelectList(ViewBag.ListaTipoCompra, "IdTipoCompra", "TipoCompraDesc"))">
+                                        <option value="">SELECCIONAR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-3">
+                            <label class="form-label" asp-for="FolioCompra"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                </span>
+                                <input style="text-transform:uppercase" type="text" class="form-control"
+                                    id="i_folio_compra" required placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="FolioCompra" tabindex="5" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label class="form-label" asp-for="DescuentoCompra"></label>
+                            <div class="input-group input-group-merge">
+                                <span id="2" class="input-group-text">
+                                    <i class="fa-solid fa-exclamation" style="font-size: 1em; color: #ff0000;"></i>
+                                </span>
+                                <input style="text-transform:uppercase" type="number" class="form-control"
+                                    id="i_descuento_compra" required placeholder="Requerido" aria-label="John Doe"
+                                    aria-describedby="2" asp-for="DescuentoCompra" tabindex="6"
+                                    placeholder="0" min="0"
+                                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
+                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+     
+    $(document).ready(function () {
+        $('#lMes').prop('disabled', true);
+        $('#lTipoPresupuesto').prop('disabled', true);
+        $('#lSubTipoPresupuesto').prop('disabled', true);
+        CargaPresupuestoPagos();
+    });
+ </script>
+}
