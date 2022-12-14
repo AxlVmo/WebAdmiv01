@@ -445,7 +445,7 @@ namespace WebAdmin.Controllers
 
                 ViewBag.ListaProveedorCompra = fProveedorCompra.ToList();
             }
-            return View();
+     
             return View(tblCompra);
         }
 
