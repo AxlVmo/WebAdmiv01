@@ -34,7 +34,7 @@ namespace WebAdmin.Controllers
         {
             var f_user = _userService.GetUserId();
             var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
-             var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
+            var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
 
             var ValidaEstatus = _context.CatEstatus.ToList();
 
@@ -147,7 +147,7 @@ namespace WebAdmin.Controllers
             ViewBag.ListaCorpCent = TempData["fTS"];
 
 
-           
+
 
 
             if (tblUsuario.IdArea == 2 && tblUsuario.IdPerfil == 3 && tblUsuario.IdRol == 2)
@@ -320,6 +320,88 @@ namespace WebAdmin.Controllers
                 return Json(new { respuesta });
             }
 
+        }
+        public async Task<IActionResult> Print(Guid? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tblVenta = await _context.TblVenta.FindAsync(id);
+            if (tblVenta == null)
+            {
+                return NotFound();
+            }
+            return View(tblVenta);
+        }
+        public async Task<IActionResult> Payment(Guid? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tblVenta = await _context.TblVenta.FindAsync(id);
+            if (tblVenta == null)
+            {
+                return NotFound();
+            }
+            return View(tblVenta);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Payment(Guid id, [Bind("IdVenta,")] TblVenta tblVenta)
+        {
+            
+            {
+                try
+                {
+                    Guid fCentroCorporativo = Guid.Empty;
+                    int fCorpCent = 0;
+                    var f_user = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    var fIdUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
+                    fCentroCorporativo = fIdUsuario.IdCorporativo;
+                    fCorpCent = 1;
+                    if (fIdUsuario.IdArea == 2 && fIdUsuario.IdPerfil == 3 && fIdUsuario.IdRol == 2)
+                    {
+                        var fIdCentro = await _context.TblCentros.FirstOrDefaultAsync(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                        fCentroCorporativo = fIdCentro.IdCentro;
+                        fCorpCent = 2;
+                    }
+                    tblVenta.IdCorpCent = fCorpCent;
+                    tblVenta.IdUCorporativoCentro = fCentroCorporativo;
+                   
+                    tblVenta.IdUsuarioModifico = Guid.Parse(f_user);
+                    tblVenta.FechaRegistro = DateTime.Now;
+                    tblVenta.IdEstatusRegistro = tblVenta.IdEstatusRegistro;
+
+                    var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
+                    int f_dia = DateTime.Now.Day;
+                    int f_mes = DateTime.Now.Day;
+                    var f_caja_centro_efectivo = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 1 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+                    var f_caja_centro_digital = _context.TblMovimientoCajas.Where(a => a.IdUCorporativoCentro == f_centro.IdCentro && a.IdEstatusRegistro == 1 && a.IdSubTipoMovimientoCaja == 1 && a.IdTipoRecurso == 2 && a.FechaRegistro.Day == f_dia).Select(i => Convert.ToDouble(i.MontoMovimientoCaja)).Sum();
+
+                   
+
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TblVentaExists(tblVenta.IdVenta))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
         // GET: TblVentas/Details/5
         public async Task<IActionResult> Details(Guid? id)

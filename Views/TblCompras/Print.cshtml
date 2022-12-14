@@ -1,0 +1,63 @@
+@model WebAdmin.Models.TblVenta
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Venta</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+            
+            <div class="card-body">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input spellcheck="true" type="hidden" asp-for="IdVenta"/>
+            <div class="form-group">
+                <label asp-for="NumeroVenta" class="control-label"></label>
+                <input spellcheck="true" asp-for="NumeroVenta" class="form-control"/>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="IdUsuarioVenta" class="control-label"></label>
+                <input spellcheck="true" asp-for="IdUsuarioVenta" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdCentro" class="control-label"></label>
+                <input spellcheck="true" asp-for="IdCentro" class="form-control"/>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="IdCliente" class="control-label"></label>
+                <input spellcheck="true" asp-for="IdCliente" class="form-control"/>
+
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="IdUsuarioModifico" class="control-label"></label>
+                <input spellcheck="true" asp-for="IdUsuarioModifico" class="form-control"/>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaRegistro" class="control-label"></label>
+                <input spellcheck="true" asp-for="FechaRegistro" class="form-control"/>
+
+                <div class="form-group">
+                    <label asp-for="IdEstatusRegistro" class="control-label"></label>
+                    <input spellcheck="true" asp-for="IdEstatusRegistro" class="form-control"/>
+                </div>
+                <div class="form-group">
+                      <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
+                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                </div>
+            </div>
+        </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

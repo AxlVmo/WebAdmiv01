@@ -1,7 +1,7 @@
-﻿@model IEnumerable<WebAdmin.Models.TblVenta>
+@model WebAdmin.Models.TblVenta
 
 @{
-    ViewData["Title"] = "Ventas";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
@@ -71,154 +71,22 @@
     }
 </style>
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Ventas</h4>
-    <div class="card">
-        <h5 class="card-header">
-            <div class="row">
-                <div class="mb-3 col-md-6">
-                    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create">
-                        <i class="fas fa-plus"></i> Nuevo
-                    </a>
-                </div>
-                <div class="mb-3 col-md-6">
-                    <div class="row mb-3" id="iCorpCent" hidden>
-                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Corporativo /
-                            Centro</label>
-                        <div class="col-sm-10">
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                        class="bx bx-check-shield"></i></span>
-                                <select class="form-select" id="drpCorpCent"
-                                    asp-items="@(new SelectList(ViewBag.ListaCorpCent,"IdCentro","CentroDesc"))">
-                                    <option value="">SELECCIONAR</option>
-                                </select>
-                            </div>
-                        </div>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Venta</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+            
+            <div class="card-body">
+        <form asp-action="Print">
+ <div class="row">
+                    <div class="col-sm-10">
+                        
+                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                        <button class="btn btn-info" id="btnPrint">Imprimir</button>
                     </div>
                 </div>
-            </div>
-        </h5>
-        <div class="table-responsive text-nowrap">
-            <div class="container">
-                <table class="display compact"  id="tblVentas">
-                    <thead>
-                        <tr>
-                            <th style="text-align:center" hidden>
-                                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CentroDesc)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.FolioVenta)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.NombreCompletoAlumno)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.FechaRegistro)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IdEstatusRegistro)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td style="text-align:center" hidden>
-                                    @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CentroDesc)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FolioVenta)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NombreCompletoAlumno)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FechaRegistro)
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.IdEstatusRegistro == 1)
-                                    {
-                                        <i class="fas fa-check-circle" style="font-size: 1em; color: green;"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fas fa-stop-circle" style="font-size: 1em; color: red;"></i>
-                                    }
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.IdTipoVenta == 2)
-                                    {
-
-                                        <a class="btn btn-outline-secondary" title="Venta X Cobrar" id="btnCobrar"><i
-                                        class="fa-solid fa-cash-register"
-                                        style="font-size: 1em; color: #BC4E57 ;"></i></a>
-                                        <a class="btn btn-outline-secondary" title="Imprimir" asp-action="Print" asp-route-id="@item.IdVenta" ><i
-                                        class="fa-solid fa-print" style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                                        <a asp-action="Delete" asp-route-id="@item.IdVenta" class="btn btn-outline-secondary"
-                                    title="Desactivar"><i class="fa-solid fa-ban"
-                                        style="font-size: 1em; color: #FF9333;"></i></a>
-                                    }
-                                    else
-                                    {
-                                        <a class="btn btn-outline-secondary" title="Imprimir" asp-action="Print" asp-route-id="@item.IdVenta"><i
-                                        class="fa-solid fa-print" style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                                        <a asp-action="Delete" asp-route-id="@item.IdVenta" class="btn btn-outline-secondary"
-                                    title="Desactivar"><i class="fa-solid fa-ban"
-                                        style="font-size: 1em; color: #FF9333;"></i></a>
-
-                                    }
-
-                                </td>
-
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th style="text-align:center" hidden>
-                                @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
-                            </th>
-                            <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.CentroDesc)
-                            </th>
-                            <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.NumeroVenta)
-                            </th>
-                            <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.NombreCompletoAlumno)
-                            </th>
-                            <th style="text-align:center">
-                                @Html.DisplayNameFor(model => model.FechaRegistro)
-                            </th>
-
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modalVentas" aria-labelledby="VentasLabel" tabindex="-1" style="display: none"
-    aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="VentasleLabel">La venta se ha registrado con exito ¿deseas imprimir la nota
-                    de venta?</h5>
-                <input spellcheck="true" type="hidden" id="i_FolioPrestamo" />
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
+            <input type="hidden" id="_idVenta" asp-for="IdVenta"/>
+<div class="row">
                     <div class="invoice-box" id="invocieContainer">
                         <table>
                             <tr class="top">
@@ -445,26 +313,18 @@
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <form class="form-inline">
-                    <button type="submit" class="btn btn-danger">Cerrar sesión</button>
-
-                </form>
+        </form>
             </div>
         </div>
     </div>
 </div>
 @section Scripts {
-@{
-await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-<script type="text/javascript">
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
     $(document).ready(function () {
-
-        const d1 = new Date();
-        const GeneraFolio = d1.getTime();
-        document.getElementById("i_FolioPrestamo").value = "iV-" + GeneraFolio;
+vNotify.warning({ text: 'Modulo en Construccion.', title: 'Intelimundo.' });
+        var GeneraFolio;
+        GeneraFolio = document.getElementById("_idVenta").value;
 
         $.ajax({
             type: "GET",
@@ -476,8 +336,8 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 if (list.length == 0) {
                 }
                 else {
-                    document.getElementById('l_NumVenta').innerHTML = '# Nómina: ' + "iV-" + GeneraFolio;
-                    document.getElementById('dl_NumVenta').innerHTML = '# Nómina: ' + "iV-" + GeneraFolio;
+                    document.getElementById('l_NumVenta').innerHTML = '# Venta: ' + "iV-" + GeneraFolio;
+                    document.getElementById('dl_NumVenta').innerHTML = '# Venta: ' + "iV-" + GeneraFolio;
 
                     const dateObject = new Date(list.fechaRegistro);
                     var month = dateObject.getMonth();
@@ -543,131 +403,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
 
     });
-    $("#btnCobrar").on("click", function () {
-        vNotify.warning({ text: 'Modulo en Construccion.', title: 'Intelimundo.' });
-    })
-
-    $(document).ready(function () {
-        $('#drpCorpCent').change(function () {
-            var SelectedText = $('option:selected', this).text();
-            var SelectedValue = $('option:selected', this).val();
-            var input, filter, table, tr, td, i;
-            input = document.getElementById("drpCorpCent");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("tblVentas");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-
-        });
-
-        $('#tblVentas').DataTable(
-            {
-                initComplete: function () {
-                    this.api()
-                        .columns()
-                        .every(function () {
-                            var column = this;
-                            var select = $('<select class="form-select">SELECCIONAR<option value=""></option></select>')
-                                .appendTo($(column.footer()).empty())
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
-                                });
-
-                            column
-                                .data()
-                                .unique()
-                                .sort()
-                                .each(function (d, j) {
-                                    select.append('<option value="' + d + '">' + d + '</option>');
-                                });
-                        });
-                },
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin resultados encontrados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
-            }
-        );
-
-        var vEstatusFlag = '@ViewBag.EstatusFlag'
-        var vEmpresaFlag = '@ViewBag.EmpresaFlag'
-        var vCorporativoFlag = '@ViewBag.CorporativoFlag'
-        var vCentrosFlag = '@ViewBag.CentrosFlag'
-        var vUsuariosFlag = '@ViewBag.UsuariosFlag'
-        var vTipoServicioFlag = '@ViewBag.TipoServiciosFlag'
-        var vServiciosFlag = '@ViewBag.ServiciosFlag'
-        var vAlumnosFlag = '@ViewBag.AlumnosFlag'
-
-        if (vEstatusFlag == 0) {
-            document.getElementById("iNuevo").style.visibility = "hidden";
-        }
-        else {
-            if (vEmpresaFlag == 0) {
-                document.getElementById("iNuevo").style.visibility = "hidden";
-            }
-            else {
-                if (vCorporativoFlag == 0) {
-                    document.getElementById("iNuevo").style.visibility = "hidden";
-                }
-                else {
-                    if (vCentrosFlag == 0) {
-                        document.getElementById("iNuevo").style.visibility = "hidden";
-                    }
-                    else {
-                        if (vUsuariosFlag == 0) {
-                            document.getElementById("iNuevo").style.visibility = "hidden";
-                        }
-                        else {
-                            if (vTipoServicioFlag == 0) {
-                                document.getElementById("iNuevo").style.visibility = "hidden";
-                            }
-                            else {
-                                if (vServiciosFlag == 0) {
-                                    document.getElementById("iNuevo").style.visibility = "hidden";
-                                }
-                                else {
-                                    if (vAlumnosFlag == 0) {
-                                        document.getElementById("iNuevo").style.visibility = "hidden";
-                                    }
-                                    else {
-                                        document.getElementById("iNuevo").style.visibility = "visible";
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    });
-    
-
+ 
 </script>
 }

@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<WebAdmin.Models.TblServicio>
-
 @{
     ViewData["Title"] = "Servicios";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,7 +16,7 @@
         </h5>
         <div class="table-responsive text-nowrap">
             <div class="container">
-                <table class="table" id="tblServicios">
+                <table class="display compact"  id="tblServicios">
                     <thead>
                         <tr>
                             <th style="text-align:center">
@@ -85,6 +84,26 @@
                             </tr>
                         }
                     </tbody>
+                    <tfoot>
+            <tr>
+              <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.CodigoInterno)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.CodigoExterno)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.TipoServicioDesc)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.DescServicio)
+                            </th>
+
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.FechaRegistro)
+                            </th>
+            </tr>
+            </tfoot>
                 </table>
             </div>
         </div>
@@ -96,8 +115,52 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script type="text/javascript">
     $(document).ready(function () {
+         $('#tblServicios').DataTable(
+                {
 
-        $('#tblServicios').DataTable();
+                    initComplete: function () {
+                        this.api()
+                            .columns()
+                            .every(function () {
+                                var column = this;
+                                var select = $('<select class="form-select">SELECCIONAR<option value=""></option></select>')
+                                    .appendTo($(column.footer()).empty())
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                        column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                    });
+                                column
+                                    .data()
+                                    .unique()
+                                    .sort()
+                                    .each(function (d, j) {
+                                        select.append('<option value="' + d + '">' + d + '</option>');
+                                    });
+                            });
+                    },
+                    language: {
+                        "decimal": "",
+                        "emptyTable": "No hay información",
+                        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                        "infoPostFix": "",
+                        "thousands": ",",
+                        "lengthMenu": "Mostrar _MENU_ Entradas",
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "search": "Buscar:",
+                        "zeroRecords": "Sin resultados encontrados",
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        }
+                    }
+                }
+            );
 
         var vEstatusFlag = '@ViewBag.EstatusFlag'
         var vEmpresaFlag = '@ViewBag.EmpresaFlag'

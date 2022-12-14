@@ -130,8 +130,7 @@ namespace WebAdmin.Controllers
                             CentroDesc = a.NombreCorporativo
                         };
             var sCorpCent = fCorp.Union(fCent);
-            TempData["fTS"] = sCorpCent.ToList();
-            ViewBag.ListaCorpCent = TempData["fTS"];
+            ViewBag.ListaCorpCent = sCorpCent.ToList();
 
 
 

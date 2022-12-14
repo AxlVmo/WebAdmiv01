@@ -119,8 +119,7 @@ namespace WebAdmin.Controllers
                             CentroDesc = a.NombreCorporativo
                         };
             var sCorpCent = fCorp.Union(fCent);
-            TempData["l_centros"] = sCorpCent.ToList();
-            ViewBag.ListaCorpCent = TempData["l_centros"];
+            ViewBag.ListaCorpCent = sCorpCent.ToList();
 
             var f_user = _userService.GetUserId();
             var tblUsuario = await _context.TblUsuarios.FirstOrDefaultAsync(m => m.IdUsuario == Guid.Parse(f_user));
