@@ -1011,7 +1011,7 @@ else
         var f_registros_tabla = $('#tbProducto >tbody >tr').length;
         var f_tipo_pago = $('#l_tipo_pago').val();
         let f_total_venta = $('#l_total_servicio').val();
-        let f_pago_diferencia = parseInt($('#i_pago_diferencia').val());
+        let f_pago_diferencia = parseFloat($('#i_pago_diferencia').val());
         var f_codigo_pago = $('#i_codigo_pago').val();
         let total_col1 = 0;
         $('#tbProducto tbody').find('tr').each(function (i, el) {

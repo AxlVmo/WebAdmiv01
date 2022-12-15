@@ -67,8 +67,7 @@ namespace WebAdmin.Controllers
                                         var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
                                         var ValidaProveedorCompras = _context.TblProveedorCompras.Where(s => s.IdUCorporativoCentro == f_centro.IdCentro).ToList();
 
-
-                                        if (ValidaProveedorCompras.Count == 1)
+                                        if (ValidaProveedorCompras.Count >= 1)
                                         {
                                             ViewBag.ProveedorComprasFlag = 1;
                                         }

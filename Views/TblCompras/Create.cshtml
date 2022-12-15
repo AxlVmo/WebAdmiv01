@@ -403,7 +403,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var _desc = $("#i_articulo_desc").val();
         var _i_descuento = $("#i_descuento").val();
         var _prec = parseFloat($("#i_precio").val());
-         let f_pago_diferencia = parseInt($('#i_pago_diferencia').val());
+         let f_pago_diferencia = parseFloat($('#i_pago_diferencia').val());
    
         var f_registros_tabla = $('#tbProducto >tbody >tr').length;
         var _l_tipo_pago = $("#l_tipo_pago").val();
@@ -509,9 +509,6 @@ vNotify.info({ text: 'Se completaron los campos requeridos.', title: 'Intelimund
     $('#i_pago_monto').change(function () {
         var _i_descuento_compra = $("#i_descuento_compra").val();
        
-
-         
-
          if (parseInt(_i_descuento_compra) == 0) {
                    let total_col1 = 0;
             $('#tbProducto tbody').find('tr').each(function (i, el) {
