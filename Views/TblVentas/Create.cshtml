@@ -198,7 +198,7 @@
                             <!-- Table row -->
                             <div class="row">
                                 <div class="col-12 table-responsive">
-                                    <table class="display compact"  id="tbProducto">
+                                    <table class="table"  id="tbProducto">
                                         <tbody>
                                             <thead>
                                                 <th style="text-align:center">
@@ -315,8 +315,9 @@
                         <a id="btnTerminar" class="btn btn-success">
                             <span>Guardar</span>
                         </a>
+                        <button class="btn btn-info" id="btnPrint">Imprimir</button>
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-                        <button class="btn btn-info" id="btnPrint" hidden>Imprimir</button>
+                        
                     </div>
                 </div>
             </div>
@@ -565,12 +566,14 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         currency: 'USD',
         minimumFractionDigits: 2
     })
-    const fecha_objeto = new Date();
-    const fecha_mes = 1 + fecha_objeto.getUTCMonth();
-    const fecha_dia = fecha_objeto.getDate();
-    const fecha_anio = fecha_objeto.getFullYear();
-    const fecha_formato = fecha_dia + "/" + fecha_mes + "/" + fecha_anio;
+    var fecha_objeto = new Date();
+    var fecha_mes = 1 + fecha_objeto.getUTCMonth();
+    var fecha_dia = fecha_objeto.getDate();
+    var fecha_anio = fecha_objeto.getFullYear();
+    var fecha_formato = fecha_dia + "/" + fecha_mes + "/" + fecha_anio;
     const folio_venta = fecha_objeto.getTime();
+
+    let nVenta = []; // my object
     var total_venta = 0;
 
     $(document).ready(function () {
@@ -749,7 +752,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
 
 
-        $('#btnPrint').removeAttr('hidden');
+        
 
     });
     $('#iDescuento').change(function () {
@@ -825,7 +828,21 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
 
                         var periodo_inicial = (fecha_dia + 1) + "/" + fecha_mes + "/" + fecha_anio;
-                        var periodo_final = (fecha_dia + 1) + "/" + (fecha_mes + list[0].periodo) + "/" + fecha_anio;
+
+if(fecha_mes = 12)
+{
+    fecha_mes = 1;
+    fecha_anio = fecha_anio + 1
+    var periodo_final = (fecha_dia + 1) + "/" + (fecha_mes ) + "/" + fecha_anio;
+
+}
+else
+{
+    var periodo_final = (fecha_dia + 1) + "/" + (fecha_mes + list[0].periodo) + "/" + fecha_anio;
+
+}
+
+                       
 
                         document.getElementById('v_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
                         document.getElementById('dv_perido').innerHTML = 'Periodo Comprendido del: ' + periodo_inicial + ' al: ' + periodo_final;
@@ -884,7 +901,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         });
     });
     $("#btnTerminar").on("click", function () {
-        valida_venta();
+        
+        if (valida_venta())
+        {
+            registra_venta(nVenta);
+        }
     })
     function RemoveRow(o) {
         var total_col1 = 0;
@@ -909,8 +930,25 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             document.getElementById('l_total_venta').innerHTML = "$ " + 0;
         }
     }
-    function registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion) {
+    function registra_venta(nVenta) {
         vNotify.warning({ text: 'Se va a cargar la Venta favor de esperar unos segundos.', title: 'Intelimundo.' });
+        
+        let _CantidadAbono;
+        let _CodigoPago;
+        let _FechaAlternaPago;
+        let _MontoInscripcion;
+        let _TipoPago;
+        let _TotalServicio;
+        
+        for (var i = 0; i < nVenta.length; i++) {
+             _CantidadAbono = nVenta[0].CantidadAbono;
+              _CodigoPago = nVenta[0].CodigoPago;
+               _FechaAlternaPago = nVenta[0].FechaAlternaPago;
+                _MontoInscripcion = nVenta[0].MontoInscripcion;
+                 _TipoPago = nVenta[0].TipoPago;
+                  _TotalServicio = nVenta[0].TotalServicio;
+        }
+        
         var RelVenta_Pagos = []
         var RelVenta_Productos = []
         $("#tbProducto > tbody > tr").each(function (i, tr) {
@@ -924,18 +962,18 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     Precio: $(tr).find('td:eq(3)').text(),
                     TotalPrecio: $(tr).find('td:eq(4)').text(),
                     Cantidad: 1,
-                    MontoInscripcion: f_monto_inscripcion
+                    MontoInscripcion: _MontoInscripcion
                 }
             )
         })
 
         var RelVenta_Pagos = [{
 
-            IdTipoPago: f_tipo_pago,
-            FechaAlternaPago: fecha_objeto,
-            CodigoReferencia: f_codigo_pago,
-            CantidadPago: catidad_abono,
-            Total: total_col1
+            IdTipoPago: _TipoPago,
+            FechaAlternaPago: _FechaAlternaPago,
+            CodigoReferencia: _CodigoPago,
+            CantidadPago: _CantidadAbono,
+            Total: _TotalServicio
         }];
         var oCompraVM = {
             TblVentas: {
@@ -965,7 +1003,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         });
     }
     function valida_venta() {
-
+        nVenta.length = 0;
         var f_tipo_venta = $('#l_tipo_venta').val();
         var f_inscripcion = $('#l_Inscripcion').val();
         var f_monto_inscripcion = parseInt($('#iMontoInscripcion').val());
@@ -982,17 +1020,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var i_pago_monto = parseInt($('#i_pago_monto').val());
         var t_diferencia = parseInt(i_pago_monto - total_col1);
         var v_total = i_pago_monto - t_diferencia;
-
-
-        var catidad_abono = null;
-
-        if (f_tipo_venta != 1) {
-
-            catidad_abono = $("#i_pago_monto").val();
-        }
-        else {
-            catidad_abono = total_col1;
-        }
+        
 
         if (f_tipo_venta == "") {
             validate('l_tipo_venta')
@@ -1027,8 +1055,17 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         var v_pago = (total_col1 + f_monto_inscripcion + (f_pago_diferencia));
                         if (i_pago_monto == v_pago) {
 
-                            registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion);
-
+                            nVenta.push(
+                                {   
+                                    TipoPago: f_tipo_pago,
+                                    CodigoPago: f_codigo_pago,
+                                    CantidadAbono: i_pago_monto,
+                                    FechaAlternaPago: fecha_objeto,
+                                    TotalServicio: total_col1,
+                                    MontoInscripcion: f_monto_inscripcion
+                                });
+                            
+                            return   true;
                         }
                         else {
                             vNotify.error({ text: 'Favor de pagar el total de la venta.', title: 'Intelimundo.' });
@@ -1037,12 +1074,23 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     else if (f_tipo_venta == 2) {
                         if (v_total == (total_col1)) {
 
-                            registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion);
+                              nVenta.push(
+                                {   
+                                    TipoPago: f_tipo_pago,
+                                    CodigoPago: f_codigo_pago,
+                                    CantidadAbono: i_pago_monto,
+                                    FechaAlternaPago: fecha_objeto,
+                                    TotalServicio: total_col1,
+                                    MontoInscripcion: f_monto_inscripcion
+                                });
+                           return true;
 
                         }
                     }
                     else {
                         vNotify.error({ text: 'Err.', title: 'Intelimundo.' });
+                        return false;
+                        
                     }
                 }
 
@@ -1067,8 +1115,16 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     var v_pago = (total_col1 + f_monto_inscripcion + (f_pago_diferencia));
                     if (i_pago_monto == v_pago) {
 
-                        registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion);
-
+                          nVenta.push(
+                                {   
+                                    TipoPago: f_tipo_pago,
+                                    CodigoPago: f_codigo_pago,
+                                    CantidadAbono: i_pago_monto,
+                                    FechaAlternaPago: fecha_objeto,
+                                    TotalServicio: total_col1,
+                                    MontoInscripcion: f_monto_inscripcion
+                                });
+return true;
                     }
                     else {
                         vNotify.error({ text: 'Favor de pagar el total de la venta.', title: 'Intelimundo.' });
@@ -1077,8 +1133,16 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 else if (f_tipo_venta == 2) {
                     if (v_total == (total_col1)) {
 
-                        registra_venta(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1, f_monto_inscripcion);
-
+                          nVenta.push(
+                                {   
+                                    TipoPago: f_tipo_pago,
+                                    CodigoPago: f_codigo_pago,
+                                    CantidadAbono: i_pago_monto,
+                                    FechaAlternaPago: fecha_objeto,
+                                    TotalServicio: total_col1,
+                                    MontoInscripcion: f_monto_inscripcion
+                                });
+return true;
                     }
                 }
                 else {
@@ -1117,7 +1181,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     }
     $(document).on("click", "#btnPrint", function (e) {
-        var f_tipo_venta = $('#l_tipo_venta').val()
+
+        if (valida_venta())
+        {
+            var f_tipo_venta = $('#l_tipo_venta').val()
 
         if (f_tipo_venta == 2) {
             var f_monto_inscripcion = parseInt($('#iMontoInscripcion').val());
@@ -1140,6 +1207,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             header: null, // prefix to html
             formValues: false // preserve input/form values
         });
+        }
     });
 
 </script>

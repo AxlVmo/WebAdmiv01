@@ -203,7 +203,21 @@ namespace WebAdmin.Controllers
             {
                 var f_centro = _context.TblCentros.First(m => m.IdUsuarioControl == Guid.Parse(f_user));
 
-                var totalQuantity = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro)
+                    var totalInscripcionD = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro && x.IdTipoVenta == 1)
+                    .Join(_context.RelVentaServicios.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.MontoInscripcion })
+                    .ToList().Sum(x => x.Quantity);
+                    var totalVentaD = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro && x.IdTipoVenta == 1)
+                    .Join(_context.RelVentaServicios.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
+                    .ToList().Sum(x => x.Quantity);
+
+                    var totalVentaDif = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro && x.IdTipoVenta == 2)
+                    .Join(_context.RelServicioPagos.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.CantidadPago })
+                    .ToList().Sum(x => x.Quantity);
+
+                     var totalInscripcionXc = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro && x.IdTipoVenta == 2)
+                    .Join(_context.RelVentaServicios.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.MontoInscripcion })
+                    .ToList().Sum(x => x.Quantity);
+                    var totalVentaXc = _context.TblVenta.Where(x => x.IdUCorporativoCentro == f_centro.IdCentro && x.IdTipoVenta == 2)
                     .Join(_context.RelVentaServicios.Where(x => x.FechaRegistro.Month >= DateTime.Now.Month), pl => pl.IdVenta, p => p.IdVenta, (pl, p) => new { Quantity = p.TotalPrecio })
                     .ToList().Sum(x => x.Quantity);
 
@@ -219,14 +233,22 @@ namespace WebAdmin.Controllers
                 //                 Quantity = g.Sum(ri => ri.TotalPrecio)
                 //                 });
 
-                var fTotales = from a in _context.TblVenta
-                               where a.IdEstatusRegistro == 1
-                               select new
-                               {
-                                   fRegistros = _context.TblVenta.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
-                                   fMontos = Convert.ToDouble(totalQuantity)
-                               };
-                return Json(fTotales);
+                // var fTotales = from a in _context.TblVenta
+                //                where a.IdEstatusRegistro == 1
+                //                select new
+                //                {
+                //                    fRegistros = _context.TblVenta.Where(a => a.IdEstatusRegistro == 1 && a.IdUCorporativoCentro == f_centro.IdCentro).Count(),
+                //                    fMontos = Convert.ToDouble(totalQuantity)
+                //                };
+                // return Json(fTotales);
+                 var fVentas = new
+                {
+                    
+                    fIdirecto = totalInscripcionD + totalVentaD,
+                    fIdiferido = totalVentaDif,
+                    fIxCobrar = (totalInscripcionXc + totalVentaXc) - totalVentaDif
+                };
+                return Json(fVentas);
             }
             else
             {

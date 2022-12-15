@@ -178,7 +178,7 @@
                                 <!-- Table row -->
                                 <div class="row">
                                     <div class="col-12 table-responsive">
-                                        <table class="display compact"  id="tbProducto">
+                                        <table class="table"  id="tbProducto">
                                             <tbody>
                                                 <thead>
                                                     <th style="text-align:center">
@@ -373,18 +373,19 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 let total_col1 = 0;
                 $('#tbProducto tbody').find('tr').each(function (i, el) {
                     total_col1 += parseFloat($(this).find('td').eq(4).text());
-                    document.getElementById('l_descuento_compra').innerHTML = "0 %";
-                    document.getElementById('l_total_compra').innerHTML = "$ " + total_col1;
                 });
+                 document.getElementById('l_descuento_compra').innerHTML = "0 %";
+                    document.getElementById('l_total_compra').innerHTML = "$ " + total_col1;
             }
             else {
                 let total_col1 = 0;
                 $('#tbProducto tbody').find('tr').each(function (i, el) {
                     total_col1 += parseFloat($(this).find('td').eq(4).text());
-                    _tprecio = (parseFloat(total_col1) - (parseFloat(total_col1)) * (parseInt(_i_descuento_compra) / 100));
+                });
+                  _tprecio = (parseFloat(total_col1) - (parseFloat(total_col1)) * (parseInt(_i_descuento_compra) / 100));
+           
                     document.getElementById('l_descuento_compra').innerHTML = _i_descuento_compra + " %";
                     document.getElementById('l_total_compra').innerHTML = "$ " + _tprecio;
-                });
             }
 
         }
@@ -402,7 +403,8 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var _desc = $("#i_articulo_desc").val();
         var _i_descuento = $("#i_descuento").val();
         var _prec = parseFloat($("#i_precio").val());
-        var _tprecio = (_cantidad * _prec);
+         let f_pago_diferencia = parseInt($('#i_pago_diferencia').val());
+   
         var f_registros_tabla = $('#tbProducto >tbody >tr').length;
         var _l_tipo_pago = $("#l_tipo_pago").val();
         var _i_folio_pago = $("#i_folio_pago").val();
@@ -460,30 +462,75 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             let total_col1 = 0;
             $('#tbProducto tbody').find('tr').each(function (i, el) {
                 total_col1 += parseFloat($(this).find('td').eq(4).text());
-                document.getElementById('l_total_compra').innerHTML = "$ " + total_col1;
+               
             });
             const fecha_objeto = new Date(_i_fecha_Compra);
-            registra_compra(f_tipo_presupuesto, f_sub_tipo_presupuesto, _l_tipo_pago, _i_folio_compra, _i_pago_monto, fecha_objeto, total_col1)
-            vNotify.info({ text: 'Se completaron los campos requeridos.', title: 'Intelimundo.' });
+            if (_l_tipo_compra == 1) {
+                 if (parseInt(_i_descuento_compra) == 0) {
+                    _tprecio = total_col1;
+            }
+            else {
+
+                  _tprecio = (parseFloat(total_col1) - (parseFloat(total_col1)) * (parseInt(_i_descuento_compra) / 100));
+     
+            }
+                var v_pago = (_tprecio + f_pago_diferencia);
+                if (_i_pago_monto == v_pago) {
+vNotify.info({ text: 'Se completaron los campos requeridos.', title: 'Intelimundo.' });
+                         registra_compra(f_tipo_presupuesto, f_sub_tipo_presupuesto, _l_tipo_pago, _i_folio_compra, _i_pago_monto, fecha_objeto, total_col1)
+            
+
+                }
+                else {
+                    vNotify.error({ text: 'Favor de pagar el total de la compra.', title: 'Intelimundo.' });
+                }
+            }
+            else if (_l_tipo_compra == 2) {
+
+                  if (parseInt(_i_descuento_compra) == 0) {
+                    _tprecio = total_col1;
+            }
+            else {
+
+                  _tprecio = (parseFloat(total_col1) - (parseFloat(total_col1)) * (parseInt(_i_descuento_compra) / 100));
+     
+            }
+                if (_i_pago_monto != 0) {
+ vNotify.info({ text: 'Se completaron los campos requeridos.', title: 'Intelimundo.' });
+                         registra_compra(f_tipo_presupuesto, f_sub_tipo_presupuesto, _l_tipo_pago, _i_folio_compra, _i_pago_monto, fecha_objeto, _tprecio)
+           
+
+                }
+            }
+       
 
         }
     })
     $('#i_pago_monto').change(function () {
         var _i_descuento_compra = $("#i_descuento_compra").val();
-        if (parseInt(_i_descuento_compra) == 0) {
-            let total_col1 = 0;
+       
+
+         
+
+         if (parseInt(_i_descuento_compra) == 0) {
+                   let total_col1 = 0;
             $('#tbProducto tbody').find('tr').each(function (i, el) {
 
                 total_col1 += parseFloat($(this).find('td').eq(4).text());
             });
+           
             let iPagoMonto = parseFloat($('#i_pago_monto').val());
             let tDiferencia = parseFloat(iPagoMonto - total_col1).toFixed(2);
             let vTotal = iPagoMonto - tDiferencia;
-            document.getElementById("i_pago_diferencia").value = tDiferencia;
+             if (tDiferencia < 0) {
+            document.getElementById("i_pago_diferencia").value = tDiferencia * - 1;
         }
         else {
-
-            let total_col1 = 0;
+            document.getElementById("i_pago_diferencia").value = tDiferencia;
+        }
+            }
+            else {
+                   let total_col1 = 0;
             $('#tbProducto tbody').find('tr').each(function (i, el) {
 
                 total_col1 += parseFloat($(this).find('td').eq(4).text());
@@ -492,8 +539,15 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             let iPagoMonto = parseFloat($('#i_pago_monto').val());
             let tDiferencia = parseFloat(iPagoMonto - _tprecio).toFixed(2);
             let vTotal = iPagoMonto - tDiferencia;
+             if (tDiferencia < 0) {
+            document.getElementById("i_pago_diferencia").value = tDiferencia * - 1;
+        }
+        else {
             document.getElementById("i_pago_diferencia").value = tDiferencia;
         }
+              
+            }
+        
 
     });
 
@@ -567,76 +621,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             }
         });
     }
-    function valida_compra() {
 
-        var f_tipo_compra = $('#l_tipo_compra').val();
-        var f_alumno = $('#l_alumno').val();
-        var f_registros_tabla = $('#tbProducto >tbody >tr').length;
-        var f_tipo_pago = $('#l_tipo_pago').val();
-        let f_total_compra = $('#l_total_compra').val();
-        let f_pago_diferencia = parseFloat($('#i_pago_diferencia').val());
-        var f_codigo_pago = $('#i_folio_pago').val();
-        let total_col1 = 0;
-        $('#tbProducto tbody').find('tr').each(function (i, el) {
-            total_col1 += parseFloat($(this).find('td').eq(3).text());
-        });
-        var i_pago_monto = parseFloat($('#i_pago_monto').val());
-        var t_diferencia = parseFloat(i_pago_monto - total_col1);
-        var v_total = i_pago_monto - t_diferencia;
-
-
-        var catidad_abono = null;
-
-        if (f_tipo_compra != 1) {
-
-            catidad_abono = $("#i_pago_monto").val();
-        }
-        else {
-            catidad_abono = total_col1;
-        }
-
-        if (f_tipo_compra == "") {
-            validate('l_tipo_compra')
-        }
-        else if (f_alumno == "") {
-            validate('l_alumno')
-        }
-        else {
-            if (f_registros_tabla == 0) {
-                vNotify.error({ text: 'Favor de agregar Servicios.', title: 'Intelimundo.' });
-            }
-            else if (f_tipo_pago == "") {
-                validate('l_tipo_pago')
-            }
-            else if (f_tipo_pago != 1 && f_codigo_pago == "") {
-                validate('i_folio_pago')
-            }
-            else if (i_pago_monto == 0) {
-                validate('i_pago_monto')
-            }
-            else if (f_tipo_compra == 1) {
-                var v_pago = (total_col1 + f_pago_diferencia);
-                if (i_pago_monto == v_pago) {
-
-                    registra_compra(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
-
-                }
-                else {
-                    vNotify.error({ text: 'Favor de pagar el total de la compra.', title: 'Intelimundo.' });
-                }
-            }
-            else if (f_tipo_compra == 2) {
-                if (v_total == (total_col1)) {
-
-                    registra_compra(f_tipo_pago, f_codigo_pago, catidad_abono, fecha_objeto, total_col1);
-
-                }
-            }
-            else {
-                vNotify.error({ text: 'Err.', title: 'Intelimundo.' });
-            }
-        }
-    }
     function validate(inputID) {
         switch (inputID) {
             case 'lTipoPresupuesto':

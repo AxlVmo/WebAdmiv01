@@ -72,9 +72,9 @@
             <div class="card-body">
               <h5 class="card-title" id="i_Mpp_g"></h5>
               <h5 class="card-title" id="i_Mppp_g"></h5>
-              <h5 class="card-title" id="i_Mpr_g"></h5>
               <h5 class="card-text" id="i_Mpp_i"></h5>
-              <h5 class="card-text" id="i_Mpr_i"></h5>
+              <h5 class="card-title" id="i_Mpr_g"></h5>
+
             </div>
           </div>
         </div>
@@ -84,7 +84,31 @@
         <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
-              Gastos
+              Ingresos Reales por Dia
+            </h5>
+            <div class="card-body">
+              <h5 class="card-text" id="i_Idirecto"></h5>
+              <h5 class="card-text" id="i_Idiferido"></h5>
+              <h5 class="card-text" id="i_IdiferidoXcobrar"></h5>
+            </div>
+          </div>
+        </div>
+         <div class="col-sm-3">
+          <div class="card">
+            <h5 class="card-header">
+              Ingresos Reales Acumulado
+            </h5>
+            <div class="card-body">
+              <h5 class="card-text" id="i_Idirecto"></h5>
+              <h5 class="card-text" id="i_Idiferido"></h5>
+              <h5 class="card-text" id="i_IdiferidoXcobrar"></h5>
+            </div>
+          </div>
+        </div>
+         <div class="col-sm-3">
+          <div class="card">
+            <h5 class="card-header">
+              Gastos Reales por Dia
             </h5>
             <div class="card-body">
               <h5 class="card-title" id="i_gasto_fijo"></h5>
@@ -94,18 +118,23 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3">
+         <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
-              Ventas
+              Gastos Reales Acumulados
             </h5>
             <div class="card-body">
-              <h5 class="card-title" id="i_fMontosVentas"></h5>
-              <p class="card-text" id="i_fRegistrosVentas"></p>
+              <h5 class="card-title" id="i_gasto_fijo"></h5>
+              <p class="card-text" id="i_registros_gasto_fijo"></p>
+              <h5 class="card-text" id="i_gasto_variable"></h5>
+              <p class="card-text" id="i_registros_gasto_variable"></p>
             </div>
           </div>
         </div>
-        <div class="col-sm-3">
+      </div>
+      <br>
+      <div class="row">
+           <div class="col-sm-3">
           <div class="card">
             <h5 class="card-header">
               Bancos
@@ -127,7 +156,7 @@
             </div>
           </div>
         </div>
-      </div>
+        </div>
     </div>
   </div>
 </div>
@@ -409,20 +438,18 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         else {
 
           let fM_ppp_g = list.fM_pp_g / 12;
+          let fUtiPerdida = (list.fM_pp_i - list.fM_pp_g)
           document.getElementById("i_Mpp_g").innerText = 'Gastos Prospectados: ' + list.fM_pp_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
           document.getElementById("i_Mppp_g").innerText = 'Gastos Promedio Mensual: ' + fM_ppp_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-          document.getElementById("i_Mpp_i").innerText = 'Ventas Prospectadas: ' + list.fM_pp_i.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-          document.getElementById("i_Mpr_g").innerText = 'Gastos Reales: ' + list.fM_pr_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+          document.getElementById("i_Mpp_i").innerText = 'Ingresos Prospectadas: ' + list.fM_pp_i.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+          document.getElementById("i_Mpr_g").innerText = 'Utilidad / Perdida: ' + fUtiPerdida.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
 
 
 
         }
       },
       error: function () {
-        var v_fMontosVentas = 0;
-        document.getElementById("i_Mpp_g").innerText = 'Prospectado: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-        document.getElementById("i_Mpp_i").innerText = 'Real: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-        document.getElementById("i_Mpp_g").innerText = 'Prospectado: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+      
 
 
       }
@@ -448,12 +475,12 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
         else {
 
-          let fM_ppp_g = list.fM_pp_g / 12;
+         let fM_ppp_g = list.fM_pp_g / 12;
+          let fUtiPerdida = (list.fM_pp_i - list.fM_pp_g)
           document.getElementById("i_Mpp_g").innerText = 'Gastos Prospectados: ' + list.fM_pp_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
           document.getElementById("i_Mppp_g").innerText = 'Gastos Promedio Mensual: ' + fM_ppp_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-          document.getElementById("i_Mpp_i").innerText = 'Ventas Prospectadas: ' + list.fM_pp_i.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-          document.getElementById("i_Mpr_g").innerText = 'Gastos Reales: ' + list.fM_pr_g.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-
+          document.getElementById("i_Mpp_i").innerText = 'Ingresos Prospectadas: ' + list.fM_pp_i.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+          document.getElementById("i_Mpr_g").innerText = 'Utilidad / Perdida: ' + fUtiPerdida.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
 
 
         }
@@ -542,22 +569,22 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
       success: function (list) {
 
         if (list.length == 0) {
-          document.getElementById("i_fRegistrosVentas").value = null;
-          document.getElementById("i_fMontosVentas").value = null;
+          document.getElementById("i_Idirecto").value = null;
+          document.getElementById("i_Idiferido").value = null;
+          document.getElementById("i_IdiferidoXcobrar").value = null;
         }
         else {
 
-          for (var i = 0, len = list.length; i < len; i++) {
-            document.getElementById('i_fRegistrosVentas').innerText = 'Total: ' + list[i].fRegistros;
-            document.getElementById("i_fMontosVentas").innerText = 'Monto: ' + list[i].fMontos.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
-          }
+
+            document.getElementById("i_Idirecto").innerText = 'Directo: ' + list.fIdirecto.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            document.getElementById("i_Idiferido").innerText = 'Diferido: ' + list.fIdiferido.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+            document.getElementById("i_IdiferidoXcobrar").innerText = 'X Cobrar: ' + list.fIxCobrar.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+          
 
         }
       },
       error: function () {
-        var v_fMontosVentas = 0;
-        document.getElementById('i_fRegistrosVentas').innerText = 'Total: ' + v_fMontosVentas;
-        document.getElementById("i_fMontosVentas").innerText = 'Monto: ' + v_fMontosVentas.toLocaleString('en-US', { style: 'currency', currency: 'USD', });
+       
       }
     });
 
