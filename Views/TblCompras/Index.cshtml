@@ -94,14 +94,27 @@
                                     }
                                 </td>
                                 <td style="text-align:center">
-                                 
-                                           <a asp-action="Details" asp-route-id="@item.IdCompra" class="btn btn-outline-secondary"
-                           title="Detalles">
-                            <i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i>
-                        </a>
-                                    <a asp-action="Delete" asp-route-id="@item.IdCompra" class="btn btn-outline-secondary"
-                                    title="Desactivar"><i class="far fa-stop-circle"
+                                     @if (item.IdTipoCompra == 2)
+                                    {
+                                         <a id="btnCobrar" title="Compra X Pagar" asp-action="Print" asp-route-id="@item.IdCompra" ><i
+                                        class="fa-solid fa-cash-register" style="font-size: 1em; color: #BC4E57 ;"></i></a> 
+                                      <a asp-action="Details" asp-route-id="@item.IdCompra" 
+                                    title="Detalles"><i class="far fa-list-alt"
+                                        style="font-size: 1em; color: #67C5C4 ;"></i></a> 
+                                        <a asp-action="Delete" asp-route-id="@item.IdCompra" 
+                                    title="Desactivar"><i class="fa-solid fa-ban"
                                         style="font-size: 1em; color: #FF9333;"></i></a>
+                                }
+                                    else
+                                    {
+                                      <a asp-action="Details" asp-route-id="@item.IdCompra"
+                                    title="Detalles"><i class="far fa-list-alt"
+                                        style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                                        <a asp-action="Delete" asp-route-id="@item.IdCompra" 
+                                    title="Desactivar"><i class="fa-solid fa-ban"
+                                        style="font-size: 1em; color: #FF9333;"></i></a>
+ 
+                                    }
                                 </td>
                             </tr>
                         }

@@ -19,10 +19,10 @@ namespace WebAdmin.Models
         public string FolioPago { get; set; }
 
         [Display(Name = "Descuento")]
-        public int CantidadPago { get; set; }
+        public double CantidadPago { get; set; }
 
       [Display(Name = "Descuento %")]
-        public int Diferencia { get; set; }
+        public double Diferencia { get; set; }
 
         [Display(Name = "Total Precio Producto")]
         public double Total { get; set; }

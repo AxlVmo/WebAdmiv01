@@ -333,7 +333,21 @@ namespace WebAdmin.Controllers
             //ViewData["IdTipoNomina"] = new SelectList(_context.CatMarcas, "IdMarca", "MarcaDesc", TblNomina.IdTipoNomina);
             return View(TblNomina);
         }
+public async Task<IActionResult> Print(Guid? id)
+        {
 
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tblNomina = await _context.TblNominas.FindAsync(id);
+            if (tblNomina == null)
+            {
+                return NotFound();
+            }
+            return View(tblNomina);
+        }
         // GET: TblNominas/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {

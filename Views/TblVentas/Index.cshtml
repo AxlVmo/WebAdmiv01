@@ -106,8 +106,9 @@
                             <th style="text-align:center" hidden>
                                 @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
                             </th>
-                            <th hidden>
-                                @Html.DisplayNameFor(model => model.CentroDesc)
+
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.TipoVentaDesc)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.FolioVenta)
@@ -131,8 +132,9 @@
                                 <td style="text-align:center" hidden>
                                     @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
                                 </td>
-                                <td hidden>
-                                    @Html.DisplayFor(modelItem => item.CentroDesc)
+
+                                 <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.TipoVentaDesc)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.FolioVenta)
@@ -157,20 +159,20 @@
                                     @if (item.IdTipoVenta == 2)
                                     {
 
-                                        <a class="btn btn-outline-secondary" title="Venta X Cobrar" id="btnCobrar"><i
+                                        <a  title="Venta X Cobrar" id="btnCobrar"><i
                                         class="fa-solid fa-cash-register"
                                         style="font-size: 1em; color: #BC4E57 ;"></i></a>
-                                        <a class="btn btn-outline-secondary" title="Imprimir" asp-action="Print" asp-route-id="@item.IdVenta" ><i
+                                        <a  title="Imprimir" asp-action="Print" asp-route-id="@item.IdVenta" ><i
                                         class="fa-solid fa-print" style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                                        <a asp-action="Delete" asp-route-id="@item.IdVenta" class="btn btn-outline-secondary"
+                                        <a asp-action="Delete" asp-route-id="@item.IdVenta" 
                                     title="Desactivar"><i class="fa-solid fa-ban"
                                         style="font-size: 1em; color: #FF9333;"></i></a>
                                     }
                                     else
                                     {
-                                        <a class="btn btn-outline-secondary" title="Imprimir" asp-action="Print" asp-route-id="@item.IdVenta"><i
+                                        <a  title="Imprimir" asp-action="Print" asp-route-id="@item.IdVenta"><i
                                         class="fa-solid fa-print" style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                                        <a asp-action="Delete" asp-route-id="@item.IdVenta" class="btn btn-outline-secondary"
+                                        <a asp-action="Delete" asp-route-id="@item.IdVenta" 
                                     title="Desactivar"><i class="fa-solid fa-ban"
                                         style="font-size: 1em; color: #FF9333;"></i></a>
 
@@ -186,8 +188,8 @@
                             <th style="text-align:center" hidden>
                                 @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
                             </th>
-                            <th style="text-align:center" hidden>
-                                @Html.DisplayNameFor(model => model.CentroDesc)
+                             <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.TipoVentaDesc)
                             </th>
                             <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.NumeroVenta)

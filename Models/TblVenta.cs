@@ -13,7 +13,7 @@ namespace WebAdmin.Models
         [Display(Name = "Numero Venta")]
         public int NumeroVenta { get; set; }
 
-        [Display(Name = "Folio Nomina")]
+        [Display(Name = "Folio Venta")]
         public string FolioVenta { get; set; }
         [Display(Name = "Tipo de Venta")]
         public int IdTipoVenta { get; set; }

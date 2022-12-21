@@ -144,6 +144,7 @@ namespace WebAdmin.Controllers
                                    select new TblCompra
                                    {
                                        TipoCompraDesc = b.TipoCompraDesc,
+                                       IdTipoCompra = b.IdTipoCompra,
                                        IdCompra = a.IdCompra,
                                        FolioCompra = a.FolioCompra,
                                        CompraDesc = a.CompraDesc,
@@ -154,24 +155,26 @@ namespace WebAdmin.Controllers
                                    };
                 return View(await fCompraCntro.ToListAsync());
             }
+else
+{
+    var fCompra = from a in _context.TblCompras
+                                   join b in _context.CatTipoCompras on a.IdTipoCompra equals b.IdTipoCompra
+                                   join c in _context.TblUsuarios on a.IdUsuarioModifico equals c.IdUsuario
 
-
-            var fCompra = from a in _context.TblCompras
-                          join b in _context.CatTipoCompras on a.IdTipoCompra equals b.IdTipoCompra
-
-                          select new TblCompra
-                          {
-
-                              TipoCompraDesc = b.TipoCompraDesc,
-                              IdCompra = a.IdCompra,
-                              CompraDesc = a.CompraDesc,
-                              IdUCorporativoCentro = a.IdUCorporativoCentro,
-                              FechaRegistro = a.FechaRegistro,
-                              IdEstatusRegistro = a.IdEstatusRegistro
-                          };
-
-
-            return View(await fCompra.ToListAsync());
+                                   select new TblCompra
+                                   {
+                                       TipoCompraDesc = b.TipoCompraDesc,
+                                       IdTipoCompra = b.IdTipoCompra,
+                                       IdCompra = a.IdCompra,
+                                       FolioCompra = a.FolioCompra,
+                                       CompraDesc = a.CompraDesc,
+                                       IdUCorporativoCentro = a.IdUCorporativoCentro,
+                                       FechaCompra = a.FechaCompra,
+                                       NombreUsuarioCompra = c.Nombres + ' ' + c.ApellidoPaterno + ' ' + c.ApellidoMaterno,
+                                       IdEstatusRegistro = a.IdEstatusRegistro
+                                   };
+                return View(await fCompra.ToListAsync());
+}
         }
 
         // GET: TblCompras/Details/5

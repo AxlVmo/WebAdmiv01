@@ -160,9 +160,10 @@ namespace WebAdmin.Controllers
                                   select new TblVenta
                                   {
                                       IdTipoVenta = d.IdTipoVenta,
+                                    TipoVentaDesc = d.TipoVentaDesc,
                                       IdVenta = a.IdVenta,
                                       FolioVenta = a.FolioVenta,
-                                      NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,
+                                      NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoMaterno,
                                       CentroDesc = c.NombreCentro,
                                       IdUCorporativoCentro = a.IdUCorporativoCentro,
                                       FechaRegistro = a.FechaRegistro,
@@ -179,14 +180,15 @@ namespace WebAdmin.Controllers
                               join d in _context.CatTipoVentas on a.IdTipoVenta equals d.IdTipoVenta
                               select new TblVenta
                               {
-                                  IdTipoVenta = d.IdTipoVenta,
-                                  IdVenta = a.IdVenta,
-                                  NumeroVenta = a.NumeroVenta,
-                                  NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoPaterno,
-                                  CentroDesc = c.NombreCentro,
-                                  IdUCorporativoCentro = a.IdUCorporativoCentro,
-                                  FechaRegistro = a.FechaRegistro,
-                                  IdEstatusRegistro = a.IdEstatusRegistro
+                                      IdTipoVenta = d.IdTipoVenta,
+                                    TipoVentaDesc = d.TipoVentaDesc,
+                                      IdVenta = a.IdVenta,
+                                      FolioVenta = a.FolioVenta,
+                                      NombreCompletoAlumno = b.NombreAlumno + " " + b.ApellidoPaterno + " " + b.ApellidoMaterno,
+                                      CentroDesc = c.NombreCentro,
+                                      IdUCorporativoCentro = a.IdUCorporativoCentro,
+                                      FechaRegistro = a.FechaRegistro,
+                                      IdEstatusRegistro = a.IdEstatusRegistro
                               };
 
                 return View(await fVentas.ToListAsync());
