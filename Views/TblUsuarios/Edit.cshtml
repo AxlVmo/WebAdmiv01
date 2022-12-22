@@ -8,7 +8,6 @@
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
-            
             <div class="card-body">
                 <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -311,13 +310,10 @@
                         </div>
                     </div>
                     <div class="row">
-
-
                     </div>
                     <div class="mt-2">
-                       <input spellcheck="true" type="button" value="Validar" class="btn btn-info" id="btn_validar"  />
-                       <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" id="btn_guardar" disabled  />
-
+                       <input type="button" value="Validar" class="btn btn-info" id="btn_validar"  />
+                       <input type="submit" value="Actualizar" class="btn btn-warning" id="btn_guardar" disabled  />
                         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>
@@ -327,7 +323,6 @@
 </div>
 @section Scripts {
 @{
-
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script type="text/javascript">
@@ -454,7 +449,6 @@ function validate(inputID) {
     });
   $("#btnCP").on("click", function () {
     var valor_cp = document.getElementById("iCodigoPostal").value;
-
     $.ajax({
       type: "GET",
       url: "/CatCodigosPostales/FiltroCodigosPostales/",
@@ -488,9 +482,7 @@ function validate(inputID) {
       error: function () {
       }
     });
-
   })
-
     $('input[type="email"]')
         .on('invalid', function () {
             return this.setCustomValidity('Ingresa una dirección de correo válida.');

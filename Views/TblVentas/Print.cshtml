@@ -75,253 +75,253 @@
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-8">
-            
+
             <div class="card-body">
-        <form asp-action="Print">
- <div class="row">
-                    <div class="col-sm-10">
-                        <button class="btn btn-info" id="btnPrint">Imprimir</button>
-                        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                <form asp-action="Print">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <button class="btn btn-info" id="btnPrint">Imprimir</button>
+                            <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+                        </div>
                     </div>
-                </div>
-            <input type="hidden" id="_idVenta" asp-for="IdVenta"/>
-<div class="row">
-                    <div class="invoice-box" id="invocieContainer">
-                        <table>
-                            <tr class="top">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td class="title">
-                                                <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
-                                                    style="width: 128px; max-width: 128px" />
-                                            </td>
-                                            <td>
-                                                <label id="l_NumVenta"></label><br />
-                                                <label id="l_FechaCreacionVenta"></label><br />
-                                                <label id="l_UsuarioVenta"></label>
-                                                <label id="l_UsuarioContactoVenta"></label>
-                                            </td>
+                    <input type="hidden" id="_idVenta" asp-for="IdVenta" />
+                    <div class="row">
+                        <div class="invoice-box" id="invocieContainer">
+                            <table>
+                                <tr class="top">
+                                    <td colspan="2">
+                                        <table>
+                                            <tr>
+                                                <td class="title">
+                                                    <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
+                                                        style="width: 128px; max-width: 128px" />
+                                                </td>
+                                                <td>
+                                                    <label id="l_NumVenta"></label><br />
+                                                    <label id="l_FechaCreacionVenta"></label><br />
+                                                    <label id="l_UsuarioVenta"></label>
+                                                    <label id="l_UsuarioContactoVenta"></label>
+                                                </td>
 
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label id="l_CorporativoVenta"></label><br />
-                                                <label id="l_DatosCorporativoVenta"></label><br />
-                                                <label id="l_DatosCorporativoVentaAlt"></label><br />
-                                                <label id="l_DatosCorporativoContactoVenta"></label><br />
-                                            </td>
-                                            <td>
-                                                <label id="l_CentroVenta"></label><br />
-                                                <label id="l_DatosCentroVenta"></label><br />
-                                                <label id="l_DatosCentroVentaAlt"></label><br />
-                                                <label id="l_DatosCentroContactoVenta"></label><br />
-                                            </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label id="l_CorporativoVenta"></label><br />
+                                                    <label id="l_DatosCorporativoVenta"></label><br />
+                                                    <label id="l_DatosCorporativoVentaAlt"></label><br />
+                                                    <label id="l_DatosCorporativoContactoVenta"></label><br />
+                                                </td>
+                                                <td>
+                                                    <label id="l_CentroVenta"></label><br />
+                                                    <label id="l_DatosCentroVenta"></label><br />
+                                                    <label id="l_DatosCentroVentaAlt"></label><br />
+                                                    <label id="l_DatosCentroContactoVenta"></label><br />
+                                                </td>
 
-                                        </tr>
+                                            </tr>
 
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr class="information">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label id="l_ClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVenta"></label><br />
-                                                <label id="l_DatosClienteVentaAlt"></label><br />
-                                            </td>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr class="information">
+                                    <td colspan="2">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label id="l_ClienteVenta"></label><br />
+                                                    <label id="l_DatosClienteVenta"></label><br />
+                                                    <label id="l_DatosClienteVentaAlt"></label><br />
+                                                </td>
 
-                                            <td>
+                                                <td>
 
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
 
-                            <tr class="heading">
-                                <td>Metodo de Pago</td>
+                                <tr class="heading">
+                                    <td>Metodo de Pago</td>
 
-                                <td>Pago #</td>
-                            </tr>
+                                    <td>Pago #</td>
+                                </tr>
 
-                            <tr class="details">
-                                <td><label id="l_TipoPago">Tipo Pago</label></td>
+                                <tr class="details">
+                                    <td><label id="l_TipoPago">Tipo Pago</label></td>
 
-                                <td><label id="l_UsuarioRemuneracion">0</label></td>
-                            </tr>
-                            <tr class="">
-                                <td></td>
+                                    <td><label id="l_UsuarioRemuneracion">0</label></td>
+                                </tr>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
+                                    <td></td>
+                                </tr>
 
-                            <tr class="">
-                                <td></td>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
+                                    <td></td>
+                                </tr>
 
-                            <tr class="">
-                                <td></td>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
-                            <tr class="total">
-                                <td></td>
-                                <td>Total</td>
-                            </tr>
-                            <tr class="">
-                                <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="total">
+                                    <td></td>
+                                    <td>Total</td>
+                                </tr>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
+                                    <td></td>
+                                </tr>
 
-                            <tr class="">
-                                <td></td>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
+                                    <td></td>
+                                </tr>
 
-                            <tr class="">
-                                <td></td>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
-                            <tr class="total">
-                                <td>
-                                    <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
-                                </td>
-                                <td><label id="f_ClienteVenta"></label></td>
-                            </tr>
+                                    <td></td>
+                                </tr>
+                                <tr class="total">
+                                    <td>
+                                        <p><span class="text-muted fw-light">Intelimundo /</span>Contabilidad</p>
+                                    </td>
+                                    <td><label id="f_ClienteVenta"></label></td>
+                                </tr>
 
-                        </table>
-                        <hr />
-                        <table>
-                            <tr class="top">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td class="title">
-                                                <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
-                                                    style="width: 128px; max-width: 128px" />
-                                            </td>
-                                            <td>
-                                                <label id="dl_NumVenta"></label><br />
-                                                <label id="dl_FechaCreacionVenta"></label><br />
-                                                <label id="dl_UsuarioVenta"></label>
-                                                <label id="dl_UsuarioContactoVenta"></label>
-                                            </td>
+                            </table>
+                            <hr />
+                            <table>
+                                <tr class="top">
+                                    <td colspan="2">
+                                        <table>
+                                            <tr>
+                                                <td class="title">
+                                                    <img src="~/assets/img/logo-azul-c.png" alt="Intelimundo"
+                                                        style="width: 128px; max-width: 128px" />
+                                                </td>
+                                                <td>
+                                                    <label id="dl_NumVenta"></label><br />
+                                                    <label id="dl_FechaCreacionVenta"></label><br />
+                                                    <label id="dl_UsuarioVenta"></label>
+                                                    <label id="dl_UsuarioContactoVenta"></label>
+                                                </td>
 
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label id="dl_CorporativoVenta"></label><br />
-                                                <label id="dl_DatosCorporativoVenta"></label><br />
-                                                <label id="dl_DatosCorporativoVentaAlt"></label><br />
-                                                <label id="dl_DatosCorporativoContactoVenta"></label><br />
-                                            </td>
-                                            <td>
-                                                <label id="dl_CentroVenta"></label><br />
-                                                <label id="dl_DatosCentroVenta"></label><br />
-                                                <label id="dl_DatosCentroVentaAlt"></label><br />
-                                                <label id="dl_DatosCentroContactoVenta"></label><br />
-                                            </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label id="dl_CorporativoVenta"></label><br />
+                                                    <label id="dl_DatosCorporativoVenta"></label><br />
+                                                    <label id="dl_DatosCorporativoVentaAlt"></label><br />
+                                                    <label id="dl_DatosCorporativoContactoVenta"></label><br />
+                                                </td>
+                                                <td>
+                                                    <label id="dl_CentroVenta"></label><br />
+                                                    <label id="dl_DatosCentroVenta"></label><br />
+                                                    <label id="dl_DatosCentroVentaAlt"></label><br />
+                                                    <label id="dl_DatosCentroContactoVenta"></label><br />
+                                                </td>
 
-                                        </tr>
+                                            </tr>
 
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr class="information">
-                                <td colspan="2">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label id="dl_ClienteVenta"></label><br />
-                                                <label id="dl_DatosClienteVenta"></label><br />
-                                                <label id="dl_DatosClienteVentaAlt"></label><br />
-                                            </td>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr class="information">
+                                    <td colspan="2">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label id="dl_ClienteVenta"></label><br />
+                                                    <label id="dl_DatosClienteVenta"></label><br />
+                                                    <label id="dl_DatosClienteVentaAlt"></label><br />
+                                                </td>
 
-                                            <td>
+                                                <td>
 
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
 
-                            <tr class="heading">
-                                <td>Metodo de Pago</td>
+                                <tr class="heading">
+                                    <td>Metodo de Pago</td>
 
-                                <td>Pago #</td>
-                            </tr>
+                                    <td>Pago #</td>
+                                </tr>
 
-                            <tr class="details">
-                                <td><label id="dl_TipoPago">Tipo Pago</label></td>
+                                <tr class="details">
+                                    <td><label id="dl_TipoPago">Tipo Pago</label></td>
 
-                                <td><label id="dl_UsuarioRemuneracion">0</label></td>
-                            </tr>
-                            <tr class="">
-                                <td></td>
+                                    <td><label id="dl_UsuarioRemuneracion">0</label></td>
+                                </tr>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
+                                    <td></td>
+                                </tr>
 
-                            <tr class="">
-                                <td></td>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
+                                    <td></td>
+                                </tr>
 
-                            <tr class="">
-                                <td></td>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
-                            <tr class="total">
-                                <td></td>
-                                <td>Total</td>
-                            </tr>
-                            <tr class="">
-                                <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="total">
+                                    <td></td>
+                                    <td>Total</td>
+                                </tr>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
+                                    <td></td>
+                                </tr>
 
-                            <tr class="">
-                                <td></td>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
+                                    <td></td>
+                                </tr>
 
-                            <tr class="">
-                                <td></td>
+                                <tr class="">
+                                    <td></td>
 
-                                <td></td>
-                            </tr>
-                            <tr class="total">
-                                <td>
-                                    <p><span class="text-muted fw-light">Intelimundo /</span>Colaborador</p>
-                                </td>
-                                <td><label id="df_ClienteVenta"></label></td>
-                            </tr>
+                                    <td></td>
+                                </tr>
+                                <tr class="total">
+                                    <td>
+                                        <p><span class="text-muted fw-light">Intelimundo /</span>Colaborador</p>
+                                    </td>
+                                    <td><label id="df_ClienteVenta"></label></td>
+                                </tr>
 
-                        </table>
+                            </table>
+                        </div>
                     </div>
-                </div>
-        </form>
+                </form>
             </div>
         </div>
     </div>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script type="text/javascript">
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
     $(document).ready(function () {
-vNotify.warning({ text: 'Modulo en Construccion.', title: 'Intelimundo.' });
+        vNotify.warning({ text: 'Modulo en Construccion.', title: 'Intelimundo.' });
         var GeneraFolio;
         GeneraFolio = document.getElementById("_idVenta").value;
 
@@ -402,6 +402,6 @@ vNotify.warning({ text: 'Modulo en Construccion.', title: 'Intelimundo.' });
 
 
     });
- 
+
 </script>
 }

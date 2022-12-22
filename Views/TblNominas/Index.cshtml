@@ -34,7 +34,7 @@
         </h5>
         <div class="table-responsive text-nowrap">
             <div class="container">
-                <table class="display compact"  id="tblNominas">
+                <table class="display compact" id="tblNominas">
 
                     <thead>
                         <tr>
@@ -90,18 +90,15 @@
                                     }
                                 </td>
                                 <td style="text-align:center">
-                                    <a asp-action="Print" asp-route-id="@item.IdNomina" 
-                                    title="Imprimir"><i class="fa-solid fa-print" title="Imprimir" id="btnPrint"
+                                    <a asp-action="Print" asp-route-id="@item.IdNomina" title="Imprimir"><i
+                                        class="fa-solid fa-print" title="Imprimir" id="btnPrint"
                                         style="font-size: 1em; color: #67C5C4;"></i></a>
-                                    <a asp-action="Edit" asp-route-id="@item.IdNomina" 
-                                    title="Editar"><i class="far fa-edit"
+                                    <a asp-action="Edit" asp-route-id="@item.IdNomina" title="Editar"><i class="far fa-edit"
                                         style="font-size: 1em; color: #FFC300;"></i></a>
-                                    <a asp-action="Details" asp-route-id="@item.IdNomina" 
-                                    title="Detalles"><i class="far fa-list-alt"
-                                        style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                                    <a asp-action="Delete" asp-route-id="@item.IdNomina" 
-                                    title="Desactivar"><i class="far fa-stop-circle"
-                                        style="font-size: 1em; color: #FF9333;"></i></a>
+                                    <a asp-action="Details" asp-route-id="@item.IdNomina" title="Detalles"><i
+                                        class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.IdNomina" title="Desactivar"><i
+                                        class="far fa-stop-circle" style="font-size: 1em; color: #FF9333;"></i></a>
                                 </td>
                             </tr>
                         }

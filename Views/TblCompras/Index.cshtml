@@ -33,10 +33,10 @@
         </h5>
         <div class="table-responsive text-nowrap">
             <div class="container">
-                <table class="display compact"  id="tblCompras">
+                <table class="display compact" id="tblCompras">
                     <thead>
                         <tr>
-                              <th style="text-align:center" hidden>
+                            <th style="text-align:center" hidden>
                                 @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
                             </th>
                             <th>
@@ -64,7 +64,7 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                  <td style="text-align:center" hidden>
+                                <td style="text-align:center" hidden>
                                     @Html.DisplayFor(modelItem => item.IdUCorporativoCentro)
                                 </td>
                                 <td>
@@ -94,37 +94,34 @@
                                     }
                                 </td>
                                 <td style="text-align:center">
-                                     @if (item.IdTipoCompra == 2)
+                                    @if (item.IdTipoCompra == 2)
                                     {
-                                         <a id="btnCobrar" title="Compra X Pagar" asp-action="Print" asp-route-id="@item.IdCompra" ><i
-                                        class="fa-solid fa-cash-register" style="font-size: 1em; color: #BC4E57 ;"></i></a> 
-                                      <a asp-action="Details" asp-route-id="@item.IdCompra" 
-                                    title="Detalles"><i class="far fa-list-alt"
-                                        style="font-size: 1em; color: #67C5C4 ;"></i></a> 
-                                        <a asp-action="Delete" asp-route-id="@item.IdCompra" 
-                                    title="Desactivar"><i class="fa-solid fa-ban"
-                                        style="font-size: 1em; color: #FF9333;"></i></a>
-                                }
+                                        <a id="btnCobrar" title="Compra X Pagar" asp-action="Print"
+                                    asp-route-id="@item.IdCompra"><i class="fa-solid fa-cash-register"
+                                        style="font-size: 1em; color: #BC4E57 ;"></i></a>
+                                        <a asp-action="Details" asp-route-id="@item.IdCompra" title="Detalles"><i
+                                        class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                                        <a asp-action="Delete" asp-route-id="@item.IdCompra" title="Desactivar"><i
+                                        class="fa-solid fa-ban" style="font-size: 1em; color: #FF9333;"></i></a>
+                                    }
                                     else
                                     {
-                                      <a asp-action="Details" asp-route-id="@item.IdCompra"
-                                    title="Detalles"><i class="far fa-list-alt"
-                                        style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                                        <a asp-action="Delete" asp-route-id="@item.IdCompra" 
-                                    title="Desactivar"><i class="fa-solid fa-ban"
-                                        style="font-size: 1em; color: #FF9333;"></i></a>
- 
+                                        <a asp-action="Details" asp-route-id="@item.IdCompra" title="Detalles"><i
+                                        class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                                        <a asp-action="Delete" asp-route-id="@item.IdCompra" title="Desactivar"><i
+                                        class="fa-solid fa-ban" style="font-size: 1em; color: #FF9333;"></i></a>
+
                                     }
                                 </td>
                             </tr>
                         }
                     </tbody>
-                     <tfoot>
+                    <tfoot>
                         <tr>
                             <th style="text-align:center" hidden>
                                 @Html.DisplayNameFor(model => model.IdUCorporativoCentro)
                             </th>
-                             <th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.TipoCompraDesc)
                             </th>
                             <th>

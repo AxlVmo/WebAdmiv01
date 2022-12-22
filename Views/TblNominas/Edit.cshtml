@@ -1,105 +1,116 @@
 ﻿@model WebAdmin.Models.TblNomina
 
 @{
-ViewData["Title"] = "Edit";
-Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Nómina</h4>
-  <!-- Basic with Icons -->
-  <div class="col-xxl">
-    <div class="card mb-8">
-      <div class="card-header d-flex align-items-center justify-content-between">
-      </div>
-      <div class="card-body">
-<form asp-action="Edit">
-    <input spellcheck="true" type="hidden" asp-for="IdNomina" />
-              <div class="card-body">
-                 <div class="row">
-                        <div class="mb-3 col-md-3">
-                            <label for="IdUsuarioRemuneracion" class="form-label" asp-for="IdUsuarioRemuneracion"></label>
-                            <div class="input-group input-group-merge">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administración /</span> Nómina</h4>
+    <!-- Basic with Icons -->
+    <div class="col-xxl">
+        <div class="card mb-8">
+            <div class="card-header d-flex align-items-center justify-content-between">
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <input spellcheck="true" type="hidden" asp-for="IdNomina" />
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-3">
+                                <label for="IdUsuarioRemuneracion" class="form-label"
+                                    asp-for="IdUsuarioRemuneracion"></label>
                                 <div class="input-group input-group-merge">
-                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="bx bx-check-shield"></i></span>
-                                    <select id="IdUsuarioRemuneracion" class="form-select" required asp-for="IdUsuarioRemuneracion" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                                        asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                class="bx bx-check-shield"></i></span>
+                                        <select id="IdUsuarioRemuneracion" class="form-select" required
+                                            asp-for="IdUsuarioRemuneracion"
+                                            oninvalid="this.setCustomValidity('Campo Requerido')"
+                                            onchange="this.setCustomValidity('')" required
+                                            asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                                            <option value="">SELECCIONAR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-3">
+                                <label for="NominaDesc" class="form-label" asp-for="NominaDesc"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                        class="form-control" id="NominaDesc" aria-label="John Doe" aria-describedby="2"
+                                        asp-for="NominaDesc" />
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-2">
+                                <label for="UsuarioRemuneracion" class="form-label"
+                                    asp-for="UsuarioRemuneracion"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                        class="form-control" id="UsuarioRemuneracion" placeholder="Requerido"
+                                        aria-label="John Doe" aria-describedby="2"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required asp-for="UsuarioRemuneracion" />
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-2">
+                                <label for="IdTipoPago" class="form-label" asp-for="IdTipoPago"></label>
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                class="bx bx-check-shield"></i></span>
+                                        <select id="lTipoPago" class="form-select" required asp-for="IdTipoPago"
+                                            oninvalid="this.setCustomValidity('Campo Requerido')"
+                                            onchange="this.setCustomValidity('')" required
+                                            asp-items="@(new SelectList(ViewBag.ListaTipopago,"IdTipoPago","TipoPagoDesc"))">
+                                            <option value="">SELECCIONAR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-2" id="lCodigoPago" hidden>
+                                <label for="CodigoPago" class="form-label" asp-for="CodigoPago"></label>
+                                <div class="input-group input-group-merge">
+                                    <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
+                                    <input spellcheck="true" style="text-transform:uppercase" type="text"
+                                        class="form-control" id="iCodigoPago" placeholder="Requerido"
+                                        aria-label="John Doe" aria-describedby="2"
+                                        oninvalid="this.setCustomValidity('Campo Requerido')"
+                                        onchange="this.setCustomValidity('')" required asp-for="CodigoPago" />
                                 </div>
                             </div>
                         </div>
-                          <div class="mb-3 col-md-3">
-                             <label for="NominaDesc" class="form-label" asp-for="NominaDesc"></label>
-                            <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="NominaDesc"
-                                    aria-label="John Doe" aria-describedby="2"
-                                    asp-for="NominaDesc" />
-                            </div>
-                        </div>
-                         <div class="mb-3 col-md-2">
-                             <label for="UsuarioRemuneracion" class="form-label" asp-for="UsuarioRemuneracion"></label>
-                            <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="UsuarioRemuneracion"
-                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                                    asp-for="UsuarioRemuneracion" />
-                            </div>
-                        </div>
-                       <div class="mb-3 col-md-2">
-                            <label for="IdTipoPago" class="form-label" asp-for="IdTipoPago"></label>
-                            <div class="input-group input-group-merge">
-                                <div class="input-group input-group-merge">
-                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="bx bx-check-shield"></i></span>
-                                    <select id="lTipoPago" class="form-select" required asp-for="IdTipoPago" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                                        asp-items="@(new SelectList(ViewBag.ListaTipopago,"IdTipoPago","TipoPagoDesc"))">
-                                        <option value="">SELECCIONAR</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3 col-md-2" id="lCodigoPago" hidden>
-                             <label for="CodigoPago" class="form-label" asp-for="CodigoPago"></label>
-                            <div class="input-group input-group-merge">
-                                <span id="2" class="input-group-text"><i class="bx bx-check-shield"></i></span>
-                                <input spellcheck="true" style="text-transform:uppercase" type="text" class="form-control" id="iCodigoPago" 
-                                    placeholder="Requerido" aria-label="John Doe" aria-describedby="2" oninvalid="this.setCustomValidity('Campo Requerido')" onchange="this.setCustomValidity('')" required
-                                    asp-for="CodigoPago" />
-                            </div>
-                        </div>
-                    </div>
-                     <div class="row">
+                        <div class="row">
                             <div class="mb-3 col-md-6">
-                               
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname"
-                                      asp-for="IdEstatusRegistro"></label>
+                                        asp-for="IdEstatusRegistro"></label>
                                     <div class="col-sm-10">
-                                      <div class="input-group input-group-merge">
-                                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                            class="bx bx-check-shield"></i></span>
-                                        <select class="form-select" required asp-for="IdEstatusRegistro"
-                                          asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
-                                          <option value="">SELECCIONAR</option>
-                                        </select>
-                                      </div>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                    class="bx bx-check-shield"></i></span>
+                                            <select class="form-select" required asp-for="IdEstatusRegistro"
+                                                asp-items="@(new SelectList(ViewBag.ListaCatEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                                                <option value="">SELECCIONAR</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-    <div class="mt-2">
+                        <div class="mt-2">
                             <input spellcheck="true" type="submit" value="Actualizar" class="btn btn-warning" />
                             <a asp-action="Index" class="btn btn-secondary">Regresar</a>
                         </div>
- </div>
-</form>
-      </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
